@@ -94,6 +94,7 @@ public class Unit : MonoBehaviour
         {
             inventoryWeapon.Init(this, null);
             inventoryWeapon.gameObject.SetActive(false);
+            inventoryWeapon.transform.SetParent(weaponsContainer);
         }
         Control.SetSpped(Parameters.Parameters[ParamType.Speed]);
         if (InventoryWeapons.Count == 0)
