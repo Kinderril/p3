@@ -154,9 +154,18 @@ ModelImporter:
     bakeSimulation: 0
     resampleRotations: 1
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: main (2)
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'death' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'shaoulder_R' has translation animation that will be
+      discarded.\n\nClip 'idle' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'shaoulder_L'
+      has translation animation that will be discarded.\n\nClip 'run' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation DOF
+      on avatar to improve retargeting quality.\n\t'shaoulder_L' has translation animation
+      that will be discarded.\n\t'shaoulder_R' has translation animation that will
+      be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 1
@@ -165,7 +174,801 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: death
+      takeName: death
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: char_mainChar_01_arm
+        weight: 1
+      - path: char_mainChar_01_arm/Master
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006/legCont_L.006_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006/legCont_R.006_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003/leg_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003/leg_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003/hand_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003/hand_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head/head_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001/finger_L.001_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003/finger_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004/finger_L.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004/hand_L.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001/finger_R.001_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003/finger_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004/finger_R.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004/hand_R.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002/spine.002_end
+        weight: 1
+      - path: main (2)
+        weight: 1
+      - path: other
+        weight: 1
+      - path: other.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle
+      takeName: idle
+      firstFrame: 0
+      lastFrame: 139
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: char_mainChar_01_arm
+        weight: 1
+      - path: char_mainChar_01_arm/Master
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006/legCont_L.006_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006/legCont_R.006_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003/leg_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003/leg_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003/hand_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003/hand_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head/head_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001/finger_L.001_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003/finger_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004/finger_L.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004/hand_L.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001/finger_R.001_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003/finger_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004/finger_R.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004/hand_R.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002/spine.002_end
+        weight: 1
+      - path: main (2)
+        weight: 1
+      - path: other
+        weight: 1
+      - path: other.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: run
+      takeName: run
+      firstFrame: 0
+      lastFrame: 17
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: char_mainChar_01_arm
+        weight: 1
+      - path: char_mainChar_01_arm/Master
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006/legCont_L.006_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006/legCont_R.006_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003/leg_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003/leg_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003/hand_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003/hand_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head/head_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001/finger_L.001_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003/finger_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004/finger_L.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004/hand_L.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001/finger_R.001_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003/finger_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004/finger_R.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004/hand_R.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002/spine.002_end
+        weight: 1
+      - path: main (2)
+        weight: 1
+      - path: other
+        weight: 1
+      - path: other.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: gun_rot
+      takeName: gun_rot
+      firstFrame: 0
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: char_mainChar_01_arm
+        weight: 1
+      - path: char_mainChar_01_arm/Master
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006/legCont_L.006_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006/legCont_R.006_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003/leg_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003/leg_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003/hand_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003/hand_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head/head_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001/finger_L.001_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003/finger_L.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004/finger_L.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004/hand_L.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001/finger_R.001_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003/finger_R.003_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004/finger_R.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004/hand_R.004_end
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002/spine.002_end
+        weight: 1
+      - path: main (2)
+        weight: 1
+      - path: other
+        weight: 1
+      - path: other.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: gun_shoot_1
+      takeName: gun_shoot_1
+      firstFrame: 0
+      lastFrame: 12
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.50204086
+        functionName: EndPlayAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8081633
+        functionName: EndPlayAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask:
+      - path: 
+        weight: 1
+      - path: char_mainChar_01_arm
+        weight: 1
+      - path: char_mainChar_01_arm/Master
+        weight: 1
+      - path: char_mainChar_01_arm/Master/legCont_L.004
+        weight: 0
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005
+        weight: 0
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006
+        weight: 0
+      - path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006/legCont_L.006_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/legCont_R.004
+        weight: 0
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005
+        weight: 0
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006
+        weight: 0
+      - path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006/legCont_R.006_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003/leg_L.003_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/leg_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003/leg_R.003_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_L.003/hand_L.003_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/hand_R.003/hand_R.003_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/neck/head/head_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001/finger_L.001_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003/finger_L.003_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004/finger_L.004_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004/hand_L.004_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001/finger_R.001_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003/finger_R.003_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004
+        weight: 1
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004/finger_R.004_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004/hand_R.004_end
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002
+        weight: 0
+      - path: char_mainChar_01_arm/Master/root/spine/spine.002/spine.002_end
+        weight: 0
+      - path: main (2)
+        weight: 0
+      - path: other
+        weight: 0
+      - path: other.001
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -191,8 +994,577 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    human: []
-    skeleton: []
+    human:
+    - boneName: root
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: leg_L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: leg_R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: leg_L.001
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: leg_R.001
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: leg_L.002
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: leg_R.002
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine.001
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shaoulder_L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: shaoulder_R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: hand_L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: hand_R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: hand_L.001
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: hand_R.001
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: hand_L.002
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: hand_R.002
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: leg_L.003
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: leg_R.003
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_L.004
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_L.002
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_L.003
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_L
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_L.001
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_R.004
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_R.002
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_R.003
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_R
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: finger_R.001
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: char_main_01(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: char_mainChar_01_arm
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+      transformModified: 1
+    - name: Master
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: root
+      position: {x: 6.058491e-11, y: 0.010354172, z: -0.00029894075}
+      rotation: {x: -0.00000003090862, y: 0.7071068, z: 0.7071068, w: -0.00000003090862}
+      scale: {x: 1, y: 0.9999998, z: 0.9999998}
+      transformModified: 1
+    - name: leg_L
+      position: {x: 0.0013487766, y: -0.000004543364, z: 0.00035891304}
+      rotation: {x: 0.00091315876, y: -0.7067154, z: 0.7071062, w: -0.023522919}
+      scale: {x: 0.9999999, y: 1.0000002, z: 1.0000001}
+      transformModified: 1
+    - name: leg_L.001
+      position: {x: -3.0267983e-11, y: 0.0050232885, z: -4.6566126e-11}
+      rotation: {x: 0.03434805, y: 0.006589183, z: -0.0064448104, w: 0.9993675}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.9999996}
+      transformModified: 1
+    - name: leg_L.002
+      position: {x: 9.313225e-11, y: 0.004823371, z: -1.11758706e-10}
+      rotation: {x: 0.0021825712, y: 0.785569, z: -0.61860824, w: -0.014157783}
+      scale: {x: 0.9999997, y: 1, z: 1.0000001}
+      transformModified: 1
+    - name: leg_L.003
+      position: {x: -2.3270728e-10, y: 0.001890767, z: 5.5879353e-11}
+      rotation: {x: 0.078901775, y: -0.000000046682818, z: -0.000000083762025, w: 0.99688244}
+      scale: {x: 1, y: 1.0000002, z: 1.0000001}
+      transformModified: 1
+    - name: leg_L.003_end
+      position: {x: -0, y: 0.00087270536, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: leg_R
+      position: {x: -0.0013487766, y: -0.000004543364, z: 0.00035891283}
+      rotation: {x: -0.00091313827, y: -0.7067154, z: 0.7071062, w: 0.023522926}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000001}
+      transformModified: 1
+    - name: leg_R.001
+      position: {x: -1.3969838e-10, y: 0.005023289, z: -2.2351741e-10}
+      rotation: {x: 0.0343481, y: -0.0065891887, z: 0.00644483, w: 0.9993675}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+      transformModified: 1
+    - name: leg_R.002
+      position: {x: 2.1769665e-10, y: 0.004823371, z: -4.6566128e-12}
+      rotation: {x: -0.0021825943, y: 0.78556895, z: -0.6186083, w: 0.014157737}
+      scale: {x: 1.0000002, y: 0.99999934, z: 1.0000004}
+      transformModified: 1
+    - name: leg_R.003
+      position: {x: -1.9725177e-10, y: 0.001890767, z: 9.313225e-11}
+      rotation: {x: 0.078901775, y: -0.00000005055789, z: 0.00000011838219, w: 0.99688244}
+      scale: {x: 0.99999934, y: 1.0000001, z: 1.0000001}
+      transformModified: 1
+    - name: leg_R.003_end
+      position: {x: -0, y: 0.00087270536, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: spine
+      position: {x: 1.3322676e-17, y: -0.000004543364, z: -5.5511148e-18}
+      rotation: {x: -0.000000012501299, y: -0.7071068, z: -0.7071068, w: -0.0000000132230955}
+      scale: {x: 1.0000001, y: 1.0000002, z: 0.9999999}
+      transformModified: 1
+    - name: spine.001
+      position: {x: -4.0745363e-12, y: 0.0023469944, z: 2.2409949e-11}
+      rotation: {x: -0.031275664, y: 0.000000054614105, z: -5.659137e-10, w: 0.9995108}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000004}
+      transformModified: 1
+    - name: neck
+      position: {x: 4.0199667e-11, y: 0.004360822, z: -5.0058586e-11}
+      rotation: {x: 0.20875384, y: -0.00000016326452, z: 0.000000015102474, w: 0.9779682}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.99999964}
+      transformModified: 1
+    - name: head
+      position: {x: 4.0046869e-10, y: 0.0007780006, z: 0.0000000014528632}
+      rotation: {x: -0.1780651, y: 0.00000012801259, z: -0.000000010844252, w: 0.98401874}
+      scale: {x: 1.0001543, y: 1.0066216, z: 1.0002642}
+      transformModified: 1
+    - name: head_end
+      position: {x: -0, y: 0.0023925996, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: shaoulder_L
+      position: {x: -0.0011333937, y: 0.0038016466, z: -0.00050762866}
+      rotation: {x: -0.5501046, y: 0.4048815, z: 0.5965961, w: 0.42134196}
+      scale: {x: 1.0000002, y: 0.9999999, z: 1}
+      transformModified: 1
+    - name: hand_L
+      position: {x: -0, y: 0.0012656974, z: 0.0000000018626451}
+      rotation: {x: -0.13214588, y: 0.028710073, z: 0.03059012, w: -0.99034214}
+      scale: {x: 0.999999, y: 0.99999976, z: 1.0000001}
+      transformModified: 1
+    - name: hand_L.001
+      position: {x: 0.0000000010617077, y: 0.0031638502, z: -5.311449e-11}
+      rotation: {x: -0.022422502, y: 0.006380403, z: -0.038637094, w: -0.99898136}
+      scale: {x: 1.0000004, y: 1, z: 0.99999994}
+      transformModified: 1
+    - name: hand_L.002
+      position: {x: 7.799826e-11, y: 0.0024057552, z: -2.9802322e-10}
+      rotation: {x: -0.053481333, y: -0.69356996, z: 0.0555874, w: -0.7162475}
+      scale: {x: 1.0000011, y: 1.0000002, z: 1.0000005}
+      transformModified: 1
+    - name: finger_L
+      position: {x: -0.00005848836, y: 0.0012370727, z: -0.000047482885}
+      rotation: {x: -0.15332589, y: -0.09137647, z: -0.07325953, w: 0.9812108}
+      scale: {x: 0.9999999, y: 0.9999996, z: 0.9999998}
+      transformModified: 1
+    - name: finger_L.001
+      position: {x: -7.0780515e-10, y: 0.0006290838, z: 1.4901161e-10}
+      rotation: {x: -0.0015662968, y: 0.16783924, z: -0.030467719, w: 0.98534226}
+      scale: {x: 1.0000002, y: 0.99999917, z: 0.99999976}
+      transformModified: 1
+    - name: finger_L.001_end
+      position: {x: -0, y: 0.00074363354, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: finger_L.002
+      position: {x: 0.00013281222, y: 0.0009875033, z: -0.00046209447}
+      rotation: {x: -0.17823155, y: -0.10682932, z: -0.110348746, w: 0.9719281}
+      scale: {x: 0.9999998, y: 0.9999998, z: 0.99999976}
+      transformModified: 1
+    - name: finger_L.003
+      position: {x: -9.685754e-10, y: 0.0006689465, z: 7.4505804e-11}
+      rotation: {x: -0.00033977604, y: 0.023292778, z: -0.027929256, w: 0.9993385}
+      scale: {x: 1.0000008, y: 0.99999833, z: 0.9999999}
+      transformModified: 1
+    - name: finger_L.003_end
+      position: {x: -0, y: 0.0005751201, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: finger_L.004
+      position: {x: 0.00030374533, y: 0.00019217776, z: -0.0005549502}
+      rotation: {x: -0.17889488, y: 0.124973394, z: -0.1625859, w: 0.96226}
+      scale: {x: 0.99999946, y: 0.9999994, z: 0.99999964}
+      transformModified: 1
+    - name: finger_L.004_end
+      position: {x: -0, y: 0.00088177016, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: hand_L.004
+      position: {x: 0.000730558, y: 0.0011573317, z: -0.00043741963}
+      rotation: {x: 0.17181806, y: 0.6898618, z: -0.64911693, w: -0.2705856}
+      scale: {x: 0.9999995, y: 1.0000004, z: 0.9999999}
+      transformModified: 1
+    - name: hand_L.004_end
+      position: {x: -0, y: 0.001685237, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: hand_L.003
+      position: {x: -0.00204943, y: -0.0010107964, z: 0.0042969133}
+      rotation: {x: 0.9444429, y: -0.31700295, z: -0.08677638, w: -0.002543733}
+      scale: {x: 1.0000006, y: 1.0000001, z: 1.0000004}
+      transformModified: 1
+    - name: hand_L.003_end
+      position: {x: -0, y: 0.0015156834, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: shaoulder_R
+      position: {x: 0.0011333942, y: 0.0038016466, z: -0.0005076286}
+      rotation: {x: 0.5501045, y: 0.40488157, z: 0.5965959, w: -0.42134225}
+      scale: {x: 1.0000007, y: 1.0000002, z: 0.99999994}
+      transformModified: 1
+    - name: hand_R
+      position: {x: 3.72529e-10, y: 0.0012656967, z: 5.0291415e-10}
+      rotation: {x: 0.13214532, y: 0.028710017, z: 0.030589797, w: 0.9903422}
+      scale: {x: 1.0000001, y: 1, z: 1.0000005}
+      transformModified: 1
+    - name: hand_R.001
+      position: {x: -5.9604643e-10, y: 0.003163848, z: -8.9406965e-10}
+      rotation: {x: 0.022422494, y: 0.006380465, z: -0.0386369, w: 0.99898136}
+      scale: {x: 0.999999, y: 1.0000001, z: 1}
+      transformModified: 1
+    - name: hand_R.002
+      position: {x: 4.2840836e-10, y: 0.0024057562, z: 0.000000001322478}
+      rotation: {x: 0.05348187, y: -0.69357, z: 0.055586863, w: 0.7162475}
+      scale: {x: 1.0000001, y: 0.9999998, z: 1.0000004}
+      transformModified: 1
+    - name: finger_R
+      position: {x: 0.000058486417, y: 0.0012370738, z: -0.000047482856}
+      rotation: {x: -0.15332566, y: 0.09137594, z: 0.07325904, w: 0.9812109}
+      scale: {x: 0.99999964, y: 1.0000001, z: 0.9999995}
+      transformModified: 1
+    - name: finger_R.001
+      position: {x: 1.7462297e-11, y: 0.0006290843, z: 2.1420418e-10}
+      rotation: {x: -0.0015665579, y: -0.16783881, z: 0.030468531, w: 0.98534226}
+      scale: {x: 0.9999997, y: 0.9999995, z: 0.9999992}
+      transformModified: 1
+    - name: finger_R.001_end
+      position: {x: -0, y: 0.00074363354, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: finger_R.002
+      position: {x: -0.00013281447, y: 0.0009875036, z: -0.00046209476}
+      rotation: {x: -0.17823161, y: 0.1068291, z: 0.110348605, w: 0.97192806}
+      scale: {x: 1.0000002, y: 0.9999993, z: 1.0000005}
+      transformModified: 1
+    - name: finger_R.003
+      position: {x: 9.313226e-10, y: 0.0006689465, z: 1.862645e-10}
+      rotation: {x: -0.00033951527, y: -0.023293091, z: 0.027929584, w: 0.99933845}
+      scale: {x: 0.9999997, y: 0.9999993, z: 0.99999964}
+      transformModified: 1
+    - name: finger_R.003_end
+      position: {x: -0, y: 0.0005751201, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: finger_R.004
+      position: {x: -0.0003037468, y: 0.00019217817, z: -0.0005549509}
+      rotation: {x: -0.17889456, y: -0.12497338, z: 0.16258562, w: 0.96225995}
+      scale: {x: 0.99999976, y: 0.99999964, z: 1}
+      transformModified: 1
+    - name: finger_R.004_end
+      position: {x: -0, y: 0.00088177016, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: hand_R.004
+      position: {x: -0.0006318359, y: 0.0011773078, z: -0.00043526216}
+      rotation: {x: -0.171818, y: 0.68986166, z: -0.6491169, w: 0.27058583}
+      scale: {x: 0.9999997, y: 0.9999992, z: 1.0000004}
+      transformModified: 1
+    - name: hand_R.004_end
+      position: {x: -0, y: 0.001685237, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: hand_R.003
+      position: {x: 0.001516809, y: -0.0008966913, z: 0.0026686462}
+      rotation: {x: 0.944443, y: 0.31700295, z: 0.08677662, w: -0.0025437248}
+      scale: {x: 0.98613185, y: 0.99999934, z: 0.99999964}
+      transformModified: 1
+    - name: hand_R.003_end
+      position: {x: -0, y: 0.0015156834, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: spine.002
+      position: {x: -0.0023377128, y: 0.00092169654, z: -3.7252902e-11}
+      rotation: {x: 0.7071068, y: -0.0000000016077838, z: -0.7071067, w: 8.03883e-10}
+      scale: {x: 1.0000001, y: 0.9999997, z: 1}
+      transformModified: 1
+    - name: spine.002_end
+      position: {x: -0, y: 0.0018753815, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: legCont_L.004
+      position: {x: -0.0029969055, y: 0.00013880551, z: -0.0012617231}
+      rotation: {x: 0, y: 0.000000036379788, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 0.99999994}
+      transformModified: 1
+    - name: legCont_L.005
+      position: {x: -1.4901161e-10, y: 0.00012868001, z: -0.00086316623}
+      rotation: {x: 0.000000027284848, y: -0.000000036379788, z: -0.000000022737366,
+        w: 1}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
+      transformModified: 1
+    - name: legCont_L.006
+      position: {x: 2.7611205e-10, y: 0.0005695099, z: -0.0018029583}
+      rotation: {x: -0.7071068, y: -0.000000019293298, z: 0.000000019293298, w: 0.7071068}
+      scale: {x: 1, y: 0.9999999, z: 1}
+      transformModified: 1
+    - name: legCont_L.006_end
+      position: {x: -0, y: 0.00075283437, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: legCont_R.004
+      position: {x: 0.0025325394, y: 0.00013880548, z: 0.0043348162}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1.0000001}
+      transformModified: 1
+    - name: legCont_R.005
+      position: {x: 7.4505804e-11, y: 0.00012868001, z: -0.00086316676}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 0.9999998}
+      transformModified: 1
+    - name: legCont_R.006
+      position: {x: -0, y: 0.0005695099, z: -0.0018029585}
+      rotation: {x: -0.7071068, y: 7.6664677e-16, z: -7.6664677e-16, w: 0.7071068}
+      scale: {x: 0.9999998, y: 1.0000002, z: 0.9999998}
+      transformModified: 1
+    - name: legCont_R.006_end
+      position: {x: -0, y: 0.00075283437, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: main (2)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: other
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: other.001
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -203,7 +1575,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
