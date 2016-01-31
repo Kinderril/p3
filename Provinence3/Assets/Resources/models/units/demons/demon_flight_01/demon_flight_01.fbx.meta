@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: 7ea2d37ac181a474b940fb7a8711a122
+timeCreated: 1452180918
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Bone.001_L
+    100004: Bone.001_L.001
+    100006: Bone.001_L.002
+    100008: Bone.001_L.002_end
+    100010: Bone.001_L.003
+    100012: Bone.001_L.003_end
+    100014: Bone.001_R
+    100016: Bone.001_R.001
+    100018: Bone.001_R.002
+    100020: Bone.001_R.002_end
+    100022: Bone.001_R.003
+    100024: Bone.001_R.003_end
+    100026: Bone.002
+    100028: Bone.003
+    100030: Bone.003_L
+    100032: Bone.003_L.001
+    100034: Bone.003_L.002
+    100036: Bone.003_L.003
+    100038: Bone.003_L.004
+    100040: Bone.003_L.004_end
+    100042: Bone.003_L.005
+    100044: Bone.003_L.005_end
+    100046: Bone.003_L.006
+    100048: Bone.003_L.007
+    100050: Bone.003_L.007_end
+    100052: Bone.003_L.008
+    100054: Bone.003_L.008_end
+    100056: Bone.003_L.009
+    100058: Bone.003_L.009_end
+    100060: Bone.003_L.010
+    100062: Bone.003_L.010_end
+    100064: Bone.003_R
+    100066: Bone.003_R.001
+    100068: Bone.003_R.002
+    100070: Bone.003_R.003
+    100072: Bone.003_R.004
+    100074: Bone.003_R.004_end
+    100076: Bone.003_R.005
+    100078: Bone.003_R.005_end
+    100080: Bone.003_R.006
+    100082: Bone.003_R.007
+    100084: Bone.003_R.007_end
+    100086: Bone.003_R.008
+    100088: Bone.003_R.008_end
+    100090: Bone.003_R.009
+    100092: Bone.003_R.009_end
+    100094: Bone.003_R.010
+    100096: Bone.003_R.010_end
+    100098: Bone.004
+    100100: Bone.005
+    100102: Bone.005_L
+    100104: Bone.005_L_end
+    100106: Bone.005_R
+    100108: Bone.005_R_end
+    100110: Bone.006
+    100112: Bone.006_end
+    100114: //RootNode
+    100116: flying_demon
+    100118: flying_demon_alpha
+    100120: Master
+    100122: Root
+    400000: Armature
+    400002: Bone.001_L
+    400004: Bone.001_L.001
+    400006: Bone.001_L.002
+    400008: Bone.001_L.002_end
+    400010: Bone.001_L.003
+    400012: Bone.001_L.003_end
+    400014: Bone.001_R
+    400016: Bone.001_R.001
+    400018: Bone.001_R.002
+    400020: Bone.001_R.002_end
+    400022: Bone.001_R.003
+    400024: Bone.001_R.003_end
+    400026: Bone.002
+    400028: Bone.003
+    400030: Bone.003_L
+    400032: Bone.003_L.001
+    400034: Bone.003_L.002
+    400036: Bone.003_L.003
+    400038: Bone.003_L.004
+    400040: Bone.003_L.004_end
+    400042: Bone.003_L.005
+    400044: Bone.003_L.005_end
+    400046: Bone.003_L.006
+    400048: Bone.003_L.007
+    400050: Bone.003_L.007_end
+    400052: Bone.003_L.008
+    400054: Bone.003_L.008_end
+    400056: Bone.003_L.009
+    400058: Bone.003_L.009_end
+    400060: Bone.003_L.010
+    400062: Bone.003_L.010_end
+    400064: Bone.003_R
+    400066: Bone.003_R.001
+    400068: Bone.003_R.002
+    400070: Bone.003_R.003
+    400072: Bone.003_R.004
+    400074: Bone.003_R.004_end
+    400076: Bone.003_R.005
+    400078: Bone.003_R.005_end
+    400080: Bone.003_R.006
+    400082: Bone.003_R.007
+    400084: Bone.003_R.007_end
+    400086: Bone.003_R.008
+    400088: Bone.003_R.008_end
+    400090: Bone.003_R.009
+    400092: Bone.003_R.009_end
+    400094: Bone.003_R.010
+    400096: Bone.003_R.010_end
+    400098: Bone.004
+    400100: Bone.005
+    400102: Bone.005_L
+    400104: Bone.005_L_end
+    400106: Bone.005_R
+    400108: Bone.005_R_end
+    400110: Bone.006
+    400112: Bone.006_end
+    400114: //RootNode
+    400116: flying_demon
+    400118: flying_demon_alpha
+    400120: Master
+    400122: Root
+    4300000: flying_demon_alpha
+    4300002: flying_demon
+    7400000: idle_1
+    7400002: run_1
+    7400004: death_1
+    7400006: fight_1
+    9500000: //RootNode
+    13700000: flying_demon
+    13700002: flying_demon_alpha
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

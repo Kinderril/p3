@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: 2eb8a8538536f470c9cdc319e72519c9
+timeCreated: 1452180914
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: char_sectant_01
+    100004: char_sectant_01_arm
+    100006: char_sectant_01_kapushon
+    100008: finger_L
+    100010: finger_L.001
+    100012: finger_L.001_end
+    100014: finger_L.002
+    100016: finger_L.003
+    100018: finger_L.003_end
+    100020: finger_L.004
+    100022: finger_L.004_end
+    100024: finger_R
+    100026: finger_R.001
+    100028: finger_R.001_end
+    100030: finger_R.002
+    100032: finger_R.003
+    100034: finger_R.003_end
+    100036: finger_R.004
+    100038: finger_R.004_end
+    100040: hand_L
+    100042: hand_L.001
+    100044: hand_L.002
+    100046: hand_L.003
+    100048: hand_L.003_end
+    100050: hand_L.004
+    100052: hand_L.004_end
+    100054: hand_R
+    100056: hand_R.001
+    100058: hand_R.002
+    100060: hand_R.003
+    100062: hand_R.003_end
+    100064: hand_R.004
+    100066: hand_R.004_end
+    100068: head
+    100070: head_end
+    100072: leg_L
+    100074: leg_L.001
+    100076: leg_L.002
+    100078: leg_L.003
+    100080: leg_L.003_end
+    100082: leg_R
+    100084: leg_R.001
+    100086: leg_R.002
+    100088: leg_R.003
+    100090: leg_R.003_end
+    100092: legCont_L.004
+    100094: legCont_L.005
+    100096: legCont_L.006
+    100098: legCont_L.006_end
+    100100: legCont_R.004
+    100102: legCont_R.005
+    100104: legCont_R.006
+    100106: legCont_R.006_end
+    100108: Master
+    100110: root
+    100112: shaoulder_L
+    100114: shaoulder_L.001
+    100116: shaoulder_L.001_end
+    100118: shaoulder_R
+    100120: shaoulder_R.001
+    100122: shaoulder_R.001_end
+    100124: spine.001
+    100126: spine.002
+    100128: spine.002_end
+    400000: char_sectant_01
+    400002: //RootNode
+    400004: char_sectant_01_arm
+    400006: char_sectant_01_kapushon
+    400008: finger_L
+    400010: finger_L.001
+    400012: finger_L.001_end
+    400014: finger_L.002
+    400016: finger_L.003
+    400018: finger_L.003_end
+    400020: finger_L.004
+    400022: finger_L.004_end
+    400024: finger_R
+    400026: finger_R.001
+    400028: finger_R.001_end
+    400030: finger_R.002
+    400032: finger_R.003
+    400034: finger_R.003_end
+    400036: finger_R.004
+    400038: finger_R.004_end
+    400040: hand_L
+    400042: hand_L.001
+    400044: hand_L.002
+    400046: hand_L.003
+    400048: hand_L.003_end
+    400050: hand_L.004
+    400052: hand_L.004_end
+    400054: hand_R
+    400056: hand_R.001
+    400058: hand_R.002
+    400060: hand_R.003
+    400062: hand_R.003_end
+    400064: hand_R.004
+    400066: hand_R.004_end
+    400068: head
+    400070: head_end
+    400072: leg_L
+    400074: leg_L.001
+    400076: leg_L.002
+    400078: leg_L.003
+    400080: leg_L.003_end
+    400082: leg_R
+    400084: leg_R.001
+    400086: leg_R.002
+    400088: leg_R.003
+    400090: leg_R.003_end
+    400092: legCont_L.004
+    400094: legCont_L.005
+    400096: legCont_L.006
+    400098: legCont_L.006_end
+    400100: legCont_R.004
+    400102: legCont_R.005
+    400104: legCont_R.006
+    400106: legCont_R.006_end
+    400108: Master
+    400110: root
+    400112: shaoulder_L
+    400114: shaoulder_L.001
+    400116: shaoulder_L.001_end
+    400118: shaoulder_R
+    400120: shaoulder_R.001
+    400122: shaoulder_R.001_end
+    400124: spine.001
+    400126: spine.002
+    400128: spine.002_end
+    4300000: char_sectant_01_kapushon
+    4300002: char_sectant_01
+    7400000: sec_walk
+    7400002: sec_death
+    7400004: sec_idle_1
+    7400006: sec_strike_01
+    9500000: //RootNode
+    13700000: char_sectant_01
+    13700002: char_sectant_01_kapushon
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
