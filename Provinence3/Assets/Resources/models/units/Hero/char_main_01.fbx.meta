@@ -823,14 +823,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.50204086
-        functionName: EndPlayAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.8081633
+      - time: 0.24350427
         functionName: EndPlayAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
