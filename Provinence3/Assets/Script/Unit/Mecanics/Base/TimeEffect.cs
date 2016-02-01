@@ -33,10 +33,10 @@ public class TimeEffect
                 effect = new DDEffect(targetUnit);
                 break;
             case EffectType.slow:
-//                targetUnit.Parameters.Parameters[ParamType.Speed] /= 3f;
+                effect = new SpeedEffect(targetUnit,false);
                 break;
             case EffectType.freez:
-
+                effect = new FreezEffet(targetUnit);
                 break;
             case EffectType.speed:
                 effect = new SpeedEffect(targetUnit);

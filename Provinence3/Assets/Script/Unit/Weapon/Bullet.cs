@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float speed = 0.002f;
+    public float speed = 0.002f;
     private float time = 0;
-    public Vector3 trg;
-    public Vector3 start;
-    public Unit targetUnit;
-    public Weapon weapon;
+    protected Vector3 trg;
+    protected Vector3 start;
+    private Unit targetUnit;
+    public IBulletHolder weapon;
     private Action updateAction;
     public BaseEffectAbsorber TrailParticleSystem;
     public BaseEffectAbsorber HitParticleSystem;
@@ -33,7 +33,6 @@ public class Bullet : MonoBehaviour
         {
             direction = new Vector3(direction.x, transform.position.y, direction.z);
         }
-        speed = weapon.Parameters.bulletSpeed;
 //        ownerType = weapon.owner.unitType;
         this.weapon = weapon;
         if (weapon.bulletComeOut != null)
@@ -51,9 +50,8 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(direction);
     }
     
-    public void Init(Unit target, Weapon weapon)
+    public void Init(Unit target, IBulletHolder weapon)
     {
-        speed = weapon.Parameters.bulletSpeed;
         targetUnit = target;
         start = transform.position;
         this.weapon = weapon;
@@ -85,9 +83,9 @@ public class Bullet : MonoBehaviour
     protected virtual void Hit(Unit unit)
     {
         bool haveManyTargets = false;
-        if (weapon != null && weapon.PlayerItem != null)
+        if (weapon != null && weapon.SpecAbility != null)
         {
-            switch (weapon.PlayerItem.specialAbilities)
+            switch (weapon.SpecAbility)
             {
                 case SpecialAbility.penetrating:
                     haveManyTargets = true;

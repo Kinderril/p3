@@ -31,5 +31,10 @@ public class BaseAction
     {
         endCallback = null;
     }
+
+    public virtual void Stop()
+    {
+
+    }
 }
 

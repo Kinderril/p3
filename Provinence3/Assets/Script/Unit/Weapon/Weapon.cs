@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IBulletHolder
 {
     private float nexAttackTime;
     public Bullet bullet;
@@ -114,6 +114,27 @@ public class Weapon : MonoBehaviour
         {
             pSystemOnShot.Play();
         }
+    }
+
+    public SpecialAbility SpecAbility
+    {
+        get { return PlayerItem == null ? SpecialAbility.none : PlayerItem.specialAbilities; }
+    }
+    public float Power {
+        get
+        {
+            return GetPower(); 
+            
+        } 
+    }
+
+    public Unit Owner
+    {
+        get { return owner; }
+    }
+    public WeaponType DamageType
+    {
+        get { return Parameters.type; }
     }
 }
 

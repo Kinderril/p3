@@ -6,18 +6,33 @@ using System.Text;
 
 public class SpeedEffect : TimeEffect
 {
-
-    public SpeedEffect(Unit targetUnit) 
+    private bool plus;
+    public SpeedEffect(Unit targetUnit,bool plus = true) 
         : base(targetUnit)
     {
-        targetUnit.Parameters.Parameters[ParamType.Speed] *= 2f;
+        this.plus = plus;
+        if (plus)
+        {
+            targetUnit.Parameters.Parameters[ParamType.Speed] *= 2f;
+        }
+        else
+        {
+            targetUnit.Parameters.Parameters[ParamType.Speed] /= 2f;
+        }
         var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.speed);
         effect.Init(targetUnit,endEffect);
     }
 
     protected override void OnTimer()
     {
-        targetUnit.Parameters.Parameters[ParamType.Speed] /= 2f;
+        if (plus)
+        {
+            targetUnit.Parameters.Parameters[ParamType.Speed] /= 2f;
+        }
+        else
+        {
+            targetUnit.Parameters.Parameters[ParamType.Speed] *= 2f;
+        }
         base.OnTimer();
     }
 }

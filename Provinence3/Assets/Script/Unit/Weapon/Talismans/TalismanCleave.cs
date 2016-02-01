@@ -13,7 +13,7 @@ public class TalismanCleave : Talisman
     }
     public override void Use()
     {
-        MainController.Instance.level.MainHero.GetHeal(currentEnergy);
+
         base.Use();
     }
 }

@@ -112,6 +112,11 @@ public class AttackAction : BaseAction
         
     }
 
+    public override void Stop()
+    {
+
+    }
+
     protected virtual void MoveEnd()
     {
         attackStatus = AttackStatus.none;

@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 
-public abstract class Talisman
+public abstract class Talisman 
 {
     public TalismanItem sourseItem;
     public float currentEnergy;
@@ -73,6 +73,10 @@ public abstract class Talisman
         return talic;
     }
 
+    public BaseMonster GetClosestMonster()
+    {
+        return null;//TODO
+    }
     public virtual void Use()
     {
         Debug.Log("Use!!! " + sourseItem.TalismanType);

@@ -26,6 +26,7 @@ public class BaseMonster : Unit
     public int energyadd = 4;
     private bool isHome = true;
     private BaseAction attackBehaviour;
+    private bool isDisabled = false;
 //    public ParticleSystem ParticleSystemBorn;
     public bool haveAction;
 
@@ -59,7 +60,6 @@ public class BaseMonster : Unit
         mapItem2.StartFly(transform);
         base.Dead();
         Action = null;
-
     }
 
     public override void GetHit(Bullet bullet)
@@ -84,7 +84,7 @@ public class BaseMonster : Unit
 
     protected override void UpdateUnit()
     {
-        if (!isDead)
+        if (!isDead && !isDisabled)
         {
             CheckDistance();
             base.UpdateUnit();
@@ -179,6 +179,22 @@ public class BaseMonster : Unit
             return;
         StartWalk();
         
+    }
+
+    public void Disable()
+    {
+        isDisabled = true;
+        if (Action != null)
+        {
+//            Action.Stop();
+            Control.Stop(false);
+            Action = null;
+            //Maybe here set animation
+        }
+    }
+    public void Activate()
+    {
+        isDisabled = false;
     }
 
     private void StartAttack()

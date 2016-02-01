@@ -188,8 +188,13 @@ public class Unit : MonoBehaviour
         return 1 - curResist/(100 + curResist);
     }
 
-    public void GetHit(float power,WeaponType type,float mdef,float pdef)
+    public void GetHit(float power,WeaponType type,float mdef = -1,float pdef = -1)
     {
+        if (mdef < 0 || pdef < 0)
+        {
+            mdef = Parameters.Parameters[ParamType.MDef];
+            pdef = Parameters.Parameters[ParamType.PDef];
+        }
         switch (type)
         {
             case WeaponType.magic:
@@ -226,14 +231,14 @@ public class Unit : MonoBehaviour
 
     public virtual void GetHit(Bullet bullet)
     {
-        float power = bullet.weapon.GetPower();
+        float power = bullet.weapon.Power;
         float mdef = Parameters.Parameters[ParamType.MDef];
         float pdef = Parameters.Parameters[ParamType.PDef];
 
-        if (bullet.weapon.PlayerItem != null)
+        if (bullet.weapon != null)
         {
             //Debug.Log("Test bullet.weapon.PlayerItem.specialAbilities : " + bullet.weapon.PlayerItem.specialAbilities);
-            switch (bullet.weapon.PlayerItem.specialAbilities)
+            switch (bullet.weapon.SpecAbility)
             {
                 case SpecialAbility.Critical:
 
@@ -245,7 +250,7 @@ public class Unit : MonoBehaviour
                     }
                     break;
                 case SpecialAbility.push:
-                    var owner2 = bullet.weapon.owner;
+                    var owner2 = bullet.weapon.Owner;
                     var dir = (transform.position - owner2.transform.position).normalized;
 
                     break;
@@ -257,7 +262,7 @@ public class Unit : MonoBehaviour
                     Parameters.Parameters[ParamType.MDef] *= 0.94f;
                     break;
                 case SpecialAbility.vampire:
-                    var owner = bullet.weapon.owner;
+                    var owner = bullet.weapon.Owner;
                     //Debug.Log("BEfore " + owner.CurHp);
                     var diff = power*0.1f;
                     owner.CurHp += diff;
@@ -279,12 +284,9 @@ public class Unit : MonoBehaviour
                 HitParticleSystem.Play();
             }
         }
-        GetHit(power, bullet.weapon.Parameters.type, mdef, pdef);
+        GetHit(power, bullet.weapon.DamageType, mdef, pdef);
     }
     
-
-    
-
     protected virtual void Dead()
     {
         if (OnDead != null)
