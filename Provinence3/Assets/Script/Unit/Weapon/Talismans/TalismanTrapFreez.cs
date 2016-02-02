@@ -18,6 +18,7 @@ public class TalismanTrapFreez : Talisman
     {
         var p = hero.transform.position;
         var item = DataBaseController.GetItem<AOETrap>(cacheGameObject, p);
+        item.Init(sourseItem.power,false);
         base.Use();
     }
 }

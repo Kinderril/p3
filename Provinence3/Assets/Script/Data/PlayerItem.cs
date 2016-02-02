@@ -36,6 +36,7 @@ public class PlayerItem : BaseItem
     public Dictionary<ParamType, float> parameters;
     public SpecialAbility specialAbilities = SpecialAbility.none; 
     public bool isRare;
+    public int enchant = 0;
     public const char FIRSTCHAR = '%';
     
 
@@ -49,8 +50,9 @@ public class PlayerItem : BaseItem
         icon = RenderCam.Instance.DoRender(slot);
         isEquped = false;
     }
-    public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, bool isRare, int cost,bool isEquiped,string name,string icon)
+    public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, bool isRare, int cost,bool isEquiped,string name,string icon,int enchant)
     {
+        this.enchant = enchant;
         this.cost = cost;
         this.parameters = pparams;
         this.Slot = slot;
@@ -108,11 +110,18 @@ public class PlayerItem : BaseItem
         ss.Append(DELEM);
         ss.Append(isEquped.ToString());
         ss.Append(DELEM);
+        ss.Append(enchant.ToString());
+        ss.Append(DELEM);
         StringBuilder specials = new StringBuilder();
         specials.Append((int)specialAbilities);
         var result = par.ToString() + MDEL + ss.ToString() + MDEL + specials.ToString();
         Debug.Log("ITEM SAVE STRING :" + result);
         return result;
+    }
+
+    public void Enchant(int sum)
+    {
+        enchant += sum;
     }
 
     public override char FirstChar()
@@ -124,7 +133,7 @@ public class PlayerItem : BaseItem
     {
         foreach (var parameter in parameters)
         {
-            hero.Parameters.Parameters[parameter.Key] += parameter.Value;
+            hero.Parameters.Parameters[parameter.Key] += (1 + enchant / 5) *  parameter.Value ;
         }
     }
 
@@ -133,13 +142,15 @@ public class PlayerItem : BaseItem
         Debug.Log("Creat from:   " + item);
         var Part1 = item.Split(MDEL);
         var Part2 = Part1[1].Split(DELEM);
+        //PART2
         Slot slot = (Slot) Convert.ToInt32(Part2[0]);
         bool isRare = Convert.ToBoolean(Part2[1]);
         string icon = Part2[2];
         string name = Part2[3];
         int cost = Convert.ToInt32(Part2[4]);
         bool isEquped = Convert.ToBoolean(Part2[5]);
-
+        int enchant = Convert.ToInt32(Part2[6]);
+        //PART1
         var firstPart = Part1[0].Split(DELEM);
         Dictionary<ParamType, float> itemParameters = new Dictionary<ParamType, float>();
         //Debug.Log(">>>Part1[0]   " + Part1[0]);
@@ -152,7 +163,7 @@ public class PlayerItem : BaseItem
             float value = Convert.ToSingle(pp[1]);
             itemParameters.Add(type,value);
         }
-        PlayerItem playerItem = new PlayerItem(itemParameters, slot, isRare, cost, isEquped, name, icon);
+        PlayerItem playerItem = new PlayerItem(itemParameters, slot, isRare, cost, isEquped, name, icon, enchant);
         //Debug.Log(">>>Part3[0]   :" + Part3.ToString());
         var Part3 = Part1[2];
         var spec = (SpecialAbility) Convert.ToInt32(Part3.ToString());

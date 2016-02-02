@@ -60,11 +60,10 @@ public class HeroShopRandomItem : IShopExecute
             pparams.Add(secondary, secondaryValue);
         }
         PlayerItem item = new PlayerItem(pparams,slot,isRare, totalPoints);
-        if (contest < 0.85f && (slot == Slot.magic_weapon || slot == Slot.physical_weapon))//.65f
+        if (contest < 0.85f && (slot == Slot.magic_weapon || slot == Slot.physical_weapon))
         {
             var spec = ShopController.AllSpecialAbilities.RandomElement();
             item.specialAbilities = spec;
-            Debug.Log("WITH SPEC::: " + item.specialAbilities);
         }
         return item;
     }

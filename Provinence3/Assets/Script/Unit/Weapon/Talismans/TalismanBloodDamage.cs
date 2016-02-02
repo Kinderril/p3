@@ -17,7 +17,10 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     public override void Use()
     {
         var bullet = DataBaseController.GetItem<Bullet>(cacheGameObject);
+
+        hero.GetHit(Power/3,WeaponType.magic);
         bullet.Init(GetClosestMonster(),this);
+
         base.Use();
     }
 

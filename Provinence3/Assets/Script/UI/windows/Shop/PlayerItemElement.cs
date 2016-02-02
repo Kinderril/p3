@@ -21,6 +21,7 @@ public class PlayerItemElement : MonoBehaviour
     public Image SlotLabel;
     public Image equpedImage;
     public BaseItem PlayerItem;
+    public Text enchantField;
     private Transform oldTransforml;
     private Action<PlayerItemElement> callback;
     private float startTakeTime = 0;
@@ -32,7 +33,19 @@ public class PlayerItemElement : MonoBehaviour
         this.callback = OnClicked;
         if (item is PlayerItem)
         {
-            rareImage.gameObject.SetActive((item as PlayerItem).isRare);
+            var pItem = item as PlayerItem;
+            rareImage.gameObject.SetActive(pItem.isRare);
+            bool haveEnchant = pItem.enchant > 0;
+            if (haveEnchant)
+            {
+                enchantField.text = "+" + pItem.enchant;
+            }
+            enchantField.gameObject.SetActive(haveEnchant);
+        }
+        else
+        {
+
+            rareImage.gameObject.SetActive(false);
         }
         equpedImage.gameObject.SetActive(item.IsEquped);
         iconImage.sprite = item.IconSprite;

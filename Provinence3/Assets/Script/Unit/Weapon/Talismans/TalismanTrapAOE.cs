@@ -18,6 +18,7 @@ public class TalismanTrapAOE : Talisman
     {
         var p = hero.transform.position;
         var item = DataBaseController.GetItem<AOETrap>(cacheGameObject, p);
+        item.Init(sourseItem.power, true);
         base.Use();
     }
 }

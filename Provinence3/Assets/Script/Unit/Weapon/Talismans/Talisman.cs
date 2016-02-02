@@ -75,7 +75,7 @@ public abstract class Talisman
 
     public BaseMonster GetClosestMonster()
     {
-        return null;//TODO
+        return Map.Instance.FindClosesEnemy(hero.transform.position);
     }
     public virtual void Use()
     {

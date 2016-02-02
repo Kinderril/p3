@@ -87,7 +87,7 @@ public class WindowShop : BaseWindow
 
                 EquipButton.gameObject.SetActive(!isEquiped);
                 UnEquipButton.gameObject.SetActive(isEquiped);
-                var canBeupgraded = canBeUpgraded(info);
+                var canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(info) != null;
                 UpgradeButton.gameObject.SetActive(canBeupgraded);
             }
         }
@@ -96,31 +96,10 @@ public class WindowShop : BaseWindow
         ItemInfoElement.gameObject.SetActive(true);
     }
 
-    private bool canBeUpgraded(BaseItem info)
-    {
-        switch (info.Slot)
-        {
-            case Slot.physical_weapon:
-            case Slot.magic_weapon:
-                return HaveExecutableItem(ExecutableType.weaponUpdate);
-            case Slot.body:
-            case Slot.helm:
-                return HaveExecutableItem(ExecutableType.armorUpdate);
-            case Slot.Talisman:
-                return HaveExecutableItem(ExecutableType.powerUpdate);
-        }
-        return false;
-    }
-
     public void OnUpgradeClick()
     {
-        
-    }
 
-    private bool HaveExecutableItem(ExecutableType t)
-    {
-        var allItems = MainController.Instance.PlayerData.GetAllItems();
-        return allItems.FirstOrDefault(x => x.Slot == Slot.executable && ((ExecutableItem)x).ExecutableType == t) != null;
+//        ItemInfoElement.Init(selectedPlayerItem);
     }
 
     public void OnBuySimpleChest()

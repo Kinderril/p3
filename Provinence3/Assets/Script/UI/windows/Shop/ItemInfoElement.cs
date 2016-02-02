@@ -19,6 +19,7 @@ public class ItemInfoElement : MonoBehaviour
     public Image SlotLabel;
     public Image mainIcon;
     public Image SpecIcon;
+    public Text enchantField;
     public Action<BaseItem, ItemOwner> OnInitCallback;
 
     public void SetCallBack(Action<BaseItem, ItemOwner> OnInitCallback)
@@ -50,6 +51,12 @@ public class ItemInfoElement : MonoBehaviour
             }
             mainIcon.sprite = Resources.Load<Sprite>("sprites/PlayerItems/" + playerItem.icon);
             NameLabel.text = playerItem.name;
+            bool haveEnchant = playerItem.enchant > 0;
+            if (haveEnchant)
+            {
+                enchantField.text = "+" + playerItem.enchant;
+            }
+            enchantField.gameObject.SetActive(haveEnchant);
         }
         var talismanItem = item as TalismanItem;
         if (talismanItem != null)

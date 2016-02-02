@@ -149,10 +149,10 @@ public class Map : Singleton<Map>
         return list;
     } 
 
-    public Unit FindClosesEnemy(Vector3 v)
+    public BaseMonster FindClosesEnemy(Vector3 v)
     {
         float curDist = 999999;
-        Unit unit = null;
+        BaseMonster unit = null;
         foreach (var enemy in enemies)
         {
             var pDist = (enemy.transform.position - v).sqrMagnitude;

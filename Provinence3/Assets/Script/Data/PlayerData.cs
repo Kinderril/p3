@@ -14,6 +14,8 @@ public enum MainParam
 
 public class PlayerData
 {
+    public const int CRYSTAL_SAFETY_ENCHANT = 10;
+    public const int ENCHANT_CHANCE = 40;
     public const string LEVEL = "LEVEL_";
     public const string ALLOCATED = "ALLOCATED_";
     public const string INVENTORY = "INVENTORY_";
@@ -65,6 +67,45 @@ public class PlayerData
                 OnParametersChange(MainParameters);
             }
             Save();
+        }
+    }
+
+    public void TryToEnchant(PlayerItem item,bool safety)
+    {
+        var exec = CanBeUpgraded(item);
+        if (exec != null)
+        {
+            if (safety)
+            {
+                if (CanPay(ItemId.crystal, CRYSTAL_SAFETY_ENCHANT))
+                {
+                    DoEnchant(item, exec, safety);
+                }
+            }
+        }
+    }
+
+    private void DoEnchant(PlayerItem item, ExecutableItem exec, bool safety)
+    {
+        RemoveItem(exec);
+        if (safety)
+        {
+            Pay(ItemId.crystal, CRYSTAL_SAFETY_ENCHANT);
+        }
+        if (UnityEngine.Random.Range(0, 100) < ENCHANT_CHANCE)
+        {
+            item.Enchant(1);
+        }
+        else
+        {
+            if (safety)
+            {
+                item.Enchant(0);
+            }
+            else
+            {
+                item.Enchant(-5);
+            }
         }
     }
 
@@ -171,6 +212,28 @@ public class PlayerData
         }
         LoadListOfBornPosition();
         CheckIfFirstLevel();
+    }
+    public ExecutableItem CanBeUpgraded(BaseItem info)
+    {
+        switch (info.Slot)
+        {
+            case Slot.physical_weapon:
+            case Slot.magic_weapon:
+                return HaveExecutableItem(ExecutableType.weaponUpdate);
+            case Slot.body:
+            case Slot.helm:
+                return HaveExecutableItem(ExecutableType.armorUpdate);
+            case Slot.Talisman:
+                return HaveExecutableItem(ExecutableType.powerUpdate);
+        }
+        return null;
+    }
+
+
+    private ExecutableItem HaveExecutableItem(ExecutableType t)
+    {
+        var allItems = GetAllItems();
+        return allItems.FirstOrDefault(x => x.Slot == Slot.executable && ((ExecutableItem)x).ExecutableType == t) as ExecutableItem;
     }
 
     private void CheckIfFirstLevel()
