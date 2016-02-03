@@ -15,7 +15,7 @@ public enum MainParam
 public class PlayerData
 {
     public const int CRYSTAL_SAFETY_ENCHANT = 10;
-    public const int ENCHANT_CHANCE = 40;
+    public const int ENCHANT_CHANCE = 60;
     public const string LEVEL = "LEVEL_";
     public const string ALLOCATED = "ALLOCATED_";
     public const string INVENTORY = "INVENTORY_";
@@ -82,6 +82,10 @@ public class PlayerData
                     DoEnchant(item, exec, safety);
                 }
             }
+            else
+            {
+                DoEnchant(item, exec, safety);
+            }
         }
     }
 
@@ -92,7 +96,9 @@ public class PlayerData
         {
             Pay(ItemId.crystal, CRYSTAL_SAFETY_ENCHANT);
         }
-        if (UnityEngine.Random.Range(0, 100) < ENCHANT_CHANCE)
+        var enchantFine = UnityEngine.Random.Range(0, 100) < ENCHANT_CHANCE;
+        Debug.Log("Enchant done:" + enchantFine);
+        if (enchantFine)
         {
             item.Enchant(1);
         }
@@ -107,6 +113,7 @@ public class PlayerData
                 item.Enchant(-5);
             }
         }
+        Save();
     }
 
     public bool CanUpgradeParameter()
@@ -152,6 +159,10 @@ public class PlayerData
             var count = PlayerPrefs.GetInt(INVENTORY + v,0);
             playerInv.Add(v,count);
         }
+        //TODO STUB DEBUG
+        playerInv[ItemId.money] += 1000;
+        playerInv[ItemId.crystal] += 10;
+        //TODO STUB DEBUG
         var allItems = PlayerPrefs.GetString(ITEMS, "").Split(ITEMS_DELEMETER);
         foreach (var item in allItems)
         {
@@ -374,12 +385,7 @@ public class PlayerData
     public void Sell(BaseItem playerItem)
     {
         AddCurrensy(ItemId.money, playerItem.cost/3);
-        playerItems.Remove(playerItem);
-        playerItem.IsEquped = false;
-        if (OnItemSold != null)
-        {
-            OnItemSold(playerItem);
-        }
+        RemoveItem(playerItem);
         Save();
     }
 
@@ -483,6 +489,11 @@ public class PlayerData
     public void RemoveItem(BaseItem bonusItem)
     {
         playerItems.Remove(bonusItem);
+        bonusItem.IsEquped = false;
+        if (OnItemSold != null)
+        {
+            OnItemSold(bonusItem);
+        }
     }
 }
 

@@ -121,7 +121,7 @@ public class PlayerItem : BaseItem
 
     public void Enchant(int sum)
     {
-        enchant += sum;
+        enchant = Mathf.Abs(enchant + sum);
     }
 
     public override char FirstChar()
@@ -149,7 +149,7 @@ public class PlayerItem : BaseItem
         string name = Part2[3];
         int cost = Convert.ToInt32(Part2[4]);
         bool isEquped = Convert.ToBoolean(Part2[5]);
-        int enchant = Convert.ToInt32(Part2[6]);
+        int enchant = Mathf.Abs(Convert.ToInt32(Part2[6]));
         //PART1
         var firstPart = Part1[0].Split(DELEM);
         Dictionary<ParamType, float> itemParameters = new Dictionary<ParamType, float>();

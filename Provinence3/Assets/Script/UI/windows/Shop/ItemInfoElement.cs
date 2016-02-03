@@ -31,15 +31,29 @@ public class ItemInfoElement : MonoBehaviour
     public void Init(BaseItem item)
     {
         Clear();
+        enchantField.gameObject.SetActive(false);
         SlotLabel.sprite = DataBaseController.Instance.SlotIcon(item.Slot);
         SpecIcon.gameObject.SetActive(false);
         var playerItem = item as PlayerItem;
         if (playerItem != null)
         {
+            bool haveEnchant = playerItem.enchant > 0;
+            if (haveEnchant)
+            {
+                enchantField.text = "+" + playerItem.enchant;
+                enchantField.gameObject.SetActive(true);
+            }
+            bool enchanted = false;
             foreach (var p in playerItem.parameters)
             {
+                var count = p.Value;
+                if (!enchanted)
+                {
+                    enchanted = true;
+                    count += count*playerItem.enchant/5;
+                }
                 var element = DataBaseController.GetItem<ParameterElement>(Prefab);
-                element.Init(p.Key, p.Value);
+                element.Init(p.Key, count);
                 element.transform.SetParent(layout);
             }
             var haveSpec = playerItem.specialAbilities != SpecialAbility.none;
@@ -51,12 +65,6 @@ public class ItemInfoElement : MonoBehaviour
             }
             mainIcon.sprite = Resources.Load<Sprite>("sprites/PlayerItems/" + playerItem.icon);
             NameLabel.text = playerItem.name;
-            bool haveEnchant = playerItem.enchant > 0;
-            if (haveEnchant)
-            {
-                enchantField.text = "+" + playerItem.enchant;
-            }
-            enchantField.gameObject.SetActive(haveEnchant);
         }
         var talismanItem = item as TalismanItem;
         if (talismanItem != null)

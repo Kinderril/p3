@@ -11,7 +11,7 @@ public class Map : Singleton<Map>
     public List<BossBornPosition> BossAppearPos;
     private Transform bornPositions;
     public Transform enemiesContainer;
-    public List<Unit> enemies = new List<Unit>();
+    public List<BaseMonster> enemies = new List<BaseMonster>();
     private BossSpawner bossSpawner;
     public Transform effectsContainer;
     public Transform miscContainer;
@@ -134,7 +134,7 @@ public class Map : Singleton<Map>
     private void OnEnemyDead(Unit obj)
     {
         obj.OnDead -= OnEnemyDead;
-        enemies.Remove(obj);
+        enemies.Remove(obj as BaseMonster);
         bossSpawner.EnemieDead();
         level.EnemieDead();
     }

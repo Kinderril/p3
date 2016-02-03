@@ -22,17 +22,25 @@ public class PlayerItemElement : MonoBehaviour
     public Image equpedImage;
     public BaseItem PlayerItem;
     public Text enchantField;
+    public Text NameField;
     private Transform oldTransforml;
     private Action<PlayerItemElement> callback;
     private bool isDrag = false;
         
     public void Init(BaseItem item,Action<PlayerItemElement> OnClicked)
     {
-        PlayerItem = item;
         this.callback = OnClicked;
-        if (item is PlayerItem)
+        PlayerItem = item;
+        Refresh();
+
+    }
+    public void Refresh()
+    {
+        enchantField.gameObject.SetActive(false);
+        NameField.text = PlayerItem.Name;
+        if (PlayerItem is PlayerItem)
         {
-            var pItem = item as PlayerItem;
+            var pItem = PlayerItem as PlayerItem;
             rareImage.gameObject.SetActive(pItem.isRare);
             bool haveEnchant = pItem.enchant > 0;
             if (haveEnchant)
@@ -43,12 +51,11 @@ public class PlayerItemElement : MonoBehaviour
         }
         else
         {
-
             rareImage.gameObject.SetActive(false);
         }
-        equpedImage.gameObject.SetActive(item.IsEquped);
-        iconImage.sprite = item.IconSprite;
-        SlotLabel.sprite = DataBaseController.Instance.SlotIcon(item.Slot);
+        equpedImage.gameObject.SetActive(PlayerItem.IsEquped);
+        iconImage.sprite = PlayerItem.IconSprite;
+        SlotLabel.sprite = DataBaseController.Instance.SlotIcon(PlayerItem.Slot);
     }
 
     public void OnPointerClick()
@@ -74,6 +81,6 @@ public class PlayerItemElement : MonoBehaviour
         if (isDrag)
             transform.position = eventData.position;
     }
-    
+
 }
 

@@ -32,6 +32,11 @@ public abstract class BaseItem
         }
     }
 
+    public virtual string Name
+    {
+        get { return name; }
+    }
+
 
     public virtual void LoadTexture()
     {

@@ -23,6 +23,10 @@ public class ExecutableItem : BaseItem
         Slot = Slot.executable;
     }
 
+    public override string Name {
+        get { return ExecutableType.ToString(); } 
+    }
+
     public override char FirstChar()
     {
         return FIRSTCHAR;

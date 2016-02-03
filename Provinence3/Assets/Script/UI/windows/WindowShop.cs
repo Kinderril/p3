@@ -24,6 +24,7 @@ public class WindowShop : BaseWindow
     public Button EquipButton;
     public Button UnEquipButton;
     public Button UpgradeButton;
+    public UpgradeWindow UpgradeWindow;
 
     public override void Init()
     {
@@ -74,8 +75,6 @@ public class WindowShop : BaseWindow
         Debug.Log(obj);
         bool val = info == null;
         BuyButton.gameObject.SetActive(val);
-
-
         EquipButton.gameObject.SetActive(false);
         UnEquipButton.gameObject.SetActive(false);
         UpgradeButton.gameObject.SetActive(false);
@@ -96,10 +95,32 @@ public class WindowShop : BaseWindow
         ItemInfoElement.gameObject.SetActive(true);
     }
 
+    public void RefreshItem(BaseItem item)
+    {
+        var element = PlayerItemElements.FirstOrDefault(x => x.PlayerItem == item);
+        if (element != null)
+        {
+            element.Refresh();
+            OnSelected(element);
+        }
+    } 
+
     public void OnUpgradeClick()
     {
+        var playerItem = selectedPlayerItem as PlayerItem;
+        if (playerItem != null)
+        {
+            UpgradeWindow.Init(playerItem, OnItemEnchanted);
+        }
+        else
+        {
+            WindowManager.Instance.InfoWindow.Init(null, "Can't Enchant this item");
+        }
+    }
 
-//        ItemInfoElement.Init(selectedPlayerItem);
+    private void OnItemEnchanted(PlayerItem obj)
+    {
+        RefreshItem(obj);
     }
 
     public void OnBuySimpleChest()
