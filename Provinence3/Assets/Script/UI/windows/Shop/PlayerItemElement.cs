@@ -24,7 +24,6 @@ public class PlayerItemElement : MonoBehaviour
     public Text enchantField;
     private Transform oldTransforml;
     private Action<PlayerItemElement> callback;
-    private float startTakeTime = 0;
     private bool isDrag = false;
         
     public void Init(BaseItem item,Action<PlayerItemElement> OnClicked)
@@ -56,18 +55,7 @@ public class PlayerItemElement : MonoBehaviour
     {
         callback(this);
     }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        startTakeTime = Time.time;
-        /*
-        if (!isDrag)
-        {
-            StartCoroutine(Wait());
-            callback(this);
-        }*/
-    }
-
+    
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(1f);
@@ -75,25 +63,7 @@ public class PlayerItemElement : MonoBehaviour
         transform.SetParent(transform.parent.parent.parent);
         isDrag = true;
     } 
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        isDrag = false;
-        //var deltaTime = Time.time - startTakeTime; 
-        /*
-        var res = IsOnWhat(eventData.position);
-        transform.SetParent(oldTransforml);
-        switch (res)
-        {
-            case UnderUi.delete:
-                MainController.Instance.PlayerData.Sell(PlayerItem);
-                break;
-            case UnderUi.equip:
-                MainController.Instance.PlayerData.EquipItem(PlayerItem);
-                break;
-        }*/
-    }
-
+    
     public void Equip(bool val)
     {
         equpedImage.gameObject.SetActive(val);
@@ -104,10 +74,6 @@ public class PlayerItemElement : MonoBehaviour
         if (isDrag)
             transform.position = eventData.position;
     }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        isDrag = false;
-    }
+    
 }
 

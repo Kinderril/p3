@@ -9,8 +9,11 @@ public abstract class Talisman
 {
     public TalismanItem sourseItem;
     public float currentEnergy;
-    public Action<bool,float> OnReady;
+    public Action<bool,float,int> OnReady;
     protected Hero hero;
+    private bool isUnderCooldown = false;
+    private TimerManager.ITimer timer;
+    private int currentCharges = 0;
 
     public Talisman(TalismanItem sourseItem,int countTalismans)
     {
@@ -23,6 +26,15 @@ public abstract class Talisman
                 AddEnergy(delta / countTalismans);
             }
         };
+    }
+
+    public void Dispose()
+    {
+        if (timer != null)
+        {
+            timer.Stop();
+            timer = null;
+        }
     }
 
     public static Talisman Creat(TalismanItem sourseItem, int countTalismans)
@@ -80,16 +92,25 @@ public abstract class Talisman
     public virtual void Use()
     {
         Debug.Log("Use!!! " + sourseItem.TalismanType);
+        isUnderCooldown = true;
+        timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromMilliseconds(500));
+        timer.OnTimer += OnTimerCome;
         AddEnergy(sourseItem.costShoot,true);
         DoCallback();
+    }
+
+    private void OnTimerCome()
+    {
+        isUnderCooldown = false;
+        DoCallback();
+        timer = null;
     }
 
     public void AddEnergy(float val, bool canBePositive = false)
     {
         if (canBePositive || val < 0)
         {
-            currentEnergy = Mathf.Clamp(currentEnergy - val, 0, sourseItem.costShoot + 1);
-            //Debug.Log("add energy " + currentEnergy + "/" + sourseItem.costShoot);
+            currentEnergy = Mathf.Clamp(currentEnergy - val, 0, (sourseItem.costShoot )*sourseItem.MaxCharges );
             DoCallback();
         }
     }
@@ -98,13 +119,20 @@ public abstract class Talisman
     {
         if (OnReady != null)
         {
-            OnReady(CanUse(), currentEnergy/ (float)sourseItem.costShoot);
+            float percent = currentEnergy/(float) sourseItem.costShoot;
+            currentCharges = (int)percent;
+            if (percent > 1)
+            {
+                percent -= currentCharges;
+            }
+            
+            OnReady(CanUse(), percent, currentCharges);
         }
     }
 
     public bool CanUse()
     {
-        return currentEnergy >= sourseItem.costShoot;
+        return currentEnergy >= sourseItem.costShoot && !isUnderCooldown;
     }
 }
 

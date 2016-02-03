@@ -12,6 +12,7 @@ public class TalismanButton : MonoBehaviour
     public Slider sliderReady;
     public Button button;
     public Image icon;
+    public Text chargesField;
 
     public void Init(TalismanItem talic, int countTalismans)
     {
@@ -20,27 +21,26 @@ public class TalismanButton : MonoBehaviour
         talicLogic.OnReady += OnReady;
         gameObject.SetActive(true);
         var spr = DataBaseController.Instance.TalismanIcon(talic.TalismanType);
-      //  Debug.Log("Talisman inited " + talic.TalismanType + "   " + icon.gameObject.name);
         icon.sprite = spr;
-        OnReady(false, 0);
+        OnReady(false, 0,0);
     }
 
-    private void OnReady(bool isReady, float percent)
+    private void OnReady(bool isReady, float percent,int curCharges)
     {
         sliderReady.gameObject.SetActive(!isReady);
         sliderReady.value = percent;
         button.interactable = isReady;
+        chargesField.text = curCharges.ToString("0");
     }
-
-
+    
     public void OnClick()
     {
-      //  Debug.Log("Talisman USE!");
         talicLogic.Use();
     }
 
     void OnDestroy()
     {
+        talicLogic.Dispose();
         talicLogic.OnReady -= OnReady;
     }
 }
