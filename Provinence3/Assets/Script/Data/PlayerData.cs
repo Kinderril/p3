@@ -94,7 +94,7 @@ public class PlayerData
         RemoveItem(exec);
         if (safety)
         {
-            Pay(ItemId.crystal, CRYSTAL_SAFETY_ENCHANT);
+            Pay(ItemId.crystal, CRYSTAL_SAFETY_ENCHANT,false);
         }
         var enchantFine = UnityEngine.Random.Range(0, 100) < ENCHANT_CHANCE;
         Debug.Log("Enchant done:" + enchantFine);
@@ -139,6 +139,7 @@ public class PlayerData
         AllocatedPoints += 2;
         CurrentLevel++;
         AddCurrensy(ItemId.money, -cost);
+        Save();
         if (OnLevelUp != null)
         {
             OnLevelUp(CurrentLevel);
@@ -322,8 +323,6 @@ public class PlayerData
         {
             OnCurrensyChanges(id, playerInv[id]);
         }
-        Save();
-
     }
 
     public void AddItem(BaseItem item,bool withSave = true)

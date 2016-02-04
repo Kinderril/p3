@@ -35,6 +35,8 @@ public class AttackAction : BaseAction
     private Vector3 lastTargetScanPos;
     protected Vector3 targetUnitDir;
     protected AttackStatus attackStatus = AttackStatus.none;
+    protected float activateTime;
+    protected bool isActivated = true;
 
     public AttackAction(BaseMonster owner, Unit target ,Action endCallback)
         : base(owner, endCallback)
@@ -52,11 +54,7 @@ public class AttackAction : BaseAction
         {
             trg = new Vector3(trg.x, owner.transform.position.y, trg.z);
             lastTargetScanPos = trg;
-
-//        bool isTooClose = true;
             trg = ClaclNearTargetPosition(trg);
-//        isTooClose = (moveTarget - trg).sqrMagnitude > 1;
-//            Debug.Log("Start move to target " + trg);
             if ( /*isTooClose && */owner.Control.MoveTo(trg))
             {
                 lastRecalTime = Time.time;

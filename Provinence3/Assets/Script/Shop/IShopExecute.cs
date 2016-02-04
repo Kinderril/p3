@@ -18,11 +18,12 @@ public abstract class IShopExecute : MonoBehaviour
 
     public  virtual void Execute(int parameter)
     {
+        var playerData = MainController.Instance.PlayerData;
         if (MoneyCost > 0)
-            MainController.Instance.PlayerData.Pay(ItemId.money, MoneyCost);
+            playerData.Pay(ItemId.money, MoneyCost);
         if (CrystalCost > 0)
-            MainController.Instance.PlayerData.Pay(ItemId.crystal, CrystalCost);
-
+            playerData.Pay(ItemId.crystal, CrystalCost);
+        playerData.Save();
     }
 }
 
