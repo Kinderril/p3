@@ -94,7 +94,7 @@ public class PlayerData
         RemoveItem(exec);
         if (safety)
         {
-            Pay(ItemId.crystal, CRYSTAL_SAFETY_ENCHANT,false);
+            Pay(ItemId.crystal, CRYSTAL_SAFETY_ENCHANT);
         }
         var enchantFine = UnityEngine.Random.Range(0, 100) < ENCHANT_CHANCE;
         Debug.Log("Enchant done:" + enchantFine);

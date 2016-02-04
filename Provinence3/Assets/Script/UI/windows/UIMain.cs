@@ -21,8 +21,6 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     private bool isPressed;
     private bool isOverUI;
     private bool isCharging = false;
-    public const float CHARGE_TIME_DELAY = 1f;
-    public const float CHARGE_COEF = 1f;
     public Slider chargeSlider;
 
     //    public Text debugText;
@@ -111,28 +109,34 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         {
             isOverUI = EventSystem.current.IsPointerOverGameObject();
             isPressed = true;
+            isCharging = false;
             startDrag = Input.mousePosition;
-            chargeTime = Time.time + CHARGE_TIME_DELAY;
+            chargeTime = Time.time + Weapon.CHARGE_TIME_DELAY;
+//            Debug.Log("charge " + chargeTime);
         }
 
+//        Debug.Log("isPressed " + isPressed);
         if (isPressed)
         {
+            var isOverUI2 = EventSystem.current.IsPointerOverGameObject();
+            var dir = Input.mousePosition - startDrag;
+
+            if (!isCharging && Time.time > chargeTime)
+            {
+                var dist = dir.sqrMagnitude;
+//                Debug.Log("charge " + chargeTime + "   isCharging:" + isCharging + "  dist:" + dist);
+                if (dist < 4000)
+                    StartCharge();
+            }
+
+            if (isCharging)
+            {
+                var perc = (Time.time - chargeTime) / Weapon.MAX_CHARGE_TIME;
+                chargeSlider.value = perc;
+            }
             if (Input.GetMouseButtonUp(index))
             {
-                var isOverUI2 = EventSystem.current.IsPointerOverGameObject();
-                var dir = Input.mousePosition - startDrag;
-
-                if (!isCharging && Time.time > chargeTime)
-                {
-                    StartCharge();
-                }
-
-                if (isCharging)
-                {
-                    var perc = (Time.time - chargeTime)/Weapon.MAX_CHARGE_POWER;
-                    chargeSlider.value = perc;
-                }
-
+                isPressed = false;
                 if (isOverUI || isOverUI2)
                 {
                     EndCharge();

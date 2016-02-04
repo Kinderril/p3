@@ -8,7 +8,8 @@ public class HeroShopExecutableItem : IShopExecute
 {
     public override void Execute(int parameter)
     {
-            MainController.Instance.PlayerData.AddItem(CreatExecutableItem(parameter));
+        MainController.Instance.PlayerData.AddItem(CreatExecutableItem(parameter));
+        base.Execute(parameter);
     }
 
     public static ExecutableItem CreatExecutableItem(int lvl)

@@ -31,9 +31,7 @@ public class ItemInfoElement : MonoBehaviour
     public void Init(BaseItem item)
     {
         Clear();
-        enchantField.gameObject.SetActive(false);
         SlotLabel.sprite = DataBaseController.Instance.SlotIcon(item.Slot);
-        SpecIcon.gameObject.SetActive(false);
         var playerItem = item as PlayerItem;
         if (playerItem != null)
         {
@@ -97,7 +95,6 @@ public class ItemInfoElement : MonoBehaviour
     public void Init(IShopExecute item)
     {
         Clear();
-        SpecIcon.gameObject.SetActive(false);
         NameLabel.text = "Level:" + item.Parameter;
         mainIcon.sprite = item.icon;
         InitCost(item.CrystalCost, item.MoneyCost);
@@ -124,6 +121,8 @@ public class ItemInfoElement : MonoBehaviour
     private void Clear()
     {
 
+        enchantField.gameObject.SetActive(false);
+        SpecIcon.gameObject.SetActive(false);
         foreach (Transform t in layout)
         {
             Destroy(t.gameObject);

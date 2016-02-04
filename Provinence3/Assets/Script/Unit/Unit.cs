@@ -231,7 +231,7 @@ public class Unit : MonoBehaviour
 
     public virtual void GetHit(Bullet bullet)
     {
-        var addPower = 1 + Mathf.Clamp(bullet.AdditionalPower, 0, Weapon.MAX_CHARGE_POWER);
+        var addPower = 1 + Mathf.Clamp(bullet.AdditionalPower, 0, Weapon.MAX_CHARGE_TIME);
         float power = bullet.weapon.Power * addPower;
         float mdef = Parameters.Parameters[ParamType.MDef];
         float pdef = Parameters.Parameters[ParamType.PDef];

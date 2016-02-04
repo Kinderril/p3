@@ -9,7 +9,7 @@ public class TriplsShotWeapon : Weapon
 {
     public int sideCount = 1;
     private Vector3 outPosVector3;
-    public override void DoShoot(Vector3 v, Unit target = null)
+    public override void DoShoot(Vector3 v, float additionalPower = 0, Unit target = null)
     {
         outPosVector3 = GetStartPos();
         var dir = v - outPosVector3;

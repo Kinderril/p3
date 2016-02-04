@@ -40,8 +40,11 @@ public class TalismanButton : MonoBehaviour
 
     void OnDestroy()
     {
-        talicLogic.Dispose();
-        talicLogic.OnReady -= OnReady;
+        if (talicLogic != null)
+        {
+            talicLogic.Dispose();
+            talicLogic.OnReady -= OnReady;
+        }
     }
 }
 

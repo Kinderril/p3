@@ -69,7 +69,7 @@ public class Hero : Unit
             var can = curWeapon.CanShoot();
             if (can && !isPlayAttack)
             {
-                base.TryAttack(shootContainer.dir);
+                base.TryAttack(shootContainer.dir,shootContainer.additionalPower);
             }
             shootContainer = null;
         }
@@ -141,16 +141,16 @@ public class Hero : Unit
             }
             else
             {
-                subTR(target, dir);
+                subTR(target, dir, additionalPower);
             }
         }
         else
         {
-            subTR(target, dir);
+            subTR(target, dir, additionalPower);
         }
     }
 
-    private void subTR(Vector3 target,Vector3 dir)
+    private void subTR(Vector3 target,Vector3 dir,float additionalPower)
     {
         if (isPlayAttack)
         {
@@ -159,7 +159,7 @@ public class Hero : Unit
         else
         {
             heorControl.SetLookDir(dir);
-            shootContainer = new ShootContainer(dir);
+            shootContainer = new ShootContainer(dir, additionalPower);
         }
     }
 
@@ -275,9 +275,11 @@ public class Hero : Unit
 class ShootContainer
 {
     public Vector3 dir;
-    public ShootContainer(Vector3 dir)
+    public float additionalPower;
+    public ShootContainer(Vector3 dir,float additionalPower)
     {
         this.dir = dir;
+        this.additionalPower = additionalPower;
     }
 }
 

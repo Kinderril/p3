@@ -14,7 +14,9 @@ public class Weapon : MonoBehaviour, IBulletHolder
     public WeaponParameters Parameters;
     public PlayerItem PlayerItem;
     public Transform bulletComeOut;
-    public const float MAX_CHARGE_POWER = 2f;
+    public const float CHARGE_COEF = 1.4f;
+    public const float MAX_CHARGE_TIME = 1.2f;
+    public const float CHARGE_TIME_DELAY = 0.5f;
 
     public void Init(Unit owner,PlayerItem PlayerItem)
     {
@@ -69,6 +71,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
 
     public virtual void DoShoot(Vector3 dir, float additionalPower = 0, Unit target = null)
     {
+        additionalPower *= CHARGE_COEF;
         Vector3 outPosVector3 = GetStartPos();
         if (Parameters.isHoming)
         {
