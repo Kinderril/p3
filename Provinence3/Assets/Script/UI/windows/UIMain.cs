@@ -16,16 +16,23 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     private bool enable;
     public Vector3 keybordDir;
 
+    private float chargeTime;
     private Vector3 startDrag;
     private bool isPressed;
     private bool isOverUI;
-//    public Text debugText;
-//    public Text debugText2;
+    private bool isCharging = false;
+    public const float CHARGE_TIME_DELAY = 1f;
+    public const float CHARGE_COEF = 1f;
+    public Slider chargeSlider;
+
+    //    public Text debugText;
+    //    public Text debugText2;
 
     public void Init()
     {
         mainHero = MainController.Instance.level.MainHero;
         MainCamera = MainController.Instance.MainCamera;
+        chargeSlider.gameObject.SetActive(false);
         if (subUI != null)
         {
             subUI.Init(this);
@@ -91,32 +98,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         }
         return Vector3.zero;
     }
-    /*
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        startDrag = eventData.position;
-    }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        var endDrag = eventData.position;
-        var dir = (endDrag - startDrag);
-        var sqrDist = dir.sqrMagnitude;
-        //Debug.Log(">>> " + dir + "    startDrag:" + startDrag + "   endDrag:" + endDrag);
-
-        if (sqrDist >4200)
-        {
-            if (enable)
-                mainHero.TryAttackByDirection(new Vector3(dir.x,0,dir.y));
-        }
-        else
-        {
-           // if (hit != Vector3.zero)
-             //   mainHero.MoveToPosition(hit);
-            
-        }
-    }
-    */
     void LateUpdate()
     {
         int index = 0;
@@ -130,6 +112,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             isOverUI = EventSystem.current.IsPointerOverGameObject();
             isPressed = true;
             startDrag = Input.mousePosition;
+            chargeTime = Time.time + CHARGE_TIME_DELAY;
         }
 
         if (isPressed)
@@ -138,17 +121,44 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             {
                 var isOverUI2 = EventSystem.current.IsPointerOverGameObject();
                 var dir = Input.mousePosition - startDrag;
-                if (isOverUI || isOverUI2)
+
+                if (!isCharging && Time.time > chargeTime)
                 {
-                    return;
+                    StartCharge();
                 }
 
-                //var sqrDist = dir.sqrMagnitude;
+                if (isCharging)
+                {
+                    var perc = (Time.time - chargeTime)/Weapon.MAX_CHARGE_POWER;
+                    chargeSlider.value = perc;
+                }
+
+                if (isOverUI || isOverUI2)
+                {
+                    EndCharge();
+                    return;
+                }
                 if (enable)
-                    mainHero.TryAttackByDirection(new Vector3(dir.x, 0, dir.y));
+                {
+                    EndCharge();
+                    float chargePower = Time.time - chargeTime;
+                    mainHero.TryAttackByDirection(new Vector3(dir.x, 0, dir.y), chargePower);
+                }
             }
         }
-//        debugText2.text = "vel:" + mainHero.Control.Velocity;
+    }
+
+    private void EndCharge()
+    {
+        isCharging = false;
+        chargeSlider.gameObject.SetActive(isCharging);
+
+    }
+
+    private void StartCharge()
+    {
+        isCharging = true;
+        chargeSlider.gameObject.SetActive(isCharging);
 
     }
 

@@ -9,6 +9,7 @@ public enum AIStatus
     attack,
     returnHome,
     walk,
+    secondaryAction,
     disable,
 }
 
@@ -135,6 +136,9 @@ public class BaseMonster : Unit
                         StartAttack();
                     }
                     break;
+                case AIStatus.secondaryAction:
+                    SecondaryAction();
+                    break;
             }
         }
         else
@@ -147,6 +151,11 @@ public class BaseMonster : Unit
                 EndAttack();
             }
         }
+    }
+
+    protected virtual void SecondaryAction()
+    {
+
     }
 
     private void StartWalk()
@@ -197,7 +206,7 @@ public class BaseMonster : Unit
         isDisabled = false;
     }
 
-    private void StartAttack()
+    protected virtual void StartAttack()
     {
         aiStatus = AIStatus.attack;
         switch (Parameters.AttackType)

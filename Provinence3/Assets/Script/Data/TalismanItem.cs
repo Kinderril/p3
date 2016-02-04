@@ -22,6 +22,7 @@ public enum TalismanType
     bloodDamage,
     cleave,
     energyVamp,
+    splitter,
 }
 
 public class TalismanItem : BaseItem

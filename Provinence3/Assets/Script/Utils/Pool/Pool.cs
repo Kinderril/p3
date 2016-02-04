@@ -94,5 +94,19 @@ public class Pool
         }
         return null;
     }
+
+    public void Clear()
+    {
+        foreach (var poolOfElement in poolOfElements)
+        {
+            foreach (var element in poolOfElement.Value)
+            {
+                if (element.IsUsing)
+                {
+                    element.EndUse();
+                }
+            }
+        }
+    }
 }
 

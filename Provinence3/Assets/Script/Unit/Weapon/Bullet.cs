@@ -18,7 +18,13 @@ public class Bullet : MonoBehaviour
     public BaseEffectAbsorber HitParticleSystem;
     protected List<Unit> AffecttedUnits = new List<Unit>();
     public bool rebuildY = true;
-//    private UnitType ownerType;
+    private float additionalPower = 0;
+
+    public float AdditionalPower
+    {
+        get { return additionalPower; }
+        set { additionalPower = value; }
+    }
 
     void Awake()
     {

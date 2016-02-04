@@ -485,13 +485,14 @@ public class PlayerData
         return listOfOpendBornPositions[misson].Contains(index);
     }
 
-    public void RemoveItem(BaseItem bonusItem)
+    public void RemoveItem(BaseItem item)
     {
-        playerItems.Remove(bonusItem);
-        bonusItem.IsEquped = false;
+        playerItems.Remove(item);
+        item.Clear();
+        item.IsEquped = false;
         if (OnItemSold != null)
         {
-            OnItemSold(bonusItem);
+            OnItemSold(item);
         }
     }
 }

@@ -48,6 +48,9 @@ public abstract class Talisman
             case TalismanType.massPush:
 
                 break;
+            case TalismanType.splitter:
+                talic = new TalismanSplitter(sourseItem, countTalismans);
+                break;
             case TalismanType.firewave:
                 talic = new TalismanFireWave(sourseItem, countTalismans);
                 break;

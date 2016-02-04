@@ -144,6 +144,7 @@ public class Level
         {
             OnEndLevel();
         }
+        DataBaseController.Instance.Pool.Clear();
     }
 
     private void AddRandomGift()

@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
     public WeaponParameters Parameters;
     public PlayerItem PlayerItem;
     public Transform bulletComeOut;
+    public const float MAX_CHARGE_POWER = 2f;
 
     public void Init(Unit owner,PlayerItem PlayerItem)
     {
@@ -66,10 +67,8 @@ public class Weapon : MonoBehaviour, IBulletHolder
         return outPosVector3;
     }
 
-    public virtual void DoShoot(Vector3 dir, Unit target = null)
+    public virtual void DoShoot(Vector3 dir, float additionalPower = 0, Unit target = null)
     {
-//        v = new Vector3(v.x,transform.position.y, v.z);
-//        Debug.Log("DoShoot attack >>>>>>>>>>>>>>>");
         Vector3 outPosVector3 = GetStartPos();
         if (Parameters.isHoming)
         {
@@ -109,6 +108,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
                 dir.y = 0;
                 bullet1.Init(dir, this);
             }
+            bullet1.AdditionalPower = additionalPower;
         }
         if (pSystemOnShot != null)
         {

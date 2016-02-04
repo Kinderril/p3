@@ -125,7 +125,7 @@ public class Hero : Unit
             Action.Update();
     }
 
-    public override void TryAttack(Vector3 target, Unit unit = null)
+    public override void TryAttack(Vector3 target,float additionalPower = 0,Unit unit = null)
     {
         var can = curWeapon.CanShoot();
         var dir = target - transform.position;
@@ -163,10 +163,8 @@ public class Hero : Unit
         }
     }
 
-    public void TryAttackByDirection(Vector3 dir)
+    public void TryAttackByDirection(Vector3 dir,float additionalPower = 0)
     {
-
-//                    Debug.Log("TryAttackByDirection ]]]]]  " + dir);
         var trg = transform.position + dir;
 
         
@@ -175,7 +173,7 @@ public class Hero : Unit
         Debug.DrawRay(ray.origin, ray.direction * 5, Color.red, 1);
 #endif
         
-        TryAttack(trg);
+        TryAttack(trg, additionalPower);
     }
 
     public void GetItems(ItemId type, int count)

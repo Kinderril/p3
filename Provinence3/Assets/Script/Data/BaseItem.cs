@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -40,6 +41,14 @@ public abstract class BaseItem
 
     public virtual void LoadTexture()
     {
+    }
+
+    public virtual void Clear()
+    {
+        if (File.Exists(icon))
+        {
+            File.Delete(icon);
+        }
     }
 }
 

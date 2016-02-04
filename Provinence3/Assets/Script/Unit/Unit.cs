@@ -116,7 +116,7 @@ public class Unit : MonoBehaviour
         }
     }
     
-    public virtual void TryAttack(Vector3 direction, Unit target = null)
+    public virtual void TryAttack(Vector3 direction, float additionalPower = 0, Unit target = null)
     {
         if (!isPlayAttack)
         {
@@ -127,7 +127,7 @@ public class Unit : MonoBehaviour
             curWeapon.SetNextTimeShoot();
             animationController.StartPlayAttack(() =>
             {
-                curWeapon.DoShoot(direction, target);
+                curWeapon.DoShoot(direction, additionalPower, target);
                 ShootEnd();
             });
         }
@@ -231,7 +231,8 @@ public class Unit : MonoBehaviour
 
     public virtual void GetHit(Bullet bullet)
     {
-        float power = bullet.weapon.Power;
+        var addPower = 1 + Mathf.Clamp(bullet.AdditionalPower, 0, Weapon.MAX_CHARGE_POWER);
+        float power = bullet.weapon.Power * addPower;
         float mdef = Parameters.Parameters[ParamType.MDef];
         float pdef = Parameters.Parameters[ParamType.PDef];
 

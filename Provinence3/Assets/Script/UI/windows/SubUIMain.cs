@@ -14,7 +14,6 @@ public class SubUIMain : MonoBehaviour,IPointerDownHandler,IDragHandler,IPointer
     public bool isDrag;
     private UIMain uiMain;
     public RectTransform Arrow;
-//    public Text debugDir;
     public void Init(UIMain uiMain)
     {
         this.uiMain = uiMain;
