@@ -160,10 +160,6 @@ public class PlayerData
             var count = PlayerPrefs.GetInt(INVENTORY + v,0);
             playerInv.Add(v,count);
         }
-        //TODO STUB DEBUG
-        playerInv[ItemId.money] += 1000;
-        playerInv[ItemId.crystal] += 10;
-        //TODO STUB DEBUG
         var allItems = PlayerPrefs.GetString(ITEMS, "").Split(ITEMS_DELEMETER);
         foreach (var item in allItems)
         {
@@ -224,6 +220,10 @@ public class PlayerData
         }
         LoadListOfBornPosition();
         CheckIfFirstLevel();
+        //TODO STUB DEBUG
+        playerInv[ItemId.money] += 1000;
+        playerInv[ItemId.crystal] += 10;
+        //TODO STUB DEBUG
     }
     public ExecutableItem CanBeUpgraded(BaseItem info)
     {

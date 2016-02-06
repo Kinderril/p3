@@ -51,7 +51,8 @@ public class BaseControl : MonoBehaviour
         if (Animator == null)
             Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
-        ThisByQuaterhnion = GetComponent<QueaternionFromTo>();
+        if (ThisByQuaterhnion == null)
+            ThisByQuaterhnion = GetComponent<QueaternionFromTo>();
         ThisByQuaterhnion.Init(null,OnComeRotation);
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         
