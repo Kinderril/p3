@@ -93,16 +93,23 @@ public class WindowInGame : BaseWindow
 
     private void OnHeroHit(float arg1, float arg2,float delta)
     {
+        FlyingNumbers number = null;
+        Color color = Color.green;
         if (delta > 1)
         {
-            //Debug.Log("OnHeroHit " + arg1 + "/" + arg2  + " d:" + delta);
-            var item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
-            //var item = DataBaseController.GetItem(DataBaseController.Instance.FlyingNumber, hitTransform.position);
-            item.transform.SetParent(transform);
-            item.transform.position = hitTransform.position;
-            Color color = DataBaseController.Instance.GetColor(ItemId.health);
-            bool isPlus = (delta > 0);
-            item.Init(GetDeltaStr(delta), color);
+            number = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
+//            color =Color.green;
+        }
+        else if (delta <-1)
+        {
+            number = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
+            color =  DataBaseController.Instance.GetColor(ItemId.health);
+        }
+        if (number != null)
+        {
+            number.transform.SetParent(transform);
+            number.transform.position = hitTransform.position;
+            number.Init(GetDeltaStr(delta), color);
         }
         HealthSlider.value = arg1 / arg2;
     }

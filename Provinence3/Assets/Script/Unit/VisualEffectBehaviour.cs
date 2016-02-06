@@ -17,9 +17,9 @@ public class VisualEffectBehaviour : PoolElement
     public VisualEffectPosition VisualEffectPosition;
     public EffectType EffectType;
     private IEndEffect toSubs;
-    public PSAbsorber DispellEffect;
-    public PSAbsorber SetEffectEffect;
-    public PSAbsorber DistanceEFfect;
+    public BaseEffectAbsorber DispellEffect;
+    public BaseEffectAbsorber SetEffectEffect;
+    public BaseEffectAbsorber DistanceEFfect;
 
     public void Init(Unit unit,float timeWaitSec)
     {
@@ -83,7 +83,7 @@ public class VisualEffectBehaviour : PoolElement
         EndUse();
     }
 
-    private void StopAbsorber(PSAbsorber psAbsorber)
+    private void StopAbsorber(BaseEffectAbsorber psAbsorber)
     {
         if (psAbsorber != null)
         {
