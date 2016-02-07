@@ -258,20 +258,34 @@ public class PlayerData
 
             PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() { {ParamType.PPower, 15} },Slot.physical_weapon, false,1);
             PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.MPower, 10 } }, Slot.magic_weapon, false, 1);
-            var talisman = new TalismanItem(10,TalismanType.doubleDamage);
-            var talisman2 = new TalismanItem(10, TalismanType.heal);
             item1.specialAbilities = SpecialAbility.vampire;
             AddAndEquip(item1);
             AddAndEquip(item2);
-            AddAndEquip(talisman);
-            AddAndEquip(talisman2);
+            AddFirstTalisman(TalismanType.doubleDamage);
+            AddFirstTalisman(TalismanType.heal);
+
+            //TODO STUB
+            AddFirstTalisman(TalismanType.chain);
+            AddFirstTalisman(TalismanType.bloodDamage);
+            AddFirstTalisman(TalismanType.trapAOE);
+            AddFirstTalisman(TalismanType.trapDamage);
+            AddFirstTalisman(TalismanType.speed);
+            AddFirstTalisman(TalismanType.firewave);
+            AddFirstTalisman(TalismanType.splitter);
+            //TODO STUB
             listOfOpendBornPositions[1].Add(1);
-            foreach (var a in listOfOpendBornPositions[1])
-            {
-                Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>  " + a);
-            }
+//            foreach (var a in listOfOpendBornPositions[1])
+//            {
+//                Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>  " + a);
+//            }
             SaveListOfBornPosition();
         }
+    }
+
+    private void AddFirstTalisman(TalismanType t)
+    {
+        var talisman2 = new TalismanItem(10, t);
+        AddAndEquip(talisman2);
     }
 
     private void AddAndEquip(BaseItem item)

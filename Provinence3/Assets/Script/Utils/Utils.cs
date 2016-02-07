@@ -30,7 +30,7 @@ public static class Utils
         {
             var t = transform.position;
             var groundOffset = hitInfo.distance;
-            transform.position = new Vector3(t.x, t.y - groundOffset, t.z);
+            transform.position = new Vector3(t.x, t.y - groundOffset , t.z);
         }
     }
 

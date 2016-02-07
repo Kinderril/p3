@@ -56,7 +56,6 @@ public class Weapon : MonoBehaviour, IBulletHolder
 
     protected Vector3 GetStartPos()
     {
-
         Vector3 outPosVector3;
         if (bulletComeOut != null)
         {

@@ -5,8 +5,9 @@ using System.Text;
 using UnityEngine;
 
 
-public abstract class Talisman 
+public abstract class Talisman
 {
+    protected const string base_path = "prefabs/talisman/";
     public TalismanItem sourseItem;
     public float currentEnergy;
     public Action<bool,float,int> OnReady;

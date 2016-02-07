@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
     {
         if (rebuildY)
         {
-            direction = new Vector3(direction.x, transform.position.y, direction.z);
+            direction = new Vector3(direction.x, 0, direction.z);
         }
 //        ownerType = weapon.owner.unitType;
         this.weapon = weapon;
@@ -163,8 +163,7 @@ public class Bullet : MonoBehaviour
     private void updateTargetUnit()
     {
         time += speed;
-        Debug.Log("update vector " + time + "   " + transform.position + "   " + targetUnit  +  "   s:" + start);
-        transform.position = Vector3.Lerp(start, targetUnit.transform.position, time);
+        transform.position = Vector3.Lerp(start, targetUnit.weaponsContainer.position, time);
         if (time > 1)
         {
             Death();

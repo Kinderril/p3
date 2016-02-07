@@ -27,7 +27,7 @@ public class TalismanButton : MonoBehaviour
 
     private void OnReady(bool isReady, float percent,int curCharges)
     {
-        sliderReady.gameObject.SetActive(!isReady);
+        sliderReady.gameObject.SetActive(talicLogic.sourseItem.MaxCharges != curCharges);
         sliderReady.value = percent;
         button.interactable = isReady;
         chargesField.text = curCharges.ToString("0");

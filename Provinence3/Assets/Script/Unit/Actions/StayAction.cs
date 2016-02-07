@@ -18,7 +18,7 @@ public class StayAction : BaseAction
     {
         if (timer != null)
         {
-            timer.Stop();
+            timer.Stop(owner != null && !owner.IsDead);
         }
         base.End(msg);
     }

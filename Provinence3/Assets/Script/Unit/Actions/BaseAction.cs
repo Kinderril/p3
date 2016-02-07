@@ -23,7 +23,7 @@ public class BaseAction
     public virtual void End(string msg = " end action ")
     {
         //Debug.Log(msg);
-        if (endCallback != null && !owner.IsDead)
+        if (owner != null && endCallback != null && !owner.IsDead)
             endCallback();
     }
 

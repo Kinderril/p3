@@ -7,19 +7,22 @@ using UnityEngine;
 
 public class TalismanBloodDamage : Talisman , IBulletHolder
 {
-    public const string WAY_CHAIN_BULLET = "";
+    public const string WAY_CHAIN_BULLET = "BulletBloodDamage";
+
     private Bullet cacheGameObject;
     public TalismanBloodDamage(TalismanItem sourseItem, int countTalismans) 
         : base(sourseItem, countTalismans)
     {
-        cacheGameObject = Resources.Load(WAY_CHAIN_BULLET, typeof(Bullet)) as Bullet;
+        cacheGameObject = Resources.Load(base_path + WAY_CHAIN_BULLET, typeof(Bullet)) as Bullet;
     }
     public override void Use()
     {
         var bullet = DataBaseController.GetItem<Bullet>(cacheGameObject);
 
         hero.GetHit(Power/3,WeaponType.magic);
-        bullet.Init(GetClosestMonster(),this);
+        var closestMonster = GetClosestMonster();
+        bullet.transform.position = hero.weaponsContainer.position;
+        bullet.Init(closestMonster, this);
 
         base.Use();
     }

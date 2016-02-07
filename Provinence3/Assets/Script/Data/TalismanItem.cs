@@ -112,6 +112,16 @@ public class TalismanItem : BaseItem
         
     }
 
+    public override string Name
+    {
+        get { return TalismanType.ToString(); }
+    }
+
+    public override void LoadTexture()
+    {
+        IconSprite = DataBaseController.Instance.TalismanIcon(TalismanType);
+    }
+
     public override string Save()
     {
         return power.ToString() + MDEL + costShoot.ToString() + MDEL + (int)TalismanType + MDEL + IsEquped;

@@ -16,7 +16,7 @@ public class TimerManager
         bool IsLoopped { get; }
         bool IsActive { get; }
 
-        void Stop();
+        void Stop(bool shallFire = true);
     }
 
     private class Timer: ITimer
@@ -57,7 +57,7 @@ public class TimerManager
             IsActive = true;
         }
 
-        public void Stop()
+        public void Stop(bool shallFire = true)
         {
             if (!IsActive)
             {
@@ -65,7 +65,8 @@ public class TimerManager
             }
             else
             {
-                onStop();
+                if (shallFire)
+                    onStop();
                 IsActive = false;
             }
         }

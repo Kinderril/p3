@@ -271,7 +271,7 @@ public class Unit : MonoBehaviour
                     {
                         if (owner.OnGetHit != null)
                         {
-                            owner.OnGetHit(owner.CurHp, owner.Parameters.Parameters[ParamType.Hp], -diff);
+                            owner.OnGetHit(owner.CurHp, owner.Parameters.Parameters[ParamType.Hp], diff);
                         }
                     }
                     break;
