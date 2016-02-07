@@ -88,8 +88,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
             if (potentialTarget != null && dist < 30)
             {
                 Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
-                bullet1.transform.position = outPosVector3;
-                bullet1.Init(potentialTarget, this);
+                bullet1.Init(potentialTarget, this, outPosVector3);
             }
             else
             {

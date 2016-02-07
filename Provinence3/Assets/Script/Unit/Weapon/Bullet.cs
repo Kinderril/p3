@@ -8,17 +8,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 0.002f;
-    private float time = 0;
+    protected float time = 0;
     protected Vector3 trg;
     protected Vector3 start;
     private Unit targetUnit;
     public IBulletHolder weapon;
-    private Action updateAction;
+    protected Action updateAction;
     public BaseEffectAbsorber TrailParticleSystem;
     public BaseEffectAbsorber HitParticleSystem;
     protected List<Unit> AffecttedUnits = new List<Unit>();
     public bool rebuildY = true;
     private float additionalPower = 0;
+    private float startDist2target;
 
     public float AdditionalPower
     {
@@ -56,17 +57,19 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(direction);
     }
     
-    public void Init(Unit target, IBulletHolder weapon)
+    public virtual void Init(Unit target, IBulletHolder weapon,Vector3 startPosition)
     {
         targetUnit = target;
-        start = transform.position;
+        start = startPosition;
+        transform.position = start;
         this.weapon = weapon;
         subInit();
+        startDist2target = (targetUnit.transform.position - start).magnitude;
         updateAction = updateTargetUnit;
         transform.LookAt(targetUnit.transform.position);
     }
 
-    private void subInit()
+    protected void subInit()
     {
         time = 0;
         if (TrailParticleSystem != null)
@@ -163,11 +166,25 @@ public class Bullet : MonoBehaviour
     private void updateTargetUnit()
     {
         time += speed;
-        transform.position = Vector3.Lerp(start, targetUnit.weaponsContainer.position, time);
-        if (time > 1)
+        var trgPos = targetUnit.weaponsContainer.position;
+        transform.position = Vector3.Lerp(start, trgPos, time);
+        var curDist = (start - trgPos).magnitude;
+        var curTime = curDist/startDist2target;
+        Debug.Log("t: " + time + "     " + curTime);
+        if (time > curTime)
         {
-            Death();
+            TryHitTragetUnitAndDEath();
         }
+    }
+
+    protected void TryHitTragetUnitAndDEath()
+    {
+        if (targetUnit != null && !targetUnit.IsDead)
+        {
+            AffecttedUnits.Add(targetUnit);
+            targetUnit.GetHit(this);
+        }
+        Death();
     }
 
     void FixedUpdate()

@@ -22,7 +22,7 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
         hero.GetHit(Power/3,WeaponType.magic);
         var closestMonster = GetClosestMonster();
         bullet.transform.position = hero.weaponsContainer.position;
-        bullet.Init(closestMonster, this);
+        bullet.Init(closestMonster, this,hero.transform.position);
 
         base.Use();
     }
