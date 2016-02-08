@@ -20,7 +20,7 @@ public class IncomingTrap : MonoBehaviour
             {
                 monstersInside.Add(monster);
                 var bullet = DataBaseController.GetItem<Bullet>(bulletPrefab);
-                bullet.Init(monster, talic,monster.transform.position );
+                bullet.Init(monster, talic,transform.position );
             }
         }
     }

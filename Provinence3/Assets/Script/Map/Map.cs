@@ -155,6 +155,7 @@ public class Map : Singleton<Map>
         BaseMonster unit = null;
         foreach (var enemy in enemies)
         {
+            
             var pDist = (enemy.transform.position - v).sqrMagnitude;
             if (pDist < curDist)
             {

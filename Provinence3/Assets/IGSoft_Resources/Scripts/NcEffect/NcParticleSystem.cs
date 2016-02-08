@@ -816,4 +816,9 @@ public class NcParticleSystem : NcEffectBehaviour
 	}
 
 #endif
+
+    public void Play()
+    {
+        ResetParticleEmit(true);
+    }
 }

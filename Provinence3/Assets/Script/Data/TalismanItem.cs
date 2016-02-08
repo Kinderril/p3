@@ -38,7 +38,7 @@ public class TalismanItem : BaseItem
     {
         this.power = totalPoints;
         this.TalismanType = type;
-        costShoot = power*1.3f;
+        costShoot = 1;//power*1.3f;
         subInit();
        // Debug.Log("cost " + costShoot);
     }
@@ -97,7 +97,7 @@ public class TalismanItem : BaseItem
     public TalismanItem(float power1, float costShoot1, global::TalismanType type)
     {
         this.power = power1;
-        this.costShoot = costShoot1;
+        this.costShoot = 1;//costShoot1;
         this.TalismanType = type;
         subInit();
     }

@@ -361,6 +361,7 @@ public class NcCurveAnimation : NcEffectAniBehaviour
 
     public void Play()
     {
+        enabled = true;
         InitAnimationTimer();
     }
 

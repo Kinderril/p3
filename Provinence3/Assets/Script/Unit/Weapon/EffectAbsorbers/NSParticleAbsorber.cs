@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 
 
-public class CurveAbsorber : BaseEffectAbsorber
+public class NSParticleAbsorber : BaseEffectAbsorber
 {
-    public NcCurveAnimation uvAnimation;
+    public NcParticleSystem uvAnimation;
     public override void Play()
     {
         uvAnimation.gameObject.SetActive(true);
@@ -15,7 +15,8 @@ public class CurveAbsorber : BaseEffectAbsorber
 
     public override void Stop()
     {
-        uvAnimation.gameObject.SetActive(false);
+        if (uvAnimation != null)
+            uvAnimation.gameObject.SetActive(false);
     }
 }
 

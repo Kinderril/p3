@@ -76,6 +76,10 @@ public class Bullet : MonoBehaviour
         {
             TrailParticleSystem.Play();
         }
+        if (HitParticleSystem != null)
+        {
+            HitParticleSystem.Stop();
+        }
     }
 
 
