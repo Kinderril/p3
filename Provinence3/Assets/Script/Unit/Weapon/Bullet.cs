@@ -174,7 +174,6 @@ public class Bullet : MonoBehaviour
         transform.position = Vector3.Lerp(start, trgPos, time);
         var curDist = (start - trgPos).magnitude;
         var curTime = curDist/startDist2target;
-        Debug.Log("t: " + time + "     " + curTime);
         if (time > curTime)
         {
             TryHitTragetUnitAndDEath();
