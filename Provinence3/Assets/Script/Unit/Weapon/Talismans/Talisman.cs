@@ -47,7 +47,7 @@ public abstract class Talisman
                 talic = new TalismanSpeed(sourseItem,countTalismans);
                 break;
             case TalismanType.massPush:
-
+                //
                 break;
             case TalismanType.splitter:
                 talic = new TalismanSplitter(sourseItem, countTalismans);
@@ -56,7 +56,7 @@ public abstract class Talisman
                 talic = new TalismanFireWave(sourseItem, countTalismans);
                 break;
             case TalismanType.massFreez:
-                talic = new TalismanMassFreez(sourseItem, countTalismans);
+//                talic = new TalismanMassFreez(sourseItem, countTalismans);
                 break;
             case TalismanType.heal:
                 talic = new TalismanHeal(sourseItem, countTalismans);
@@ -68,7 +68,7 @@ public abstract class Talisman
                 talic = new TalismanChain(sourseItem, countTalismans);
                 break;
             case TalismanType.energyVamp:
-                talic = new TalismanEnergyVamp(sourseItem, countTalismans);
+//                talic = new TalismanEnergyVamp(sourseItem, countTalismans);
                 break;
             case TalismanType.bloodDamage:
                 talic = new TalismanBloodDamage(sourseItem, countTalismans);
@@ -85,6 +85,7 @@ public abstract class Talisman
             case TalismanType.cleave:
                 talic = new TalismanCleave(sourseItem, countTalismans);
                 break;
+                
         }
         return talic;
     }

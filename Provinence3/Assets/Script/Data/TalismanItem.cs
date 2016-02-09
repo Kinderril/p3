@@ -36,17 +36,16 @@ public class TalismanItem : BaseItem
 
     public TalismanItem(int totalPoints, TalismanType type)
     {
-        this.power = totalPoints;
         this.TalismanType = type;
         costShoot = 1;//power*1.3f;
-        subInit();
+        subInit(totalPoints);
        // Debug.Log("cost " + costShoot);
     }
 
-    private void subInit()
+    private void subInit(int totalPoints)
     {
         Slot = Slot.Talisman;
-        
+        this.power = totalPoints;
         switch (TalismanType)
         {
             case TalismanType.firewave:
@@ -60,21 +59,26 @@ public class TalismanItem : BaseItem
                 break;
             case TalismanType.heal:
                 MaxCharges = 1;
+                power *= 1.5f;
                 break;
             case TalismanType.doubleDamage:
                 MaxCharges = 1;
+                power /= 100;
                 break;
             case TalismanType.speed:
                 MaxCharges = 1;
+                power /= 100;
                 break;
             case TalismanType.megaArmor:
                 MaxCharges = 1;
+                power *= 1.5f;
                 break;
             case TalismanType.chain:
                 MaxCharges = 2;
                 break;
             case TalismanType.trapDamage:
                 MaxCharges = 3;
+                power *= 2;
                 break;
             case TalismanType.trapAOE:
                 MaxCharges = 3;
@@ -84,12 +88,17 @@ public class TalismanItem : BaseItem
                 break;
             case TalismanType.bloodDamage:
                 MaxCharges = 2;
+                power *= 3f;
                 break;
             case TalismanType.cleave:
                 MaxCharges = 1;
                 break;
             case TalismanType.energyVamp:
                 MaxCharges = 1;
+                break;
+            case TalismanType.splitter:
+                MaxCharges = 2;
+                power *= 2f;
                 break;
         }
     }

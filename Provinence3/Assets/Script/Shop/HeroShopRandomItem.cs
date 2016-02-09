@@ -70,7 +70,7 @@ public class HeroShopRandomItem : IShopExecute
 
     private static int GetPointsByLvl(int lvl)
     {
-        return lvl*4 + 20;
+        return lvl*7 + 20;
     }
 
     private static float GetSlotCoef(Slot slot)

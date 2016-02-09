@@ -6,6 +6,9 @@ using System.Text;
 
 public class ShopController : Singleton<ShopController>
 {
+    public List<TalismanType> RejectedTalismanTypes = new List<TalismanType>();
+    public List<SpecialAbility> RejectedSpecialAbilities = new List<SpecialAbility>();
+
     public static List<TalismanType> AllTalismanstypes = new List<TalismanType>();
     public static List<SpecialAbility> AllSpecialAbilities = new List<SpecialAbility>();
     public static List<ExecutableType> AllExecutables = new List<ExecutableType>();
@@ -14,11 +17,13 @@ public class ShopController : Singleton<ShopController>
         Connections.Init();
         foreach (TalismanType talic_type in Enum.GetValues(typeof(TalismanType)))
         {
-            AllTalismanstypes.Add(talic_type);
+            if (!RejectedTalismanTypes.Contains(talic_type))
+                AllTalismanstypes.Add(talic_type);
         }
         foreach (SpecialAbility type in Enum.GetValues(typeof(SpecialAbility)))
         {
-            AllSpecialAbilities.Add(type);
+            if (!RejectedSpecialAbilities.Contains(type))
+                AllSpecialAbilities.Add(type);
         }
         foreach (ExecutableType type in Enum.GetValues(typeof(ExecutableType)))
         {
