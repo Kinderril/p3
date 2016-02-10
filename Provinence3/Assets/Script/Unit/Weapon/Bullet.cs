@@ -141,7 +141,7 @@ public class Bullet : MonoBehaviour
         Death();
     }
 
-    private void Death()
+    protected void Death()
     {
         Destroy(gameObject);
         if (HitParticleSystem != null)

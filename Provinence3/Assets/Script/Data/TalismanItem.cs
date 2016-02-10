@@ -36,79 +36,104 @@ public class TalismanItem : BaseItem
 
     public TalismanItem(int totalPoints, TalismanType type)
     {
+        Slot = Slot.Talisman;
         this.TalismanType = type;
         costShoot = 1;//power*1.3f;
         subInit(totalPoints);
-       // Debug.Log("cost " + costShoot);
+        MaxCharges = GetMaxCharges(type);
+        // Debug.Log("cost " + costShoot);
+    }
+
+    private int GetMaxCharges(TalismanType t)
+    {
+        switch (TalismanType)
+        {
+            case TalismanType.firewave:
+                return 2;
+            case TalismanType.massPush:
+                return 2;
+            case TalismanType.massFreez:
+                return 2;
+            case TalismanType.heal:
+                return 1;
+            case TalismanType.doubleDamage:
+                return 1;
+            case TalismanType.speed:
+                return 1;
+            case TalismanType.megaArmor:
+                return  1;
+            case TalismanType.chain:
+                return  2;
+            case TalismanType.trapDamage:
+                return  3;
+            case TalismanType.trapAOE:
+                return  3;
+            case TalismanType.trapFreez:
+                return  3;
+            case TalismanType.bloodDamage:
+                return  2;
+            case TalismanType.cleave:
+                return  1;
+            case TalismanType.energyVamp:
+                return  1;
+            case TalismanType.splitter:
+                return  2;
+        }
+        return 1;
     }
 
     private void subInit(int totalPoints)
     {
-        Slot = Slot.Talisman;
         this.power = totalPoints;
         switch (TalismanType)
         {
             case TalismanType.firewave:
-                MaxCharges = 2;
                 break;
             case TalismanType.massPush:
-                MaxCharges = 2;
                 break;
             case TalismanType.massFreez:
-                MaxCharges = 2;
                 break;
             case TalismanType.heal:
-                MaxCharges = 1;
                 power *= 1.5f;
                 break;
             case TalismanType.doubleDamage:
-                MaxCharges = 1;
                 power /= 100;
                 break;
             case TalismanType.speed:
-                MaxCharges = 1;
                 power /= 100;
                 break;
             case TalismanType.megaArmor:
-                MaxCharges = 1;
                 power *= 1.5f;
                 break;
             case TalismanType.chain:
-                MaxCharges = 2;
                 break;
             case TalismanType.trapDamage:
-                MaxCharges = 3;
                 power *= 2;
                 break;
             case TalismanType.trapAOE:
-                MaxCharges = 3;
                 break;
             case TalismanType.trapFreez:
-                MaxCharges = 3;
                 break;
             case TalismanType.bloodDamage:
-                MaxCharges = 2;
                 power *= 3f;
                 break;
             case TalismanType.cleave:
-                MaxCharges = 1;
                 break;
             case TalismanType.energyVamp:
-                MaxCharges = 1;
                 break;
             case TalismanType.splitter:
-                MaxCharges = 2;
                 power *= 2f;
                 break;
         }
     }
 
-    public TalismanItem(float power1, float costShoot1, global::TalismanType type)
+    public TalismanItem(float power1, float costShoot1, TalismanType type)
     {
         this.power = power1;
         this.costShoot = 1;//costShoot1;
         this.TalismanType = type;
-        subInit();
+        Slot = Slot.Talisman;
+        MaxCharges = GetMaxCharges(type);
     }
 
     public override char FirstChar()
