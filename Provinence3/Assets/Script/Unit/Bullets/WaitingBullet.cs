@@ -52,7 +52,7 @@ public class WaitingBullet : Bullet
                     }
                 }
             }
-            Death();
+            Death(null);
         }
     }
 }

@@ -5,6 +5,12 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+public enum HitPosition
+{
+    target,
+    bullet,
+}
+
 public class Bullet : MonoBehaviour
 {
     public float speed = 0.002f;
@@ -14,10 +20,12 @@ public class Bullet : MonoBehaviour
     private Unit targetUnit;
     public IBulletHolder weapon;
     protected Action updateAction;
+    public HitPosition hitPOsition;
     public BaseEffectAbsorber TrailParticleSystem;
     public BaseEffectAbsorber HitParticleSystem;
     protected List<Unit> AffecttedUnits = new List<Unit>();
     public bool rebuildY = true;
+    public bool playHitAnyway = true;
     private float additionalPower = 0;
     private float startDist2target;
 
@@ -104,7 +112,7 @@ public class Bullet : MonoBehaviour
                     haveManyTargets = true;
                     if (AffecttedUnits.Count > 3)
                     {
-                        Death();
+                        Death(unit);
                     }
                     else
                     {
@@ -118,7 +126,7 @@ public class Bullet : MonoBehaviour
                     haveManyTargets = true;
                     if (AffecttedUnits.Count > 3)
                     {
-                        Death();
+                        Death(unit);
                     }
                     else
                     {
@@ -138,23 +146,38 @@ public class Bullet : MonoBehaviour
                 unit.GetHit(this);
             }
         }
-        Death();
+        Death(unit);
     }
 
-    protected void Death()
+    protected void Death(Unit lastUnitHitted)
     {
-        Destroy(gameObject);
         if (HitParticleSystem != null)
         {
-            HitParticleSystem.Play();
-            Map.Instance.LeaveEffect(HitParticleSystem);
+            if (playHitAnyway)
+            {
+                HitParticleSystem.Play();
+                switch (hitPOsition)
+                {
+                    case HitPosition.target:
+                        if (lastUnitHitted != null)
+                        {
+                            HitParticleSystem.transform.SetParent(lastUnitHitted.transform, true);
+                            HitParticleSystem.DestroyPS();
+                        }
+                        break;
+                    case HitPosition.bullet:
+                        Map.Instance.LeaveEffect(HitParticleSystem);
+                        break;
+                }
+            }
         }
         if (TrailParticleSystem != null)
         {
             TrailParticleSystem.Stop();
             Map.Instance.LeaveEffect(TrailParticleSystem);
         }
-        
+        Destroy(gameObject);
+
     }
 
     protected void updateVector()
@@ -163,7 +186,7 @@ public class Bullet : MonoBehaviour
         transform.position = Vector3.Lerp(start, trg, time);
         if (time > 1)
         {
-            Death();
+            Death(null);
         }
     }
 
@@ -187,7 +210,7 @@ public class Bullet : MonoBehaviour
             AffecttedUnits.Add(targetUnit);
             targetUnit.GetHit(this);
         }
-        Death();
+        Death(targetUnit);
     }
 
     void FixedUpdate()

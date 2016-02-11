@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ public class BaseEffectAbsorber : MonoBehaviour
     public virtual void Stop()
     {
         
+    }
+
+
+    public IEnumerator DestroyPS(float waitTime = 4f)
+    {
+        yield return new WaitForSeconds(waitTime);
+        Destroy(gameObject);
     }
 }
 

@@ -18,6 +18,12 @@ public enum SpecialAbility
     vampire,
     chain,
     clear,
+    dot,
+    stun,
+    distance,
+    hp,
+    shield,
+
 }
 
 public enum Slot

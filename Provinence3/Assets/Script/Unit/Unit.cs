@@ -78,6 +78,7 @@ public class Unit : MonoBehaviour
                     OnShieldOn();
             }
         }
+        get { return _shield; }
     }
 
     public virtual void Init()
@@ -238,6 +239,7 @@ public class Unit : MonoBehaviour
 
         if (bullet.weapon != null)
         {
+            var owner = bullet.weapon.Owner;
             //Debug.Log("Test bullet.weapon.PlayerItem.specialAbilities : " + bullet.weapon.PlayerItem.specialAbilities);
             switch (bullet.weapon.SpecAbility)
             {
@@ -263,8 +265,6 @@ public class Unit : MonoBehaviour
                     Parameters.Parameters[ParamType.MDef] *= 0.94f;
                     break;
                 case SpecialAbility.vampire:
-                    var owner = bullet.weapon.Owner;
-                    //Debug.Log("BEfore " + owner.CurHp);
                     var diff = power*0.1f;
                     owner.CurHp += diff;
                     if (owner is Hero)
@@ -278,6 +278,21 @@ public class Unit : MonoBehaviour
                 case SpecialAbility.clear:
                     mdef = mdef/2;
                     pdef = pdef/2;
+                    break;
+                case SpecialAbility.dot:
+                    break;
+                case SpecialAbility.distance:
+                    var sqrdist = (owner.transform.position - transform.position).sqrMagnitude * 0.8f;
+                    power *= sqrdist;
+                    break;
+                case SpecialAbility.hp:
+                    var c = ( 1 - CurHp/Parameters.MaxHp)/3;
+                    power *= c;
+                    break;
+                case SpecialAbility.shield:
+                    owner.Shield += MainController.Instance.level.difficult;
+                    break;
+                case SpecialAbility.stun:
                     break;
             }
             if (HitParticleSystem != null)

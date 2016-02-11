@@ -169,12 +169,7 @@ public class Map : Singleton<Map>
     public void LeaveEffect(BaseEffectAbsorber ps)
     {
         ps.transform.SetParent(effectsContainer, true);
-        StartCoroutine(DestroyPS(ps));
-    }
-    public IEnumerator DestroyPS(BaseEffectAbsorber ps)
-    {
-        yield return new WaitForSeconds(4);
-        Destroy(ps.gameObject);
+        ps.DestroyPS(4);
     }
 
 }
