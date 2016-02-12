@@ -14,7 +14,7 @@ public class TalismanFireWave : Talisman
         var targets2 = Map.Instance.GetEnimiesInRadius(80);
         foreach (var baseMonster in targets2)
         {
-            TimeEffect.Creat(baseMonster, EffectType.fire, sourseItem.power);
+            TimeEffect.Creat(baseMonster, EffectType.fire, sourseItem.power,6);
             base.Use();
         }
     }

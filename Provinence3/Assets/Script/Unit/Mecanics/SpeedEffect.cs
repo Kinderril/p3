@@ -7,9 +7,10 @@ using System.Text;
 public class SpeedEffect : TimeEffect
 {
     private bool plus;
-    public SpeedEffect(Unit targetUnit,bool plus = true) 
-        : base(targetUnit)
+    public SpeedEffect(Unit targetUnit,float  totalTime,bool plus = true) 
+        : base(targetUnit, totalTime)
     {
+        EffectType = EffectType.slow;
         this.plus = plus;
         if (plus)
         {
@@ -19,8 +20,8 @@ public class SpeedEffect : TimeEffect
         {
             targetUnit.Parameters.Parameters[ParamType.Speed] /= 2f;
         }
-        var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.speed);
-        effect.Init(targetUnit,endEffect);
+        var visualEffect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.speed);
+        visualEffect.Init(targetUnit,endEffect);
     }
 
     protected override void OnTimer()

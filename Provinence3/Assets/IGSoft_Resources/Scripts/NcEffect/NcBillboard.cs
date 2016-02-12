@@ -110,6 +110,15 @@ public class NcBillboard : NcEffectBehaviour
 	}
 	// Control Function -----------------------------------------------------------------
 	// Event Function -------------------------------------------------------------------
+    public void Play()
+    {
+
+    }
+
+    public void Stop()
+    {
+        gameObject.SetActive(false);
+    }
 }
 
 

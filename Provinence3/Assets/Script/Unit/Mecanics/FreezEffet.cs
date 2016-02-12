@@ -7,9 +7,10 @@ using System.Text;
 public class FreezEffet : TimeEffect
 {
     private BaseMonster monster;
-    public FreezEffet(Unit targetUnit) 
-        : base(targetUnit)
+    public FreezEffet(Unit targetUnit, float totalTime) 
+        : base(targetUnit, totalTime)
     {
+        EffectType = EffectType.freez;
         monster = targetUnit as BaseMonster;
         if (monster != null)
         {

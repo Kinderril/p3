@@ -821,4 +821,10 @@ public class NcParticleSystem : NcEffectBehaviour
     {
         ResetParticleEmit(true);
     }
+
+    public void Stop()
+    {
+        SetEnableParticle(false);
+
+    }
 }

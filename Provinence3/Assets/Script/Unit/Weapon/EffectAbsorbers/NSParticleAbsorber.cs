@@ -16,7 +16,7 @@ public class NSParticleAbsorber : BaseEffectAbsorber
     public override void Stop()
     {
         if (uvAnimation != null)
-            uvAnimation.gameObject.SetActive(false);
+            uvAnimation.Stop();
     }
 }
 

@@ -6,9 +6,10 @@ using System.Text;
 
 public class DDEffect : TimeEffect
 {
-    public DDEffect(Unit targetUnit) 
-        : base(targetUnit)
+    public DDEffect(Unit targetUnit, float totalTime) 
+        : base(targetUnit,totalTime)
     {
+        EffectType = EffectType.doubleDamage;
         targetUnit.Parameters.Parameters[ParamType.MPower] *= 2f;
         targetUnit.Parameters.Parameters[ParamType.PPower] *= 2f;
         var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.doubleDamage);

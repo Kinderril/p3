@@ -17,39 +17,55 @@ public enum EffectType
 
 public class TimeEffect
 {
-    public float totalTime = 10;
+    private float totalTime = 10;
     protected Unit targetUnit;
     protected TimerManager.ITimer timer;
-//    public Action effectEnd;
     public IEndEffect endEffect;
+    public EffectType EffectType;
 
-    public static TimeEffect Creat(Unit targetUnit, EffectType EffectType,float power = 0)
+    public static TimeEffect Creat(Unit targetUnit, EffectType EffectType,float power = 0, float totalTime = 10)
     {
-        Debug.Log("Effect setted " + EffectType);
+        TimeEffect oldEffect = null;
+        if (targetUnit.efftcs.TryGetValue(EffectType,out oldEffect))
+        {
+            oldEffect.End();
+        }
         TimeEffect effect = null;
+        Debug.Log("Effect setted " + EffectType);
         switch (EffectType)
         {
             case EffectType.doubleDamage:
-                effect = new DDEffect(targetUnit);
+                effect = new DDEffect(targetUnit, totalTime);
                 break;
             case EffectType.slow:
-                effect = new SpeedEffect(targetUnit,false);
+                effect = new SpeedEffect(targetUnit, totalTime,false);
                 break;
             case EffectType.freez:
-                effect = new FreezEffet(targetUnit);
+                effect = new FreezEffet(targetUnit, totalTime);
                 break;
             case EffectType.speed:
-                effect = new SpeedEffect(targetUnit);
+                effect = new SpeedEffect(targetUnit, totalTime);
                 break;
             case EffectType.fire:
-                effect = new FireEffect(targetUnit,power);
+                effect = new FireEffect(targetUnit, totalTime, power);
                 break;
         }
+        targetUnit.efftcs[EffectType] = effect;
         return effect;
     }
 
-    public TimeEffect(Unit targetUnit)
+    private void End()
     {
+        targetUnit.efftcs[EffectType] = null;
+        MainController.Instance.level.OnEndLevel -= OnEndLevel;
+        timer.Stop();
+        Debug.Log("Effect UnSET ");
+        endEffect.Do();
+    }
+
+    public TimeEffect(Unit targetUnit, float totalTime)
+    {
+        this.totalTime = totalTime;
         this.targetUnit = targetUnit;
         timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromSeconds(totalTime));
         timer.OnTimer += OnTimer;
@@ -60,20 +76,17 @@ public class TimeEffect
 
     private void OnTargetDead(Unit obj)
     {
-        OnEndLevel();
+        End();
     }
 
     protected virtual void OnTimer()
     {
-        OnEndLevel();
+        End();
     }
 
     private void OnEndLevel()
     {
-        MainController.Instance.level.OnEndLevel -= OnEndLevel;
-        timer.Stop();
-        Debug.Log("Effect UnSET ");
-        endEffect.Do();
+        End();
     }
 }
 

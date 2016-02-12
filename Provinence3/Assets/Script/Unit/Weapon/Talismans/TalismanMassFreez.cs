@@ -16,7 +16,7 @@ public class TalismanMassFreez : Talisman
         var targets = Map.Instance.GetEnimiesInRadius(80);
         foreach (var baseMonster in targets)
         {
-            TimeEffect.Creat(baseMonster, EffectType.freez);
+            TimeEffect.Creat(baseMonster, EffectType.freez, 0 , 2);
         }
         base.Use();
     }

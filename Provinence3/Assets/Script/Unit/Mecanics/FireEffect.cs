@@ -11,9 +11,11 @@ public class FireEffect : TimeEffect
 
     private float power;
     private bool shallStop = false;
-    public FireEffect(Unit targetUnit,float power)
-        : base(targetUnit)
+    public FireEffect(Unit targetUnit,float power, float totalTime)
+        : base(targetUnit, totalTime)
     {
+        this.power = power;
+        EffectType = EffectType.fire;
         targetUnit.StartCoroutine(Burn());
     }
 

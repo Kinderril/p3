@@ -49,7 +49,7 @@ public class BaseBonusMapElement : MonoBehaviour
                 hero.Shield = hero.Parameters.MaxHp/3f;
                 break;
             case BonusElementMapType.speed:
-                var speedEffect = new SpeedEffect(hero);
+                TimeEffect.Creat(hero, EffectType.speed, 0, 10);
                 break;
             case BonusElementMapType.killAll:
                 var enemies = Map.Instance.GetEnimiesInRadius(30);

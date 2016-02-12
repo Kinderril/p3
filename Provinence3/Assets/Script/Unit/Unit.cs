@@ -33,6 +33,7 @@ public class Unit : MonoBehaviour
     public float _shield;
     public Action OnShieldOn;
     public IEndEffect OnShieldOff;
+    public Dictionary<EffectType,TimeEffect> efftcs = new Dictionary<EffectType, TimeEffect>(); 
 
     public float CurHp
     {
@@ -225,7 +226,7 @@ public class Unit : MonoBehaviour
         {
             if (OnGetHit != null)
             {
-                OnGetHit(CurHp, Parameters.Parameters[ParamType.Hp], power);
+                OnGetHit(CurHp, Parameters.Parameters[ParamType.Hp], -power);
             }
         }
     }
@@ -244,18 +245,16 @@ public class Unit : MonoBehaviour
             switch (bullet.weapon.SpecAbility)
             {
                 case SpecialAbility.Critical:
-
                     var isCrit = UnityEngine.Random.Range(0, 10) < 2;
-                    //Debug.Log("Test crit : " + isCrit);
                     if (isCrit)
                     {
                         power *= 2.25f;
                     }
                     break;
                 case SpecialAbility.push:
-                    var owner2 = bullet.weapon.Owner;
-                    var dir = (transform.position - owner2.transform.position).normalized;
-
+//                    var owner2 = bullet.weapon.Owner;
+//                    var dir = (transform.position - owner2.transform.position).normalized;
+                    //TODO
                     break;
                 case SpecialAbility.slow:
                     Parameters.Parameters[ParamType.Speed] *= 0.92f;
@@ -269,7 +268,8 @@ public class Unit : MonoBehaviour
                     owner.CurHp += diff;
                     if (owner is Hero)
                     {
-                        if (owner.OnGetHit != null)
+                        var isMax = owner.CurHp < owner.Parameters.MaxHp;
+                        if (owner.OnGetHit != null && !isMax)
                         {
                             owner.OnGetHit(owner.CurHp, owner.Parameters.Parameters[ParamType.Hp], diff);
                         }
@@ -293,6 +293,11 @@ public class Unit : MonoBehaviour
                     owner.Shield += MainController.Instance.level.difficult;
                     break;
                 case SpecialAbility.stun:
+                    var isStun = UnityEngine.Random.Range(0, 10) < 2;
+                    if (isStun)
+                    {
+                        TimeEffect.Creat(this, EffectType.freez,0,2);
+                    }
                     break;
             }
             if (HitParticleSystem != null)
