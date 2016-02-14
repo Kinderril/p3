@@ -37,9 +37,12 @@ public class Level
     public bool IsGoodEnd;
     public int EnemiesKills = 0;
     private const float speedEnergyFall = 1.5f;
+    private float penalty;
 
-    public Level(int index)
+    public Level(int index,int difficult)
     {
+        this.difficult = difficult;
+        penalty = GetPenalty(difficult);
         inventory = new DictionaryOfItemAndInt();
         foreach (ItemId id in Enum.GetValues(typeof(ItemId)))
         {
@@ -47,6 +50,11 @@ public class Level
         }
         MainHero = Map.Instance.Init(this, index);
         PortalsController.Start((int)maxpower,OnPortalOpen);
+    }
+
+    public float Penalty
+    {
+        get { return penalty; }
     }
 
     private void OnPortalOpen()
@@ -187,6 +195,25 @@ public class Level
     public void EnemieDead()
     {
         EnemiesKills++;
+    }
+
+    public static float GetPenalty(int dif)
+    {
+        var m = MainController.Instance.PlayerData.Level - dif;
+
+        switch (m)
+        {
+            case 0:
+                return 1f;
+            case 1:
+                return 0.65f;
+            case 2:
+                return 0.45f;
+            case 3:
+                return 0.2f;
+            default:
+                return 0;
+        }
     }
 }
 

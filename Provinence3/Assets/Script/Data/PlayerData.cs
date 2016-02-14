@@ -421,10 +421,10 @@ public class PlayerData
                 v += 4;
                 break;
             case ParamType.MPower:
-                v += MainParameters[MainParam.ATTACK] * 12 + 36;
+                v += MainParameters[MainParam.ATTACK] * 9 + 26;
                 break;
             case ParamType.PPower:
-                v += MainParameters[MainParam.ATTACK] * 10 + 32;
+                v += MainParameters[MainParam.ATTACK] * 8 + 22;
                 break;
             case ParamType.PDef:
                 v += MainParameters[MainParam.DEF] * 10 + 10;

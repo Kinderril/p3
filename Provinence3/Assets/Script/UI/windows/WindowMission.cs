@@ -14,6 +14,8 @@ public class WindowMission : BaseWindow
     public Transform Layout;
     private List<RespawnPointToggle> RespawnToggles ;
     public RespawnPointToggle PrefabRespawnPointToggle;
+    public DifficultyChooser DifficultyChooser;
+    private int curDiffChoosed;
 
     public override void Init()
     {
@@ -37,7 +39,13 @@ public class WindowMission : BaseWindow
             t.Toggle.isOn = t.ID == 1;
             t.Toggle.interactable = opensRespawnPoints.Count > 0;
         }
+        DifficultyChooser.Init(OnDifChanges);
         MissionSelected(1);
+    }
+
+    private void OnDifChanges(int obj)
+    {
+        curDiffChoosed = obj;
     }
 
     private void MissionSelected(int mission)
@@ -81,7 +89,7 @@ public class WindowMission : BaseWindow
     public void OnPlayClick()
     {
         int GetCurrentBornPosIndex = currentSelectedRespawnPoint;
-        MainController.Instance.StartLevel(GetCurrentBornPosIndex);
+        MainController.Instance.StartLevel(GetCurrentBornPosIndex,curDiffChoosed);
     }
 
 }

@@ -53,15 +53,16 @@ public class Chest : MonoBehaviour
         }
     }
 
-    public void Init(bool withCrystal,int difficulty)
+    public void Init(bool withCrystal,Level lvl)
     {
 		float m_GroundCheckDistance = 9999f;
         animator = GetComponent<Animator>();
         Utils.GroundTransform(transform, m_GroundCheckDistance);
         Utils.SetRandomRotation(transform);
-        var rnd =(int)( Mathf.Pow(difficulty,0.6f) * moneyCoef );
+        var p = lvl.Penalty;
+        var rnd = (int) (p * Mathf.Pow(lvl.difficult, 0.6f)*moneyCoef);
         items.Add(ItemId.money,GreatRandom.RandomizeValue(rnd));
-        if (withCrystal)
+        if (withCrystal && p > 0.99f)
             items.Add(ItemId.crystal, 1);
 
     }
