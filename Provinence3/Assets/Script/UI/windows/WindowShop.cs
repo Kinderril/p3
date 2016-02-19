@@ -49,7 +49,9 @@ public class WindowShop : BaseWindow
         MainController.Instance.PlayerData.OnItemEquiped += OnItemEquipedCallback;
         MainController.Instance.PlayerData.OnItemSold += OnItemSoldCallback;
         MainController.Instance.PlayerData.OnCurrensyChanges += OnCurrensyChanges;
+        MainController.Instance.PlayerData.OnChangeCount += OnChangeCount;
     }
+
 
     private void InitPlayerItems()
     {
@@ -70,7 +72,7 @@ public class WindowShop : BaseWindow
         int lvl = MainController.Instance.PlayerData.Level;
         for (int i = lvl; i >= lvl - 2 && i > 0; i--)
         {
-            CreatShopElement(new HeroShopExecutableItem(i));
+            CreatShopElement(new HeroShopRandomItem(i));
         }
         CreatShopElement(new HeroShopBonusItem(lvl));
         CreatShopElement(new HeroShopExecutableItem(lvl));
@@ -117,7 +119,6 @@ public class WindowShop : BaseWindow
 
     private void OnItemInit(BaseItem info,ItemOwner obj)
     {
-        Debug.Log(obj);
         bool val = info == null;
         BuyButton.gameObject.SetActive(val);
         EquipButton.gameObject.SetActive(false);
@@ -138,6 +139,14 @@ public class WindowShop : BaseWindow
 
         SellButton.gameObject.SetActive(!val);
         ItemInfoElement.gameObject.SetActive(true);
+    }
+    private void OnChangeCount(ExecutableItem obj)
+    {
+        var element = PlayerItemElements.FirstOrDefault(x => x.PlayerItem == obj);
+        if (element != null)
+        {
+            element.Refresh();
+        }
     }
 
     public void RefreshItem(BaseItem item)
@@ -284,6 +293,7 @@ public class WindowShop : BaseWindow
 
     public override void Close()
     {
+        MainController.Instance.PlayerData.OnChangeCount -= OnChangeCount;
         MainController.Instance.PlayerData.OnNewItem -= OnNewItem;
         MainController.Instance.PlayerData.OnItemEquiped -= OnItemEquipedCallback;
         MainController.Instance.PlayerData.OnItemSold -= OnItemSoldCallback;

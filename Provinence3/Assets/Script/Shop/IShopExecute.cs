@@ -11,6 +11,7 @@ public abstract class IShopExecute
     public int MoneyCost;
     public int Parameter;
     public Sprite icon;
+    public string name = "wrong";
     public bool CanBuy
     {
         get { return MainController.Instance.PlayerData.Level >= Parameter; }

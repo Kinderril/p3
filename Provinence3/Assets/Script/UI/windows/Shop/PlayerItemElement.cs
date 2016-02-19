@@ -39,6 +39,7 @@ public class PlayerItemElement : MonoBehaviour
     {
         enchantField.gameObject.SetActive(false);
         NameField.text = PlayerItem.Name;
+        CountField.gameObject.SetActive(false);
         if (PlayerItem is PlayerItem)
         {
             var pItem = PlayerItem as PlayerItem;
@@ -58,6 +59,7 @@ public class PlayerItemElement : MonoBehaviour
         var exec = PlayerItem as ExecutableItem;
         if (exec != null)
         {
+            CountField.gameObject.SetActive(true);
             CountField.text = exec.count.ToString("0");
         }
 

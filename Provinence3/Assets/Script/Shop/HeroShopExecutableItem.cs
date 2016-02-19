@@ -18,8 +18,10 @@ public class HeroShopExecutableItem : IShopExecute
         return new ExecutableItem(t,1);
     }
 
-    public HeroShopExecutableItem(int lvl) : base(lvl)
+    public HeroShopExecutableItem(int lvl) 
+        : base(lvl)
     {
+        name = "Scroll";
     }
 }
 

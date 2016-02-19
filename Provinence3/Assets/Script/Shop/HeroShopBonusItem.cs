@@ -20,8 +20,10 @@ public class HeroShopBonusItem : IShopExecute
         return b;
     }
 
-    public HeroShopBonusItem(int lvl) : base(lvl)
+    public HeroShopBonusItem(int lvl) 
+        : base(lvl)
     {
+        name = "Bonus";
     }
 }
 

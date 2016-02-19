@@ -32,6 +32,7 @@ public class PlayerData
     private readonly Dictionary<int, List<int>> listOfOpendBornPositions = new Dictionary<int, List<int>>(); 
 
     public event Action<BaseItem> OnNewItem;
+    public event Action<ExecutableItem> OnChangeCount;
     public event Action<BaseItem, bool> OnItemEquiped;
     public event Action<BaseItem> OnItemSold;
     public event Action<Dictionary<MainParam, int>> OnParametersChange;
@@ -341,27 +342,35 @@ public class PlayerData
 
     public void AddItem(BaseItem item,bool withSave = true)
     {
-        if (OnNewItem != null)
-        {
-            OnNewItem(item);
-        }
         var executable = item as ExecutableItem;
         if (executable != null)
         {
             var oldItem =
                 playerItems.FirstOrDefault(
-                    x => x is ExecutableItem && (x as ExecutableItem).ExecutableType == executable.ExecutableType);
+                    x => x is ExecutableItem && (x as ExecutableItem).ExecutableType == executable.ExecutableType) as ExecutableItem;
             if (oldItem != null)
             {
-                (oldItem as ExecutableItem).count++;
+                (oldItem).count++;
+                if (OnChangeCount != null)
+                {
+                    OnChangeCount(oldItem);
+                }
             }
             else
             {
+                if (OnNewItem != null)
+                {
+                    OnNewItem(item);
+                }
                 playerItems.Add(item);
             }
         }
         else
         {
+            if (OnNewItem != null)
+            {
+                OnNewItem(item);
+            }
             playerItems.Add(item);
         }
         if (withSave)
@@ -529,13 +538,20 @@ public class PlayerData
             if (oldItem.count == 0)
             {
                 playerItems.Remove(oldItem);
+                if (OnItemSold != null)
+                {
+                    OnItemSold(oldItem);
+                }
+            }
+            else
+            {
+                if (OnChangeCount != null)
+                {
+                    OnChangeCount(oldItem);
+                }
             }
         }
 
-        if (OnItemSold != null)
-        {
-            OnItemSold(oldItem);
-        }
 
     }
 

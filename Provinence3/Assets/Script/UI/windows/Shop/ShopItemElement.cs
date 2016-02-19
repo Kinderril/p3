@@ -11,6 +11,7 @@ public class ShopItemElement : MonoBehaviour
     public Image icon;
     public IShopExecute shopExecute;
     public Text lvlField;
+    public Text nameField;
     public Image overlay;
     private bool isOpen = false;
     private Action<IShopExecute> callback;
@@ -20,6 +21,7 @@ public class ShopItemElement : MonoBehaviour
         this.shopExecute = shopExecute;
         this.callback = callback;
         icon.sprite = shopExecute.icon;
+        nameField.text = shopExecute.name;
         lvlField.text = "Level:" + shopExecute.Parameter;
         isOpen = shopExecute.CanBuy;
         overlay.gameObject.SetActive(!isOpen);

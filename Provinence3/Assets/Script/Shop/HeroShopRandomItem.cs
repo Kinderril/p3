@@ -101,6 +101,7 @@ public class HeroShopRandomItem : IShopExecute
 
     public HeroShopRandomItem(int lvl) : base(lvl)
     {
+        name = "Chest";
     }
 }
 
