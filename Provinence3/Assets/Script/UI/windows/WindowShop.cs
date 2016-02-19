@@ -43,9 +43,8 @@ public class WindowShop : BaseWindow
         moneyField.text = MainController.Instance.PlayerData.playerInv[ItemId.money].ToString("0");
         crystalField.text = MainController.Instance.PlayerData.playerInv[ItemId.crystal].ToString("0");
         InitPlayerItems();
-        InitGoods();
-
-
+        OnMarkerChange();
+        
         MainController.Instance.PlayerData.OnNewItem += OnNewItem;
         MainController.Instance.PlayerData.OnItemEquiped += OnItemEquipedCallback;
         MainController.Instance.PlayerData.OnItemSold += OnItemSoldCallback;

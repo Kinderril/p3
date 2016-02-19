@@ -33,10 +33,15 @@ public class HeroShopRandomItem : IShopExecute
 
     public static TalismanItem CreaTalic(int levelResult)
     {
-        var totalPoints = GetPointsByLvl(levelResult);
+        int power = GetTalismanPointsByLvl(levelResult);
         var type = ShopController.AllTalismanstypes.RandomElement();
-        TalismanItem item = new TalismanItem(totalPoints, type);
+        TalismanItem item = new TalismanItem(power, type);
         return item;
+    }
+
+    private static int GetTalismanPointsByLvl(int lvl)
+    {
+        return lvl * 11 + 33;
     }
 
     public static PlayerItem CreatMainSlot(Slot slot, int levelResult)

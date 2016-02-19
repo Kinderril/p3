@@ -34,12 +34,12 @@ public class TalismanItem : BaseItem
     public int MaxCharges = 1;
 
 
-    public TalismanItem(int totalPoints, TalismanType type)
+    public TalismanItem(int power, TalismanType type)
     {
         Slot = Slot.Talisman;
         this.TalismanType = type;
         costShoot = 1;//power*1.3f;
-        subInit(totalPoints);
+        subInit(power);
         MaxCharges = GetMaxCharges(type);
         // Debug.Log("cost " + costShoot);
     }
