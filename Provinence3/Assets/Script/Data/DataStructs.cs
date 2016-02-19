@@ -52,6 +52,13 @@ public struct EffectVisualsBehaviour
     public EffectType type;
     public VisualEffectBehaviour beh;
 }
+[Serializable]
+public struct CostItemsByLevel
+{
+    public int level;
+    public int crystal;
+    public int money;
+}
 public class DataStructs : MonoBehaviour
 {
     public MainParameterImage[] MainParametersImages;
@@ -60,11 +67,15 @@ public class DataStructs : MonoBehaviour
     public SlotImage[] SlotImage;
     public ColorUI[] ColorsOfUI;
     public TalismanImage[] TalismanImage;
+    public CostItemsByLevel[] CostItemsByLevel;
     public SpecialAbilityImage[] SpecialAbilityImage;
     public EffectVisualsBehaviour[] EffectVisualsBehaviours;
     public int[] costParameterByLvl;
     public const int MISSION_LAST_INDEX = 2;
     public List<BaseBonusMapElement> BaseBonusMapElement;
+//    public HeroShopBonusItem HeroShopBonusItemPrefab;
+//    public HeroShopExecutableItem HeroShopExecutableItemPrefab;
+//    public HeroShopRandomItem HeroShopRandomItemPrefab;
     public int GetRespawnPointsCountByMission(int mission)
     {
         return 4;

@@ -93,5 +93,9 @@ public class HeroShopRandomItem : IShopExecute
         }
         return val;
     }
+
+    public HeroShopRandomItem(int lvl) : base(lvl)
+    {
+    }
 }
 

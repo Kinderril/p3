@@ -88,3 +88,18 @@ public static class Utils
         }
     }
 }
+
+
+public class Taple<T1, T2>
+{
+    public T1 val1;
+    public T2 val2;
+
+    public Taple(T1 t1, T2 t2)
+    {
+        val1 = t1;
+        val2 = t2;
+    }
+
+}
+

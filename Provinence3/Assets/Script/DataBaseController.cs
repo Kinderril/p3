@@ -29,6 +29,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<Slot, Sprite> SlotSprites = new Dictionary<Slot, Sprite>();
     private readonly Dictionary<ItemId, Color> itemsColors = new Dictionary<ItemId, Color>();
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
+    private readonly Dictionary<int,Taple<int,int>> costByLevelItems = new Dictionary<int, Taple<int, int>>(); 
 
     public List<IShopExecute> allShopElements;
     public Chest chestPrefab;
@@ -95,12 +96,21 @@ public class DataBaseController : Singleton<DataBaseController>
         {
             visualEffectBehaviours.Add(effectVisualsBehaviour.type, effectVisualsBehaviour.beh);
         }
+        foreach (var itemsByLevel in DataStructs.CostItemsByLevel)
+        {
+            costByLevelItems.Add(itemsByLevel.level,new Taple<int, int>(itemsByLevel.money, itemsByLevel.crystal));
+        }
     }
     
     public Sprite MainParameterIcon(MainParam mp)
     {
         return MainParamSprites[mp];
     }
+
+    public Taple<int, int> GetCostItemsByLevel(int level)
+    {
+        return costByLevelItems[level];
+    } 
 
     public Sprite SlotIcon(Slot mp)
     {

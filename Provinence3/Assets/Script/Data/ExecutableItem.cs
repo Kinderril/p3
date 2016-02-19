@@ -10,17 +10,19 @@ public enum ExecutableType
     powerUpdate,
     armorUpdate,
     healthUpdate,
-    
 }
+
 public class ExecutableItem : BaseItem
 {
     public ExecutableType ExecutableType;
     public const char FIRSTCHAR = '©';
+    public int count;
 
-    public ExecutableItem(ExecutableType type)
+    public ExecutableItem(ExecutableType type,int count)
     {
         ExecutableType = type;
         Slot = Slot.executable;
+        this.count = count;
     }
 
     public override string Name {
@@ -39,13 +41,15 @@ public class ExecutableItem : BaseItem
 
     public override string Save()
     {
-        return ExecutableType.ToString();
+        return ExecutableType.ToString() + DELEM + count;
     }
 
     public static ExecutableItem Creat(string subStr)
     {
-        ExecutableType t = (ExecutableType)Enum.Parse(typeof (ExecutableType), subStr);
-        return new ExecutableItem(t);
+        var spl = subStr.Split(DELEM);
+        ExecutableType t = (ExecutableType)Enum.Parse(typeof (ExecutableType), spl[0]);
+        
+        return new ExecutableItem(t,Convert.ToInt32(spl[1]));
     }
 }
 

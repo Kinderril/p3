@@ -23,6 +23,7 @@ public class PlayerItemElement : MonoBehaviour
     public BaseItem PlayerItem;
     public Text enchantField;
     public Text NameField;
+    public Text CountField;
     private Transform oldTransforml;
     private Action<PlayerItemElement> callback;
     private bool isDrag = false;
@@ -53,6 +54,13 @@ public class PlayerItemElement : MonoBehaviour
         {
             rareImage.gameObject.SetActive(false);
         }
+
+        var exec = PlayerItem as ExecutableItem;
+        if (exec != null)
+        {
+            CountField.text = exec.count.ToString("0");
+        }
+
         equpedImage.gameObject.SetActive(PlayerItem.IsEquped);
         iconImage.sprite = PlayerItem.IconSprite;
         SlotLabel.sprite = DataBaseController.Instance.SlotIcon(PlayerItem.Slot);

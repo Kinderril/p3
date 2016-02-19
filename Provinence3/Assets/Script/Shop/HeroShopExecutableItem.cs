@@ -15,7 +15,11 @@ public class HeroShopExecutableItem : IShopExecute
     public static ExecutableItem CreatExecutableItem(int lvl)
     {
         var t = ShopController.AllExecutables.RandomElement();
-        return new ExecutableItem(t);
+        return new ExecutableItem(t,1);
+    }
+
+    public HeroShopExecutableItem(int lvl) : base(lvl)
+    {
     }
 }
 

@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum Bookmarks
+{
+    weapons,
+    recipies,
+}
 
 public class WindowShop : BaseWindow
 {
@@ -25,6 +32,7 @@ public class WindowShop : BaseWindow
     public Button UnEquipButton;
     public Button UpgradeButton;
     public UpgradeWindow UpgradeWindow;
+    private Bookmarks Bookmarks;
 
     public override void Init()
     {
@@ -34,6 +42,18 @@ public class WindowShop : BaseWindow
         AllParametersContainer.Init();
         moneyField.text = MainController.Instance.PlayerData.playerInv[ItemId.money].ToString("0");
         crystalField.text = MainController.Instance.PlayerData.playerInv[ItemId.crystal].ToString("0");
+        InitPlayerItems();
+        InitGoods();
+
+
+        MainController.Instance.PlayerData.OnNewItem += OnNewItem;
+        MainController.Instance.PlayerData.OnItemEquiped += OnItemEquipedCallback;
+        MainController.Instance.PlayerData.OnItemSold += OnItemSoldCallback;
+        MainController.Instance.PlayerData.OnCurrensyChanges += OnCurrensyChanges;
+    }
+
+    private void InitPlayerItems()
+    {
         PlayerItemElements = new List<PlayerItemElement>();
         List<BaseItem> items = MainController.Instance.PlayerData.GetAllItems();
         Debug.Log("items count = " + items.Count);
@@ -41,21 +61,47 @@ public class WindowShop : BaseWindow
         {
             var element = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
             element.Init(playerItem, OnSelected);
-            element.transform.SetParent(layoutMyInventory,false);
+            element.transform.SetParent(layoutMyInventory, false);
             PlayerItemElements.Add(element);
         }
-        var allSell = DataBaseController.Instance.allShopElements;
-        foreach (var shopExecute in allSell)
+    }
+
+    public void InitGoods()
+    {
+        int lvl = MainController.Instance.PlayerData.Level;
+        for (int i = lvl; i >= lvl - 2 && i > 0; i--)
         {
-            var element = DataBaseController.GetItem<ShopItemElement>(PrefabShopItemElement);
-            element.Init(shopExecute,OnShopSelected);
-            element.transform.SetParent(layoutShopItems,false);
+            CreatShopElement(new HeroShopExecutableItem(i));
         }
-        
-        MainController.Instance.PlayerData.OnNewItem += OnNewItem;
-        MainController.Instance.PlayerData.OnItemEquiped += OnItemEquipedCallback;
-        MainController.Instance.PlayerData.OnItemSold += OnItemSoldCallback;
-        MainController.Instance.PlayerData.OnCurrensyChanges += OnCurrensyChanges;
+        CreatShopElement(new HeroShopBonusItem(lvl));
+        CreatShopElement(new HeroShopExecutableItem(lvl));
+        Bookmarks = Bookmarks.weapons;
+    }
+
+    public void InitRecipies()
+    {
+
+        Bookmarks = Bookmarks.recipies;
+    }
+    public void OnMarkerChange()
+    {
+        ClearTransform(layoutShopItems);
+        switch (Bookmarks)
+        {
+            case Bookmarks.weapons:
+                InitGoods();
+                break;
+            case Bookmarks.recipies:
+                InitRecipies();
+                break;
+        }
+    }
+
+    private void CreatShopElement(IShopExecute exec)
+    {
+        var element = DataBaseController.GetItem<ShopItemElement>(PrefabShopItemElement);
+        element.Init(exec, OnShopSelected);
+        element.transform.SetParent(layoutShopItems, false);
     }
 
     private void NullSelection()
@@ -174,10 +220,19 @@ public class WindowShop : BaseWindow
     private void OnItemSoldCallback(BaseItem obj)
     {
         Debug.Log("OnItemSold");
+        var exec = obj as ExecutableItem;
         var item = PlayerItemElements.FirstOrDefault(x => x.PlayerItem == obj);
         if (item != null)
         {
-            Destroy(item.gameObject);
+            if (exec.count >= 1)
+            {
+                item.Refresh();
+            }
+            else
+            {
+                Destroy(item.gameObject);
+            
+            }
         }
         NullSelection();
     }

@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 
-public abstract class IShopExecute : MonoBehaviour
+public abstract class IShopExecute
 {
     public int CrystalCost;
     public int MoneyCost;
@@ -15,8 +15,16 @@ public abstract class IShopExecute : MonoBehaviour
     {
         get { return MainController.Instance.PlayerData.Level >= Parameter; }
     }
+    public IShopExecute(int lvl)
+    {
+        Parameter = lvl;
+        var cost = DataBaseController.Instance.GetCostItemsByLevel(lvl);
+        MoneyCost = cost.val1;
+        CrystalCost = cost.val2;
+    }
 
-    public  virtual void Execute(int parameter)
+
+    public virtual void Execute(int parameter)
     {
         var playerData = MainController.Instance.PlayerData;
         if (MoneyCost > 0)

@@ -345,7 +345,25 @@ public class PlayerData
         {
             OnNewItem(item);
         }
-        playerItems.Add(item);
+        var executable = item as ExecutableItem;
+        if (executable != null)
+        {
+            var oldItem =
+                playerItems.FirstOrDefault(
+                    x => x is ExecutableItem && (x as ExecutableItem).ExecutableType == executable.ExecutableType);
+            if (oldItem != null)
+            {
+                (oldItem as ExecutableItem).count++;
+            }
+            else
+            {
+                playerItems.Add(item);
+            }
+        }
+        else
+        {
+            playerItems.Add(item);
+        }
         if (withSave)
             Save();
     }
@@ -499,11 +517,40 @@ public class PlayerData
         return listOfOpendBornPositions[misson].Contains(index);
     }
 
+    public void RemoveItem(ExecutableType type, int count)
+{
+        var oldItem =
+            playerItems.FirstOrDefault(
+                x => x is ExecutableItem && (x as ExecutableItem).ExecutableType == type) as
+                ExecutableItem;
+        if (oldItem.count >= count)
+        {
+            oldItem.count -= count;
+            if (oldItem.count == 0)
+            {
+                playerItems.Remove(oldItem);
+            }
+        }
+
+        if (OnItemSold != null)
+        {
+            OnItemSold(oldItem);
+        }
+
+    }
+
     public void RemoveItem(BaseItem item)
     {
+        var executable = item as ExecutableItem;
+        if (executable != null)
+        {
+            RemoveItem(executable.ExecutableType, 1);
+            return;
+        }
         playerItems.Remove(item);
         item.Clear();
         item.IsEquped = false;
+
         if (OnItemSold != null)
         {
             OnItemSold(item);
