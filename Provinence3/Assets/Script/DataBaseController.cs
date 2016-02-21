@@ -48,8 +48,14 @@ public class DataBaseController : Singleton<DataBaseController>
     public List<Weapon> Weapons;
     public Pool Pool;
 
+    public Shader simpleShader;
+    public Shader flashShader;
+
     private void Awake()
     {
+        simpleShader = Shader.Find("Custom/BumperSpecular");
+        flashShader = Shader.Find("Custom/BumperSpecularFlash");
+
         for (var i = 0; i < maxLevel; i++)
         {
             mosntersLevel.Add(i, new List<BaseMonster>());

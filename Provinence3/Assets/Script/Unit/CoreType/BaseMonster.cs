@@ -30,6 +30,7 @@ public class BaseMonster : Unit
     private bool isDisabled = false;
 //    public ParticleSystem ParticleSystemBorn;
     public bool haveAction;
+    public FlashController FlashController;
 
 
     public void Init(Hero hero)
@@ -74,6 +75,8 @@ public class BaseMonster : Unit
             fn.transform.SetParent(WindowManager.Instance.CurrentWindow.TopPanel.transform);
             //fn.transform.position = transform.position;
             fn.Init(transform, "-" + hp.ToString("0"),Color.red);
+            if (FlashController != null)
+                FlashController.Play();
             //fn.transform.LookAt(MainController.Instance.MainCamera.transform);
         }
         if (attackBehaviour == null)
