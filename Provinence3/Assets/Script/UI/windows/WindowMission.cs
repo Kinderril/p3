@@ -89,7 +89,7 @@ public class WindowMission : BaseWindow
     public void OnPlayClick()
     {
         int GetCurrentBornPosIndex = currentSelectedRespawnPoint;
-        MainController.Instance.StartLevel(GetCurrentBornPosIndex,curDiffChoosed);
+        MainController.Instance.StartLevel(GetCurrentBornPosIndex,curDiffChoosed,1);
     }
 
 }

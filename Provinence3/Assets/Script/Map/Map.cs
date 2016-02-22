@@ -7,26 +7,32 @@ using UnityEngine;
 
 public class Map : Singleton<Map>
 {
+    private const string BASE_WAY = "prefabs/level/Level";
     public List<MonsterBornPosition> appearPos;
     public List<BossBornPosition> BossAppearPos;
     private Transform bornPositions;
     public Transform enemiesContainer;
-    public List<BaseMonster> enemies = new List<BaseMonster>();
     private BossSpawner bossSpawner;
     public Transform effectsContainer;
     public Transform miscContainer;
-    public Transform heroBornPositions;
+    private Transform heroBornPositions;
     private Level level;
+    public List<BaseMonster> enemies;
     public CameraFollow CameraFollow;
     private BossUnit boss;
+    private GameObject levelMainObject;
 
-    public Hero Init(Level lvl,int heroBornPositionIndex)
+    public Hero Init(Level lvl,int heroBornPositionIndex, int levelIndex)
     {
         level = lvl;
+        LoadLevelGameObject(levelIndex);
+        heroBornPositions = levelMainObject.transform.Find("BornPos/HeroBornPositions");
+        bornPositions = levelMainObject.transform.Find("BornPos");
+        enemiesContainer = transform.Find("Enemies");
+
         var hero = DataBaseController.GetItem(DataBaseController.Instance.prefabHero, GetHeroBoenPos(heroBornPositionIndex));
         hero.Init();
-        bornPositions = transform.Find("BornPos");
-        enemiesContainer = transform.Find("Enemies");
+        enemies = new List<BaseMonster>();
         appearPos = new List<MonsterBornPosition>();
         BossAppearPos = new List<BossBornPosition>();
         List<ChestBornPosition> chestPositions = new List<ChestBornPosition>();
@@ -68,6 +74,18 @@ public class Map : Singleton<Map>
         CameraFollow.Init(hero.transform);
         bossSpawner = new BossSpawner(enemies.Count,OnSpawnBoss);
         return hero;
+    }
+
+    private void LoadLevelGameObject(int levelIndex)
+    {
+        if (levelMainObject != null)
+        {
+            Destroy(levelMainObject);
+        }
+
+        var prefab = Resources.Load(BASE_WAY + levelIndex,typeof(GameObject)) as GameObject;
+        levelMainObject = GameObject.Instantiate(prefab);
+        levelMainObject.transform.SetParent(transform);
     }
 
     private Vector3 GetHeroBoenPos(int index)

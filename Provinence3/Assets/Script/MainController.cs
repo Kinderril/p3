@@ -31,9 +31,9 @@ public class MainController : Singleton<MainController>
         WindowManager.Instance.OpenWindow(MainState.start);
 	}
 
-    public void StartLevel(int indexStartPos,int dif)
+    public void StartLevel(int indexStartPos,int dif,int levelIndex)
     {
-        level = new Level(indexStartPos, dif);
+        level = new Level(indexStartPos, dif, levelIndex);
         WindowManager.Instance.OpenWindow(MainState.play);
     }
     private IEnumerator w4death()

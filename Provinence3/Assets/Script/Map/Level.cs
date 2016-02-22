@@ -39,7 +39,7 @@ public class Level
     private const float speedEnergyFall = 1.5f;
     private float penalty;
 
-    public Level(int index,int difficult)
+    public Level(int indexBornPos,int difficult,int levelIndex)
     {
         this.difficult = difficult;
         penalty = GetPenalty(difficult);
@@ -48,7 +48,7 @@ public class Level
         {
             inventory.Add(id,0);
         }
-        MainHero = Map.Instance.Init(this, index);
+        MainHero = Map.Instance.Init(this, indexBornPos, levelIndex);
         PortalsController.Start((int)maxpower,OnPortalOpen);
     }
 
