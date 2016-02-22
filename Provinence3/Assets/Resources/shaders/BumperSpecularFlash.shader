@@ -28,7 +28,7 @@
 		half4 tex = tex2D(_MainTex, IN.uv_MainTex);
 
 
-		o.Albedo = tex.rgb * _Color.rgb *(1+_Time2*14) * _FlashColor;
+		o.Albedo = tex.rgb * _Color.rgb *_Time2 * _FlashColor;
 		o.Gloss = tex.a;
 		o.Alpha = tex.a * _Color.a;
 		o.Specular = _Shininess;

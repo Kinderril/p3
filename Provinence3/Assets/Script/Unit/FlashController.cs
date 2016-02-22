@@ -1,37 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class FlashController : MonoBehaviour
 {
-    private const float totalTime = .17f;
+    private const float totalTime = .26f;
+    private float power = 14;
     private float curTime = 0;
     private Shader flashShader;
     private Shader simpleShader;
-//    public Material material;
-    private Renderer Renderer;
+    public List<Renderer> Renderers;
     private bool isPlaying = false;
     private const string keyTime = "_Time2";
     private List<Material> materials = new List<Material>(); 
 
     void Awake()
     {
-//        if (material == null)
-//            material = GetComponent<Material>();
-
-
-        Renderer = GetComponent<Renderer>();
-        var mat = Renderer.materials;
-        for (int i = 0; i < mat.Length; i++)
+        foreach (var renderer1 in Renderers)
         {
-            var m = Instantiate(mat[i]) as Material;
-            materials.Add(m);
+            List<Material> materialsInside = new List<Material>();
+            var mat = renderer1.materials;
+            for (int i = 0; i < mat.Length; i++)
+            {
+                materialsInside.Add(Instantiate(mat[i]) as Material);
+            }
+            renderer1.materials = materialsInside.ToArray();
+            materials.AddRange(materialsInside);
         }
-        Renderer.materials = materials.ToArray();
-
-        //        Renderer.material = Instantiate(Renderer.material) as Material;
-
-
         flashShader = DataBaseController.Instance.flashShader;
         simpleShader = DataBaseController.Instance.simpleShader;
     }
@@ -46,7 +42,6 @@ public class FlashController : MonoBehaviour
         {
             material.shader = flashShader;
             material.SetFloat(keyTime, curTime);
-
         }
 
     }
@@ -63,12 +58,12 @@ public class FlashController : MonoBehaviour
                 c = totalTime - curTime;
             }
 //            Debug.Log("curTime:" + curTime + "   prev c:" + c);
-            c = 2*c/totalTime;
+            c = Mathf.Clamp(power * c/totalTime,0,Single.MaxValue);
             foreach (var material in materials)
             {
                 material.SetFloat(keyTime, c);
             }
-//            Debug.Log("curTime:" + curTime + "   c:"+c);
+            Debug.Log("curTime:" + curTime + "   c:"+c);
             if (curTime > totalTime)
             {
                 End();
@@ -79,6 +74,7 @@ public class FlashController : MonoBehaviour
 
     void End()
     {
+        Debug.Log("End:" );
         foreach (var material in materials)
         {
             material.shader = simpleShader;
