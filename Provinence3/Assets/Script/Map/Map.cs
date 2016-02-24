@@ -102,7 +102,7 @@ public class Map : Singleton<Map>
                 vector3s = v.position;
 //                break;
             }
-            heroBP.Init(this,playerData.IsPositionOpen(level.MissionIndex,index));
+            heroBP.Init(this,playerData.OpenLevels.IsPositionOpen(level.MissionIndex,index));
 //            vector3s = v.position;
         }
         return vector3s;

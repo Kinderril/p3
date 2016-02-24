@@ -4,6 +4,19 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+[Serializable]
+public struct DropItem
+{
+    public float chance;
+    public CraftItemType type;
+    public DropItem(float chance, CraftItemType type)
+    {
+        this.chance = chance;
+        this.type = type;
+    }
+
+}
+
 public enum AIStatus
 {
     attack,
@@ -30,6 +43,7 @@ public class BaseMonster : Unit
     private bool isDisabled = false;
 //    public ParticleSystem ParticleSystemBorn;
     public bool haveAction;
+    public List<DropItem> dropItems; 
     public FlashController FlashController;
 
 
@@ -56,12 +70,42 @@ public class BaseMonster : Unit
     {
         Control.Dead();
         MainController.Instance.level.AddItem(ItemId.energy, -energyadd);
-        var mapItem2 = DataBaseController.GetItem<MapItem>(DataBaseController.Instance.MapItemPrefab, transform.position);
-        mapItem2.Init(ItemId.money, moneyCollect);
-        mapItem2.transform.SetParent(Map.Instance.miscContainer, true);
-        mapItem2.StartFly(transform);
+
+
+        DropItems();
+        DropMoney();
+
         base.Dead();
         Action = null;
+    }
+
+    private void DropItems()
+    {
+
+        foreach (var dropItem in dropItems)
+        {
+            if (UnityEngine.Random.Range(0f, 1f) < dropItem.chance)
+            {
+                DropItem(dropItem.type);
+            }
+        }
+    }
+
+    private void DropItem(CraftItemType t)
+    {
+        var itemMapItem = DataBaseController.GetItem<ItemMapItem>(DataBaseController.Instance.ItemMapItemPrefab, transform.position);
+        itemMapItem.Init(t);
+        itemMapItem.transform.SetParent(Map.Instance.miscContainer, true);
+        itemMapItem.StartFly(transform);
+    }
+
+
+    private void DropMoney()
+    {
+        var goldMapItem = DataBaseController.GetItem<GoldMapItem>(DataBaseController.Instance.GoldMapItemPrefab, transform.position);
+        goldMapItem.Init(ItemId.money, moneyCollect);
+        goldMapItem.transform.SetParent(Map.Instance.miscContainer, true);
+        goldMapItem.StartFly(transform);
     }
 
     public override void GetHit(Bullet bullet)

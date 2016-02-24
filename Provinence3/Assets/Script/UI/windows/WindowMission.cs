@@ -9,10 +9,11 @@ using UnityEngine.UI;
 public class WindowMission : BaseWindow
 {
     private int currentSelectedRespawnPoint;
-    private int currentSelectedMission;
+    private int currentSelectedMission = 1;
     public List<RespawnPointToggle> MissionsToggles;
+    private List<RespawnPointToggle> RespawnToggles;
+
     public Transform Layout;
-    private List<RespawnPointToggle> RespawnToggles ;
     public RespawnPointToggle PrefabRespawnPointToggle;
     public DifficultyChooser DifficultyChooser;
     private int curDiffChoosed;
@@ -21,6 +22,7 @@ public class WindowMission : BaseWindow
     {
         base.Init();
         Dictionary<int, int> stubList = new Dictionary<int, int>();
+        var openedMissions = MainController.Instance.PlayerData.OpenLevels.GetAllOpenedMissions();
         foreach (var t in MissionsToggles)
         {
             Debug.Log("Selected: " + t.transform.name);
@@ -34,7 +36,7 @@ public class WindowMission : BaseWindow
                     MissionSelected(stubList[a]);
                 }
             });
-            List<int> opensRespawnPoints = MainController.Instance.PlayerData.GetAllBornPositions(t.ID);
+            List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(t.ID);
        
             t.Toggle.isOn = t.ID == 1;
             t.Toggle.interactable = opensRespawnPoints.Count > 0;
@@ -51,7 +53,7 @@ public class WindowMission : BaseWindow
     private void MissionSelected(int mission)
     {
         var count = DataBaseController.Instance.DataStructs.GetRespawnPointsCountByMission(mission);
-        List<int> opensRespawnPoints = MainController.Instance.PlayerData.GetAllBornPositions(mission);
+        List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(mission);
         RespawnToggles = new List<RespawnPointToggle>();
         var toggleGroup = Layout.GetComponent<ToggleGroup>();
         Utils.ClearTransform(Layout);
@@ -89,7 +91,7 @@ public class WindowMission : BaseWindow
     public void OnPlayClick()
     {
         int GetCurrentBornPosIndex = currentSelectedRespawnPoint;
-        MainController.Instance.StartLevel(GetCurrentBornPosIndex,curDiffChoosed,1);
+        MainController.Instance.StartLevel(GetCurrentBornPosIndex,curDiffChoosed, currentSelectedMission);
     }
 
 }

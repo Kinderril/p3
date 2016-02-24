@@ -39,7 +39,8 @@ public class DataBaseController : Singleton<DataBaseController>
     public FlyingNumbers FlyingNumber;
     public FlyingNumbers FlyingNumberWithPicture;
     public FlyNumberWIthDependence FlyNumberWIthDependence;
-    public MapItem MapItemPrefab;
+    public GoldMapItem GoldMapItemPrefab;
+    public ItemMapItem ItemMapItemPrefab;
     public int maxLevel = 20;
     public List<BaseMonster> Monsters;
     public Dictionary<int, List<BaseMonster>> mosntersLevel = new Dictionary<int, List<BaseMonster>>();

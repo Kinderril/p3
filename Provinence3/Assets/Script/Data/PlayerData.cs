@@ -23,13 +23,16 @@ public class PlayerData
     public const string BASE_PARAMS = "BASE_PARAMS";
     public const string BORN_POSITIONS = "BORN_POSITIONS";
     public const char ITEMS_DELEMETER = '`';
+
+
     public DictionaryOfItemAndInt playerInv = new DictionaryOfItemAndInt();
     private List<BaseItem> playerItems = new List<BaseItem>();
     public int AllocatedPoints;
     private int CurrentLevel;
     public Dictionary<MainParam,int> MainParameters;
     private readonly Dictionary<Slot,int> slotsCount = new Dictionary<Slot, int>() { {Slot.Talisman, 2}, { Slot.executable, 0 } };
-    private readonly Dictionary<int, List<int>> listOfOpendBornPositions = new Dictionary<int, List<int>>(); 
+    public OpenLevels OpenLevels;
+    
 
     public event Action<BaseItem> OnNewItem;
     public event Action<ExecutableItem> OnChangeCount;
@@ -219,7 +222,7 @@ public class PlayerData
             MainParameters.Add(global::MainParam.HP, 1);
             MainParameters.Add(global::MainParam.DEF, 1);
         }
-        LoadListOfBornPosition();
+        OpenLevels = new OpenLevels();
         CheckIfFirstLevel();
         //TODO STUB DEBUG
         playerInv[ItemId.money] += 1000;
@@ -232,21 +235,24 @@ public class PlayerData
         {
             case Slot.physical_weapon:
             case Slot.magic_weapon:
-                return HaveExecutableItem(ExecutableType.weaponUpdate);
+                return HaveExecutableItem(EnchantType.weaponUpdate);
             case Slot.body:
             case Slot.helm:
-                return HaveExecutableItem(ExecutableType.armorUpdate);
+                return HaveExecutableItem(EnchantType.armorUpdate);
             case Slot.Talisman:
-                return HaveExecutableItem(ExecutableType.powerUpdate);
+                return HaveExecutableItem(EnchantType.powerUpdate);
         }
         return null;
     }
 
 
-    private ExecutableItem HaveExecutableItem(ExecutableType t)
+    private ExecutableItem HaveExecutableItem(EnchantType t)
     {
         var allItems = GetAllItems();
-        return allItems.FirstOrDefault(x => x.Slot == Slot.executable && ((ExecutableItem)x).ExecutableType == t) as ExecutableItem;
+        return allItems.FirstOrDefault(x => x.Slot == Slot.executable 
+        && ((ExecutableItem)x).ExecutableType == ExecutableType.enchant 
+        && ((ExecEnchantItem)x).ItemType == t
+        ) as ExecutableItem;
     }
 
     private void CheckIfFirstLevel()
@@ -273,13 +279,7 @@ public class PlayerData
             AddFirstTalisman(TalismanType.speed);
             AddFirstTalisman(TalismanType.firewave);
             AddFirstTalisman(TalismanType.splitter);
-            //TODO STUB
-            listOfOpendBornPositions[1].Add(1);
-//            foreach (var a in listOfOpendBornPositions[1])
-//            {
-//                Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>  " + a);
-//            }
-            SaveListOfBornPosition();
+            
         }
     }
 
@@ -473,58 +473,9 @@ public class PlayerData
 
     public void OpenBornPosition(int id)
     {
-        var a = MainController.Instance.level.MissionIndex;
-        listOfOpendBornPositions[a].ForceAddValue(id);
-        SaveListOfBornPosition();
+        OpenLevels.OpenPosition(MainController.Instance.level.MissionIndex, id);
     }
 
-    private void SaveListOfBornPosition()
-    {
-        string save_string;
-        foreach (var bornPosition in listOfOpendBornPositions)
-        {
-            save_string = "";
-            foreach (var val in bornPosition.Value)
-            {
-                save_string += val.ToString() + ITEMS_DELEMETER;
-            }
-            var saveKey = BORN_POSITIONS + bornPosition.Key.ToString();
-//            Debug.Log("SaveListOfBornPosition:" + saveKey + "    " + save_string);
-            PlayerPrefs.SetString(saveKey, save_string);
-        }
-    }
-
-    private void LoadListOfBornPosition()
-    {
-        for (int i = 1; i < DataStructs.MISSION_LAST_INDEX + 1; i++)
-        {
-            List<int> list = new List<int>();
-            listOfOpendBornPositions.Add(i, list);
-            var str = PlayerPrefs.GetString(BORN_POSITIONS + i,"");
-//            Debug.Log(i + " LoadListOfBornPosition " + str + "  " + str.Length);
-            if (str.Length > 0)
-            {
-                var splited = str.Split(ITEMS_DELEMETER);
-                foreach (var s in splited)
-                {
-                    if (s.Length > 0)
-                    {
-                        list.Add(Convert.ToInt32(s));
-                    }
-                }
-            }
-        }
-    }
-
-    public List<int> GetAllBornPositions(int mission)
-    {
-        return listOfOpendBornPositions[mission];
-    }
-
-    internal bool IsPositionOpen(int misson,int index)
-    {
-        return listOfOpendBornPositions[misson].Contains(index);
-    }
 
     public void RemoveItem(ExecutableType type, int count)
 {

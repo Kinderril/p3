@@ -21,18 +21,21 @@ public class DictionaryOfItemAndInt : SerializableDictionary<ItemId, int> { }
 
 public class Level
 {
-    private float powerLeft;
-    public Hero MainHero;
-    private float maxpower = 120;
     public Action<float, float> OnLeft;
     public Action<ItemId,float,float> OnItemCollected;
     public Action<BossUnit> OnBossAppear;
+    public Action<CraftItemType, int> OnCraftItemCollected;
+    public Action OnEndLevel;
+
+    private float powerLeft;
+    public Hero MainHero;
+    private float maxpower = 120;
     private DictionaryOfItemAndInt inventory;
     public int difficult = 1;
     public bool isPLaying = true;
     private PortalsController PortalsController = new PortalsController();
     private List<BaseItem> collectedItems = new List<BaseItem>();
-    public Action OnEndLevel;
+    private Dictionary<CraftItemType,int> collectedCrafts = new Dictionary<CraftItemType, int>(); 
     public int MissionIndex = 1;
     public bool IsGoodEnd;
     public int EnemiesKills = 0;
@@ -117,6 +120,21 @@ public class Level
     public void AddItem(BaseItem item)
     {
         collectedItems.Add(item);
+    }
+    public void AddItem(CraftItemType type, int count)
+    {
+        if (collectedCrafts.ContainsKey(type))
+        {
+            collectedCrafts[type] += count;
+        }
+        else
+        {
+            collectedCrafts.Add(type,count);
+        }
+        if (OnCraftItemCollected != null)
+        {
+            OnCraftItemCollected(type, count);
+        }
     }
 
     public void Update()
@@ -215,5 +233,6 @@ public class Level
                 return 0;
         }
     }
+
 }
 

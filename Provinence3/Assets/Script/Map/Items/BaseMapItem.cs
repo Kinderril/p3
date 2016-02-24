@@ -5,19 +5,15 @@ using System.Text;
 using UnityEngine;
 
 
-public class MapItem : MonoBehaviour
+public class BaseMapItem : MonoBehaviour
 {
-    private ItemId type;
-    private int count;
     public BaseEffectAbsorber OpenEffect;
     public Animator animator;
     private bool canBeTaken = false;
 
-    public void Init(ItemId type, int count)
+    public void Init()
     {
         Utils.SetRandomRotation(transform);
-        this.type = type;
-        this.count = count;
     }
     void OnTriggerEnter(Collider other)
     {
@@ -27,7 +23,7 @@ public class MapItem : MonoBehaviour
             if (unit != null)
             {
                 canBeTaken = false;
-                unit.GetItems(type,count);
+                Take(unit);
                 if (OpenEffect != null)
                 {
                     OpenEffect.Play();
@@ -37,6 +33,12 @@ public class MapItem : MonoBehaviour
             }
         }
     }
+
+    protected virtual void Take(Hero unit)
+    {
+        
+    }
+
     void OnTriggerStay(Collider other)
     {
         OnTriggerEnter(other);

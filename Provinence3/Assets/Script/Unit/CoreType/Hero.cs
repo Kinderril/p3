@@ -270,6 +270,11 @@ public class Hero : Unit
     {
         base.GetHit(bullet);
     }
+
+    public void GetItem(CraftItemType type, int count)
+    {
+        MainController.Instance.level.AddItem(type, count);
+    }
 }
 
 class ShootContainer

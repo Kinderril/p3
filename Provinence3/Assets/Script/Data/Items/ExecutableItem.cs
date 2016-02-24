@@ -6,10 +6,10 @@ using UnityEngine;
 
 public enum ExecutableType
 {
-    weaponUpdate,
-    powerUpdate,
-    armorUpdate,
-    healthUpdate,
+    craft,
+    enchant,
+    catalys,
+    
 }
 
 public class ExecutableItem : BaseItem
@@ -48,8 +48,23 @@ public class ExecutableItem : BaseItem
     {
         var spl = subStr.Split(DELEM);
         ExecutableType t = (ExecutableType)Enum.Parse(typeof (ExecutableType), spl[0]);
-        
-        return new ExecutableItem(t,Convert.ToInt32(spl[1]));
+        ExecutableItem item = null;
+        var count = Convert.ToInt32(spl[1]);
+        switch (t)
+        {
+            case ExecutableType.craft:
+
+                item = new ExecCraftItem((CraftItemType)Enum.Parse(typeof(CraftItemType), spl[2]), count);
+                break;
+            case ExecutableType.enchant:
+
+                break;
+            case ExecutableType.catalys:
+
+                break;
+        }
+
+        return item;
     }
 }
 
