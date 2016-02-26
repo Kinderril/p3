@@ -26,6 +26,7 @@ public class Map : Singleton<Map>
     {
         level = lvl;
         LoadLevelGameObject(levelIndex);
+        Application.LoadLevelAdditive("Level" + levelIndex);
         heroBornPositions = levelMainObject.transform.Find("BornPos/HeroBornPositions");
         bornPositions = levelMainObject.transform.Find("BornPos");
         enemiesContainer = transform.Find("Enemies");
@@ -147,6 +148,8 @@ public class Map : Singleton<Map>
         {
             Destroy(boss.gameObject);
         }
+        Application.UnloadLevel("Level" + level.MissionIndex);
+        Destroy(levelMainObject);
     }
 
     private void OnEnemyDead(Unit obj)

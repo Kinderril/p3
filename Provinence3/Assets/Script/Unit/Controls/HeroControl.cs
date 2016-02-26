@@ -162,7 +162,7 @@ public class HeroControl : BaseControl
         {
             SetToDirection(dir);
         }
-        Debug.Log("loookkkk " + dir);
+//        Debug.Log("loookkkk " + dir);
         var doRotate = SpinTransform.SetLookDir(dir);
         return doRotate;
     }

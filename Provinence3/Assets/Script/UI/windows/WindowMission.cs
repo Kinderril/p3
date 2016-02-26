@@ -52,7 +52,8 @@ public class WindowMission : BaseWindow
 
     private void MissionSelected(int mission)
     {
-        var count = DataBaseController.Instance.DataStructs.GetRespawnPointsCountByMission(mission);
+        currentSelectedMission = mission;
+        var count = DataBaseController.Instance.DataStructs.GetRespawnPointsCountByMission(mission) + 1;
         List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(mission);
         RespawnToggles = new List<RespawnPointToggle>();
         var toggleGroup = Layout.GetComponent<ToggleGroup>();

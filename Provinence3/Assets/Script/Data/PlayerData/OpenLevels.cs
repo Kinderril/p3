@@ -7,14 +7,14 @@ using UnityEngine;
 
 public class OpenLevels
 {
-    private List<int> opendLevels;
+    private List<int> opendLevels = new List<int>();
     private readonly Dictionary<int, List<int>> listOfOpendBornPositions = new Dictionary<int, List<int>>();
-    private const char DELEM = '-';
+    private const char DELEM = '$';
     private const string KEY_OPENED_LEVELS = "KEY_OPENED_LEVELS";
     private const string KEY_OPENED_POS = "KEY_OPENED_POS";
     public OpenLevels()
     {
-        var isFirst = PlayerPrefs.GetString(KEY_OPENED_LEVELS, "").Length > 2;
+        var isFirst = PlayerPrefs.GetString(KEY_OPENED_LEVELS, "").Length < 2;
         if (isFirst)
         {
             opendLevels.Add(1);
@@ -43,11 +43,11 @@ public class OpenLevels
         string openedLevels = "";
         foreach (var pos in listOfOpendBornPositions)
         {
-            openedLevels += pos.Key + DELEM;
+            openedLevels += pos.Key.ToString() + DELEM;
             string openedPos = "";
             foreach (var index in pos.Value)
             {
-                openedPos += index + DELEM;
+                openedPos += index.ToString() + DELEM;
             }
             PlayerPrefs.SetString(KEY_OPENED_POS + pos.Key, openedPos);
         }
@@ -85,7 +85,9 @@ public class OpenLevels
 
     public List<int> GetAllBornPositions(int mission)
     {
-        return listOfOpendBornPositions[mission];
+        if (listOfOpendBornPositions.ContainsKey(mission))
+            return listOfOpendBornPositions[mission];
+        return new List<int>();
     }
 
     public bool IsPositionOpen(int misson, int index)
