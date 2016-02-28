@@ -160,6 +160,8 @@ public class Unit : MonoBehaviour
             }
             curWeapon = InventoryWeapons[index];
             curWeapon.gameObject.SetActive(true);
+            if (curWeapon.pSystemOnShot != null)
+                curWeapon.pSystemOnShot.Stop();
             if (OnWeaponChanged != null)
             {
                 OnWeaponChanged(curWeapon);

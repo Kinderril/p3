@@ -16,6 +16,7 @@ public class WindowInGame : BaseWindow
     public Transform hitTransform;
     public List<TalismanButton> TalismanButtons;
     public Transform moneyContainer;
+    public Transform itemsContainer;
 
     public override void Init()
     {
@@ -23,6 +24,7 @@ public class WindowInGame : BaseWindow
         UiControls.Init();
         MainController.Instance.level.OnLeft += OnLeft;
         MainController.Instance.level.OnItemCollected += OnItemCollected;
+        MainController.Instance.level.OnCraftItemCollected += OnCraftItemCollected;
         MainController.Instance.level.MainHero.OnGetHit += OnHeroHit;
         MainController.Instance.level.MainHero.OnWeaponChanged += OnWeaponChanged;
         WeaponChooser.Init();
@@ -40,6 +42,15 @@ public class WindowInGame : BaseWindow
             TalismanButtons[i].gameObject.SetActive(false);
         }
         HealthSlider.value = 1;
+    }
+
+    private void OnCraftItemCollected(CraftItemType arg1, int delta)
+    {
+        FlyingNumbers item;
+        item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
+        item.transform.SetParent(itemsContainer);
+        item.Init(GetDeltaStr(delta) + " " + arg1.ToString(), DataBaseController.Instance.GetColor(arg1), FlyNumerDirection.non, 36);
+
     }
 
     private void OnWeaponChanged(Weapon obj)
@@ -60,6 +71,7 @@ public class WindowInGame : BaseWindow
         MainController.Instance.level.OnItemCollected -= OnItemCollected;
         MainController.Instance.level.MainHero.OnGetHit -= OnHeroHit;
         MainController.Instance.level.MainHero.OnWeaponChanged -= OnWeaponChanged;
+        MainController.Instance.level.OnCraftItemCollected -= OnCraftItemCollected;
     }
 
     private void OnItemCollected(ItemId arg1, float arg2,float delta)
@@ -70,9 +82,7 @@ public class WindowInGame : BaseWindow
             case ItemId.money:
                 moneyField.text = arg2.ToString("00");
                 item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
-                //item = DataBaseController.GetItem(DataBaseController.Instance.FlyingNumber, moneyField.transform.position);
                 item.transform.SetParent(moneyContainer);
-//                item.transform.position = moneyField.transform.position;
                 item.Init(GetDeltaStr(delta) + " Gold", DataBaseController.Instance.GetColor(arg1),FlyNumerDirection.non,26);
                 break;
             case ItemId.crystal:

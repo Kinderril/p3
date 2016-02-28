@@ -7,11 +7,11 @@ using UnityEngine;
 [Serializable]
 public struct DropItem
 {
-    public float chance;
+    public float chance0_1;
     public CraftItemType type;
     public DropItem(float chance, CraftItemType type)
     {
-        this.chance = chance;
+        this.chance0_1 = chance;
         this.type = type;
     }
 
@@ -84,7 +84,7 @@ public class BaseMonster : Unit
 
         foreach (var dropItem in dropItems)
         {
-            if (UnityEngine.Random.Range(0f, 1f) < dropItem.chance)
+            if (UnityEngine.Random.Range(0f, 1f) < dropItem.chance0_1)
             {
                 DropItem(dropItem.type);
             }
