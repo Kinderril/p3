@@ -38,7 +38,10 @@ public class WindowEndGame : BaseWindow
                     break;
                 case ItemId.crystal:
                     if (item.Value > 0)
+                    {
                         crystalField.SetActive(true);
+                        t = captureField;
+                    }
                     break;
             }
             if (t != null)
@@ -50,7 +53,7 @@ public class WindowEndGame : BaseWindow
             ExecCraftItem craftItem = new ExecCraftItem(craft.Key,craft.Value);
             var playerItem = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
             playerItem.Init(craftItem, element => { });
-            playerItem.gameObject.transform.SetParent(craftsLayout);
+            playerItem.gameObject.transform.SetParent(craftsLayout); 
         }
 
         var items = level.CollectedItems;
@@ -65,9 +68,7 @@ public class WindowEndGame : BaseWindow
         goodPicture.SetActive(isGoodEnd);
         badPicture.SetActive(!isGoodEnd);
         captureField.text = capt;
-        killsField.text =  "/";
-
+        killsField.text =  level.EnemiesKills.ToString("0");
     }
-
 }
 
