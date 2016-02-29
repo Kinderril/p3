@@ -28,7 +28,7 @@ public class PlayerItemElement : MonoBehaviour
     private Action<PlayerItemElement> callback;
     private bool isDrag = false;
         
-    public void Init(BaseItem item,Action<PlayerItemElement> OnClicked)
+    public virtual void Init(BaseItem item,Action<PlayerItemElement> OnClicked)
     {
         this.callback = OnClicked;
         PlayerItem = item;

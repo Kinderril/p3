@@ -20,6 +20,11 @@ public  class ExecEnchantItem : ExecutableItem
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Enchant/" + type.ToString());
         ItemType = type;
     }
+    public static ExecEnchantItem Creat()
+    {
+        return new ExecEnchantItem(ShopController.AllEnchantes.RandomElement(),1);
+    }
+
     public override string Save()
     {
         return base.Save() + DELEM + (int)ItemType;

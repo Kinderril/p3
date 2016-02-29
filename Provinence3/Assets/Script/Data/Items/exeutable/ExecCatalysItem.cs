@@ -14,12 +14,17 @@ public enum CatalysItemType
 public class ExecCatalysItem : ExecutableItem
 {
     public CatalysItemType ItemType;
-    public ExecCatalysItem(CatalysItemType type, int count) 
+    public ExecCatalysItem(CatalysItemType type, int count = 1) 
         : base(ExecutableType.catalys, count)
     {
 
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Catalys/" + type.ToString());
         ItemType = type;
+    }
+
+    public static ExecCatalysItem Creat()
+    {
+        return new ExecCatalysItem(ShopController.AllCatalyses.RandomElement());
     }
 
     public override string Save()

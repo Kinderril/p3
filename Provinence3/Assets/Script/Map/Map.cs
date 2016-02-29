@@ -148,6 +148,10 @@ public class Map : Singleton<Map>
         {
             Destroy(boss.gameObject);
         }
+    }
+
+    public void DestroyLevel()
+    {
         Application.UnloadLevel("Level" + level.MissionIndex);
         Destroy(levelMainObject);
     }

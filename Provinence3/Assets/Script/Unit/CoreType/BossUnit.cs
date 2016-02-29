@@ -17,7 +17,7 @@ public class BossUnit : BaseMonster
     private IEnumerator Wait4Dead()
     {
         yield return new WaitForSeconds(1);
-        MainController.Instance.EndLevel(true);
+        MainController.Instance.EndLevel(EndlevelType.normal);
 
     } 
 }

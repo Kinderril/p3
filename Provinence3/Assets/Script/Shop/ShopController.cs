@@ -12,6 +12,8 @@ public class ShopController : Singleton<ShopController>
     public static List<TalismanType> AllTalismanstypes = new List<TalismanType>();
     public static List<SpecialAbility> AllSpecialAbilities = new List<SpecialAbility>();
     public static List<ExecutableType> AllExecutables = new List<ExecutableType>();
+    public static List<CatalysItemType> AllCatalyses = new List<CatalysItemType>();
+    public static List<EnchantType> AllEnchantes = new List<EnchantType>();
     public void Init()
     {
         Connections.Init();
@@ -28,6 +30,14 @@ public class ShopController : Singleton<ShopController>
         foreach (ExecutableType type in Enum.GetValues(typeof(ExecutableType)))
         {
             AllExecutables.Add(type);
+        }
+        foreach (CatalysItemType type in Enum.GetValues(typeof(CatalysItemType)))
+        {
+            AllCatalyses.Add(type);
+        }
+        foreach (EnchantType type in Enum.GetValues(typeof(EnchantType)))
+        {
+            AllEnchantes.Add(type);
         }
     }
 

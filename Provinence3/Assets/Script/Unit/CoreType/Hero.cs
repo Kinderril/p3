@@ -251,7 +251,7 @@ public class Hero : Unit
     protected override void Dead()
     {
         base.Dead();
-        MainController.Instance.EndLevel(false);
+        MainController.Instance.EndLevel(EndlevelType.bad);
     }
 
     public void GetHeal(float currentPower)

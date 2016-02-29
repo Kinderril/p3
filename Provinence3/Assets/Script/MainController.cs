@@ -43,7 +43,7 @@ public class MainController : Singleton<MainController>
         WindowManager.Instance.OpenWindow(MainState.end);
     }
 
-    public void EndLevel(bool goodEnd)
+    public void EndLevel(EndlevelType goodEnd)
     {
         Debug.Log("EndLevel>> goodEnd:" + goodEnd);
         level.EndLevel(PlayerData, goodEnd);

@@ -4,6 +4,22 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+public enum GiftType
+{
+    catalys,
+    recepi,
+    item,
+    enchant,
+    bonus,
+}
+
+public enum EndlevelType
+{
+    bad,
+    normal,
+    good
+}
+
 [Serializable]
 public struct inventotyItem
 {
@@ -30,14 +46,14 @@ public class Level
     private float powerLeft;
     public Hero MainHero;
     private float maxpower = 120;
-    private DictionaryOfItemAndInt inventory;
+    private DictionaryOfItemAndInt moneyInv;
     public int difficult = 1;
     public bool isPLaying = true;
     private PortalsController PortalsController = new PortalsController();
     private List<BaseItem> collectedItems = new List<BaseItem>();
     private Dictionary<CraftItemType,int> collectedCrafts = new Dictionary<CraftItemType, int>(); 
     public int MissionIndex = 1;
-    public bool IsGoodEnd;
+    public EndlevelType IsGoodEnd;
     public int EnemiesKills = 0;
     private const float speedEnergyFall = 1.5f;
     private float penalty;
@@ -46,10 +62,10 @@ public class Level
     {
         this.difficult = difficult;
         penalty = GetPenalty(difficult);
-        inventory = new DictionaryOfItemAndInt();
+        moneyInv = new DictionaryOfItemAndInt();
         foreach (ItemId id in Enum.GetValues(typeof(ItemId)))
         {
-            inventory.Add(id,0);
+            moneyInv.Add(id,0);
         }
         MainHero = Map.Instance.Init(this, indexBornPos, levelIndex);
         PortalsController.Start((int)maxpower,OnPortalOpen);
@@ -58,6 +74,16 @@ public class Level
     public float Penalty
     {
         get { return penalty; }
+    }
+
+    public Dictionary<CraftItemType, int> CollectedCrafts
+    {
+        get { return collectedCrafts; }
+    }
+
+    public List<BaseItem> CollectedItems
+    {
+        get { return collectedItems; }
     }
 
     private void OnPortalOpen()
@@ -80,7 +106,7 @@ public class Level
             case ItemId.money:
             case ItemId.crystal:
                 value = (int)(value * (MainHero.moneyBonusFromItem + 1f));
-                inventory[type] += value;
+                moneyInv[type] += value;
                 ActivaAction(type, value);
                 break;
             case ItemId.energy:
@@ -98,7 +124,7 @@ public class Level
     {
         if (OnItemCollected != null)
         {
-            OnItemCollected(i, inventory[i], delta);
+            OnItemCollected(i, moneyInv[i], delta);
         }
         
     }
@@ -113,7 +139,7 @@ public class Level
         if (powerLeft > maxpower)
         {
             isPLaying = false;
-            MainController.Instance.EndLevel(false);
+            MainController.Instance.EndLevel(EndlevelType.bad);
         }
     }
 
@@ -146,15 +172,15 @@ public class Level
         }
     }
 
-    public void EndLevel(PlayerData PlayerData,bool isGood)
+    public void EndLevel(PlayerData PlayerData, EndlevelType LevelEndType)
     {
-        IsGoodEnd = isGood;
+        IsGoodEnd = LevelEndType;
         PortalsController.Stop();
         MainHero.Control.enabled = false;
-        if (!isGood)
+        if (LevelEndType == EndlevelType.bad)
         {
-            inventory.Remove(ItemId.crystal);
-            inventory[ItemId.money] /= 2;
+            moneyInv.Remove(ItemId.crystal);
+            moneyInv[ItemId.money] /= 2;
         }
         else
         {
@@ -169,7 +195,7 @@ public class Level
                 PlayerData.AddItem(exec);
             }
         }
-        PlayerData.AddInventory(inventory);
+        PlayerData.AddInventory(moneyInv);
         PlayerData.Save();
         if (OnEndLevel != null)
         {
@@ -180,39 +206,47 @@ public class Level
 
     private void AddRandomGift()
     {
-        if (UnityEngine.Random.Range(0, 10) <= 5)
+        if (powerLeft >= maxpower/2)
         {
-            int lvl = MainController.Instance.PlayerData.Level;
-            var slot = ShopController.RandomAfterLevelGift();
-            BaseItem item = null;
-            switch (slot)
-            {
-                case Slot.physical_weapon:
-                case Slot.magic_weapon:
-                case Slot.body:
-                case Slot.helm:
-                    item = HeroShopRandomItem.CreatMainSlot(slot, lvl);
-                    break;
-                case Slot.Talisman:
-                    item = HeroShopRandomItem.CreaTalic(lvl);
-                    break;
-                case Slot.executable:
-                    item = HeroShopExecutableItem.CreatExecutableItem(lvl);
-                    break;
-                case Slot.bonus:
-                    item = HeroShopBonusItem.CreatBonusItem(lvl);
-                    break;
-            }
-            if (item != null)
-            {
+            IsGoodEnd = EndlevelType.good;
+        }
+
+        WDictionary<GiftType> gifts = new WDictionary<GiftType>(new Dictionary<GiftType, float>()
+        {
+            { GiftType.catalys, 6 },
+            { GiftType.recepi ,5 },
+            { GiftType.item ,2 },
+            { GiftType.enchant ,8 },
+            { GiftType.bonus ,3 },
+        });
+        var val = gifts.Random();
+
+
+        int lvl = MainController.Instance.PlayerData.Level;
+        switch (val)
+        {
+            case GiftType.catalys:
+                collectedItems.Add(ExecCatalysItem.Creat());
+                break;
+            case GiftType.recepi:
+                //TODO
+                break;
+            case GiftType.item:
+                var item = HeroShopRandomItem.CreatMainSlot(ShopController.RandomSlot(), lvl);
                 collectedItems.Add(item);
-            }
+                break;
+            case GiftType.enchant:
+                collectedItems.Add(ExecEnchantItem.Creat());
+                break;
+            case GiftType.bonus:
+                collectedItems.Add(HeroShopBonusItem.CreatBonusItem(lvl));
+                break;
         }
     }
 
-    public DictionaryOfItemAndInt GetAllCollectedItems()
+    public DictionaryOfItemAndInt GetAllCollectedMoney()
     {
-        return inventory;
+        return moneyInv;
     }
 
     public void EnemieDead()
