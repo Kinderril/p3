@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 public enum EnchantType
 {
@@ -16,6 +17,7 @@ public  class ExecEnchantItem : ExecutableItem
     public ExecEnchantItem(EnchantType type, int count) 
         : base(ExecutableType.enchant, count)
     {
+        IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Enchant/" + type.ToString());
         ItemType = type;
     }
     public override string Save()

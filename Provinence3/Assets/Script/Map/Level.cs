@@ -163,6 +163,11 @@ public class Level
             {
                 PlayerData.AddItem(collectedItem, false);
             }
+            foreach (var collectedCraft in collectedCrafts)
+            {
+                var exec = new ExecCraftItem(collectedCraft.Key,collectedCraft.Value,false);
+                PlayerData.AddItem(exec);
+            }
         }
         PlayerData.AddInventory(inventory);
         PlayerData.Save();

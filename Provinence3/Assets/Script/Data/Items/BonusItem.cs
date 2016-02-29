@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 public enum Bonustype
 {
@@ -25,6 +26,8 @@ public class BonusItem : BaseItem
         this.Bonustype = Bonustype;
         this.power = power;
         this.remainUsetime = remainUsetime;
+
+        IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/BonusItem/" + Bonustype.ToString());
         Slot = Slot.bonus;
     }
 

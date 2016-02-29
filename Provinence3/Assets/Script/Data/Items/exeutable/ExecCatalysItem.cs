@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 public enum CatalysItemType
 {
-    
+    vampire,
+    crit,
+
 }
 
 public class ExecCatalysItem : ExecutableItem
@@ -15,6 +18,7 @@ public class ExecCatalysItem : ExecutableItem
         : base(ExecutableType.catalys, count)
     {
 
+        IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Catalys/" + type.ToString());
         ItemType = type;
     }
 

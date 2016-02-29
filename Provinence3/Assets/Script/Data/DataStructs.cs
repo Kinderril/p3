@@ -66,6 +66,7 @@ public class DataStructs : MonoBehaviour
     public ItemImage[] ItemImage;
     public SlotImage[] SlotImage;
     public ColorUI[] ColorsOfUI;
+    public Color CraftItemColor;
     public TalismanImage[] TalismanImage;
     public CostItemsByLevel[] CostItemsByLevel;
     public SpecialAbilityImage[] SpecialAbilityImage;
@@ -78,7 +79,16 @@ public class DataStructs : MonoBehaviour
 //    public HeroShopRandomItem HeroShopRandomItemPrefab;
     public int GetRespawnPointsCountByMission(int mission)
     {
-        return 4;
+        switch (mission)
+        {
+            case 0:
+                return 1;
+            case 1:
+                return 1;
+            case 2:
+                return 4;
+        }
+        return 0;
     }
 }
 

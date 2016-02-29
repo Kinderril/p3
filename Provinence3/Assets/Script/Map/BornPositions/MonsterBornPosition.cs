@@ -82,7 +82,7 @@ public class MonsterBornPosition : BaseBornPosition
 //            Debug.Log("Start reborn in " + sec);
             if (UnityEngine.Random.Range(0, 100) < 95)
             {
-                Debug.Log("Start reborn in " + sec);
+//                Debug.Log("Start reborn in " + sec);
                 timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromSeconds(sec));
                 timer.OnTimer += OnReborn;
             }

@@ -63,7 +63,7 @@ public class FlashController : MonoBehaviour
             {
                 material.SetFloat(keyTime, c);
             }
-            Debug.Log("curTime:" + curTime + "   c:"+c);
+//            Debug.Log("curTime:" + curTime + "   c:"+c);
             if (curTime > totalTime)
             {
                 End();
@@ -74,7 +74,7 @@ public class FlashController : MonoBehaviour
 
     void End()
     {
-        Debug.Log("End:" );
+//        Debug.Log("End:" );
         foreach (var material in materials)
         {
             material.shader = simpleShader;
