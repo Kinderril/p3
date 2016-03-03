@@ -177,6 +177,7 @@ public class Level
         IsGoodEnd = LevelEndType;
         PortalsController.Stop();
         MainHero.Control.enabled = false;
+        AddRandomGift();//TODO DEBUG!!
         if (LevelEndType == EndlevelType.bad)
         {
             moneyInv.Remove(ItemId.crystal);

@@ -9,15 +9,15 @@ using UnityEngine.UI;
 public class WindowEndGame : BaseWindow
 {
     public Text moneyField;
-    public GameObject crystalField;
+    public Text crystalField;
     public Text captureField;
     public Text killsField;
     public GameObject goodPicture;
     public GameObject badPicture;
     public Transform craftsLayout;
     public Transform bigItemLayout;
-    public TurnerPlayerItemElement TurnerPlayerItemElement;
-    public PlayerItemElement PrefabPlayerItemElement;
+    public BaseSimpleElement PrefabItem;
+    public BaseSimpleElement PrefabCraft;
 
     public override void Init()
     {
@@ -27,7 +27,7 @@ public class WindowEndGame : BaseWindow
         var level = MainController.Instance.level;
         bool isGoodEnd = level.IsGoodEnd != EndlevelType.bad;
         var collectedMoney = level.GetAllCollectedMoney();
-        crystalField.SetActive(false);
+        crystalField.gameObject.SetActive(false);
         foreach (var item in collectedMoney)
         {
             Text t = null;
@@ -39,8 +39,8 @@ public class WindowEndGame : BaseWindow
                 case ItemId.crystal:
                     if (item.Value > 0)
                     {
-                        crystalField.SetActive(true);
-                        t = captureField;
+                        crystalField.gameObject.SetActive(true);
+                        t = crystalField;
                     }
                     break;
             }
@@ -51,20 +51,17 @@ public class WindowEndGame : BaseWindow
         foreach (var craft in crafts)
         {
             ExecCraftItem craftItem = new ExecCraftItem(craft.Key,craft.Value);
-            var playerItem = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
-            playerItem.Init(craftItem, element => { });
-            playerItem.gameObject.transform.SetParent(craftsLayout); 
+            var playerItem = DataBaseController.GetItem<BaseSimpleElement>(PrefabCraft);
+            playerItem.Init(craftItem);
+            playerItem.gameObject.transform.SetParent(craftsLayout, true); 
         }
 
         var items = level.CollectedItems;
         foreach (var baseItem in items)
         {
-            var playerItem = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
-            playerItem.Init(baseItem, element => { });
-            playerItem.gameObject.transform.SetParent(bigItemLayout);
-
-            var playerItemCover = DataBaseController.GetItem<TurnerPlayerItemElement>(TurnerPlayerItemElement);
-            playerItemCover.gameObject.transform.SetParent(bigItemLayout);
+            var playerItem = DataBaseController.GetItem<BaseSimpleElement>(PrefabItem);
+            playerItem.Init(baseItem);
+            playerItem.gameObject.transform.SetParent(bigItemLayout,true);
         }
 
         string capt = isGoodEnd ? "Good end" : "Bad ending lose half of gold";

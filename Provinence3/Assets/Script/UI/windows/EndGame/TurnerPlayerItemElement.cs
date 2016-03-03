@@ -26,8 +26,10 @@ public class TurnerPlayerItemElement : MonoBehaviour
 
     private void DoTurn()
     {
-        isTurn = true;
-        animator.SetTrigger(key);
+
+        EndAnimation();
+        //        isTurn = true;
+        //        animator.SetTrigger(key);
     }
 
     public void EndAnimation()

@@ -14,58 +14,23 @@ public enum UnderUi
     equip
 }
 
-public class PlayerItemElement : MonoBehaviour
+public class PlayerItemElement : BaseSimpleElement
 {
-    public Image rareImage;
-    public Image iconImage;
-    public Image SlotLabel;
     public Image equpedImage;
-    public BaseItem PlayerItem;
-    public Text enchantField;
-    public Text NameField;
-    public Text CountField;
-    private Transform oldTransforml;
     private Action<PlayerItemElement> callback;
-    private bool isDrag = false;
         
-    public virtual void Init(BaseItem item,Action<PlayerItemElement> OnClicked)
+    public void Init(BaseItem item,Action<PlayerItemElement> OnClicked)
     {
+        base.Init(item);
         this.callback = OnClicked;
         PlayerItem = item;
         Refresh();
 
     }
-    public void Refresh()
+    public override void Refresh()
     {
-        enchantField.gameObject.SetActive(false);
-        NameField.text = PlayerItem.Name;
-        CountField.gameObject.SetActive(false);
-        if (PlayerItem is PlayerItem)
-        {
-            var pItem = PlayerItem as PlayerItem;
-            rareImage.gameObject.SetActive(pItem.isRare);
-            bool haveEnchant = pItem.enchant > 0;
-            if (haveEnchant)
-            {
-                enchantField.text = "+" + pItem.enchant;
-            }
-            enchantField.gameObject.SetActive(haveEnchant);
-        }
-        else
-        {
-            rareImage.gameObject.SetActive(false);
-        }
-
-        var exec = PlayerItem as ExecutableItem;
-        if (exec != null)
-        {
-            CountField.gameObject.SetActive(true);
-            CountField.text = exec.count.ToString("0");
-        }
-
+        base.Refresh();
         equpedImage.gameObject.SetActive(PlayerItem.IsEquped);
-        iconImage.sprite = PlayerItem.IconSprite;
-        SlotLabel.sprite = DataBaseController.Instance.SlotIcon(PlayerItem.Slot);
     }
 
     public void OnPointerClick()
@@ -73,24 +38,9 @@ public class PlayerItemElement : MonoBehaviour
         callback(this);
     }
     
-    private IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(1f);
-        oldTransforml = transform.parent;
-        transform.SetParent(transform.parent.parent.parent);
-        isDrag = true;
-    } 
-    
     public void Equip(bool val)
     {
         equpedImage.gameObject.SetActive(val);
     }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (isDrag)
-            transform.position = eventData.position;
-    }
-
 }
 

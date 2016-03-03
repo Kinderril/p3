@@ -28,6 +28,11 @@ public class ExecCraftItem : ExecutableItem
         if (loadSprite)
             IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/CraftIrems/" + type.ToString());
         ItemType = type;
+        name = type.ToString();
+    }
+    public override string Name
+    {
+        get { return name; }
     }
 
     public override string Save()

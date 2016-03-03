@@ -71,7 +71,7 @@ public class WindowShop : BaseWindow
     {
         ClearTransform(layoutShopItems);
         int lvl = MainController.Instance.PlayerData.Level;
-        for (int i = Mathf.Clamp(lvl - 2,0,Int32.MaxValue); i < lvl ; i++)
+        for (int i = Mathf.Clamp(lvl - 2,1,Int32.MaxValue); i <= lvl ; i++)
         {
             CreatShopElement(new HeroShopRandomItem(i));
         }
@@ -84,7 +84,7 @@ public class WindowShop : BaseWindow
     {
         ClearTransform(layoutShopItems);
         int lvl = MainController.Instance.PlayerData.Level;
-        for (int i = Mathf.Clamp(lvl - 1, 0, Int32.MaxValue); i < lvl; i++)
+        for (int i = Mathf.Clamp(lvl - 1, 1, Int32.MaxValue); i <= lvl; i++)
         {
             CreatShopElement(new HeroShopRecipeItem(i));
         }
