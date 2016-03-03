@@ -35,6 +35,7 @@ public enum Slot
     bonus,
     Talisman,
     executable,
+    recipe,
 }
 
 public class PlayerItem : BaseItem

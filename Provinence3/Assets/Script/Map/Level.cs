@@ -229,7 +229,7 @@ public class Level
                 collectedItems.Add(ExecCatalysItem.Creat());
                 break;
             case GiftType.recepi:
-                //TODO
+                collectedItems.Add(HeroShopRecipeItem.CreatRandomRecipeItem(lvl));
                 break;
             case GiftType.item:
                 var item = HeroShopRandomItem.CreatMainSlot(ShopController.RandomSlot(), lvl);

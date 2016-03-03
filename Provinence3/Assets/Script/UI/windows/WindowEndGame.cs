@@ -59,9 +59,12 @@ public class WindowEndGame : BaseWindow
         var items = level.CollectedItems;
         foreach (var baseItem in items)
         {
-            var playerItem = DataBaseController.GetItem<TurnerPlayerItemElement>(TurnerPlayerItemElement);
+            var playerItem = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
             playerItem.Init(baseItem, element => { });
             playerItem.gameObject.transform.SetParent(bigItemLayout);
+
+            var playerItemCover = DataBaseController.GetItem<TurnerPlayerItemElement>(TurnerPlayerItemElement);
+            playerItemCover.gameObject.transform.SetParent(bigItemLayout);
         }
 
         string capt = isGoodEnd ? "Good end" : "Bad ending lose half of gold";

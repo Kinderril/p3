@@ -69,8 +69,9 @@ public class WindowShop : BaseWindow
 
     public void InitGoods()
     {
+        ClearTransform(layoutShopItems);
         int lvl = MainController.Instance.PlayerData.Level;
-        for (int i = lvl; i >= lvl - 2 && i > 0; i--)
+        for (int i = Mathf.Clamp(lvl - 2,0,Int32.MaxValue); i < lvl ; i++)
         {
             CreatShopElement(new HeroShopRandomItem(i));
         }
@@ -81,12 +82,16 @@ public class WindowShop : BaseWindow
 
     public void InitRecipies()
     {
-
+        ClearTransform(layoutShopItems);
+        int lvl = MainController.Instance.PlayerData.Level;
+        for (int i = Mathf.Clamp(lvl - 1, 0, Int32.MaxValue); i < lvl; i++)
+        {
+            CreatShopElement(new HeroShopRecipeItem(i));
+        }
         Bookmarks = Bookmarks.recipies;
     }
     public void OnMarkerChange()
     {
-        ClearTransform(layoutShopItems);
         switch (Bookmarks)
         {
             case Bookmarks.weapons:
