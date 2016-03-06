@@ -26,7 +26,9 @@ public class ExecCraftItem : ExecutableItem
         : base(ExecutableType.craft, count)
     {
         if (loadSprite)
-            IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/CraftIrems/" + type.ToString());
+        {
+            IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/CraftItems/" + type.ToString());
+        }
         ItemType = type;
         name = type.ToString();
     }

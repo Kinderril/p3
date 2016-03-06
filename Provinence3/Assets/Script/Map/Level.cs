@@ -185,7 +185,7 @@ public class Level
         }
         else
         {
-            AddRandomGift();
+//            AddRandomGift();//TODO DEBUG!!
             foreach (var collectedItem in collectedItems)
             {
                 PlayerData.AddItem(collectedItem, false);

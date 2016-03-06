@@ -32,7 +32,7 @@ public class WindowShop : BaseWindow
     public Button UnEquipButton;
     public Button UpgradeButton;
     public UpgradeWindow UpgradeWindow;
-    private Bookmarks Bookmarks;
+    private Bookmarks Bookmarks = Bookmarks.recipies;
 
     public override void Init()
     {
@@ -43,7 +43,7 @@ public class WindowShop : BaseWindow
         moneyField.text = MainController.Instance.PlayerData.playerInv[ItemId.money].ToString("0");
         crystalField.text = MainController.Instance.PlayerData.playerInv[ItemId.crystal].ToString("0");
         InitPlayerItems();
-        OnMarkerChange();
+        InitGoods();
         
         MainController.Instance.PlayerData.OnNewItem += OnNewItem;
         MainController.Instance.PlayerData.OnItemEquiped += OnItemEquipedCallback;
@@ -78,6 +78,7 @@ public class WindowShop : BaseWindow
         CreatShopElement(new HeroShopBonusItem(lvl));
         CreatShopElement(new HeroShopExecutableItem(lvl));
         Bookmarks = Bookmarks.weapons;
+        NullSelection();
     }
 
     public void InitRecipies()
@@ -89,19 +90,21 @@ public class WindowShop : BaseWindow
             CreatShopElement(new HeroShopRecipeItem(i));
         }
         Bookmarks = Bookmarks.recipies;
+        NullSelection();
     }
-    public void OnMarkerChange()
-    {
-        switch (Bookmarks)
-        {
-            case Bookmarks.weapons:
-                InitGoods();
-                break;
-            case Bookmarks.recipies:
-                InitRecipies();
-                break;
-        }
-    }
+//    public void OnMarkerChange()
+//    {
+//        switch (Bookmarks)
+//        {
+//            case Bookmarks.recipies:
+//                InitGoods();
+//                break;
+//            case Bookmarks.weapons:
+//                InitRecipies();
+//                break;
+//        }
+//    }
+
 
     private void CreatShopElement(IShopExecute exec)
     {
@@ -117,6 +120,7 @@ public class WindowShop : BaseWindow
         EquipButton.gameObject.SetActive(false);
         UnEquipButton.gameObject.SetActive(false);
         UpgradeButton.gameObject.SetActive(false);
+        BuyButton.gameObject.SetActive(false);
         SellButton.gameObject.SetActive(false);
         selectedShopElement = null;
         selectedPlayerItem = null;
@@ -237,7 +241,8 @@ public class WindowShop : BaseWindow
         var item = PlayerItemElements.FirstOrDefault(x => x.PlayerItem == obj);
         if (item != null)
         {
-            if (exec.count >= 1)
+            
+            if (exec != null && exec.count >= 1)
             {
                 item.Refresh();
             }

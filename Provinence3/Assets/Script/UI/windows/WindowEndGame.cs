@@ -53,7 +53,7 @@ public class WindowEndGame : BaseWindow
             ExecCraftItem craftItem = new ExecCraftItem(craft.Key,craft.Value);
             var playerItem = DataBaseController.GetItem<BaseSimpleElement>(PrefabCraft);
             playerItem.Init(craftItem);
-            playerItem.gameObject.transform.SetParent(craftsLayout, true); 
+            playerItem.gameObject.transform.SetParent(craftsLayout, false); 
         }
 
         var items = level.CollectedItems;
@@ -61,7 +61,7 @@ public class WindowEndGame : BaseWindow
         {
             var playerItem = DataBaseController.GetItem<BaseSimpleElement>(PrefabItem);
             playerItem.Init(baseItem);
-            playerItem.gameObject.transform.SetParent(bigItemLayout,true);
+            playerItem.gameObject.transform.SetParent(bigItemLayout, false);
         }
 
         string capt = isGoodEnd ? "Good end" : "Bad ending lose half of gold";

@@ -176,7 +176,9 @@ public class Bullet : MonoBehaviour
             TrailParticleSystem.Stop();
             Map.Instance.LeaveEffect(TrailParticleSystem);
         }
+        
         Destroy(gameObject);
+            
 
     }
 
@@ -193,13 +195,20 @@ public class Bullet : MonoBehaviour
     private void updateTargetUnit()
     {
         time += speed;
-        var trgPos = targetUnit.weaponsContainer.position;
-        transform.position = Vector3.Lerp(start, trgPos, time);
-        var curDist = (start - trgPos).magnitude;
-        var curTime = curDist/startDist2target;
-        if (time > curTime)
+        if (targetUnit != null)
         {
-            TryHitTragetUnitAndDEath();
+            var trgPos = targetUnit.weaponsContainer.position;
+            transform.position = Vector3.Lerp(start, trgPos, time);
+            var curDist = (start - trgPos).magnitude;
+            var curTime = curDist/startDist2target;
+            if (time > curTime)
+            {
+                TryHitTragetUnitAndDEath();
+            }
+        }
+        else
+        {
+            Death(null);
         }
     }
 
