@@ -51,7 +51,7 @@ public class Hero : Unit
             Parameters.Parameters[v] = playerData.CalcParameter(v);
             Debug.Log("Calc parameter: " + v + " : " + Parameters.Parameters[v]);
         }
-        curHp = Parameters.Parameters[ParamType.Hp];
+        curHp = Parameters.Parameters[ParamType.Heath];
 
         Parameters.Parameters[ParamType.PPower] *= damageBonusFromItem + 1f;
         Parameters.Parameters[ParamType.MPower] *= damageBonusFromItem + 1f;
@@ -195,7 +195,7 @@ public class Hero : Unit
             CurHp = CurHp + p;
             if (OnGetHit != null)
             {
-                OnGetHit(CurHp, Parameters.Parameters[ParamType.Hp], p);
+                OnGetHit(CurHp, Parameters.Parameters[ParamType.Heath], p);
             }
         }
     }
@@ -265,7 +265,7 @@ public class Hero : Unit
         CurHp += p;
         if (OnGetHit != null)
         {
-            OnGetHit(CurHp, Parameters.Parameters[ParamType.Hp], p);
+            OnGetHit(CurHp, Parameters.Parameters[ParamType.Heath], p);
         }
     }
 

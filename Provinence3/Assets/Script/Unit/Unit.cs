@@ -40,7 +40,7 @@ public class Unit : MonoBehaviour
         get { return curHp; }
         set
         {
-            curHp = Mathf.Clamp(value,-1,Parameters.Parameters[ParamType.Hp]);
+            curHp = Mathf.Clamp(value,-1,Parameters.Parameters[ParamType.Heath]);
             if (curHp <= 0)
             {
                 Dead();
@@ -90,7 +90,7 @@ public class Unit : MonoBehaviour
         animationController = GetComponentInChildren<AnimationController>();
         if(animationController == null)
             Debug.LogError("NO ANImator Controller");
-        curHp = Parameters.Parameters[ParamType.Hp];
+        curHp = Parameters.Parameters[ParamType.Heath];
         //List<Weapon> weapons = new List<Weapon>();
         foreach (var inventoryWeapon in InventoryWeapons)
         {
@@ -228,7 +228,7 @@ public class Unit : MonoBehaviour
         {
             if (OnGetHit != null)
             {
-                OnGetHit(CurHp, Parameters.Parameters[ParamType.Hp], -power);
+                OnGetHit(CurHp, Parameters.Parameters[ParamType.Heath], -power);
             }
         }
     }
@@ -273,7 +273,7 @@ public class Unit : MonoBehaviour
                         var isMax = owner.CurHp < owner.Parameters.MaxHp;
                         if (owner.OnGetHit != null && !isMax)
                         {
-                            owner.OnGetHit(owner.CurHp, owner.Parameters.Parameters[ParamType.Hp], diff);
+                            owner.OnGetHit(owner.CurHp, owner.Parameters.Parameters[ParamType.Heath], diff);
                         }
                     }
                     break;

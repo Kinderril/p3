@@ -11,42 +11,6 @@ public struct ColorUI
     public ItemId type;
 }
 [Serializable]
-public struct ParameterImage
-{
-    public ParamType type;
-    public string path;
-}
-[Serializable]
-public struct MainParameterImage
-{
-    public MainParam type;
-    public string path;
-}
-[Serializable]
-public struct ItemImage
-{
-    public ItemId type;
-    public string path;
-}
-[Serializable]
-public struct SlotImage
-{
-    public Slot type;
-    public Sprite path;
-}
-[Serializable]
-public struct SpecialAbilityImage
-{
-    public SpecialAbility type;
-    public Sprite path;
-}
-[Serializable]
-public struct TalismanImage
-{
-    public TalismanType type;
-    public Sprite path;
-}
-[Serializable]
 public struct EffectVisualsBehaviour
 {
     public EffectType type;
@@ -61,15 +25,9 @@ public struct CostItemsByLevel
 }
 public class DataStructs : MonoBehaviour
 {
-    public MainParameterImage[] MainParametersImages;
-    public ParameterImage[] ParametersImages;
-    public ItemImage[] ItemImage;
-    public SlotImage[] SlotImage;
     public ColorUI[] ColorsOfUI;
     public Color CraftItemColor;
-    public TalismanImage[] TalismanImage;
     public CostItemsByLevel[] CostItemsByLevel;
-    public SpecialAbilityImage[] SpecialAbilityImage;
     public EffectVisualsBehaviour[] EffectVisualsBehaviours;
     public int[] costParameterByLvl;
     public const int MISSION_LAST_INDEX = 2;

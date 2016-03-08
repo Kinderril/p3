@@ -25,10 +25,6 @@ public class ExecutableItem : BaseItem
         this.count = count;
     }
 
-    public override string Name {
-        get { return ExecutableType.ToString(); } 
-    }
-
     public override char FirstChar()
     {
         return FIRSTCHAR;
@@ -44,7 +40,7 @@ public class ExecutableItem : BaseItem
         return ExecutableType.ToString() + DELEM + count;
     }
 
-    public static ExecutableItem Creat(string subStr)
+    public static ExecutableItem Create(string subStr)
     {
         var spl = subStr.Split(DELEM);
         ExecutableType t = (ExecutableType)Enum.Parse(typeof (ExecutableType), spl[0]);

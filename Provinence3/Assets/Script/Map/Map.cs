@@ -15,6 +15,7 @@ public class Map : Singleton<Map>
     private BossSpawner bossSpawner;
     public Transform effectsContainer;
     public Transform miscContainer;
+    public Transform bulletContainer;
     private Transform heroBornPositions;
     private Level level;
     public List<BaseMonster> enemies;
@@ -140,6 +141,7 @@ public class Map : Singleton<Map>
         }
         Utils.ClearTransform(enemiesContainer);
         Utils.ClearTransform(miscContainer);
+        Utils.ClearTransform(bulletContainer);
         foreach (var bornPosition in appearPos)
         {
             bornPosition.EndLevel();

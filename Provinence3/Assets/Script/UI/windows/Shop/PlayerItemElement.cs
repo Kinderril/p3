@@ -25,7 +25,6 @@ public class PlayerItemElement : BaseSimpleElement
         this.callback = OnClicked;
         PlayerItem = item;
         Refresh();
-
     }
     public override void Refresh()
     {

@@ -8,6 +8,7 @@ public class RecipeItem : BaseItem
 {
     public int Level = 1;
     public Slot recipeSlot;
+    public const char FIRSTCHAR = '§';
 
     public RecipeItem(int lvl, Slot slot)
     {
@@ -22,7 +23,7 @@ public class RecipeItem : BaseItem
     }
     public override char FirstChar()
     {
-        return '§';
+        return FIRSTCHAR;
     }
 
     public override void Activate(Hero hero)
@@ -40,7 +41,7 @@ public class RecipeItem : BaseItem
         return Level.ToString() + DELEM + ((int)recipeSlot).ToString();
     }
 
-    public static RecipeItem Load(string data)
+    public static RecipeItem Create(string data)
     {
         var s = data.Split(DELEM);
         int lvl = Convert.ToInt32(s[0]);

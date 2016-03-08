@@ -49,15 +49,14 @@ public class BaseSimpleElement : MonoBehaviour
             CountField.gameObject.SetActive(true);
             CountField.text = exec.count.ToString("0");
         }
-//        var craft = PlayerItem as RecipeItem;
-//        if (craft != null)
-//        {
-//            
-//        }
-        
+
         iconImage.sprite = PlayerItem.IconSprite;
         
         SlotLabel.sprite = DataBaseController.Instance.SlotIcon(PlayerItem.Slot);
+        if (SlotLabel.sprite == null)
+        {
+            SlotLabel.gameObject.SetActive(false);
+        }
     }
 }
 

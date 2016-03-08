@@ -20,6 +20,7 @@ public class ExecCatalysItem : ExecutableItem
 
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Catalys/" + type.ToString());
         ItemType = type;
+        name = type.ToString();
     }
 
     public static ExecCatalysItem Creat()

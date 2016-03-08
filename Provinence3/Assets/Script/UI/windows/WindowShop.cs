@@ -31,6 +31,7 @@ public class WindowShop : BaseWindow
     public Button EquipButton;
     public Button UnEquipButton;
     public Button UpgradeButton;
+    public Button RecipeButton;
     public UpgradeWindow UpgradeWindow;
     private Bookmarks Bookmarks = Bookmarks.recipies;
 
@@ -136,15 +137,15 @@ public class WindowShop : BaseWindow
         if (!val)
         {
             bool isEquiped = info.IsEquped;
-            if (info.Slot != Slot.executable)
+            if (info.Slot != Slot.executable && info.Slot != Slot.recipe)
             {
-
                 EquipButton.gameObject.SetActive(!isEquiped);
                 UnEquipButton.gameObject.SetActive(isEquiped);
                 var canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(info) != null;
                 UpgradeButton.gameObject.SetActive(canBeupgraded);
             }
         }
+        RecipeButton.gameObject.SetActive(info is RecipeItem);
 
         SellButton.gameObject.SetActive(!val);
         ItemInfoElement.gameObject.SetActive(true);

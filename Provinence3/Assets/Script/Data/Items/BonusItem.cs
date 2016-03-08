@@ -54,7 +54,7 @@ public class BonusItem : BaseItem
         return power.ToString() + MDEL + (int)Bonustype + MDEL + remainUsetime;
     }
 
-    public static BaseItem Creat(string subStr)
+    public static BaseItem Create(string subStr)
     {
         var mstr = subStr.Split(MDEL);
         var type = (Bonustype) Convert.ToInt32(mstr[1]);

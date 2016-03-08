@@ -167,7 +167,7 @@ public class PlayerData
         var allItems = PlayerPrefs.GetString(ITEMS, "").Split(ITEMS_DELEMETER);
         foreach (var item in allItems)
         {
-            if (item.Length > 4)
+            if (item.Length > 2)
             {
                 var fchar = item[0];
                 Debug.Log("Split FC " + fchar + "   " + item);
@@ -176,16 +176,19 @@ public class PlayerData
                 switch (fchar)
                 {
                     case PlayerItem.FIRSTCHAR:
-                        itemBase  = PlayerItem.Creat(subStr);
+                        itemBase  = PlayerItem.Create(subStr);
                         break;
                     case BonusItem.FIRSTCHAR:
-                        itemBase = BonusItem.Creat(subStr);
+                        itemBase = BonusItem.Create(subStr);
                         break;
                     case TalismanItem.FIRSTCHAR:
-                        itemBase = TalismanItem.Creat(subStr);
+                        itemBase = TalismanItem.Create(subStr);
                         break;
                     case ExecutableItem.FIRSTCHAR:
-                        itemBase = ExecutableItem.Creat(subStr);
+                        itemBase = ExecutableItem.Create(subStr);
+                        break;
+                    case RecipeItem.FIRSTCHAR:
+                        itemBase = RecipeItem.Create(subStr);
                         break;
                 }
                 if (itemBase != null)
@@ -209,7 +212,7 @@ public class PlayerData
             }
             if (MainParameters.Count != 3)
             {
-                Debug.LogError("BAD PARAMETERS LOAD " + MainParameters.Count + "   bp:" + bp);
+//                Debug.LogError("BAD PARAMETERS LOAD " + MainParameters.Count + "   bp:" + bp);
                 MainParameters.Clear();
                 MainParameters.Add(global::MainParam.ATTACK, 1);
                 MainParameters.Add(global::MainParam.HP, 1);
@@ -244,8 +247,7 @@ public class PlayerData
         }
         return null;
     }
-
-
+    
     private ExecutableItem HaveExecutableItem(EnchantType t)
     {
         var allItems = GetAllItems();
@@ -311,7 +313,6 @@ public class PlayerData
         foreach (var playerItem in playerItems)
         {
             itemsStr += playerItem.FirstChar() + playerItem.Save() + ITEMS_DELEMETER;
-            
         }
         PlayerPrefs.SetString(ITEMS, itemsStr);
         PlayerPrefs.SetString(BASE_PARAMS, bsStr);
@@ -345,9 +346,31 @@ public class PlayerData
         var executable = item as ExecutableItem;
         if (executable != null)
         {
-            var oldItem =
-                playerItems.FirstOrDefault(
-                    x => x is ExecutableItem && (x as ExecutableItem).ExecutableType == executable.ExecutableType) as ExecutableItem;
+            ExecutableItem oldItem = null;
+            switch (executable.ExecutableType)
+            {
+                case ExecutableType.craft:
+                    var orevType = (executable as ExecCraftItem).ItemType;
+                    oldItem =
+                        playerItems.FirstOrDefault(
+                            x => x is ExecCraftItem 
+                            && (x as ExecCraftItem).ItemType == orevType) as ExecutableItem;
+                    break;
+                case ExecutableType.enchant:
+                    var orevTypeE = (executable as ExecEnchantItem).ItemType;
+                    oldItem =
+                        playerItems.FirstOrDefault(
+                            x => x is ExecEnchantItem
+                            && (x as ExecEnchantItem).ItemType == orevTypeE) as ExecutableItem;
+                break;
+                case ExecutableType.catalys:
+                    var orevTypeC = (executable as ExecCatalysItem).ItemType;
+                    oldItem =
+                        playerItems.FirstOrDefault(
+                            x => x is ExecCatalysItem
+                            && (x as ExecCatalysItem).ItemType == orevTypeC) as ExecutableItem;
+                break;
+            }
             if (oldItem != null)
             {
                 (oldItem).count++;
@@ -401,14 +424,12 @@ public class PlayerData
                 {
                     OnItemEquiped(item2Unquip, false);
                 }
-
             }
             playerItem.IsEquped = true;
             if (OnItemEquiped != null)
             {
                 OnItemEquiped(playerItem, true);
             }
-
         }
         else
         {
@@ -417,7 +438,6 @@ public class PlayerData
             {
                 OnItemEquiped(playerItem, false);
             }
-
         }
         Save();
     }
@@ -459,7 +479,7 @@ public class PlayerData
             case ParamType.MDef:
                 v += MainParameters[MainParam.DEF] * 9;
                 break;
-            case ParamType.Hp:
+            case ParamType.Heath:
                 v += MainParameters[MainParam.HP] * 40 + 200;
                 break;
         }
@@ -475,10 +495,9 @@ public class PlayerData
     {
         OpenLevels.OpenPosition(MainController.Instance.level.MissionIndex, id);
     }
-
-
+    
     public void RemoveItem(ExecutableType type, int count)
-{
+    {
         var oldItem =
             playerItems.FirstOrDefault(
                 x => x is ExecutableItem && (x as ExecutableItem).ExecutableType == type) as
@@ -502,8 +521,6 @@ public class PlayerData
                 }
             }
         }
-
-
     }
 
     public void RemoveItem(BaseItem item)

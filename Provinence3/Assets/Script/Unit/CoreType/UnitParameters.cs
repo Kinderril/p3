@@ -11,7 +11,7 @@ public enum ParamType
     PPower,
     PDef,
     MDef,
-    Hp,
+    Heath,
 
 }
 public class UnitParameters : ScriptableObject
@@ -42,7 +42,7 @@ public class UnitParameters : ScriptableObject
         p.Parameters.Add(ParamType.PPower, PPower);
         p.Parameters.Add(ParamType.PDef, physicResist);
         p.Parameters.Add(ParamType.MDef, magicResist);
-        p.Parameters.Add(ParamType.Hp,MaxHp );
+        p.Parameters.Add(ParamType.Heath,MaxHp );
         p.AttackType = AttackType;
         return p;
 

@@ -14,7 +14,7 @@ public class ToTargetRandomWeapon : Weapon
     {
         for (int i = 0; i < countBullets; i++)
         {
-            Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
+            Bullet bullet1 = InstantiateBullet();
             var hero = MainController.Instance.level.MainHero;
             var heroPos = hero.transform.position;
             var dX = UnityEngine.Random.Range(-1f, 1f);

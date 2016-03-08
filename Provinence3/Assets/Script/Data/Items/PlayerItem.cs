@@ -144,7 +144,7 @@ public class PlayerItem : BaseItem
         }
     }
 
-    public static PlayerItem Creat(string item)
+    public static PlayerItem Create(string item)
     {
         Debug.Log("Creat from:   " + item);
         var Part1 = item.Split(MDEL);

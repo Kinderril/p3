@@ -17,9 +17,11 @@ public class Weapon : MonoBehaviour, IBulletHolder
     public const float CHARGE_COEF = 1.4f;
     public const float MAX_CHARGE_TIME = 1.2f;
     public const float CHARGE_TIME_DELAY = 0.5f;
+    private Transform bulletParent;
 
     public void Init(Unit owner,PlayerItem PlayerItem)
     {
+        bulletParent = Map.Instance.bulletContainer;
         nexAttackTime = 0;
         this.PlayerItem = PlayerItem;
         if (pSystemOnShot != null)
@@ -87,7 +89,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
             var dist = (outPosVector3  - potentialTarget.transform.position).sqrMagnitude;
             if (potentialTarget != null && dist < 30)
             {
-                Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
+                Bullet bullet1 = InstantiateBullet();
                 bullet1.Init(potentialTarget, this, outPosVector3);
             }
             else
@@ -97,7 +99,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
         }
         else
         {
-            Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
+            Bullet bullet1 = InstantiateBullet();
             bullet1.transform.position = outPosVector3;
             if (target == null || (target != null && target.IsDead))
             {
@@ -115,6 +117,13 @@ public class Weapon : MonoBehaviour, IBulletHolder
         {
             pSystemOnShot.Play();
         }
+    }
+
+    protected Bullet InstantiateBullet()
+    {
+        Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
+        bullet1.gameObject.transform.SetParent(bulletParent);
+        return bullet1;
     }
 
     public SpecialAbility SpecAbility

@@ -161,7 +161,7 @@ public class TalismanItem : BaseItem
         return power.ToString() + MDEL + costShoot.ToString() + MDEL + (int)TalismanType + MDEL + IsEquped;
     }
 
-    public static TalismanItem Creat(string subStr)
+    public static TalismanItem Create(string subStr)
     {
         Debug.Log("TalismanItem Creat from:   " + subStr);
         var pp = subStr.Split(MDEL);

@@ -28,6 +28,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<ParamType, Sprite> ParamTypeSprites = new Dictionary<ParamType, Sprite>();
     private readonly Dictionary<Slot, Sprite> SlotSprites = new Dictionary<Slot, Sprite>();
     private readonly Dictionary<ItemId, Color> itemsColors = new Dictionary<ItemId, Color>();
+    private readonly Dictionary<CraftItemType,Sprite> CraftItemsSprites = new Dictionary<CraftItemType, Sprite>(); 
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
     private readonly Dictionary<int,Taple<int,int>> costByLevelItems = new Dictionary<int, Taple<int, int>>(); 
 
@@ -73,29 +74,48 @@ public class DataBaseController : Singleton<DataBaseController>
 
     private void LoadSprites()
     {
-        foreach (var mp in DataStructs.MainParametersImages)
+        foreach (CraftItemType v in Enum.GetValues(typeof(CraftItemType)))
         {
-            MainParamSprites.Add(mp.type, Resources.Load<Sprite>("sprites/MainParameters/" + mp.path));
+            CraftItemsSprites.Add(v,UnityEngine.Resources.Load<Sprite>("sprites/CraftItems/" + v.ToString()));
         }
-        foreach (var mp in DataStructs.SlotImage)
+
+        foreach (MainParam v in Enum.GetValues(typeof(MainParam)))
         {
-            SlotSprites.Add(mp.type, mp.path);
+            MainParamSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Parameters/" + v.ToString()));
         }
-        foreach (var mp in DataStructs.ItemImage)
+//        foreach (var mp in DataStructs.MainParametersImages)
+//        {
+//            MainParamSprites.Add(mp.type, Resources.Load<Sprite>("sprites/MainParameters/" + mp.path));
+//        }
+        foreach (Slot v in Enum.GetValues(typeof(Slot)))
         {
-            ItemIdSprites.Add(mp.type, Resources.Load<Sprite>("sprites/Items/" + mp.path));
+            SlotSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Slot/" + v.ToString()));
         }
-        foreach (var mp in DataStructs.ParametersImages)
+
+        foreach (ItemId v in Enum.GetValues(typeof(ItemId)))
         {
-            ParamTypeSprites.Add(mp.type, Resources.Load<Sprite>("sprites/Parameters/" + mp.path));
+            ItemIdSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Items/" + v.ToString()));
         }
-        foreach (var mp in DataStructs.SpecialAbilityImage)
+//        foreach (var mp in DataStructs.ItemImage)
+//        {
+//            ItemIdSprites.Add(mp.type, Resources.Load<Sprite>("sprites/Items/" + mp.path));
+//        }
+//        foreach (var mp in DataStructs.ParametersImages)
+//        {
+//            ParamTypeSprites.Add(mp.type, Resources.Load<Sprite>("sprites/Parameters/" + mp.path));
+//        }
+        foreach (ParamType v in Enum.GetValues(typeof(ParamType)))
         {
-            SpecialsSprites.Add(mp.type,  mp.path);
+            ParamTypeSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Parameters/" + v.ToString()));
         }
-        foreach (var mp in DataStructs.TalismanImage)
+
+        foreach (SpecialAbility v in Enum.GetValues(typeof(SpecialAbility)))
         {
-            TalismansSprites.Add(mp.type,  mp.path);
+            SpecialsSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/SpecialAbility/" + v.ToString()));
+        }
+        foreach (TalismanType v in Enum.GetValues(typeof(TalismanType)))
+        {
+            TalismansSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Talisman/" + v.ToString()));
         }
         foreach (var colorUi in DataStructs.ColorsOfUI)
         {
@@ -119,7 +139,12 @@ public class DataBaseController : Singleton<DataBaseController>
     public Taple<int, int> GetCostItemsByLevel(int level)
     {
         return costByLevelItems[level];
-    } 
+    }
+
+    public Sprite CraftItemSprite(CraftItemType c)
+    {
+        return CraftItemsSprites[c];
+    }
 
     public Sprite SlotIcon(Slot mp)
     {

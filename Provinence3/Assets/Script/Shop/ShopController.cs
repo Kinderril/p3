@@ -111,8 +111,8 @@ public static class Connections
 
         secondary.Add(Slot.physical_weapon, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.PDef, 1 } }));
         secondary.Add(Slot.magic_weapon, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.MDef, 3 } }));
-        secondary.Add(Slot.body, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.Hp, 1 }, { ParamType.Speed, 1 } }));
-        secondary.Add(Slot.helm, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.Hp, 1 }, { ParamType.PPower, 3 }, { ParamType.MPower, 3 } }));
+        secondary.Add(Slot.body, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.Heath, 1 }, { ParamType.Speed, 1 } }));
+        secondary.Add(Slot.helm, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.Heath, 1 }, { ParamType.PPower, 3 }, { ParamType.MPower, 3 } }));
     }
 
     public static ParamType GetPrimaryParamType(Slot slot)

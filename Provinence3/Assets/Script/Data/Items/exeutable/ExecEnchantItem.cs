@@ -19,6 +19,7 @@ public  class ExecEnchantItem : ExecutableItem
     {
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Enchant/" + type.ToString());
         ItemType = type;
+        name = type.ToString();
     }
     public static ExecEnchantItem Creat()
     {

@@ -192,7 +192,7 @@ public class Level
             }
             foreach (var collectedCraft in collectedCrafts)
             {
-                var exec = new ExecCraftItem(collectedCraft.Key,collectedCraft.Value,false);
+                var exec = new ExecCraftItem(collectedCraft.Key,collectedCraft.Value);
                 PlayerData.AddItem(exec);
             }
         }

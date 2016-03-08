@@ -14,7 +14,7 @@ public class TriplsShotWeapon : Weapon
         outPosVector3 = GetStartPos();
         var dir = v - outPosVector3;
 
-        Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
+        Bullet bullet1 = InstantiateBullet();
         bullet1.transform.position = outPosVector3 + dir.normalized;
         bullet1.Init(v, this);
 
@@ -37,7 +37,7 @@ public class TriplsShotWeapon : Weapon
             float vx = dir.x * cosAP - dir.z * sinAP;
             float vz = dir.x * sinAP + dir.z * cosAP;
             var v = new Vector3(vx,dir.y,vz);
-            Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
+            Bullet bullet1 = InstantiateBullet();
             bullet1.transform.position = outPosVector3 + v.normalized;
             bullet1.Init(v + outPosVector3, this);
         }

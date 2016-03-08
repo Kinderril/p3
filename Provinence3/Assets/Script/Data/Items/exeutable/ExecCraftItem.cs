@@ -22,13 +22,10 @@ public enum CraftItemType
 public class ExecCraftItem : ExecutableItem
 {
     public CraftItemType ItemType;
-    public ExecCraftItem(CraftItemType type, int count,bool loadSprite = true) 
+    public ExecCraftItem(CraftItemType type, int count) 
         : base(ExecutableType.craft, count)
     {
-        if (loadSprite)
-        {
-            IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/CraftItems/" + type.ToString());
-        }
+        IconSprite = DataBaseController.Instance.CraftItemSprite(type);
         ItemType = type;
         name = type.ToString();
     }
