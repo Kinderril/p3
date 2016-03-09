@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 
-public abstract class IShopExecute
+public abstract class IShopExecute : MonoBehaviour
 {
     public int CrystalCost;
     public int MoneyCost;
