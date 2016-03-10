@@ -59,6 +59,7 @@ public class DataBaseController : Singleton<DataBaseController>
     {
         simpleShader = Shader.Find("Custom/BumperSpecular");
         flashShader = Shader.Find("Custom/BumperSpecularFlash");
+        CheckEnums();
 
         for (var i = 0; i < maxLevel; i++)
         {
@@ -70,6 +71,16 @@ public class DataBaseController : Singleton<DataBaseController>
         }
         LoadSprites();
         Pool = new Pool(this);
+    }
+
+    private void CheckEnums()
+    {
+        int sac = Enum.GetValues(typeof (SpecialAbility)).Length;
+        int cic = Enum.GetValues(typeof(CatalysItemType)).Length;
+        if (sac - 1 != cic)
+        {
+            Debug.LogError("Wrong enums");
+        }
     }
 
     private void LoadSprites()

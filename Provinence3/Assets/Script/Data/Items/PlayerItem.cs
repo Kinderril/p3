@@ -23,7 +23,6 @@ public enum SpecialAbility
     distance,
     hp,
     shield,
-
 }
 
 public enum Slot

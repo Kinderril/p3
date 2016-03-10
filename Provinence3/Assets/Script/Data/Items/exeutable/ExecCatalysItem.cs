@@ -6,9 +6,21 @@ using UnityEngine;
 
 public enum CatalysItemType
 {
+    penetrating,
+    AOE,
+    Critical,
+    homing,
+    push,
+    slow,
+    removeDefence,
     vampire,
-    crit,
-
+    chain,
+    clear,
+    dot,
+    stun,
+    distance,
+    hp,
+    shield,
 }
 
 public class ExecCatalysItem : ExecutableItem
