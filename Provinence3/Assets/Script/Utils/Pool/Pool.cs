@@ -101,10 +101,7 @@ public class Pool
         {
             foreach (var element in poolOfElement.Value)
             {
-                if (element.IsUsing)
-                {
-                    element.EndUse();
-                }
+                element.EndUse();
             }
         }
     }

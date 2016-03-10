@@ -53,6 +53,50 @@ public class WindowShop : BaseWindow
         MainController.Instance.PlayerData.OnChangeCount += OnChangeCount;
     }
 
+    private void Sort()
+    {
+        PlayerItemElements.Sort((x, y) =>
+        {
+            var xPriority = GetPriority(x);
+            var yPriority = GetPriority(y);
+            if (xPriority > yPriority)
+            {
+                return 1;
+            }
+
+            if (yPriority > xPriority)
+            {
+                return -1;
+            }
+            return 0;
+        });
+    }
+
+    private int GetPriority(PlayerItemElement p0)
+    {
+
+        switch (p0.PlayerItem.Slot)
+        {
+            case Slot.physical_weapon:
+                return 10;
+            case Slot.magic_weapon:
+                return 10;
+            case Slot.body:
+                return 8;
+            case Slot.helm:
+                return 8;
+            case Slot.bonus:
+                return 6;
+            case Slot.Talisman:
+                return 7;
+            case Slot.executable:
+                return 4;
+            case Slot.recipe:
+                return 5;
+        }
+        return 0;
+
+    }
 
     private void InitPlayerItems()
     {
@@ -64,8 +108,14 @@ public class WindowShop : BaseWindow
             var element = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
             element.Init(playerItem, OnSelected);
             element.transform.SetParent(layoutMyInventory, false);
-            PlayerItemElements.Add(element);
+            AddNewItem(element);
         }
+    }
+
+    private void AddNewItem(PlayerItemElement element)
+    {
+        PlayerItemElements.Add(element);
+        Sort();
     }
 
     public void InitGoods()
@@ -299,7 +349,7 @@ public class WindowShop : BaseWindow
         var element = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
         element.Init(playerItem, OnSelected);
         element.transform.SetParent(layoutMyInventory,false);
-        PlayerItemElements.Add(element);
+        AddNewItem(element);
     }
 
     public override void Close()

@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 
-public class IncomingTrap : MonoBehaviour
+public class IncomingTrap : LifeTimeTrap
 {
     protected float power;
     protected List<BaseMonster> monstersInside = new List<BaseMonster>();
@@ -26,6 +26,7 @@ public class IncomingTrap : MonoBehaviour
     }
     public void Init(float power, TalismanTrapDamage talic)
     {
+        base.Init();
         this.talic = talic;
         this.power = power;
     }

@@ -33,7 +33,6 @@ public class AOETrap : Trap
                 TimeEffect.Creat(monster, EffectType.freez);
             }
         }
-        Destroy(gameObject);
     }
 }
 

@@ -13,12 +13,12 @@ public class ChainBullet : MonoBehaviour
     private float power;
     public int maxTargets = 8;
 
-
     public void Init(TalismanItem sourseItem, Hero hero)
     {
         power = sourseItem.power;
         StartCoroutine(WaitForAction());
-    }
+}
+
     void OnTriggerEnter(Collider other)
     {
         var monster = other.GetComponent<BaseMonster>();
