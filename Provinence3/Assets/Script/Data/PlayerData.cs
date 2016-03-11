@@ -373,7 +373,7 @@ public class PlayerData
             }
             if (oldItem != null)
             {
-                (oldItem).count++;
+                (oldItem).count += executable.count;
                 if (OnChangeCount != null)
                 {
                     OnChangeCount(oldItem);
@@ -539,6 +539,11 @@ public class PlayerData
         {
             OnItemSold(item);
         }
+    }
+
+    public void DoCraft(RecipeItem recipeItem, ExecCatalysItem catalysItem = null)
+    {
+
     }
 }
 

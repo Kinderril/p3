@@ -18,7 +18,7 @@ public class BaseWindow : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    protected void ClearTransform(Transform go)
+    public static void ClearTransform(Transform go)
     {
         foreach (Transform child in go.transform)
         {

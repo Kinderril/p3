@@ -17,6 +17,11 @@ public class RecipeItem : BaseItem
         recipeSlot = slot;
     }
 
+    public List<ExecCraftItem> ItemsToCraft()
+    {
+        return null;
+    } 
+
     public override string Name
     {
         get { return "Recipe"; }
