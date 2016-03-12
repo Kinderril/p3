@@ -11,9 +11,9 @@ public class CraftWindow : MonoBehaviour
     public Transform CraftItemsLayout;
     public Transform CatalysItemsLayout;
     private RecipeItem recipeItem;
-    public Image ResultItemImage;
+//    public Image ResultItemImage;
     public CatalysPlace CatalysPlace;
-    public Text ResultItemName;
+//    public Text ResultItemName;
     private ExecCatalysItem catalysItem;
     private List<CraftItemElement> elements = new List<CraftItemElement>();
     private bool canCraft = false;
@@ -25,6 +25,7 @@ public class CraftWindow : MonoBehaviour
 
     public void Init(RecipeItem recipeItem)
     {
+        gameObject.SetActive(true);
         this.recipeItem = recipeItem;
         elements.Clear();
         BaseWindow.ClearTransform(CraftItemsLayout);

@@ -103,7 +103,7 @@ public class ItemInfoElement : MonoBehaviour
 
     private void InitCost(int crystals,int money)
     {
-        Debug.Log("Init cost : " + crystals + "    " + money);
+//        Debug.Log("Init cost : " + crystals + "    " + money);
         if (crystals > 0)
         {
             var element = DataBaseController.GetItem<ParameterElement>(Prefab);

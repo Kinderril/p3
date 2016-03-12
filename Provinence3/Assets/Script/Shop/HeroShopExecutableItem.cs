@@ -12,10 +12,11 @@ public class HeroShopExecutableItem : IShopExecute
         base.Execute(parameter);
     }
 
-    public static ExecutableItem CreatExecutableItem(int lvl)
+    public static ExecEnchantItem CreatExecutableItem(int lvl)
     {
-        var t = ShopController.AllExecutables.RandomElement();
-        return new ExecutableItem(t,1);
+        var t = ShopController.AllEnchantes.RandomElement();
+        
+        return new ExecEnchantItem(t,1);
     }
 
     public HeroShopExecutableItem(int lvl) 

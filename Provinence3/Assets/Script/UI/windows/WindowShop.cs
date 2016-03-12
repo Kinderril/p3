@@ -33,12 +33,14 @@ public class WindowShop : BaseWindow
     public Button UpgradeButton;
     public Button RecipeButton;
     public UpgradeWindow UpgradeWindow;
+    public CraftWindow CraftWindow;
     private Bookmarks Bookmarks = Bookmarks.recipies;
 
     public override void Init()
     {
         base.Init();
         NullSelection();
+        CraftWindow.gameObject.SetActive(false);
         ItemInfoElement.SetCallBack(OnItemInit);
         AllParametersContainer.Init();
         moneyField.text = MainController.Instance.PlayerData.playerInv[ItemId.money].ToString("0");
@@ -70,6 +72,11 @@ public class WindowShop : BaseWindow
             }
             return 0;
         });
+        for (int i = PlayerItemElements.Count - 1; i >=0 ; i--)
+        {
+            var pe = PlayerItemElements[i];
+            pe.transform.SetAsLastSibling();
+        }
     }
 
     private int GetPriority(PlayerItemElement p0)
@@ -85,14 +92,16 @@ public class WindowShop : BaseWindow
                 return 8;
             case Slot.helm:
                 return 8;
-            case Slot.bonus:
-                return 6;
             case Slot.Talisman:
                 return 7;
-            case Slot.executable:
-                return 4;
+            case Slot.bonus:
+                return 6;
             case Slot.recipe:
                 return 5;
+            case Slot.executable:
+                if (p0.PlayerItem is ExecEnchantItem)
+                    return 4;
+                return 3;
         }
         return 0;
 
@@ -102,7 +111,7 @@ public class WindowShop : BaseWindow
     {
         PlayerItemElements = new List<PlayerItemElement>();
         List<BaseItem> items = MainController.Instance.PlayerData.GetAllItems();
-        Debug.Log("items count = " + items.Count);
+//        Debug.Log("items count = " + items.Count);
         foreach (var playerItem in items)
         {
             var element = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
@@ -124,7 +133,8 @@ public class WindowShop : BaseWindow
         int lvl = MainController.Instance.PlayerData.Level;
         for (int i = Mathf.Clamp(lvl - 2,1,Int32.MaxValue); i <= lvl ; i++)
         {
-            CreatShopElement(new HeroShopRandomItem(i));
+            var e = new HeroShopRandomItem(i);
+            CreatShopElement(e);
         }
         CreatShopElement(new HeroShopBonusItem(lvl));
         CreatShopElement(new HeroShopExecutableItem(lvl));
@@ -156,6 +166,14 @@ public class WindowShop : BaseWindow
 //        }
 //    }
 
+    public void OnRecipeOpen()
+    {
+        var recipe = selectedPlayerItem as RecipeItem;
+        if (recipe != null)
+        {
+            CraftWindow.Init(recipe);
+        }
+    }
 
     private void CreatShopElement(IShopExecute exec)
     {
@@ -239,7 +257,7 @@ public class WindowShop : BaseWindow
 
     public void OnBuySimpleChest()
     {
-        if (selectedShopElement != null && selectedShopElement.CanBuy && EnoughtMoney(selectedShopElement))
+        if (/*selectedShopElement != null && */selectedShopElement.CanBuy && EnoughtMoney(selectedShopElement))
         {
             WindowManager.Instance.ConfirmWindow.Init(
                 () => { ShopController.Instance.BuyItem(selectedShopElement); }
@@ -247,6 +265,12 @@ public class WindowShop : BaseWindow
         }
         else
         {
+//            if (selectedShopElement == null)
+//            {
+//                Debug.Log("selectedShopElement : " + selectedShopElement.MoneyCost);
+//            }
+//
+//            Debug.Log("selectedShopElement != null " + (selectedShopElement == null) + "   " + selectedShopElement.MoneyCost);
             WindowManager.Instance.InfoWindow.Init(null,"not enought money");
         }
     }
@@ -300,8 +324,10 @@ public class WindowShop : BaseWindow
             else
             {
                 Destroy(item.gameObject);
-            
+
             }
+            PlayerItemElements.Remove(item);
+            Sort();
         }
         NullSelection();
     }

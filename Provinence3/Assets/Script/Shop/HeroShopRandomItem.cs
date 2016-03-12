@@ -99,7 +99,8 @@ public class HeroShopRandomItem : IShopExecute
         return val;
     }
 
-    public HeroShopRandomItem(int lvl) : base(lvl)
+    public HeroShopRandomItem(int lvl) 
+        : base(lvl)
     {
         name = "Chest";
     }

@@ -11,6 +11,7 @@ public class CraftItemElement : MonoBehaviour
     private ExecCraftItem craftItem;
     public GameObject isEnoughtGameobject;
     public Text countField;
+    public Image Icon;
     private bool isEnought = false;
 
     public bool IsEnought
@@ -28,6 +29,7 @@ public class CraftItemElement : MonoBehaviour
         {
             myCount = myItem.count;
         }
+        Icon.sprite = craftItem.IconSprite;
         isEnought = myCount >= craftItem.count;
         isEnoughtGameobject.SetActive(isEnought);
         countField.text = Mathf.Clamp(myCount, 0, craftItem.count) + "/" + craftItem.count;

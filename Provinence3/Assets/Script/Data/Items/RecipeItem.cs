@@ -19,7 +19,7 @@ public class RecipeItem : BaseItem
 
     public List<ExecCraftItem> ItemsToCraft()
     {
-        return null;
+        return DataBaseController.Instance.CraftDB.GetRecipe(recipeSlot, Level);
     } 
 
     public override string Name

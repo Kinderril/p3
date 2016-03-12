@@ -53,10 +53,10 @@ public class ExecutableItem : BaseItem
                 item = new ExecCraftItem((CraftItemType)Enum.Parse(typeof(CraftItemType), spl[2]), count);
                 break;
             case ExecutableType.enchant:
-
+                item = new ExecEnchantItem((EnchantType)Enum.Parse(typeof(EnchantType), spl[2]), count);
                 break;
             case ExecutableType.catalys:
-
+                item = new ExecCatalysItem((CatalysItemType)Enum.Parse(typeof(CatalysItemType), spl[2]), count);
                 break;
         }
 

@@ -36,6 +36,7 @@ public class DataBaseController : Singleton<DataBaseController>
     public Chest chestPrefab;
     
     public DataStructs DataStructs;
+    public CraftDB CraftDB;
     public GameObject debugCube;
     public FlyingNumbers FlyingNumber;
     public FlyingNumbers FlyingNumberWithPicture;
@@ -60,7 +61,7 @@ public class DataBaseController : Singleton<DataBaseController>
         simpleShader = Shader.Find("Custom/BumperSpecular");
         flashShader = Shader.Find("Custom/BumperSpecularFlash");
         CheckEnums();
-
+        CraftDB = new CraftDB();
         for (var i = 0; i < maxLevel; i++)
         {
             mosntersLevel.Add(i, new List<BaseMonster>());

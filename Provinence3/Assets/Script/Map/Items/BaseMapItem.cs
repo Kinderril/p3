@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,8 +58,14 @@ public class BaseMapItem : MonoBehaviour
         }
         else
         {
-            EndAnimation();
+            StartCoroutine(Wait4take());
         }
     }
+
+    private IEnumerator Wait4take()
+    {
+        yield return new WaitForSeconds(0.5f);
+        EndAnimation();
+    } 
 }
 
