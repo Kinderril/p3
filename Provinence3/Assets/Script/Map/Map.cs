@@ -196,7 +196,7 @@ public class Map : Singleton<Map>
     public void LeaveEffect(BaseEffectAbsorber ps)
     {
         ps.transform.SetParent(effectsContainer, true);
-        ps.DestroyPS(4);
+        StartCoroutine(ps.DestroyPS(4));
     }
 
 }

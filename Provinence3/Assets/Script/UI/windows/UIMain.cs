@@ -146,7 +146,8 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
                 {
                     EndCharge();
                     float chargePower = Time.time - chargeTime;
-                    mainHero.TryAttackByDirection(new Vector3(dir.x, 0, dir.y), chargePower);
+                    var v = new Vector3(dir.x, 0, dir.y);
+                    mainHero.TryAttackByDirection(v, chargePower);
                 }
             }
         }

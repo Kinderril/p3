@@ -122,7 +122,7 @@ public class Unit : MonoBehaviour
     {
         if (!isPlayAttack)
         {
-//            Debug.Log("hero try attack isLookToTarget: isPlayAttack = true");
+            Debug.Log("hero attack:"+direction);
             isPlayAttack = true;
 //            isPlayAttack = true;
             Control.PlayAttack();

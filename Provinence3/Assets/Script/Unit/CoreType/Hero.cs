@@ -124,6 +124,18 @@ public class Hero : Unit
         if (Action != null)
             Action.Update();
     }
+    public void TryAttackByDirection(Vector3 dir, float additionalPower = 0)
+    {
+        var trg = transform.position + dir;
+
+
+#if UNITY_EDITOR
+        Ray ray = new Ray(transform.position, trg);
+        Debug.DrawRay(ray.origin, ray.direction * 5, Color.red, 1);
+#endif
+
+        TryAttack(trg, additionalPower);
+    }
 
     public override void TryAttack(Vector3 target,float additionalPower = 0,Unit unit = null)
     {
@@ -131,13 +143,14 @@ public class Hero : Unit
         var dir = target - transform.position;
 
         var isLookToTarget = heorControl.SpinTransform.ShallRotate(dir);
-//        Debug.Log("hero try attack isLookToTarget: " + isLookToTarget);
-//        heorControl.SetLookDir(dir);
+        Debug.Log("Direction from UI:" + dir + "   isLookToTarget:"+ isLookToTarget);
+        //        Debug.Log("hero try attack isLookToTarget: " + isLookToTarget);
+        //        heorControl.SetLookDir(dir);
         if (can)
         {
             if (isLookToTarget)
             {
-                base.TryAttack(target);
+                base.TryAttack(dir);
             }
             else
             {
@@ -163,18 +176,6 @@ public class Hero : Unit
         }
     }
 
-    public void TryAttackByDirection(Vector3 dir,float additionalPower = 0)
-    {
-        var trg = transform.position + dir;
-
-        
-#if UNITY_EDITOR
-        Ray ray = new Ray(transform.position, trg);
-        Debug.DrawRay(ray.origin, ray.direction * 5, Color.red, 1);
-#endif
-        
-        TryAttack(trg, additionalPower);
-    }
 
     public void GetItems(ItemId type, int count)
     {

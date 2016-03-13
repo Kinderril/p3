@@ -26,21 +26,16 @@ public class RenderCam : Singleton<RenderCam>
     void Awake()
     {
         lastId = PlayerPrefs.GetInt(key, 0);
-        RenderCamera.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     } 
 
     public string DoRender(Slot slot )
     {
-        RenderCamera.gameObject.SetActive(true);
+        gameObject.SetActive(true);
         RenderImage(slot, RenderSlotType.back, backImage);
         RenderImage(slot, RenderSlotType.bot, botImage);
         RenderImage(slot, RenderSlotType.mid, midImage);
         RenderImage(slot, RenderSlotType.top, topImage);
-        //        RenderTexture rendText = RenderTexture.active;
-
-
-
-        RenderCamera.gameObject.SetActive(true);
         var pngTex = new Texture2D(RenderCamera.pixelWidth, RenderCamera.pixelHeight);
         RenderTexture = new RenderTexture(RenderCamera.pixelWidth, RenderCamera.pixelHeight, 24);
         RenderCamera.targetTexture = RenderTexture;
@@ -55,31 +50,11 @@ public class RenderCam : Singleton<RenderCam>
         fileStream = File.CreateText(fileName);
         fileStream.Close();
         File.WriteAllBytes(fileName, bytes);
-        RenderCamera.gameObject.SetActive(false);
-
-
-
-
-
-
-
-
-
-
-//        RenderTexture.active = RenderCamera.targetTexture;
-//
-//        Texture2D cameraImage = new Texture2D(RenderCamera.targetTexture.width, RenderCamera.targetTexture.height, TextureFormat.RGB24, false);
-//        cameraImage.ReadPixels(new Rect(0, 0, RenderCamera.targetTexture.width, RenderCamera.targetTexture.height), 0, 0);
-//        cameraImage.Apply();
-//        RenderTexture.active = rendText;
+        gameObject.SetActive(false);
         
-//        byte[] bytes = cameraImage.EncodeToPNG();
-
-//        System.IO.File.WriteAllBytes(path, bytes);
         Debug.Log("Render done:" + fileName);
         lastId++;
         PlayerPrefs.SetInt(key, lastId);
-//        RenderCamera.gameObject.SetActive(false);
         return fileName;
     }
 
