@@ -15,6 +15,8 @@ public class WindowManager : Singleton<WindowManager>
 {
     public WindowT[] windows;
     private BaseWindow currentWindow;
+    private BaseWindow nextWindow;
+
     public Camera MainCamera;
     public Camera SubCamera;
     public ConfirmWindow ConfirmWindow;

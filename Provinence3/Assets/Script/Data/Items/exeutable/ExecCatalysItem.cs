@@ -37,8 +37,7 @@ public class ExecCatalysItem : ExecutableItem
 
     public SpecialAbility GetSpec()
     {
-        //TODO
-        return SpecialAbility.none;
+        return (SpecialAbility)Enum.Parse(typeof(SpecialAbility), ItemType.ToString(), true);
     }
 
     public static ExecCatalysItem Creat()

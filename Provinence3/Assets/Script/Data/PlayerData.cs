@@ -525,6 +525,8 @@ public class PlayerData
 
     public void RemoveItem(BaseItem item,int count = 1)
     {
+        if (count == 0)
+            return;
         var executable = item as ExecutableItem;
         if (executable != null)
         {
@@ -547,7 +549,7 @@ public class PlayerData
         {
             RemoveItem(execCraftItem, execCraftItem.count);
         }
-        var resultItem = HeroShopRandomItem.CreatMainSlot(recipeItem.recipeSlot, recipeItem.Level);
+        var resultItem = HeroShopRandomItem.CreatMainSlot(recipeItem.recipeSlot, recipeItem.Level, catalysItem);
         AddItem(resultItem);
         Save();
     }

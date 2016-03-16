@@ -32,13 +32,16 @@ public class CraftWindow : MonoBehaviour
         BaseWindow.ClearTransform(CatalysItemsLayout);
         foreach (var craftElement in recipeItem.ItemsToCraft())
         {
-            CraftItemElement craftItemElement = DataBaseController.GetItem<CraftItemElement>(CraftItemPrefab);
-            craftItemElement.transform.SetParent(CraftItemsLayout, false);
-            craftItemElement.Init(craftElement);
-            if (!craftItemElement.IsEnought)
+            if (craftElement.count > 0)
             {
-                failElement = craftItemElement;
-                canCraft = false;
+                CraftItemElement craftItemElement = DataBaseController.GetItem<CraftItemElement>(CraftItemPrefab);
+                craftItemElement.transform.SetParent(CraftItemsLayout, false);
+                craftItemElement.Init(craftElement);
+                if (!craftItemElement.IsEnought)
+                {
+                    failElement = craftItemElement;
+                    canCraft = false;
+                }
             }
         }
         var allCatalys = MainController.Instance.PlayerData.GetAllItems().Where(x => x is ExecCatalysItem);
