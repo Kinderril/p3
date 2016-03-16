@@ -44,30 +44,48 @@ public class HeroShopRandomItem : IShopExecute
         return lvl * 11 + 33;
     }
 
-    public static PlayerItem CreatMainSlot(Slot slot, int levelResult)
+    public static PlayerItem CreatMainSlot(Slot slot, int levelResult, ExecCatalysItem catalysItem = null)
     {
         var totalPoints = GetPointsByLvl(levelResult)*GetSlotCoef(slot);
-        float diff = Utils.RandomNormal(0.5f, 1f);
-        //Debug.Log("iffff " + diff);
+        float diff = 0;
+        if (catalysItem == null)
+        {
+            diff = Utils.RandomNormal(0.5f, 1f);
+        }
+        else
+        {
+            diff = Utils.RandomNormal(0.75f, 1f);
+        }
         bool isRare = diff > 0.95f;
         totalPoints *= diff;
         float contest = UnityEngine.Random.Range(0.60f, 1f);
         if (contest > 0.9f)
             contest = 1f;
+
         var pparams = new Dictionary<ParamType,float>();
         var primary = Connections.GetPrimaryParamType(slot);
         var primaryValue = totalPoints*contest;
         pparams.Add(primary,primaryValue);
+
         if (contest < 0.95f)
         {
             var secondary = Connections.GetSecondaryParamType(slot);
             var secondaryValue = totalPoints*(1f - contest);
             pparams.Add(secondary, secondaryValue);
         }
+
         PlayerItem item = new PlayerItem(pparams,slot,isRare, totalPoints);
-        if (contest < 0.85f && (slot == Slot.magic_weapon || slot == Slot.physical_weapon))
+        if ((contest < 0.85f || catalysItem != null) && (slot == Slot.magic_weapon || slot == Slot.physical_weapon))
         {
-            var spec = ShopController.AllSpecialAbilities.RandomElement();
+            SpecialAbility spec;
+            if (catalysItem == null)
+            {
+                spec = ShopController.AllSpecialAbilities.RandomElement();
+            }
+            else
+            {
+                spec = catalysItem.GetSpec();
+            }
             item.specialAbilities = spec;
         }
         return item;

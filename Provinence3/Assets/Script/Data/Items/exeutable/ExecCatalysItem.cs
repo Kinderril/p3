@@ -35,6 +35,12 @@ public class ExecCatalysItem : ExecutableItem
         name = type.ToString();
     }
 
+    public SpecialAbility GetSpec()
+    {
+        //TODO
+        return SpecialAbility.none;
+    }
+
     public static ExecCatalysItem Creat()
     {
         return new ExecCatalysItem(ShopController.AllCatalyses.RandomElement());

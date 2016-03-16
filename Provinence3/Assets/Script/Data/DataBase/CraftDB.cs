@@ -4,40 +4,64 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+public class CraftItemCoefs
+{
+    public CraftItemType CraftItemType;
+    public int def;
+    public float coef;
+    public int start;
+
+    public CraftItemCoefs(CraftItemType CraftItemType, int def, float coef, int start)
+    {
+        this.CraftItemType = CraftItemType;
+        this.def = def;
+        this.coef = coef;
+        this.start = start;
+    }
+    public int Get(int lvl)
+    {
+        if (lvl < start)
+            return 0;
+
+        return (int)((lvl - start)*coef) + def;
+    }
+}
 
 public class CraftDB
 {
-    Dictionary<Slot,List<CraftItemType>> crafts = new Dictionary<Slot, List<CraftItemType>>(); 
+    Dictionary<Slot,List<CraftItemCoefs>> crafts = new Dictionary<Slot, List<CraftItemCoefs>>(); 
+     
     public CraftDB()
     {
-        crafts.Add(Slot.physical_weapon, new List<CraftItemType>()
+        crafts.Add(Slot.physical_weapon, new List<CraftItemCoefs>()
         {
-            CraftItemType.Leather,
-            CraftItemType.Coal,
-            CraftItemType.Oil,
-            CraftItemType.Thread,
+            new CraftItemCoefs(CraftItemType.Iron, 18,7,0),
+            new CraftItemCoefs(CraftItemType.Wood, 13,5,0),
+            new CraftItemCoefs(CraftItemType.Bone, 4,3,5),
+            new CraftItemCoefs(CraftItemType.Mercury, 3,2.5f,7),
         });
-        crafts.Add(Slot.magic_weapon, new List<CraftItemType>()
+        crafts.Add(Slot.magic_weapon, new List<CraftItemCoefs>()
         {
-            CraftItemType.Iron,
-            CraftItemType.Hardner,
-            CraftItemType.Silver,
-            CraftItemType.Thread,
+            new CraftItemCoefs(CraftItemType.Wood, 21,8,0),
+            new CraftItemCoefs(CraftItemType.Thread, 5,3,0),
+            new CraftItemCoefs(CraftItemType.Silver, 3, 3.5f ,6),
+            new CraftItemCoefs(CraftItemType.Gems, 3, 2.3f ,8),
         });
-        crafts.Add(Slot.helm, new List<CraftItemType>()
+        crafts.Add(Slot.body, new List<CraftItemCoefs>()
         {
-            CraftItemType.Leather,
-            CraftItemType.Coal,
-            CraftItemType.Oil,
-            CraftItemType.Silver,
+            new CraftItemCoefs(CraftItemType.Iron, 16,6,0),
+            new CraftItemCoefs(CraftItemType.Leather, 12,5,0),
+            new CraftItemCoefs(CraftItemType.Gems, 5, 1.9f ,5),
+            new CraftItemCoefs(CraftItemType.Mercury, 2, 3.2f ,8),
         });
-        crafts.Add(Slot.body, new List<CraftItemType>()
+        crafts.Add(Slot.helm, new List<CraftItemCoefs>()
         {
-            CraftItemType.Iron,
-            CraftItemType.Hardner,
-            CraftItemType.Stem,
-            CraftItemType.Bone,
+            new CraftItemCoefs(CraftItemType.Thread, 8,5,0),
+            new CraftItemCoefs(CraftItemType.Leather, 18,7,0),
+            new CraftItemCoefs(CraftItemType.Gems, 4, 2.8f ,6),
+            new CraftItemCoefs(CraftItemType.Mercury, 2, 1.9f ,7),
         });
+        
     }
 
     public List<ExecCraftItem> GetRecipe(Slot s,int l)
@@ -46,27 +70,7 @@ public class CraftDB
         
         foreach (var craftItemType in crafts[s])
         {
-            int count = 0;
-            switch (craftItemType)
-            {
-                case CraftItemType.Hardner:
-                case CraftItemType.Iron:
-                case CraftItemType.Leather:
-                case CraftItemType.Coal:
-                    count = (int)(l*1.5f);
-                    break;
-                case CraftItemType.Bone:
-                case CraftItemType.Thread:
-                case CraftItemType.Stem:
-                case CraftItemType.Oil:
-                case CraftItemType.Silver:
-                    count = (int)(Mathf.Clamp(4-l,0,Int32.MaxValue) + 5);
-                    break;
-                case CraftItemType.Splinter:
-                    count = l;
-                    break;
-            }
-            list.Add(new ExecCraftItem(craftItemType,count));
+            list.Add(new ExecCraftItem(craftItemType.CraftItemType, craftItemType.Get(l)));
         }
         return list;
     }

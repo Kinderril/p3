@@ -523,12 +523,12 @@ public class PlayerData
         }
     }
 
-    public void RemoveItem(BaseItem item)
+    public void RemoveItem(BaseItem item,int count = 1)
     {
         var executable = item as ExecutableItem;
         if (executable != null)
         {
-            RemoveItem(executable.ExecutableType, 1);
+            RemoveItem(executable.ExecutableType, count);
             return;
         }
         playerItems.Remove(item);
@@ -543,7 +543,13 @@ public class PlayerData
 
     public void DoCraft(RecipeItem recipeItem, ExecCatalysItem catalysItem = null)
     {
-
+        foreach (var execCraftItem in recipeItem.ItemsToCraft())
+        {
+            RemoveItem(execCraftItem, execCraftItem.count);
+        }
+        var resultItem = HeroShopRandomItem.CreatMainSlot(recipeItem.recipeSlot, recipeItem.Level);
+        AddItem(resultItem);
+        Save();
     }
 }
 

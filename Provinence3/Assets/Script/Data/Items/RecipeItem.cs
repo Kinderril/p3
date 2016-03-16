@@ -9,6 +9,7 @@ public class RecipeItem : BaseItem
     public int Level = 1;
     public Slot recipeSlot;
     public const char FIRSTCHAR = '§';
+    private List<ExecCraftItem> list = null;
 
     public RecipeItem(int lvl, Slot slot)
     {
@@ -19,7 +20,11 @@ public class RecipeItem : BaseItem
 
     public List<ExecCraftItem> ItemsToCraft()
     {
-        return DataBaseController.Instance.CraftDB.GetRecipe(recipeSlot, Level);
+        if (list == null)
+        {
+            list = DataBaseController.Instance.CraftDB.GetRecipe(recipeSlot, Level);
+        }
+        return list;
     } 
 
     public override string Name

@@ -7,14 +7,15 @@ using UnityEngine;
 public enum CraftItemType
 {
     Iron,
+    Wood,
     Leather,
-    Coal,
     Thread,
+
     Bone,
-    Stem,
-    Oil,
+    Mercury,
+    Gems,
     Silver,
-    Hardner,
+
     Splinter,
 }
 
