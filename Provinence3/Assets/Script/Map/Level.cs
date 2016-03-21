@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -202,8 +203,14 @@ public class Level
         {
             OnEndLevel();
         }
-        DataBaseController.Instance.Pool.Clear();
+        MainController.Instance.StartCoroutine(WaitEndLvl());
     }
+
+    private IEnumerator WaitEndLvl()
+    {
+        yield return new WaitForFixedUpdate();
+        DataBaseController.Instance.Pool.Clear();
+    } 
 
     private void AddRandomGift()
     {

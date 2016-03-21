@@ -15,7 +15,8 @@ public class AttackCloseCombat :AttackAction
             isActivated = false;
             var dir = target.transform.position - owner.transform.position;
             owner.Control.ThisByQuaterhnion.SetLookDir(dir);
-            activateTime = Time.time + UnityEngine.Random.Range(0.4f, 1f);
+            activateTime = Time.time + UnityEngine.Random.Range(1.5f, 3f);
+            Debug.Log("tupiiim:" + activateTime);
         }
         else
         {
@@ -46,6 +47,7 @@ public class AttackCloseCombat :AttackAction
 
     private void TestTargetDist()
     {
+        Debug.Log("isInRange:" + isInRange);
         isInRange = (curRangeSqr < rangeAttackSqr);
         if (isInRange)
         {
