@@ -66,16 +66,15 @@ public class BaseMonster : Unit
         aiStatus = AIStatus.disable;
     }
 
-    protected override void Dead()
+    protected override void Death()
     {
         Control.Dead();
         MainController.Instance.level.AddItem(ItemId.energy, -energyadd);
-
-
+        
         DropItems();
         DropMoney();
 
-        base.Dead();
+        base.Death();
         Action = null;
     }
 

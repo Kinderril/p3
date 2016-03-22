@@ -17,6 +17,7 @@ public class Map : Singleton<Map>
     public Transform miscContainer;
     public Transform bulletContainer;
     private Transform heroBornPositions;
+    private Transform bossBonusMapElement;
     private Level level;
     public List<BaseMonster> enemies;
     public CameraFollow CameraFollow;
@@ -29,6 +30,7 @@ public class Map : Singleton<Map>
         LoadLevelGameObject(levelIndex);
         Application.LoadLevelAdditive("Level" + levelIndex);
         heroBornPositions = levelMainObject.transform.Find("BornPos/HeroBornPositions");
+        bossBonusMapElement = levelMainObject.transform.Find("BornPos/BossBonusMapElements");
         bornPositions = levelMainObject.transform.Find("BornPos");
         enemiesContainer = transform.Find("Enemies");
 
@@ -38,6 +40,7 @@ public class Map : Singleton<Map>
         appearPos = new List<MonsterBornPosition>();
         BossAppearPos = new List<BossBornPosition>();
         List<ChestBornPosition> chestPositions = new List<ChestBornPosition>();
+
         foreach (Transform bornPosition in bornPositions)
         {
             var bp = bornPosition.GetComponent<BaseBornPosition>();
@@ -71,10 +74,14 @@ public class Map : Singleton<Map>
         foreach (var chestBornPosition in chestPositions)
         {
             chestBornPosition.Init(this,lvl);
-            
         }
         CameraFollow.Init(hero.transform);
         bossSpawner = new BossSpawner(enemies.Count,OnSpawnBoss);
+        foreach (Transform tr in bossBonusMapElement)
+        {
+            var bonusBoss = tr.GetComponent<BossBonusMapElement>();
+            bonusBoss.Init(bossSpawner);
+        }
         return hero;
     }
 
@@ -110,7 +117,7 @@ public class Map : Singleton<Map>
         return vector3s;
     }
 
-    private void OnSpawnBoss()
+    private void OnSpawnBoss(int bonuses)
     {
         var pos = BossAppearPos.RandomElement().transform.position;
         var bossPrefab = DataBaseController.Instance.BossUnits.FirstOrDefault(x => x.Parameters.Level == level.difficult);
@@ -119,6 +126,7 @@ public class Map : Singleton<Map>
             boss = DataBaseController.GetItem<BossUnit>(bossPrefab, pos);
             var hero = MainController.Instance.level.MainHero;
             boss.Init(hero);
+            boss.CurHp = boss.CurHp*(1-0.03f*bonuses);
             hero.ArrowTarget.Init(boss);
             boss.transform.SetParent(enemiesContainer);
             MainController.Instance.level.MessageAppear("Boss have appear", Color.red, DataBaseController.Instance.ItemIcon(ItemId.crystal));

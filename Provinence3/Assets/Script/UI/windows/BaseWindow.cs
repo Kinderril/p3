@@ -35,16 +35,16 @@ public class BaseWindow : MonoBehaviour
 
     public virtual void Init()
     {
+        gameObject.SetActive(true);
         if (animator != null)
         {
             canvasGroup.interactable = false;
             animator.SetTrigger(open_key);
         }
-        else
-        {
-            gameObject.SetActive(true);
-
-        }
+//        else
+//        {
+//            gameObject.SetActive(true);
+//        }
     }
 
     public void EndClose()

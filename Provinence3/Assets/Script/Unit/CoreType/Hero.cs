@@ -249,11 +249,11 @@ public class Hero : Unit
         }
     }
 
-    protected override void Dead()
+    protected override void Death()
     {
         if (!IsDead)
         {
-            base.Dead();
+            base.Death();
             MainController.Instance.EndLevel(EndlevelType.bad);
         }
     }

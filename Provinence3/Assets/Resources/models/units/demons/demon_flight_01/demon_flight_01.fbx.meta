@@ -135,6 +135,8 @@ ModelImporter:
     7400002: run_1
     7400004: death_1
     7400006: fight_1
+    7400008: strike_01
+    7400010: ranged_attack_01
     9500000: //RootNode
     13700000: flying_demon
     13700002: flying_demon_alpha

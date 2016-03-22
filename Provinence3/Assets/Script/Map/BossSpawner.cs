@@ -8,11 +8,12 @@ public class BossSpawner
 {
     private int EnemiesOnStart;
     private int ToSpawnBossOnStart;
-    private Action OnSpawnBoss;
+    private Action<int> OnSpawnBoss;
     private bool isBossSpawned = false;
     private const float PRECENT_TO_KILL = 0.05f;
+    private int bonusesGet = 0;
 
-    public BossSpawner(int count, Action SpawnBoss)
+    public BossSpawner(int count, Action<int> SpawnBoss)
     {
         OnSpawnBoss = SpawnBoss;
         this.EnemiesOnStart = count;
@@ -28,9 +29,14 @@ public class BossSpawner
             if (ToSpawnBossOnStart > EnemiesOnStart)
             {
                 isBossSpawned = true;
-                OnSpawnBoss();
+                OnSpawnBoss(bonusesGet);
             }
         }
+    }
+
+    public void GetBonus()
+    {
+        bonusesGet++;
     }
 }
 

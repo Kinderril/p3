@@ -112,6 +112,8 @@ ModelImporter:
     7400002: death
     7400004: fight_1
     7400006: idle_1
+    7400008: strike_01
+    7400010: ranged_attack_01
     9500000: //RootNode
     13700000: mesh
     13700002: mesh.001
