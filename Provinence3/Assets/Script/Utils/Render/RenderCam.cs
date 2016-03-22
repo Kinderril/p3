@@ -26,7 +26,7 @@ public class RenderCam : Singleton<RenderCam>
     void Awake()
     {
         lastId = PlayerPrefs.GetInt(key, 0);
-        gameObject.SetActive(false);
+//        gameObject.SetActive(false);
     } 
 
     public string DoRender(Slot slot )

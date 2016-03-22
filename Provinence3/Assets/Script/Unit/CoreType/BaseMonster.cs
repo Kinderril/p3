@@ -31,7 +31,7 @@ public class BaseMonster : Unit
     private const float isHomeDist = 2;
     public float attackDist = 45;
     private float runAwayDist = 110;
-    private const float aiDist = 110;
+    private const float aiDist = 120;
     public float mainHeroDist = 0;
     public Vector3 bornPosition;
     private AIStatus aiStatus;
