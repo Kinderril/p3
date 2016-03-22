@@ -12,7 +12,8 @@ public class BaseWindow : MonoBehaviour
     private const string open_key = "open";
     private const string close_key = "close";
     private CanvasGroup canvasGroup;
-    void Awake()
+    private bool isAnimating;
+    public void Activate()
     {
         animator = GetComponent<Animator>();
         canvasGroup = GetComponent<CanvasGroup>();
@@ -35,8 +36,17 @@ public class BaseWindow : MonoBehaviour
 
     public virtual void Init()
     {
+        bool isAnim = animator != null;
+        if (isAnim)
+        {
+            transform.localPosition = new Vector2(-1300, 00);
+        }
+        else
+        {
+            transform.localPosition =Vector3.zero;
+        }
         gameObject.SetActive(true);
-        if (animator != null)
+        if (isAnim)
         {
             canvasGroup.interactable = false;
             animator.SetTrigger(open_key);
@@ -49,7 +59,6 @@ public class BaseWindow : MonoBehaviour
 
     public void EndClose()
     {
-
         gameObject.SetActive(false);
     }
 

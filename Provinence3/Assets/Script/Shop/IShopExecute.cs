@@ -16,14 +16,6 @@ public abstract class IShopExecute : MonoBehaviour
     {
         get { return MainController.Instance.PlayerData.Level >= Parameter; }
     }
-    public IShopExecute(int lvl)
-    {
-        Parameter = lvl;
-        var cost = DataBaseController.Instance.GetCostItemsByLevel(lvl);
-        MoneyCost = cost.val1;
-        CrystalCost = cost.val2;
-    }
-
 
     public virtual void Execute(int parameter)
     {
@@ -33,6 +25,14 @@ public abstract class IShopExecute : MonoBehaviour
         if (CrystalCost > 0)
             playerData.Pay(ItemId.crystal, CrystalCost);
         playerData.Save();
+    }
+
+    public virtual void Init(int lvl)
+    {
+        Parameter = lvl;
+        var cost = DataBaseController.Instance.GetCostItemsByLevel(lvl);
+        MoneyCost = cost.val1;
+        CrystalCost = cost.val2;
     }
 }
 

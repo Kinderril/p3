@@ -19,10 +19,10 @@ public class HeroShopBonusItem : IShopExecute
         BonusItem b = new BonusItem(bonus, lvl * 2, 3);
         return b;
     }
-
-    public HeroShopBonusItem(int lvl) 
-        : base(lvl)
+    
+    public override void Init(int lvl)
     {
+        base.Init(lvl);
         name = "Bonus";
     }
 }

@@ -17,6 +17,7 @@ public class ConfirmWindow : MonoBehaviour
         this.onReject = onReject;
         labelField.text = ss;
         gameObject.SetActive(true);
+        transform.SetAsLastSibling();
     }
 
     public void OnConfirmClick()

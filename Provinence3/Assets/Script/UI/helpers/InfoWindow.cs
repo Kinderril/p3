@@ -15,6 +15,7 @@ public class InfoWindow : MonoBehaviour
         this.onOK = onOK;
         textField.text = msg;
         gameObject.SetActive(true);
+        transform.SetAsLastSibling();
     }
 
     public void OnClickOk()

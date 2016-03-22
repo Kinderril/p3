@@ -36,6 +36,11 @@ public class WindowShop : BaseWindow
     public CraftWindow CraftWindow;
     private Bookmarks Bookmarks = Bookmarks.recipies;
 
+    public HeroShopExecutableItem PrefabHeroShopExecutableItem;
+    public HeroShopBonusItem PrefabHeroShopBonusItem;
+    public HeroShopRandomItem PrefabHeroShopRandomItem;
+    public HeroShopRecipeItem PrefabHeroShopRecipeItem;
+
     public override void Init()
     {
         base.Init();
@@ -133,11 +138,18 @@ public class WindowShop : BaseWindow
         int lvl = MainController.Instance.PlayerData.Level;
         for (int i = Mathf.Clamp(lvl - 2,1,Int32.MaxValue); i <= lvl ; i++)
         {
-            var e = new HeroShopRandomItem(i);
+            var e = DataBaseController.GetItem<HeroShopRandomItem>(PrefabHeroShopRandomItem);
+            e.Init(i);
+//            var e = new HeroShopRandomItem(i);
             CreatShopElement(e);
         }
-        CreatShopElement(new HeroShopBonusItem(lvl));
-        CreatShopElement(new HeroShopExecutableItem(lvl));
+        var bonItem = DataBaseController.GetItem<HeroShopBonusItem>(PrefabHeroShopBonusItem);
+        bonItem.Init(lvl);
+        CreatShopElement(bonItem);
+
+        var execItem = DataBaseController.GetItem<HeroShopExecutableItem>(PrefabHeroShopExecutableItem);
+        execItem.Init(lvl);
+        CreatShopElement(execItem);
         Bookmarks = Bookmarks.weapons;
         NullSelection();
     }
@@ -148,23 +160,13 @@ public class WindowShop : BaseWindow
         int lvl = MainController.Instance.PlayerData.Level;
         for (int i = Mathf.Clamp(lvl - 1, 1, Int32.MaxValue); i <= lvl; i++)
         {
-            CreatShopElement(new HeroShopRecipeItem(i));
+            var execItem = DataBaseController.GetItem<HeroShopRecipeItem>(PrefabHeroShopRecipeItem);
+            execItem.Init(lvl);
+            CreatShopElement(execItem);
         }
         Bookmarks = Bookmarks.recipies;
         NullSelection();
     }
-//    public void OnMarkerChange()
-//    {
-//        switch (Bookmarks)
-//        {
-//            case Bookmarks.recipies:
-//                InitGoods();
-//                break;
-//            case Bookmarks.weapons:
-//                InitRecipies();
-//                break;
-//        }
-//    }
 
     public void OnRecipeOpen()
     {

@@ -117,9 +117,9 @@ public class HeroShopRandomItem : IShopExecute
         return val;
     }
 
-    public HeroShopRandomItem(int lvl) 
-        : base(lvl)
+    public override void Init(int lvl)
     {
+        base.Init(lvl);
         name = "Chest";
     }
 }

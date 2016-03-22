@@ -19,9 +19,9 @@ public class HeroShopExecutableItem : IShopExecute
         return new ExecEnchantItem(t,1);
     }
 
-    public HeroShopExecutableItem(int lvl) 
-        : base(lvl)
+    public override void Init(int lvl)
     {
+        base.Init(lvl);
         name = "Scroll";
     }
 }

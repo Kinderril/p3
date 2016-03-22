@@ -33,6 +33,7 @@ public class WindowManager : Singleton<WindowManager>
         foreach (var window in windows)
         {
             window.window.gameObject.SetActive(false);
+            window.window.Activate();
         }
         ConfirmWindow.gameObject.SetActive(false);
         InfoWindow.gameObject.SetActive(false);
@@ -43,14 +44,16 @@ public class WindowManager : Singleton<WindowManager>
         var isInGame = state == MainState.play;
         MainCamera.enabled = isInGame;
         SubCamera.enabled = !isInGame;
+        var nextWindow = windows.FirstOrDefault(x => x.state == state).window;
         if (currentWindow != null)
         {
             currentWindow.Close();
+            var sIndex = currentWindow.transform.GetSiblingIndex();
+            nextWindow.transform.SetSiblingIndex(sIndex + 1);
         }
-        var window = windows.FirstOrDefault(x => x.state == state).window;
         //window.StartAnimation();
-        window.Init();
-        currentWindow = window;
+        nextWindow.Init();
+        currentWindow = nextWindow;
     }
 
    

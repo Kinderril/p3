@@ -22,7 +22,8 @@ public class BaseEffectAbsorber : MonoBehaviour
     public IEnumerator DestroyPS(float waitTime = 4f)
     {
         yield return new WaitForSeconds(waitTime);
-        Destroy(gameObject);
+        if (gameObject != null)
+            Destroy(gameObject);
     }
 }
 

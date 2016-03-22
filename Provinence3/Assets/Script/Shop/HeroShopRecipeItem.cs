@@ -6,9 +6,9 @@ using System.Text;
 
 public  class HeroShopRecipeItem : IShopExecute
 {
-    public HeroShopRecipeItem(int lvl) : base(lvl)
+    public override void Init(int lvl)
     {
-//        icon = ;
+        base.Init(lvl);
         name = "Recipe Chest";
     }
 

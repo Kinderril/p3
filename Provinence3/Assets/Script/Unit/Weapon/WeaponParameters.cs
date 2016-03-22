@@ -13,7 +13,7 @@ public enum WeaponType
 
 public  class WeaponParameters : ScriptableObject
 {
-    public float bulletSpeed;
+//    public float bulletSpeed;
     public WeaponType type;
     public float range;
     public bool isHoming = false;

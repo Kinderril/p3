@@ -77,10 +77,13 @@ public class Map : Singleton<Map>
         }
         CameraFollow.Init(hero.transform);
         bossSpawner = new BossSpawner(enemies.Count,OnSpawnBoss);
-        foreach (Transform tr in bossBonusMapElement)
+        if (bossBonusMapElement != null)
         {
-            var bonusBoss = tr.GetComponent<BossBonusMapElement>();
-            bonusBoss.Init(bossSpawner);
+            foreach (Transform tr in bossBonusMapElement)
+            {
+                var bonusBoss = tr.GetComponent<BossBonusMapElement>();
+                bonusBoss.Init(bossSpawner);
+            }
         }
         return hero;
     }
