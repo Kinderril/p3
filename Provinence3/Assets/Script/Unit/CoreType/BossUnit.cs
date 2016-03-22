@@ -8,9 +8,9 @@ using UnityEngine;
 
 public class BossUnit : BaseMonster
 {
-    protected override void Dead()
+    protected override void Death()
     {
-        base.Dead();
+        base.Death();
         StartCoroutine(Wait4Dead());
     }
 

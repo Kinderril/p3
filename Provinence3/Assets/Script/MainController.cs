@@ -39,15 +39,15 @@ public class MainController : Singleton<MainController>
     private IEnumerator w4death()
     {
         yield return new WaitForSeconds(1);
+        Map.Instance.EndLevel();
         GameObject.Destroy(level.MainHero.gameObject);
-        WindowManager.Instance.OpenWindow(MainState.end);
     }
 
     public void EndLevel(EndlevelType goodEnd)
     {
         Debug.Log("EndLevel>> goodEnd:" + goodEnd);
         level.EndLevel(PlayerData, goodEnd);
-        Map.Instance.EndLevel();
+        WindowManager.Instance.OpenWindow(MainState.end);
         StartCoroutine(w4death());
     }
     

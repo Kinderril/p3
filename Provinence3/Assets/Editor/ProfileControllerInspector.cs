@@ -21,7 +21,7 @@ public class ProfileControllerInspector : EditorWindow
         {
             if (GUILayout.Button("ADD 1 point"))
             {
-               var  AllocatedPoints = PlayerPrefs.GetInt(PlayerData.ALLOCATED, 0);
+                var AllocatedPoints = PlayerPrefs.GetInt(PlayerData.ALLOCATED, 0);
                 AllocatedPoints++;
                 PlayerPrefs.SetInt(PlayerData.ALLOCATED, AllocatedPoints);
             }
@@ -45,6 +45,18 @@ public class ProfileControllerInspector : EditorWindow
             }
             EditorGUILayout.LabelField(">>>");
             Repaint();
+        }
+        else
+        {
+
+            if (GUILayout.Button("GIVE ALL ITEMS ALL"))
+            {
+                foreach(CraftItemType v in Enum.GetValues(typeof(CraftItemType)))
+                {
+                    MainController.Instance.PlayerData.AddItem(new ExecCraftItem(v, 10));
+                }
+
+            }
         }
     }
 }
