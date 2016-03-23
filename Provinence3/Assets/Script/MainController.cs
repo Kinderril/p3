@@ -40,7 +40,8 @@ public class MainController : Singleton<MainController>
     {
         yield return new WaitForSeconds(1);
         Map.Instance.EndLevel();
-        GameObject.Destroy(level.MainHero.gameObject);
+        if (level.MainHero.gameObject != null)
+            Destroy(level.MainHero.gameObject);
     }
 
     public void EndLevel(EndlevelType goodEnd)
