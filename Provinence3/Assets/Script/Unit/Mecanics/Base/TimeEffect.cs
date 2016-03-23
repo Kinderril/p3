@@ -28,7 +28,7 @@ public class TimeEffect
         TimeEffect oldEffect = null;
         if (targetUnit.efftcs.TryGetValue(EffectType,out oldEffect))
         {
-            oldEffect.End();
+            oldEffect.OnTimer();
         }
         TimeEffect effect = null;
         Debug.Log("Effect setted " + EffectType);
