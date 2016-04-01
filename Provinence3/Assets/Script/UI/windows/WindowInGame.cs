@@ -17,6 +17,7 @@ public class WindowInGame : BaseWindow
     public List<TalismanButton> TalismanButtons;
     public Transform moneyContainer;
     public Transform itemsContainer;
+    public PreStartWindow PreStartWindow;
 
     public override void Init()
     {
@@ -42,6 +43,12 @@ public class WindowInGame : BaseWindow
             TalismanButtons[i].gameObject.SetActive(false);
         }
         HealthSlider.value = 1;
+        ShowPreStartWindow();
+    }
+
+    private void ShowPreStartWindow()
+    {
+        PreStartWindow.Init(MainController.Instance.level.Start);
     }
 
     private void OnCraftItemCollected(CraftItemType arg1, int delta)

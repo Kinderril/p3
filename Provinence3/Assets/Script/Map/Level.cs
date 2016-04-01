@@ -49,7 +49,7 @@ public class Level
     private float maxpower = 120;
     private DictionaryOfItemAndInt moneyInv;
     public int difficult = 1;
-    public bool isPLaying = true;
+    public bool isPLaying ;
     private PortalsController PortalsController = new PortalsController();
     private List<BaseItem> collectedItems = new List<BaseItem>();
     private Dictionary<CraftItemType,int> collectedCrafts = new Dictionary<CraftItemType, int>(); 
@@ -59,7 +59,7 @@ public class Level
     private const float speedEnergyFall = 1.5f;
     private float penalty;
 
-    public Level(int indexBornPos,int difficult,int levelIndex)
+    public Level(int levelIndex,int indexBornPos,int difficult,Action callback)
     {
         this.difficult = difficult;
         penalty = GetPenalty(difficult);
@@ -68,8 +68,14 @@ public class Level
         {
             moneyInv.Add(id,0);
         }
-        MainHero = Map.Instance.Init(this, indexBornPos, levelIndex);
+        MainHero = Map.Instance.Init(this, levelIndex ,indexBornPos, callback);
         PortalsController.Start((int)maxpower,OnPortalOpen);
+        isPLaying = false;
+    }
+
+    public void Start()
+    {
+        isPLaying = true;
     }
 
     public float Penalty

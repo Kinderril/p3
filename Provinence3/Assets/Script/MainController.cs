@@ -9,7 +9,8 @@ public enum MainState
     parameters,
     pause,
     shop,
-    end
+    end,
+    loading,
 }
 
 public class MainController : Singleton<MainController>
@@ -33,8 +34,12 @@ public class MainController : Singleton<MainController>
 
     public void StartLevel(int indexStartPos,int dif,int levelIndex)
     {
-        level = new Level(indexStartPos, dif, levelIndex);
-        WindowManager.Instance.OpenWindow(MainState.play);
+        WindowManager.Instance.OpenWindow(MainState.loading);
+
+        level = new Level(levelIndex ,indexStartPos, dif , () =>
+        {
+            WindowManager.Instance.OpenWindow(MainState.play);
+        });
     }
     private IEnumerator w4death()
     {

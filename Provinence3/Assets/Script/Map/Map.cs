@@ -24,7 +24,7 @@ public class Map : Singleton<Map>
     private BossUnit boss;
     private GameObject levelMainObject;
 
-    public Hero Init(Level lvl,int heroBornPositionIndex, int levelIndex)
+    public Hero Init(Level lvl, int levelIndex, int heroBornPositionIndex,Action callback)
     {
         level = lvl;
         LoadLevelGameObject(levelIndex);
@@ -85,6 +85,7 @@ public class Map : Singleton<Map>
                 bonusBoss.Init(bossSpawner);
             }
         }
+        callback();
         return hero;
     }
 

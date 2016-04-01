@@ -39,8 +39,8 @@ public class DataStructs : MonoBehaviour
     {
         switch (mission)
         {
-            case 0:
-                return 1;
+//            case 0:
+//                return 1;
             case 1:
                 return 1;
             case 2:

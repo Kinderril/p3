@@ -17,32 +17,36 @@ public class WindowMission : BaseWindow
     public RespawnPointToggle PrefabRespawnPointToggle;
     public DifficultyChooser DifficultyChooser;
     private int curDiffChoosed;
+    private const string key_last_level_chosed = "key_last_level_chosed";
+    
 
     public override void Init()
     {
         base.Init();
         Dictionary<int, int> stubList = new Dictionary<int, int>();
+        var lastLevel = PlayerPrefs.GetInt(key_last_level_chosed, 1);
         var openedMissions = MainController.Instance.PlayerData.OpenLevels.GetAllOpenedMissions();
-        foreach (var t in MissionsToggles)
+        foreach (var pointToggle in MissionsToggles)
         {
-            Debug.Log("Selected: " + t.transform.name);
-            t.Toggle.onValueChanged.RemoveAllListeners();
-            int a = t.ID;
-            stubList.Add(a, t.ID);
-            t.Toggle.onValueChanged.AddListener(arg0 =>
+            Debug.Log("Selected: " + pointToggle.transform.name);
+            pointToggle.text.text = pointToggle.ID.ToString();
+            pointToggle.Toggle.onValueChanged.RemoveAllListeners();
+            int a = pointToggle.ID;
+            stubList.Add(a, pointToggle.ID);
+            pointToggle.Toggle.onValueChanged.AddListener(arg0 =>
             {
                 if (arg0)
                 {
                     MissionSelected(stubList[a]);
                 }
             });
-            List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(t.ID);
+            List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(pointToggle.ID);
        
-            t.Toggle.isOn = t.ID == 1;
-            t.Toggle.interactable = opensRespawnPoints.Count > 0;
+            pointToggle.Toggle.isOn = pointToggle.ID == lastLevel;
+            pointToggle.Toggle.interactable = opensRespawnPoints.Count > 0;
         }
         DifficultyChooser.Init(OnDifChanges);
-        MissionSelected(1);
+        MissionSelected(lastLevel);
     }
 
     private void OnDifChanges(int obj)
@@ -53,11 +57,13 @@ public class WindowMission : BaseWindow
     private void MissionSelected(int mission)
     {
         currentSelectedMission = mission;
+        PlayerPrefs.SetInt(key_last_level_chosed, mission);
         var count = DataBaseController.Instance.DataStructs.GetRespawnPointsCountByMission(mission) + 1;
         List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(mission);
         RespawnToggles = new List<RespawnPointToggle>();
         var toggleGroup = Layout.GetComponent<ToggleGroup>();
         Utils.ClearTransform(Layout);
+        var names = DataBaseController.Instance.RespawnPositionsNames[mission];
         for (int i = 1; i < count; i++)
         {
             var rpToggle = DataBaseController.GetItem<RespawnPointToggle>(PrefabRespawnPointToggle, Vector3.zero);
@@ -65,7 +71,7 @@ public class WindowMission : BaseWindow
             rpToggle.transform.SetParent(Layout);
             rpToggle.Toggle.group = toggleGroup;
             rpToggle.ID = i;
-            rpToggle.text.text = "Respawn Stage " + i;
+            rpToggle.text.text = names[i];
             rpToggle.Toggle.isOn = i == 1;
             Debug.Log("mission:" + mission + " Check for: " + i + "  " + opensRespawnPoints.Contains(i));
             rpToggle.Toggle.interactable = opensRespawnPoints.Contains(i);

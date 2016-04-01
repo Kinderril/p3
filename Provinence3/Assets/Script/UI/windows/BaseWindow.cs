@@ -79,6 +79,10 @@ public class BaseWindow : MonoBehaviour
     {
         WindowManager.Instance.OpenWindow(MainState.mission);
     }
+    public virtual void OnToLoadingScreen()
+    {
+        WindowManager.Instance.OpenWindow(MainState.loading);
+    }
     public virtual void OnToShop()
     {
         WindowManager.Instance.OpenWindow(MainState.shop);
