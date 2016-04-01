@@ -8,7 +8,8 @@ public class BaseControl : MonoBehaviour
 {
     private const string ANIM_WALK = "walk";
     private const string ANIM_DEATH = "death";
-    protected const string ANIM_ATTACK = "attack";
+    private const string ANIM_ATTACK = "attack";
+    private const string ANIM_ATTACK_ALT = "attack_alt";
     private const float WALK = 0.000001f;
 
 	[SerializeField] float m_MovingTurnSpeed = 660;
@@ -16,6 +17,8 @@ public class BaseControl : MonoBehaviour
 
 	protected Rigidbody m_Rigidbody;
 	public Animator Animator;
+    public bool UseAltAttack;
+    protected string attackKey;
 	float m_TurnAmount;
 	float m_ForwardAmount;
     private bool moving = false;
@@ -48,6 +51,14 @@ public class BaseControl : MonoBehaviour
 
     protected virtual void Init()
     {
+        if (UseAltAttack)
+        {
+            attackKey = ANIM_ATTACK_ALT;
+        }
+        else
+        {
+            attackKey = ANIM_ATTACK;
+        }
         if (Animator == null)
             Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -115,7 +126,7 @@ public class BaseControl : MonoBehaviour
 
     public virtual void PlayAttack()
     {
-        Animator.SetTrigger(ANIM_ATTACK);
+        Animator.SetTrigger(attackKey);
     }
 }
 

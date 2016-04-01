@@ -41,7 +41,6 @@ public class BaseMonster : Unit
     private bool isHome = true;
     private BaseAction attackBehaviour;
     private bool isDisabled = false;
-//    public ParticleSystem ParticleSystemBorn;
     public bool haveAction;
     public List<DropItem> dropItems; 
     public FlashController FlashController;
