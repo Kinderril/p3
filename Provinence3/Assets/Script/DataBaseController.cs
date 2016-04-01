@@ -46,7 +46,7 @@ public class DataBaseController : Singleton<DataBaseController>
     public int maxLevel = 20;
     public List<BaseMonster> Monsters;
     public Dictionary<int, List<BaseMonster>> mosntersLevel = new Dictionary<int, List<BaseMonster>>();
-
+    public Dictionary<int, Dictionary<int, string>> RespawnPositionsNames;
 
     public List<BossUnit> BossUnits = new List<BossUnit>(); 
     public Hero prefabHero;
@@ -72,6 +72,24 @@ public class DataBaseController : Singleton<DataBaseController>
         }
         LoadSprites();
         Pool = new Pool(this);
+        LoadRespawnPointsNames();
+    }
+
+    private void LoadRespawnPointsNames()
+    {
+        RespawnPositionsNames = new Dictionary<int, Dictionary<int, string>>();
+        RespawnPositionsNames.Add(1,new Dictionary<int, string>() { {1,"Trainings"} });
+        RespawnPositionsNames.Add(2, new Dictionary<int, string>() { { 1, "Forest" } , { 2, "Lake" } , { 3, "Fields" } , { 4, "Town" } });
+
+        for (int i = 1; i < DataStructs.MISSION_LAST_INDEX+1; i++)
+        {
+            var pos = DataStructs.GetRespawnPointsCountByMission(i);
+            var namesCount = RespawnPositionsNames[i].Count;
+            if (pos != namesCount)
+            {
+                Debug.LogError("WRONG DATA!!!! IN RESPAWN POINTS");
+            }
+        }
     }
 
     private void CheckEnums()
