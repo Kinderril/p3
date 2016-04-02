@@ -9,8 +9,7 @@ public class TalismanTrapFreez : Talisman ,IBulletHolder
 {
     public const string WAY_CHAIN_BULLET = "";
     private AOETrap cacheGameObject;
-    public TalismanTrapFreez(TalismanItem sourseItem, int countTalismans) 
-        : base(sourseItem, countTalismans)
+    public TalismanTrapFreez()
     {
         cacheGameObject = Resources.Load(WAY_CHAIN_BULLET, typeof(AOETrap)) as AOETrap;
     }

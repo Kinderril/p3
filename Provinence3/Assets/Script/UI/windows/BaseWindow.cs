@@ -36,6 +36,11 @@ public class BaseWindow : MonoBehaviour
 
     public virtual void Init()
     {
+        Init<object>(null);
+    }
+
+    public virtual void Init<T>(T obj)
+    {
         bool isAnim = animator != null;
         if (isAnim)
         {
@@ -77,35 +82,35 @@ public class BaseWindow : MonoBehaviour
     }
     public virtual void OnToMission()
     {
-        WindowManager.Instance.OpenWindow(MainState.mission);
+        WindowManager.Instance.OpenWindow<object>(MainState.mission,null);
     }
     public virtual void OnToLoadingScreen()
     {
-        WindowManager.Instance.OpenWindow(MainState.loading);
+        WindowManager.Instance.OpenWindow<object>(MainState.loading, null);
     }
     public virtual void OnToShop()
     {
-        WindowManager.Instance.OpenWindow(MainState.shop);
+        WindowManager.Instance.OpenWindow<object>(MainState.shop, null);
     }
     public virtual void OnToStart()
     {
-        WindowManager.Instance.OpenWindow(MainState.start);
+        WindowManager.Instance.OpenWindow<object>(MainState.start, null);
     }
     public virtual void OnToParameters()
     {
-        WindowManager.Instance.OpenWindow(MainState.parameters);
+        WindowManager.Instance.OpenWindow<object>(MainState.parameters, null);
     }
     public virtual void OnToPause()
     {
-        WindowManager.Instance.OpenWindow(MainState.pause);
+        WindowManager.Instance.OpenWindow<object>(MainState.pause, null);
     }
     public virtual void OnToPlay()
     {
-        WindowManager.Instance.OpenWindow(MainState.play);
+        WindowManager.Instance.OpenWindow<object>(MainState.play, null);
     }
     public virtual void OnToEnd()
     {
-        WindowManager.Instance.OpenWindow(MainState.end);
+        WindowManager.Instance.OpenWindow<object>(MainState.end, null);
     }
     
 }

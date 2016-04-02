@@ -14,10 +14,10 @@ public class TalismanButton : MonoBehaviour
     public Image icon;
     public Text chargesField;
 
-    public void Init(TalismanItem talic, int countTalismans)
+    public void Init(TalismanItem talic, int countTalismans,Level level)
     {
         this.TalismanItem = talic;
-        talicLogic = Talisman.Creat(TalismanItem, countTalismans);
+        talicLogic = Talisman.Creat(TalismanItem, countTalismans, level);
         talicLogic.OnReady += OnReady;
         gameObject.SetActive(true);
         var spr = DataBaseController.Instance.TalismanIcon(talic.TalismanType);

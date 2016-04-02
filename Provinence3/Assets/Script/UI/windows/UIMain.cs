@@ -26,9 +26,9 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     //    public Text debugText;
     //    public Text debugText2;
 
-    public void Init()
+    public void Init(Level lvl)
     {
-        mainHero = MainController.Instance.level.MainHero;
+        mainHero = lvl.MainHero;
         MainCamera = MainController.Instance.MainCamera;
         chargeSlider.gameObject.SetActive(false);
         if (subUI != null)
@@ -79,7 +79,8 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             y = -1;
         }
         keybordDir = new Vector3(y,0,x);
-        mainHero.MoveToDirection(keybordDir);
+        if (mainHero != null)
+            mainHero.MoveToDirection(keybordDir);
 #endif
     }
     

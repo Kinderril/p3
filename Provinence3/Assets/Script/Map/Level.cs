@@ -59,7 +59,7 @@ public class Level
     private const float speedEnergyFall = 1.5f;
     private float penalty;
 
-    public Level(int levelIndex,int indexBornPos,int difficult,Action callback)
+    public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
         this.difficult = difficult;
         penalty = GetPenalty(difficult);
@@ -68,14 +68,17 @@ public class Level
         {
             moneyInv.Add(id,0);
         }
-        MainHero = Map.Instance.Init(this, levelIndex ,indexBornPos, callback);
+        MainHero = Map.Instance.Init(this, levelIndex ,indexBornPos);
         PortalsController.Start((int)maxpower,OnPortalOpen);
         isPLaying = false;
+        callback(this);
+
     }
 
     public void Start()
     {
         isPLaying = true;
+//        Utils.GroundTransform(MainHero.transform);
     }
 
     public float Penalty

@@ -38,7 +38,13 @@ public class WindowManager : Singleton<WindowManager>
         ConfirmWindow.gameObject.SetActive(false);
         InfoWindow.gameObject.SetActive(false);
     }
+
     public void OpenWindow(MainState state)
+    {
+        OpenWindow<object>(state, null);
+    }
+
+    public void OpenWindow<T>(MainState state,T obj) 
     {
         Debug.Log("OpenWindow " + state);
         var isInGame = state == MainState.play;
@@ -52,7 +58,7 @@ public class WindowManager : Singleton<WindowManager>
             nextWindow.transform.SetSiblingIndex(sIndex + 1);
         }
         //window.StartAnimation();
-        nextWindow.Init();
+        nextWindow.Init<T>(obj);
         currentWindow = nextWindow;
     }
 

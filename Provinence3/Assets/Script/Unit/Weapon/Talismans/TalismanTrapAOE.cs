@@ -9,8 +9,8 @@ public class TalismanTrapAOE : Talisman , IBulletHolder
 {
     public const string WAY_CHAIN_BULLET = "AOETrap";
     private AOETrap cacheGameObject;
-    public TalismanTrapAOE(TalismanItem sourseItem, int countTalismans) 
-        : base(sourseItem, countTalismans)
+    public TalismanTrapAOE()
+        :base()
     {
         cacheGameObject = Resources.Load(base_path + WAY_CHAIN_BULLET, typeof(AOETrap)) as AOETrap;
     }

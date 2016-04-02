@@ -68,7 +68,7 @@ public class WindowMission : BaseWindow
         {
             var rpToggle = DataBaseController.GetItem<RespawnPointToggle>(PrefabRespawnPointToggle, Vector3.zero);
             RespawnToggles.Add(rpToggle);
-            rpToggle.transform.SetParent(Layout);
+            rpToggle.transform.SetParent(Layout,false);
             rpToggle.Toggle.group = toggleGroup;
             rpToggle.ID = i;
             rpToggle.text.text = names[i];

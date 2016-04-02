@@ -10,8 +10,7 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     public const string WAY_CHAIN_BULLET = "BulletBloodDamage";
 
     private Bullet cacheGameObject;
-    public TalismanBloodDamage(TalismanItem sourseItem, int countTalismans) 
-        : base(sourseItem, countTalismans)
+    public TalismanBloodDamage() 
     {
         cacheGameObject = Resources.Load(base_path + WAY_CHAIN_BULLET, typeof(Bullet)) as Bullet;
     }

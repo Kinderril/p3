@@ -24,7 +24,7 @@ public class Map : Singleton<Map>
     private BossUnit boss;
     private GameObject levelMainObject;
 
-    public Hero Init(Level lvl, int levelIndex, int heroBornPositionIndex,Action callback)
+    public Hero Init(Level lvl, int levelIndex, int heroBornPositionIndex)
     {
         level = lvl;
         LoadLevelGameObject(levelIndex);
@@ -85,7 +85,7 @@ public class Map : Singleton<Map>
                 bonusBoss.Init(bossSpawner);
             }
         }
-        callback();
+//        callback();
         return hero;
     }
 
@@ -108,6 +108,11 @@ public class Map : Singleton<Map>
        
         foreach (Transform v in heroBornPositions)
         {
+            if (vector3s == Vector3.zero)
+            {
+                vector3s = v.position;
+            }
+
             v.GetComponent<MeshRenderer>().enabled = false;
             var heroBP = v.GetComponent<HeroBornPosition>();
             if (heroBP.ID == index)

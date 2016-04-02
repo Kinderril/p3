@@ -6,11 +6,6 @@ using System.Text;
 
 public class TalismanCleave : Talisman
 {
-    public TalismanCleave(TalismanItem sourseItem, int countTalismans) 
-        : base(sourseItem, countTalismans)
-    {
-
-    }
     public override void Use()
     {
 

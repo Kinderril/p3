@@ -11,9 +11,9 @@ public class WeaponChooserView : MonoBehaviour
     private WeaponButtonView currentSelected;
     private Dictionary<Weapon, WeaponButtonView> dictionary; 
 
-    public void Init()
+    public void Init(Level level)
     {
-        var hero  = MainController.Instance.level.MainHero;
+        var hero  = level.MainHero;
         dictionary = new Dictionary<Weapon, WeaponButtonView>();
         foreach (var v in hero.InventoryWeapons)
         {

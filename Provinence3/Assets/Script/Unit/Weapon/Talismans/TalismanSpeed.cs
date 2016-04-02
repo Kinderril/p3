@@ -6,10 +6,6 @@ using System.Text;
 
 public class TalismanSpeed : Talisman
 {
-    public TalismanSpeed(TalismanItem sourseItem, int countTalismans) : base(sourseItem, countTalismans)
-    {
-
-    }
 
     public override void Use()
     {

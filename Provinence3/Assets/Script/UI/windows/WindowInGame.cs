@@ -18,24 +18,25 @@ public class WindowInGame : BaseWindow
     public Transform moneyContainer;
     public Transform itemsContainer;
     public PreStartWindow PreStartWindow;
+    private Level level;
 
-    public override void Init()
+    public override void Init<T>(T obj)
     {
-        base.Init();
-        UiControls.Init();
-        MainController.Instance.level.OnLeft += OnLeft;
-        MainController.Instance.level.OnItemCollected += OnItemCollected;
-        MainController.Instance.level.OnCraftItemCollected += OnCraftItemCollected;
-        MainController.Instance.level.MainHero.OnGetHit += OnHeroHit;
-        MainController.Instance.level.MainHero.OnWeaponChanged += OnWeaponChanged;
-        WeaponChooser.Init();
-        UiControls.Enable(true);
+        base.Init(obj);
+        level = obj as Level;
+        UiControls.Init(level);
+        level.OnLeft += OnLeft;
+        level.OnItemCollected += OnItemCollected;
+        level.OnCraftItemCollected += OnCraftItemCollected;
+        level.MainHero.OnGetHit += OnHeroHit;
+        level.MainHero.OnWeaponChanged += OnWeaponChanged;
+        WeaponChooser.Init(level);
         int index = 0;
         var allTalismans = MainController.Instance.PlayerData.GetAllWearedItems().Where(x => x.Slot == Slot.Talisman);
         foreach (var talic in allTalismans)
         {
             var talismain = talic as TalismanItem;
-            TalismanButtons[index].Init(talismain, allTalismans.Count());
+            TalismanButtons[index].Init(talismain, allTalismans.Count(),level);
             index++;
         }
         for (int i = index; i < TalismanButtons.Count; i++)
@@ -46,9 +47,15 @@ public class WindowInGame : BaseWindow
         ShowPreStartWindow();
     }
 
+    
+
     private void ShowPreStartWindow()
     {
-        PreStartWindow.Init(MainController.Instance.level.Start);
+        PreStartWindow.Init(() =>
+        {
+            level.Start();
+            UiControls.Enable(true);
+        });
     }
 
     private void OnCraftItemCollected(CraftItemType arg1, int delta)
@@ -74,11 +81,11 @@ public class WindowInGame : BaseWindow
     {
         base.Close();
         UiControls.Enable(false);
-        MainController.Instance.level.OnLeft -= OnLeft;
-        MainController.Instance.level.OnItemCollected -= OnItemCollected;
-        MainController.Instance.level.MainHero.OnGetHit -= OnHeroHit;
-        MainController.Instance.level.MainHero.OnWeaponChanged -= OnWeaponChanged;
-        MainController.Instance.level.OnCraftItemCollected -= OnCraftItemCollected;
+        level.OnLeft -= OnLeft;
+        level.OnItemCollected -= OnItemCollected;
+        level.MainHero.OnGetHit -= OnHeroHit;
+        level.MainHero.OnWeaponChanged -= OnWeaponChanged;
+        level.OnCraftItemCollected -= OnCraftItemCollected;
     }
 
     private void OnItemCollected(ItemId arg1, float arg2,float delta)
@@ -93,7 +100,7 @@ public class WindowInGame : BaseWindow
                 item.Init(GetDeltaStr(delta) + " Gold", DataBaseController.Instance.GetColor(arg1),FlyNumerDirection.non,26);
                 break;
             case ItemId.crystal:
-                MainController.Instance.level.MessageAppear("You found crystal", Color.green, DataBaseController.Instance.ItemIcon(ItemId.crystal));
+                level.MessageAppear("You found crystal", Color.green, DataBaseController.Instance.ItemIcon(ItemId.crystal));
                 break;
             case ItemId.energy:
                 item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);

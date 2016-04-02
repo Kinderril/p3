@@ -9,8 +9,7 @@ public class TalismanChain : Talisman
 {
     public const string WAY_CHAIN_BULLET = "";
     private ChainBullet cacheGameObject;
-    public TalismanChain(TalismanItem sourseItem, int countTalismans) 
-        : base(sourseItem, countTalismans)
+    public TalismanChain() 
     {
         cacheGameObject = Resources.Load(WAY_CHAIN_BULLET, typeof (ChainBullet)) as ChainBullet;
     }

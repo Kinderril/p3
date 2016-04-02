@@ -6,9 +6,6 @@ using System.Text;
 
 public class TalismanFireWave : Talisman
 {
-    public TalismanFireWave(TalismanItem sourseItem, int countTalismans) : base(sourseItem, countTalismans)
-    {
-    }
     public override void Use()
     {
         var targets2 = Map.Instance.GetEnimiesInRadius(80);

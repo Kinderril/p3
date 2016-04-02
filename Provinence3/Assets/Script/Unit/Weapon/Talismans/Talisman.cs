@@ -16,11 +16,16 @@ public abstract class Talisman
     private TimerManager.ITimer timer;
     private int currentCharges = 0;
 
-    public Talisman(TalismanItem sourseItem,int countTalismans)
+    public Talisman()
+    {
+
+    }
+
+    public void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         this.sourseItem = sourseItem;
-        hero = MainController.Instance.level.MainHero;
-        MainController.Instance.level.OnItemCollected += (id, f, delta) =>
+        hero = level.MainHero;
+        level.OnItemCollected += (id, f, delta) =>
         {
             if (id == ItemId.energy)
             {
@@ -38,55 +43,56 @@ public abstract class Talisman
         }
     }
 
-    public static Talisman Creat(TalismanItem sourseItem, int countTalismans)
+    public static Talisman Creat(TalismanItem sourseItem, int countTalismans, Level level)
     {
         Talisman talic = null;
         switch (sourseItem.TalismanType)
         {
             case TalismanType.speed:
-                talic = new TalismanSpeed(sourseItem,countTalismans);
+                talic = new TalismanSpeed();
                 break;
             case TalismanType.massPush:
                 //
                 break;
             case TalismanType.splitter:
-                talic = new TalismanSplitter(sourseItem, countTalismans);
+                talic = new TalismanSplitter();
                 break;
             case TalismanType.firewave:
-                talic = new TalismanFireWave(sourseItem, countTalismans);
+                talic = new TalismanFireWave();
                 break;
             case TalismanType.massFreez:
 //                talic = new TalismanMassFreez(sourseItem, countTalismans);
                 break;
             case TalismanType.heal:
-                talic = new TalismanHeal(sourseItem, countTalismans);
+                talic = new TalismanHeal();
                 break;
             case TalismanType.doubleDamage:
-                talic = new TalismanDoubleDamage(sourseItem, countTalismans);
+                talic = new TalismanDoubleDamage();
                 break;
             case TalismanType.chain:
-                talic = new TalismanChain(sourseItem, countTalismans);
+                talic = new TalismanChain();
                 break;
             case TalismanType.energyVamp:
 //                talic = new TalismanEnergyVamp(sourseItem, countTalismans);
                 break;
             case TalismanType.bloodDamage:
-                talic = new TalismanBloodDamage(sourseItem, countTalismans);
+                talic = new TalismanBloodDamage();
                 break;
             case TalismanType.trapAOE:
-                talic = new TalismanTrapAOE(sourseItem, countTalismans);
+                talic = new TalismanTrapAOE();
                 break;
             case TalismanType.trapDamage:
-                talic = new TalismanTrapDamage(sourseItem, countTalismans);
+                talic = new TalismanTrapDamage();
                 break;
             case TalismanType.trapFreez:
-                talic = new TalismanTrapFreez(sourseItem, countTalismans);
+                talic = new TalismanTrapFreez();
                 break;
             case TalismanType.cleave:
-                talic = new TalismanCleave(sourseItem, countTalismans);
+                talic = new TalismanCleave();
                 break;
                 
         }
+        talic.Init(level,sourseItem,countTalismans);
         return talic;
     }
 
