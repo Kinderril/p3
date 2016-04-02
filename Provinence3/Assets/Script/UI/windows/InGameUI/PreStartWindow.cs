@@ -11,6 +11,7 @@ public class PreStartWindow : MonoBehaviour
     private Action callback;
     public void Init(Action callback)
     {
+        gameObject.SetActive(true);
         this.callback = callback;
     }
 

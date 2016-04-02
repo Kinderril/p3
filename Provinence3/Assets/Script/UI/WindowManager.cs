@@ -58,7 +58,14 @@ public class WindowManager : Singleton<WindowManager>
             nextWindow.transform.SetSiblingIndex(sIndex + 1);
         }
         //window.StartAnimation();
-        nextWindow.Init<T>(obj);
+        if (obj != null)
+        {
+            nextWindow.Init<T>(obj);
+        }
+        else
+        {
+            nextWindow.Init();
+        }
         currentWindow = nextWindow;
     }
 
