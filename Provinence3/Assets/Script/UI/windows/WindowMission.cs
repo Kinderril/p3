@@ -72,26 +72,25 @@ public class WindowMission : BaseWindow
             rpToggle.Toggle.group = toggleGroup;
             rpToggle.ID = i;
             rpToggle.text.text = names[i];
-            rpToggle.Toggle.isOn = i == 1;
-            Debug.Log("mission:" + mission + " Check for: " + i + "  " + opensRespawnPoints.Contains(i));
+            Debug.Log("mission:" + mission + " Check for: rpToggle.ID:" + rpToggle.ID + "  " + opensRespawnPoints.Contains(i));
             rpToggle.Toggle.interactable = opensRespawnPoints.Contains(i);
-        }
-        currentSelectedRespawnPoint = mission;
-        foreach (var respawnToggle in RespawnToggles)
-        {
-            respawnToggle.Toggle.onValueChanged.RemoveAllListeners();
-            respawnToggle.Toggle.onValueChanged.AddListener(arg0 =>
+
+            rpToggle.Toggle.onValueChanged.RemoveAllListeners();
+            rpToggle.Toggle.onValueChanged.AddListener(arg0 =>
             {
                 if (arg0)
                 {
-                    currentSelectedRespawnPoint = respawnToggle.ID;
+                    currentSelectedRespawnPoint = rpToggle.ID;
+                    Debug.Log("currentSelectedRespawnPoint selected:" + currentSelectedRespawnPoint);
                 }
             });
-            if (respawnToggle.ID == 1)
+            rpToggle.Toggle.isOn = rpToggle.ID == 1;
+            if (rpToggle.Toggle.isOn)
             {
-                respawnToggle.Toggle.isOn = true;
+                currentSelectedRespawnPoint = rpToggle.ID;
             }
         }
+        Debug.Log("currentSelectedRespawnPoint:" + currentSelectedRespawnPoint);
 
     }
 

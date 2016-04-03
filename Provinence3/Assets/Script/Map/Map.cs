@@ -95,10 +95,34 @@ public class Map : Singleton<Map>
         {
             Destroy(levelMainObject);
         }
+//        Resources.LoadAsync(BASE_WAY + levelIndex, typeof(GameObject));
 
         var prefab = Resources.Load(BASE_WAY + levelIndex,typeof(GameObject)) as GameObject;
         levelMainObject = GameObject.Instantiate(prefab);
         levelMainObject.transform.SetParent(transform);
+    }
+
+    void Update()
+    {
+        if (level == null)
+            return;
+        var mainHero = level.MainHero;
+        float mainHeroDist;
+        bool isActive;
+        foreach (var baseMonster in enemies)
+        {
+            if (!baseMonster.IsDead && !baseMonster.IsDisabled)
+            {
+                mainHeroDist = (mainHero.transform.position - baseMonster.transform.position).sqrMagnitude;
+                isActive = mainHeroDist < BaseMonster.AI_DIST;
+                baseMonster.gameObject.SetActive(isActive);
+                if (isActive)
+                {
+                    baseMonster.CheckDistance(mainHeroDist);
+                    baseMonster.UpdateByManager();
+                }
+            }
+        }
     }
 
     private Vector3 GetHeroBoenPos(int index)
@@ -120,7 +144,13 @@ public class Map : Singleton<Map>
                 vector3s = v.position;
 //                break;
             }
-            heroBP.Init(this,playerData.OpenLevels.IsPositionOpen(level.MissionIndex,index));
+            var opend = playerData.OpenLevels.IsPositionOpen(level.MissionIndex, index);
+            if (opend)
+            {
+                Debug.Log("...");
+            }
+            Debug.Log(index + " ... " + opend);
+            heroBP.Init(this, opend);
 //            vector3s = v.position;
         }
         return vector3s;

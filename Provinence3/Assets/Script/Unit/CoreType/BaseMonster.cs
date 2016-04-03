@@ -31,7 +31,7 @@ public class BaseMonster : Unit
     private const float isHomeDist = 2;
     public float attackDist = 45;
     private float runAwayDist = 110;
-    private const float aiDist = 120;
+    public const float AI_DIST = 170;
     public float mainHeroDist = 0;
     public Vector3 bornPosition;
     private AIStatus aiStatus;
@@ -44,6 +44,11 @@ public class BaseMonster : Unit
     public bool haveAction;
     public List<DropItem> dropItems; 
     public FlashController FlashController;
+
+    public bool IsDisabled
+    {
+        get { return isDisabled; }
+    }
 
 
     public void Init(Hero hero)
@@ -128,24 +133,24 @@ public class BaseMonster : Unit
 
     }
 
-    protected override void UpdateUnit()
-    {
-        if (!isDead && !isDisabled)
-        {
-            CheckDistance();
-            base.UpdateUnit();
-        }
-    }
+//    protected override void UpdateUnit()
+//    {
+////        if (!isDead && !isDisabled)
+////        {
+////            CheckDistance();
+//            base.UpdateUnit();
+////        }
+//    }
 
 
-    public void CheckDistance()
+    public void CheckDistance(float heroDist)
     {
         if (mainHero == null)
             return;
 
         mainHeroDist = (mainHero.transform.position - bornPosition).sqrMagnitude;
         
-        if (mainHeroDist < aiDist)
+        if (mainHeroDist < AI_DIST)
         {
             isHome = false;
             Control.UpdateFromUnit();

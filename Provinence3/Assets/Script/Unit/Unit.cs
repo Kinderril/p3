@@ -169,12 +169,9 @@ public class Unit : MapObjectWithDeath
         }
     }
 
-    void Update()
+    public void UpdateByManager()
     {
-        if (!isDead)
-        {
-            UpdateUnit();
-        }
+        UpdateUnit();
     }
 
     protected virtual void UpdateUnit()
