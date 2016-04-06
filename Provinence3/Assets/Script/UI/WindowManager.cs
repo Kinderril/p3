@@ -53,7 +53,14 @@ public class WindowManager : Singleton<WindowManager>
         var nextWindow = windows.FirstOrDefault(x => x.state == state).window;
         if (currentWindow != null)
         {
-            currentWindow.Close();
+            if (nextWindow.Animator == null)
+            {
+                CurrentWindow.EndClose();
+            }
+            else
+            {
+                currentWindow.Close();
+            }
             var sIndex = currentWindow.transform.GetSiblingIndex();
             nextWindow.transform.SetSiblingIndex(sIndex + 1);
         }

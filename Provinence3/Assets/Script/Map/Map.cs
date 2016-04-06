@@ -104,7 +104,7 @@ public class Map : Singleton<Map>
 
     void Update()
     {
-        if (level == null)
+        if (level == null || level.MainHero == null)
             return;
         var mainHero = level.MainHero;
         float mainHeroDist;
@@ -145,10 +145,6 @@ public class Map : Singleton<Map>
 //                break;
             }
             var opend = playerData.OpenLevels.IsPositionOpen(level.MissionIndex, index);
-            if (opend)
-            {
-                Debug.Log("...");
-            }
             Debug.Log(index + " ... " + opend);
             heroBP.Init(this, opend);
 //            vector3s = v.position;
@@ -243,7 +239,10 @@ public class Map : Singleton<Map>
     public void LeaveEffect(BaseEffectAbsorber ps)
     {
         ps.transform.SetParent(effectsContainer, true);
-        StartCoroutine(ps.DestroyPS(4));
+        if (ps != null && ps.gameObject != null)
+        {
+            StartCoroutine(ps.DestroyPS(4, "1"));
+        }
     }
 
 }

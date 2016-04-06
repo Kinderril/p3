@@ -35,17 +35,24 @@ public class MainController : Singleton<MainController>
     public void StartLevel(int indexStartPos,int dif,int levelIndex)
     {
         WindowManager.Instance.OpenWindow(MainState.loading);
+        StartCoroutine(w4load(indexStartPos, dif, levelIndex));
+    }
 
-        level = new Level(levelIndex ,indexStartPos, dif , (lvl) =>
+    private IEnumerator w4load(int indexStartPos, int dif, int levelIndex)
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        level = new Level(levelIndex, indexStartPos, dif, (lvl) =>
         {
             WindowManager.Instance.OpenWindow(MainState.play, lvl);
         });
     }
+
     private IEnumerator w4death()
     {
         yield return new WaitForSeconds(1);
         Map.Instance.EndLevel();
-        if (level.MainHero.gameObject != null)
+        if (level.MainHero != null)
             Destroy(level.MainHero.gameObject);
     }
 
@@ -57,7 +64,6 @@ public class MainController : Singleton<MainController>
         StartCoroutine(w4death());
     }
     
-    // Update is called once per frame
 	void Update () {
         if (TimerManager != null)
 	        TimerManager.Update();

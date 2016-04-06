@@ -13,6 +13,12 @@ public class BaseWindow : MonoBehaviour
     private const string close_key = "close";
     private CanvasGroup canvasGroup;
     private bool isAnimating;
+
+    public Animator Animator
+    {
+        get { return animator; }
+    }
+
     public void Activate()
     {
         animator = GetComponent<Animator>();

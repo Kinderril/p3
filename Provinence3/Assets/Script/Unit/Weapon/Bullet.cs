@@ -162,7 +162,8 @@ public class Bullet : MonoBehaviour
                         if (lastUnitHitted != null)
                         {
                             HitParticleSystem.transform.SetParent(lastUnitHitted.transform, true);
-                            HitParticleSystem.DestroyPS();
+                            if (HitParticleSystem.gameObject != null)
+                                MainController.Instance.StartCoroutine(HitParticleSystem.DestroyPS(4,"2"));
                         }
                         break;
                     case HitPosition.bullet:
