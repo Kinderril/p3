@@ -236,12 +236,12 @@ public class Map : Singleton<Map>
         return unit;
     }
 
-    public void LeaveEffect(BaseEffectAbsorber ps)
+    public void LeaveEffect(BaseEffectAbsorber ps,Transform oldTransform)
     {
         ps.transform.SetParent(effectsContainer, true);
         if (ps != null && ps.gameObject != null)
         {
-            StartCoroutine(ps.DestroyPS(4, "1"));
+            StartCoroutine(ps.DestroyPS(oldTransform,4, "1"));
         }
     }
 

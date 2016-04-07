@@ -19,21 +19,13 @@ public class BaseEffectAbsorber : MonoBehaviour
     }
 
 
-    public IEnumerator DestroyPS(float waitTime = 4f,string reason = "")
+    public IEnumerator DestroyPS(Transform oldTransform,float waitTime = 4f,string reason = "")
     {
         yield return new WaitForSeconds(waitTime);
-//        try
+        Stop();
+//        if (gameObject != null)
 //        {
-
-            if (gameObject != null)
-            {
-                Destroy(gameObject);
-            }
-//        }
-//        catch (Exception)
-//        {
-//            
-//            Debug.Log(reason);
+//            Destroy(gameObject);
 //        }
     }
 }

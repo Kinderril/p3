@@ -17,6 +17,7 @@ public enum PoolType
     flyNumberInUI,
     flyNumberWithPicture,
     effectVisual,
+    bullet,
 }
 
 public class DataBaseController : Singleton<DataBaseController>

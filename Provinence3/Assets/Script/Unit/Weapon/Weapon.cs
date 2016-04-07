@@ -18,9 +18,12 @@ public class Weapon : MonoBehaviour, IBulletHolder
     public const float MAX_CHARGE_TIME = 1.2f;
     public const float CHARGE_TIME_DELAY = 0.5f;
     private Transform bulletParent;
+    private Pool pool;
 
     public void Init(Unit owner,PlayerItem PlayerItem)
     {
+        pool = DataBaseController.Instance.Pool;
+        pool.RegisterBullet(bullet);
         bulletParent = Map.Instance.bulletContainer;
         nexAttackTime = 0;
         this.PlayerItem = PlayerItem;
@@ -121,7 +124,8 @@ public class Weapon : MonoBehaviour, IBulletHolder
 
     protected Bullet InstantiateBullet()
     {
-        Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
+        Bullet bullet1 = pool.GetBullet(bullet.ID);   
+//        Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
         bullet1.gameObject.transform.SetParent(bulletParent);
         return bullet1;
     }

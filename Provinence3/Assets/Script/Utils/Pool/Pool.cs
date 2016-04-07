@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class Pool
 {
-//    private List<PoolElement> FlyNumberInUIpool = new List<PoolElement>();
-//    private  FlyNumberInGamepool = new List<PoolElement>();
     private Dictionary<PoolType,List<PoolElement>> poolOfElements = new Dictionary<PoolType, List<PoolElement>>();
+    private Dictionary<int,List<Bullet>> bulletsPool = new Dictionary<int, List<Bullet>>();
+    private Dictionary<int,Bullet> registeredBulletsPrefabs = new Dictionary<int, Bullet>(); 
     private DataBaseController dataBaseController;
 
     public Pool(DataBaseController dataBaseController)
@@ -39,6 +39,34 @@ public class Pool
             poolOfElements[PoolType.flyNumberInUI].Add(element);
             element.transform.SetParent(dataBaseController.transform);
         }
+    }
+
+    public void StartLevel()
+    {
+        bulletsPool = new Dictionary<int, List<Bullet>>();
+    }
+
+    public void RegisterBullet(Bullet bullet)
+    {
+        if (!bulletsPool.ContainsKey(bullet.ID))
+        {
+            bulletsPool.Add(bullet.ID, new List<Bullet>());
+        }
+        if (!registeredBulletsPrefabs.ContainsKey(bullet.ID))
+            registeredBulletsPrefabs.Add(bullet.ID,bullet);
+    }
+
+    public Bullet GetBullet(int id)
+    {
+        Bullet bullet;
+        var pool = bulletsPool[id];
+        bullet = pool.FirstOrDefault(x=>!x.IsUsing);
+        if (bullet == null)
+        {
+            bullet =  GameObject.Instantiate(registeredBulletsPrefabs[id].gameObject).GetComponent<Bullet>();
+            pool.Add(bullet);
+        }
+        return bullet;
     }
 
     public T GetItemFromPool<T>(PoolType poolType, Vector3 pos = default(Vector3)) where T : PoolElement

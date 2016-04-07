@@ -7,8 +7,10 @@ using UnityEngine;
 
 public class ProfileControllerInspector : EditorWindow
 {
-    [MenuItem("Construct/ProfileControllerInspector")]
 
+    private static string basePath = "";
+
+    [MenuItem("Construct/ProfileControllerInspector")]
     static void Init()
     {
         // Get existing open window or if none, make a new one:
@@ -39,6 +41,10 @@ public class ProfileControllerInspector : EditorWindow
                 cur += 10;
                 PlayerPrefs.SetInt(str, cur);
             }
+            if (GUILayout.Button("Reset IDs"))
+            {
+                CheckID();
+            }
             if (GUILayout.Button("CLEAR ALL"))
             {
                 PlayerPrefs.DeleteAll();
@@ -58,6 +64,59 @@ public class ProfileControllerInspector : EditorWindow
 
             }
         }
+    }
+
+
+    private void CheckID()
+    {
+        int bulletIndex = 1;
+        var allPrefabs = GetAllPrefabs();
+        foreach (string prefab in allPrefabs)
+        {
+            UnityEngine.Object o = AssetDatabase.LoadMainAssetAtPath(prefab);
+            GameObject go;
+            try
+            {
+                go = (GameObject)o;
+                var bullet = go.GetComponent<Bullet>();
+                if (bullet != null)
+                {
+                    bullet.ID = bulletIndex;
+                    bulletIndex++;
+                }
+
+            }
+            catch
+            {
+                Debug.Log("For some reason, prefab " + prefab + " won't cast to GameObject");
+
+            }
+        }
+        Debug.Log("All bullets ID setted last id:" + bulletIndex);
+    }
+    public static string[] GetAllPrefabs()
+    {
+        List<string> prefabsDontCheck = new List<string>()
+        {
+            "UIFakeStoreCanvas","AccountMenu","DebugCanvas","DebugHUD"
+        };
+
+        string[] temp = AssetDatabase.GetAllAssetPaths();
+        List<string> result = new List<string>();
+        foreach (string s in temp)
+        {
+            if (basePath.Length > 0 && !s.Contains(basePath))
+            {
+                continue;
+            }
+
+            bool dontCheck = prefabsDontCheck.Any(p => s.Contains(p));
+            if (dontCheck)
+                continue;
+            if (s.Contains(".prefab"))
+                result.Add(s);
+        }
+        return result.ToArray();
     }
 }
 

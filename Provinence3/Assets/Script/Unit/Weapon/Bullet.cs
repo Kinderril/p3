@@ -11,7 +11,7 @@ public enum HitPosition
     bullet,
 }
 
-public class Bullet : MonoBehaviour
+public class Bullet : PoolElement
 {
     public float speed = 0.002f;
     protected float time = 0;
@@ -28,6 +28,7 @@ public class Bullet : MonoBehaviour
     public bool playHitAnyway = true;
     private float additionalPower = 0;
     private float startDist2target;
+    public int ID;
 
     public float AdditionalPower
     {
@@ -82,14 +83,27 @@ public class Bullet : MonoBehaviour
         time = 0;
         if (TrailParticleSystem != null)
         {
+            TrailParticleSystem.transform.SetParent(transform,false);
+            TrailParticleSystem.transform.localPosition = Vector3.zero;
             TrailParticleSystem.Play();
         }
         if (HitParticleSystem != null)
         {
             HitParticleSystem.Stop();
         }
+        base.Init();
     }
 
+    public override void EndUse()
+    {
+        targetUnit = null;
+        weapon = null;
+        updateAction = null;
+        time = 0;
+        AffecttedUnits.Clear();
+
+        base.EndUse();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -163,11 +177,11 @@ public class Bullet : MonoBehaviour
                         {
                             HitParticleSystem.transform.SetParent(lastUnitHitted.transform, true);
                             if (HitParticleSystem.gameObject != null)
-                                MainController.Instance.StartCoroutine(HitParticleSystem.DestroyPS(4,"2"));
+                                MainController.Instance.StartCoroutine(HitParticleSystem.DestroyPS(transform,4,"2"));
                         }
                         break;
                     case HitPosition.bullet:
-                        Map.Instance.LeaveEffect(HitParticleSystem);
+                        Map.Instance.LeaveEffect(HitParticleSystem, transform);
                         break;
                 }
             }
@@ -175,11 +189,13 @@ public class Bullet : MonoBehaviour
         if (TrailParticleSystem != null)
         {
             TrailParticleSystem.Stop();
-            Map.Instance.LeaveEffect(TrailParticleSystem);
+            Map.Instance.LeaveEffect(TrailParticleSystem, transform);
         }
-        
-        Destroy(gameObject);
-            
+
+        EndUse();
+
+//        Destroy(gameObject);
+
 
     }
 
@@ -225,7 +241,7 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (updateAction != null)
+        if (IsUsing && updateAction != null)
         {
             updateAction();
         }

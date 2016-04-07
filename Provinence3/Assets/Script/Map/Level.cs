@@ -62,6 +62,7 @@ public class Level
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
         this.difficult = difficult;
+        DataBaseController.Instance.Pool.StartLevel();
         penalty = GetPenalty(difficult);
         moneyInv = new DictionaryOfItemAndInt();
         foreach (ItemId id in Enum.GetValues(typeof(ItemId)))

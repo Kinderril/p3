@@ -20,7 +20,7 @@ public class PoolElement : MonoBehaviour
         gameObject.SetActive(IsUsing);
     }
 
-    public void EndUse()
+    public virtual void EndUse()
     {
         isUsing = false;
         gameObject.SetActive(IsUsing);
