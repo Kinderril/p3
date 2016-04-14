@@ -23,7 +23,7 @@ public class LifeTimeTrap : MonoBehaviour
         {
             if (dieEffect != null)
             {
-                Map.Instance.LeaveEffect(dieEffect);
+                Map.Instance.LeaveEffect(dieEffect,transform);
                 dieEffect.Play();
             }
             timer = null;

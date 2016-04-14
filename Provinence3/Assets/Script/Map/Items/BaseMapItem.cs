@@ -28,7 +28,7 @@ public class BaseMapItem : MonoBehaviour
                 if (OpenEffect != null)
                 {
                     OpenEffect.Play();
-                    Map.Instance.LeaveEffect(OpenEffect);
+                    Map.Instance.LeaveEffect(OpenEffect,transform);
                 }
                 Destroy(gameObject);
             }
