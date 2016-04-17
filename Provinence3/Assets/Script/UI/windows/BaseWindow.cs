@@ -13,6 +13,7 @@ public class BaseWindow : MonoBehaviour
     private const string close_key = "close";
     private CanvasGroup canvasGroup;
     private bool isAnimating;
+    public bool playOpenAnimIfCan = true;
 
     public Animator Animator
     {
@@ -47,7 +48,7 @@ public class BaseWindow : MonoBehaviour
 
     public virtual void Init<T>(T obj)
     {
-        bool isAnim = animator != null;
+        bool isAnim = animator != null && playOpenAnimIfCan;  
         if (isAnim)
         {
             transform.localPosition = new Vector2(-1300, 00);

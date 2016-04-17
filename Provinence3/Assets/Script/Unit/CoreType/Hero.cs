@@ -143,7 +143,7 @@ public class Hero : Unit
         var dir = target - transform.position;
 
         var isLookToTarget = heorControl.SpinTransform.ShallRotate(dir);
-        Debug.Log("Direction from UI:" + dir + "   isLookToTarget:"+ isLookToTarget);
+//        Debug.Log("Direction from UI:" + dir + "   isLookToTarget:"+ isLookToTarget);
         //        Debug.Log("hero try attack isLookToTarget: " + isLookToTarget);
         //        heorControl.SetLookDir(dir);
         if (can)

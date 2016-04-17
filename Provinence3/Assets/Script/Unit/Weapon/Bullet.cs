@@ -89,6 +89,8 @@ public class Bullet : PoolElement
         }
         if (HitParticleSystem != null)
         {
+            HitParticleSystem.transform.SetParent(transform, false);
+            HitParticleSystem.transform.localPosition = Vector3.zero;
             HitParticleSystem.Stop();
         }
         base.Init();

@@ -362,8 +362,12 @@ public class NcCurveAnimation : NcEffectAniBehaviour
     public void Play()
     {
         enabled = true;
+//        m_fStartTime = GetEngineTime() - m_fAddElapsedTime;
         InitAnimationTimer();
+//        m_Timer.Reset(0);
     }
+
+    
 
 	void LateUpdate()
 	{
@@ -383,8 +387,11 @@ public class NcCurveAnimation : NcEffectAniBehaviour
 
 		float fElapsedTime	= m_Timer.GetTime() + m_fAddElapsedTime;
 		float fElapsedRate	= fElapsedTime;
-			
-		if (0 != m_fDurationTime)
+//        Debug.Log("name: " + name
+//            +"   fElapsedRate:" + fElapsedRate 
+//            + "   m_Timer.GetTime():" + m_Timer.GetTime()
+//            + "   m_fAddElapsedTime:"+ m_fAddElapsedTime);
+        if (0 != m_fDurationTime)
 			fElapsedRate = fElapsedTime / m_fDurationTime;
 		UpdateAnimation(fElapsedRate);
 	}
@@ -569,6 +576,7 @@ public class NcCurveAnimation : NcEffectAniBehaviour
 
 								for (int n = 0; n < 4; n++)
 									currentColor[n] += GetNextValue(curveInfo, n, color[n] * fValue);
+
 								m_MainMaterial.SetColor(m_ColorName, currentColor);
 							}
 						}

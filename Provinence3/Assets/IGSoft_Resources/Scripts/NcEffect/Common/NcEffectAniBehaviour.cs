@@ -42,6 +42,7 @@ public class NcEffectAniBehaviour : NcEffectBehaviour
 		if (m_Timer == null)
 			m_Timer = new NcTimerTool();
 		m_bEndAnimation = false;
+        
 		m_Timer.Start();
 	}
 
