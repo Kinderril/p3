@@ -29,6 +29,7 @@ public class Unit : MapObjectWithDeath
     public Action<Weapon> OnWeaponChanged;
     protected float lastWeaponChangse;
     public ParticleSystem HitParticleSystem;
+    public BaseEffectAbsorber StartAttackEffect;
     protected bool isPlayAttack = false;
     public float _shield;
     public Action OnShieldOn;
@@ -126,6 +127,10 @@ public class Unit : MapObjectWithDeath
             isPlayAttack = true;
 //            isPlayAttack = true;
             Control.PlayAttack();
+            if (StartAttackEffect != null)
+            {
+                StartAttackEffect.Play();
+            }
             curWeapon.SetNextTimeShoot();
             animationController.StartPlayAttack(() =>
             {

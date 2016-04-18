@@ -9,7 +9,7 @@ public class BaseControl : MonoBehaviour
     private const string ANIM_WALK = "walk";
     private const string ANIM_DEATH = "death";
     private const string ANIM_ATTACK = "attack";
-    private const string ANIM_ATTACK_ALT = "attack_alt";
+    private const string ANIM_ATTACK_ALT = "range";
     private const float WALK = 0.000001f;
 
 	[SerializeField] float m_MovingTurnSpeed = 660;

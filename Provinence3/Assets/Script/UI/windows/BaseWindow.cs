@@ -56,6 +56,8 @@ public class BaseWindow : MonoBehaviour
         else
         {
             transform.localPosition =Vector3.zero;
+            if (canvasGroup != null)
+                canvasGroup.interactable = true;
         }
         gameObject.SetActive(true);
         if (isAnim)

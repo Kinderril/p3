@@ -44,6 +44,7 @@ public class BaseMonster : Unit
     public bool haveAction;
     public List<DropItem> dropItems; 
     public FlashController FlashController;
+    
 
     public bool IsDisabled
     {
