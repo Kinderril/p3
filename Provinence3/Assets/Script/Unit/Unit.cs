@@ -136,6 +136,10 @@ public class Unit : MapObjectWithDeath
             {
                 curWeapon.DoShoot(direction, additionalPower, target);
                 ShootEnd();
+                if (StartAttackEffect != null)
+                {
+                    StartAttackEffect.Stop();
+                }
             });
         }
     }
