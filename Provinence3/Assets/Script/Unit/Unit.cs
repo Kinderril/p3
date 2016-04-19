@@ -123,7 +123,6 @@ public class Unit : MapObjectWithDeath
     {
         if (!isPlayAttack)
         {
-//            Debug.Log("hero attack:"+direction);
             isPlayAttack = true;
 //            isPlayAttack = true;
             Control.PlayAttack();

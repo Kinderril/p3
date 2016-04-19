@@ -2,7 +2,7 @@
 	Properties{
 		_Color("Main Color", Color) = (1,1,1,1)
 		_FlashColor("Flash Color", Color) = (1,1,1,1)
-		_SpecColor("Specular Color", Color) = (0.5, 0.5, 0.5, 1)
+		_SpecColor("Specular Color", Color) = (0.0, 0.0, 0.0, 1)
 		_Shininess("Shininess", Range(0.03, 1)) = 0.078125
 		_Time2("Time", Range(0.0, 1)) = 0.0
 		_MainTex("Base (RGB) Gloss (A)", 2D) = "white" {}

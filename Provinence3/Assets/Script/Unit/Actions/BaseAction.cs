@@ -8,9 +8,9 @@ using UnityEngine;
 public class BaseAction
 {
     protected BaseMonster owner;
-    protected Action endCallback;
+    protected Action<bool> endCallback;
 
-    public BaseAction(BaseMonster owner,Action endCallback)
+    public BaseAction(BaseMonster owner,Action<bool> endCallback)
     {
         this.endCallback = endCallback;
         this.owner = owner;
@@ -24,7 +24,7 @@ public class BaseAction
     {
         //Debug.Log(msg);
         if (owner != null && endCallback != null && !owner.IsDead)
-            endCallback();
+            endCallback(true);
     }
 
     public virtual void Dispose()

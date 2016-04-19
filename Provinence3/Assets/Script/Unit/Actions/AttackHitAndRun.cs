@@ -10,7 +10,8 @@ public class AttackHitAndRun : AttackAction
     private AttackStatus status;
     private Vector3 backPosition;
 
-    public AttackHitAndRun(BaseMonster owner, Unit target, Action endCallback) : base(owner, target, endCallback)
+    public AttackHitAndRun(BaseMonster owner, Unit target, Action<bool> endCallback,bool byHit) 
+        : base(owner, target, endCallback)
     {
     }
 

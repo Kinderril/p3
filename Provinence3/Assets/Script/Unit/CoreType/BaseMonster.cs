@@ -88,7 +88,14 @@ public class BaseMonster : Unit
 
         foreach (var dropItem in dropItems)
         {
-            if (UnityEngine.Random.Range(0f, 1f) < dropItem.chance0_1)
+            var isDrop = UnityEngine.Random.Range(0f, 1f) < dropItem.chance0_1;
+#if UNITY_EDITOR
+            if (DebugController.Instance.ALL_TIME_DROP)
+            {
+                isDrop = true;
+            }
+#endif
+            if (isDrop)
             {
                 DropItem(dropItem.type);
             }
@@ -129,7 +136,7 @@ public class BaseMonster : Unit
         }
         if (attackBehaviour == null)
         {
-            StartAttack();
+            StartAttack(true);
         }
 
     }
@@ -159,7 +166,7 @@ public class BaseMonster : Unit
             switch (aiStatus)
             {
                 case AIStatus.disable:
-                    StartWalk();
+                    StartWalk(false);
                     break;
                 case AIStatus.attack:
                     if ((mainHeroDist > runAwayDist))
@@ -170,7 +177,7 @@ public class BaseMonster : Unit
                 case AIStatus.returnHome:
                     if (isTargetClose)
                     {
-                        StartAttack();
+                        StartAttack(false);
                     }
                     else
                     {
@@ -184,7 +191,7 @@ public class BaseMonster : Unit
                 case AIStatus.walk:
                     if (isTargetClose)
                     {
-                        StartAttack();
+                        StartAttack(false);
                     }
                     break;
                 case AIStatus.secondaryAction:
@@ -209,7 +216,7 @@ public class BaseMonster : Unit
 
     }
 
-    private void StartWalk()
+    private void StartWalk(bool byHit)
     {
         aiStatus = AIStatus.walk;
         int coef = 60;
@@ -232,12 +239,12 @@ public class BaseMonster : Unit
         
     }
 
-    private void EndWalk()
+    private void EndWalk(bool byHit)
     {
         isHome = true;
         if (aiStatus == AIStatus.returnHome)
             return;
-        StartWalk();
+        StartWalk(false);
         
     }
 
@@ -257,19 +264,19 @@ public class BaseMonster : Unit
         isDisabled = false;
     }
 
-    protected virtual void StartAttack()
+    protected virtual void StartAttack(bool byHit)
     {
         aiStatus = AIStatus.attack;
         switch (Parameters.AttackType)
         {
             case AttackType.hitAndRun:
-                Action = new AttackHitAndRun(this, MainController.Instance.level.MainHero, StartAttack);
+                Action = new AttackHitAndRun(this, MainController.Instance.level.MainHero, StartAttack, byHit);
                 break;
             case AttackType.distanceFight:
-                Action = new AttackDistance(this, MainController.Instance.level.MainHero, StartAttack);
+                Action = new AttackDistance(this, MainController.Instance.level.MainHero, StartAttack, byHit);
                 break;
             case AttackType.closeCombat:
-                Action = new AttackCloseCombat(this, MainController.Instance.level.MainHero, StartAttack);
+                Action = new AttackCloseCombat(this, MainController.Instance.level.MainHero, StartAttack, byHit);
                 break;
         }
     }

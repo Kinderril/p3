@@ -7,11 +7,14 @@ using System.Text;
 public class StayAction : BaseAction
 {
     private TimerManager.ITimer timer;
-    public StayAction(BaseMonster owner, Action endCallback) 
+    public StayAction(BaseMonster owner, Action<bool> endCallback) 
         : base(owner, endCallback)
     {
         timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromSeconds(UnityEngine.Random.Range(2, 10)));
-        timer.OnTimer += endCallback;
+        timer.OnTimer += () =>
+        {
+            endCallback(false);
+        };
     }
 
     public override void End(string msg = " end action ")

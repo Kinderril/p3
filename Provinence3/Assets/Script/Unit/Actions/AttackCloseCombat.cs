@@ -7,16 +7,17 @@ using UnityEngine;
 
 public class AttackCloseCombat :AttackAction
 {
-    public AttackCloseCombat(BaseMonster owner, Unit target, Action endCallback) 
+    public AttackCloseCombat(BaseMonster owner, Unit target, Action<bool> endCallback,bool byHit) 
         : base(owner, target, endCallback)
     {
-        if (UnityEngine.Random.Range(0, 100) < 50)
+        if (!byHit && UnityEngine.Random.Range(0, 100) < 50)
         {
             isActivated = false;
             var dir = target.transform.position - owner.transform.position;
             owner.Control.ThisByQuaterhnion.SetLookDir(dir);
-            activateTime = Time.time + UnityEngine.Random.Range(1.5f, 3f);
-            Debug.Log("tupiiim:" + activateTime);
+            var waitTime = UnityEngine.Random.Range(1.5f, 3f);
+            activateTime = Time.time + waitTime;
+            Debug.Log("tupiiim:" + waitTime);
         }
         else
         {
@@ -47,7 +48,7 @@ public class AttackCloseCombat :AttackAction
 
     private void TestTargetDist()
     {
-        Debug.Log("isInRange:" + isInRange);
+//        Debug.Log("isInRange:" + isInRange);
         isInRange = (curRangeSqr < rangeAttackSqr);
         if (isInRange)
         {

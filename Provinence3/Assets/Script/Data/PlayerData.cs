@@ -481,6 +481,12 @@ public class PlayerData
                 break;
             case ParamType.Heath:
                 v += MainParameters[MainParam.HP] * 40 + 200;
+#if UNITY_EDITOR
+                if (DebugController.Instance.MAIN_HERO_MEGAHP)
+                {
+                    v += 999999;
+                }
+#endif
                 break;
         }
         return v;

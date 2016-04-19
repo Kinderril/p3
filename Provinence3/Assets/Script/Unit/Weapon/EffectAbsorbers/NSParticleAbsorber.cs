@@ -8,25 +8,16 @@ using UnityEngine;
 public class NSParticleAbsorber : BaseEffectAbsorber
 {
     public NcParticleSystem uvAnimation;
-    public EllipsoidParticleEmitter emmiter;
     public override void Play()
     {
         uvAnimation.gameObject.SetActive(true);
         uvAnimation.Play();
-        if (emmiter != null)
-        {
-            emmiter.Emit();
-        }
     }
 
     public override void Stop()
     {
         if (uvAnimation != null)
             uvAnimation.Stop();
-//        if (emmiter != null)
-//        {
-//            emmiter.e();
-//        }
     }
 }
 

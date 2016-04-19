@@ -6,10 +6,10 @@ using System.Text;
 
 public class BlinkMonster : BaseMonster
 {
-    protected override void StartAttack()
+    protected override void StartAttack(bool byHit)
     {
         StartBlink();
-        base.StartAttack();
+        base.StartAttack(byHit);
     }
 
     private void StartBlink()

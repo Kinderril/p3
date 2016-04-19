@@ -9,7 +9,7 @@ using UnityEngine;
 public class AttackDistance : AttackAction
 {
 
-    public AttackDistance(BaseMonster owner, Unit target, Action endCallback) 
+    public AttackDistance(BaseMonster owner, Unit target, Action<bool> endCallback,bool byHit) 
         : base(owner, target, endCallback)
     {
     }

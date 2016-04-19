@@ -10,7 +10,7 @@ public class MoveAction : BaseAction
     private Vector3 trg;
     private Vector3 dir;
 
-    public MoveAction(BaseMonster owner, Vector3 trg,Action callback)
+    public MoveAction(BaseMonster owner, Vector3 trg,Action<bool> callback)
         : base(owner, callback)
     {
         this.trg = new Vector3(trg.x, owner.transform.position.y, trg.z);
