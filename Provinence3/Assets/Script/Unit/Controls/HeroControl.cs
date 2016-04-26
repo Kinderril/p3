@@ -6,8 +6,25 @@ using System.Text;
 using UnityEngine;
 using UnityStandardAssets.Effects;
 
+public enum TriggerType
+{
+    left,
+    right,
+    back,
+    forward,
+    run,
+    idle,
+}
+
 public class HeroControl : BaseControl
 {
+    private const string ANIM_LEFT = "left";
+    private const string ANIM_RUN = "run";
+    private const string ANIM_IDLE = "idle";
+    private const string ANIM_RIGHT = "right";
+    private const string ANIM_BACK = "back";
+    private const string ANIM_FORWARD = "forward";
+
     private const int ANG_TO_BACK = 110;
     private const float CPNST_BACK_WALK = 0.62f;
     private const float CONST_SEC_WALK = 1.4f;
@@ -16,8 +33,9 @@ public class HeroControl : BaseControl
     private float TimeToGoToDefaultLook;
     private bool useLookDir = false;
     private Vector3 lookDir;
+    private TriggerType curTriggerType = TriggerType.idle;
     private Vector3 lastMoveDir;
-    public bool isBackDir;
+//    public bool isBackDir;
     public QueaternionFromTo SpinTransform;
     public GameObject DebuGameObject;
     
@@ -37,69 +55,85 @@ public class HeroControl : BaseControl
     {
         if (v != Vector3.zero)
         {
-            if (SpinTransform.IsWaiting || SpinTransform.IsRotating)
-            {
-                var ang = Quaternion.Angle(Quaternion.LookRotation(v), SpinTransform.qTo);
-                if (ang > ANG_TO_BACK)
-                {
+            var isWalk = SpinTransform.IsWaiting || SpinTransform.IsRotating;
 
-                    SetBackDir(true);
-                }
-                else
-                {
-                    SetBackDir(false);
-                }
-            }
-            else
-            {
-                SetBackDir(false);
-            }
-            if (isBackDir)
+            if (isWalk)
             {
                 v = v*CPNST_BACK_WALK;
-                SetToDirection(-v);
             }
             else
             {
-
-                SetToDirection(v);
+                SetToDirection(v );
             }
 
-            /*
-            if (IsMoving() && SpinTransform.IsWaiting)
+            m_Rigidbody.velocity = v;
+            float speed = v.sqrMagnitude;
+            if (speed < WALK)
             {
-                if (ang > 110)
+                SetAnimType(TriggerType.idle);
+            }
+            else if (isWalk)
+            {
+                var ang = Quaternion.Angle(Quaternion.LookRotation(v), SpinTransform.qTo);
+                if (ang > 45 + 90)
                 {
-                    SetBackDir(true);
+                    SetAnimType(TriggerType.back);
+                    SetToDirection(v + new Vector3(0,0,90));
                 }
-                if (isBackDir)
+                else if (ang > 45)
                 {
-                    v = v * CPNST_BACK_WALK;
-                    SetToDirection(-v);
+                    SetAnimType(TriggerType.left);
+                    SetToDirection(v + new Vector3(0, 0, 45));
                 }
                 else
                 {
-                    SetToDirection(v);
+                    SetAnimType(TriggerType.forward);
                 }
-            }
-            else  if (isBackDir)
-            {
-                if (ang < 110)
-                {
-                    SetBackDir(false,"diffff a");
-                }
-//                Debug.Log("dir back1 " + (-v));
-                v = v * CPNST_BACK_WALK;
-                SetToDirection(-v);
             }
             else
             {
-                SetToDirection(v);
-            }*/
+                SetAnimType(TriggerType.run);
+            }
         }
-        m_Rigidbody.velocity = v;
-        UpdateAnimator(v);
+        else
+        {
+            m_Rigidbody.velocity = v;
+            SetAnimType(TriggerType.idle);
+        }
+//        Debug.Log("trigger: " + d + "     speed:" + speed);
+        //        moving = speed > WALK;
+        //        Animator.SetBool(ANIM_WALK, moving);
+
         return true;
+    }
+
+    private void SetAnimType(TriggerType type)
+    {
+        if (type != curTriggerType)
+        {
+            curTriggerType = type;
+            switch (curTriggerType)
+            {
+                case TriggerType.left:
+                    Animator.SetTrigger(ANIM_LEFT);
+                    break;
+                case TriggerType.right:
+                    Animator.SetTrigger(ANIM_RIGHT);
+                    break;
+                case TriggerType.back:
+                    Animator.SetTrigger(ANIM_BACK);
+                    break;
+                case TriggerType.forward:
+                    Animator.SetTrigger(ANIM_FORWARD);
+                    break;
+                case TriggerType.run:
+                    Animator.SetTrigger(ANIM_RUN);
+                    break;
+                case TriggerType.idle:
+                    Animator.SetTrigger(ANIM_IDLE);
+                    break;
+            }
+        }
     }
 
     public override void SetToDirection(Vector3 dir)
@@ -111,32 +145,10 @@ public class HeroControl : BaseControl
         }
     }
 
-    private void SetBackDir(bool value,string cause = "")
-    {
-        //CHeck on look. maybe we wait here
-        //        Debug.Log("SetBackDir " + value);
-        //        if (value == isBackDir)
-        //
-        //        if (SpinTransform.IsWaiting)
-        //        {
-        //            
-        //        }
-        isBackDir = value;
-
-//        if (value)
-//        {
-//            RemainBackWalkTimeSec = CONST_SEC_WALK;
-//        }
-//        if (IsMoving())
-//        {
-//            isBackDir = value;
-//        }
-//        else
-//        {
-//            isBackDir = false;
-//        }
-//        Debug.Log("Set backl dir " + value + "   " + Time.time + "   cause:" + cause);
-    }
+//    private void SetBackDir(bool value,string cause = "")
+//    {
+//        isBackDir = value;
+//    }
 
     private bool IsMoving()
     {
@@ -151,11 +163,11 @@ public class HeroControl : BaseControl
         {
             if (angel > ANG_TO_BACK)
             {
-                SetBackDir(true);
+//                SetBackDir(true);
             }
             else
             {
-                SetBackDir(false);
+//                SetBackDir(false);
             }
         }
         else
@@ -172,10 +184,10 @@ public class HeroControl : BaseControl
         base.UpdateCharacter();
 //        SpinTransform.UpdateRotate();
 //        CheckRemainBackDir();
-        if (DebuGameObject != null)
-        {
-            DebuGameObject.SetActive(isBackDir);
-        }
+//        if (DebuGameObject != null)
+//        {
+////            DebuGameObject.SetActive(isBackDir);
+//        }
     }
 }
 
