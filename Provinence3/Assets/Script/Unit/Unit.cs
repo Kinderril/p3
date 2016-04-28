@@ -125,6 +125,7 @@ public class Unit : MapObjectWithDeath
         {
             isPlayAttack = true;
 //            isPlayAttack = true;
+            Debug.Log("Start Attack : " + direction);
             Control.PlayAttack();
             if (StartAttackEffect != null)
             {
@@ -145,7 +146,7 @@ public class Unit : MapObjectWithDeath
 
     protected virtual void ShootEnd()
     {
-//        Debug.Log("End attack  isPlayAttack = false");
+        Debug.Log("End attack ");
         isPlayAttack = false;
         if (OnShootEnd != null)
         {

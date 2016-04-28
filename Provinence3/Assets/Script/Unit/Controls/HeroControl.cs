@@ -158,6 +158,7 @@ public class HeroControl : BaseControl
     public bool SetLookDir(Vector3 dir)
     {
         var angel = Quaternion.Angle(Quaternion.LookRotation(dir), SpinTransform.qTo);
+        
         var isMoving = IsMoving();
         if (isMoving)
         {
@@ -175,7 +176,7 @@ public class HeroControl : BaseControl
             SetToDirection(dir);
         }
 //        Debug.Log("loookkkk " + dir);
-        var doRotate = SpinTransform.SetLookDir(dir);
+        var doRotate = SpinTransform.SetLookDir(dir,true);
         return doRotate;
     }
 

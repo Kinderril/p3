@@ -140,22 +140,24 @@ public class Hero : Unit
     public override void TryAttack(Vector3 target,float additionalPower = 0,Unit unit = null)
     {
         var can = curWeapon.CanShoot();
+
+//        target = transform.position + new Vector3(0, 0, 10);//TODO STUB
+//        if (UnityEngine.Random.Range(0, 100) < 50)
+//        {
+//
+//            target = transform.position + new Vector3(10, 0, 10);//TODO STUB
+//        }
+
+
         var dir = target - transform.position;
 
         var isLookToTarget = heorControl.SpinTransform.ShallRotate(dir);
 //        Debug.Log("Direction from UI:" + dir + "   isLookToTarget:"+ isLookToTarget);
         //        Debug.Log("hero try attack isLookToTarget: " + isLookToTarget);
         //        heorControl.SetLookDir(dir);
-        if (can)
+        if (can && isLookToTarget)
         {
-            if (isLookToTarget)
-            {
-                base.TryAttack(dir);
-            }
-            else
-            {
-                subTR(target, dir, additionalPower);
-            }
+            base.TryAttack(dir);
         }
         else
         {
@@ -171,6 +173,9 @@ public class Hero : Unit
         }
         else
         {
+#if UNITY_EDITOR
+            Debug.DrawRay(transform.position, dir * 5, Color.yellow, 2);
+#endif
             heorControl.SetLookDir(dir);
             shootContainer = new ShootContainer(dir, additionalPower);
         }
@@ -183,8 +188,7 @@ public class Hero : Unit
 
         CurrenthBonus += moneyBonusCoef;
         currenthBonusTimeLeft += moneyBonusCoefTime;
-
-//        GetItemEffect.Play();
+        
         MainController.Instance.level.AddItem(type, count);
     }
 

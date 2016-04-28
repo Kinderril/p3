@@ -19,6 +19,7 @@ public class QueaternionFromTo : MonoBehaviour
     private float remainAngel;
     public bool isRotating;
     public QueaternionFromTo BlockingFromTo;
+    public Transform GetRotationFrom;
     public float waitTimeSec;
     private Action endLookRotation;
     private Action comeToRotation;
@@ -44,10 +45,46 @@ public class QueaternionFromTo : MonoBehaviour
 
     }
 
-    public bool SetLookDir(Vector3 dir)
+    private Quaternion GetCurrentRotation()
     {
-        qFrom = transform.rotation;
+        if (GetRotationFrom == null)
+        {
+            return transform.rotation;
+        }
+        else
+        {
+            return GetRotationFrom.rotation;
+        }
+    }
+
+
+    private Vector3 RotateVettor(Vector3 d, float ang = 30)
+    {
+        ang = Mathf.Deg2Rad*ang;
+//        var l1 = new Vector3(Mathf.Cos(ang), -Mathf.Sin(ang),0);
+//        var l2 = new Vector3(Mathf.Sin(ang), Mathf.Cos(ang), 0);
+//        var l3 = new Vector3(0, 0, 1);
+
+        var l1 = new Vector3(Mathf.Cos(ang), 0, Mathf.Sin(ang));
+        var l2 = new Vector3(0,1,0);
+        var l3 = new Vector3(-Mathf.Sin(ang), 0,Mathf.Cos(ang));
+
+        var a1 = l1.x*d.x + l1.y*d.y + l1.z*d.z;
+        var a2 = l2.x * d.x + l2.y * d.y + l2.z * d.z;
+        var a3 = l3.x * d.x + l3.y * d.y + l3.z * d.z;
+
+
+        return new Vector3(a1,a2,a3);
+    }
+
+    public bool SetLookDir(Vector3 dir,bool rotate = false)
+    {
+//        Debug.Log("Before: " + dir);
+        if (rotate)
+            dir = RotateVettor(dir);
+//        Debug.Log("Atfter: " + dir);
         qTo = Quaternion.LookRotation(dir);
+        qFrom = GetCurrentRotation();
         ang = Quaternion.Angle(qFrom, qTo);
         time = 0;
         if (ang > 2)
@@ -57,7 +94,7 @@ public class QueaternionFromTo : MonoBehaviour
             isRotating = true;
             isWaiting = false;
         }
-//        Debug.Log("ang:"+ ang);
+        Debug.Log("ang:"+ ang + "   dir:" + dir);
         return IsRotating;
     }
 
@@ -141,7 +178,8 @@ public class QueaternionFromTo : MonoBehaviour
 
     public bool ShallRotate(Vector3 dir)
     {
-        return Quaternion.Angle(transform.rotation, Quaternion.LookRotation(dir)) < 4;
+
+        return Quaternion.Angle(GetCurrentRotation(), Quaternion.LookRotation(dir)) < 4;
     }
 
 }
