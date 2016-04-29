@@ -30,7 +30,10 @@ public class PlayerData
     public int AllocatedPoints;
     private int CurrentLevel;
     public Dictionary<MainParam,int> MainParameters;
-    private readonly Dictionary<Slot,int> slotsCount = new Dictionary<Slot, int>() { {Slot.Talisman, 2}, { Slot.executable, 0 } };
+    private readonly Dictionary<Slot,int> slotsCount = new Dictionary<Slot, int>()
+    {
+        {Slot.Talisman, 2}, { Slot.executable, 0 }
+    };
     public OpenLevels OpenLevels;
     
 
@@ -227,10 +230,13 @@ public class PlayerData
         }
         OpenLevels = new OpenLevels();
         CheckIfFirstLevel();
-        //TODO STUB DEBUG
-        playerInv[ItemId.money] += 1000;
-        playerInv[ItemId.crystal] += 10;
-        //TODO STUB DEBUG
+#if UNITY_EDITOR
+        if (DebugController.Instance.GET_START_BOOST)
+        {
+            playerInv[ItemId.money] += 1000;
+            playerInv[ItemId.crystal] += 10;
+        }
+#endif
     }
     public ExecutableItem CanBeUpgraded(BaseItem info)
     {
@@ -273,14 +279,18 @@ public class PlayerData
             AddFirstTalisman(TalismanType.doubleDamage);
             AddFirstTalisman(TalismanType.heal);
 
-            //TODO STUB
-            AddFirstTalisman(TalismanType.chain);
-            AddFirstTalisman(TalismanType.bloodDamage);
-            AddFirstTalisman(TalismanType.trapAOE);
-            AddFirstTalisman(TalismanType.trapDamage);
-            AddFirstTalisman(TalismanType.speed);
-            AddFirstTalisman(TalismanType.firewave);
-            AddFirstTalisman(TalismanType.splitter);
+#if UNITY_EDITOR
+            if (DebugController.Instance.GET_START_BOOST)
+            {
+                AddFirstTalisman(TalismanType.chain);
+                AddFirstTalisman(TalismanType.bloodDamage);
+                AddFirstTalisman(TalismanType.trapAOE);
+                AddFirstTalisman(TalismanType.trapDamage);
+                AddFirstTalisman(TalismanType.speed);
+                AddFirstTalisman(TalismanType.firewave);
+                AddFirstTalisman(TalismanType.splitter);
+            }
+#endif
             
         }
     }
