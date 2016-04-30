@@ -78,8 +78,14 @@ public class MonsterBornPosition : BaseBornPosition
     {
         if (!isReborned)
         {
-            int sec = UnityEngine.Random.Range(15, 30);
-//            Debug.Log("Start reborn in " + sec);
+            int sec = UnityEngine.Random.Range(45, 58);
+#if UNITY_EDITOR
+            if (DebugController.Instance.RESPAWN_TIME_CREEPS_FAST)
+            {
+                sec = 15;
+            }
+#endif
+            //            Debug.Log("Start reborn in " + sec);
             if (UnityEngine.Random.Range(0, 100) < 95)
             {
 //                Debug.Log("Start reborn in " + sec);
