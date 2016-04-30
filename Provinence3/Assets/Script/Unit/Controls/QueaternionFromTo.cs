@@ -58,12 +58,9 @@ public class QueaternionFromTo : MonoBehaviour
     }
 
 
-    private Vector3 RotateVettor(Vector3 d, float ang = 30)
+    public static Vector3 RotateVectorByY(Vector3 d, float ang = 30)
     {
         ang = Mathf.Deg2Rad*ang;
-//        var l1 = new Vector3(Mathf.Cos(ang), -Mathf.Sin(ang),0);
-//        var l2 = new Vector3(Mathf.Sin(ang), Mathf.Cos(ang), 0);
-//        var l3 = new Vector3(0, 0, 1);
 
         var l1 = new Vector3(Mathf.Cos(ang), 0, Mathf.Sin(ang));
         var l2 = new Vector3(0,1,0);
@@ -72,16 +69,15 @@ public class QueaternionFromTo : MonoBehaviour
         var a1 = l1.x*d.x + l1.y*d.y + l1.z*d.z;
         var a2 = l2.x * d.x + l2.y * d.y + l2.z * d.z;
         var a3 = l3.x * d.x + l3.y * d.y + l3.z * d.z;
-
-
+        
         return new Vector3(a1,a2,a3);
     }
 
-    public bool SetLookDir(Vector3 dir,bool rotate = false)
+    public bool SetLookDir(Vector3 dir)
     {
 //        Debug.Log("Before: " + dir);
-        if (rotate)
-            dir = RotateVettor(dir);
+//        if (rotate)
+//            dir = RotateVettor(dir);
 //        Debug.Log("Atfter: " + dir);
         qTo = Quaternion.LookRotation(dir);
         qFrom = GetCurrentRotation();

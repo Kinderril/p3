@@ -25,6 +25,7 @@ public class HeroControl : BaseControl
     private const string ANIM_BACK = "back";
     private const string ANIM_FORWARD = "forward";
 
+    private const int maxAngle = 45 + 90;
     private const int ANG_TO_BACK = 110;
     private const float CPNST_BACK_WALK = 0.62f;
     private const float CONST_SEC_WALK = 1.4f;
@@ -51,39 +52,61 @@ public class HeroControl : BaseControl
 //        Animator.SetBool(ANIM_ATTACK, false);
     }
 
-    public override bool MoveTo(Vector3 v)
+    public override bool MoveTo(Vector3 dir)
     {
-        if (v != Vector3.zero)
+        if (dir != Vector3.zero)
         {
             var isWalk = SpinTransform.IsWaiting || SpinTransform.IsRotating;
 
             if (isWalk)
             {
-                v = v*CPNST_BACK_WALK;
+                dir = dir*CPNST_BACK_WALK;
             }
             else
             {
-                SetToDirection(v );
+                SetToDirection(dir );
             }
 
-            m_Rigidbody.velocity = v;
-            float speed = v.sqrMagnitude;
+            m_Rigidbody.velocity = dir;
+            float speed = dir.sqrMagnitude;
             if (speed < WALK)
             {
                 SetAnimType(TriggerType.idle);
             }
             else if (isWalk)
             {
-                var ang = Quaternion.Angle(Quaternion.LookRotation(v), SpinTransform.qTo);
-                if (ang > 45 + 90)
+
+//                                Vector3 dirFromSpinTo = SpinTransform.qTo * Vector3.forward;
+//                                var getSide = Mathf.Sign(dir.x*dirFromSpinTo.z + dir.z*dirFromSpinTo.x) > 0;
+//                                Debug.Log("Side:" + getSide + "   dir:" + dir  +  "   contest:"+ dirFromSpinTo + "    SpinTransform.qTo:" + SpinTransform.qTo);
+//                var getSide = SpinTransform.qTo.y > 0;
+//                Debug.Log(" getSide:"  + getSide);
+
+
+
+                var ang = Quaternion.Angle(Quaternion.LookRotation(dir), SpinTransform.qTo);
+                if (ang > maxAngle)
                 {
                     SetAnimType(TriggerType.back);
-                    SetToDirection(v + new Vector3(0,0,90));
+                    var v1 = QueaternionFromTo.RotateVectorByY(dir, 180);
+                    SetToDirection(v1);
                 }
                 else if (ang > 45)
                 {
-                    SetAnimType(TriggerType.left);
-                    SetToDirection(v + new Vector3(0, 0, 45));
+                    Vector3 dirFromSpinTo = SpinTransform.qTo * Vector3.forward;
+                    var getSide = Mathf.Sign(dir.x * dirFromSpinTo.z + dir.z * dirFromSpinTo.x) > 0;
+                    if (getSide)
+                    {
+                        SetAnimType(TriggerType.left);
+//                        var v1 = QueaternionFromTo.RotateVectorByY(dir, 0);
+                        SetToDirection(dirFromSpinTo);
+                    }
+                    else
+                    {
+                        SetAnimType(TriggerType.right);
+//                        var v1 = QueaternionFromTo.RotateVectorByY(dir, -0);
+                        SetToDirection(dirFromSpinTo);
+                    }
                 }
                 else
                 {
@@ -97,7 +120,7 @@ public class HeroControl : BaseControl
         }
         else
         {
-            m_Rigidbody.velocity = v;
+            m_Rigidbody.velocity = dir;
             SetAnimType(TriggerType.idle);
         }
 //        Debug.Log("trigger: " + d + "     speed:" + speed);
@@ -111,29 +134,40 @@ public class HeroControl : BaseControl
     {
         if (type != curTriggerType)
         {
+
+            var key = GetKeyByType(type);
+            Animator.SetBool(key,false);
             curTriggerType = type;
-            switch (curTriggerType)
-            {
-                case TriggerType.left:
-                    Animator.SetTrigger(ANIM_LEFT);
-                    break;
-                case TriggerType.right:
-                    Animator.SetTrigger(ANIM_RIGHT);
-                    break;
-                case TriggerType.back:
-                    Animator.SetTrigger(ANIM_BACK);
-                    break;
-                case TriggerType.forward:
-                    Animator.SetTrigger(ANIM_FORWARD);
-                    break;
-                case TriggerType.run:
-                    Animator.SetTrigger(ANIM_RUN);
-                    break;
-                case TriggerType.idle:
-                    Animator.SetTrigger(ANIM_IDLE);
-                    break;
-            }
+            key = GetKeyByType(curTriggerType);
+            Animator.SetBool(key,true);
+            
         }
+    }
+
+    private string GetKeyByType(TriggerType t)
+    {
+
+        switch (curTriggerType)
+        {
+            case TriggerType.left:
+                return (ANIM_LEFT);
+            case TriggerType.right:
+                return (ANIM_RIGHT);
+                break;
+            case TriggerType.back:
+                return  ANIM_BACK;
+                break;
+            case TriggerType.forward:
+                return (ANIM_FORWARD);
+                break;
+            case TriggerType.run:
+                return (ANIM_RUN);
+                break;
+            case TriggerType.idle:
+                return (ANIM_IDLE);
+                break;
+        }
+        return "";
     }
 
     public override void SetToDirection(Vector3 dir)
@@ -176,7 +210,7 @@ public class HeroControl : BaseControl
             SetToDirection(dir);
         }
 //        Debug.Log("loookkkk " + dir);
-        var doRotate = SpinTransform.SetLookDir(dir,true);
+        var doRotate = SpinTransform.SetLookDir(dir);
         return doRotate;
     }
 
