@@ -6,7 +6,6 @@ using UnityEngine;
 
 public enum AttackType
 {
-    hitAndRun,
     distanceFight,
     closeCombat
 }

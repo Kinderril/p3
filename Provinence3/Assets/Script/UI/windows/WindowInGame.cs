@@ -10,6 +10,7 @@ public class WindowInGame : BaseWindow
 
     public Slider TImeSlider;
     public Slider HealthSlider;
+    public MonsterInfo MonsterInfo;
     public Text moneyField;
     public WeaponChooserView WeaponChooser;
     public UIMain UiControls;
@@ -45,9 +46,9 @@ public class WindowInGame : BaseWindow
         }
         HealthSlider.value = 1;
         ShowPreStartWindow();
+        MonsterInfo.Init();
     }
 
-    
 
     private void ShowPreStartWindow()
     {
@@ -80,6 +81,7 @@ public class WindowInGame : BaseWindow
     public override void Close()
     {
         base.Close();
+        MonsterInfo.DeInit();
         UiControls.Enable(false);
         level.OnLeft -= OnLeft;
         level.OnItemCollected -= OnItemCollected;

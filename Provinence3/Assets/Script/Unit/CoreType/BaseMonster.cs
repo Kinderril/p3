@@ -132,7 +132,7 @@ public class BaseMonster : Unit
             fn.Init(transform, "-" + hp.ToString("0"),Color.red);
             if (FlashController != null)
                 FlashController.Play();
-            //fn.transform.LookAt(MainController.Instance.MainCamera.transform);
+            GlobalEventManager.Instance.MonsterGetHit(this);
         }
         if (attackBehaviour == null)
         {
@@ -269,9 +269,6 @@ public class BaseMonster : Unit
         aiStatus = AIStatus.attack;
         switch (Parameters.AttackType)
         {
-            case AttackType.hitAndRun:
-                Action = new AttackHitAndRun(this, MainController.Instance.level.MainHero, StartAttack, byHit);
-                break;
             case AttackType.distanceFight:
                 Action = new AttackDistance(this, MainController.Instance.level.MainHero, StartAttack, byHit);
                 break;

@@ -75,10 +75,6 @@ public class QueaternionFromTo : MonoBehaviour
 
     public bool SetLookDir(Vector3 dir)
     {
-//        Debug.Log("Before: " + dir);
-//        if (rotate)
-//            dir = RotateVettor(dir);
-//        Debug.Log("Atfter: " + dir);
         qTo = Quaternion.LookRotation(dir);
         qFrom = GetCurrentRotation();
         ang = Quaternion.Angle(qFrom, qTo);
@@ -90,7 +86,7 @@ public class QueaternionFromTo : MonoBehaviour
             isRotating = true;
             isWaiting = false;
         }
-        Debug.Log("ang:"+ ang + "   dir:" + dir);
+//        Debug.Log("ang:"+ ang + "   dir:" + dir);
         return IsRotating;
     }
 
@@ -99,60 +95,32 @@ public class QueaternionFromTo : MonoBehaviour
         if (isRotating)
         {
             time += Time.deltaTime * curSpeed;
-            if (NoBlocking())
+            if (time >= 1f)
             {
-                if (time >= 1f)
-                {
-                    time = 1f;
+                time = 1f;
 //                    Debug.Log("ENd tor " + curSpeed);
-                    comeToRotation();
-                    isRotating = false;
-                    StartWait();
-                }
-                remainAngel = (1f - time)*ang;
-                qCur = Quaternion.Lerp(qFrom, qTo, time);
-                transform.rotation = qCur;
+                comeToRotation();
+                isRotating = false;
+                StartWait();
             }
+            remainAngel = (1f - time)*ang;
+            qCur = Quaternion.Lerp(qFrom, qTo, time);
+            transform.rotation = qCur;
         }
         else if (isWaiting)
         {
-            if (NoBlocking())
+            transform.rotation = qCur;
+            if (Time.time > endWaitTime)
             {
-                transform.rotation = qCur;
-                if (Time.time > endWaitTime)
-                {
-                    isWaiting = false;
-                    if (endLookRotation != null)
-                    {
-                        endLookRotation();
-                    }
-                }
-            }
-            else
-            {
-//                Debug.Log("By block: " + BlockingFromTo.RemainAngel + "  " +BlockingFromTo.qFrom.eulerAngles + "  " + BlockingFromTo.qTo.eulerAngles + "  " + BlockingFromTo.qCur.eulerAngles);
-                
                 isWaiting = false;
+                if (endLookRotation != null)
+                {
+                    endLookRotation();
+                }
             }
         }
     }
-
-    private bool NoBlocking()
-    {
-//        if (BlockingFromTo == null)
-//            return true;
-//
-//        if (!BlockingFromTo.IsRotating)
-//            return true;
-//
-//        if (Quaternion.Angle(BlockingFromTo.qTo, qTo) < 90)
-//            return true;
-//
-//        return false;
-        return true;
-//        return !(BlockingFromTo != null && BlockingFromTo.IsRotating && BlockingFromTo.RemainAngel > 45);
-    }
-
+    
     private void StartWait()
     {
         if (waitTimeSec > 0)
