@@ -10,7 +10,7 @@ public class MapObjectWithDeath : MonoBehaviour
     public Animator DeathAnimator;
     private const string key_death = "death";
 
-    protected virtual void Death()
+    public virtual void SetDeath()
     {
         if (DeathAnimator == null)
         {

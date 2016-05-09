@@ -84,6 +84,11 @@ public class ProfileControllerInspector : EditorWindow
                     bullet.ID = bulletIndex;
                     bulletIndex++;
                 }
+                var control = go.GetComponent<BaseControl>();
+                if (control != null)
+                {
+                    control.Cache();
+                }
 
             }
             catch

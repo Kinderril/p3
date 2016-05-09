@@ -8,7 +8,7 @@ public enum UnitType
     hero,
     monster
 }
-public class Unit : MapObjectWithDeath
+public class Unit : MonoBehaviour
 {
     protected float curHp;
     public Weapon curWeapon;
@@ -313,7 +313,7 @@ public class Unit : MapObjectWithDeath
         GetHit(power, bullet.weapon.DamageType, mdef, pdef);
     }
     
-    protected override void Death()
+    protected virtual void Death()
     {
         if (OnDead != null)
         {
@@ -327,7 +327,7 @@ public class Unit : MapObjectWithDeath
             rigbody.isKinematic = true;
         isDead = true;
         Control.SetDeath();
-        base.Death();
+//        base.Death();
 //        StartCoroutine(PLayDeath());
     }
 

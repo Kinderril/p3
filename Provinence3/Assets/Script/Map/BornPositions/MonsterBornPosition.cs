@@ -45,7 +45,16 @@ public class MonsterBornPosition : BaseBornPosition
 
     public void BornEnemy(Vector3 pos, Action<Unit> OnEnemyDead, Hero hero)
     {
-        var monster = DataBaseController.Instance.mosntersLevel[difficulty].RandomElement();
+        BaseMonster monster;
+        if (monsterPrebaf == null)
+        {
+            monster = DataBaseController.Instance.mosntersLevel[difficulty].RandomElement();
+        }
+        else
+        {
+            monster = monsterPrebaf;
+        }
+         
         totalUnits = 0;
         if (monster != null)
         {

@@ -26,12 +26,12 @@ public class RenderCam : Singleton<RenderCam>
     void Awake()
     {
         lastId = PlayerPrefs.GetInt(key, 0);
-//        gameObject.SetActive(false);
+        RenderCamera.gameObject.SetActive(false);
     } 
 
     public string DoRender(Slot slot )
     {
-        gameObject.SetActive(true);
+        RenderCamera.gameObject.SetActive(true);
         RenderImage(slot, RenderSlotType.back, backImage);
         RenderImage(slot, RenderSlotType.bot, botImage);
         RenderImage(slot, RenderSlotType.mid, midImage);
@@ -50,8 +50,8 @@ public class RenderCam : Singleton<RenderCam>
         fileStream = File.CreateText(fileName);
         fileStream.Close();
         File.WriteAllBytes(fileName, bytes);
-        gameObject.SetActive(false);
-        
+        RenderCamera.gameObject.SetActive(false);
+
         Debug.Log("Render done:" + fileName);
         lastId++;
         PlayerPrefs.SetInt(key, lastId);

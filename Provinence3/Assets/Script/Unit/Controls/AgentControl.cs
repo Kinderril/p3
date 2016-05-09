@@ -35,7 +35,7 @@ public class AgentControl : BaseControl
         targetDirection = dir;
         ThisByQuaterhnion.SetLookDir(targetDirection);
     }
-
+    
     public override bool IsPathComplete()
     {
         var isComplete = agent.remainingDistance < 1;

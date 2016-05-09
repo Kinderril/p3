@@ -29,7 +29,7 @@ public class BossBonusMapElement : MapObjectWithDeath
                     effect.Play();
                 }
                 bossSpawner.GetBonus();
-                Death();
+                SetDeath();
             }
         }
     }

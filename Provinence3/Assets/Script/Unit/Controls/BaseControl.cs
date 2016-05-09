@@ -1,10 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 
-public class BaseControl : MonoBehaviour
+public class BaseControl : MapObjectWithDeath
 {
     protected const string ANIM_WALK = "walk";
     private const string ANIM_DEATH = "death";
@@ -25,6 +28,9 @@ public class BaseControl : MonoBehaviour
     public Vector3 Direction;
     protected Vector3 targetDirection;
     public QueaternionFromTo ThisByQuaterhnion;
+//    public bool haveRagDoll = false;
+    public Rigidbody RagDollRigidbody;
+    public List<Rigidbody> listForRagDoll; 
 
     public Vector3 TargetDirection
     {
@@ -66,7 +72,14 @@ public class BaseControl : MonoBehaviour
             ThisByQuaterhnion = GetComponent<QueaternionFromTo>();
         ThisByQuaterhnion.Init(null,OnComeRotation);
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-        
+
+        if (listForRagDoll != null)
+        {
+            foreach (var child in listForRagDoll)
+            {
+                child.isKinematic = true;
+            }
+        }
     }
 
     private void OnComeRotation()
@@ -108,11 +121,36 @@ public class BaseControl : MonoBehaviour
         Animator.SetBool(ANIM_WALK, moving);
 	}
 
-    public void SetDeath()
+    public override void SetDeath()
     {
+        base.SetDeath();
         ThisByQuaterhnion.enabled = false;
-        Animator.SetBool(ANIM_DEATH,true);
+        if (RagDollRigidbody != null)
+        {
+            foreach (var child in listForRagDoll)
+            {
+                child.isKinematic = false;
+            }
+            StartCoroutine(WaitRagdoll());
+            Animator.enabled = false;
+            var dir = MainController.Instance.level.MainHero.transform.position - transform.position;
+            RagDollRigidbody.AddExplosionForce(1,dir,2);
+        }
+        else
+        {
+            Animator.SetBool(ANIM_DEATH, true);
+        }
     }
+
+    private IEnumerator WaitRagdoll()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        foreach (var child in listForRagDoll)
+        {
+            child.isKinematic = true;
+        }
+    } 
 
     public virtual void Stop(bool setSpeedToZero = true)
     {
@@ -127,6 +165,19 @@ public class BaseControl : MonoBehaviour
     public virtual void PlayAttack()
     {
         Animator.SetTrigger(attackKey);
+    }
+
+    public void Cache()
+    {
+        if (RagDollRigidbody != null)
+        {
+            listForRagDoll = RagDollRigidbody.GetComponentsInChildren<Rigidbody>(true).ToList();
+        }
+        else
+        {
+            listForRagDoll = null;
+        }
+
     }
 }
 
