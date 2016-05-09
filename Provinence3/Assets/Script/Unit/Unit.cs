@@ -2,9 +2,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System.Runtime.Remoting.Channels;
-using UnityStandardAssets.Characters.ThirdPerson;
 
 public enum UnitType
 {
@@ -125,7 +122,7 @@ public class Unit : MapObjectWithDeath
         {
             isPlayAttack = true;
 //            isPlayAttack = true;
-            Debug.Log("Start Attack : " + direction);
+//            Debug.Log("Start Attack : " + direction);
             Control.PlayAttack();
             if (StartAttackEffect != null)
             {
@@ -146,7 +143,7 @@ public class Unit : MapObjectWithDeath
 
     protected virtual void ShootEnd()
     {
-        Debug.Log("End attack ");
+//        Debug.Log("End attack ");
         isPlayAttack = false;
         if (OnShootEnd != null)
         {

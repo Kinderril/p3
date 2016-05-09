@@ -35,19 +35,24 @@ public class NsRenderManager : MonoBehaviour
 
 	void OnPreRender()
 	{
-		if (m_RenderEventCalls != null)
-		{
-			for (int n = m_RenderEventCalls.Count-1; 0 <= n; n--)
-			{
-				if (m_RenderEventCalls[n] == null)
-				{
-					m_RenderEventCalls.RemoveAt(n);
-					continue;
-				}
-				m_RenderEventCalls[n].SendMessage("OnPreRender", SendMessageOptions.DontRequireReceiver);
-			}
-		}
 	}
+
+    public void PreRenderOut()
+    {
+
+        if (m_RenderEventCalls != null)
+        {
+            for (int n = m_RenderEventCalls.Count - 1; 0 <= n; n--)
+            {
+                if (m_RenderEventCalls[n] == null)
+                {
+                    m_RenderEventCalls.RemoveAt(n);
+                    continue;
+                }
+                m_RenderEventCalls[n].SendMessage("OnPreRender", SendMessageOptions.DontRequireReceiver);
+            }
+        }
+    }
 
 	void OnRenderObject()
 	{
@@ -55,13 +60,17 @@ public class NsRenderManager : MonoBehaviour
 
 	void OnPostRender()
 	{
-		if (m_RenderEventCalls != null)
-		foreach (Component com in m_RenderEventCalls)
-		{
-			if (com != null)
-				com.SendMessage("OnPostRender", SendMessageOptions.DontRequireReceiver);
-		}
 	}
+
+    public void PostRenderOut()
+    {
+        if (m_RenderEventCalls != null)
+            foreach (Component com in m_RenderEventCalls)
+            {
+                if (com != null)
+                    com.SendMessage("OnPostRender", SendMessageOptions.DontRequireReceiver);
+            }
+    }
 
 	// Control Function -----------------------------------------------------------------
 	public void AddRenderEventCall(Component tarCom)

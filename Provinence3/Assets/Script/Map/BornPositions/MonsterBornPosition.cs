@@ -67,7 +67,7 @@ public class MonsterBornPosition : BaseBornPosition
     {
         unit.OnDead -= OnDead;
         totalUnits--;
-        Debug.Log("OnDead  " + totalUnits + "    " + isReborned) ;
+//        Debug.Log("OnDead  " + totalUnits + "    " + isReborned) ;
         if (totalUnits <= 0)
         {
             StartReborn();

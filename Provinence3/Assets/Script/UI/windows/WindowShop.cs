@@ -181,12 +181,12 @@ public class WindowShop : BaseWindow
     {
         var element = DataBaseController.GetItem<ShopItemElement>(PrefabShopItemElement);
         element.Init(exec, OnShopSelected);
+        exec.transform.SetParent(element.transform,false);
         element.transform.SetParent(layoutShopItems, false);
     }
 
     private void NullSelection()
     {
-
         ItemInfoElement.gameObject.SetActive(false);
         EquipButton.gameObject.SetActive(false);
         UnEquipButton.gameObject.SetActive(false);
@@ -267,12 +267,6 @@ public class WindowShop : BaseWindow
         }
         else
         {
-//            if (selectedShopElement == null)
-//            {
-//                Debug.Log("selectedShopElement : " + selectedShopElement.MoneyCost);
-//            }
-//
-//            Debug.Log("selectedShopElement != null " + (selectedShopElement == null) + "   " + selectedShopElement.MoneyCost);
             WindowManager.Instance.InfoWindow.Init(null,"not enought money");
         }
     }
