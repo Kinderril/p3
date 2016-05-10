@@ -52,7 +52,7 @@ public class WindowInGame : BaseWindow
 
     private void ShowPreStartWindow()
     {
-        PreStartWindow.Init(() =>
+        PreStartWindow.Init(level,() =>
         {
             level.Start();
             UiControls.Enable(true);

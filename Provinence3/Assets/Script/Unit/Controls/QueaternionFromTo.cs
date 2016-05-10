@@ -98,13 +98,14 @@ public class QueaternionFromTo : MonoBehaviour
             if (time >= 1f)
             {
                 time = 1f;
-//                    Debug.Log("ENd tor " + curSpeed);
                 comeToRotation();
                 isRotating = false;
                 StartWait();
             }
             remainAngel = (1f - time)*ang;
             qCur = Quaternion.Lerp(qFrom, qTo, time);
+//            if (!gameObject.name.Contains("Controller"))
+//                Debug.Log("ENd tor " + qCur.eulerAngles + "    qFrom:" + qFrom.eulerAngles + "   qTo:"+qTo.eulerAngles);
             transform.rotation = qCur;
         }
         else if (isWaiting)

@@ -17,7 +17,8 @@ public class AgentControl : BaseControl
 
     public override bool MoveTo(Vector3 v)
     {
-        SetToDirection((v - transform.position).normalized);
+        var vv = (new Vector3(v.x, transform.position.y, v.z) - transform.position).normalized;
+        SetToDirection(vv);
         if (agent.isOnNavMesh)
         {
             var movingOk = agent.SetDestination(v);

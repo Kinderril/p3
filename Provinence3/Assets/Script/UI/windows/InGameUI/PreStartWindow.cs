@@ -9,10 +9,20 @@ public class PreStartWindow : MonoBehaviour
 {
     public Button StartButton;
     private Action callback;
-    public void Init(Action callback)
+    public Text FieldLevel;
+    public Text Difficulty;
+    public Text Startpoint;
+    public Text MonsterCountField;
+    public Text ActiveBonuses;
+    public void Init(Level level,Action callback)
     {
         gameObject.SetActive(true);
         this.callback = callback;
+//        FieldLevel.text = level.MissionIndex.ToString();
+//        Difficulty.text = level.difficult.ToString();
+//        Startpoint.text = level.MissionIndex.ToString();
+//        MonsterCountField.text = level.EnemiesKills.ToString();
+
     }
 
     public void OnStart()
