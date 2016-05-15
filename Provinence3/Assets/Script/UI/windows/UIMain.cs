@@ -17,14 +17,17 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     public Vector3 keybordDir;
 
     private float chargeTime;
-    private Vector3 startDrag;
-    private bool isPressed;
+    private Vector2 startDrag;
+    private bool isLastFramePressed;
     private bool isOverUI;
     private bool isCharging = false;
     public Slider chargeSlider;
+    private Vector2 dir;
+    private int framesPressed = 0;
 
-    //    public Text debugText;
-    //    public Text debugText2;
+    public Text debugText;
+    public Text debugText2;
+    public Text debugText3;
 
     public void Init(Level lvl)
     {
@@ -46,11 +49,11 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         mainHero.SwitchWeapon();
     }
 
-    public void OnCrouch()
-    {
-        if (enable)
-            mainHero.DoCrouch();
-    }
+//    public void OnCrouch()
+//    {
+//        if (enable)
+//            mainHero.DoCrouch();
+//    }
 
     void Update()
     {
@@ -100,61 +103,89 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
 
     void LateUpdate()
     {
-        int index = 0;
-        if (Input.touchCount > 1)
+//        isOverUI = false;
+        bool pressedCur = false;
+        Touch touch =default(Touch);
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            index = 1;
+            var touchTmp = Input.GetTouch(i);
+            
+            isOverUI = EventSystem.current.IsPointerOverGameObject(touchTmp.fingerId);
+            if (!isOverUI)
+            {
+//                debugText3.text = "Pressed " + touchTmp.position 
+//                    + " phase:"+ touchTmp.phase 
+//                    + " type:" + touchTmp.type
+//                    +" delta:" + touchTmp.deltaTime;
+                pressedCur = true;
+                touch = touchTmp;
+                break;
+            }
         }
-
-        if (Input.GetMouseButtonDown(index))
+//        debugText.text = "c:" + Input.touchCount + "isOver:" + isOverUI;
+//        debugText2.text = "pressed:" + pressedCur;
+//        debugText3.text = "pLast:" + isLastFramePressed;
+        if (isLastFramePressed)
         {
-            isOverUI = EventSystem.current.IsPointerOverGameObject();
-            isPressed = true;
-            isCharging = false;
-            startDrag = Input.mousePosition;
-            chargeTime = Time.time + Weapon.CHARGE_TIME_DELAY;
-//            Debug.Log("charge " + chargeTime);
+            if (pressedCur)
+            {
+                ContiniusPress(touch);
+            }
+            else
+            {
+                EndPress();
+            }
         }
-
-//        Debug.Log("isPressed " + isPressed);
-        if (isPressed)
+        else
         {
-            var isOverUI2 = EventSystem.current.IsPointerOverGameObject();
-            var dir = Input.mousePosition - startDrag;
+            if (pressedCur)
+            {
+                StartPress(touch);
+            }
+        }
+        isLastFramePressed = pressedCur;
+//        for (int i = 0; i < Input.touchCount; i++)
+//        {
+//            var touchTmp = Input.GetTouch(i);
+//            isOverUI = EventSystem.current.IsPointerOverGameObject(touchTmp.fingerId);
+//            if (!isOverUI)
+//                break;
+//        }
+    }
 
-            if (!isCharging && Time.time > chargeTime)
-            {
-                var dist = dir.sqrMagnitude;
-//                Debug.Log("charge " + chargeTime + "   isCharging:" + isCharging + "  dist:" + dist);
-                if (dist < 4000)
-                    StartCharge();
-            }
+    private void StartPress(Touch touch)
+    {
+        startDrag = touch.position;
+        chargeTime = Time.time + Weapon.CHARGE_TIME_DELAY;
+        framesPressed = 0;
+    }
 
-            if (isCharging)
-            {
-                var perc = (Time.time - chargeTime) / Weapon.MAX_CHARGE_TIME;
-                chargeSlider.value = perc;
-            }
-            if (Input.GetMouseButtonUp(index))
-            {
-                isPressed = false;
-                if (isOverUI || isOverUI2)
-                {
-                    EndCharge();
-                    return;
-                }
-                if (enable)
-                {
-                    EndCharge();
-                    float chargePower = Time.time - chargeTime;
-                    var v = new Vector3(dir.x, 0, dir.y);
-                    mainHero.TryAttackByDirection(v, chargePower);
-                }
-            }
+    private void EndPress()
+    {
+        EndChargeUI();
+        if (framesPressed > 2)
+        {
+            float chargePower = Time.time - chargeTime;
+            var v = new Vector3(dir.x, 0, dir.y);
+            mainHero.TryAttackByDirection(v, chargePower);
         }
     }
 
-    private void EndCharge()
+    private void ContiniusPress(Touch touch)
+    {
+        dir = touch.position - startDrag;
+        if (!isCharging && Time.time > chargeTime)
+        {
+            var dist = dir.sqrMagnitude;
+            if (dist < 4000)
+                StartCharge();
+        }
+        framesPressed++;
+        var perc = (Time.time - chargeTime) / Weapon.MAX_CHARGE_TIME;
+        chargeSlider.value = perc;
+    }
+
+    private void EndChargeUI()
     {
         isCharging = false;
         chargeSlider.gameObject.SetActive(isCharging);
