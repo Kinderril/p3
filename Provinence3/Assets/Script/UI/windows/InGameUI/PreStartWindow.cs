@@ -18,10 +18,11 @@ public class PreStartWindow : MonoBehaviour
     {
         gameObject.SetActive(true);
         this.callback = callback;
-//        FieldLevel.text = level.MissionIndex.ToString();
-//        Difficulty.text = level.difficult.ToString();
-//        Startpoint.text = level.MissionIndex.ToString();
-//        MonsterCountField.text = level.EnemiesKills.ToString();
+        FieldLevel.text = "Level:"+level.MissionIndex.ToString();
+        var names = DataBaseController.Instance.RespawnPositionsNames[level.MissionIndex];
+        Difficulty.text = "Difficulty:"+level.difficult.ToString();
+        Startpoint.text = names[level.IndexBornPoint];
+        MonsterCountField.text = "Monsters:"+Map.Instance.enemies.Count.ToString();
 
     }
 

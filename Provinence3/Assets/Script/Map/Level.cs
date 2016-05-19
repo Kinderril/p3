@@ -54,6 +54,7 @@ public class Level
     private List<BaseItem> collectedItems = new List<BaseItem>();
     private Dictionary<CraftItemType,int> collectedCrafts = new Dictionary<CraftItemType, int>(); 
     public int MissionIndex = 1;
+    public int IndexBornPoint = 0;
     public EndlevelType IsGoodEnd;
     public int EnemiesKills = 0;
     private const float speedEnergyFall = 1.5f;
@@ -61,6 +62,7 @@ public class Level
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
+        IndexBornPoint = indexBornPos;
         this.difficult = difficult;
         DataBaseController.Instance.Pool.StartLevel();
         penalty = GetPenalty(difficult);
@@ -188,15 +190,21 @@ public class Level
         IsGoodEnd = LevelEndType;
         PortalsController.Stop();
         MainHero.Control.enabled = false;
-        AddRandomGift();//TODO DEBUG!!
-        if (LevelEndType == EndlevelType.bad)
+        var isBad = LevelEndType == EndlevelType.bad;
+#if UNITY_EDITOR
+        if (DebugController.Instance.ALWAYS_GOOD_END)
+        {
+            isBad = false;
+        }
+#endif
+        if (isBad)
         {
             moneyInv.Remove(ItemId.crystal);
             moneyInv[ItemId.money] /= 2;
         }
         else
         {
-//            AddRandomGift();//TODO DEBUG!!
+            AddRandomGift();
             foreach (var collectedItem in collectedItems)
             {
                 PlayerData.AddItem(collectedItem, false);

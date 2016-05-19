@@ -30,6 +30,7 @@ public class WindowMission : BaseWindow
         Dictionary<int, int> stubList = new Dictionary<int, int>();
         var lastLevel = PlayerPrefs.GetInt(key_last_level_chosed, 1);
 //        var openedMissions = MainController.Instance.PlayerData.OpenLevels.GetAllOpenedMissions();
+        int maxLvl = 0;
         foreach (var pointToggle in MissionsToggles)
         {
             Debug.Log("Selected: " + pointToggle.transform.name);
@@ -37,20 +38,32 @@ public class WindowMission : BaseWindow
             pointToggle.Toggle.onValueChanged.RemoveAllListeners();
             int a = pointToggle.ID;
             stubList.Add(a, pointToggle.ID);
+            
             pointToggle.Toggle.onValueChanged.AddListener(arg0 =>
             {
                 if (arg0)
                 {
                     var id = stubList[a];
                     List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(id);
-
                     MissionSelected(stubList[a], opensRespawnPoints.Count > 0);
                 }
             });
+            if (a > maxLvl)
+            {
+                List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(a);
+                if (opensRespawnPoints.Count > 0)
+                    maxLvl = a;
+            }
             
             pointToggle.Toggle.isOn = pointToggle.ID == lastLevel;
-//            pointToggle.Toggle.interactable = opensRespawnPoints.Count > 0;
+            //            pointToggle.Toggle.interactable = opensRespawnPoints.Count > 0;
         }
+        foreach (var pointToggle in MissionsToggles)
+        {
+            pointToggle.Toggle.interactable = pointToggle.ID <= maxLvl + 1;
+
+        }
+
         DifficultyChooser.Init(OnDifChanges);
         MissionSelected(lastLevel,true);
     }

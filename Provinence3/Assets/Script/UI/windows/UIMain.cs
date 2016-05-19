@@ -101,9 +101,64 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         return Vector3.zero;
     }
 
+#if UNITY_EDITOR
     void LateUpdate()
     {
-//        isOverUI = false;
+        int index = 0;
+        if (Input.touchCount > 1)
+        {
+            index = 1;
+        }
+
+        if (Input.GetMouseButtonDown(index))
+        {
+            isOverUI = EventSystem.current.IsPointerOverGameObject();
+            isLastFramePressed = true;
+            isCharging = false;
+            startDrag = Input.mousePosition;
+            chargeTime = Time.time + Weapon.CHARGE_TIME_DELAY;
+            //            Debug.Log("charge " + chargeTime);
+        }
+
+        //        Debug.Log("isPressed " + isPressed);
+        if (isLastFramePressed)
+        {
+            var isOverUI2 = EventSystem.current.IsPointerOverGameObject();
+            var m = Input.mousePosition;
+            var dir = new Vector2(m.x,m.y) - startDrag;
+
+            if (!isCharging && Time.time > chargeTime)
+            {
+                var dist = dir.sqrMagnitude;
+                //                Debug.Log("charge " + chargeTime + "   isCharging:" + isCharging + "  dist:" + dist);
+                if (dist < 4000)
+                    StartCharge();
+            }
+
+            if (isCharging)
+            {
+                var perc = (Time.time - chargeTime) / Weapon.MAX_CHARGE_TIME;
+                chargeSlider.value = perc;
+            }
+            if (Input.GetMouseButtonUp(index))
+            {
+                isLastFramePressed = false;
+                if (isOverUI || isOverUI2)
+                {
+                    EndPress();
+                    return;
+                }
+                if (enable)
+                {
+                    framesPressed = 3;
+                    EndPress();
+                }
+            }
+        }
+    }
+#else
+    void LateUpdate()
+    {
         bool pressedCur = false;
         Touch touch =default(Touch);
         for (int i = 0; i < Input.touchCount; i++)
@@ -113,18 +168,11 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             isOverUI = EventSystem.current.IsPointerOverGameObject(touchTmp.fingerId);
             if (!isOverUI)
             {
-//                debugText3.text = "Pressed " + touchTmp.position 
-//                    + " phase:"+ touchTmp.phase 
-//                    + " type:" + touchTmp.type
-//                    +" delta:" + touchTmp.deltaTime;
                 pressedCur = true;
                 touch = touchTmp;
                 break;
             }
         }
-//        debugText.text = "c:" + Input.touchCount + "isOver:" + isOverUI;
-//        debugText2.text = "pressed:" + pressedCur;
-//        debugText3.text = "pLast:" + isLastFramePressed;
         if (isLastFramePressed)
         {
             if (pressedCur)
@@ -144,14 +192,8 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             }
         }
         isLastFramePressed = pressedCur;
-//        for (int i = 0; i < Input.touchCount; i++)
-//        {
-//            var touchTmp = Input.GetTouch(i);
-//            isOverUI = EventSystem.current.IsPointerOverGameObject(touchTmp.fingerId);
-//            if (!isOverUI)
-//                break;
-//        }
     }
+#endif
 
     private void StartPress(Touch touch)
     {
