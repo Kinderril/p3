@@ -179,14 +179,6 @@ public class BaseMonster : Unit
                     {
                         StartAttack(false);
                     }
-                    else
-                    {
-//                        isHome = (transform.position - bornPosition).sqrMagnitude < isHomeDist;
-//                        if (isHome)
-//                        {
-//                            StartWalk();
-//                        }
-                    }
                     break;
                 case AIStatus.walk:
                     if (isTargetClose)

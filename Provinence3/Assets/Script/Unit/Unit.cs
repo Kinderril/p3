@@ -121,11 +121,11 @@ public class Unit : MonoBehaviour
         if (!isPlayAttack)
         {
             isPlayAttack = true;
-//            isPlayAttack = true;
 //            Debug.Log("Start Attack : " + direction);
             Control.PlayAttack();
             if (StartAttackEffect != null)
             {
+                Debug.Log("NSParticleAbsorber PLAY " + gameObject.name);
                 StartAttackEffect.Play();
             }
             curWeapon.SetNextTimeShoot();

@@ -29,7 +29,8 @@ public class AttackDistance : AttackAction
 
     private void TestTargetDist()
     {
-        isInRange = (curRangeSqr < rangeAttackSqr);
+
+        isInRange = (curRangeSqr < rangeAttackSqr); Debug.Log("t:"+curRangeSqr + "   R:" + rangeAttackSqr);
         if (isInRange)
         {
             if (owner.curWeapon.CanShoot())

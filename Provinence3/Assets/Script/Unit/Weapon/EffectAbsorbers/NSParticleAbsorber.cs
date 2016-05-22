@@ -10,6 +10,7 @@ public class NSParticleAbsorber : BaseEffectAbsorber
     public NcParticleSystem uvAnimation;
     public override void Play()
     {
+
         uvAnimation.gameObject.SetActive(true);
         uvAnimation.Play();
     }
