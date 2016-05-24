@@ -10,7 +10,7 @@ public class MoveAction : BaseAction
     private Vector3 trg;
     private Vector3 dir;
 
-    public MoveAction(BaseMonster owner, Vector3 trg,Action<bool> callback)
+    public MoveAction(BaseMonster owner, Vector3 trg,Action<EndCause> callback)
         : base(owner, callback)
     {
         this.trg = new Vector3(trg.x, owner.transform.position.y, trg.z);
@@ -26,7 +26,7 @@ public class MoveAction : BaseAction
         if (sqrM < 1f)
         {
             //owner.Control.MoveToPoint(Vector3.zero, false, false);
-            End("Direction " + sqrM);
+            End(EndCause.no,"Direction " + sqrM);
         }
     }
 

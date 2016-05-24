@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AttackCloseCombat :AttackAction
 {
-    public AttackCloseCombat(BaseMonster owner, Unit target, Action<bool> endCallback,bool byHit) 
+    public AttackCloseCombat(BaseMonster owner, Unit target, Action<EndCause> endCallback,bool byHit) 
         : base(owner, target, endCallback)
     {
         if (!byHit && UnityEngine.Random.Range(0, 100) < 50)

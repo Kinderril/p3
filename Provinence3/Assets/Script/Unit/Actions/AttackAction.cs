@@ -37,7 +37,7 @@ public class AttackAction : BaseAction
     protected float activateTime;
     protected bool isActivated = true;
 
-    public AttackAction(BaseMonster owner, Unit target ,Action<bool> endCallback)
+    public AttackAction(BaseMonster owner, Unit target ,Action<EndCause> endCallback)
         : base(owner, endCallback)
     {
         this.target = target;
@@ -143,11 +143,11 @@ public class AttackAction : BaseAction
         owner.OnShootEnd -= OnShootEnd;
     }
 
-    public override void End(string msg = " end action ")
+    public override void End(EndCause cause,string msg = " end action ")
     {
         owner.OnShootEnd -= OnShootEnd;
         ((AgentControl)owner.Control).Stop(false);
-        base.End(msg);
+        base.End(cause,msg);
     }
 }
 

@@ -30,11 +30,11 @@ public class BaseMonster : Unit
 {
     private const float isHomeDist = 2;
     public float attackDist = 45;
-    private float runAwayDist = 110;
     public const float AI_DIST = 170;
+    private const float runAwayDist = 110;
     public float mainHeroDist = 0;
     public Vector3 bornPosition;
-    private AIStatus aiStatus;
+    public AIStatus aiStatus;
     private Hero mainHero;
     public int moneyCollect;
     public int energyadd = 4;
@@ -157,50 +157,101 @@ public class BaseMonster : Unit
             return;
 
         mainHeroDist = (mainHero.transform.position - bornPosition).sqrMagnitude;
-        
-        if (mainHeroDist < AI_DIST)
+        var isInAI = mainHeroDist < AI_DIST;
+        bool isTargetClose = (mainHeroDist < attackDist);
+
+
+
+        switch (aiStatus)
         {
-            isHome = false;
-            Control.UpdateFromUnit();
-            bool isTargetClose = (mainHeroDist < attackDist);
-            switch (aiStatus)
-            {
-                case AIStatus.disable:
-                    StartWalk(false);
-                    break;
-                case AIStatus.attack:
-                    if ((mainHeroDist > runAwayDist))
-                    {
-                        EndAttack();
-                    }
-                    break;
-                case AIStatus.returnHome:
-                    if (isTargetClose)
-                    {
-                        StartAttack(false);
-                    }
-                    break;
-                case AIStatus.walk:
-                    if (isTargetClose)
-                    {
-                        StartAttack(false);
-                    }
-                    break;
-                case AIStatus.secondaryAction:
-                    SecondaryAction();
-                    break;
-            }
+            case AIStatus.attack:
+                if ((mainHeroDist > runAwayDist))
+                {
+                    ReturnHome();
+                }
+                break;
+            case AIStatus.returnHome:
+                if (isTargetClose)
+                {
+                    StartAttack(false);
+                }
+                break;
+            case AIStatus.walk:
+                if (!isInAI)
+                {
+                    Disable();
+                }
+                else if (isTargetClose)
+                {
+                    StartAttack(false);
+                }
+                break;
+            case AIStatus.disable:
+                if (isTargetClose)
+                {
+                    StartAttack(false);
+                }
+                else if (isInAI)
+                {
+                    StartWalk(EndCause.no);
+                }
+                break;
         }
-        else
+
+        Control.UpdateFromUnit();
+        //        if ()
+        //        {
+        ////            isHome = false;
+        //
+        //
+        //            switch (aiStatus)
+        //            {
+        //                case AIStatus.disable:
+        //                    StartWalk(false);
+        //                    break;
+        //                case AIStatus.attack:
+        //                    if ((mainHeroDist > runAwayDist))
+        //                    {
+        //                        EndAttack();
+        //                    }
+        //                    break;
+        //                case AIStatus.returnHome:
+        //                    if (isTargetClose)
+        //                    {
+        //                        StartAttack(false);
+        //                    }
+        //                    break;
+        //                case AIStatus.walk:
+        //                    if (isTargetClose)
+        //                    {
+        //                        StartAttack(false);
+        //                    }
+        //                    break;
+        //                case AIStatus.secondaryAction:
+        //                    SecondaryAction();
+        //                    break;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (aiStatus != AIStatus.returnHome && !isHome)
+        //            {
+        ////                Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>Start go home 1111111111111 prevStatus " + aiStatus + "    mainHeroDist " + mainHeroDist + "   aiDist:" + aiDist);
+        ////                aiStatus = AIStatus.disable;
+        //                //                Action = null;
+        //                EndAttack();
+        //            }
+        //        }
+    }
+
+    private void ReturnHome()
+    {
+        aiStatus = AIStatus.returnHome;
+        if (Action != null)
         {
-            if (aiStatus != AIStatus.returnHome && !isHome)
-            {
-//                Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>Start go home 1111111111111 prevStatus " + aiStatus + "    mainHeroDist " + mainHeroDist + "   aiDist:" + aiDist);
-//                aiStatus = AIStatus.disable;
-                //                Action = null;
-                EndAttack();
-            }
+            Action.End();
         }
+        Action = new MoveAction(this, bornPosition, EndComeHome);
     }
 
     protected virtual void SecondaryAction()
@@ -208,7 +259,7 @@ public class BaseMonster : Unit
 
     }
 
-    private void StartWalk(bool byHit)
+    private void StartWalk(EndCause byHit)
     {
         aiStatus = AIStatus.walk;
         int coef = 60;
@@ -231,12 +282,12 @@ public class BaseMonster : Unit
         
     }
 
-    private void EndWalk(bool byHit)
+    private void EndComeHome(EndCause byHit)
     {
         isHome = true;
-        if (aiStatus == AIStatus.returnHome)
-            return;
-        StartWalk(false);
+//        if (aiStatus == AIStatus.returnHome)
+//            return;
+        StartWalk(byHit);
         
     }
 
@@ -250,6 +301,7 @@ public class BaseMonster : Unit
             Action = null;
             //Maybe here set animation
         }
+        aiStatus = AIStatus.disable;
     }
     public void Activate()
     {
@@ -262,27 +314,31 @@ public class BaseMonster : Unit
         switch (Parameters.AttackType)
         {
             case AttackType.distanceFight:
-                Action = new AttackDistance(this, MainController.Instance.level.MainHero, StartAttack, byHit);
+                Action = new AttackDistance(this, MainController.Instance.level.MainHero, EndAttack, byHit);
                 break;
             case AttackType.closeCombat:
-                Action = new AttackCloseCombat(this, MainController.Instance.level.MainHero, StartAttack, byHit);
+                Action = new AttackCloseCombat(this, MainController.Instance.level.MainHero, EndAttack, byHit);
                 break;
         }
     }
+
+    private void EndAttack(EndCause obj)
+    {
+        switch (obj)
+        {
+            case EndCause.no:
+                StartAttack(false);
+                break;
+            case EndCause.runAway:
+
+                break;
+        }
+    }
+
     public bool IsInRadius(float rad)
     {
         return mainHeroDist < rad;
     }
 
-    private void EndAttack()
-    {
-//        Debug.Log("Run AWAY  " + Parameters.AttackType);
-        aiStatus = AIStatus.returnHome;
-        if (Action != null)
-        {
-            Action.End();
-        }
-        Action = new MoveAction(this, bornPosition, EndWalk);
-    }
 }
 
