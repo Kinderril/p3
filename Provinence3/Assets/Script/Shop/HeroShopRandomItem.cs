@@ -44,9 +44,24 @@ public class HeroShopRandomItem : IShopExecute
         return lvl * 11 + 33;
     }
 
+    public static Rarity GetRarity()
+    {
+        var r = UnityEngine.Random.Range(0, 100);
+        if (r < 60)
+        {
+            return Rarity.Normal;
+        }
+        if (r < 90)
+        {
+            return Rarity.Magic;
+        }
+        return Rarity.Rare;
+    }
+
     public static PlayerItem CreatMainSlot(Slot slot, int levelResult, ExecCatalysItem catalysItem = null)
     {
         var totalPoints = GetPointsByLvl(levelResult)*GetSlotCoef(slot);
+        var rarity = GetRarity();
         float diff = 0;
         if (catalysItem == null)
         {
@@ -56,26 +71,41 @@ public class HeroShopRandomItem : IShopExecute
         {
             diff = Utils.RandomNormal(0.75f, 1f);
         }
-        bool isRare = diff > 0.95f;
-        totalPoints *= diff;
-        float contest = UnityEngine.Random.Range(0.60f, 1f);
-        if (contest > 0.9f)
-            contest = 1f;
+        var primaryValue = totalPoints * diff;
 
-        var pparams = new Dictionary<ParamType,float>();
-        var primary = Connections.GetPrimaryParamType(slot);
-        var primaryValue = totalPoints*contest;
-        pparams.Add(primary,primaryValue);
-
-        if (contest < 0.95f)
+        var pparams = new Dictionary<ParamType, float>();
+        switch (rarity)
         {
-            var secondary = Connections.GetSecondaryParamType(slot);
-            var secondaryValue = totalPoints*(1f - contest);
-            pparams.Add(secondary, secondaryValue);
+            case Rarity.Magic:
+                if (UnityEngine.Random.Range(0, 10) < 5)
+                {
+                    var secondary = Connections.GetSecondaryParamType(slot);
+                    var secondaryValue = totalPoints * (0.3f);
+                    pparams.Add(secondary, secondaryValue);
+                }
+                else
+                {
+                    SpecialAbility spec;
+                    spec = ShopController.AllSpecialAbilities.RandomElement();
+                }
+
+
+                break;
+            case Rarity.Rare:
+
+                break;
         }
 
-        PlayerItem item = new PlayerItem(pparams,slot,isRare, totalPoints);
-        if ((contest < 0.85f || catalysItem != null) && (slot == Slot.magic_weapon || slot == Slot.physical_weapon))
+//        float contest = UnityEngine.Random.Range(0.60f, 1f);
+//        if (contest > 0.9f)
+//            contest = 1f;
+
+        var primary = Connections.GetPrimaryParamType(slot);
+        pparams.Add(primary,primaryValue);
+        
+
+        PlayerItem item = new PlayerItem(pparams,slot, rarity, totalPoints);
+        if ((catalysItem != null) && (slot == Slot.magic_weapon || slot == Slot.physical_weapon))
         {
             SpecialAbility spec;
             if (catalysItem == null)
@@ -90,6 +120,8 @@ public class HeroShopRandomItem : IShopExecute
         }
         return item;
     }
+
+    public  static 
 
     private static int GetPointsByLvl(int lvl)
     {

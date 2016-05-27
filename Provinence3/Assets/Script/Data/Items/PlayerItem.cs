@@ -5,6 +5,13 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+public enum Rarity
+{
+    Normal,
+    Magic,
+    Rare,
+    Uniq,
+}
 public enum SpecialAbility
 {
     none = 0,
@@ -41,29 +48,29 @@ public class PlayerItem : BaseItem
 {
     public Dictionary<ParamType, float> parameters;
     public SpecialAbility specialAbilities = SpecialAbility.none; 
-    public bool isRare;
+    public Rarity Rare;
     public int enchant = 0;
     public const char FIRSTCHAR = '%';
     
 
 
-    public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, bool isRare, float totalPoints)
+    public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, Rarity rare, float totalPoints)
     {
-        this.cost = PointsToCost(totalPoints, isRare);
+        this.cost = PointsToCost(totalPoints, rare);
         this.parameters = pparams;
         this.Slot = slot;
-        this.isRare = isRare;
+        this.Rare = rare;
         icon = RenderCam.Instance.DoRender(slot);
         isEquped = false;
     }
-    public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, bool isRare, int cost,bool isEquiped,string name,string icon,int enchant)
+    public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, Rarity isRare, int cost,bool isEquiped,string name,string icon,int enchant)
     {
         this.enchant = enchant;
         this.cost = cost;
         this.parameters = pparams;
         this.Slot = slot;
         this.name = name;
-        this.isRare = isRare;
+        this.Rare = isRare;
         this.isEquped = isEquiped;
         this.icon = icon;
         string p = "";
@@ -88,9 +95,22 @@ public class PlayerItem : BaseItem
         }
     }
 
-    private int PointsToCost(float points, bool isRare)
+    private int PointsToCost(float points, Rarity isRare)
     {
-        return (int)( points*5*(isRare ? 1.4f : 1) );
+        float c = 1;
+        switch (isRare)
+        {
+            case Rarity.Magic:
+                c = 1.5f;
+                break;
+            case Rarity.Rare:
+                c =2.5f;
+                break;
+            case Rarity.Uniq:
+                c = 4f;
+                break;
+        }
+        return (int)( points*5*(c) );
     }
     
     public override string Save()
@@ -106,7 +126,7 @@ public class PlayerItem : BaseItem
         StringBuilder ss = new StringBuilder();
         ss.Append((int)Slot);
         ss.Append(DELEM);
-        ss.Append(isRare.ToString());
+        ss.Append((int)Rare);
         ss.Append(DELEM);
         ss.Append(icon.ToString());
         ss.Append(DELEM);
@@ -150,7 +170,7 @@ public class PlayerItem : BaseItem
         var Part2 = Part1[1].Split(DELEM);
         //PART2
         Slot slot = (Slot) Convert.ToInt32(Part2[0]);
-        bool isRare = Convert.ToBoolean(Part2[1]);
+        Rarity isRare = (Rarity)Convert.ToInt32(Part2[1]);
         string icon = Part2[2];
         string name = Part2[3];
         int cost = Convert.ToInt32(Part2[4]);

@@ -119,8 +119,9 @@ public static class Connections
     {
         return primary[slot].Random();
     }
-    public static ParamType GetSecondaryParamType(Slot slot)
+    public static ParamType GetSecondaryParamType(Slot slot,ParamType exceed)
     {
+
         return secondary[slot].Random();
     }
 }
