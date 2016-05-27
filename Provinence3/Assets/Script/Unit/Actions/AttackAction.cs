@@ -87,14 +87,14 @@ public class AttackAction : BaseAction
                 MoveEnd();
             }
         }
-        curRangeFromBornPosition = owner.mainHeroDist;
+        curRangeSqr = owner.mainHeroDist;
         if (target != null)
         {
-            curRangeSqr = (owner.transform.position - target.transform.position).sqrMagnitude;
+//            curRangeSqr = (owner.transform.position - target.transform.position).sqrMagnitude;
             var curp = target.transform.position;
             targetUnitDir = lastTargetScanPos - curp;
             var offset = (targetUnitDir).sqrMagnitude;
-//            Debug.Log("Offset test  " + offset);
+//            Debug.Log("curRangeSqr  " + curRangeSqr);
             if (offset > MAX_OFFSET_SQR)
             {
                 //                lastTargetScanPos = curp;

@@ -156,7 +156,7 @@ public class BaseMonster : Unit
         if (mainHero == null)
             return;
 
-        mainHeroDist = (mainHero.transform.position - bornPosition).sqrMagnitude;
+        mainHeroDist = (mainHero.transform.position - transform.position).sqrMagnitude;
         var isInAI = mainHeroDist < AI_DIST;
         bool isTargetClose = (mainHeroDist < attackDist);
 
