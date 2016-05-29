@@ -30,7 +30,19 @@ public class MainController : Singleton<MainController>
         PlayerData = new PlayerData();
         PlayerData.Load();
         WindowManager.Instance.OpenWindow(MainState.start);
+	    Test();
 	}
+
+    private void Test()
+    {
+#if UNITY_EDITOR
+
+        for (int i = 0; i < 10; i++)
+        {
+            Debug.Log(ShopController.RandomSlot());
+        }
+#endif
+    }
 
     public void StartLevel(int indexStartPos,int dif,int levelIndex)
     {

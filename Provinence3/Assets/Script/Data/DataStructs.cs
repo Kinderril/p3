@@ -11,6 +11,12 @@ public struct ColorUI
     public ItemId type;
 }
 [Serializable]
+public struct ColorRarity
+{
+    public Color Color;
+    public Rarity Rarity;
+}
+[Serializable]
 public struct EffectVisualsBehaviour
 {
     public EffectType type;
@@ -25,6 +31,9 @@ public struct CostItemsByLevel
 }
 public class DataStructs : MonoBehaviour
 {
+
+
+    public ColorRarity[] ColorRarity;
     public ColorUI[] ColorsOfUI;
     public Color CraftItemColor;
     public CostItemsByLevel[] CostItemsByLevel;

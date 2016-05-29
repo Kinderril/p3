@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class BaseSimpleElement : MonoBehaviour
 {
-    public Image rareImage;
+    public RarityElement rareImage;
     public Image iconImage;
     public Image SlotLabel;
     public Text enchantField;
@@ -26,11 +26,13 @@ public class BaseSimpleElement : MonoBehaviour
     {
         enchantField.gameObject.SetActive(false);
         NameField.text = PlayerItem.Name;
+
         CountField.gameObject.SetActive(false);
         if (PlayerItem is PlayerItem)
         {
             var pItem = PlayerItem as PlayerItem;
-            rareImage.gameObject.SetActive(pItem.isRare);
+            NameField.color = DataBaseController.Instance.GetColor(pItem.Rare);
+            rareImage.Set(pItem.Rare);
             bool haveEnchant = pItem.enchant > 0;
             if (haveEnchant)
             {
@@ -40,6 +42,7 @@ public class BaseSimpleElement : MonoBehaviour
         }
         else
         {
+            NameField.color = DataBaseController.Instance.GetColor(Rarity.Normal);
             rareImage.gameObject.SetActive(false);
         }
 

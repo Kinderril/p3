@@ -29,6 +29,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<ParamType, Sprite> ParamTypeSprites = new Dictionary<ParamType, Sprite>();
     private readonly Dictionary<Slot, Sprite> SlotSprites = new Dictionary<Slot, Sprite>();
     private readonly Dictionary<ItemId, Color> itemsColors = new Dictionary<ItemId, Color>();
+    private readonly Dictionary<Rarity, Color> rarityColors = new Dictionary<Rarity, Color>();
     private readonly Dictionary<CraftItemType,Sprite> CraftItemsSprites = new Dictionary<CraftItemType, Sprite>(); 
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
     private readonly Dictionary<int,Taple<int,int>> costByLevelItems = new Dictionary<int, Taple<int, int>>(); 
@@ -114,6 +115,7 @@ public class DataBaseController : Singleton<DataBaseController>
         {
             MainParamSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Parameters/" + v.ToString()));
         }
+
 //        foreach (var mp in DataStructs.MainParametersImages)
 //        {
 //            MainParamSprites.Add(mp.type, Resources.Load<Sprite>("sprites/MainParameters/" + mp.path));
@@ -151,6 +153,10 @@ public class DataBaseController : Singleton<DataBaseController>
         foreach (var colorUi in DataStructs.ColorsOfUI)
         {
             itemsColors.Add(colorUi.type,colorUi.color);
+        }
+        foreach (var colorUi in DataStructs.ColorRarity)
+        {
+            rarityColors.Add(colorUi.Rarity, colorUi.Color);
         }
         foreach (var effectVisualsBehaviour in DataStructs.EffectVisualsBehaviours)
         {
@@ -219,6 +225,10 @@ public class DataBaseController : Singleton<DataBaseController>
     public Color GetColor(ItemId f)
     {
         return itemsColors[f];
+    }
+    public Color GetColor(Rarity f)
+    {
+        return rarityColors[f];
     }
     public Color GetColor(CraftItemType arg1)
     {

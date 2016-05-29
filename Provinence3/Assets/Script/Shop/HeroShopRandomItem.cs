@@ -9,6 +9,7 @@ public class HeroShopRandomItem : IShopExecute
     public override void Execute(int level)
     {
         var slot = ShopController.RandomSlot();
+        Debug.Log("SLOT:" + slot);
         var levelResult = ShopController.RandomizeLvl(level);
         switch (slot)
         {
@@ -46,6 +47,7 @@ public class HeroShopRandomItem : IShopExecute
 
     public static Rarity GetRarity()
     {
+        return Rarity.Rare;
         var r = UnityEngine.Random.Range(0, 100);
         if (r < 60)
         {
@@ -74,54 +76,72 @@ public class HeroShopRandomItem : IShopExecute
         var primaryValue = totalPoints * diff;
 
         var pparams = new Dictionary<ParamType, float>();
-        switch (rarity)
+        bool addSpecial = false;
+        var special = GetSpecial(slot, catalysItem);
+        Action paramInit = () =>
         {
-            case Rarity.Magic:
-                if (UnityEngine.Random.Range(0, 10) < 5)
+            if ((special == SpecialAbility.none || UnityEngine.Random.Range(0, 10) < 5) || addSpecial)
+            {
+                var secondaryParam = GetSecondaryParam(totalPoints, slot);
+                if (pparams.ContainsKey(secondaryParam.Key))
                 {
-                    var secondary = Connections.GetSecondaryParamType(slot);
-                    var secondaryValue = totalPoints * (0.3f);
-                    pparams.Add(secondary, secondaryValue);
+                    pparams[secondaryParam.Key] += secondaryParam.Value;
                 }
                 else
                 {
-                    SpecialAbility spec;
-                    spec = ShopController.AllSpecialAbilities.RandomElement();
+                    pparams.Add(secondaryParam.Key, secondaryParam.Value);
                 }
-
-
-                break;
-            case Rarity.Rare:
-
-                break;
-        }
-
-//        float contest = UnityEngine.Random.Range(0.60f, 1f);
-//        if (contest > 0.9f)
-//            contest = 1f;
-
-        var primary = Connections.GetPrimaryParamType(slot);
-        pparams.Add(primary,primaryValue);
-        
-
-        PlayerItem item = new PlayerItem(pparams,slot, rarity, totalPoints);
-        if ((catalysItem != null) && (slot == Slot.magic_weapon || slot == Slot.physical_weapon))
-        {
-            SpecialAbility spec;
-            if (catalysItem == null)
-            {
-                spec = ShopController.AllSpecialAbilities.RandomElement();
             }
             else
             {
-                spec = catalysItem.GetSpec();
+                addSpecial = true;
             }
-            item.specialAbilities = spec;
+        };
+        switch (rarity)
+        {
+            case Rarity.Magic:
+                paramInit();
+                break;
+            case Rarity.Rare:
+                paramInit();
+                paramInit();
+                break;
+        }
+        
+        var primary = Connections.GetPrimaryParamType(slot);
+        pparams.Add(primary,primaryValue);
+        
+        PlayerItem item = new PlayerItem(pparams,slot, rarity, totalPoints);
+        if (addSpecial)
+        {
+            item.specialAbilities = special;
         }
         return item;
     }
 
-    public  static 
+    private static KeyValuePair<ParamType,float> GetSecondaryParam(float totalPoints,Slot slot)
+    {
+        var secondary = Connections.GetSecondaryParamType(slot);
+        var secondaryValue = totalPoints * (0.3f);
+        return new KeyValuePair<ParamType, float>(secondary, secondaryValue);
+    }
+
+    private static SpecialAbility GetSpecial(Slot slot, ExecCatalysItem catalysItem = null)
+    {
+        if (slot == Slot.magic_weapon || slot == Slot.physical_weapon)
+        {
+            if (catalysItem == null)
+            {
+                return ShopController.AllSpecialAbilities.RandomElement();
+            }
+            else
+            {
+                return catalysItem.GetSpec();
+            }
+        }
+        return SpecialAbility.none;
+    }
+//    public  static 
 
     private static int GetPointsByLvl(int lvl)
     {

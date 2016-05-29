@@ -17,7 +17,7 @@ public enum SpecialAbility
     none = 0,
     penetrating,
     AOE,
-    Critical,
+    critical,
     homing,
     push,
     slow,
@@ -141,7 +141,7 @@ public class PlayerItem : BaseItem
         StringBuilder specials = new StringBuilder();
         specials.Append((int)specialAbilities);
         var result = par.ToString() + MDEL + ss.ToString() + MDEL + specials.ToString();
-        Debug.Log("ITEM SAVE STRING :" + result);
+//        Debug.Log("ITEM SAVE STRING :" + result);
         return result;
     }
 

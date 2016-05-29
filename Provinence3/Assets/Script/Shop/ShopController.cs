@@ -119,10 +119,28 @@ public static class Connections
     {
         return primary[slot].Random();
     }
-    public static ParamType GetSecondaryParamType(Slot slot,ParamType exceed)
+    public static ParamType GetSecondaryParamType(Slot slot)
     {
 
         return secondary[slot].Random();
+    }
+    public static ParamType GetSecondaryParamType(Slot slot, ParamType exceed)
+    {
+        var par = secondary[slot];
+        Dictionary<ParamType,float> dic = new Dictionary<ParamType, float>();
+        foreach (var paramType in par)
+        {
+            if (exceed != paramType.Value)
+            {
+                dic.Add(paramType.Value, paramType.Key);
+            }
+        }
+        if (dic.Count == 0)
+        {
+            return secondary[slot].Random();
+        }
+        WDictionary<ParamType> nWDic = new WDictionary<ParamType>(dic);
+        return nWDic.Random();
     }
 }
 

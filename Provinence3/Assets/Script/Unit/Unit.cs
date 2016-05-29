@@ -249,7 +249,7 @@ public class Unit : MonoBehaviour
             //Debug.Log("Test bullet.weapon.PlayerItem.specialAbilities : " + bullet.weapon.PlayerItem.specialAbilities);
             switch (bullet.weapon.SpecAbility)
             {
-                case SpecialAbility.Critical:
+                case SpecialAbility.critical:
                     var isCrit = UnityEngine.Random.Range(0, 10) < 2;
                     if (isCrit)
                     {

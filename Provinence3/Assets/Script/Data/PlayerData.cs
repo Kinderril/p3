@@ -270,10 +270,8 @@ public class PlayerData
         var items = playerItems.Count == 0;
         if (money && lvl && items)
         {
-
-            PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() { {ParamType.PPower, 15} },Slot.physical_weapon, false,1);
-            PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.MPower, 10 } }, Slot.magic_weapon, false, 1);
-            item1.specialAbilities = SpecialAbility.vampire;
+            PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() { {ParamType.PPower, 15} },Slot.physical_weapon, Rarity.Normal, 1);
+            PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.MPower, 10 } }, Slot.magic_weapon, Rarity.Normal, 1);
             AddAndEquip(item1);
             AddAndEquip(item2);
             AddFirstTalisman(TalismanType.doubleDamage);
@@ -282,6 +280,8 @@ public class PlayerData
 #if UNITY_EDITOR
             if (DebugController.Instance.GET_START_BOOST)
             {
+                PlayerItem item3 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PDef, 25 } }, Slot.body, Rarity.Rare, 1);
+                AddAndEquip(item3);
                 AddFirstTalisman(TalismanType.chain);
                 AddFirstTalisman(TalismanType.bloodDamage);
                 AddFirstTalisman(TalismanType.trapAOE);
