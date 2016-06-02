@@ -9,7 +9,7 @@ public class HeroShopRandomItem : IShopExecute
     public override void Execute(int level)
     {
         var slot = ShopController.RandomSlot();
-        Debug.Log("SLOT:" + slot);
+//        Debug.Log("SLOT:" + slot);
         var levelResult = ShopController.RandomizeLvl(level);
         switch (slot)
         {
@@ -47,7 +47,6 @@ public class HeroShopRandomItem : IShopExecute
 
     public static Rarity GetRarity()
     {
-        return Rarity.Rare;
         var r = UnityEngine.Random.Range(0, 100);
         if (r < 60)
         {

@@ -52,15 +52,14 @@ public class PlayerItem : BaseItem
     public int enchant = 0;
     public const char FIRSTCHAR = '%';
     
-
-
     public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, Rarity rare, float totalPoints)
     {
         this.cost = PointsToCost(totalPoints, rare);
         this.parameters = pparams;
         this.Slot = slot;
         this.Rare = rare;
-        icon = RenderCam.Instance.DoRender(slot);
+        RenderCam.Instance.DoRender(slot,out icon);
+        LoadTexture();
         isEquped = false;
     }
     public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, Rarity isRare, int cost,bool isEquiped,string name,string icon,int enchant)

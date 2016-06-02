@@ -104,33 +104,25 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
 #if UNITY_EDITOR
     void LateUpdate()
     {
-        int index = 0;
-        if (Input.touchCount > 1)
+
+        if (Input.GetMouseButtonDown(0))
         {
-            index = 1;
+            startDrag = Input.mousePosition;
         }
 
-        if (Input.GetMouseButtonDown(index))
+        if (Input.GetMouseButton(0))
         {
             isOverUI = EventSystem.current.IsPointerOverGameObject();
             isLastFramePressed = true;
             isCharging = false;
-            startDrag = Input.mousePosition;
             chargeTime = Time.time + Weapon.CHARGE_TIME_DELAY;
-            //            Debug.Log("charge " + chargeTime);
-        }
-
-        //        Debug.Log("isPressed " + isPressed);
-        if (isLastFramePressed)
-        {
-            var isOverUI2 = EventSystem.current.IsPointerOverGameObject();
             var m = Input.mousePosition;
-            var dir = new Vector2(m.x,m.y) - startDrag;
+            dir = new Vector2(m.x,m.y) - startDrag;
 
+//            Debug.Log("dir " + dir);
             if (!isCharging && Time.time > chargeTime)
             {
                 var dist = dir.sqrMagnitude;
-                //                Debug.Log("charge " + chargeTime + "   isCharging:" + isCharging + "  dist:" + dist);
                 if (dist < 4000)
                     StartCharge();
             }
@@ -140,19 +132,19 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
                 var perc = (Time.time - chargeTime) / Weapon.MAX_CHARGE_TIME;
                 chargeSlider.value = perc;
             }
-            if (Input.GetMouseButtonUp(index))
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            isLastFramePressed = false;
+            if (isOverUI)
             {
-                isLastFramePressed = false;
-                if (isOverUI || isOverUI2)
-                {
-                    EndPress();
-                    return;
-                }
-                if (enable)
-                {
-                    framesPressed = 3;
-                    EndPress();
-                }
+                EndPress();
+                return;
+            }
+            if (enable)
+            {
+                framesPressed = 3;
+                EndPress();
             }
         }
     }

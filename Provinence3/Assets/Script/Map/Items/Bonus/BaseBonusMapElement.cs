@@ -15,7 +15,7 @@ public class BaseBonusMapElement : MonoBehaviour
 {
     public BonusElementMapType bonusElementMapType;
     private bool isActive = true;
-    public PSAbsorber effect;
+    public PSAbsorber effectOnGet;
     public GameObject ActivePart;
 
     public void Init()
@@ -30,8 +30,8 @@ public class BaseBonusMapElement : MonoBehaviour
             if (unit != null)
             {
                 PlayOpen(unit);
-                if (effect != null)
-                    effect.Play();
+                if (effectOnGet != null)
+                    effectOnGet.Play();
             }
         }
     }
@@ -43,7 +43,7 @@ public class BaseBonusMapElement : MonoBehaviour
         switch (bonusElementMapType)
         {
             case BonusElementMapType.heal:
-                hero.GetHeal((hero.Parameters.MaxHp - hero.CurHp)/2f);
+                hero.GetHeal((hero.Parameters.MaxHp)/2f);
                 break;
             case BonusElementMapType.shield:
                 hero.Shield = hero.Parameters.MaxHp/3f;
@@ -52,9 +52,10 @@ public class BaseBonusMapElement : MonoBehaviour
                 TimeEffect.Creat(hero, EffectType.speed, 0, 10);
                 break;
             case BonusElementMapType.killAll:
-                var enemies = Map.Instance.GetEnimiesInRadius(30);
+                var enemies = Map.Instance.GetEnimiesInRadius(36);
                 foreach (var baseMonster in enemies)
                 {
+                    Debug.Log(" " + baseMonster.mainHeroDist);
                     baseMonster.CurHp -= 90000;
                 }
                 break;

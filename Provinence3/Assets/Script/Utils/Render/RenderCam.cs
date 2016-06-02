@@ -29,7 +29,7 @@ public class RenderCam : Singleton<RenderCam>
         RenderCamera.gameObject.SetActive(false);
     } 
 
-    public string DoRender(Slot slot )
+    public Texture2D DoRender(Slot slot,out string icon)
     {
         RenderCamera.gameObject.SetActive(true);
         RenderImage(slot, RenderSlotType.back, backImage);
@@ -55,7 +55,8 @@ public class RenderCam : Singleton<RenderCam>
         Debug.Log("Render done:" + fileName);
         lastId++;
         PlayerPrefs.SetInt(key, lastId);
-        return fileName;
+        icon = fileName;
+        return pngTex;
     }
 
     private void RenderImage(Slot slot, RenderSlotType type,Image img)

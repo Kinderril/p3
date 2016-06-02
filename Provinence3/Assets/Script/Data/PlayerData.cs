@@ -297,7 +297,7 @@ public class PlayerData
 
     private void AddFirstTalisman(TalismanType t)
     {
-        var talisman2 = new TalismanItem(10, t);
+        var talisman2 = new TalismanItem(40, t);
         AddAndEquip(talisman2);
     }
 

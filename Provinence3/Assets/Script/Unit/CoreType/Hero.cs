@@ -266,7 +266,7 @@ public class Hero : Unit
     {
         var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.heal);
         effect.Init(this,3.5f);
-        var p =  currentPower * 3;
+        var p =  currentPower;
         CurHp += p;
         if (OnGetHit != null)
         {

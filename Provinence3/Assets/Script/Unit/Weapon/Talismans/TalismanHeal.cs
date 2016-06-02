@@ -8,7 +8,7 @@ public class TalismanHeal : Talisman
 {
     public override void Use()
     {
-        MainController.Instance.level.MainHero.GetHeal(currentEnergy);
+        MainController.Instance.level.MainHero.GetHeal(sourseItem.power);
         base.Use();
     }
 }

@@ -337,7 +337,7 @@ public class BaseMonster : Unit
 
     public bool IsInRadius(float rad)
     {
-        return mainHeroDist < rad;
+        return mainHeroDist > 0 && mainHeroDist < rad;
     }
 
 }
