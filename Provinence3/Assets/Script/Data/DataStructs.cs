@@ -41,9 +41,10 @@ public class DataStructs : MonoBehaviour
     public int[] costParameterByLvl;
     public const int MISSION_LAST_INDEX = 2;
     public List<BaseBonusMapElement> BaseBonusMapElement;
-//    public HeroShopBonusItem HeroShopBonusItemPrefab;
-//    public HeroShopExecutableItem HeroShopExecutableItemPrefab;
-//    public HeroShopRandomItem HeroShopRandomItemPrefab;
+    public PrefabsStruct PrefabsStruct;
+    //    public HeroShopBonusItem HeroShopBonusItemPrefab;
+    //    public HeroShopExecutableItem HeroShopExecutableItemPrefab;
+    //    public HeroShopRandomItem HeroShopRandomItemPrefab;
     public int GetRespawnPointsCountByMission(int mission)
     {
         switch (mission)

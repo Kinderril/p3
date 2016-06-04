@@ -8,11 +8,12 @@ using UnityEngine.UI;
 
 public class PlayerItemInfo : BaseItemInfo
 {
-    public Transform layout;
+    public Transform layoutParam;
     public Image SpecIcon;
     public Text enchantField;
     public void Init(PlayerItem playerItem)
     {
+        base.Init(playerItem);
         bool haveEnchant = playerItem.enchant > 0;
         if (haveEnchant)
         {
@@ -28,9 +29,9 @@ public class PlayerItemInfo : BaseItemInfo
                 enchanted = true;
                 count += count * playerItem.enchant / 5;
             }
-            var element = DataBaseController.GetItem<ParameterElement>(Prefab);
+            var element = DataBaseController.GetItem<ParameterElement>(DataBaseController.Instance.DataStructs.PrefabsStruct.ParameterElement);
             element.Init(p.Key, count);
-            element.transform.SetParent(layout);
+            element.transform.SetParent(layoutParam,false);
         }
         var haveSpec = playerItem.specialAbilities != SpecialAbility.none;
         SpecIcon.gameObject.SetActive(haveSpec);
@@ -40,7 +41,6 @@ public class PlayerItemInfo : BaseItemInfo
             SpecIcon.sprite = DataBaseController.Instance.SpecialAbilityIcon(playerItem.specialAbilities);
         }
         mainIcon.sprite = playerItem.IconSprite;
-        // PlayerItem.FIRSTCHAR Resources.Load<Sprite>("sprites/PlayerItems/" + playerItem.icon);
         NameLabel.text = playerItem.name;
     }
 }

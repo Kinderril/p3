@@ -12,15 +12,8 @@ public enum ItemOwner
 }
 public class ItemInfoElement : MonoBehaviour
 {
-    public ParameterElement Prefab;
-    public Text NameLabel;
-    public Transform layout;
-    public Transform moneyLayout;
-    public Image SlotLabel;
-    public Image mainIcon;
-    public Image SpecIcon;
-    public Text enchantField;
-    public Action<BaseItem, ItemOwner> OnInitCallback;
+    private BaseItemInfo CurItemInfo;
+    private Action<BaseItem, ItemOwner> OnInitCallback;
 
     public void SetCallBack(Action<BaseItem, ItemOwner> OnInitCallback)
     {
@@ -28,109 +21,61 @@ public class ItemInfoElement : MonoBehaviour
     }
 
 
+    private void Clear()
+    {
+        if (CurItemInfo != null)
+        {
+            GameObject.Destroy(CurItemInfo.gameObject);
+        }
+    }
     public void Init(BaseItem item)
     {
         Clear();
-        SlotLabel.sprite = DataBaseController.Instance.SlotIcon(item.Slot);
-        var playerItem = item as PlayerItem;
-        if (playerItem != null)
+        switch (item.FirstChar())
         {
-            bool haveEnchant = playerItem.enchant > 0;
-            if (haveEnchant)
-            {
-                enchantField.text = "+" + playerItem.enchant;
-                enchantField.gameObject.SetActive(true);
-            }
-            bool enchanted = false;
-            foreach (var p in playerItem.parameters)
-            {
-                var count = p.Value;
-                if (!enchanted)
-                {
-                    enchanted = true;
-                    count += count*playerItem.enchant/5;
-                }
-                var element = DataBaseController.GetItem<ParameterElement>(Prefab);
-                element.Init(p.Key, count);
-                element.transform.SetParent(layout);
-            }
-            var haveSpec = playerItem.specialAbilities != SpecialAbility.none;
-            SpecIcon.gameObject.SetActive(haveSpec);
-            if (haveSpec)
-            {
-                SpecIcon.gameObject.SetActive(true);
-                SpecIcon.sprite = DataBaseController.Instance.SpecialAbilityIcon(playerItem.specialAbilities);
-            }
-            mainIcon.sprite = Resources.Load<Sprite>("sprites/PlayerItems/" + playerItem.icon);
-            NameLabel.text = playerItem.name;
+            case PlayerItem.FIRSTCHAR:
+                PlayerItemInfo PlayerItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.PlayerItemInfo);
+                PlayerItemInfo.Init(item as PlayerItem);
+                CurItemInfo = PlayerItemInfo;
+                break;
+            case BonusItem.FIRSTCHAR:
+                BonusItemInfo BonusItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.BonusItemInfo);
+                BonusItemInfo.Init(item as BonusItem);
+                CurItemInfo = BonusItemInfo;
+                break;
+            case ExecutableItem.FIRSTCHAR:
+                ExecutableItemInfo ExecutableItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.ExecutableItemInfo);
+                ExecutableItemInfo.Init(item as ExecutableItem);
+                CurItemInfo = ExecutableItemInfo;
+                break;
+            case TalismanItem.FIRSTCHAR:
+                TalismanItemInfo TalismanItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.TalismanItemInfo);
+                TalismanItemInfo.Init(item as TalismanItem);
+                CurItemInfo = TalismanItemInfo;
+                break;
         }
-        var talismanItem = item as TalismanItem;
-        if (talismanItem != null)
-        {
-            mainIcon.sprite = DataBaseController.Instance.TalismanIcon(talismanItem.TalismanType);
-            var element = DataBaseController.GetItem<ParameterElement>(Prefab);
-            element.Init(ParamType.PPower, talismanItem.power);
-            element.Init(ParamType.MDef, talismanItem.costShoot);
-            element.transform.SetParent(layout);
-            NameLabel.text = talismanItem.name;
-        }
-        var bonusItem = item as BonusItem;
-        if (bonusItem != null)
-        {
-            var element = DataBaseController.GetItem<ParameterElement>(Prefab);
-            element.Init(ParamType.PPower, bonusItem.power);
-            element.transform.SetParent(layout);
-            NameLabel.text = "name (" + bonusItem.remainUsetime + ")";
-        }
-        var execItem = item as ExecutableItem;
-        if (execItem != null)
-        {
-
-            NameLabel.text = execItem.ExecutableType.ToString();
-        }
-        InitCost(0, item.cost / 3);
-        OnInitCallback(item,ItemOwner.Player);
+        Link();
+        if (OnInitCallback != null)
+            OnInitCallback(item,ItemOwner.Player);
     }
+
+    private void Link()
+    {
+        CurItemInfo.transform.SetParent(transform, false);
+    }
+    
 
     public void Init(IShopExecute item)
     {
         Clear();
-        NameLabel.text = "Level:" + item.Parameter;
-        mainIcon.sprite = item.icon;
-        InitCost(item.CrystalCost, item.MoneyCost);
-        OnInitCallback(null,ItemOwner.Shop);
+        ShopSellElement ShopSellElement = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.ShopSellElement);
+        ShopSellElement.Init(item);
+        CurItemInfo = ShopSellElement;
+        Link();
+        if (OnInitCallback != null)
+            OnInitCallback(null, ItemOwner.Shop);
     }
 
-    private void InitCost(int crystals,int money)
-    {
-//        Debug.Log("Init cost : " + crystals + "    " + money);
-        if (crystals > 0)
-        {
-            var element = DataBaseController.GetItem<ParameterElement>(Prefab);
-            element.Init(ItemId.crystal, crystals);
-            element.transform.SetParent(moneyLayout);
-        }
-        if (money > 0)
-        {
-            var element = DataBaseController.GetItem<ParameterElement>(Prefab);
-            element.Init(ItemId.money, money);
-            element.transform.SetParent(moneyLayout);
-        }
-    }
-
-    private void Clear()
-    {
-
-        enchantField.gameObject.SetActive(false);
-        SpecIcon.gameObject.SetActive(false);
-        foreach (Transform t in layout)
-        {
-            Destroy(t.gameObject);
-        }
-        foreach (Transform t in moneyLayout)
-        {
-            Destroy(t.gameObject);
-        }
-    }
+    
 }
 

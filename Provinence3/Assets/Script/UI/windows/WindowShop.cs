@@ -34,6 +34,7 @@ public class WindowShop : BaseWindow
     public Button RecipeButton;
     public UpgradeWindow UpgradeWindow;
     public CraftWindow CraftWindow;
+    public ItemWindow ItemWindow;
     private Bookmarks Bookmarks = Bookmarks.recipies;
 
     public HeroShopExecutableItem PrefabHeroShopExecutableItem;
@@ -45,7 +46,9 @@ public class WindowShop : BaseWindow
     {
         base.Init();
         NullSelection();
+        UpgradeWindow.gameObject.SetActive(false);
         CraftWindow.gameObject.SetActive(false);
+        ItemWindow.gameObject.SetActive(false);
         ItemInfoElement.SetCallBack(OnItemInit);
         AllParametersContainer.Init();
         moneyField.text = MainController.Instance.PlayerData.playerInv[ItemId.money].ToString("0");
@@ -367,6 +370,7 @@ public class WindowShop : BaseWindow
 
     private void OnNewItem(BaseItem playerItem)
     {
+        ItemWindow.Init(playerItem);
         //WindowManager.Instance.InfoWindow.Init(null,"you buy new item");
         var element = DataBaseController.GetItem<PlayerItemElement>(PrefabPlayerItemElement);
         element.Init(playerItem, OnSelected);

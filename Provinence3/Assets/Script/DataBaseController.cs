@@ -220,6 +220,10 @@ public class DataBaseController : Singleton<DataBaseController>
     {
         return (Instantiate(item.gameObject, Vector3.zero, Quaternion.identity) as GameObject).GetComponent<T>();
     }
+    public static T GetItem<T>(string item) where T : MonoBehaviour
+    {
+        return (GameObject.Instantiate(Resources.Load(item)) as GameObject).GetComponent<T>();
+    }
 
 
     public Color GetColor(ItemId f)
