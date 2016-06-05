@@ -10,7 +10,9 @@ public class DebugController : Singleton<DebugController>
     public bool MAIN_HERO_MEGAHP = false;
     public bool LESS_COUNT_BOSS_COME = false;
     public bool GET_START_BOOST = false;
+    public bool GET_ALL_TYPE_WEAPONS_BOOST = false;
     public bool RESPAWN_TIME_CREEPS_FAST = false;
     public bool ALWAYS_GOOD_END = false;
+    public bool CHANCE_STUN_100 = false;
 }
 

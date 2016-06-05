@@ -10,7 +10,9 @@ public class PlayerItemInfo : BaseItemInfo
 {
     public Transform layoutParam;
     public Image SpecIcon;
+    public Text SpecName;
     public Text enchantField;
+    
     public void Init(PlayerItem playerItem)
     {
         base.Init(playerItem);
@@ -38,6 +40,7 @@ public class PlayerItemInfo : BaseItemInfo
         if (haveSpec)
         {
             SpecIcon.gameObject.SetActive(true);
+            SpecName.text = playerItem.specialAbilities.ToString();
             SpecIcon.sprite = DataBaseController.Instance.SpecialAbilityIcon(playerItem.specialAbilities);
         }
         mainIcon.sprite = playerItem.IconSprite;

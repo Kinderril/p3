@@ -10,6 +10,15 @@ public class FlyNumberWIthDependence : PoolElement
     public FlyingNumbers incFlyingNumbers;
     private Transform dependence;
     private Camera cam;
+
+    public static FlyNumberWIthDependence Create(Transform tr,string str)
+    {
+        var fn = DataBaseController.Instance.Pool.GetItemFromPool<FlyNumberWIthDependence>(PoolType.flyNumberInGame);
+        fn.transform.SetParent(WindowManager.Instance.CurrentWindow.TopPanel.transform);
+        fn.Init(tr, str, Color.red);
+        return fn;
+    }
+
     public void Init(Transform dependence, string msg, Color textColor, FlyNumerDirection flyDir = FlyNumerDirection.side,int size = 42)
     {
         base.Init();

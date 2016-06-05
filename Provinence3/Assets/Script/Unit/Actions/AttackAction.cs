@@ -127,7 +127,7 @@ public class AttackAction : BaseAction
 //        Debug.Log("shhot dir: " + dir);
         owner.Control.SetToDirection(dir);
         //dir = new Vector3(dir.x,owner.transform.position.y,dir.z);
-        Debug.Log("attack: " + dir + "    " + dir.sqrMagnitude);
+//        Debug.Log("attack: " + dir + "    " + dir.sqrMagnitude);
         owner.TryAttack(dir,0, target);
         owner.OnShootEnd += OnShootEnd;
         attackStatus = AttackStatus.shoot;

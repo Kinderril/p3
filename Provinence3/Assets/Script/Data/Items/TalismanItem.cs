@@ -8,6 +8,10 @@ using UnityEngine;
 
 public enum TalismanType
 {
+    //W - need to work
+    //2-work
+    //1-work - need test
+    //0-Cancel
     firewave,
     massPush,
     massFreez,

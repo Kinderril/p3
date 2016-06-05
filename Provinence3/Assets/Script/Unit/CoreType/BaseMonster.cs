@@ -126,10 +126,7 @@ public class BaseMonster : Unit
         hp -= CurHp;
         if (hp > 0)
         {
-            var fn = DataBaseController.Instance.Pool.GetItemFromPool<FlyNumberWIthDependence>(PoolType.flyNumberInGame);
-            fn.transform.SetParent(WindowManager.Instance.CurrentWindow.TopPanel.transform);
-            //fn.transform.position = transform.position;
-            fn.Init(transform, "-" + hp.ToString("0"),Color.red);
+            FlyNumberWIthDependence.Create(transform, "-" + hp.ToString("0"));
             if (FlashController != null)
                 FlashController.Play();
             GlobalEventManager.Instance.MonsterGetHit(this);
@@ -140,17 +137,7 @@ public class BaseMonster : Unit
         }
 
     }
-
-//    protected override void UpdateUnit()
-//    {
-////        if (!isDead && !isDisabled)
-////        {
-////            CheckDistance();
-//            base.UpdateUnit();
-////        }
-//    }
-
-
+    
     public void CheckDistance(float heroDist)
     {
         if (mainHero == null)
@@ -199,49 +186,6 @@ public class BaseMonster : Unit
         }
 
         Control.UpdateFromUnit();
-        //        if ()
-        //        {
-        ////            isHome = false;
-        //
-        //
-        //            switch (aiStatus)
-        //            {
-        //                case AIStatus.disable:
-        //                    StartWalk(false);
-        //                    break;
-        //                case AIStatus.attack:
-        //                    if ((mainHeroDist > runAwayDist))
-        //                    {
-        //                        EndAttack();
-        //                    }
-        //                    break;
-        //                case AIStatus.returnHome:
-        //                    if (isTargetClose)
-        //                    {
-        //                        StartAttack(false);
-        //                    }
-        //                    break;
-        //                case AIStatus.walk:
-        //                    if (isTargetClose)
-        //                    {
-        //                        StartAttack(false);
-        //                    }
-        //                    break;
-        //                case AIStatus.secondaryAction:
-        //                    SecondaryAction();
-        //                    break;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (aiStatus != AIStatus.returnHome && !isHome)
-        //            {
-        ////                Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>Start go home 1111111111111 prevStatus " + aiStatus + "    mainHeroDist " + mainHeroDist + "   aiDist:" + aiDist);
-        ////                aiStatus = AIStatus.disable;
-        //                //                Action = null;
-        //                EndAttack();
-        //            }
-        //        }
     }
 
     private void ReturnHome()
@@ -296,7 +240,7 @@ public class BaseMonster : Unit
         isDisabled = true;
         if (Action != null)
         {
-//            Action.Stop();
+            Action.Stop();
             Control.Stop(false);
             Action = null;
             //Maybe here set animation

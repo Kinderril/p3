@@ -14,22 +14,26 @@ public enum Rarity
 }
 public enum SpecialAbility
 {
+    //W - need to work
+    //2-work
+    //1-work - need test
+    //0-Cancel
     none = 0,
-    penetrating,
-    AOE,
-    critical,
-    homing,
-    push,
-    slow,
-    removeDefence,
-    vampire,
-    chain,
-    clear,
-    dot,
-    stun,
-    distance,
-    hp,
-    shield,
+    penetrating,//2
+    AOE,//0
+    critical,//2
+    homing,//0
+    push,//0
+    slow,//2
+    removeDefence,//0
+    vampire,//2
+    chain,//0
+    clear,//2
+    dot,//W
+    stun,//1
+    distance,//1
+    hp,//2
+    shield,//2
 }
 
 public enum Slot

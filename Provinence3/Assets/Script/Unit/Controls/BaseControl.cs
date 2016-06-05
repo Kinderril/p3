@@ -164,7 +164,6 @@ public class BaseControl : MapObjectWithDeath
 
     public virtual void PlayAttack()
     {
-        Debug.Log("PLay attack controls");
         Animator.SetTrigger(attackKey);
     }
 

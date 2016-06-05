@@ -117,16 +117,16 @@ public class WindowInGame : BaseWindow
         return ((delta > 0) ? "+" : "") + delta.ToString("0");
     }
 
-    private void OnHeroHit(float arg1, float arg2,float delta)
+    private void OnHeroHit(float cur_HP, float maxHp,float delta)
     {
         FlyingNumbers number = null;
         Color color = Color.green;
-        if (delta > 1)
+        if (delta >= 1)
         {
             number = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
 //            color =Color.green;
         }
-        else if (delta <-1)
+        else if (delta <=-1)
         {
             number = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
             color =  DataBaseController.Instance.GetColor(ItemId.health);
@@ -137,7 +137,7 @@ public class WindowInGame : BaseWindow
             number.transform.position = hitTransform.position;
             number.Init(GetDeltaStr(delta), color);
         }
-        HealthSlider.value = arg1 / arg2;
+        HealthSlider.value = cur_HP / maxHp;
     }
 
     private void OnLeft(float arg1, float arg2)

@@ -23,6 +23,7 @@ public class FireEffect : TimeEffect
     {
         yield return new WaitForSeconds(1);
         targetUnit.CurHp -= power;
+        FlyNumberWIthDependence.Create(targetUnit.transform, "-" + power.ToString("0"));
         if (!shallStop)
         {
             targetUnit.StartCoroutine(Burn());

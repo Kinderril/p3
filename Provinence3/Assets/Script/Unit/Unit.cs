@@ -125,7 +125,7 @@ public class Unit : MonoBehaviour
             Control.PlayAttack();
             if (StartAttackEffect != null)
             {
-                Debug.Log("NSParticleAbsorber PLAY " + gameObject.name);
+//                Debug.Log("NSParticleAbsorber PLAY " + gameObject.name);
                 StartAttackEffect.Play();
             }
             curWeapon.SetNextTimeShoot();
@@ -299,6 +299,13 @@ public class Unit : MonoBehaviour
                     break;
                 case SpecialAbility.stun:
                     var isStun = UnityEngine.Random.Range(0, 10) < 2;
+#if UNITY_EDITOR
+                    if (DebugController.Instance.CHANCE_STUN_100)
+                    {
+                        isStun = true;
+                    }
+#endif
+                    Debug.Log("STUN! " + isStun);
                     if (isStun)
                     {
                         TimeEffect.Creat(this, EffectType.freez,0,2);

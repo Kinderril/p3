@@ -282,17 +282,28 @@ public class PlayerData
             {
                 PlayerItem item3 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PDef, 25 } }, Slot.body, Rarity.Rare, 1);
                 AddAndEquip(item3);
-                AddFirstTalisman(TalismanType.chain);
-                AddFirstTalisman(TalismanType.bloodDamage);
-                AddFirstTalisman(TalismanType.trapAOE);
-                AddFirstTalisman(TalismanType.trapDamage);
-                AddFirstTalisman(TalismanType.speed);
-                AddFirstTalisman(TalismanType.firewave);
-                AddFirstTalisman(TalismanType.splitter);
+
+                foreach (var ability in ShopController.AllTalismanstypes)
+                {
+                    AddFirstTalisman(ability);
+                }
             }
+            if (DebugController.Instance.GET_ALL_TYPE_WEAPONS_BOOST)
+            {
+                int i = 0;
+                foreach (var ability in ShopController.AllSpecialAbilities)
+                {
+                    PlayerItem itemA = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PPower, 15 + i++ } }, Slot.physical_weapon, Rarity.Normal, 1);
+                    itemA.specialAbilities = ability;
+                    AddAndEquip(itemA);
+                }
+                
+            }
+
+
 #endif
-            
-        }
+
+            }
     }
 
     private void AddFirstTalisman(TalismanType t)
@@ -305,7 +316,6 @@ public class PlayerData
     {
         playerItems.Add(item);
         EquipItem(item);
-        
     }
 
     public void Save()

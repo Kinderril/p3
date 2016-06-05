@@ -8,8 +8,7 @@ public class TalismanDoubleDamage : Talisman
 {
     public override void Use()
     {
-        //TODO time to power
-        TimeEffect.Creat(MainController.Instance.level.MainHero, EffectType.doubleDamage);
+        TimeEffect.Creat(MainController.Instance.level.MainHero, EffectType.doubleDamage,0, sourseItem.power);
         base.Use();
     }
 }
