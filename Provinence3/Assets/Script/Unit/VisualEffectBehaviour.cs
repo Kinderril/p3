@@ -33,6 +33,21 @@ public class VisualEffectBehaviour : PoolElement
         Init(unit, timeEffect.endEffect);
     }
 
+    public void SetColor(Color color)
+    {
+        SubSetColor(DispellEffect, color);
+        SubSetColor(SetEffectEffect, color);
+        SubSetColor(DistanceEFfect, color);
+    }
+
+    private void SubSetColor(BaseEffectAbsorber bea, Color color)
+    {
+        if (bea != null)
+        {
+            bea.SetColor(color);
+        }
+    }
+
     public void Init(Unit unit, IEndEffect toSubs)
     {
         this.toSubs = toSubs;

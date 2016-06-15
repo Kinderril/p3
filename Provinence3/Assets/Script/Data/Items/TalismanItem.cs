@@ -12,21 +12,21 @@ public enum TalismanType
     //2-work
     //1-work - need test
     //0-Cancel
-    firewave,
-    massPush,
-    massFreez,
-    heal,
-    doubleDamage,
-    speed,
-    megaArmor,
-    chain,
-    trapDamage,
-    trapAOE,
-    trapFreez,
-    bloodDamage,
-    cleave,
-    energyVamp,
-    splitter,
+    firewave,//1
+    massPush,// W 
+    massFreez,//0
+    heal,//2
+    doubleDamage,//2
+    speed,//0
+    megaArmor,// W
+    chain,// W
+    trapDamage,// 1
+    trapAOE,// 1
+    trapFreez,// 1
+    bloodDamage,// 1
+    cleave,//0
+    energyVamp,//0
+    splitter,//1
 }
 
 public class TalismanItem : BaseItem
@@ -44,8 +44,18 @@ public class TalismanItem : BaseItem
         this.TalismanType = type;
         costShoot = power*1.3f;
         subInit(power);
+        IconSprite = DataBaseController.Instance.TalismanIcon(type);
         MaxCharges = GetMaxCharges(type);
         // Debug.Log("cost " + costShoot);
+    }
+    public TalismanItem(float power1, float costShoot1, TalismanType type)
+    {
+        this.power = power1;
+        this.costShoot = costShoot1;
+        this.TalismanType = type;
+        IconSprite = DataBaseController.Instance.TalismanIcon(type);
+        Slot = Slot.Talisman;
+        MaxCharges = GetMaxCharges(type);
     }
 
     private int GetMaxCharges(TalismanType t)
@@ -131,14 +141,6 @@ public class TalismanItem : BaseItem
         }
     }
 
-    public TalismanItem(float power1, float costShoot1, TalismanType type)
-    {
-        this.power = power1;
-        this.costShoot = 1;//costShoot1;
-        this.TalismanType = type;
-        Slot = Slot.Talisman;
-        MaxCharges = GetMaxCharges(type);
-    }
 
     public override char FirstChar()
     {

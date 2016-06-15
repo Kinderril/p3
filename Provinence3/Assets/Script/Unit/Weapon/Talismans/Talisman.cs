@@ -90,7 +90,10 @@ public abstract class Talisman
             case TalismanType.cleave:
                 talic = new TalismanCleave();
                 break;
-                
+            case TalismanType.megaArmor:
+                talic = new TalismanArmor();
+                break;
+
         }
         talic.Init(level,sourseItem,countTalismans);
         return talic;

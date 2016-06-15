@@ -30,6 +30,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<Slot, Sprite> SlotSprites = new Dictionary<Slot, Sprite>();
     private readonly Dictionary<ItemId, Color> itemsColors = new Dictionary<ItemId, Color>();
     private readonly Dictionary<Rarity, Color> rarityColors = new Dictionary<Rarity, Color>();
+    private readonly Dictionary<ParamType, Color> parameterColors = new Dictionary<ParamType, Color>();
     private readonly Dictionary<CraftItemType,Sprite> CraftItemsSprites = new Dictionary<CraftItemType, Sprite>(); 
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
     private readonly Dictionary<int,Taple<int,int>> costByLevelItems = new Dictionary<int, Taple<int, int>>(); 
@@ -158,6 +159,10 @@ public class DataBaseController : Singleton<DataBaseController>
         {
             rarityColors.Add(colorUi.Rarity, colorUi.Color);
         }
+        foreach (var colorUi in DataStructs.ColorParameter)
+        {
+            parameterColors.Add(colorUi.ParamType, colorUi.Color);
+        }
         foreach (var effectVisualsBehaviour in DataStructs.EffectVisualsBehaviours)
         {
             visualEffectBehaviours.Add(effectVisualsBehaviour.type, effectVisualsBehaviour.beh);
@@ -233,6 +238,10 @@ public class DataBaseController : Singleton<DataBaseController>
     public Color GetColor(Rarity f)
     {
         return rarityColors[f];
+    }
+    public Color GetColor(ParamType f)
+    {
+        return parameterColors[f];
     }
     public Color GetColor(CraftItemType arg1)
     {

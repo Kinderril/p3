@@ -7,12 +7,14 @@ using UnityEngine;
 public enum EffectType
 {
     doubleDamage,
+    parameter,
     slow,
     speed,
     heal,
     freez,
     fire,
     shield,
+    armor,
 }
 
 public class TimeEffect
@@ -22,6 +24,19 @@ public class TimeEffect
     protected TimerManager.ITimer timer;
     public IEndEffect endEffect;
     public EffectType EffectType;
+
+    public static void Creat(Unit targetUnit, TimeEffect Effect)
+    {
+
+        TimeEffect oldEffect = null;
+        if (targetUnit.efftcs.TryGetValue(Effect.EffectType, out oldEffect))
+        {
+            if (oldEffect != null)
+                oldEffect.OnTimer();
+        }
+        Debug.Log("Effect setted " + Effect.EffectType);
+        targetUnit.efftcs[Effect.EffectType] = Effect;
+    }
 
     public static TimeEffect Creat(Unit targetUnit, EffectType EffectType,float power = 0, float totalTime = 10)
     {

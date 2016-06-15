@@ -26,8 +26,8 @@ public class BaseSimpleElement : MonoBehaviour
     {
         enchantField.gameObject.SetActive(false);
         NameField.text = PlayerItem.Name;
-
         CountField.gameObject.SetActive(false);
+        iconImage.sprite = PlayerItem.IconSprite;
         if (PlayerItem is PlayerItem)
         {
             var pItem = PlayerItem as PlayerItem;
@@ -53,7 +53,6 @@ public class BaseSimpleElement : MonoBehaviour
             CountField.text = exec.count.ToString("0");
         }
 
-        iconImage.sprite = PlayerItem.IconSprite;
         
         SlotLabel.sprite = DataBaseController.Instance.SlotIcon(PlayerItem.Slot);
         if (SlotLabel.sprite == null)

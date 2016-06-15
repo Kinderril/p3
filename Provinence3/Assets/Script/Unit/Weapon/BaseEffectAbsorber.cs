@@ -28,5 +28,10 @@ public class BaseEffectAbsorber : MonoBehaviour
 //            Destroy(gameObject);
 //        }
     }
+
+    public virtual void SetColor(Color color)
+    {
+
+    }
 }
 

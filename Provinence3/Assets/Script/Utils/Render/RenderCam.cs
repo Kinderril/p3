@@ -61,7 +61,7 @@ public class RenderCam : Singleton<RenderCam>
 
     private void RenderImage(Slot slot, RenderSlotType type,Image img)
     {
-        int randBot = UnityEngine.Random.Range(0, 1);
+        int randBot = UnityEngine.Random.Range(0, 2);
         string path;
         if (type == RenderSlotType.back)
         {

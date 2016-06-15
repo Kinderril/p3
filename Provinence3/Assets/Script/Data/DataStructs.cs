@@ -17,6 +17,12 @@ public struct ColorRarity
     public Rarity Rarity;
 }
 [Serializable]
+public struct ColorParameter
+{
+    public Color Color;
+    public ParamType ParamType;
+}
+[Serializable]
 public struct EffectVisualsBehaviour
 {
     public EffectType type;
@@ -34,6 +40,7 @@ public class DataStructs : MonoBehaviour
 
 
     public ColorRarity[] ColorRarity;
+    public ColorParameter[] ColorParameter;
     public ColorUI[] ColorsOfUI;
     public Color CraftItemColor;
     public CostItemsByLevel[] CostItemsByLevel;
