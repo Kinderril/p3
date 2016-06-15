@@ -8,13 +8,10 @@ public enum EffectType
 {
     doubleDamage,
     parameter,
-    slow,
-    speed,
     heal,
     freez,
     fire,
     shield,
-    armor,
 }
 
 public class TimeEffect
@@ -53,17 +50,14 @@ public class TimeEffect
             case EffectType.doubleDamage:
                 effect = new DDEffect(targetUnit, totalTime);
                 break;
-            case EffectType.slow:
-                effect = new SpeedEffect(targetUnit, totalTime,false);
-                break;
             case EffectType.freez:
                 effect = new FreezEffet(targetUnit, totalTime);
                 break;
-            case EffectType.speed:
-                effect = new SpeedEffect(targetUnit, totalTime);
-                break;
             case EffectType.fire:
                 effect = new FireEffect(targetUnit, totalTime, power);
+                break;
+            case EffectType.parameter:
+                Debug.LogError("Dont creat this effect type bu this method");
                 break;
         }
         targetUnit.efftcs[EffectType] = effect;

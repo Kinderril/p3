@@ -7,6 +7,7 @@ using System.Text;
 public class DebugController : Singleton<DebugController>
 {
     public bool ALL_TIME_DROP = false;
+    public bool ALL_TALISMAN_CHARGED = false;
     public bool MAIN_HERO_MEGAHP = false;
     public bool LESS_COUNT_BOSS_COME = false;
     public bool GET_START_BOOST = false;

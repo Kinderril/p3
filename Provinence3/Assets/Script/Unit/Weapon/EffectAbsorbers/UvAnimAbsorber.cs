@@ -8,21 +8,32 @@ using UnityEngine;
 public class UvAnimAbsorber : BaseEffectAbsorber
 {
     public NcUvAnimation _uvAnimation;
-    public Material Material;
+    private Material Material;
+
+    void Awake()
+    {
+        var mesh = GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            Material = mesh.material;
+        }
+    }
+
     public override void Play()
     {
+        _uvAnimation.gameObject.SetActive(true);
         _uvAnimation.Play();
     }
 
     public override void Stop()
     {
-
+        _uvAnimation.gameObject.SetActive(false);
     }
 
     public override void SetColor(Color color)
     {
         if (Material != null)
-            Material.SetColor("TintColor",color);
+            Material.SetColor("_TintColor",color);
     }
 }
 

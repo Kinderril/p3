@@ -8,8 +8,9 @@ public class TalismanArmor : Talisman
 {
     public override void Use()
     {
-
-        TimeEffect.Creat(MainController.Instance.level.MainHero, EffectType.armor, 0, sourseItem.power);
+        var trg = MainController.Instance.level.MainHero;
+        var timeEffect = new ParameterEffect(trg,sourseItem.power,ParamType.PDef,1.5f);
+        TimeEffect.Creat(trg, timeEffect);
         base.Use();
     }
 }

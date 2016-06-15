@@ -15,6 +15,7 @@ public abstract class Talisman
     private bool isUnderCooldown = false;
     private TimerManager.ITimer timer;
     private int currentCharges = 0;
+    private float max;
 
     public Talisman()
     {
@@ -25,6 +26,7 @@ public abstract class Talisman
     {
         this.sourseItem = sourseItem;
         hero = level.MainHero;
+        max = (sourseItem.costShoot) * sourseItem.MaxCharges;
         level.OnItemCollected += (id, f, delta) =>
         {
             if (id == ItemId.energy)
@@ -32,6 +34,10 @@ public abstract class Talisman
                 AddEnergy(delta / countTalismans);
             }
         };
+        if (DebugController.Instance.ALL_TALISMAN_CHARGED)
+        {
+            currentEnergy = max;
+        }
     }
 
     public void Dispose()
@@ -124,7 +130,7 @@ public abstract class Talisman
     {
         if (canBePositive || val < 0)
         {
-            currentEnergy = Mathf.Clamp(currentEnergy - val, 0, (sourseItem.costShoot )*sourseItem.MaxCharges );
+            currentEnergy = Mathf.Clamp(currentEnergy - val, 0, max);
             DoCallback();
         }
     }

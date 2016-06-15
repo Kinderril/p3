@@ -26,6 +26,8 @@ public class ParameterEffect : TimeEffect
         }
         var visualEffect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType);
         visualEffect.Init(targetUnit, endEffect);
+        var paramColor = DataBaseController.Instance.GetColor(type);
+        visualEffect.SetColor(paramColor);
     }
 
     protected override void OnTimer()
