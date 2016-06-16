@@ -29,7 +29,7 @@ public enum TalismanType
 
 public class TalismanItem : BaseItem
 {
-    public float power;
+    public float points;
     public TalismanType TalismanType;
     public float costShoot;
     public const char FIRSTCHAR = '=';
@@ -37,19 +37,18 @@ public class TalismanItem : BaseItem
     public int Enchant = 0;
 
 
-    public TalismanItem(int power, TalismanType type)
+    public TalismanItem(int points, TalismanType type)
     {
         Slot = Slot.Talisman;
         this.TalismanType = type;
-        costShoot = power*1.3f;
-//        subInit(power);
+        this.points = points;
+        costShoot = points * 0.7f;//TODO remove dependence of level
         IconSprite = DataBaseController.Instance.TalismanIcon(type);
         MaxCharges = GetMaxCharges(type);
-        // Debug.Log("cost " + costShoot);
     }
     public TalismanItem(float power1, float costShoot1, TalismanType type)
     {
-        this.power = power1;
+        this.points = power1;
         this.costShoot = costShoot1;
         this.TalismanType = type;
         IconSprite = DataBaseController.Instance.TalismanIcon(type);
@@ -112,7 +111,7 @@ public class TalismanItem : BaseItem
 
     public override string Save()
     {
-        return power.ToString() + MDEL + costShoot.ToString() + MDEL + (int)TalismanType + MDEL + IsEquped;
+        return points.ToString() + MDEL + costShoot.ToString() + MDEL + (int)TalismanType + MDEL + IsEquped;
     }
 
     public static TalismanItem Create(string subStr)

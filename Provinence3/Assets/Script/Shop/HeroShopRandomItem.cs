@@ -34,9 +34,9 @@ public class HeroShopRandomItem : IShopExecute
 
     public static TalismanItem CreaTalic(int levelResult)
     {
-        int power = GetTalismanPointsByLvl(levelResult);
+        int point = GetTalismanPointsByLvl(levelResult);
         var type = ShopController.AllTalismanstypes.RandomElement();
-        TalismanItem item = new TalismanItem(power, type);
+        TalismanItem item = new TalismanItem(point, type);
         return item;
     }
 

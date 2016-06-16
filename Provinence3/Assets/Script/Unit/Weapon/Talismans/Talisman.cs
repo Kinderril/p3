@@ -42,7 +42,7 @@ public abstract class Talisman
     {
         this.sourseItem = sourseItem;
         hero = level.MainHero;
-        max = (sourseItem.costShoot) * sourseItem.MaxCharges;
+        max = sourseItem.costShoot * sourseItem.MaxCharges;
         level.OnItemCollected += (id, f, delta) =>
         {
             if (id == ItemId.energy)
