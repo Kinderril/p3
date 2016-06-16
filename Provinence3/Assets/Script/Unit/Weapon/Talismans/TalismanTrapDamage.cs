@@ -5,14 +5,25 @@ using System.Text;
 using UnityEngine;
 
 
-public class TalismanTrapDamage : Talisman ,IBulletHolder
+public class TalismanTrapDamage : TalismanWithTime ,IBulletHolder
 {
     public const string WAY_CHAIN_BULLET = "SingleTrap";
     private IncomingTrap cacheGameObject;
+    private const float LVL_1_P = 30f;
+    private const float LVL_10_P = 110f;
     public TalismanTrapDamage()
     {
         cacheGameObject = Resources.Load(base_path + WAY_CHAIN_BULLET, typeof(IncomingTrap)) as IncomingTrap;
     }
+
+    public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
+    {
+        base.Init(level, sourseItem, countTalismans,TRAP_1_LVL_TIME,TRAP_10_LVL_TIME);
+
+        var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
+        power = sourseItem.power * pointPower * EnchntCoef();
+    }
+
     public override void Use()
     {
         var p= hero.transform.position;
@@ -26,7 +37,7 @@ public class TalismanTrapDamage : Talisman ,IBulletHolder
         get { return SpecialAbility.none; }
     }
     public float Power {
-        get { return sourseItem.power; }
+        get { return power; }
     }
 
     public Unit Owner

@@ -5,19 +5,29 @@ using System.Text;
 using UnityEngine;
 
 
-public class TalismanTrapFreez : Talisman ,IBulletHolder
+public class TalismanTrapFreez : TalismanWithTime ,IBulletHolder
 {
     public const string WAY_CHAIN_BULLET = "";
     private AOETrap cacheGameObject;
+    private const float LVL_1_P = 4f;
+    private const float LVL_10_P = 6;
     public TalismanTrapFreez()
     {
         cacheGameObject = Resources.Load(WAY_CHAIN_BULLET, typeof(AOETrap)) as AOETrap;
     }
+
+    public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
+    {
+        base.Init(level, sourseItem, countTalismans, LVL_1_P, LVL_10_P);
+        var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
+        power = sourseItem.power * pointPower * EnchntCoef();
+    }
+
     public override void Use()
     {
         var p = hero.transform.position;
         var item = DataBaseController.GetItem<AOETrap>(cacheGameObject, p);
-        item.Init(sourseItem.power,false, this);
+        item.Init(Power, false, this);
         base.Use();
     }
     public SpecialAbility SpecAbility
@@ -26,7 +36,7 @@ public class TalismanTrapFreez : Talisman ,IBulletHolder
     }
     public float Power
     {
-        get { return sourseItem.power; }
+        get { return power; }
     }
 
     public Unit Owner
