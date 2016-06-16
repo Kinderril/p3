@@ -7,6 +7,9 @@ using UnityEngine;
 
 public abstract class Talisman
 {
+    protected const float LVL_1_AV_MONSTER_HP = 100;
+    protected const float LVL_10_AV_MONSTER_HP = 330;
+
     protected const string base_path = "prefabs/talisman/";
     public TalismanItem sourseItem;
     public float currentEnergy;

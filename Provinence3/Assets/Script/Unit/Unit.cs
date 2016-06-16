@@ -31,7 +31,7 @@ public class Unit : MonoBehaviour
     public float _shield;
     public Action OnShieldOn;
     public IEndEffect OnShieldOff;
-    public Dictionary<EffectType,TimeEffect> efftcs = new Dictionary<EffectType, TimeEffect>(); 
+    public List<TimeEffect> efftcs = new List<TimeEffect>(); 
 
     public float CurHp
     {

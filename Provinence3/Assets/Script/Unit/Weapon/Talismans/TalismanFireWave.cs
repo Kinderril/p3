@@ -7,8 +7,8 @@ using System.Text;
 public class TalismanFireWave : TalismanWithTime
 {
 
-    private const float LVL_1_P = 50f;
-    private const float LVL_10_P = 180f;
+    private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP / 2.5f;
+    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 2.4f;
 
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {

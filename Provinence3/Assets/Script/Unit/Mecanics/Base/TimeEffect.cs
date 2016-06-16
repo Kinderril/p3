@@ -24,27 +24,13 @@ public class TimeEffect
 
     public static void Creat(Unit targetUnit, TimeEffect Effect)
     {
-
-        TimeEffect oldEffect = null;
-        if (targetUnit.efftcs.TryGetValue(Effect.EffectType, out oldEffect))
-        {
-            if (oldEffect != null)
-                oldEffect.OnTimer();
-        }
-        Debug.Log("Effect setted " + Effect.EffectType);
-        targetUnit.efftcs[Effect.EffectType] = Effect;
+        CheckOldEffect(targetUnit, Effect);
+        targetUnit.efftcs.Add(Effect);
     }
 
     public static TimeEffect Creat(Unit targetUnit, EffectType EffectType,float power = 0, float totalTime = 10)
     {
-        TimeEffect oldEffect = null;
-        if (targetUnit.efftcs.TryGetValue(EffectType,out oldEffect))
-        {
-            if (oldEffect != null)
-                oldEffect.OnTimer();
-        }
         TimeEffect effect = null;
-        Debug.Log("Effect setted " + EffectType);
         switch (EffectType)
         {
             case EffectType.doubleDamage:
@@ -60,13 +46,35 @@ public class TimeEffect
                 Debug.LogError("Dont creat this effect type bu this method");
                 break;
         }
-        targetUnit.efftcs[EffectType] = effect;
+        CheckOldEffect(targetUnit, effect);
+        targetUnit.efftcs.Add(effect);
         return effect;
     }
 
+    private static void CheckOldEffect(Unit targetUnit, TimeEffect nEffect)
+    {
+        TimeEffect oldEffect = targetUnit.efftcs.FirstOrDefault(x => x.EffectType == nEffect.EffectType);
+        if (oldEffect != null)
+        {
+            var oldParamEffect = oldEffect as ParameterEffect;
+            var nParamEffect = nEffect as ParameterEffect;
+            if (oldParamEffect != null && nParamEffect != null)
+            {
+                if (oldParamEffect.Type == nParamEffect.Type)
+                {
+                    oldEffect.OnTimer();
+                }
+            }
+            else
+            {
+                oldEffect.OnTimer();
+            }
+        }
+        Debug.Log("Effect setted:" + nEffect);
+    }
     private void End()
     {
-        targetUnit.efftcs[EffectType] = null;
+        targetUnit.efftcs.Remove(this);
         MainController.Instance.level.OnEndLevel -= OnEndLevel;
         timer.Stop();
         Debug.Log("Effect UnSET ");

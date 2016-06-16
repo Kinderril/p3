@@ -6,8 +6,8 @@ using System.Text;
 
 public class TalismanSplitter : Talisman
 {
-    private const float LVL_1_P = 30f;
-    private const float LVL_10_P = 121f;
+    private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP / 4.1f;
+    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 4.0f;
 
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {

@@ -9,8 +9,8 @@ public class TalismanTrapDamage : TalismanWithTime ,IBulletHolder
 {
     public const string WAY_CHAIN_BULLET = "SingleTrap";
     private IncomingTrap cacheGameObject;
-    private const float LVL_1_P = 30f;
-    private const float LVL_10_P = 110f;
+    private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP / 3.6f;
+    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 3.5f;
     public TalismanTrapDamage()
     {
         cacheGameObject = Resources.Load(base_path + WAY_CHAIN_BULLET, typeof(IncomingTrap)) as IncomingTrap;

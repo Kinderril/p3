@@ -9,8 +9,8 @@ public class TalismanTrapAOE : TalismanWithTime , IBulletHolder
 {
     public const string WAY_CHAIN_BULLET = "AOETrap";
     private AOETrap cacheGameObject;
-    private const float LVL_1_P = 30f;
-    private const float LVL_10_P = 136f;
+    private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP / 4.1f;
+    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 4.0f;
     public TalismanTrapAOE()
         :base()
     {

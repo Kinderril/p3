@@ -10,8 +10,8 @@ public class TalismanChain : Talisman
     public const string WAY_CHAIN_BULLET = "";
     private ChainBullet cacheGameObject;
 
-    private const float LVL_1_P = 30f;
-    private const float LVL_10_P = 110f;
+    private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP / 4f;
+    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 3.8f;
 
     private int targetsCount = 3;
 

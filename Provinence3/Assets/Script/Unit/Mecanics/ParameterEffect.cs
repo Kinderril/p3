@@ -7,12 +7,12 @@ using System.Text;
 public class ParameterEffect : TimeEffect
 {
     private bool plus;
-    private ParamType type;
+    public ParamType Type;
     private float coef;
     public ParameterEffect(Unit targetUnit, float totalTime, ParamType type, float coef , bool plus = true)
         : base(targetUnit, totalTime)
     {
-        this.type = type;
+        this.Type = type;
         EffectType = EffectType.parameter;
         this.coef = coef;
         this.plus = plus;
@@ -34,11 +34,11 @@ public class ParameterEffect : TimeEffect
     {
         if (plus)
         {
-            targetUnit.Parameters.Parameters[type] /= coef;
+            targetUnit.Parameters.Parameters[Type] /= coef;
         }
         else
         {
-            targetUnit.Parameters.Parameters[type] *= coef;
+            targetUnit.Parameters.Parameters[Type] *= coef;
         }
         base.OnTimer();
     }

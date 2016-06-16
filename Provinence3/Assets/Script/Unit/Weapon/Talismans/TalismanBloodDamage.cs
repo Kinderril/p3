@@ -9,8 +9,8 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
 {
     public const string WAY_CHAIN_BULLET = "BulletBloodDamage";
 
-    private const float LVL_1_P = 40f;
-    private const float LVL_10_P = 150f;
+    private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP/3f;
+    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP/2.8f;
 
     private const int LVL_1_S = 15;
     private const int LVL_10_S = 43;
