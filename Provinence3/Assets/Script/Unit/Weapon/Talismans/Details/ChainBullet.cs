@@ -11,11 +11,12 @@ public class ChainBullet : MonoBehaviour
     protected List<BaseMonster> monstersInside = new List<BaseMonster>();
     protected List<BaseMonster> affectedList = new List<BaseMonster>();
     private float power;
-    public int maxTargets = 8;
+    public int maxTargets = 3;
 
-    public void Init(TalismanItem sourseItem, Hero hero)
+    public void Init(TalismanChain sourseItem, Hero hero,int targetsCount)
     {
-        power = sourseItem.power;
+        power = sourseItem.Power;
+        maxTargets = targetsCount;
         StartCoroutine(WaitForAction());
 }
 

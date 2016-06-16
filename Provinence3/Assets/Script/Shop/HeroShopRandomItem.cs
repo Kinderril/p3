@@ -40,9 +40,9 @@ public class HeroShopRandomItem : IShopExecute
         return item;
     }
 
-    private static int GetTalismanPointsByLvl(int lvl)
+    public static int GetTalismanPointsByLvl(int lvl)
     {
-        return lvl * 11 + 33;
+        return lvl * 10 + 30;
     }
 
     public static Rarity GetRarity()

@@ -16,13 +16,26 @@ public abstract class Talisman
     private TimerManager.ITimer timer;
     private int currentCharges = 0;
     private float max;
+    protected float power;
 
     public Talisman()
     {
 
     }
 
-    public void Init(Level level, TalismanItem sourseItem, int countTalismans)
+    protected float EnchntCoef()
+    {
+        return 1 + 0.2f*sourseItem.Enchant;
+    }
+
+    protected float DiffOfTen()
+    {
+        var points1 = HeroShopRandomItem.GetTalismanPointsByLvl(1);
+        var points10 = HeroShopRandomItem.GetTalismanPointsByLvl(10);
+        return points10 - points1;
+    }
+
+    public virtual void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         this.sourseItem = sourseItem;
         hero = level.MainHero;
@@ -54,9 +67,6 @@ public abstract class Talisman
         Talisman talic = null;
         switch (sourseItem.TalismanType)
         {
-            case TalismanType.speed:
-                talic = new TalismanSpeed();
-                break;
             case TalismanType.massPush:
                 //
                 break;
@@ -92,9 +102,6 @@ public abstract class Talisman
                 break;
             case TalismanType.trapFreez:
                 talic = new TalismanTrapFreez();
-                break;
-            case TalismanType.cleave:
-                talic = new TalismanCleave();
                 break;
             case TalismanType.megaArmor:
                 talic = new TalismanArmor();

@@ -17,14 +17,12 @@ public enum TalismanType
     massFreez,//0
     heal,//2
     doubleDamage,//2
-    speed,//0
     megaArmor,// W
     chain,// W
     trapDamage,// 1
     trapAOE,// 1
     trapFreez,// 1
     bloodDamage,// 1
-    cleave,//0
     energyVamp,//0
     splitter,//1
 }
@@ -36,6 +34,7 @@ public class TalismanItem : BaseItem
     public float costShoot;
     public const char FIRSTCHAR = '=';
     public int MaxCharges = 1;
+    public int Enchant = 0;
 
 
     public TalismanItem(int power, TalismanType type)
@@ -43,7 +42,7 @@ public class TalismanItem : BaseItem
         Slot = Slot.Talisman;
         this.TalismanType = type;
         costShoot = power*1.3f;
-        subInit(power);
+//        subInit(power);
         IconSprite = DataBaseController.Instance.TalismanIcon(type);
         MaxCharges = GetMaxCharges(type);
         // Debug.Log("cost " + costShoot);
@@ -65,14 +64,12 @@ public class TalismanItem : BaseItem
             case TalismanType.firewave:
                 return 2;
             case TalismanType.massPush:
-                return 2;
+                return 1;
             case TalismanType.massFreez:
                 return 2;
             case TalismanType.heal:
                 return 1;
             case TalismanType.doubleDamage:
-                return 1;
-            case TalismanType.speed:
                 return 1;
             case TalismanType.megaArmor:
                 return  1;
@@ -86,8 +83,6 @@ public class TalismanItem : BaseItem
                 return  3;
             case TalismanType.bloodDamage:
                 return  2;
-            case TalismanType.cleave:
-                return  1;
             case TalismanType.energyVamp:
                 return  1;
             case TalismanType.splitter:
@@ -95,53 +90,6 @@ public class TalismanItem : BaseItem
         }
         return 1;
     }
-
-    private void subInit(int totalPoints)
-    {
-        this.power = totalPoints;
-        switch (TalismanType)
-        {
-            case TalismanType.firewave:
-                break;
-            case TalismanType.massPush:
-                break;
-            case TalismanType.massFreez:
-                break;
-            case TalismanType.heal:
-                power *= 1.5f;
-                break;
-            case TalismanType.doubleDamage:
-                power /= 100;
-                break;
-            case TalismanType.speed:
-                power /= 100;
-                break;
-            case TalismanType.megaArmor:
-                power *= 1.5f;
-                break;
-            case TalismanType.chain:
-                break;
-            case TalismanType.trapDamage:
-                power *= 2;
-                break;
-            case TalismanType.trapAOE:
-                break;
-            case TalismanType.trapFreez:
-                break;
-            case TalismanType.bloodDamage:
-                power *= 3f;
-                break;
-            case TalismanType.cleave:
-                break;
-            case TalismanType.energyVamp:
-                break;
-            case TalismanType.splitter:
-                power *= 2f;
-                break;
-        }
-    }
-
-
     public override char FirstChar()
     {
         return FIRSTCHAR;
