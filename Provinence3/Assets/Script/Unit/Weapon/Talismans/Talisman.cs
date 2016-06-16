@@ -26,6 +26,11 @@ public abstract class Talisman
 
     }
 
+    public virtual string PowerInfo()
+    {
+        return power.ToString();
+    }
+
     protected float EnchntCoef()
     {
         return 1 + 0.2f*sourseItem.Enchant;
@@ -41,15 +46,18 @@ public abstract class Talisman
     public virtual void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         this.sourseItem = sourseItem;
-        hero = level.MainHero;
         max = sourseItem.costShoot * sourseItem.MaxCharges;
-        level.OnItemCollected += (id, f, delta) =>
+        if (level != null)
         {
-            if (id == ItemId.energy)
+            hero = level.MainHero;
+            level.OnItemCollected += (id, f, delta) =>
             {
-                AddEnergy(delta / countTalismans);
-            }
-        };
+                if (id == ItemId.energy)
+                {
+                    AddEnergy(delta/countTalismans);
+                }
+            };
+        }
         if (DebugController.Instance.ALL_TALISMAN_CHARGED)
         {
             currentEnergy = max;

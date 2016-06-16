@@ -17,7 +17,7 @@ public class TalismanDoubleDamage : TalismanWithTime
     {
         base.Init(level, sourseItem, countTalismans, LVL_1_T, LVL_10_T);
         var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.power * pointPower * EnchntCoef();
+        power = sourseItem.points * pointPower * EnchntCoef();
 
     }
 

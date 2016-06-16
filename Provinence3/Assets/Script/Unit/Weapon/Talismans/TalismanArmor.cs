@@ -17,9 +17,14 @@ public class TalismanArmor : TalismanWithTime
     {
         base.Init(level, sourseItem, countTalismans, LVL_1_T, LVL_10_T);
 
-        var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.power * pointPower * EnchntCoef();
+        var pointPower =  (LVL_10_P - LVL_1_P) / DiffOfTen();
+        power = (LVL_1_P + sourseItem.points * pointPower) * EnchntCoef();
     }
+    public override string PowerInfo()
+    {
+        return "Increase Physical defence:" + (power*10).ToString("0") + "% on " + TimeCoef.ToString("0") + " second";
+    }
+
 
     public override void Use()
     {

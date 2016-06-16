@@ -21,7 +21,7 @@ public class TalismanTrapAOE : TalismanWithTime , IBulletHolder
     {
         base.Init(level, sourseItem, countTalismans,TRAP_1_LVL_TIME,TRAP_10_LVL_TIME);
         var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.power * pointPower * EnchntCoef();
+        power = sourseItem.points * pointPower * EnchntCoef();
     }
 
     public override void Use()

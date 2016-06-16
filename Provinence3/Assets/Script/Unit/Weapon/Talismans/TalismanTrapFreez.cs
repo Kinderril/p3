@@ -20,7 +20,7 @@ public class TalismanTrapFreez : TalismanWithTime ,IBulletHolder
     {
         base.Init(level, sourseItem, countTalismans, LVL_1_P, LVL_10_P);
         var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.power * pointPower * EnchntCoef();
+        power = sourseItem.points * pointPower * EnchntCoef();
     }
 
     public override void Use()

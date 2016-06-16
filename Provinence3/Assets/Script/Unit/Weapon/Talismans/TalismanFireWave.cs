@@ -14,7 +14,7 @@ public class TalismanFireWave : TalismanWithTime
     {
         base.Init(level, sourseItem, countTalismans,8,10);
         var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.power * pointPower * EnchntCoef();
+        power = sourseItem.points * pointPower * EnchntCoef();
 
     }
 

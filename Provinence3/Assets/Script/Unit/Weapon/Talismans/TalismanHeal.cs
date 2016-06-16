@@ -14,7 +14,7 @@ public class TalismanHeal : Talisman
 
         var pointPower = (LVL_10_P - LVL_1_P) /DiffOfTen();
 
-        power = sourseItem.power*pointPower * EnchntCoef();
+        power = sourseItem.points*pointPower * EnchntCoef();
     }
 
     public override void Use()

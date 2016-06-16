@@ -23,10 +23,10 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
         base.Init(level, sourseItem, countTalismans);
 
         var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.power * pointPower * EnchntCoef();
+        power = sourseItem.points * pointPower * EnchntCoef();
 
         var sefl = (LVL_10_S - LVL_1_S) / DiffOfTen();
-        SefDmg = sourseItem.power*sefl;
+        SefDmg = sourseItem.points * sefl;
     }
 
     public TalismanBloodDamage() 

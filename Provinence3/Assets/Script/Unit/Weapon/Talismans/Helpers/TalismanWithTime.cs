@@ -14,7 +14,7 @@ public class TalismanWithTime : Talisman
         base.Init(level, sourseItem, countTalismans);
 
         var timePower = (lvl_10_time - lvl_1_time) / DiffOfTen();
-        TimeCoef = sourseItem.power * timePower * EnchntCoef();
+        TimeCoef = sourseItem.points * timePower * EnchntCoef();
     }
 }
 

@@ -12,10 +12,10 @@ public class TalismanSplitter : Talisman
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
 
-        var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.power * pointPower * EnchntCoef();
-
         base.Init(level, sourseItem, countTalismans);
+        var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
+        power = sourseItem.points * pointPower * EnchntCoef();
+
     }
 
     public override void Use()
