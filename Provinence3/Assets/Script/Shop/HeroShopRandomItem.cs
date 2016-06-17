@@ -35,6 +35,7 @@ public class HeroShopRandomItem : IShopExecute
     public static TalismanItem CreaTalic(int levelResult)
     {
         int point = GetTalismanPointsByLvl(levelResult);
+        point = (int) Utils.RandomNormal(point*0.7f, point*1.3f);
         var type = ShopController.AllTalismanstypes.RandomElement();
         TalismanItem item = new TalismanItem(point, type);
         return item;
@@ -42,7 +43,7 @@ public class HeroShopRandomItem : IShopExecute
 
     public static int GetTalismanPointsByLvl(int lvl)
     {
-        return lvl * 10 + 30;
+        return lvl * 10 ;
     }
 
     public static Rarity GetRarity()

@@ -11,7 +11,7 @@ public class TalismanChain : Talisman
     private ChainBullet cacheGameObject;
 
     private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP / 4f;
-    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 3.8f;
+    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 3.8f - Talisman.LVL_1_AV_MONSTER_HP / 4f;
 
     private int targetsCount = 3;
 
@@ -19,8 +19,8 @@ public class TalismanChain : Talisman
     {
         base.Init(level, sourseItem, countTalismans);
 
-        var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.points * pointPower * EnchntCoef();
+        var pointPower = (LVL_10_P ) / DiffOfTen();
+        power = (LVL_1_P +  sourseItem.points * pointPower) * EnchntCoef();
 
         targetsCount += 0;//TODO calc
     }

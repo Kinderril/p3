@@ -10,7 +10,7 @@ public class TalismanTrapDamage : TalismanWithTime ,IBulletHolder
     public const string WAY_CHAIN_BULLET = "SingleTrap";
     private IncomingTrap cacheGameObject;
     private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP / 3.6f;
-    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 3.5f;
+    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP / 3.5f - Talisman.LVL_1_AV_MONSTER_HP / 3.6f;
     public TalismanTrapDamage()
     {
         cacheGameObject = Resources.Load(base_path + WAY_CHAIN_BULLET, typeof(IncomingTrap)) as IncomingTrap;
@@ -20,8 +20,8 @@ public class TalismanTrapDamage : TalismanWithTime ,IBulletHolder
     {
         base.Init(level, sourseItem, countTalismans,TRAP_1_LVL_TIME,TRAP_10_LVL_TIME);
 
-        var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.points * pointPower * EnchntCoef();
+        var pointPower = (LVL_10_P ) / DiffOfTen();
+        power = (LVL_1_P + sourseItem.points * pointPower )* EnchntCoef();
     }
 
     public override void Use()
