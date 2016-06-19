@@ -119,6 +119,10 @@ public abstract class Talisman
                 break;
 
         }
+        if (talic == null)
+        {
+            Debug.LogError("Talic creat error:" + sourseItem.TalismanType);
+        }
         talic.Init(level,sourseItem,countTalismans);
         return talic;
     }
