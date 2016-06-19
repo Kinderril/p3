@@ -10,7 +10,7 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     public const string WAY_CHAIN_BULLET = "BulletBloodDamage";
 
     private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP/3f;
-    private float LVL_10_P = Talisman.LVL_10_AV_MONSTER_HP/2.8f;
+    private float LVL_10_P = (Talisman.LVL_10_AV_MONSTER_HP- LVL_1_AV_MONSTER_HP )/ 2.8f;
 
     private const int LVL_1_S = 15;
     private const int LVL_10_S = 43;
@@ -22,11 +22,11 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     {
         base.Init(level, sourseItem, countTalismans);
 
-        var pointPower = (LVL_10_P - LVL_1_P) / DiffOfTen();
-        power = sourseItem.points * pointPower * EnchntCoef();
+        var pointPower = (LVL_10_P ) / DiffOfTen();
+        power = (LVL_1_P + sourseItem.points * pointPower) * EnchntCoef();
 
-        var sefl = (LVL_10_S - LVL_1_S) / DiffOfTen();
-        SefDmg = sourseItem.points * sefl;
+        var sefl = (LVL_10_S ) / DiffOfTen();
+        SefDmg = LVL_1_S +  sourseItem.points * sefl;
     }
 
     public TalismanBloodDamage() 
