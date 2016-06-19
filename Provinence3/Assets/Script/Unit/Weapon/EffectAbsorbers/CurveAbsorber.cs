@@ -15,7 +15,8 @@ public class CurveAbsorber : BaseEffectAbsorber
 
     public override void Stop()
     {
-        uvAnimation.gameObject.SetActive(false);
+        if (uvAnimation != null && uvAnimation.gameObject != null)
+            uvAnimation.gameObject.SetActive(false);
     }
 }
 

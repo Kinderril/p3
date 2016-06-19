@@ -129,7 +129,15 @@ public class Pool
         {
             foreach (var element in poolOfElement.Value)
             {
-                element.EndUse();
+                try
+                {
+
+                    element.EndUse();
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError(" " + element.name + "   " + ex);
+                }
             }
         }
     }
