@@ -62,21 +62,33 @@ public class MainController : Singleton<MainController>
 
     private IEnumerator w4death()
     {
-        yield return new WaitForSeconds(1);
+        PostProcessingController.Instance.StartFadeIn();
+        yield return new WaitForSeconds(2f);
+        PostProcessingController.Instance.EndFade();
+        WindowManager.Instance.OpenWindow(MainState.end);
         Map.Instance.EndLevel();
         if (level.MainHero != null)
             Destroy(level.MainHero.gameObject);
+    }
+
+    private void EndFadeScreen()
+    {
+
+    }
+
+    private void StartFadeScreen()
+    {
+
     }
 
     public void EndLevel(EndlevelType goodEnd)
     {
         Debug.Log("EndLevel>> goodEnd:" + goodEnd);
         level.EndLevel(PlayerData, goodEnd);
-        WindowManager.Instance.OpenWindow(MainState.end);
         StartCoroutine(w4death());
     }
-    
-	void Update () {
+
+    void Update () {
         if (TimerManager != null)
 	        TimerManager.Update();
 	    if (level != null)
