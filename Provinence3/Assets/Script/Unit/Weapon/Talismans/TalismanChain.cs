@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class TalismanChain : Talisman
 {
-    public const string WAY_CHAIN_BULLET = "";
+    public const string WAY_CHAIN_BULLET = "prefabs/talisman/ChainBullet";
     private ChainBullet cacheGameObject;
 
     private float LVL_1_P = Talisman.LVL_1_AV_MONSTER_HP / 4f;

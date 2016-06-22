@@ -94,6 +94,7 @@ public class Pool
 
         element.transform.localPosition = pos;
         element.Init();
+        element.SetBaseParent(dataBaseController.transform);
         return element as T;
     }
 

@@ -197,7 +197,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     private void EndPress()
     {
         EndChargeUI();
-        if (framesPressed > 2)
+        if (framesPressed > 2 && mainHero != null && !mainHero.IsDead)
         {
             float chargePower = Time.time - chargeTime;
             var v = new Vector3(dir.x, 0, dir.y);

@@ -254,14 +254,19 @@ public class BaseMonster : Unit
 
     protected virtual void StartAttack(bool byHit)
     {
+        var heroTarget = MainController.Instance.level.MainHero;
+        if (heroTarget == null)
+        {
+            return;
+        }
         aiStatus = AIStatus.attack;
         switch (Parameters.AttackType)
         {
             case AttackType.distanceFight:
-                Action = new AttackDistance(this, MainController.Instance.level.MainHero, EndAttack, byHit);
+                Action = new AttackDistance(this, heroTarget, EndAttack, byHit);
                 break;
             case AttackType.closeCombat:
-                Action = new AttackCloseCombat(this, MainController.Instance.level.MainHero, EndAttack, byHit);
+                Action = new AttackCloseCombat(this, heroTarget, EndAttack, byHit);
                 break;
         }
     }

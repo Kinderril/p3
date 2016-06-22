@@ -20,6 +20,7 @@ public class VisualEffectBehaviour : PoolElement
     public BaseEffectAbsorber DispellEffect;
     public BaseEffectAbsorber SetEffectEffect;
     public BaseEffectAbsorber DistanceEFfect;
+    private Unit lastUseUnit;
 
     public void Init(Unit unit,float timeWaitSec)
     {
@@ -58,7 +59,7 @@ public class VisualEffectBehaviour : PoolElement
 
     private void subInit(Unit unit)
     {
-
+        lastUseUnit = unit;
         transform.SetParent(unit.transform);
         transform.localPosition = Vector3.zero;
         switch (VisualEffectPosition)
@@ -70,6 +71,7 @@ public class VisualEffectBehaviour : PoolElement
                 transform.SetParent(unit.weaponsContainer, false);
                 break;
         }
+        lastUseUnit.OnDead += OnDead;
         StopAbsorber(DispellEffect);
         if (DistanceEFfect != null)
         {
@@ -80,7 +82,12 @@ public class VisualEffectBehaviour : PoolElement
             SetEffectEffect.Play();
         }
     }
-    
+
+    private void OnDead(Unit obj)
+    {
+        EndEffect();
+    }
+
     private void EndEffect()
     {
         Debug.Log("End use visual effet " + EffectType);
@@ -95,6 +102,7 @@ public class VisualEffectBehaviour : PoolElement
         }
         StopAbsorber(DistanceEFfect);
         StopAbsorber(SetEffectEffect);
+        lastUseUnit.OnDead -= OnDead;
         EndUse();
     }
 
@@ -104,6 +112,12 @@ public class VisualEffectBehaviour : PoolElement
         {
             psAbsorber.Stop();
         }
+    }
+
+    void OnDestroy()
+    {
+        if (lastUseUnit != null)
+            lastUseUnit.OnDead -= OnDead;
     }
 
     private IEnumerator WaitFor(float timeSec)

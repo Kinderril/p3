@@ -107,6 +107,7 @@ public class NcAttachPrefab : NcEffectBehaviour
 
 	protected virtual void Start()
 	{
+
 	}
 
 	// Update is called once per frame
@@ -260,5 +261,16 @@ public class NcAttachPrefab : NcEffectBehaviour
 		for (int n = 0; n < rootObj.transform.childCount; n++)
 			Ng_ChangeLayerWithChild(rootObj.transform.GetChild(n).gameObject, nLayer);
 	}
+
+    public void Stop()
+    {
+        SetEnable(false);
+    }
+
+    public void Play()
+    {
+        SetEnable(true);
+        CreateAttachGameObject();
+    }
 }
 

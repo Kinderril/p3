@@ -58,7 +58,7 @@ public class NcEffectBehaviour : MonoBehaviour
 
 	protected bool IsCreatingEditObject()
 	{
-		GameObject	main	= GameObject.Find("_FXMaker");
+		GameObject main = GameObject.Find("_FXMaker");
 		if (main == null)
 			return false;
 		GameObject	effroot	= FindRootEditorEffect();

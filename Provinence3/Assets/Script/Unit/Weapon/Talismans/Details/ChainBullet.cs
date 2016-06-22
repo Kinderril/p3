@@ -10,12 +10,15 @@ public class ChainBullet : MonoBehaviour
 {
     protected List<BaseMonster> monstersInside = new List<BaseMonster>();
     protected List<BaseMonster> affectedList = new List<BaseMonster>();
+    public BaseEffectAbsorber hitEffect;
     private float power;
     public int maxTargets = 3;
+    
 
     public void Init(TalismanChain sourseItem, Hero hero,int targetsCount)
     {
         power = sourseItem.Power;
+        transform.position = hero.transform.position;
         maxTargets = targetsCount;
         StartCoroutine(WaitForAction());
 }
@@ -41,7 +44,7 @@ public class ChainBullet : MonoBehaviour
     
     protected IEnumerator WaitForAction()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         DoAction();
     }
 
@@ -53,10 +56,15 @@ public class ChainBullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        transform.position = target.transform.position;
+        if (hitEffect != null)
+        {
+            hitEffect.Play();
+        }
         target.GetHit(power,WeaponType.magic);
         affectedList.Add(target);
         monstersInside.Remove(target);
-        if (affectedList.Count >= maxTargets)
+        if (affectedList.Count > maxTargets)
         {
             Destroy(gameObject);
             return;
