@@ -29,7 +29,11 @@ public class AttackDistance : AttackAction
 
     private void TestTargetDist()
     {
-
+        if (target == null)
+        {
+            End(EndCause.no);
+            return;
+        }
         isInRange = (curRangeSqr < rangeAttackSqr);
 //        Debug.Log("t:"+curRangeSqr + "   R:" + rangeAttackSqr);
         if (isInRange)

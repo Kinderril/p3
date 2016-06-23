@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public enum UnitType
 {
@@ -67,12 +68,16 @@ public class Unit : MonoBehaviour
     {
         set
         {
+            var prev = _shield <= 0;
             _shield = value;
             if (_shield > 0)
             {
-                var effectVisual = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.shield);
-                effectVisual.Init(this, OnShieldOff);
-
+                if (prev)
+                {
+                    var effectVisual =
+                        DataBaseController.Instance.Pool.GetItemFromPool(EffectType.shield) as VisualEffectBehaviour;
+                    effectVisual.Init(this, OnShieldOff);
+                }
                 if (OnShieldOn != null)
                     OnShieldOn();
             }
