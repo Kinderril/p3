@@ -146,9 +146,7 @@ public class BaseMonster : Unit
         mainHeroDist = (mainHero.transform.position - transform.position).sqrMagnitude;
         var isInAI = mainHeroDist < AI_DIST;
         bool isTargetClose = (mainHeroDist < attackDist);
-
-
-
+        
         switch (aiStatus)
         {
             case AIStatus.attack:

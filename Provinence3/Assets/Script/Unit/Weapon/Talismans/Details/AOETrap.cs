@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AOETrap : Trap
 {
-    public const string WAY_CHAIN_BULLET = "prefabs/talisman/BulletAOETrap";
+    public const string WAY_AOETRAP_BULLET = "prefabs/talisman/BulletAOETrap";
     public bool isDamage = false;
     private Bullet cacheGameObject;
     private IBulletHolder talic;
@@ -16,7 +16,7 @@ public class AOETrap : Trap
     {
         Init(power);
         this.talic = talic;
-        cacheGameObject = Resources.Load(WAY_CHAIN_BULLET, typeof(Bullet)) as Bullet;
+        cacheGameObject = Resources.Load(WAY_AOETRAP_BULLET, typeof(Bullet)) as Bullet;
         this.isDamage = isDamage;
     }
     protected override void DoAction()

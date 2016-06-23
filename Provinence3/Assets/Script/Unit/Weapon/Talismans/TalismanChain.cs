@@ -19,12 +19,15 @@ public class TalismanChain : Talisman
     {
         base.Init(level, sourseItem, countTalismans);
 
-        var pointPower = (LVL_10_P ) / DiffOfTen();
-        power = (LVL_1_P +  sourseItem.points * pointPower) * EnchntCoef();
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
 
         targetsCount += 0;//TODO calc
     }
-
+    public override string PowerInfo()
+    {
+        return "Stretches from the hero to a targeted nearby enemy and chains on to additional " +targetsCount + " targets. Deal " + Power.ToString("0") + " magical damage.";
+    }
+    
     public TalismanChain() 
     {
         cacheGameObject = Resources.Load(WAY_CHAIN_BULLET, typeof (ChainBullet)) as ChainBullet;

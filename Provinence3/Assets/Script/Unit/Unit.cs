@@ -96,7 +96,7 @@ public class Unit : MonoBehaviour
             inventoryWeapon.gameObject.SetActive(false);
             inventoryWeapon.transform.SetParent(weaponsContainer,true);
         }
-        Control.SetSpped(Parameters.Parameters[ParamType.Speed]);
+        Control.SetSpeed(Parameters.Parameters[ParamType.Speed]);
         if (InventoryWeapons.Count == 0)
         {
             Debug.LogWarning("NO WEAPON!!! " + gameObject.name);
@@ -189,12 +189,7 @@ public class Unit : MonoBehaviour
     {
         Control.MoveTo(dir * Parameters.Parameters[ParamType.Speed]);
     }
-
-    private float calcResist(float curResist)
-    {
-        return 1 - curResist/(100 + curResist);
-    }
-
+    
     public void GetHit(float power,WeaponType type,float mdef = -1,float pdef = -1)
     {
         if (mdef < 0 || pdef < 0)
@@ -205,10 +200,10 @@ public class Unit : MonoBehaviour
         switch (type)
         {
             case WeaponType.magic:
-                power *= calcResist(mdef);
+                power *= Formuls.calcResist(mdef);
                 break;
             case WeaponType.physics:
-                power *= calcResist(pdef);
+                power *= Formuls.calcResist(pdef);
                 break;
         }
         power = GreatRandom.RandomizeValue(power);
@@ -263,6 +258,7 @@ public class Unit : MonoBehaviour
                     break;
                 case SpecialAbility.slow:
                     Parameters.Parameters[ParamType.Speed] *= 0.92f;
+                    Control.SetSpeed(Parameters.Parameters[ParamType.Speed]);
                     break;
                 case SpecialAbility.removeDefence:
                     Parameters.Parameters[ParamType.PDef] *= 0.94f;

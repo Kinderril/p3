@@ -12,9 +12,7 @@ public class TalismanWithTime : Talisman
     public void Init(Level level, TalismanItem sourseItem, int countTalismans,float lvl_1_time, float offsetToLvl10)
     {
         base.Init(level, sourseItem, countTalismans);
-
-        var timePower = (offsetToLvl10) / DiffOfTen();
-        TimeCoef = (lvl_1_time + sourseItem.points * timePower) * EnchntCoef();
+        power = Formuls.PowerTalicStandart(lvl_1_time, offsetToLvl10, sourseItem.points, sourseItem.Enchant);
     }
 }
 

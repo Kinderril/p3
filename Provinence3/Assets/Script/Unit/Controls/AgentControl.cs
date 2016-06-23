@@ -47,7 +47,7 @@ public class AgentControl : BaseControl
     {
         UpdateAnimator(agent.velocity);
     }
-    public override void SetSpped(float speed)
+    public override void SetSpeed(float speed)
     {
 
         if (agent != null)

@@ -20,8 +20,7 @@ public class TalismanTrapDamage : TalismanWithTime ,IBulletHolder
     {
         base.Init(level, sourseItem, countTalismans,TRAP_1_LVL_TIME,TRAP_10_LVL_TIME);
 
-        var pointPower = (LVL_10_P ) / DiffOfTen();
-        power = (LVL_1_P + sourseItem.points * pointPower )* EnchntCoef();
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
     }
 
     public override void Use()
@@ -30,6 +29,10 @@ public class TalismanTrapDamage : TalismanWithTime ,IBulletHolder
         var item = DataBaseController.GetItem<IncomingTrap>(cacheGameObject, p);
         item.Init(Power,this);
         base.Use();
+    }
+    public override string PowerInfo()
+    {
+        return "Set a trap whitch shoots to monster come close for: " + Power.ToString("0") + " damage. LigeTime is:" + LifeTimeTrap.LIFE_TIME;
     }
 
     public SpecialAbility SpecAbility

@@ -9,6 +9,7 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
     protected float power;
+    public const float WAIT_FOR_EXPLOSION = 1.7f;
     protected List<BaseMonster> monstersInside = new List<BaseMonster>();
     bool isActivated;
 
@@ -48,7 +49,7 @@ public class Trap : MonoBehaviour
 
     protected IEnumerator WaitForAction()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(WAIT_FOR_EXPLOSION);
         DoAction();
         Destroy(gameObject);
     }

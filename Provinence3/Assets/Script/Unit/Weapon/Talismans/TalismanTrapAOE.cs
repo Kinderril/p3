@@ -20,8 +20,7 @@ public class TalismanTrapAOE : TalismanWithTime , IBulletHolder
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         base.Init(level, sourseItem, countTalismans,TRAP_1_LVL_TIME,TRAP_10_LVL_TIME);
-        var pointPower = (LVL_10_P ) / DiffOfTen();
-        power = (LVL_1_P + sourseItem.points * pointPower) * EnchntCoef();
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
     }
 
     public override void Use()
@@ -30,6 +29,10 @@ public class TalismanTrapAOE : TalismanWithTime , IBulletHolder
         var item = DataBaseController.GetItem<AOETrap>( cacheGameObject, p);
         item.Init(Power, true,this);
         base.Use();
+    }
+    public override string PowerInfo()
+    {
+        return "Set a trap whitch exposis when some monster come close with delay: " + Trap.WAIT_FOR_EXPLOSION + " and deal: "+ Power.ToString("0") + " Damage to all in radius";
     }
     public SpecialAbility SpecAbility
     {

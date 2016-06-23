@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class LifeTimeTrap : MonoBehaviour
 {
-    public float lifeTimeSec = 10;
+    public const float lifeTimeSec = 10;
     private TimerManager.ITimer timer;
     public BaseEffectAbsorber dieEffect;
 

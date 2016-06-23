@@ -34,16 +34,11 @@ public class HeroShopRandomItem : IShopExecute
 
     public static TalismanItem CreaTalic(int levelResult)
     {
-        int point = GetTalismanPointsByLvl(levelResult);
+        int point = Formuls.GetTalismanPointsByLvl(levelResult);
         point = (int) Utils.RandomNormal(point*0.7f, point*1.3f);
         var type = ShopController.AllTalismanstypes.RandomElement();
         TalismanItem item = new TalismanItem(point, type);
         return item;
-    }
-
-    public static int GetTalismanPointsByLvl(int lvl)
-    {
-        return lvl * 10 ;
     }
 
     public static Rarity GetRarity()
@@ -62,7 +57,7 @@ public class HeroShopRandomItem : IShopExecute
 
     public static PlayerItem CreatMainSlot(Slot slot, int levelResult, ExecCatalysItem catalysItem = null)
     {
-        var totalPoints = GetPointsByLvl(levelResult)*GetSlotCoef(slot);
+        var totalPoints = Formuls.GetPointsByLvl(levelResult)* Formuls.GetSlotCoef(slot);
         var rarity = GetRarity();
         float diff = 0;
         if (catalysItem == null)
@@ -143,31 +138,7 @@ public class HeroShopRandomItem : IShopExecute
     }
 //    public  static 
 
-    private static int GetPointsByLvl(int lvl)
-    {
-        return lvl*7 + 20;
-    }
-
-    private static float GetSlotCoef(Slot slot)
-    {
-        float val = 1f;
-        switch (slot)
-        {
-            case Slot.physical_weapon:
-                val = 1.1f;
-                break;
-            case Slot.magic_weapon:
-                val = 1.3f;
-                break;
-            case Slot.body:
-                val = 1f;
-                break;
-            case Slot.helm:
-                val = 0.8f;
-                break;
-        }
-        return val;
-    }
+   
 
     public override void Init(int lvl)
     {

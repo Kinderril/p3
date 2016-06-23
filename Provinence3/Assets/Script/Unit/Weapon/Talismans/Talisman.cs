@@ -31,17 +31,6 @@ public abstract class Talisman
         return power.ToString();
     }
 
-    protected float EnchntCoef()
-    {
-        return 1 + 0.2f*sourseItem.Enchant;
-    }
-
-    protected float DiffOfTen()
-    {
-        var points1 = HeroShopRandomItem.GetTalismanPointsByLvl(1);
-        var points10 = HeroShopRandomItem.GetTalismanPointsByLvl(10);
-        return points10 - points1;
-    }
 
     public virtual void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {

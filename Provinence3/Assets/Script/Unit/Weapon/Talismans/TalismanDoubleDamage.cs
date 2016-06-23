@@ -16,9 +16,12 @@ public class TalismanDoubleDamage : TalismanWithTime
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         base.Init(level, sourseItem, countTalismans, LVL_1_T, LVL_10_T);
-        var pointPower = (LVL_10_P) / DiffOfTen();
-        power =(LVL_1_P +  sourseItem.points * pointPower) * EnchntCoef();
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
 
+    }
+    public override string PowerInfo()
+    {
+        return "Increase outcoming hero damage by " + (10 * power).ToString("0") + "% for " + TimeCoef.ToString("0") + " sec.";
     }
 
     public override void Use()

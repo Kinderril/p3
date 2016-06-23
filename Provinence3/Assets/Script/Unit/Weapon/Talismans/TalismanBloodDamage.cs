@@ -22,10 +22,9 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     {
         base.Init(level, sourseItem, countTalismans);
 
-        var pointPower = (LVL_10_P ) / DiffOfTen();
-        power = (LVL_1_P + sourseItem.points * pointPower) * EnchntCoef();
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
 
-        var sefl = (LVL_10_S ) / DiffOfTen();
+        var sefl = (LVL_10_S ) / Formuls.DiffOfTen();
         SefDmg = LVL_1_S +  sourseItem.points * sefl;
     }
 
@@ -58,6 +57,11 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     {
         get { return hero; }
     }
+    public override string PowerInfo()
+    {
+        return "Casts to nearby enemy and with power: " + Power.ToString("0") + ". But Dealing " + SefDmg.ToString("0") + " to caster";
+    }
+
 
     public WeaponType DamageType
     {

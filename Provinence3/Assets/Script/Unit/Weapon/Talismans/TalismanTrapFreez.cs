@@ -19,8 +19,11 @@ public class TalismanTrapFreez : TalismanWithTime ,IBulletHolder
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         base.Init(level, sourseItem, countTalismans, LVL_1_P, LVL_10_P);
-        var pointPower = (LVL_10_P) / DiffOfTen();
-        power = (LVL_1_P + sourseItem.points * pointPower) * EnchntCoef();
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
+    }
+    public override string PowerInfo()
+    {
+        return "Set a trap witch exposis when some monster come close with delay: " + Trap.WAIT_FOR_EXPLOSION + " and freez for " + Power.ToString("0") + " seconds all in radius";
     }
 
     public override void Use()

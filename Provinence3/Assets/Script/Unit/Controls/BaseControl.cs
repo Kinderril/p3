@@ -50,7 +50,7 @@ public class BaseControl : MapObjectWithDeath
         return true;
     }
 
-    public virtual void SetSpped(float speed)
+    public virtual void SetSpeed(float speed)
     {
 
     }
