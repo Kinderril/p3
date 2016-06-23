@@ -23,6 +23,8 @@ public class WindowManager : Singleton<WindowManager>
     public InfoWindow InfoWindow;
     private GameObject planeX;
 
+    public Transform UIPool;
+
     public BaseWindow CurrentWindow
     {
         get { return currentWindow; }

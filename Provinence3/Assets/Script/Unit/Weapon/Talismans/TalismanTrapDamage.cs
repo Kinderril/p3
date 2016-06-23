@@ -32,7 +32,7 @@ public class TalismanTrapDamage : TalismanWithTime ,IBulletHolder
     }
     public override string PowerInfo()
     {
-        return "Set a trap whitch shoots to monster come close for: " + Power.ToString("0") + " damage. LigeTime is:" + LifeTimeTrap.LIFE_TIME;
+        return "Set a trap whitch shoots to monster come close for: " + Power.ToString("0") + " damage. LigeTime is:" + LifeTimeTrap.lifeTimeSec;
     }
 
     public SpecialAbility SpecAbility

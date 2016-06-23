@@ -32,6 +32,7 @@ public class FlyingNumbers : PoolElement
 
     private void subInit(FlyNumerDirection flyDir)
     {
+//        transform.localScale = Vector3.one;
         anim = GetComponent<Animator>();
         switch (flyDir)
         {

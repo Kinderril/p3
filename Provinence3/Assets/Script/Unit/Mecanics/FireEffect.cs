@@ -16,15 +16,18 @@ public class FireEffect : TimeEffect
     {
         this.power = power;
         EffectType = EffectType.fire;
+        var visualEffect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType);
+        visualEffect.Init(targetUnit, endEffect);
         targetUnit.StartCoroutine(Burn());
     }
 
     private IEnumerator Burn()
     {
+        
         yield return new WaitForSeconds(1);
         targetUnit.CurHp -= power;
         FlyNumberWIthDependence.Create(targetUnit.transform, "-" + power.ToString("0"));
-        if (!shallStop)
+        if (!shallStop && !targetUnit.IsDead)
         {
             targetUnit.StartCoroutine(Burn());
         }

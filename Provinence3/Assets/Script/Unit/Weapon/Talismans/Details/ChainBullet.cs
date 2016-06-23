@@ -56,6 +56,7 @@ public class ChainBullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+//        transform.SetParent(target.transform);
         transform.position = target.transform.position;
         if (hitEffect != null)
         {

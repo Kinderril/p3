@@ -48,9 +48,9 @@ public class TimeEffect
         }
         CheckOldEffect(targetUnit, effect);
         targetUnit.efftcs.Add(effect);
-        return effect;
+            return effect;
     }
-
+    
     private static void CheckOldEffect(Unit targetUnit, TimeEffect nEffect)
     {
         TimeEffect oldEffect = targetUnit.efftcs.FirstOrDefault(x => x.EffectType == nEffect.EffectType);
@@ -74,9 +74,10 @@ public class TimeEffect
     }
     private void End()
     {
-        targetUnit.efftcs.Remove(this);
-        MainController.Instance.level.OnEndLevel -= OnEndLevel;
         timer.Stop();
+        targetUnit.efftcs.Remove(this);
+        targetUnit.OnDead -= OnTargetDead;
+        MainController.Instance.level.OnEndLevel -= OnEndLevel;
         Debug.Log("Effect UnSET ");
         endEffect.Do();
     }

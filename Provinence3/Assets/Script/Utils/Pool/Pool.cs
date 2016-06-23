@@ -24,12 +24,13 @@ public class Pool
 
     private void Prewarm()
     {
+        var baseT = WindowManager.Instance.UIPool;
         for (int i = 0; i < 10; i++)
         {
             var element = DataBaseController.GetItem(dataBaseController.FlyNumberWIthDependence);
             element.gameObject.SetActive(false);
             poolOfElements[PoolType.flyNumberInGame].Add(element);
-            element.transform.SetParent(dataBaseController.transform);
+            element.SetBaseParent(baseT);
         }
         for (int i = 0; i < 10; i++)
         {
@@ -37,7 +38,7 @@ public class Pool
             var element = DataBaseController.GetItem(dataBaseController.FlyingNumber);
             element.gameObject.SetActive(false);
             poolOfElements[PoolType.flyNumberInUI].Add(element);
-            element.transform.SetParent(dataBaseController.transform);
+            element.SetBaseParent(baseT);
         }
     }
 
@@ -94,7 +95,7 @@ public class Pool
 
         element.transform.localPosition = pos;
         element.Init();
-        element.SetBaseParent(dataBaseController.transform);
+        element.SetBaseParent(WindowManager.Instance.UIPool);
         return element as T;
     }
 
@@ -132,7 +133,6 @@ public class Pool
             {
                 try
                 {
-
                     element.EndUse();
                 }
                 catch (Exception ex)

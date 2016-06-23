@@ -18,6 +18,7 @@ public class PoolElement : MonoBehaviour
     public void SetBaseParent(Transform baseParent)
     {
         this.baseParent = baseParent;
+        transform.SetParent(baseParent,false);
     }
 
     public virtual void Init()
@@ -29,7 +30,10 @@ public class PoolElement : MonoBehaviour
     public virtual void EndUse()
     {
         isUsing = false;
-        transform.SetParent(baseParent);
+        if (baseParent != null)
+        {
+            transform.SetParent(baseParent,false);
+        }
         gameObject.SetActive(IsUsing);
         
     }

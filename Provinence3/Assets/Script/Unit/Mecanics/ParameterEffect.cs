@@ -32,7 +32,7 @@ public class ParameterEffect : TimeEffect
         var paramColor = DataBaseController.Instance.GetColor(type);
         visualEffect.SetColor(paramColor);
         var oldP = visualEffect.transform.localPosition;
-        visualEffect.transform.localPosition = new Vector3(oldP.x,oldP.y,oldP.z + Random.Range(0,3));
+        visualEffect.transform.localPosition = new Vector3(oldP.x,oldP.y + Random.Range(0, 2), oldP.z );
     }
 
     private void CheckOnSpeed()

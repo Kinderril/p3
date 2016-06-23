@@ -323,6 +323,11 @@ public class Unit : MonoBehaviour
     
     protected virtual void Death()
     {
+        if (IsDead)
+        {
+            Debug.LogError(gameObject.name + " is already dead");
+            return;
+        }
         if (OnDead != null)
         {
             OnDead(this);
