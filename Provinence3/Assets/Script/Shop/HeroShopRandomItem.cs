@@ -61,7 +61,7 @@ public class HeroShopRandomItem : IShopExecute
 
     public static PlayerItem CreatMainSlot(Slot slot, int levelResult, ExecCatalysItem catalysItem = null)
     {
-        var totalPoints = Formuls.GetPointsByLvl(levelResult)* Formuls.GetSlotCoef(slot);
+        var totalPoints = Formuls.GetPlayerItemPointsByLvl(levelResult)* Formuls.GetSlotCoef(slot);
         var rarity = GetRarity();
         float diff = 0;
         if (catalysItem == null)

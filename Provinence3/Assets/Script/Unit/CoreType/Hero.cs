@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Hero : Unit
 {
-    public const int HOMING_RAD_SQRT = 24;
+    public const int HOMING_RAD_SQRT = 44;
 
     private const float moneyBonusCoef = 0.2f;
     private const float moneyBonusCoefTime = 0.8f;

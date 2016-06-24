@@ -482,34 +482,7 @@ public class PlayerData
                 }
             }
         }
-        switch (type)
-        {
-            case ParamType.Speed:
-                v += 4;
-                break;
-            case ParamType.MPower:
-                v += MainParameters[MainParam.ATTACK] * 9 + 26;
-                break;
-            case ParamType.PPower:
-                v += MainParameters[MainParam.ATTACK] * 8 + 22;
-                break;
-            case ParamType.PDef:
-                v += MainParameters[MainParam.DEF] * 10 + 10;
-                break;
-            case ParamType.MDef:
-                v += MainParameters[MainParam.DEF] * 9;
-                break;
-            case ParamType.Heath:
-                v += MainParameters[MainParam.HP] * 40 + 200;
-#if UNITY_EDITOR
-                if (DebugController.Instance.MAIN_HERO_MEGAHP)
-                {
-                    v += 999999;
-                }
-#endif
-                break;
-        }
-        return v;
+        return Formuls.AffectMainParam(v, MainParameters, type);
     }
 
     public void Pay(ItemId itemId, int cost)

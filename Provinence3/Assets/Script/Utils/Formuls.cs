@@ -10,7 +10,7 @@ public class Formuls
     public const float BASE_MOSTER_ENERGY = 5;
     public static float calcResist(float curResist)
     {
-        return 1 - curResist / (100 + curResist);
+        return 1 - curResist / (150 + curResist);
     }
 
     private const int av_mosters_kills = 45;
@@ -56,7 +56,7 @@ public class Formuls
         return lvl * 10;
     }
 
-    public static int GetPointsByLvl(int lvl)
+    public static int GetPlayerItemPointsByLvl(int lvl)
     {
         return lvl * 7 + 20;
     }
@@ -91,6 +91,38 @@ public class Formuls
     public static float EnchntCoef(int enchantCount)
     {
         return 1 + 0.2f*enchantCount;
+    }
+
+    public static float AffectMainParam(float curVal ,Dictionary<MainParam, int> MainParameters,ParamType type)
+    {
+        switch (type)
+        {
+            case ParamType.Speed:
+                curVal += 4;
+                break;
+            case ParamType.MPower:
+                curVal += MainParameters[MainParam.ATTACK] * 8 + 12;
+                break;
+            case ParamType.PPower:
+                curVal += MainParameters[MainParam.ATTACK] * 9 + 26;
+                break;
+            case ParamType.PDef:
+                curVal += MainParameters[MainParam.DEF] * 6 + 20;
+                break;
+            case ParamType.MDef:
+                curVal += MainParameters[MainParam.DEF] * 5 + 10;
+                break;
+            case ParamType.Heath:
+                curVal += MainParameters[MainParam.HP] * 40 + 200;
+#if UNITY_EDITOR
+                if (DebugController.Instance.MAIN_HERO_MEGAHP)
+                {
+                    curVal += 999999;
+                }
+#endif
+                break;
+        }
+        return curVal;
     }
 
     public static float DiffOfTen()

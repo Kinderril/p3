@@ -93,6 +93,7 @@ public class BaseMonster : Unit
                     break;
                 case ParamType.Heath:
                     c = 5f;
+                    curHp = unitParameter.Value*c;
                     break;
             }
             var upg = unitParameter.Value*c;

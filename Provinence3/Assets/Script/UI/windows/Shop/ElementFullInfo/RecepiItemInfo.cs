@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class RecepiItemInfo : BaseItemInfo
 {
     public Text descField;
-    public Image slotIcon;
     public void Init(RecipeItem recipeItem)
     {
         base.Init(recipeItem);

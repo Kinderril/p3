@@ -122,6 +122,11 @@ public class AttackAction : BaseAction
 
     protected void DoShoot(bool shallStop = false)
     {
+        if (target == null)
+        {
+            End(EndCause.no);
+            return;
+        }
         var dir = target.transform.position - owner.transform.position;
         dir.y = 0;
 //        Debug.Log("shhot dir: " + dir);
