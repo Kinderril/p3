@@ -270,8 +270,8 @@ public class PlayerData
         var items = playerItems.Count == 0;
         if (money && lvl && items)
         {
-            PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() { {ParamType.PPower, 15} },Slot.physical_weapon, Rarity.Normal, 1);
-            PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.MPower, 10 } }, Slot.magic_weapon, Rarity.Normal, 1);
+            PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() { {ParamType.PPower, Formuls.GetPlayerItemPointsByLvl(1)} },Slot.physical_weapon, Rarity.Normal, 1);
+            PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.MPower, Formuls.GetPlayerItemPointsByLvl(1) } }, Slot.magic_weapon, Rarity.Normal, 1);
             AddAndEquip(item1);
             AddAndEquip(item2);
             AddFirstTalisman(TalismanType.doubleDamage);
