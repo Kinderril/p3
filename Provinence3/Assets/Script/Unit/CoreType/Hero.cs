@@ -220,10 +220,19 @@ public class Hero : Unit
         var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.heal);
         effect.Init(this,3.5f);
         var p =  currentPower;
-        CurHp += p;
-        if (OnGetHit != null)
+
+        var posibleDelta = Parameters.Parameters[ParamType.Heath] - CurHp;
+        if (p >= posibleDelta)
         {
-            OnGetHit(CurHp, Parameters.Parameters[ParamType.Heath], p);
+            p = posibleDelta;
+        }
+        if (p > 0)
+        {
+            CurHp += p;
+            if (OnGetHit != null)
+            {
+                OnGetHit(CurHp, Parameters.Parameters[ParamType.Heath], p);
+            }
         }
     }
 

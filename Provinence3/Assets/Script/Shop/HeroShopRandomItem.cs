@@ -27,6 +27,10 @@ public class HeroShopRandomItem : IShopExecute
         base.Execute(level);
     }
 
+    public override int MoneyCost
+    {
+        get { return Formuls.ChestItemCost(Parameter); }
+    }
     private void randomCreatAdditionalItem()
     {
         

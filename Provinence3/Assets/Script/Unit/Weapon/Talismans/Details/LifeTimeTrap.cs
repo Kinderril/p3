@@ -7,13 +7,13 @@ using UnityEngine;
 
 public class LifeTimeTrap : MonoBehaviour
 {
-    public const float lifeTimeSec = 10;
+    public const float LIFE_TIME = 10;
     private TimerManager.ITimer timer;
     public BaseEffectAbsorber dieEffect;
 
     public virtual void Init()
     {
-        timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromSeconds(lifeTimeSec));
+        timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromSeconds(LIFE_TIME));
         timer.OnTimer += OnTimer;
     }
 

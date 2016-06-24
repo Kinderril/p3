@@ -36,15 +36,17 @@ public class BaseMonster : Unit
     public Vector3 bornPosition;
     public AIStatus aiStatus;
     private Hero mainHero;
-    public int moneyCollect;
-    public int energyadd = 4;
+    private int energyadd;
     private bool isHome = true;
     private BaseAction attackBehaviour;
     private bool isDisabled = false;
     public bool haveAction;
     public List<DropItem> dropItems; 
     public FlashController FlashController;
-    
+
+    public float moneyCoef = 1f;
+    public float energyCoef = 1f;
+
 
     public bool IsDisabled
     {
@@ -65,9 +67,9 @@ public class BaseMonster : Unit
         Parameters.Parameters[ParamType.Speed] = GreatRandom.RandomizeValue(Parameters.Parameters[ParamType.Speed]);
         bornPosition = transform.position;
         Utils.GroundTransform(transform, 999f);
+        energyadd = (int)(Formuls.BASE_MOSTER_ENERGY*energyCoef);
         //curWeapon.power = GreatRandom.RandomizeValue(curWeapon.power);
-        moneyCollect = GreatRandom.RandomizeValue(moneyCollect);
-        energyadd = GreatRandom.RandomizeValue(energyadd);
+//        moneyCollect = GreatRandom.RandomizeValue(moneyCollect);
         aiStatus = AIStatus.disable;
     }
 
@@ -114,7 +116,7 @@ public class BaseMonster : Unit
     private void DropMoney()
     {
         var goldMapItem = DataBaseController.GetItem<GoldMapItem>(DataBaseController.Instance.GoldMapItemPrefab, transform.position);
-        goldMapItem.Init(ItemId.money, moneyCollect);
+        goldMapItem.Init(ItemId.money, Formuls.GoldInMonster(Parameters.Level,moneyCoef));
         goldMapItem.transform.SetParent(Map.Instance.miscContainer, true);
         goldMapItem.StartFly(transform);
     }

@@ -2,15 +2,55 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 
 public class Formuls
 {
-
+    public const float BASE_MOSTER_ENERGY = 5;
     public static float calcResist(float curResist)
     {
         return 1 - curResist / (100 + curResist);
     }
+
+    private const int av_mosters_kills = 45;
+    private const int av_chestes = 13;
+    private const int base_gold_chest = 109;
+    private const int base_monster_gold = 23;
+
+    public static int LevelGoldAv(int lvl)
+    {
+        return av_mosters_kills* GoldInMonster(lvl) + av_chestes*GoldInChest(lvl);
+    }
+
+    public static int ChestItemCost(int lvl)
+    {
+        return (int) (2*Mathf.Pow(lvl, 0.37f)*LevelGoldAv(lvl));
+    }
+    public static int RecepiCost(int lvl)
+    {
+        return (int)(ChestItemCost(lvl) * 0.65f);
+    }
+    public static int BonusCost(int lvl)
+    {
+        return (int)(ChestItemCost(lvl) * 0.35f);
+    }
+    public static int ExecutableCost(int lvl)
+    {
+        return (int)(ChestItemCost(lvl) * 0.4f);
+    }
+
+    public static int GoldInChest(int lvl)
+    {
+        //return (int)(base_gold_chest*(1 + 0.1f*lvl)); 
+        return (int) (Mathf.Pow(lvl, 0.6f)* base_gold_chest);
+    }
+
+    public static int GoldInMonster(int lvl,float coef = 1f)
+    {
+        return (int) (lvl*base_monster_gold*coef);
+    }
+
     public static int GetTalismanPointsByLvl(int lvl)
     {
         return lvl * 10;

@@ -17,6 +17,10 @@ public  class HeroShopRecipeItem : IShopExecute
         MainController.Instance.PlayerData.AddItem(CreatRandomRecipeItem(parameter));
         base.Execute(parameter);
     }
+    public override int MoneyCost
+    {
+        get { return Formuls.RecepiCost(Parameter); }
+    }
 
     public static RecipeItem CreatRandomRecipeItem(int lvl)
     {

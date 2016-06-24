@@ -12,6 +12,10 @@ public class HeroShopExecutableItem : IShopExecute
         base.Execute(parameter);
     }
 
+    public override int MoneyCost
+    {
+        get { return Formuls.ExecutableCost(Parameter); }
+    }
     public static ExecEnchantItem CreatExecutableItem(int lvl)
     {
         var t = ShopController.AllEnchantes.RandomElement();

@@ -8,7 +8,7 @@ using UnityStandardAssets.Effects;
 
 public class Chest : MonoBehaviour
 {
-    public const int moneyCoef = 80; 
+//    public const int moneyCoef = 80; 
     public Dictionary<ItemId, int> items = new Dictionary<ItemId, int>();
     private bool isOpen = false;
     public ParticleSystemMultiplier SystemMultiplier;
@@ -60,7 +60,7 @@ public class Chest : MonoBehaviour
         Utils.GroundTransform(transform, m_GroundCheckDistance);
         Utils.SetRandomRotation(transform);
         var p = lvl.Penalty;
-        var rnd = (int) (p * Mathf.Pow(lvl.difficult, 0.6f)*moneyCoef);
+        var rnd = (int)(Formuls.GoldInChest(lvl.difficult) * p); 
         items.Add(ItemId.money,GreatRandom.RandomizeValue(rnd));
         if (withCrystal && p > 0.99f)
             items.Add(ItemId.crystal, 1);

@@ -13,6 +13,11 @@ public class HeroShopBonusItem : IShopExecute
         base.Execute(lvl);
     }
 
+    public override int MoneyCost
+    {
+        get { return Formuls.BonusCost(Parameter); }
+    }
+
     public static BonusItem CreatBonusItem(int lvl)
     {
         var bonus = ShopController.RandomBonus();
