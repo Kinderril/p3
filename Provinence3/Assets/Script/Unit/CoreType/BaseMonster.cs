@@ -76,6 +76,7 @@ public class BaseMonster : Unit
 
     public void Overcharg()
     {
+        Dictionary<ParamType, float> tmpDictionary = new Dictionary<ParamType, float>();
         foreach (var unitParameter in Parameters.Parameters)
         {
             float c = 1f;
@@ -95,7 +96,11 @@ public class BaseMonster : Unit
                     break;
             }
             var upg = unitParameter.Value*c;
-            Parameters.Parameters[unitParameter.Key] = upg;
+            tmpDictionary[unitParameter.Key] = upg;
+        }
+        foreach (var f in tmpDictionary)
+        {
+            Parameters.Parameters[f.Key] = f.Value;
         }
         transform.localScale = Vector3.one*1.5f;
         overcharged = true;

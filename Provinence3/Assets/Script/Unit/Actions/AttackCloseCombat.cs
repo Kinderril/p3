@@ -17,7 +17,7 @@ public class AttackCloseCombat :AttackAction
             owner.Control.ThisByQuaterhnion.SetLookDir(dir);
             var waitTime = UnityEngine.Random.Range(1.5f, 3f);
             activateTime = Time.time + waitTime;
-            Debug.Log("tupiiim:" + waitTime);
+//            Debug.Log("tupiiim:" + waitTime);
         }
         else
         {

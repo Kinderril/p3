@@ -24,16 +24,17 @@ public class PoolElement : MonoBehaviour
     public virtual void Init()
     {
         isUsing = true;
+        if (baseParent == null)
+        {
+            baseParent = DataBaseController.Instance.transform;
+        }
         gameObject.SetActive(IsUsing);
     }
 
     public virtual void EndUse()
     {
         isUsing = false;
-        if (baseParent != null)
-        {
-            transform.SetParent(baseParent,false);
-        }
+        transform.SetParent(baseParent,false);
         gameObject.SetActive(IsUsing);
         
     }

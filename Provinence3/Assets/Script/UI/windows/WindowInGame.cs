@@ -25,6 +25,7 @@ public class WindowInGame : BaseWindow
     {
         base.Init(obj);
         level = obj as Level;
+        moneyField.text = 0.ToString("0");
         UiControls.Init(level);
         level.OnLeft += OnLeft;
         level.OnItemCollected += OnItemCollected;

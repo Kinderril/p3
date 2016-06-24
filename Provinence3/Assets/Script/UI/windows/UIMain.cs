@@ -201,7 +201,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         {
             float chargePower = Time.time - chargeTime;
             var v = new Vector3(dir.x, 0, dir.y);
-            mainHero.TryAttackByDirection(v, chargePower);
+            mainHero.TryAttackByDirection(v, chargePower,true);
         }
     }
 

@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Hero : Unit
 {
-    public const int HOMING_RAD_SQRT = 30;
+    public const int HOMING_RAD_SQRT = 24;
 
     private const float moneyBonusCoef = 0.2f;
     private const float moneyBonusCoefTime = 0.8f;
@@ -127,18 +127,24 @@ public class Hero : Unit
 
 
 #if UNITY_EDITOR
-        Ray ray = new Ray(p, trg);
-        Debug.DrawRay(ray.origin, ray.direction * 5, Color.red, 1);
+//        Ray ray = new Ray(p, trg);
+        Debug.DrawRay(transform.position, dir * 5, Color.red, 1);
 #endif
         if (homing)
         {
-            var centr = p + dir/2;
+            var centr = p + curWeapon.Parameters.range* dir.normalized;
+#if UNITY_EDITOR
+//            Ray ray2 = new Ray(centr, Vector3.up);
+            Debug.DrawRay(centr, Vector3.up * 4, Color.yellow, 2);
+#endif
             var closestEnemy = Map.Instance.FindClosesEnemy(centr);
             if (closestEnemy != null)
             {
                 var ep = closestEnemy.transform.position;
                 var sDist = (ep-centr).sqrMagnitude;
-                if (sDist < HOMING_RAD_SQRT)
+                var shallHoming = sDist < HOMING_RAD_SQRT;
+//                Debug.Log("shallHoming:" + shallHoming + "  sDist:" + sDist + "  enemy:" + closestEnemy.name + "  centr:" + centr);
+                if (shallHoming)
                 {
                     trg = new Vector3(ep.x, p.y, ep.z);
                 }
@@ -184,7 +190,7 @@ public class Hero : Unit
         else
         {
 #if UNITY_EDITOR
-            Debug.DrawRay(transform.position, dir * 5, Color.yellow, 2);
+            Debug.DrawRay(transform.position, dir * 5, Color.green, 2);
 #endif
             heorControl.SetLookDir(dir);
             shootContainer = new ShootContainer(dir, additionalPower);

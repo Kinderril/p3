@@ -36,7 +36,6 @@ public abstract class IShopExecute : MonoBehaviour
     {
         Parameter = lvl;
         var cost = DataBaseController.Instance.GetCostItemsByLevel(lvl);
-        MoneyCost = cost.val1;
         CrystalCost = cost.val2;
     }
 }
