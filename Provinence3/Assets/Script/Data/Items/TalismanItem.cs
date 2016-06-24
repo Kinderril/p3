@@ -42,7 +42,7 @@ public class TalismanItem : BaseItem
         Slot = Slot.Talisman;
         this.TalismanType = type;
         this.points = points;
-        costShoot = GreatRandom.RandomizeValue(GetBaseCost(type)*Formuls.BASE_MOSTER_ENERGY);
+        costShoot = GreatRandom.RandomizeValue(GetBaseCost(type)*Formuls.BASE_MOSTER_ENERGY)/2;
         IconSprite = DataBaseController.Instance.TalismanIcon(type);
         MaxCharges = GetMaxCharges(type);
     }
@@ -95,31 +95,31 @@ public class TalismanItem : BaseItem
         switch (TalismanType)
         {
             case TalismanType.firewave:
-                return 12;
+                return 6;
             case TalismanType.massPush:
-                return 14;
+                return 6;
             case TalismanType.massFreez:
-                return 14;
+                return 6;
             case TalismanType.heal:
-                return 10;
+                return 5;
             case TalismanType.doubleDamage:
-                return 8;
+                return 4;
             case TalismanType.megaArmor:
-                return 8;
+                return 4;
             case TalismanType.chain:
-                return 12;
+                return 6;
             case TalismanType.trapDamage:
-                return 10;
+                return 5;
             case TalismanType.trapAOE:
-                return 14;
+                return 7;
             case TalismanType.trapFreez:
-                return 14;
+                return 7;
             case TalismanType.bloodDamage:
-                return 8;
+                return 4;
             case TalismanType.energyVamp:
-                return 9;
+                return 5;
             case TalismanType.splitter:
-                return 10;
+                return 5;
         }
         return 1;
     }

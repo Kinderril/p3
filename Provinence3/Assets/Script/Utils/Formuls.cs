@@ -113,7 +113,7 @@ public class Formuls
                 curVal += MainParameters[MainParam.DEF] * 5 + 10;
                 break;
             case ParamType.Heath:
-                curVal += MainParameters[MainParam.HP] * 40 + 200;
+                curVal += MainParameters[MainParam.HP] * 40 + 300;//200
 #if UNITY_EDITOR
                 if (DebugController.Instance.MAIN_HERO_MEGAHP)
                 {

@@ -19,8 +19,8 @@ public class TalismanItemInfo : BaseItemInfo
         var item = Talisman.Creat(talismanItem, 0, null);
 
         mainIcon.sprite = DataBaseController.Instance.TalismanIcon(talismanItem.TalismanType);
-        powerField.text = item.PowerInfo();
-        descField.text = "cost:"  + talismanItem.costShoot;
+        powerField.text = item.PowerInfo() + "\n Charges: " + talismanItem.MaxCharges;
+        descField.text = "cost:"  + talismanItem.costShoot.ToString("0");
         NameLabel.text = talismanItem.TalismanType.ToString();
     }
 }

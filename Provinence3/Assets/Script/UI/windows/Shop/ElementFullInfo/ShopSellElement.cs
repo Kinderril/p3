@@ -13,6 +13,9 @@ public class ShopSellElement : BaseItemInfo
         base.Init(null,false);
         NameLabel.text = "Level:" + item.Parameter;
         mainIcon.sprite = item.icon;
+
+        InitCost(item.CrystalCost, item.MoneyCost);
+        
     }
 }
 

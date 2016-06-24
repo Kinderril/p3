@@ -288,8 +288,8 @@ public class Unit : MonoBehaviour
                 case SpecialAbility.dot:
                     break;
                 case SpecialAbility.distance:
-                    var sqrdist = (owner.transform.position - transform.position).sqrMagnitude * 0.8f;
-                    power *= sqrdist;
+                    var sqrdist = (owner.transform.position - transform.position).sqrMagnitude *  (38f * 0.4f);
+                    power *= Mathf.Clamp(sqrdist,1f,2f);
                     break;
                 case SpecialAbility.hp:
                     var c = ( 1 - CurHp/Parameters.MaxHp)/3;

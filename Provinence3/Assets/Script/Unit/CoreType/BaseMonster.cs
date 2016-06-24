@@ -89,10 +89,10 @@ public class BaseMonster : Unit
                 case ParamType.PPower:
                 case ParamType.PDef:
                 case ParamType.MDef:
-                    c = 2f;
+                    c = 1.3f;
                     break;
                 case ParamType.Heath:
-                    c = 5f;
+                    c = 2.3f;
                     curHp = unitParameter.Value*c;
                     break;
             }
