@@ -61,6 +61,10 @@ public class MonsterBornPosition : BaseBornPosition
             var unit = DataBaseController.GetItem(monster, pos);
             map.enemies.Add(unit);
             unit.Init(hero);
+            if (UnityEngine.Random.Range(0, 100) < 7)
+            {
+                unit.Overcharg();
+            }
             unit.transform.SetParent(map.enemiesContainer);
             unit.OnDead += OnEnemyDead;
             unit.OnDead += OnDead;

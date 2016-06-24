@@ -43,6 +43,7 @@ public class BaseMonster : Unit
     public bool haveAction;
     public List<DropItem> dropItems; 
     public FlashController FlashController;
+    private bool overcharged = false;
 
     public float moneyCoef = 1f;
     public float energyCoef = 1f;
@@ -71,6 +72,35 @@ public class BaseMonster : Unit
         //curWeapon.power = GreatRandom.RandomizeValue(curWeapon.power);
 //        moneyCollect = GreatRandom.RandomizeValue(moneyCollect);
         aiStatus = AIStatus.disable;
+    }
+
+    public void Overcharg()
+    {
+        foreach (var unitParameter in Parameters.Parameters)
+        {
+            float c = 1f;
+            switch (unitParameter.Key)
+            {
+                case ParamType.Speed:
+                    c = 1.15f;
+                    break;
+                case ParamType.MPower:
+                case ParamType.PPower:
+                case ParamType.PDef:
+                case ParamType.MDef:
+                    c = 2f;
+                    break;
+                case ParamType.Heath:
+                    c = 5f;
+                    break;
+            }
+            var upg = unitParameter.Value*c;
+            Parameters.Parameters[unitParameter.Key] = upg;
+        }
+        transform.localScale = Vector3.one*1.5f;
+        overcharged = true;
+        moneyCoef *= 4f;
+        energyCoef *= 5f;
     }
 
     protected override void Death()
