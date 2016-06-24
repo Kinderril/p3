@@ -9,7 +9,7 @@ public enum ExecutableType
     craft,
     enchant,
     catalys,
-    recipe,
+//    recipe,
 }
 
 public class ExecutableItem : BaseItem

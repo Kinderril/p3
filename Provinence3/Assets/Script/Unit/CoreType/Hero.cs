@@ -8,8 +8,11 @@ using UnityEngine;
 
 public class Hero : Unit
 {
+    public const int HOMING_RAD_SQRT = 30;
+
     private const float moneyBonusCoef = 0.2f;
     private const float moneyBonusCoefTime = 0.8f;
+    
     public PSAbsorber GetItemEffect;
     private float currenthBonus = 0f;
     private float currenthBonusTimeLeft = 0f;
@@ -117,16 +120,30 @@ public class Hero : Unit
         if (Action != null)
             Action.Update();
     }
-    public void TryAttackByDirection(Vector3 dir, float additionalPower = 0)
+    public void TryAttackByDirection(Vector3 dir, float additionalPower = 0,bool homing = false)
     {
-        var trg = transform.position + dir;
+        var p = transform.position;
+        var trg = p + dir;
 
 
 #if UNITY_EDITOR
-        Ray ray = new Ray(transform.position, trg);
+        Ray ray = new Ray(p, trg);
         Debug.DrawRay(ray.origin, ray.direction * 5, Color.red, 1);
 #endif
-
+        if (homing)
+        {
+            var centr = p + dir/2;
+            var closestEnemy = Map.Instance.FindClosesEnemy(centr);
+            if (closestEnemy != null)
+            {
+                var ep = closestEnemy.transform.position;
+                var sDist = (ep-centr).sqrMagnitude;
+                if (sDist < HOMING_RAD_SQRT)
+                {
+                    trg = new Vector3(ep.x, p.y, ep.z);
+                }
+            }
+        }
         TryAttack(trg, additionalPower);
     }
 

@@ -53,6 +53,12 @@ public class ItemInfoElement : MonoBehaviour
                 TalismanItemInfo.Init(item as TalismanItem);
                 CurItemInfo = TalismanItemInfo;
                 break;
+            case RecipeItem.FIRSTCHAR:
+                RecepiItemInfo RecepiItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.RecepiItemInfo);
+                RecepiItemInfo.Init(item as RecipeItem);
+                CurItemInfo = RecepiItemInfo;
+                break;
+
         }
         Link();
         if (OnInitCallback != null)

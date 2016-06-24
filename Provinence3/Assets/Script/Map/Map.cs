@@ -223,9 +223,8 @@ public class Map : Singleton<Map>
     {
         float curDist = 999999;
         BaseMonster unit = null;
-        foreach (var enemy in enemies)
+        foreach (var enemy in enemies.Where(x=>!x.IsDisabled))
         {
-            
             var pDist = (enemy.transform.position - v).sqrMagnitude;
             if (pDist < curDist)
             {

@@ -120,7 +120,12 @@ public class BaseMonster : Unit
 
         foreach (var dropItem in dropItems)
         {
-            var isDrop = UnityEngine.Random.Range(0f, 1f) < dropItem.chance0_1;
+            var chance = UnityEngine.Random.Range(0f, 1f);
+            if (overcharged)
+            {
+                chance /= 3;
+            }
+            var isDrop = chance < dropItem.chance0_1;
 #if UNITY_EDITOR
             if (DebugController.Instance.ALL_TIME_DROP)
             {
@@ -136,10 +141,18 @@ public class BaseMonster : Unit
 
     private void DropItem(CraftItemType t)
     {
-        var itemMapItem = DataBaseController.GetItem<ItemMapItem>(DataBaseController.Instance.ItemMapItemPrefab, transform.position);
-        itemMapItem.Init(t);
-        itemMapItem.transform.SetParent(Map.Instance.miscContainer, true);
-        itemMapItem.StartFly(transform);
+        int count = 1;
+        if (overcharged)
+        {
+            count = 4;
+        }
+        for (int i = 0; i < count; i++)
+        {
+            var itemMapItem = DataBaseController.GetItem<ItemMapItem>(DataBaseController.Instance.ItemMapItemPrefab, transform.position);
+            itemMapItem.Init(t);
+            itemMapItem.transform.SetParent(Map.Instance.miscContainer, true);
+            itemMapItem.StartFly(transform);
+        }
     }
 
 

@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PrefabsStruct : MonoBehaviour
 {
+    public RecepiItemInfo RecepiItemInfo;
     public TalismanItemInfo TalismanItemInfo;
     public PlayerItemInfo PlayerItemInfo;
     public BonusItemInfo BonusItemInfo;
