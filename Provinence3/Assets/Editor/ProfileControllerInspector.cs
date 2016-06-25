@@ -125,9 +125,11 @@ public class ProfileControllerInspector : EditorWindow
                 if (bullet != null)
                 {
                     bullet.ID = bulletIndex;
-                    bullet.tmpField = "index:" + bulletIndex;
                     bulletIndex++;
-                    PrefabUtility.ReplacePrefab(go, PrefabUtility.GetPrefabParent(go), ReplacePrefabOptions.ConnectToPrefab);
+//                    PrefabUtility.re
+//                    PrefabUtility.prefabInstanceUpdated(go);
+//                    PrefabUtility.ReplacePrefab(go, o, ReplacePrefabOptions.ConnectToPrefab);
+//                    PrefabUtility.ReplacePrefab(bullet.gameObject, o, ReplacePrefabOptions.Default);
                 }
                 var control = go.GetComponent<BaseControl>();
                 if (control != null)
@@ -142,7 +144,7 @@ public class ProfileControllerInspector : EditorWindow
 
             }
         }
-        AssetDatabase.Refresh();
+//        AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();
         Debug.Log("All bullets ID setted last id:" + bulletIndex);
     }
