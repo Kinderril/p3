@@ -174,7 +174,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   rebuildY: 1
   playHitAnyway: 1
-  ID: 0
+  ID: 107
 --- !u!114 &11440026
 MonoBehaviour:
   m_ObjectHideFlags: 1

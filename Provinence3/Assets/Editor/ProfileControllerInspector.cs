@@ -112,7 +112,8 @@ public class ProfileControllerInspector : EditorWindow
 
     private void CheckID()
     {
-        int bulletIndex = 100;
+   
+           int bulletIndex = 100;
         var allPrefabs = GetAllPrefabs();
         foreach (string prefab in allPrefabs)
         {
@@ -126,10 +127,11 @@ public class ProfileControllerInspector : EditorWindow
                 {
                     bullet.ID = bulletIndex;
                     bulletIndex++;
-//                    PrefabUtility.re
-//                    PrefabUtility.prefabInstanceUpdated(go);
-//                    PrefabUtility.ReplacePrefab(go, o, ReplacePrefabOptions.ConnectToPrefab);
-//                    PrefabUtility.ReplacePrefab(bullet.gameObject, o, ReplacePrefabOptions.Default);
+                    EditorUtility.SetDirty(go);
+                    //                    PrefabUtility.re
+                    //                    PrefabUtility.prefabInstanceUpdated(go);
+                    //                    PrefabUtility.ReplacePrefab(go, o, ReplacePrefabOptions.ConnectToPrefab);
+                    //                    PrefabUtility.ReplacePrefab(bullet.gameObject, o, ReplacePrefabOptions.Default);
                 }
                 var control = go.GetComponent<BaseControl>();
                 if (control != null)
@@ -145,7 +147,7 @@ public class ProfileControllerInspector : EditorWindow
             }
         }
 //        AssetDatabase.Refresh();
-        AssetDatabase.SaveAssets();
+//        AssetDatabase.SaveAssets();
         Debug.Log("All bullets ID setted last id:" + bulletIndex);
     }
     public static string[] GetAllPrefabs()

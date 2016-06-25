@@ -30,7 +30,7 @@ public class MainController : Singleton<MainController>
         PlayerData = new PlayerData();
         PlayerData.Load();
         WindowManager.Instance.OpenWindow(MainState.start);
-	    Test();
+//	    Test();
 	}
 
     private void Test()
