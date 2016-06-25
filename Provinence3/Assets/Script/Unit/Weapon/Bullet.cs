@@ -29,6 +29,7 @@ public class Bullet : PoolElement
     private float additionalPower = 0;
     private float startDist2target;
     public int ID;
+    public string tmpField ;
 
     public float AdditionalPower
     {

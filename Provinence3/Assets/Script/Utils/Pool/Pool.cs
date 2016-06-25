@@ -67,6 +67,7 @@ public class Pool
             bullet =  GameObject.Instantiate(registeredBulletsPrefabs[id].gameObject).GetComponent<Bullet>();
             pool.Add(bullet);
         }
+//        Debug.Log("Get bullet id:" + id);
         return bullet;
     }
 
