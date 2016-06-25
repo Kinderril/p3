@@ -10,13 +10,13 @@ public class Hero : Unit
 {
     public const int HOMING_RAD_SQRT = 44;
 
-    private const float moneyBonusCoef = 0.2f;
-    private const float moneyBonusCoefTime = 0.8f;
+//    private const float moneyBonusCoef = 0.2f;
+//    private const float moneyBonusCoefTime = 0.8f;
     
     public PSAbsorber GetItemEffect;
     private float currenthBonus = 0f;
     private float currenthBonusTimeLeft = 0f;
-    public Action<float> CurrentBonusUpdateX;
+//    public Action<float> CurrentBonusUpdateX;
     public float moneyBonusFromItem = 0.0f;
     public float damageBonusFromItem = 0.0f;
     private HeroControl heorControl;
@@ -25,18 +25,18 @@ public class Hero : Unit
     private ShootContainer shootContainer;
     private RotateContainer rotateContainer;
 
-    public float CurrenthBonus
-    {
-        get { return currenthBonus; }
-        set
-        {
-            currenthBonus = value;
-            if (CurrentBonusUpdateX != null)
-            {
-                CurrentBonusUpdateX( currenthBonus );
-            }
-        }
-    }
+//    public float CurrenthBonus
+//    {
+//        get { return currenthBonus; }
+//        set
+//        {
+//            currenthBonus = value;
+//            if (CurrentBonusUpdateX != null)
+//            {
+//                CurrentBonusUpdateX( currenthBonus );
+//            }
+//        }
+//    }
 
     public override void Init()
     {
@@ -202,8 +202,8 @@ public class Hero : Unit
     {
         count =(int)(count * (currenthBonus + 1));
 
-        CurrenthBonus += moneyBonusCoef;
-        currenthBonusTimeLeft += moneyBonusCoefTime;
+//        CurrenthBonus += moneyBonusCoef;
+//        currenthBonusTimeLeft += moneyBonusCoefTime;
         
         MainController.Instance.level.AddItem(type, count);
     }

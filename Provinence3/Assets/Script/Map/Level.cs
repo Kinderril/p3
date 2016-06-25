@@ -62,6 +62,7 @@ public class Level
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
+        MissionIndex = levelIndex;
         IndexBornPoint = indexBornPos;
         this.difficult = difficult;
         DataBaseController.Instance.Pool.StartLevel();

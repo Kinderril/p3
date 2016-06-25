@@ -29,6 +29,12 @@ public struct EffectVisualsBehaviour
     public VisualEffectBehaviour beh;
 }
 [Serializable]
+public struct EffectVisualsTalisman
+{
+    public TalismanType type;
+    public BaseEffectAbsorber EffectAbsorber;
+}
+[Serializable]
 public struct CostItemsByLevel
 {
     public int level;
@@ -38,7 +44,7 @@ public struct CostItemsByLevel
 public class DataStructs : MonoBehaviour
 {
 
-
+    public EffectVisualsTalisman[] EffectVisualsTalisman;
     public ColorRarity[] ColorRarity;
     public ColorParameter[] ColorParameter;
     public ColorUI[] ColorsOfUI;

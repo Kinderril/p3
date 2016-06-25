@@ -20,6 +20,7 @@ public abstract class Talisman
     private int currentCharges = 0;
     private float max;
     protected float power;
+    private BaseEffectAbsorber CastEffect;
 
     public Talisman()
     {
@@ -46,6 +47,12 @@ public abstract class Talisman
                     AddEnergy(delta/countTalismans);
                 }
             };
+            var db = DataBaseController.Instance;
+            var absorber = db.GetEffect(sourseItem.TalismanType);
+            if (absorber != null)
+            {
+                CastEffect = DataBaseController.GetItem<BaseEffectAbsorber>(absorber);
+            }
         }
         if (DebugController.Instance.ALL_TALISMAN_CHARGED)
         {
@@ -127,6 +134,10 @@ public abstract class Talisman
         timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromMilliseconds(500));
         timer.OnTimer += OnTimerCome;
         AddEnergy(sourseItem.costShoot,true);
+        if (CastEffect != null)
+        {
+            CastEffect.Play();
+        }
         DoCallback();
     }
 

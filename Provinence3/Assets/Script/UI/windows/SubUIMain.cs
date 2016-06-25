@@ -13,6 +13,7 @@ public class SubUIMain : MonoBehaviour,IPointerDownHandler,IDragHandler,IPointer
     private Vector2 dir;
     public bool isDrag;
     private UIMain uiMain;
+    private bool enable = false;
     public RectTransform Arrow;
     public void Init(UIMain uiMain)
     {
@@ -20,9 +21,12 @@ public class SubUIMain : MonoBehaviour,IPointerDownHandler,IDragHandler,IPointer
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        startPos = eventData.position;
-        Arrow.transform.position = startPos;
-        isDrag = true;
+        if (enable)
+        {
+            startPos = eventData.position;
+            Arrow.transform.position = startPos;
+            isDrag = true;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -49,6 +53,10 @@ public class SubUIMain : MonoBehaviour,IPointerDownHandler,IDragHandler,IPointer
     {
         isDrag = false;
         uiMain.UpdateMoveArrow(Vector3.zero);
+    }
+    public void Enable(bool val)
+    {
+        enable = val;
     }
 }
 

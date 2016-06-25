@@ -69,6 +69,7 @@ public class MainController : Singleton<MainController>
         Map.Instance.EndLevel();
         if (level.MainHero != null)
             Destroy(level.MainHero.gameObject);
+        DataBaseController.Instance.Pool.Clear();
     }
 
     private void EndFadeScreen()

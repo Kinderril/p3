@@ -23,6 +23,7 @@ public class PreStartWindow : MonoBehaviour
         Difficulty.text = "Difficulty:"+level.difficult.ToString();
         Startpoint.text = names[level.IndexBornPoint];
         MonsterCountField.text = "Monsters:"+Map.Instance.enemies.Count.ToString();
+//        if (level.MainHero.CurrenthBonus)
 
     }
 

@@ -22,5 +22,9 @@ public class TalismanItemInfo : BaseItemInfo
         powerField.text = item.PowerInfo() + "\n Charges: " + talismanItem.MaxCharges;
         descField.text = "cost:"  + talismanItem.costShoot.ToString("0");
         NameLabel.text = talismanItem.TalismanType.ToString();
+
+        var haveEnchant = talismanItem.Enchant > 0;
+        enchantField.gameObject.SetActive(haveEnchant);
+        enchantField.text = "+" + talismanItem.Enchant;
     }
 }

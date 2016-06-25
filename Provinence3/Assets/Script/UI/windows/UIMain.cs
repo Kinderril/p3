@@ -101,10 +101,9 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         return Vector3.zero;
     }
 
-#if UNITY_EDITOR
-    void LateUpdate()
+    void UpdateSwipe()
     {
-
+#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
             startDrag = Input.mousePosition;
@@ -117,9 +116,9 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             isCharging = false;
             chargeTime = Time.time + Weapon.CHARGE_TIME_DELAY;
             var m = Input.mousePosition;
-            dir = new Vector2(m.x,m.y) - startDrag;
+            dir = new Vector2(m.x, m.y) - startDrag;
 
-//            Debug.Log("dir " + dir);
+            //            Debug.Log("dir " + dir);
             if (!isCharging && Time.time > chargeTime)
             {
                 var dist = dir.sqrMagnitude;
@@ -147,11 +146,8 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
                 EndPress();
             }
         }
-    }
 #else
-    void LateUpdate()
-    {
-        bool pressedCur = false;
+         bool pressedCur = false;
         Touch touch =default(Touch);
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -184,8 +180,15 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             }
         }
         isLastFramePressed = pressedCur;
-    }
 #endif
+    }
+    void LateUpdate()
+    {
+        if (enable)
+        {
+            UpdateSwipe();
+        }
+    }
 
     private void StartPress(Touch touch)
     {
@@ -243,6 +246,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
 
     public void Enable(bool val)
     {
+        subUI.Enable(val);
         enable = val;
     }
 }

@@ -27,7 +27,7 @@ public class HeroControl : BaseControl
 
     private const int maxAngle = 45 + 90;
     private const int ANG_TO_BACK = 110;
-    private const float CPNST_BACK_WALK = 0.62f;
+    private const float CPNST_BACK_WALK = 0.52f;
     private const float CONST_SEC_WALK = 1.4f;
     private const float CONST_SEC_LOOK = 1.4f;
     private float RemainBackWalkTimeSec = 0;

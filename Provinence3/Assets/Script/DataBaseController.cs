@@ -30,6 +30,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<Slot, Sprite> SlotSprites = new Dictionary<Slot, Sprite>();
     private readonly Dictionary<ItemId, Color> itemsColors = new Dictionary<ItemId, Color>();
     private readonly Dictionary<Rarity, Color> rarityColors = new Dictionary<Rarity, Color>();
+    private readonly Dictionary<TalismanType, BaseEffectAbsorber> TalismanEffects = new Dictionary<TalismanType, BaseEffectAbsorber>();
     private readonly Dictionary<ParamType, Color> parameterColors = new Dictionary<ParamType, Color>();
     private readonly Dictionary<CraftItemType,Sprite> CraftItemsSprites = new Dictionary<CraftItemType, Sprite>(); 
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
@@ -159,6 +160,10 @@ public class DataBaseController : Singleton<DataBaseController>
         {
             rarityColors.Add(colorUi.Rarity, colorUi.Color);
         }
+        foreach (var effects in DataStructs.EffectVisualsTalisman)
+        {
+            TalismanEffects.Add(effects.type, effects.EffectAbsorber);
+        }
         foreach (var colorUi in DataStructs.ColorParameter)
         {
             parameterColors.Add(colorUi.ParamType, colorUi.Color);
@@ -238,6 +243,14 @@ public class DataBaseController : Singleton<DataBaseController>
     public Color GetColor(Rarity f)
     {
         return rarityColors[f];
+    }
+    public BaseEffectAbsorber GetEffect(TalismanType f)
+    {
+        if (TalismanEffects.ContainsKey(f))
+        {
+            return TalismanEffects[f];
+        }
+        return null;
     }
     public Color GetColor(ParamType f)
     {
