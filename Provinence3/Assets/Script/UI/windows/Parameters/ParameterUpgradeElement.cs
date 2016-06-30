@@ -11,15 +11,22 @@ public class ParameterUpgradeElement : MonoBehaviour
     public Button UpgradeButton;
     public Text CurrentValue;
     private MainParam type;
-    public Image Icon;
-    //public Text nextLevelCost;
+//    public Image Icon;
+    public Text paramInfo;
+    public Text nameField;
+
+    public MainParam TypeParam
+    {
+        get { return type; }
+    }
 
     public void Init(MainParam type)
     {
         this.type = type;
         UpgradeData();
-
-        Icon.sprite = DataBaseController.Instance.MainParameterIcon(type);
+        nameField.text = Localizer.MainParameterName(type);
+        paramInfo.text = Localizer.MainParameterInfo(type);
+        //        Icon.sprite = DataBaseController.Instance.MainParameterIcon(type);
     }
 
     public void UpgradeData()

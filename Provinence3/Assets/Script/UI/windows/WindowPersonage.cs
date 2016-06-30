@@ -37,9 +37,11 @@ public class WindowPersonage : BaseWindow
     private void OnLevelUp(int obj)
     {
         LevelUpButton.interactable = MainController.Instance.PlayerData.CanUpgradeLevel();
-        alocatedField.text = MainController.Instance.PlayerData.AllocatedPoints.ToString("0");
-        levelField.text = MainController.Instance.PlayerData.Level.ToString("0");
-        var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[MainController.Instance.PlayerData.Level];
+        var ap = MainController.Instance.PlayerData.AllocatedPoints;
+        var lvl = MainController.Instance.PlayerData.Level;
+        alocatedField.text = "Remain:"+ ap.ToString("0") + "/" + ((lvl-1)*PlayerData.POINTS_PER_LVL);
+        levelField.text = lvl.ToString("0");
+        var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[lvl];
         costNextLevelField.text = cost.ToString("0");
         UpgradeAllMainElements();
     }
@@ -85,10 +87,26 @@ public class WindowPersonage : BaseWindow
         {
             var item = DataBaseController.GetItem(PrefabParameterUpgrade);
             item.Init(baseParam.Key);
-            item.gameObject.transform.SetParent(layout);
+            item.gameObject.transform.SetParent(layout,false);
             elements.Add(item);
         }
+        Utils.Sort(elements,GetPriority);
     }
+
+    private int GetPriority(ParameterUpgradeElement arg1)
+    {
+        switch (arg1.TypeParam)
+        {
+            case MainParam.HP:
+                return 1;
+            case MainParam.DEF:
+                return 2;
+            case MainParam.ATTACK:
+                return 3;
+        }
+        return 0;
+    }
+
 
     public override void Close()
     {

@@ -36,12 +36,13 @@ public class PlayerItemInfo : BaseItemInfo
             element.transform.SetParent(layoutParam,false);
         }
         var haveSpec = playerItem.specialAbilities != SpecialAbility.none;
-        SpecIcon.gameObject.SetActive(haveSpec);
+        SpecIcon.transform.parent.gameObject.SetActive(haveSpec);
         if (haveSpec)
         {
             SpecIcon.gameObject.SetActive(true);
             SpecName.text = playerItem.specialAbilities.ToString();
             SpecIcon.sprite = DataBaseController.Instance.SpecialAbilityIcon(playerItem.specialAbilities);
+            SpecIcon.transform.parent.transform.SetAsLastSibling();
         }
         mainIcon.sprite = playerItem.IconSprite;
         NameLabel.text = playerItem.name;

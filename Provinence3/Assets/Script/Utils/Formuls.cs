@@ -93,6 +93,12 @@ public class Formuls
         return 1 + 0.2f*enchantCount;
     }
 
+    public const int PATTACK_COEF = 8;
+    public const int MATTACK_COEF = 9;
+    public const int PDEF_COEF = 6;
+    public const int MDEF_COEF = 5;
+    public const int HP_COEF = 40;
+
     public static float AffectMainParam(float curVal ,Dictionary<MainParam, int> MainParameters,ParamType type)
     {
         switch (type)
@@ -101,19 +107,19 @@ public class Formuls
                 curVal += 4;
                 break;
             case ParamType.MPower:
-                curVal += MainParameters[MainParam.ATTACK] * 8 + 12;
+                curVal += MainParameters[MainParam.ATTACK] * PATTACK_COEF + 12;
                 break;
             case ParamType.PPower:
-                curVal += MainParameters[MainParam.ATTACK] * 9 + 26;
+                curVal += MainParameters[MainParam.ATTACK] * MATTACK_COEF + 26;
                 break;
             case ParamType.PDef:
-                curVal += MainParameters[MainParam.DEF] * 6 + 20;
+                curVal += MainParameters[MainParam.DEF] * PDEF_COEF + 20;
                 break;
             case ParamType.MDef:
-                curVal += MainParameters[MainParam.DEF] * 5 + 10;
+                curVal += MainParameters[MainParam.DEF] * MDEF_COEF + 10;
                 break;
             case ParamType.Heath:
-                curVal += MainParameters[MainParam.HP] * 40 + 300;//200
+                curVal += MainParameters[MainParam.HP] * HP_COEF + 300;//200
 #if UNITY_EDITOR
                 if (DebugController.Instance.MAIN_HERO_MEGAHP)
                 {

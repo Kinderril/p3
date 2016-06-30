@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RecepiItemInfo: {fileID: 11444668, guid: 2be2df67012fa9649bc4b1e9913ba198, type: 2}
   TalismanItemInfo: {fileID: 11454610, guid: d30f2b84f848f6c44a995d55048862a6, type: 2}
-  PlayerItemInfo: {fileID: 11497644, guid: 1ab5e148e759a3346af59953a46c1044, type: 2}
+  PlayerItemInfo: {fileID: 11439630, guid: 1ab5e148e759a3346af59953a46c1044, type: 2}
   BonusItemInfo: {fileID: 11470772, guid: e90ee4d62674bbe4d98b1cd0c2862317, type: 2}
   ExecutableItemInfo: {fileID: 11472970, guid: 1ca019261ed23a149b5cdda55fe4a448, type: 2}
   ShopSellElement: {fileID: 11473184, guid: 85112eb1abee2e040b629d96aad99a6f, type: 2}

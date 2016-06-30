@@ -183,9 +183,12 @@ public class DataBaseController : Singleton<DataBaseController>
         return MainParamSprites[mp];
     }
 
+
     public Taple<int, int> GetCostItemsByLevel(int level)
     {
-        return costByLevelItems[level];
+        if (costByLevelItems.ContainsKey(level))
+            return costByLevelItems[level];
+        return new Taple<int, int>(0,0);
     }
 
     public Sprite CraftItemSprite(CraftItemType c)

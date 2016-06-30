@@ -17,7 +17,30 @@ public static class Utils
             return default(T);
         return list[UnityEngine.Random.Range(0, list.Count)];
     }
-    
+
+    public static void Sort<T>(List<T> list, Func<T, int> GetPriority) where T : MonoBehaviour
+    {
+        list.Sort((x, y) =>
+        {
+            var xPriority = GetPriority(x);
+            var yPriority = GetPriority(y);
+            if (xPriority > yPriority)
+            {
+                return 1;
+            }
+
+            if (yPriority > xPriority)
+            {
+                return -1;
+            }
+            return 0;
+        });
+        for (int i = list.Count - 1; i >= 0; i--)
+        {
+            var pe = list[i];
+            pe.transform.SetAsLastSibling();
+        }
+    }
     public static void SetRandomRotation(Transform transform)
     {
         transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(-180, 180), 0);

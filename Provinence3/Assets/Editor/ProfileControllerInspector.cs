@@ -28,11 +28,11 @@ public class ProfileControllerInspector : EditorWindow
                 AllocatedPoints++;
                 PlayerPrefs.SetInt(PlayerData.ALLOCATED, AllocatedPoints);
             }
-            if (GUILayout.Button("GIVE 1000 money"))
+            if (GUILayout.Button("GIVE 99000 money"))
             {
                 var str = PlayerData.INVENTORY + ItemId.money.ToString();
                 var cur = PlayerPrefs.GetInt(str, 0);
-                cur += 1000;
+                cur += 99000;
                 PlayerPrefs.SetInt(str, cur);
             }
             if (GUILayout.Button("GIVE 10 crystal"))
@@ -128,10 +128,6 @@ public class ProfileControllerInspector : EditorWindow
                     bullet.ID = bulletIndex;
                     bulletIndex++;
                     EditorUtility.SetDirty(go);
-                    //                    PrefabUtility.re
-                    //                    PrefabUtility.prefabInstanceUpdated(go);
-                    //                    PrefabUtility.ReplacePrefab(go, o, ReplacePrefabOptions.ConnectToPrefab);
-                    //                    PrefabUtility.ReplacePrefab(bullet.gameObject, o, ReplacePrefabOptions.Default);
                 }
                 var control = go.GetComponent<BaseControl>();
                 if (control != null)
@@ -146,8 +142,6 @@ public class ProfileControllerInspector : EditorWindow
 
             }
         }
-//        AssetDatabase.Refresh();
-//        AssetDatabase.SaveAssets();
         Debug.Log("All bullets ID setted last id:" + bulletIndex);
     }
     public static string[] GetAllPrefabs()

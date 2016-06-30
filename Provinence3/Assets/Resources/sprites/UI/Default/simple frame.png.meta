@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 47506361b9e294c48902fbceacf77fac
-timeCreated: 1466794758
+timeCreated: 1467225024
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -26,7 +26,7 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -2
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -41,9 +41,9 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 155, y: 82, z: 158, w: 85}
+  alignment: 9
+  spritePivot: {x: 0.51937985, y: 0.53341347}
+  spriteBorder: {x: 66, y: 43, z: 48, w: 41}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
@@ -51,7 +51,7 @@ TextureImporter:
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: 
+  spritePackingTag: UIMenu
   userData: 
   assetBundleName: 
   assetBundleVariant: 

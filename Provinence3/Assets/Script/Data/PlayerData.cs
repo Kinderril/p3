@@ -16,6 +16,7 @@ public class PlayerData
 {
     public const int CRYSTAL_SAFETY_ENCHANT = 10;
     public const int ENCHANT_CHANCE = 60;
+    public const int POINTS_PER_LVL = 2;
     public const string LEVEL = "LEVEL_";
     public const string ALLOCATED = "ALLOCATED_";
     public const string INVENTORY = "INVENTORY_";
@@ -143,7 +144,7 @@ public class PlayerData
     public void LevelUp()
     {
         var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[CurrentLevel];
-        AllocatedPoints += 2;
+        AllocatedPoints += POINTS_PER_LVL;
         CurrentLevel++;
         AddCurrensy(ItemId.money, -cost);
         Save();
