@@ -14,6 +14,7 @@ public class ItemMapItem : BaseMapItem
         base.Init();
         this.count = count;
         this.type = type;
+        Utils.GroundTransform(transform);
     }
 
     protected override void Take(Hero unit)

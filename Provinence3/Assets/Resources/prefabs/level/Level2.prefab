@@ -6353,6 +6353,7 @@ GameObject:
   - 4: {fileID: 406862}
   - 218: {fileID: 21877682}
   - 154: {fileID: 15414540}
+  - 114: {fileID: 11492324}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -38081,7 +38082,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.4, y: 2, z: -36.7}
+  m_LocalPosition: {x: 55.98, y: 2, z: -40.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -58283,7 +58284,7 @@ Transform:
   m_LocalRotation: {x: 0.14873022, y: -0.6912882, z: 0.6912882, w: 0.14873025}
   m_LocalPosition: {x: 77.1, y: 28.401392, z: -27}
   m_LocalScale: {x: 7.6667714, y: 7.666768, z: 7.6667676}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -155.7159, z: 0}
   m_Children: []
   m_Father: {fileID: 427804}
   m_RootOrder: 38
@@ -64472,7 +64473,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.82, y: 30.34, z: -35.98}
+  m_LocalPosition: {x: 46.93, y: 30.34, z: -38.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -146080,6 +146081,95 @@ MonoBehaviour:
   radius: 1
   unitsCout: 1
   ID: 0
+--- !u!114 &11492324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f794e56866546c4a975ff68b5cdbc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guiSkin: {fileID: 11400000, guid: e53c3c54630eb44238133bc85acaad3e, type: 2}
+  createIcon: {fileID: 2800000, guid: ec20c8207422b4bc69637154f53e6023, type: 3}
+  erodeIcon: {fileID: 2800000, guid: 6ebd61e94bd5548ebacc446dc9baa8f9, type: 3}
+  textureIcon: {fileID: 2800000, guid: 5264f932396cc4e76ba45a142eda8100, type: 3}
+  mooreIcon: {fileID: 2800000, guid: 03853adeb5f824bb59bafdb606fd3005, type: 3}
+  vonNeumannIcon: {fileID: 2800000, guid: 4ef8d2735a093471cb8cadc45e3a2cc0, type: 3}
+  mountainsIcon: {fileID: 2800000, guid: c7f01a8e2399d493dbd50b38869f2723, type: 3}
+  hillsIcon: {fileID: 2800000, guid: 5e5a7853f82e54ab6912e5c20342dd73, type: 3}
+  plateausIcon: {fileID: 2800000, guid: d56a2918dbaab45ae899828d981d8dff, type: 3}
+  defaultTexture: {fileID: 2800000, guid: 07ec441dca83743ee8e1b259837acbd2, type: 3}
+  toolModeInt: 2
+  erosionTypeInt: 3
+  generatorTypeInt: 0
+  isBrushOn: 0
+  isBrushHidden: 0
+  isBrushPainting: 0
+  brushPosition: {x: 0, y: 0, z: 0}
+  brushSize: 50
+  brushOpacity: 1
+  brushSoftness: 0.5
+  neighbourhoodInt: 0
+  useDifferenceMaps: 1
+  thermalIterations: 25
+  thermalMinSlope: 1
+  thermalFalloff: 0.5
+  hydraulicTypeInt: 0
+  hydraulicType: 0
+  hydraulicIterations: 12
+  hydraulicMaxSlope: 13.6
+  hydraulicFalloff: 0.333
+  hydraulicRainfall: 0.01
+  hydraulicEvaporation: 0.5
+  hydraulicSedimentSolubility: 0.01
+  hydraulicSedimentSaturation: 0.1
+  hydraulicVelocityRainfall: 0.01
+  hydraulicVelocityEvaporation: 0.5
+  hydraulicVelocitySedimentSolubility: 0.01
+  hydraulicVelocitySedimentSaturation: 0.1
+  hydraulicVelocity: 20
+  hydraulicMomentum: 1
+  hydraulicEntropy: 0
+  hydraulicDowncutting: 0.1
+  tidalIterations: 25
+  tidalSeaLevel: 50
+  tidalRangeAmount: 5
+  tidalCliffLimit: 60
+  windIterations: 25
+  windDirection: 0
+  windForce: 0.5
+  windLift: 0.01
+  windGravity: 0.5
+  windCapacity: 0.01
+  windEntropy: 0.1
+  windSmoothing: 0.25
+  tempTexture: {fileID: 0}
+  slopeBlendMinAngle: 0
+  slopeBlendMaxAngle: 10.30303
+  heightBlendPoints:
+  - 0.11447811
+  - 0.30639732
+  gradientStyles: []
+  voronoiTypeInt: 0
+  voronoiType: 0
+  voronoiCells: 16
+  voronoiFeatures: 1
+  voronoiScale: 1
+  voronoiBlend: 1
+  diamondSquareDelta: 0.5
+  diamondSquareBlend: 1
+  perlinFrequency: 4
+  perlinAmplitude: 1
+  perlinOctaves: 8
+  perlinBlend: 1
+  smoothBlend: 0.25
+  smoothIterations: 1
+  normaliseMin: 0
+  normaliseMax: 1
+  normaliseBlend: 1
 --- !u!114 &11492866
 MonoBehaviour:
   m_ObjectHideFlags: 1
