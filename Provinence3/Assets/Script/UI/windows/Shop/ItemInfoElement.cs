@@ -13,13 +13,6 @@ public enum ItemOwner
 public class ItemInfoElement : MonoBehaviour
 {
     private BaseItemInfo CurItemInfo;
-    private Action<BaseItem, ItemOwner> OnInitCallback;
-
-    public void SetCallBack(Action<BaseItem, ItemOwner> OnInitCallback)
-    {
-        this.OnInitCallback = OnInitCallback;
-    }
-
 
     private void Clear()
     {
@@ -61,8 +54,8 @@ public class ItemInfoElement : MonoBehaviour
 
         }
         Link();
-        if (OnInitCallback != null)
-            OnInitCallback(item,ItemOwner.Player);
+//        if (OnInitCallback != null)
+//            OnInitCallback(item,ItemOwner.Player);
     }
 
     private void Link()
@@ -78,8 +71,8 @@ public class ItemInfoElement : MonoBehaviour
         ShopSellElement.Init(item);
         CurItemInfo = ShopSellElement;
         Link();
-        if (OnInitCallback != null)
-            OnInitCallback(null, ItemOwner.Shop);
+//        if (OnInitCallback != null)
+//            OnInitCallback(null, ItemOwner.Shop);
     }
 
     

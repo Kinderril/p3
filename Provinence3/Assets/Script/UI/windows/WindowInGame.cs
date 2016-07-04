@@ -23,6 +23,7 @@ public class WindowInGame : BaseWindow
 
     public override void Init<T>(T obj)
     {
+        WindowManager.Instance.MainBack.gameObject.SetActive(false);
         base.Init(obj);
         level = obj as Level;
         moneyField.text = 0.ToString("0");
@@ -82,6 +83,7 @@ public class WindowInGame : BaseWindow
     public override void Close()
     {
         base.Close();
+        WindowManager.Instance.MainBack.gameObject.SetActive(true);
         MonsterInfo.DeInit();
         UiControls.Enable(false);
         level.OnLeft -= OnLeft;

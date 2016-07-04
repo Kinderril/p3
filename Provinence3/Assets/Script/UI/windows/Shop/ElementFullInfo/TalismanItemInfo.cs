@@ -7,9 +7,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class TalismanItemInfo : BaseItemInfo
+public class TalismanItemInfo : UpgWearingInvItemInfo
 {
-    public Text enchantField;
     public Text descField;
     public Text powerField;
     public void Init(TalismanItem talismanItem)
@@ -22,9 +21,7 @@ public class TalismanItemInfo : BaseItemInfo
         powerField.text = item.PowerInfo() + "\n Charges: " + talismanItem.MaxCharges;
         descField.text = "cost:"  + talismanItem.costShoot.ToString("0");
         NameLabel.text = talismanItem.TalismanType.ToString();
-
-        var haveEnchant = talismanItem.Enchant > 0;
-        enchantField.gameObject.SetActive(haveEnchant);
-        enchantField.text = "+" + talismanItem.Enchant;
+        
+        SetEnchant(talismanItem.Enchant, talismanItem.Enchant > 0);
     }
 }

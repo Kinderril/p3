@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ExecutableItemInfo : BaseItemInfo
+public class ExecutableItemInfo : InventoryItemInfo
 {
     public Text descField;
     public void Init(ExecutableItem executableItem)

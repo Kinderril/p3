@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class BonusItemInfo : BaseItemInfo
+public class BonusItemInfo : WearingInventoryItemInfo
 {
     public Text descField;
     public Text remainTimesField;

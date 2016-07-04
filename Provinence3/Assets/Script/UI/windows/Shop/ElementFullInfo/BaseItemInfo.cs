@@ -6,15 +6,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class BaseItemInfo : MonoBehaviour
+public abstract class BaseItemInfo : MonoBehaviour
 {
     public Text NameLabel;
     public Transform moneyLayout;
     public Image mainIcon;
     public Image SlotLabel;
+    protected BaseItem BaseItem;
 
-    protected void Init(BaseItem item,bool sell = true)
+    protected virtual void Init(BaseItem item,bool sell = true)
     {
+        BaseItem = item;
         if (SlotLabel != null)
         {
             if (item != null)
@@ -47,5 +49,17 @@ public class BaseItemInfo : MonoBehaviour
             element.transform.SetParent(moneyLayout);
         }
     }
+
+    protected virtual void Refresh()
+    {
+
+    }
+    protected bool EnoughtMoney(IShopExecute selectedShopElement)
+    {
+        bool haveMoney = MainController.Instance.PlayerData.CanPay(ItemId.money, selectedShopElement.MoneyCost);
+        bool haveCrystal = MainController.Instance.PlayerData.CanPay(ItemId.crystal, selectedShopElement.CrystalCost);
+        return haveMoney && haveCrystal;
+    }
+
 }
 

@@ -30,7 +30,7 @@ public class Localizer
         switch (mp)
         {
             case MainParam.HP:
-                ss = "+" + Formuls.HP_COEF + " Heaths";
+                ss = "+" + Formuls.HP_COEF + " Health";
                 break;
             case MainParam.DEF:
                 ss = "+" + Formuls.PDEF_COEF + " Physic defence \n" +

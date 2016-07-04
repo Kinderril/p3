@@ -35,8 +35,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<CraftItemType,Sprite> CraftItemsSprites = new Dictionary<CraftItemType, Sprite>(); 
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
     private readonly Dictionary<int,Taple<int,int>> costByLevelItems = new Dictionary<int, Taple<int, int>>(); 
-
-    public List<IShopExecute> allShopElements;
+    
     public Chest chestPrefab;
     
     public DataStructs DataStructs;

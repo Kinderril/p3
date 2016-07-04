@@ -26,16 +26,16 @@ public class WindowShop : BaseWindow
     private IShopExecute selectedShopElement;
     private BaseItem selectedPlayerItem;
     public AllParametersContainer AllParametersContainer;
-    public Button BuyButton;
-    public Button SellButton;
-    public Button EquipButton;
-    public Button UnEquipButton;
-    public Button UpgradeButton;
-    public Button RecipeButton;
-    public UpgradeWindow UpgradeWindow;
-    public CraftWindow CraftWindow;
+//    public Button BuyButton;
+//    public Button SellButton;
+//    public Button EquipButton;
+//    public Button UnEquipButton;
+//    public Button UpgradeButton;
+//    public Button RecipeButton;
     public ItemWindow ItemWindow;
     private Bookmarks Bookmarks = Bookmarks.recipies;
+    public UpgradeWindow UpgradeWindow;
+    public CraftWindow CraftWindow;
 
     public HeroShopExecutableItem PrefabHeroShopExecutableItem;
     public HeroShopBonusItem PrefabHeroShopBonusItem;
@@ -49,7 +49,7 @@ public class WindowShop : BaseWindow
         UpgradeWindow.gameObject.SetActive(false);
         CraftWindow.gameObject.SetActive(false);
         ItemWindow.gameObject.SetActive(false);
-        ItemInfoElement.SetCallBack(OnItemInit);
+//        ItemInfoElement.SetCallBack(OnItemInit);
         AllParametersContainer.Init();
         moneyField.text = MainController.Instance.PlayerData.playerInv[ItemId.money].ToString("0");
         crystalField.text = MainController.Instance.PlayerData.playerInv[ItemId.crystal].ToString("0");
@@ -171,14 +171,6 @@ public class WindowShop : BaseWindow
         NullSelection();
     }
 
-    public void OnRecipeOpen()
-    {
-        var recipe = selectedPlayerItem as RecipeItem;
-        if (recipe != null)
-        {
-            CraftWindow.Init(recipe);
-        }
-    }
 
     private void CreatShopElement(IShopExecute exec)
     {
@@ -190,39 +182,25 @@ public class WindowShop : BaseWindow
 
     private void NullSelection()
     {
-        ItemInfoElement.gameObject.SetActive(false);
-        EquipButton.gameObject.SetActive(false);
-        UnEquipButton.gameObject.SetActive(false);
-        UpgradeButton.gameObject.SetActive(false);
-        BuyButton.gameObject.SetActive(false);
-        SellButton.gameObject.SetActive(false);
+//        ItemInfoElement.gameObject.SetActive(false);
         selectedShopElement = null;
         selectedPlayerItem = null;
+//        OnSelected()
     }
 
-    private void OnItemInit(BaseItem info,ItemOwner obj)
-    {
-        bool val = info == null;
-        BuyButton.gameObject.SetActive(val);
-        EquipButton.gameObject.SetActive(false);
-        UnEquipButton.gameObject.SetActive(false);
-        UpgradeButton.gameObject.SetActive(false);
-        if (!val)
-        {
-            bool isEquiped = info.IsEquped;
-            if (info.Slot != Slot.executable && info.Slot != Slot.recipe)
-            {
-                EquipButton.gameObject.SetActive(!isEquiped);
-                UnEquipButton.gameObject.SetActive(isEquiped);
-                var canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(info) != null;
-                UpgradeButton.gameObject.SetActive(canBeupgraded);
-            }
-        }
-        RecipeButton.gameObject.SetActive(info is RecipeItem);
-
-        SellButton.gameObject.SetActive(!val);
-        ItemInfoElement.gameObject.SetActive(true);
-    }
+//    private void OnItemInit(BaseItem info,ItemOwner obj)
+//    {
+//        bool val = info == null;
+//        if (!val)
+//        {
+//            bool isEquiped = info.IsEquped;
+//            if (info.Slot != Slot.executable && info.Slot != Slot.recipe)
+//            {
+//                var canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(info) != null;
+//            }
+//        }
+//        ItemInfoElement.gameObject.SetActive(true);
+//    }
     private void OnChangeCount(ExecutableItem obj)
     {
         var element = PlayerItemElements.FirstOrDefault(x => x.PlayerItem == obj);
@@ -241,53 +219,7 @@ public class WindowShop : BaseWindow
             OnSelected(element);
         }
     } 
-
-    public void OnUpgradeClick()
-    {
-        var playerItem = selectedPlayerItem as PlayerItem;
-        if (playerItem != null)
-        {
-            UpgradeWindow.Init(playerItem, OnItemEnchanted);
-        }
-        else
-        {
-            WindowManager.Instance.InfoWindow.Init(null, "Can't Enchant this item");
-        }
-    }
-
-    private void OnItemEnchanted(PlayerItem obj)
-    {
-        RefreshItem(obj);
-    }
-
-    public void OnBuySimpleChest()
-    {
-        if (/*selectedShopElement != null && */selectedShopElement.CanBuy && EnoughtMoney(selectedShopElement))
-        {
-            WindowManager.Instance.ConfirmWindow.Init(
-                () => { ShopController.Instance.BuyItem(selectedShopElement); }
-                ,null,"Do u what to but it?");
-        }
-        else
-        {
-            WindowManager.Instance.InfoWindow.Init(null,"not enought money");
-        }
-    }
-
-    public void OnUnequipItem()
-    {
-        if (selectedPlayerItem != null)
-        {
-            MainController.Instance.PlayerData.EquipItem(selectedPlayerItem,false);
-        }
-    }
-
-    private bool EnoughtMoney(IShopExecute selectedShopElement)
-    {
-        bool haveMoney = MainController.Instance.PlayerData.CanPay(ItemId.money,selectedShopElement.MoneyCost);
-        bool haveCrystal = MainController.Instance.PlayerData.CanPay(ItemId.crystal, selectedShopElement.CrystalCost);
-        return haveMoney && haveCrystal;
-    }
+    
     private void OnShopSelected(IShopExecute obj)
     {
         selectedShopElement = obj;
@@ -331,22 +263,8 @@ public class WindowShop : BaseWindow
         NullSelection();
     }
 
-    public void OnEquip()
-    {
-        if (selectedPlayerItem == null)
-        {
-            Debug.Log("no one selected");
-            return;
-        }
-        MainController.Instance.PlayerData.EquipItem(selectedPlayerItem);
-    }
 
 
-    public void OnSell()
-    {
-        WindowManager.Instance.ConfirmWindow.Init(() => MainController.Instance.PlayerData.Sell(selectedPlayerItem),
-            null, "do you wnat to sell it?");
-    }
 
     private void OnItemEquipedCallback(BaseItem obj,bool val)
     {
@@ -355,9 +273,6 @@ public class WindowShop : BaseWindow
         if (item != null)
         {
             item.Equip(val);
-            EquipButton.gameObject.SetActive(!val);
-            UnEquipButton.gameObject.SetActive(val);
-
         }
         AllParametersContainer.UpgradeValues();
     }

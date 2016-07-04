@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CrystalCost: 0
   Parameter: 0
-  icon: {fileID: 21300000, guid: 49b611e658efbf443b686a4036f74fe3, type: 3}
+  icon: {fileID: 21300000, guid: 323779a68853986439d8c5e742858b31, type: 3}
   name: 
 --- !u!1001 &100100000
 Prefab:

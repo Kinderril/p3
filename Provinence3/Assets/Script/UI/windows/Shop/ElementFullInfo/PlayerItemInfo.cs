@@ -6,22 +6,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PlayerItemInfo : BaseItemInfo
+public class PlayerItemInfo : UpgWearingInvItemInfo
 {
     public Transform layoutParam;
     public Image SpecIcon;
     public Text SpecName;
-    public Text enchantField;
     
     public void Init(PlayerItem playerItem)
     {
         base.Init(playerItem);
-        bool haveEnchant = playerItem.enchant > 0;
-        if (haveEnchant)
-        {
-            enchantField.text = "+" + playerItem.enchant;
-            enchantField.gameObject.SetActive(true);
-        }
+        SetEnchant(playerItem.enchant, playerItem.enchant > 0);
         bool enchanted = false;
         foreach (var p in playerItem.parameters)
         {

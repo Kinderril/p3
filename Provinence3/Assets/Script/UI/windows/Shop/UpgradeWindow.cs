@@ -12,6 +12,10 @@ public class UpgradeWindow : MonoBehaviour
     public Button safeButton;
     private Action<PlayerItem> onClose;
 
+    public static void Creat()
+    {
+//        WindowManager.Instance.
+    }
 
     public void Init(PlayerItem item,Action<PlayerItem> onClose)
     {

@@ -22,6 +22,7 @@ public class WindowManager : Singleton<WindowManager>
     public ConfirmWindow ConfirmWindow;
     public InfoWindow InfoWindow;
     private GameObject planeX;
+    public GameObject MainBack;
 
     public Transform UIPool;
 

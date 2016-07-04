@@ -231,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &118644
 GameObject:
   m_ObjectHideFlags: 1
@@ -714,7 +714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &151578
 GameObject:
   m_ObjectHideFlags: 1
@@ -2343,7 +2343,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -3312,15 +3312,9 @@ MonoBehaviour:
   moneyField: {fileID: 11478166}
   crystalField: {fileID: 11495522}
   AllParametersContainer: {fileID: 11408930}
-  BuyButton: {fileID: 11491324}
-  SellButton: {fileID: 11411978}
-  EquipButton: {fileID: 11496978}
-  UnEquipButton: {fileID: 11448652}
-  UpgradeButton: {fileID: 11442564}
-  RecipeButton: {fileID: 11421302}
+  ItemWindow: {fileID: 11442934}
   UpgradeWindow: {fileID: 11453208}
   CraftWindow: {fileID: 11462454}
-  ItemWindow: {fileID: 11442934}
   PrefabHeroShopExecutableItem: {fileID: 11421406, guid: 2e54c16ffa71abf47b5557fbcfb570c4,
     type: 2}
   PrefabHeroShopBonusItem: {fileID: 11431356, guid: 764976e2fb898b24eb9fcc7f5b9645cf,
@@ -3348,7 +3342,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 58744f7814144644a98c4b2d2ce13e22, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d28fcda3d11a0548b6d5b885a651c6f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5140,10 +5134,10 @@ RectTransform:
   - {fileID: 22415492}
   m_Father: {fileID: 22444810}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 386.6666, y: -54.08}
+  m_SizeDelta: {x: 152.66664, y: 65.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22412212
 RectTransform:
@@ -5566,10 +5560,10 @@ RectTransform:
   - {fileID: 22497848}
   m_Father: {fileID: 22444810}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 81.33332, y: -54.08}
+  m_SizeDelta: {x: 152.66664, y: 65.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22438270
 RectTransform:
@@ -5913,8 +5907,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -777, y: -10}
-  m_SizeDelta: {x: 523, y: -419.60004}
+  m_AnchoredPosition: {x: -571, y: -10}
+  m_SizeDelta: {x: 935, y: -420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22460648
 RectTransform:
@@ -6116,10 +6110,10 @@ RectTransform:
   - {fileID: 22484058}
   m_Father: {fileID: 22444810}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 233.99997, y: -54.08}
+  m_SizeDelta: {x: 152.66664, y: 65.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22480588
 RectTransform:
@@ -6359,10 +6353,10 @@ RectTransform:
   - {fileID: 22437920}
   m_Father: {fileID: 22491550}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 201.25, y: -43}
+  m_SizeDelta: {x: 369.37, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22497848
 RectTransform:

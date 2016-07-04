@@ -10,6 +10,7 @@ public class WindowStart : BaseWindow
     public override void Init()
     {
         base.Init();
+        WindowManager.Instance.MainBack.gameObject.SetActive(true);
     }
 
     public void OnExitClick()
