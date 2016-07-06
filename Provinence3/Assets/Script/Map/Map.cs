@@ -219,14 +219,24 @@ public class Map : Singleton<Map>
         return list;
     } 
 
-    public BaseMonster FindClosesEnemy(Vector3 v)
+    public BaseMonster FindClosesEnemy(Vector3 v,float maxSqrDist = 9999,List<Unit> rejected = null)
     {
-        float curDist = 999999;
+        float curDist = 9999;
         BaseMonster unit = null;
-        foreach (var enemy in enemies.Where(x=>!x.IsDisabled))
+        IEnumerable<BaseMonster> pTargets;
+        if (rejected != null)
+        {
+            pTargets = enemies.Where(x => x.gameObject.activeSelf && !rejected.Contains(x));
+        }
+        else
+        {
+            pTargets = enemies.Where(x => x.gameObject.activeSelf);
+        }
+        foreach (var enemy in pTargets)
         {
             var pDist = (enemy.transform.position - v).sqrMagnitude;
-            if (pDist < curDist)
+            Debug.Log("Dist:" + pDist);
+            if (pDist < curDist && pDist < maxSqrDist)
             {
                 curDist = pDist;
                 unit = enemy;

@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  maxTargets: 1
   hitPOsition: 1
   TrailParticleSystem: {fileID: 0}
   HitParticleSystem: {fileID: 11421516}

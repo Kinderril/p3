@@ -14,11 +14,12 @@ public enum HitPosition
 public class Bullet : PoolElement
 {
     public float speed = 0.002f;
+    public int maxTargets = 1;
     protected float time = 0;
     protected Vector3 trg;
     protected Vector3 start;
     private Unit targetUnit;
-    public IBulletHolder weapon;
+    public IBulletHolder bulletHolder;
     protected Action updateAction;
     public HitPosition hitPOsition;
     public BaseEffectAbsorber TrailParticleSystem;
@@ -29,6 +30,7 @@ public class Bullet : PoolElement
     private float additionalPower = 0;
     private float startDist2target;
     public int ID;
+//    protected Weapon weapon;
 
     public float AdditionalPower
     {
@@ -49,21 +51,27 @@ public class Bullet : PoolElement
         {
             direction = new Vector3(direction.x, 0, direction.z);
         }
-//        ownerType = weapon.owner.unitType;
-        this.weapon = weapon;
-        if (weapon.bulletComeOut != null)
-        {
-            start = weapon.bulletComeOut.position;
-        }
-        else
-        {
-            start = transform.position;
-            Debug.Log("wrong bullet start position");
-        }
+        this.bulletHolder = weapon;
+        start = FindStartPos(weapon);
         trg = direction.normalized * weapon.Parameters.range + start;
         subInit();
         updateAction = updateVector;
         transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    protected virtual Vector3 FindStartPos(Weapon weapon)
+    {
+        Vector3 sPos;
+        if (weapon != null && weapon.bulletComeOut != null)
+        {
+            sPos = weapon.bulletComeOut.position;
+        }
+        else
+        {
+            sPos = transform.position;
+            Debug.Log("wrong bullet start position " + start);
+        }
+        return sPos;
     }
     
     public virtual void Init(Unit target, IBulletHolder weapon,Vector3 startPosition)
@@ -71,7 +79,7 @@ public class Bullet : PoolElement
         targetUnit = target;
         start = startPosition;
         transform.position = start;
-        this.weapon = weapon;
+        this.bulletHolder = weapon;
         subInit();
         startDist2target = (targetUnit.transform.position - start).magnitude;
         updateAction = updateTargetUnit;
@@ -99,7 +107,7 @@ public class Bullet : PoolElement
     public override void EndUse()
     {
         targetUnit = null;
-        weapon = null;
+        bulletHolder = null;
         updateAction = null;
         time = 0;
         AffecttedUnits.Clear();
@@ -120,6 +128,7 @@ public class Bullet : PoolElement
     protected virtual void Hit(Unit unit)
     {
         bool haveManyTargets = false;
+        /*
         if (weapon != null && weapon.SpecAbility != null)
         {
             switch (weapon.SpecAbility)
@@ -153,16 +162,16 @@ public class Bullet : PoolElement
                     break;
             }
         }
-
-        if (!haveManyTargets)
+        */
+        if (!AffecttedUnits.Contains(unit))
         {
-            if (AffecttedUnits.Count < 1)
-            {
-                AffecttedUnits.Add(unit);
-                unit.GetHit(this);
-            }
+            AffecttedUnits.Add(unit);
+            unit.GetHit(this);
         }
-        Death(unit);
+        if (AffecttedUnits.Count >= maxTargets)
+        {
+            Death(unit);
+        }
     }
 
     protected void Death(Unit lastUnitHitted)

@@ -239,15 +239,15 @@ public class Unit : MonoBehaviour
     public virtual void GetHit(Bullet bullet)
     {
         var addPower = 1 + Mathf.Clamp(bullet.AdditionalPower, 0, Weapon.MAX_CHARGE_TIME);
-        float power = bullet.weapon.Power * addPower;
+        float power = bullet.bulletHolder.Power * addPower;
         float mdef = Parameters.Parameters[ParamType.MDef];
         float pdef = Parameters.Parameters[ParamType.PDef];
 
-        if (bullet.weapon != null)
+        if (bullet.bulletHolder != null)
         {
-            var owner = bullet.weapon.Owner;
+            var owner = bullet.bulletHolder.Owner;
             //Debug.Log("Test bullet.weapon.PlayerItem.specialAbilities : " + bullet.weapon.PlayerItem.specialAbilities);
-            switch (bullet.weapon.SpecAbility)
+            switch (bullet.bulletHolder.SpecAbility)
             {
                 case SpecialAbility.critical:
                     var isCrit = UnityEngine.Random.Range(0, 10) < 2;
@@ -318,7 +318,7 @@ public class Unit : MonoBehaviour
                 HitParticleSystem.Play();
             }
         }
-        GetHit(power, bullet.weapon.DamageType, mdef, pdef);
+        GetHit(power, bullet.bulletHolder.DamageType, mdef, pdef);
     }
     
     protected virtual void Death()

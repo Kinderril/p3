@@ -45,14 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6dcd91fac5f4b4d82c4b1e3c9eb860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allShopElements:
-  - {fileID: 11466538, guid: 068b18365267c5245a3b4f4f7a077107, type: 2}
-  - {fileID: 11406546, guid: 0fb79bdd5cb20444d839fd2899902fbb, type: 2}
-  - {fileID: 11471060, guid: 3ccffcc40b1ac574c96c5f66521a89cc, type: 2}
-  - {fileID: 11456008, guid: be4a7dc0c78c97244932bbdf945192d0, type: 2}
-  - {fileID: 11431356, guid: 764976e2fb898b24eb9fcc7f5b9645cf, type: 2}
-  - {fileID: 11437626, guid: 5f4b4eaac80a0f74faa0cd97c1c3b9df, type: 2}
-  - {fileID: 11421406, guid: 2e54c16ffa71abf47b5557fbcfb570c4, type: 2}
   chestPrefab: {fileID: 11473748, guid: acb64bc8c843f474490dca07f7b6f49e, type: 2}
   DataStructs: {fileID: 11474658, guid: a9a3e934f3d937040990b169755ea49f, type: 2}
   debugCube: {fileID: 0}
@@ -70,7 +62,7 @@ MonoBehaviour:
   - {fileID: 11465162, guid: 3f1637189313f7e40b42cbba9ac58c46, type: 2}
   - {fileID: 11450574, guid: 13f06168c668d0044981699762ed6652, type: 2}
   BossUnits:
-  - {fileID: 11414582, guid: 65fc47f77970c8345a65928d6fc4f32b, type: 2}
+  - {fileID: 11408556, guid: bb08f8bde5e25184c9a36dfd5b115b75, type: 2}
   prefabHero: {fileID: 11487600, guid: fc190c4abdb826a49a92ed5e58aee7d5, type: 2}
   Weapons: []
   simpleShader: {fileID: 0}
@@ -107,6 +99,7 @@ MonoBehaviour:
   SubCamera: {fileID: 0}
   ConfirmWindow: {fileID: 0}
   InfoWindow: {fileID: 0}
+  MainBack: {fileID: 0}
   UIPool: {fileID: 0}
 --- !u!114 &11424998
 MonoBehaviour:
@@ -119,8 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec381d4dac79b0f438592670f0a5fc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RejectedTalismanTypes: 020000000d0000000c0000000500000001000000
-  RejectedSpecialAbilities: 0400000005000000090000000700000002000000
+  RejectedTalismanTypes: 0b0000000100000002000000
+  RejectedSpecialAbilities: 040000000500000009000000070000000200000001000000
 --- !u!114 &11431316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,11 +150,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ALL_TIME_DROP: 1
-  ALL_TALISMAN_CHARGED: 0
-  MAIN_HERO_MEGAHP: 1
+  ALL_TALISMAN_CHARGED: 1
+  MAIN_HERO_MEGAHP: 0
   LESS_COUNT_BOSS_COME: 0
   GET_START_BOOST: 1
-  GET_ALL_TYPE_WEAPONS_BOOST: 0
+  GET_ALL_TYPE_WEAPONS_BOOST: 1
   RESPAWN_TIME_CREEPS_FAST: 0
   ALWAYS_GOOD_END: 0
   CHANCE_STUN_100: 1

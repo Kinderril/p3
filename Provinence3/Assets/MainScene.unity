@@ -102,7 +102,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1059631397}
   m_Script: {fileID: 11500000, guid: e15e56fda7fc4de43ac7dfa8c86bba93, type: 3}
---- !u!84 &223398877
+--- !u!84 &108310647
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -111,8 +111,8 @@ RenderTexture:
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
-  m_Width: 1021
-  m_Height: 631
+  m_Width: 213
+  m_Height: 159
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 2
@@ -369,28 +369,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 715417424}
   m_Script: {fileID: 11500000, guid: 4fcfd0a8d7e7f644b9bdd6de764cf9be, type: 3}
---- !u!84 &672053989
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 1021
-  m_Height: 631
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 2
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapMode: 1
 --- !u!1001 &715417424
 Prefab:
   m_ObjectHideFlags: 0
@@ -586,6 +564,28 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1328554416}
   m_Script: {fileID: 11500000, guid: 4ac617bfc90608140831ab0f20fa21e3, type: 3}
+--- !u!84 &859743436
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 852
+  m_Height: 637
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 2
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapMode: 1
 --- !u!1001 &872414534
 Prefab:
   m_ObjectHideFlags: 0
@@ -707,6 +707,28 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22403074, guid: 019c3a3ec04430744b461839d32f886f,
     type: 2}
   m_PrefabInternal: {fileID: 872414534}
+--- !u!84 &903052463
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 852
+  m_Height: 637
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 2
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapMode: 1
 --- !u!1 &934086950
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,28 +861,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 935537702}
---- !u!84 &984508911
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 1021
-  m_Height: 631
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 2
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapMode: 1
 --- !u!1001 &1054089067
 Prefab:
   m_ObjectHideFlags: 0
@@ -1491,6 +1491,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!84 &1286075385
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 852
+  m_Height: 637
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 2
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapMode: 1
 --- !u!1001 &1328554416
 Prefab:
   m_ObjectHideFlags: 0
@@ -1822,28 +1844,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1585889780}
   m_RootOrder: 0
---- !u!84 &1569230407
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 255
-  m_Height: 157
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 2
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapMode: 1
 --- !u!1 &1585889779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,7 +2030,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6602fc6586ec3a94cb157e2405734fba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78639516874850546b98473ca10edf42, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2728,10 +2728,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11424998, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: RejectedTalismanTypes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 473892, guid: 9c40be2deae9f164996b375c585de545, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.3483454
@@ -2764,10 +2760,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11411312, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: debugCube
+    - target: {fileID: 11431316, guid: 9c40be2deae9f164996b375c585de545, type: 2}
+      propertyPath: MainCamera
       value: 
-      objectReference: {fileID: 190852, guid: ff06c455f27b27d4fbc818cb4f6c21c7, type: 2}
+      objectReference: {fileID: 47909250}
     - target: {fileID: 11417906, guid: 9c40be2deae9f164996b375c585de545, type: 2}
       propertyPath: windows.Array.data[0].window
       value: 
@@ -2816,50 +2812,18 @@ Prefab:
       propertyPath: InfoWindow
       value: 
       objectReference: {fileID: 1588561718}
-    - target: {fileID: 11431316, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: MainCamera
-      value: 
-      objectReference: {fileID: 47909250}
-    - target: {fileID: 11496442, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: ALL_TALISMAN_CHARGED
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11424998, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: RejectedTalismanTypes.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11424998, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: RejectedTalismanTypes.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11424998, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: RejectedTalismanTypes.Array.data[0]
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 11424998, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: RejectedTalismanTypes.Array.data[3]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11424998, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: RejectedTalismanTypes.Array.data[4]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11496442, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: GET_ALL_TYPE_WEAPONS_BOOST
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11496442, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: MAIN_HERO_MEGAHP
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11417906, guid: 9c40be2deae9f164996b375c585de545, type: 2}
-      propertyPath: UIPool
-      value: 
-      objectReference: {fileID: 1783708631}
     - target: {fileID: 11417906, guid: 9c40be2deae9f164996b375c585de545, type: 2}
       propertyPath: MainBack
       value: 
       objectReference: {fileID: 1587890881}
+    - target: {fileID: 11417906, guid: 9c40be2deae9f164996b375c585de545, type: 2}
+      propertyPath: UIPool
+      value: 
+      objectReference: {fileID: 1783708631}
+    - target: {fileID: 11411312, guid: 9c40be2deae9f164996b375c585de545, type: 2}
+      propertyPath: debugCube
+      value: 
+      objectReference: {fileID: 190852, guid: ff06c455f27b27d4fbc818cb4f6c21c7, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c40be2deae9f164996b375c585de545, type: 2}
   m_IsPrefabParent: 0

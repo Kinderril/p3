@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.02
+  maxTargets: 1
   hitPOsition: 0
   TrailParticleSystem: {fileID: 0}
   HitParticleSystem: {fileID: 0}

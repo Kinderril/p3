@@ -13,7 +13,7 @@ public class WaitingBullet : Bullet
 
         start = startPosition;
         transform.position = start;
-        this.weapon = weapon;
+        this.bulletHolder = weapon;
         subInit();
         updateAction = updateWaitBullet;
         time = Time.time + waitTime;
@@ -45,8 +45,8 @@ public class WaitingBullet : Bullet
             {
                 if (unit != null && !unit.IsDead)
                 {
-                    if ((weapon.Owner is Hero && unit is BaseMonster) 
-                        || (weapon.Owner is BaseMonster && unit is Hero))
+                    if ((bulletHolder.Owner is Hero && unit is BaseMonster) 
+                        || (bulletHolder.Owner is BaseMonster && unit is Hero))
                     {
                         unit.GetHit(this);
                     }
