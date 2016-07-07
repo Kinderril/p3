@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 
 public class RecipeItem : BaseItem
@@ -13,7 +14,25 @@ public class RecipeItem : BaseItem
 
     public RecipeItem(int lvl, Slot slot)
     {
+        string ss = "";
+        switch (slot)
+        {
+            case Slot.physical_weapon:
+            case Slot.magic_weapon:
+                ss = "weapon";
+                break;
+            case Slot.body:
+            case Slot.helm:
+                ss = "armor";
+                break;
+            case Slot.Talisman:
+                ss = "scroll";
+                break;
+        }
         Slot = Slot.recipe;
+
+
+        IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/RecipeItem/" + ss);
         this.Level = lvl;
         recipeSlot = slot;
     }

@@ -68,7 +68,7 @@ public class WindowEndGame : BaseWindow
         goodPicture.SetActive(isGoodEnd);
         badPicture.SetActive(!isGoodEnd);
         captureField.text = capt;
-        killsField.text =  level.EnemiesKills.ToString("0");
+        killsField.text =  "Monsters killed:" + level.EnemiesKills.ToString("0");
     }
 }
 

@@ -12,7 +12,7 @@ public class TriplsShotWeapon : Weapon
     public override void DoShoot(Vector3 v, float additionalPower = 0, Unit target = null)
     {
         outPosVector3 = GetStartPos();
-        var dir = v - outPosVector3;
+        var dir = v;
 
         Bullet bullet1 = InstantiateBullet();
         bullet1.transform.position = outPosVector3 + dir.normalized;
@@ -39,7 +39,7 @@ public class TriplsShotWeapon : Weapon
             var v = new Vector3(vx,dir.y,vz);
             Bullet bullet1 = InstantiateBullet();
             bullet1.transform.position = outPosVector3 + v.normalized;
-            bullet1.Init(v + outPosVector3, this);
+            bullet1.Init(v, this);
         }
     }
 }

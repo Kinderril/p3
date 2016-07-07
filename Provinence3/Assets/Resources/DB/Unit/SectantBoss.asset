@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
   m_Name: SectantBoss
   m_EditorClassIdentifier: 
-  Speed: 2.06
-  MPower: 14.33
-  PPower: 29.91
-  MaxHp: 1323
-  magicResist: 3.61
-  physicResist: 3.05
+  Speed: 3.34
+  MPower: 99.43
+  PPower: 72.7
+  MaxHp: 1407
+  magicResist: 28.55
+  physicResist: 73.03
   Level: 1
-  AttackType: 1
+  AttackType: 0

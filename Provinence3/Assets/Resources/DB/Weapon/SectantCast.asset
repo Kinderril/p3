@@ -14,5 +14,5 @@ MonoBehaviour:
   type: 0
   range: 5.17
   isHoming: 0
-  attackCooldown: 0.18
+  attackCooldown: 2.95
   icon: {fileID: 0}

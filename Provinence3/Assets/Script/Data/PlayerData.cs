@@ -39,7 +39,7 @@ public class PlayerData
     
 
     public event Action<BaseItem> OnNewItem;
-    public event Action<ExecutableItem> OnChangeCount;
+    public event Action<ExecutableItem,int> OnChangeCount;
     public event Action<BaseItem, bool> OnItemEquiped;
     public event Action<BaseItem> OnItemSold;
     public event Action<Dictionary<MainParam, int>> OnParametersChange;
@@ -397,7 +397,7 @@ public class PlayerData
                 (oldItem).count += executable.count;
                 if (OnChangeCount != null)
                 {
-                    OnChangeCount(oldItem);
+                    OnChangeCount(oldItem, executable.count);
                 }
             }
             else
@@ -495,13 +495,39 @@ public class PlayerData
     {
         OpenLevels.OpenPosition(MainController.Instance.level.MissionIndex, id);
     }
-    
-    public void RemoveItem(ExecutableType type, int count)
+
+    private IEnumerable<T> PreFilter<T>(ExecutableItem item) where T: ExecutableItem
     {
-        var oldItem =
-            playerItems.FirstOrDefault(
-                x => x is ExecutableItem && (x as ExecutableItem).ExecutableType == type) as
-                ExecutableItem;
+        var preFilter = playerItems.Where(x => x is T
+                   && ((T) x).ExecutableType == item.ExecutableType);
+        return preFilter.Select(baseItem => baseItem as T).ToList();
+    }
+
+    public void RemoveExecutableItem(ExecutableItem item, int count)
+    {
+        ExecutableItem oldItem = null;
+        switch (item.ExecutableType)
+        {
+            case ExecutableType.craft:
+                var p1 = PreFilter<ExecCraftItem>(item);
+                oldItem = p1.FirstOrDefault(x => x.ItemType == (item as ExecCraftItem).ItemType);
+                break;
+            case ExecutableType.enchant:
+                var p2 = PreFilter<ExecEnchantItem>(item);
+                oldItem = p2.FirstOrDefault(x => x.ItemType == (item as ExecEnchantItem).ItemType);
+                break;
+            case ExecutableType.catalys:
+                var p3 = PreFilter<ExecCatalysItem>(item);
+                oldItem = p3.FirstOrDefault(x => x.ItemType == (item as ExecCatalysItem).ItemType);
+                break;
+        }
+        if (oldItem == null)
+        {
+            Debug.LogError("can't Sell item " + item);
+            return;
+        }
+        
+
         if (oldItem.count >= count)
         {
             oldItem.count -= count;
@@ -517,7 +543,7 @@ public class PlayerData
             {
                 if (OnChangeCount != null)
                 {
-                    OnChangeCount(oldItem);
+                    OnChangeCount(oldItem,-count);
                 }
             }
         }
@@ -530,7 +556,7 @@ public class PlayerData
         var executable = item as ExecutableItem;
         if (executable != null)
         {
-            RemoveItem(executable.ExecutableType, count);
+            RemoveExecutableItem(executable, count);
             return;
         }
         playerItems.Remove(item);
@@ -554,4 +580,5 @@ public class PlayerData
         Save();
     }
 }
+
 

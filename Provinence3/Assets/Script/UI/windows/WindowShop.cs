@@ -201,13 +201,15 @@ public class WindowShop : BaseWindow
 //        }
 //        ItemInfoElement.gameObject.SetActive(true);
 //    }
-    private void OnChangeCount(ExecutableItem obj)
+    private void OnChangeCount(ExecutableItem obj,int delta)
     {
         var element = PlayerItemElements.FirstOrDefault(x => x.PlayerItem == obj);
         if (element != null)
         {
             element.Refresh();
         }
+        if (delta > 0)
+            ItemWindow.Init(obj);
     }
 
     public void RefreshItem(BaseItem item)

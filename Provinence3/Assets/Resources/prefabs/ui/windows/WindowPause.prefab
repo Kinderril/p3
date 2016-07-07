@@ -818,7 +818,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145838}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -831,8 +831,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 1d28fcda3d11a0548b6d5b885a651c6f, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1282,7 +1282,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.1, y: -63.1}
+  m_AnchoredPosition: {x: -89.1, y: -55}
   m_SizeDelta: {x: 67.1, y: 68.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22405530
@@ -1302,8 +1302,8 @@ RectTransform:
   m_RootOrder: 8
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 429, y: -236}
-  m_SizeDelta: {x: 345, y: 189.6}
+  m_AnchoredPosition: {x: 432, y: -241.2}
+  m_SizeDelta: {x: 371.47, y: 189.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22424106
 RectTransform:
@@ -1391,10 +1391,10 @@ RectTransform:
   - {fileID: 22475662}
   m_Father: {fileID: 22403074}
   m_RootOrder: 4
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -302.3, y: 325}
-  m_SizeDelta: {x: 100, y: 73.96}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -302.3, y: -64}
+  m_SizeDelta: {x: 100, y: 73.95999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22443518
 RectTransform:
@@ -1483,10 +1483,10 @@ RectTransform:
   - {fileID: 22492156}
   m_Father: {fileID: 22403074}
   m_RootOrder: 5
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 161, y: 333}
-  m_SizeDelta: {x: 67.1, y: 68.2}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 161, y: -56}
+  m_SizeDelta: {x: 67.1, y: 68.20001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22473812
 RectTransform:
@@ -1559,7 +1559,7 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 423, y: 17}
+  m_AnchoredPosition: {x: 432, y: 17}
   m_SizeDelta: {x: 235.2, y: 156.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22492156

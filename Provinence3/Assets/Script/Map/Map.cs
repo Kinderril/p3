@@ -161,6 +161,7 @@ public class Map : Singleton<Map>
             boss = DataBaseController.GetItem<BossUnit>(bossPrefab, pos);
             var hero = MainController.Instance.level.MainHero;
             boss.Init(hero);
+            enemies.Add(boss);
             boss.CurHp = boss.CurHp*(1-0.03f*bonuses);
             hero.ArrowTarget.Init(boss);
             boss.transform.SetParent(enemiesContainer);
