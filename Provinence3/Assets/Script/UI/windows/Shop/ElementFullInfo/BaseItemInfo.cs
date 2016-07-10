@@ -30,7 +30,7 @@ public abstract class BaseItemInfo : MonoBehaviour
         }
         if (sell)
         {
-            InitCost(0, item.cost / 3);
+            InitCost(0, item.cost);
         }
     }
     protected void InitCost(int crystals, int money)

@@ -13,6 +13,7 @@ public enum ItemOwner
 public class ItemInfoElement : MonoBehaviour
 {
     private BaseItemInfo CurItemInfo;
+    public bool WithButtons = true;
 
     private void Clear()
     {

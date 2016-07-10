@@ -29,8 +29,8 @@ public class RecipeItem : BaseItem
                 ss = "scroll";
                 break;
         }
+        cost = Formuls.RecepiCost(lvl)/3;
         Slot = Slot.recipe;
-
 
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/RecipeItem/" + ss);
         this.Level = lvl;

@@ -58,7 +58,7 @@ MonoBehaviour:
     ParamType: 1
   - Color: {r: 0.986207, g: 1, b: 0, a: 0.872}
     ParamType: 2
-  - Color: {r: 0.49027407, g: 0.53676474, b: 0.055255182, a: 0.903}
+  - Color: {r: 0.07586241, g: 0, b: 1, a: 0.903}
     ParamType: 3
   - Color: {r: 0.046550598, g: 0.6914257, b: 0.9044118, a: 0.891}
     ParamType: 4
@@ -101,6 +101,7 @@ MonoBehaviour:
   - {fileID: 11423788, guid: 05ede93fe9ae27543b197450205ca4c3, type: 2}
   - {fileID: 11484730, guid: cebe23c6eb7a1894098edffc8f4e4be5, type: 2}
   - {fileID: 11413902, guid: 2d2fec2785bf138448f90b93165e269e, type: 2}
+  - {fileID: 11407316, guid: 3e687f2ce10a5664a8743ac8a02dd41d, type: 2}
   PrefabsStruct: {fileID: 11483194}
 --- !u!114 &11483194
 MonoBehaviour:

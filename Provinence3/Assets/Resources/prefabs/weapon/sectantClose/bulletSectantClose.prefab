@@ -64,7 +64,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   rebuildY: 0
   playHitAnyway: 1
-  ID: 105
+  ID: 106
 --- !u!135 &13553576
 SphereCollider:
   m_ObjectHideFlags: 1

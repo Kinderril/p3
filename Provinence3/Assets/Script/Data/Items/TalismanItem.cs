@@ -12,19 +12,19 @@ public enum TalismanType
     //2-work
     //1-work - need test
     //0-Cancel
-    firewave,//1
-    massPush,// W 
+    firewave,//2
+    massPush,//0 
     massFreez,//0
     heal,//2
     doubleDamage,//2
-    megaArmor,// W
-    chain,// W
-    trapDamage,// 1
-    trapAOE,// 1
+    megaArmor,// 2
+    chain,// 2
+    trapDamage,// 2
+    trapAOE,// 2
     trapFreez,// 1
-    bloodDamage,// 1
+    bloodDamage,// 2
     energyVamp,//0
-    splitter,//1
+    splitter,//2
 }
 
 public class TalismanItem : BaseItem
@@ -45,9 +45,11 @@ public class TalismanItem : BaseItem
         costShoot = GreatRandom.RandomizeValue(GetBaseCost(type)*Formuls.BASE_MOSTER_ENERGY)/2;
         IconSprite = DataBaseController.Instance.TalismanIcon(type);
         MaxCharges = GetMaxCharges(type);
+        cost = Formuls.CostTalismanBypoints(points);
     }
     public TalismanItem(float power1, float costShoot1, TalismanType type)
     {
+        cost = Formuls.CostTalismanBypoints((int)power1);
         this.points = power1;
         this.costShoot = costShoot1;
         this.TalismanType = type;

@@ -27,7 +27,7 @@ public class ExecCatalysItem : ExecutableItem
 {
     public CatalysItemType ItemType;
     public ExecCatalysItem(CatalysItemType type, int count = 1) 
-        : base(ExecutableType.catalys, count)
+        : base(ExecutableType.catalys, count,Formuls.CostCatalys(type))
     {
 
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Catalys/" + type.ToString());

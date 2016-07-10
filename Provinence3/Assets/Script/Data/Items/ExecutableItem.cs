@@ -18,11 +18,12 @@ public class ExecutableItem : BaseItem
     public const char FIRSTCHAR = '©';
     public int count;
 
-    public ExecutableItem(ExecutableType type,int count)
+    public ExecutableItem(ExecutableType type,int count,int cost)
     {
         ExecutableType = type;
         Slot = Slot.executable;
         this.count = count;
+        this.cost = cost;
     }
 
     public override char FirstChar()
@@ -49,7 +50,6 @@ public class ExecutableItem : BaseItem
         switch (t)
         {
             case ExecutableType.craft:
-
                 item = new ExecCraftItem((CraftItemType)Enum.Parse(typeof(CraftItemType), spl[2]), count);
                 break;
             case ExecutableType.enchant:

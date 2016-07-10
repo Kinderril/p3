@@ -271,8 +271,10 @@ public class PlayerData
         var items = playerItems.Count == 0;
         if (money && lvl && items)
         {
-            PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() { {ParamType.PPower, Formuls.GetPlayerItemPointsByLvl(1)} },Slot.physical_weapon, Rarity.Normal, 1);
-            PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.MPower, Formuls.GetPlayerItemPointsByLvl(1) } }, Slot.magic_weapon, Rarity.Normal, 1);
+            var p1 = Formuls.GetPlayerItemPointsByLvl(1);
+            PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() { {ParamType.PPower, p1 } },Slot.physical_weapon, Rarity.Normal, p1);
+            var p2 = Formuls.GetPlayerItemPointsByLvl(1);
+            PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.MPower, p2 } }, Slot.magic_weapon, Rarity.Normal, p2);
             AddAndEquip(item1);
             AddAndEquip(item2);
             AddFirstTalisman(TalismanType.doubleDamage);
@@ -281,7 +283,7 @@ public class PlayerData
 #if UNITY_EDITOR
             if (DebugController.Instance.GET_START_BOOST)
             {
-                PlayerItem item3 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PDef, 25 } }, Slot.body, Rarity.Rare, 1);
+                PlayerItem item3 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PDef, 25 } }, Slot.body, Rarity.Rare, 25);
                 AddAndEquip(item3);
 
                 foreach (var ability in ShopController.AllTalismanstypes)
@@ -292,9 +294,11 @@ public class PlayerData
             if (DebugController.Instance.GET_ALL_TYPE_WEAPONS_BOOST)
             {
                 int i = 0;
+                var baseP = Formuls.GetPlayerItemPointsByLvl(1) + 1;
                 foreach (var ability in ShopController.AllSpecialAbilities)
                 {
-                    PlayerItem itemA = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PPower, 15 + i++ } }, Slot.physical_weapon, Rarity.Normal, 1);
+                    var y = baseP + i++;
+                    PlayerItem itemA = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PPower, y } }, Slot.physical_weapon, Rarity.Normal, y);
                     itemA.specialAbilities = ability;
                     AddAndEquip(itemA);
                 }
@@ -465,7 +469,7 @@ public class PlayerData
 
     public void Sell(BaseItem playerItem)
     {
-        AddCurrensy(ItemId.money, playerItem.cost/3);
+        AddCurrensy(ItemId.money, playerItem.cost);
         RemoveItem(playerItem);
         Save();
     }

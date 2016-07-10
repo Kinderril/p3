@@ -236,7 +236,7 @@ public class Map : Singleton<Map>
         foreach (var enemy in pTargets)
         {
             var pDist = (enemy.transform.position - v).sqrMagnitude;
-            Debug.Log("Dist:" + pDist);
+//            Debug.Log("Dist:" + pDist);
             if (pDist < curDist && pDist < maxSqrDist)
             {
                 curDist = pDist;

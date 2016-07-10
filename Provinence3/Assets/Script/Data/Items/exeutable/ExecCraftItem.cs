@@ -23,7 +23,7 @@ public class ExecCraftItem : ExecutableItem
 {
     public CraftItemType ItemType;
     public ExecCraftItem(CraftItemType type, int count) 
-        : base(ExecutableType.craft, count)
+        : base(ExecutableType.craft, count,Formuls.CostCraftItemType(type))
     {
         IconSprite = DataBaseController.Instance.CraftItemSprite(type);
         ItemType = type;

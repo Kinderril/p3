@@ -58,7 +58,7 @@ public class PlayerItem : BaseItem
     
     public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, Rarity rare, float totalPoints)
     {
-        this.cost = PointsToCost(totalPoints, rare);
+        this.cost = Formuls.PlayerItemCost(totalPoints, rare);
         this.parameters = pparams;
         this.Slot = slot;
         this.Rare = rare;
@@ -98,23 +98,6 @@ public class PlayerItem : BaseItem
         }
     }
 
-    private int PointsToCost(float points, Rarity isRare)
-    {
-        float c = 1;
-        switch (isRare)
-        {
-            case Rarity.Magic:
-                c = 1.5f;
-                break;
-            case Rarity.Rare:
-                c =2.5f;
-                break;
-            case Rarity.Uniq:
-                c = 4f;
-                break;
-        }
-        return (int)( points*5*(c) );
-    }
     
     public override string Save()
     {

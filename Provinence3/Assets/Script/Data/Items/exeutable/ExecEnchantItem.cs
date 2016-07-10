@@ -15,7 +15,7 @@ public  class ExecEnchantItem : ExecutableItem
 {
     public EnchantType ItemType;
     public ExecEnchantItem(EnchantType type, int count) 
-        : base(ExecutableType.enchant, count)
+        : base(ExecutableType.enchant, count,Formuls.CostEnchant(type,MainController.Instance.PlayerData.Level))
     {
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Enchant/" + type.ToString());
         ItemType = type;

@@ -34,14 +34,15 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     }
     public override void Use()
     {
-        var bullet = DataBaseController.GetItem<Bullet>(cacheGameObject);
-
-        hero.GetHit(SefDmg, WeaponType.magic);
         var closestMonster = GetClosestMonster();
-        bullet.transform.position = hero.weaponsContainer.position;
-        bullet.Init(closestMonster, this,hero.transform.position);
-
-        base.Use();
+        if (closestMonster != null)
+        {
+            var bullet = DataBaseController.GetItem<Bullet>(cacheGameObject);
+            hero.GetHit(SefDmg, WeaponType.magic);
+            bullet.transform.position = hero.weaponsContainer.position;
+            bullet.Init(closestMonster, this, bullet.transform.position);
+            base.Use();
+        }
     }
 
     public SpecialAbility SpecAbility

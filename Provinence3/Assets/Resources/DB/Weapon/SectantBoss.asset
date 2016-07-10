@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SectantBoss
   m_EditorClassIdentifier: 
   type: 0
-  range: 5
+  range: 9.8
   isHoming: 0
   attackCooldown: 1.41
   icon: {fileID: 0}

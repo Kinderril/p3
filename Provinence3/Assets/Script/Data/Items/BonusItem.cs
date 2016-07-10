@@ -26,7 +26,7 @@ public class BonusItem : BaseItem
         this.Bonustype = Bonustype;
         this.power = power;
         this.remainUsetime = remainUsetime;
-
+        cost = Formuls.CostBonus(Bonustype, MainController.Instance.PlayerData.Level);
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/BonusItem/" + Bonustype.ToString());
         Slot = Slot.bonus;
     }

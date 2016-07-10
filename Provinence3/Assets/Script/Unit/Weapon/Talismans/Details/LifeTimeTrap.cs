@@ -31,8 +31,14 @@ public class LifeTimeTrap : MonoBehaviour
         }
     }
 
+    protected virtual void subDestroy()
+    {
+        
+    }
+
     void OnDestroy()
     {
+        subDestroy();
         if (timer != null)
         {
             timer.Stop();
