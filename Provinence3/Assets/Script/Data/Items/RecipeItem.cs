@@ -48,7 +48,31 @@ public class RecipeItem : BaseItem
 
     public override string Name
     {
-        get { return "Recipe"; }
+        get
+        {
+            string sub = "";
+            switch (recipeSlot)
+            {
+                case Slot.physical_weapon:
+                    sub = "of weapon";
+                    break;
+                case Slot.magic_weapon:
+                    sub = "of magic weapon";
+                    break;
+                case Slot.body:
+                    sub = "of armor";
+                    break;
+                case Slot.helm:
+                    sub = "of helmet";
+                    break;
+                case Slot.Talisman:
+                    sub = "of talisman";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            return "Recipe " + sub;
+        }
     }
     public override char FirstChar()
     {

@@ -10,12 +10,13 @@ public class RecepiItemInfo : InventoryItemInfo
 {
     public Text descField;
     public Button RecipeButton;
-    public void Init(RecipeItem recipeItem)
+    public void Init(RecipeItem recipeItem,bool WithButtons)
     {
-        base.Init(recipeItem);
+        base.Init(recipeItem,true, WithButtons);
         mainIcon.sprite = recipeItem.IconSprite;
         NameLabel.text = recipeItem.Name;
-//        SlotLabel.sprite = DataBaseController.Instance.SlotIcon(recipeItem.Slot);
+        RecipeButton.gameObject.SetActive(WithButtons);
+        //        SlotLabel.sprite = DataBaseController.Instance.SlotIcon(recipeItem.Slot);
     }
     public void OnRecipeOpen()
     {

@@ -10,14 +10,27 @@ public class BonusItemInfo : WearingInventoryItemInfo
 {
     public Text descField;
     public Text remainTimesField;
-    public void Init(BonusItem bonusItem)
+    public void Init(BonusItem bonusItem,bool WithButtons)
     {
-        base.Init(bonusItem);
+        base.Init(bonusItem,true, WithButtons);
 
-        //        var element = DataBaseController.GetItem<ParameterElement>(Prefab);
-        //        element.Init(ParamType.PPower, bonusItem.power);
-        //        element.transform.SetParent(layout);
-        NameLabel.text = "name (";
-        remainTimesField.text = "Remain:" + bonusItem.remainUsetime;
+        string nameBonus = "";
+        string descBonus = "";
+        switch (bonusItem.Bonustype)
+        {
+            case Bonustype.damage:
+                nameBonus = "Bonus Damage";
+                descBonus = " Give additional damage at next round, for all time.\n Use 1 charge per round";
+                break;
+            case Bonustype.money:
+                nameBonus = "Additional Money";
+                descBonus = " Add some money for all coin you can find , for all time.\n Use 1 charge per round";
+                break;
+        }
+
+
+        NameLabel.text = nameBonus;
+        descField.text = descBonus;
+        remainTimesField.text = "Charges remain:" + bonusItem.remainUsetime;
     }
 }

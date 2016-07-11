@@ -10,11 +10,12 @@ public abstract class UpgWearingInvItemInfo : WearingInventoryItemInfo
     public Button UpgradeButton;
     public Text EnchantField;
 
-    protected override void Init(BaseItem item, bool sell = true)
+    protected override void Init(BaseItem item, bool sell = true,bool WithButtons = true)
     {
         var canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(item) != null;
         UpgradeButton.interactable = canBeupgraded;
-        base.Init(item, sell);
+        base.Init(item, sell, WithButtons);
+        UpgradeButton.gameObject.SetActive(UpgradeButton);
 
     }
 

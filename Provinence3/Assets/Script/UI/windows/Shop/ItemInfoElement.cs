@@ -29,27 +29,27 @@ public class ItemInfoElement : MonoBehaviour
         {
             case PlayerItem.FIRSTCHAR:
                 PlayerItemInfo PlayerItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.PlayerItemInfo);
-                PlayerItemInfo.Init(item as PlayerItem);
+                PlayerItemInfo.Init(item as PlayerItem, WithButtons);
                 CurItemInfo = PlayerItemInfo;
                 break;
             case BonusItem.FIRSTCHAR:
                 BonusItemInfo BonusItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.BonusItemInfo);
-                BonusItemInfo.Init(item as BonusItem);
+                BonusItemInfo.Init(item as BonusItem, WithButtons);
                 CurItemInfo = BonusItemInfo;
                 break;
             case ExecutableItem.FIRSTCHAR:
                 ExecutableItemInfo ExecutableItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.ExecutableItemInfo);
-                ExecutableItemInfo.Init(item as ExecutableItem);
+                ExecutableItemInfo.Init(item as ExecutableItem, WithButtons);
                 CurItemInfo = ExecutableItemInfo;
                 break;
             case TalismanItem.FIRSTCHAR:
                 TalismanItemInfo TalismanItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.TalismanItemInfo);
-                TalismanItemInfo.Init(item as TalismanItem);
+                TalismanItemInfo.Init(item as TalismanItem, WithButtons);
                 CurItemInfo = TalismanItemInfo;
                 break;
             case RecipeItem.FIRSTCHAR:
                 RecepiItemInfo RecepiItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.RecepiItemInfo);
-                RecepiItemInfo.Init(item as RecipeItem);
+                RecepiItemInfo.Init(item as RecipeItem, WithButtons);
                 CurItemInfo = RecepiItemInfo;
                 break;
 

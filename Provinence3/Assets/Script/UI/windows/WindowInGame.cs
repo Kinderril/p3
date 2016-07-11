@@ -28,7 +28,8 @@ public class WindowInGame : BaseWindow
         level = obj as Level;
         moneyField.text = 0.ToString("0");
         UiControls.Init(level);
-        level.OnLeft += OnLeft;
+        level.Energy.OnLeft += OnLeft;
+        level.Energy.OnRage += OnRage;
         level.OnItemCollected += OnItemCollected;
         level.OnCraftItemCollected += OnCraftItemCollected;
         level.MainHero.OnGetHit += OnHeroHit;
@@ -49,6 +50,11 @@ public class WindowInGame : BaseWindow
         HealthSlider.value = 1;
         ShowPreStartWindow();
         MonsterInfo.Init();
+    }
+
+    private void OnRage()
+    {
+        
     }
 
 
@@ -86,7 +92,8 @@ public class WindowInGame : BaseWindow
         WindowManager.Instance.MainBack.gameObject.SetActive(true);
         MonsterInfo.DeInit();
         UiControls.Enable(false);
-        level.OnLeft -= OnLeft;
+        level.Energy.OnLeft -= OnLeft;
+        level.Energy.OnRage += OnRage;
         level.OnItemCollected -= OnItemCollected;
         level.MainHero.OnGetHit -= OnHeroHit;
         level.MainHero.OnWeaponChanged -= OnWeaponChanged;

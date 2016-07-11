@@ -11,6 +11,13 @@ public abstract class WearingInventoryItemInfo : InventoryItemInfo
     public Button EquipButton;
     public Button UnEquipButton;
 
+    protected override void Init(BaseItem item, bool sell = true, bool WithButtons = true)
+    {
+        base.Init(item, sell, WithButtons);
+        EquipButton.gameObject.SetActive(WithButtons);
+        UnEquipButton.gameObject.SetActive(WithButtons);
+    }
+
     public void OnUnequipItem()
     {
         MainController.Instance.PlayerData.EquipItem(BaseItem, false);

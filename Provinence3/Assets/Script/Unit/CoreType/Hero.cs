@@ -19,6 +19,7 @@ public class Hero : Unit
 //    public Action<float> CurrentBonusUpdateX;
     public float moneyBonusFromItem = 0.0f;
     public float damageBonusFromItem = 0.0f;
+    private float regenCoef = 1.2f;
     private HeroControl heorControl;
     public bool isRegenHP = false;
     public ArrowTarget ArrowTarget;
@@ -212,7 +213,7 @@ public class Hero : Unit
     {
         if (isRegenHP)
         {
-            var p = Time.deltaTime * 0.2f;
+            var p = Time.deltaTime * regenCoef;
             CurHp = CurHp + p;
             if (OnGetHit != null)
             {
@@ -267,6 +268,18 @@ public class Hero : Unit
     public void GetItem(CraftItemType type, int count)
     {
         MainController.Instance.level.AddItem(type, count);
+    }
+
+    public void Rage()
+    {
+        regenCoef = -1f;
+        isRegenHP = true;
+        Parameters.Parameters[ParamType.PPower] *= 1.5f;
+        Parameters.Parameters[ParamType.MPower] *= 1.5f;
+        Parameters.Parameters[ParamType.MDef] *= 1.3f;
+        Parameters.Parameters[ParamType.PDef] *= 1.3f;
+        Parameters.Parameters[ParamType.Speed] *= 1.3f;
+        //TODO add rage effect
     }
 }
 

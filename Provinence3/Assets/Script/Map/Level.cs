@@ -38,15 +38,13 @@ public class DictionaryOfItemAndInt : SerializableDictionary<ItemId, int> { }
 
 public class Level
 {
-    public Action<float, float> OnLeft;
     public Action<ItemId,float,float> OnItemCollected;
     public Action<BossUnit> OnBossAppear;
     public Action<CraftItemType, int> OnCraftItemCollected;
     public Action OnEndLevel;
 
-    private float powerLeft;
+    public Energy Energy;
     public Hero MainHero;
-    private float maxpower = 120;
     private DictionaryOfItemAndInt moneyInv;
     public int difficult = 1;
     public bool isPLaying ;
@@ -57,11 +55,11 @@ public class Level
     public int IndexBornPoint = 0;
     public EndlevelType IsGoodEnd;
     public int EnemiesKills = 0;
-    private const float speedEnergyFall = 1.5f;
     private float penalty;
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
+        Energy = new Energy(ActivaAction,OnRage);
         MissionIndex = levelIndex;
         IndexBornPoint = indexBornPos;
         this.difficult = difficult;
@@ -73,10 +71,15 @@ public class Level
             moneyInv.Add(id,0);
         }
         MainHero = Map.Instance.Init(this, levelIndex ,indexBornPos);
-        PortalsController.Start((int)maxpower,OnPortalOpen);
+//        PortalsController.Start((int)maxpower,OnPortalOpen);
         isPLaying = false;
         callback(this);
 
+    }
+
+    private void OnRage()
+    {
+        MainHero.Rage();
     }
 
     public void Start()
@@ -102,7 +105,8 @@ public class Level
 
     private void OnPortalOpen()
     {
-        Vector3 placeToBorn;
+        //TODO
+//        Vector3 placeToBorn;
         //Find closes bornPositions
     }
 
@@ -124,9 +128,7 @@ public class Level
                 ActivaAction(type, value);
                 break;
             case ItemId.energy:
-                powerLeft = Mathf.Clamp(powerLeft + value, -1, maxpower);
-                ActionPOwerLeft();
-                ActivaAction(type, value);
+                Energy.Add(value);
                 break;
             case ItemId.health:
                 break;
@@ -143,19 +145,6 @@ public class Level
         
     }
 
-    private void ActionPOwerLeft()
-    {
-        if (OnLeft != null)
-        {
-            OnLeft(powerLeft, maxpower);
-        }
-
-        if (powerLeft > maxpower)
-        {
-            isPLaying = false;
-            MainController.Instance.EndLevel(EndlevelType.bad);
-        }
-    }
 
     public void AddItem(BaseItem item)
     {
@@ -181,8 +170,7 @@ public class Level
     {
         if (isPLaying)
         {
-            powerLeft += Time.deltaTime*speedEnergyFall;
-            ActionPOwerLeft();
+            Energy.Update();
         }
     }
 
@@ -222,6 +210,7 @@ public class Level
         {
             OnEndLevel();
         }
+        Energy.Dispose();
         MainController.Instance.StartCoroutine(WaitEndLvl());
     }
 
@@ -233,7 +222,7 @@ public class Level
 
     private void AddRandomGift()
     {
-        if (powerLeft >= maxpower/2)
+        if (Energy.MorePowerLeft())
         {
             IsGoodEnd = EndlevelType.good;
         }

@@ -12,9 +12,9 @@ public class PlayerItemInfo : UpgWearingInvItemInfo
     public Image SpecIcon;
     public Text SpecName;
     
-    public void Init(PlayerItem playerItem)
+    public void Init(PlayerItem playerItem,bool WithButtons)
     {
-        base.Init(playerItem);
+        base.Init(playerItem,true, WithButtons);
         SetEnchant(playerItem.enchant, playerItem.enchant > 0);
         bool enchanted = false;
         foreach (var p in playerItem.parameters)

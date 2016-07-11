@@ -9,9 +9,9 @@ using UnityEngine.UI;
 public class ExecutableItemInfo : InventoryItemInfo
 {
     public Text descField;
-    public void Init(ExecutableItem executableItem)
+    public void Init(ExecutableItem executableItem,bool WithButtons)
     {
-        base.Init(executableItem);
+        base.Init(executableItem,true, WithButtons);
         switch (executableItem.ExecutableType)
         {
             case ExecutableType.craft:

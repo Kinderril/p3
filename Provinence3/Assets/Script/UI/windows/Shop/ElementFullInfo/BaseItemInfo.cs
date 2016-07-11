@@ -14,7 +14,7 @@ public abstract class BaseItemInfo : MonoBehaviour
     public Image SlotLabel;
     protected BaseItem BaseItem;
 
-    protected virtual void Init(BaseItem item,bool sell = true)
+    protected virtual void Init(BaseItem item,bool sell = true, bool WithButtons = true)
     {
         BaseItem = item;
         if (SlotLabel != null)
