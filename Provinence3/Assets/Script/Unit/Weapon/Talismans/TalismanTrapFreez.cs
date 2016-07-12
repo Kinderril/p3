@@ -19,7 +19,7 @@ public class TalismanTrapFreez : TalismanWithTime ,IBulletHolder
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         base.Init(level, sourseItem, countTalismans, LVL_1_P, LVL_10_P);
-        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.enchant);
     }
     public override string PowerInfo()
     {

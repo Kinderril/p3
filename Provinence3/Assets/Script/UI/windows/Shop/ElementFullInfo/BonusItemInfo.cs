@@ -32,6 +32,6 @@ public class BonusItemInfo : WearingInventoryItemInfo
 
         NameLabel.text = nameBonus;
         descField.text = descBonus;
-        remainTimesField.text = "Charges remain:" + bonusItem.remainUsetime;
+        remainTimesField.text = "Remain:" + bonusItem.remainUsetime;
     }
 }

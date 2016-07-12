@@ -24,7 +24,8 @@ public class BaseSimpleElement : MonoBehaviour
     }
     public virtual void Refresh()
     {
-        enchantField.gameObject.SetActive(false);
+        if (enchantField != null)
+            enchantField.gameObject.SetActive(false);
         NameField.text = PlayerItem.Name;
         CountField.gameObject.SetActive(false);
         iconImage.sprite = PlayerItem.IconSprite;
@@ -53,11 +54,13 @@ public class BaseSimpleElement : MonoBehaviour
             CountField.text = exec.count.ToString("0");
         }
 
-        
-        SlotLabel.sprite = DataBaseController.Instance.SlotIcon(PlayerItem.Slot);
-        if (SlotLabel.sprite == null)
+        if (SlotLabel != null)
         {
-            SlotLabel.gameObject.SetActive(false);
+            SlotLabel.sprite = DataBaseController.Instance.SlotIcon(PlayerItem.Slot);
+            if (SlotLabel.sprite == null)
+            {
+                SlotLabel.gameObject.SetActive(false);
+            }
         }
     }
 }

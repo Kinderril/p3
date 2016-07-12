@@ -64,7 +64,7 @@ public class WindowShop : BaseWindow
         MainController.Instance.PlayerData.OnEnchant += OnEnchant;
     }
 
-    private void OnEnchant(PlayerItem arg1, bool arg2)
+    private void OnEnchant(IEnhcant arg1, bool arg2)
     {
         var msg = arg2 ? "Item was succsesfully enchant" : "Enchant failed";
         WindowManager.Instance.InfoWindow.Init(() => { }, msg);
@@ -195,8 +195,10 @@ public class WindowShop : BaseWindow
 //        OnSelected()
         if (layoutShopItems.childCount > 0)
         {
-            var shopExec = layoutShopItems.GetChild(0).GetComponent<IShopExecute>();
-            OnShopSelected(shopExec);
+            var tmp = layoutShopItems.GetChild(0);
+            var shopExec = tmp.GetComponent<IShopExecute>();
+            if (shopExec != null)
+                OnShopSelected(shopExec);
         }
 
     }

@@ -27,14 +27,14 @@ public enum TalismanType
     splitter,//2
 }
 
-public class TalismanItem : BaseItem
+public class TalismanItem : BaseItem ,IEnhcant
 {
     public float points;
     public TalismanType TalismanType;
     public float costShoot;
     public const char FIRSTCHAR = '=';
     public int MaxCharges = 1;
-    public int Enchant = 0;
+    public int enchant = 0;
 
 
     public TalismanItem(int points, TalismanType type)
@@ -47,11 +47,12 @@ public class TalismanItem : BaseItem
         MaxCharges = GetMaxCharges(type);
         cost = Formuls.CostTalismanBypoints(points);
     }
-    public TalismanItem(float power1, float costShoot1, TalismanType type)
+    public TalismanItem(float power1, float costShoot1, TalismanType type,int enchant)
     {
         cost = Formuls.CostTalismanBypoints((int)power1);
         this.points = power1;
         this.costShoot = costShoot1;
+        this.enchant = enchant;
         this.TalismanType = type;
         IconSprite = DataBaseController.Instance.TalismanIcon(type);
         Slot = Slot.Talisman;
@@ -147,7 +148,7 @@ public class TalismanItem : BaseItem
 
     public override string Save()
     {
-        return points.ToString() + MDEL + costShoot.ToString() + MDEL + (int)TalismanType + MDEL + IsEquped;
+        return points.ToString() + MDEL + costShoot.ToString() + MDEL + (int)TalismanType + MDEL + IsEquped + MDEL + enchant;
     }
 
     public static TalismanItem Create(string subStr)
@@ -158,9 +159,19 @@ public class TalismanItem : BaseItem
         float costShoot = Convert.ToSingle(pp[1]);
         global::TalismanType type = (TalismanType)Convert.ToInt32(pp[2]);
         bool isEquiped = Convert.ToBoolean(pp[3]);
-        TalismanItem talic = new TalismanItem(power,costShoot,type);
+        int enchant = Convert.ToInt32(pp[4]);
+        TalismanItem talic = new TalismanItem(power,costShoot,type, enchant);
         talic.IsEquped = isEquiped;
         return talic;
+    }
+
+    public BaseItem BaseItem {
+        get { return this; } 
+    }
+
+    public void Enchant(int sum)
+    {
+        enchant = Mathf.Clamp(enchant + sum, 0, 30);
     }
 }
 

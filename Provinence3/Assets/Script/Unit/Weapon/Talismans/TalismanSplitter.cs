@@ -17,7 +17,7 @@ public class TalismanSplitter : Talisman ,IBulletHolder
     {
 
         base.Init(level, sourseItem, countTalismans);
-        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.enchant);
 
     }
     public TalismanSplitter()

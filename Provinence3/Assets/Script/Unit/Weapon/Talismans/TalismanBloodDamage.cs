@@ -22,7 +22,7 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     {
         base.Init(level, sourseItem, countTalismans);
 
-        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.enchant);
 
         var sefl = (LVL_10_S ) / Formuls.DiffOfTen();
         SefDmg = LVL_1_S +  sourseItem.points * sefl;

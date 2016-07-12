@@ -12,7 +12,7 @@ public class TalismanFireWave : TalismanWithTime
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         base.Init(level, sourseItem, countTalismans,8,2);
-        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant)/TimeCoef;
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.enchant) /TimeCoef;
     }
     public override string PowerInfo()
     {

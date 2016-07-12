@@ -10,23 +10,23 @@ public class UpgradeWindow : MonoBehaviour
 {
     public Image ItemImage;
     public Image EnchantImage;
-    private PlayerItem item;
+    private IEnhcant item;
     public Button safeButton;
-    private Action<PlayerItem> onClose;
+    private Action<IEnhcant> onClose;
 
     public static void Creat()
     {
 //        WindowManager.Instance.
     }
 
-    public void Init(PlayerItem item,Action<PlayerItem> onClose)
+    public void Init(IEnhcant item,Action<IEnhcant> onClose)
     {
         this.item = item;
         this.onClose = onClose;
         var canSafe = MainController.Instance.PlayerData.CanPay(ItemId.crystal, PlayerData.CRYSTAL_SAFETY_ENCHANT);
         safeButton.interactable = canSafe;
         gameObject.SetActive(true);
-        ItemImage.sprite = item.IconSprite;
+        ItemImage.sprite = item.BaseItem.IconSprite;
         var exec = MainController.Instance.PlayerData.CanBeUpgraded(item);
         EnchantImage.sprite = exec.IconSprite;
     }

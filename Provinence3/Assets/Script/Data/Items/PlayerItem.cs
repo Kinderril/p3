@@ -48,8 +48,9 @@ public enum Slot
     recipe,
 }
 
-public class PlayerItem : BaseItem
+public class PlayerItem : BaseItem ,IEnhcant
 {
+    public const int ENCHANT_PLAYER_COEF = 5;
     public Dictionary<ParamType, float> parameters;
     public SpecialAbility specialAbilities = SpecialAbility.none; 
     public Rarity Rare;
@@ -135,6 +136,10 @@ public class PlayerItem : BaseItem
     {
         enchant = Mathf.Clamp(enchant + sum,0,30);
     }
+    public BaseItem BaseItem
+    {
+        get { return this; }
+    }
 
     public override char FirstChar()
     {
@@ -145,7 +150,7 @@ public class PlayerItem : BaseItem
     {
         foreach (var parameter in parameters)
         {
-            hero.Parameters.Parameters[parameter.Key] += (1 + enchant / 5) *  parameter.Value ;
+            hero.Parameters.Parameters[parameter.Key] += (1 + enchant / ENCHANT_PLAYER_COEF) *  parameter.Value ;
         }
     }
 

@@ -45,7 +45,7 @@ public class PlayerData
     public event Action<Dictionary<MainParam, int>> OnParametersChange;
     public event Action<int> OnLevelUp;
     public event Action<ItemId, int> OnCurrensyChanges;
-    public event Action<PlayerItem, bool> OnEnchant;
+    public event Action<IEnhcant, bool> OnEnchant;
 
     public int Level
     {
@@ -79,7 +79,7 @@ public class PlayerData
         }
     }
 
-    public void TryToEnchant(PlayerItem item,bool safety)
+    public void TryToEnchant(IEnhcant item,bool safety)
     {
         var exec = CanBeUpgraded(item);
         if (exec != null)
@@ -98,7 +98,7 @@ public class PlayerData
         }
     }
 
-    private void DoEnchant(PlayerItem item, ExecutableItem exec, bool safety)
+    private void DoEnchant(IEnhcant item, ExecutableItem exec, bool safety)
     {
         RemoveItem(exec);
         if (safety)
@@ -244,9 +244,9 @@ public class PlayerData
         }
 #endif
     }
-    public ExecutableItem CanBeUpgraded(BaseItem info)
+    public ExecutableItem CanBeUpgraded(IEnhcant info)
     {
-        switch (info.Slot)
+        switch (info.BaseItem.Slot)
         {
             case Slot.physical_weapon:
             case Slot.magic_weapon:

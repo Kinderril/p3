@@ -576,8 +576,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
 --- !u!114 &11445246
@@ -721,13 +721,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 41
+    m_Font: {fileID: 12800000, guid: 86983c6bd4117a0498dfcb64cf777b37, type: 3}
+    m_FontSize: 46
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 41
-    m_Alignment: 4
+    m_MaxSize: 53
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -877,7 +877,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 86983c6bd4117a0498dfcb64cf777b37, type: 3}
     m_FontSize: 41
     m_FontStyle: 0
     m_BestFit: 0
@@ -1060,8 +1060,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -9.8, y: -25.89}
-  m_SizeDelta: {x: 254.42, y: 52}
+  m_AnchoredPosition: {x: -10, y: -32.49997}
+  m_SizeDelta: {x: 336, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22406706
 RectTransform:
@@ -1096,8 +1096,8 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -39.205017, y: -25.944984}
-  m_SizeDelta: {x: 80.59, y: 51.89}
+  m_AnchoredPosition: {x: -143, y: -39}
+  m_SizeDelta: {x: 258, y: 52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22432284
 RectTransform:
@@ -1234,8 +1234,8 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 231, y: 112}
-  m_SizeDelta: {x: 210.45, y: 71}
+  m_AnchoredPosition: {x: 196, y: 106.74999}
+  m_SizeDelta: {x: 279, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22489410
 RectTransform:
@@ -1252,8 +1252,8 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -157, y: -24.858002}
-  m_SizeDelta: {x: 254, y: -158.44}
+  m_AnchoredPosition: {x: -354, y: 38.500008}
+  m_SizeDelta: {x: 656, y: -218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22490628
 RectTransform:

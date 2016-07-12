@@ -18,11 +18,11 @@ public class TalismanItemInfo : UpgWearingInvItemInfo
         var item = Talisman.Creat(talismanItem, 0, null);
 
         mainIcon.sprite = DataBaseController.Instance.TalismanIcon(talismanItem.TalismanType);
-        powerField.text = item.PowerInfo() + "\n Charges: " + talismanItem.MaxCharges;
-        descField.text = "Cost:"  + talismanItem.costShoot.ToString("0");
+        powerField.text = item.PowerInfo();
+        descField.text = "Cost:"  + talismanItem.costShoot.ToString("0") + "\n Charges:" + talismanItem.MaxCharges;
         NameLabel.text = TalismanName(talismanItem.TalismanType);
         
-        SetEnchant(talismanItem.Enchant, talismanItem.Enchant > 0);
+        SetEnchant(talismanItem.enchant, talismanItem.enchant > 0);
     }
 
     public static string TalismanName(TalismanType type)

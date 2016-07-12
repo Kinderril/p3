@@ -16,7 +16,7 @@ public class TalismanDoubleDamage : TalismanWithTime
     public override void Init(Level level, TalismanItem sourseItem, int countTalismans)
     {
         base.Init(level, sourseItem, countTalismans, LVL_1_T, LVL_10_T);
-        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.Enchant);
+        power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.enchant);
 
     }
     public override string PowerInfo()

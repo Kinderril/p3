@@ -12,7 +12,9 @@ public abstract class UpgWearingInvItemInfo : WearingInventoryItemInfo
 
     protected override void Init(BaseItem item, bool sell = true,bool WithButtons = true)
     {
-        var canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(item) != null;
+        bool canBeupgraded = false;
+        if (item is IEnhcant)
+            canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(item as IEnhcant) != null;
         UpgradeButton.interactable = canBeupgraded;
         base.Init(item, sell, WithButtons);
         UpgradeButton.gameObject.SetActive(UpgradeButton);
@@ -27,14 +29,14 @@ public abstract class UpgWearingInvItemInfo : WearingInventoryItemInfo
 
     public void OnUpgradeClick()
     {
-        var playerItem = BaseItem as PlayerItem;
+        var playerItem = BaseItem as IEnhcant;
         var shop = WindowManager.Instance.CurrentWindow as WindowShop;
         if (shop != null)
         {
             shop.UpgradeWindow.Init(playerItem, OnItemEnchanted);
         }
     }
-    private void OnItemEnchanted(PlayerItem obj)
+    private void OnItemEnchanted(IEnhcant obj)
     {
         Refresh();
     }

@@ -33,7 +33,7 @@ public class ExecutableItem : BaseItem
 
     public override void Activate(Hero hero)
     {
-        Debug.LogWarning("cannot be activate");
+//        Debug.LogWarning("cannot be activate");
     }
 
     public override string Save()

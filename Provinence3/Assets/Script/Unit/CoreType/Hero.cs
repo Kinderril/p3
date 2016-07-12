@@ -43,6 +43,11 @@ public class Hero : Unit
     {
         base.Init();
         var playerData = MainController.Instance.PlayerData;
+        foreach (var allWearedItem in playerData.GetAllWearedItems())
+        {
+            allWearedItem.Activate(this);
+        }
+
         foreach (ParamType v in Enum.GetValues(typeof(ParamType)))
         {
             Parameters.Parameters[v] = playerData.CalcParameter(v);

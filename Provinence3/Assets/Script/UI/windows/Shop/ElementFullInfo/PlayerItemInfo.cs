@@ -23,7 +23,7 @@ public class PlayerItemInfo : UpgWearingInvItemInfo
             if (!enchanted)
             {
                 enchanted = true;
-                count += count * playerItem.enchant / 5;
+                count = count * ( 1 +  playerItem.enchant / PlayerItem.ENCHANT_PLAYER_COEF);
             }
             var element = DataBaseController.GetItem<ParameterElement>(DataBaseController.Instance.DataStructs.PrefabsStruct.ParameterElement);
             element.Init(p.Key, count);

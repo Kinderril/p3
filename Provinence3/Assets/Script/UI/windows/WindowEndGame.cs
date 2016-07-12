@@ -27,7 +27,8 @@ public class WindowEndGame : BaseWindow
         var level = MainController.Instance.level;
         bool isGoodEnd = level.IsGoodEnd != EndlevelType.bad;
         var collectedMoney = level.GetAllCollectedMoney();
-        crystalField.gameObject.SetActive(false);
+//        crystalField.gameObject.SetActive(false);
+        crystalField.transform.parent.gameObject.SetActive(false);
         foreach (var item in collectedMoney)
         {
             Text t = null;
