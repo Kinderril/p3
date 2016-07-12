@@ -187,6 +187,7 @@ public class Bullet : PoolElement
                         if (lastUnitHitted != null)
                         {
                             HitParticleSystem.transform.SetParent(lastUnitHitted.transform, true);
+                            HitParticleSystem.transform.localPosition = Vector3.zero;
                             if (HitParticleSystem.gameObject != null)
                                 MainController.Instance.StartCoroutine(HitParticleSystem.DestroyPS(transform,4,"2"));
                         }

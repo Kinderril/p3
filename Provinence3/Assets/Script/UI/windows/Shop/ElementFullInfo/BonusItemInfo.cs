@@ -16,15 +16,16 @@ public class BonusItemInfo : WearingInventoryItemInfo
 
         string nameBonus = "";
         string descBonus = "";
+        var percent = (bonusItem.power*100).ToString("00");
         switch (bonusItem.Bonustype)
         {
             case Bonustype.damage:
                 nameBonus = "Bonus Damage";
-                descBonus = " Give additional damage at next round, for all time.\n Use 1 charge per round";
+                descBonus = " Give " + percent + "% additional damage at next round, for all time.\n Use 1 charge per round";
                 break;
             case Bonustype.money:
                 nameBonus = "Additional Money";
-                descBonus = " Add some money for all coin you can find , for all time.\n Use 1 charge per round";
+                descBonus = " Find more money for " + percent + "% for all coin you can find , for all time.\n Use 1 charge per round";
                 break;
         }
 

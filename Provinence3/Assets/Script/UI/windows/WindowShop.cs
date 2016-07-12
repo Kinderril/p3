@@ -45,7 +45,6 @@ public class WindowShop : BaseWindow
     public override void Init()
     {
         base.Init();
-        NullSelection();
         UpgradeWindow.gameObject.SetActive(false);
         CraftWindow.gameObject.SetActive(false);
         ItemWindow.gameObject.SetActive(false);
@@ -55,12 +54,20 @@ public class WindowShop : BaseWindow
         crystalField.text = MainController.Instance.PlayerData.playerInv[ItemId.crystal].ToString("0");
         InitPlayerItems();
         InitGoods();
-        
+        NullSelection();
+
         MainController.Instance.PlayerData.OnNewItem += OnNewItem;
         MainController.Instance.PlayerData.OnItemEquiped += OnItemEquipedCallback;
         MainController.Instance.PlayerData.OnItemSold += OnItemSoldCallback;
         MainController.Instance.PlayerData.OnCurrensyChanges += OnCurrensyChanges;
         MainController.Instance.PlayerData.OnChangeCount += OnChangeCount;
+        MainController.Instance.PlayerData.OnEnchant += OnEnchant;
+    }
+
+    private void OnEnchant(PlayerItem arg1, bool arg2)
+    {
+        var msg = arg2 ? "Item was succsesfully enchant" : "Enchant failed";
+        WindowManager.Instance.InfoWindow.Init(() => { }, msg);
     }
 
     private void Sort()
@@ -186,6 +193,12 @@ public class WindowShop : BaseWindow
         selectedShopElement = null;
         selectedPlayerItem = null;
 //        OnSelected()
+        if (layoutShopItems.childCount > 0)
+        {
+            var shopExec = layoutShopItems.GetChild(0).GetComponent<IShopExecute>();
+            OnShopSelected(shopExec);
+        }
+
     }
 
 //    private void OnItemInit(BaseItem info,ItemOwner obj)
@@ -301,6 +314,7 @@ public class WindowShop : BaseWindow
         MainController.Instance.PlayerData.OnNewItem -= OnNewItem;
         MainController.Instance.PlayerData.OnItemEquiped -= OnItemEquipedCallback;
         MainController.Instance.PlayerData.OnItemSold -= OnItemSoldCallback;
+        MainController.Instance.PlayerData.OnEnchant -= OnEnchant;
         MainController.Instance.PlayerData.OnCurrensyChanges -= OnCurrensyChanges;
         PlayerItemElements.Clear();
         ClearTransform(layoutMyInventory);

@@ -21,7 +21,7 @@ public class HeroShopBonusItem : IShopExecute
     public static BonusItem CreatBonusItem(int lvl)
     {
         var bonus = ShopController.RandomBonus();
-        BonusItem b = new BonusItem(bonus, Formuls.GetBonusPointsByLvl(lvl), 3);
+        BonusItem b = new BonusItem(bonus, Formuls.GetBonusPointsByLvl(lvl), BonusItem.BONUS_USE_TIME);
         return b;
     }
     

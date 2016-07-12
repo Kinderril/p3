@@ -37,9 +37,10 @@ public class WindowEndGame : BaseWindow
                     t = moneyField;
                     break;
                 case ItemId.crystal:
-                    if (item.Value > 0)
+                    var haveCrystals = item.Value > 0;
+                    crystalField.transform.parent.gameObject.SetActive(haveCrystals);
+                    if (haveCrystals)
                     {
-                        crystalField.gameObject.SetActive(true);
                         t = crystalField;
                     }
                     break;

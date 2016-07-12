@@ -29,9 +29,10 @@ public enum AIStatus
 public class BaseMonster : Unit
 {
     private const float isHomeDist = 2;
-    public float attackDist = 45;
     public const float AI_DIST = 170;
     private const float runAwayDist = 110;
+
+    public float attackDist = 45;
     public float mainHeroDist = 0;
     public Vector3 bornPosition;
     public AIStatus aiStatus;
@@ -68,7 +69,7 @@ public class BaseMonster : Unit
         Parameters.Parameters[ParamType.Speed] = GreatRandom.RandomizeValue(Parameters.Parameters[ParamType.Speed]);
         bornPosition = transform.position;
         Utils.GroundTransform(transform, 999f);
-        energyadd = (int)(Formuls.BASE_MOSTER_ENERGY*energyCoef);
+        energyadd = (int)(Energy.CREEP_ENERGY_AV*energyCoef);
         //curWeapon.power = GreatRandom.RandomizeValue(curWeapon.power);
 //        moneyCollect = GreatRandom.RandomizeValue(moneyCollect);
         aiStatus = AIStatus.disable;

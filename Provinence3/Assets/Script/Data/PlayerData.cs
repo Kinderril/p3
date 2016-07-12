@@ -45,6 +45,7 @@ public class PlayerData
     public event Action<Dictionary<MainParam, int>> OnParametersChange;
     public event Action<int> OnLevelUp;
     public event Action<ItemId, int> OnCurrensyChanges;
+    public event Action<PlayerItem, bool> OnEnchant;
 
     public int Level
     {
@@ -122,6 +123,10 @@ public class PlayerData
             }
         }
         Save();
+        if (OnEnchant != null)
+        {
+            OnEnchant(item, enchantFine);
+        }
     }
 
     public bool CanUpgradeParameter()

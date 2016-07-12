@@ -133,7 +133,7 @@ public class PlayerItem : BaseItem
 
     public void Enchant(int sum)
     {
-        enchant = Mathf.Clamp(enchant + sum,0,9999);
+        enchant = Mathf.Clamp(enchant + sum,0,30);
     }
 
     public override char FirstChar()

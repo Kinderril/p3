@@ -12,6 +12,7 @@ public enum Bonustype
 
 public class BonusItem : BaseItem
 {
+    public const int BONUS_USE_TIME = 2;
     public float power;
     public Bonustype Bonustype;
     public int remainUsetime;
@@ -26,7 +27,7 @@ public class BonusItem : BaseItem
         this.Bonustype = Bonustype;
         this.power = power;
         this.remainUsetime = remainUsetime;
-        cost = Formuls.CostBonus(Bonustype, MainController.Instance.PlayerData.Level);
+        cost = Formuls.CostBonus(Bonustype, MainController.Instance.PlayerData.Level) * (remainUsetime/ BONUS_USE_TIME);
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/BonusItem/" + Bonustype.ToString());
         Slot = Slot.bonus;
     }
@@ -48,6 +49,8 @@ public class BonusItem : BaseItem
             MainController.Instance.PlayerData.RemoveItem(this);
         }
     }
+
+
 
     public override string Save()
     {

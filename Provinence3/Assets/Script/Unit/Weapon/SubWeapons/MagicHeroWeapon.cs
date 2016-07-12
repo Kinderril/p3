@@ -15,7 +15,7 @@ public class MagicHeroWeapon : Weapon
     public override void DoShoot(Vector3 v, float additionalPower = 0, Unit target = null)
     {
         base.DoShoot(v);
-        MainController.Instance.level.AddItem(ItemId.energy, 1);
+        MainController.Instance.level.AddItem(ItemId.energy, Energy.MAGIC_WEAPON_COST);
     }
 }
 

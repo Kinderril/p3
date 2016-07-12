@@ -91,20 +91,16 @@ public class MonsterBornPosition : BaseBornPosition
     {
         if (!isReborned)
         {
-            int sec = UnityEngine.Random.Range(45, 58);
+            int sec = UnityEngine.Random.Range(60*2, 60*3);
 #if UNITY_EDITOR
             if (DebugController.Instance.RESPAWN_TIME_CREEPS_FAST)
             {
                 sec = 15;
             }
 #endif
-            //            Debug.Log("Start reborn in " + sec);
-            if (UnityEngine.Random.Range(0, 100) < 95)
-            {
-//                Debug.Log("Start reborn in " + sec);
-                timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromSeconds(sec));
-                timer.OnTimer += OnReborn;
-            }
+            timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromSeconds(sec));
+            timer.OnTimer += OnReborn;
+
             isReborned = true;
         }
     }

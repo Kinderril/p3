@@ -77,7 +77,15 @@ public class WindowPersonage : BaseWindow
 
     public void OnLevelUpClicked()
     {
-        MainController.Instance.PlayerData.LevelUp();
+        var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[MainController.Instance.PlayerData.Level];
+        WindowManager.Instance.ConfirmWindow.Init(() =>
+        {
+            MainController.Instance.PlayerData.LevelUp();
+        }, () =>
+        {
+            
+        },"Do you want to level up for " + cost.ToString("0") + " gold?");
+        
     }
 
     private void LoadParameters()

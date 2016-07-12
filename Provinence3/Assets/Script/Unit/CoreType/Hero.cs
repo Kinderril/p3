@@ -50,8 +50,8 @@ public class Hero : Unit
         }
         curHp = Parameters.Parameters[ParamType.Heath];
 
-        Parameters.Parameters[ParamType.PPower] *= damageBonusFromItem + 1f;
-        Parameters.Parameters[ParamType.MPower] *= damageBonusFromItem + 1f;
+        Parameters.Parameters[ParamType.PPower] *= (damageBonusFromItem + 1f);
+        Parameters.Parameters[ParamType.MPower] *= (damageBonusFromItem + 1f);
 //        GetItemEffect.Stop(true);
         heorControl = Control as HeroControl;
         heorControl.Init(OnRotationEnds);

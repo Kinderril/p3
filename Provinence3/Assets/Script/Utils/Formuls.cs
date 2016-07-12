@@ -13,7 +13,7 @@ public class Formuls
         return 1 - curResist / (150 + curResist);
     }
 
-    private const int av_mosters_kills = 45;
+    public const int av_mosters_kills = 45;
     private const int av_chestes = 13;
     private const int base_gold_chest = 109;
     private const int base_monster_gold = 23;
