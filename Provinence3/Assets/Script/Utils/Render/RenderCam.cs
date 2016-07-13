@@ -36,6 +36,16 @@ public class RenderCam : Singleton<RenderCam>
         RenderImage(slot, RenderSlotType.bot, botImage);
         RenderImage(slot, RenderSlotType.mid, midImage);
         RenderImage(slot, RenderSlotType.top, topImage);
+        var fileName = Application.persistentDataPath + "/imagePic" + lastId + ".png";
+        var pngTex = RenderImpl(RenderCamera, RenderTexture,fileName);
+        lastId++;
+        PlayerPrefs.SetInt(key, lastId);
+        icon = fileName;
+        return pngTex;
+    }
+
+    public static Texture2D RenderImpl(Camera RenderCamera, RenderTexture RenderTexture, string fileName)
+    {
         var pngTex = new Texture2D(RenderCamera.pixelWidth, RenderCamera.pixelHeight);
         RenderTexture = new RenderTexture(RenderCamera.pixelWidth, RenderCamera.pixelHeight, 24);
         RenderCamera.targetTexture = RenderTexture;
@@ -43,19 +53,13 @@ public class RenderCam : Singleton<RenderCam>
         RenderTexture.active = RenderTexture;
         var rect = new Rect(0, 0, RenderCamera.pixelWidth, RenderCamera.pixelHeight);
         pngTex.ReadPixels(rect, 0, 0);
-//        RenderCamera.targetTexture = null;
+        //        RenderCamera.targetTexture = null;
         var bytes = pngTex.EncodeToPNG();
         StreamWriter fileStream;
-        var fileName = Application.persistentDataPath + "/imagePic" + lastId + ".png";
         fileStream = File.CreateText(fileName);
         fileStream.Close();
         File.WriteAllBytes(fileName, bytes);
-        RenderCamera.gameObject.SetActive(false);
-
         Debug.Log("Render done:" + fileName);
-        lastId++;
-        PlayerPrefs.SetInt(key, lastId);
-        icon = fileName;
         return pngTex;
     }
 

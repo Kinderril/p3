@@ -22,8 +22,9 @@ public class MainController : Singleton<MainController>
     //public WindowInGame WindowInGame;st 
     public MainState MainState;
     public PlayerData PlayerData;
-    
-	void Start () {
+    public ScreenshotMaker ScreenshotMaker;
+
+    void Start () {
         WindowManager.Instance.Init();
         ShopController.Instance.Init();
         TimerManager = new TimerManager();
