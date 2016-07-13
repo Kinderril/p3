@@ -17,7 +17,7 @@ public abstract class UpgWearingInvItemInfo : WearingInventoryItemInfo
             canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(item as IEnhcant) != null;
         UpgradeButton.interactable = canBeupgraded;
         base.Init(item, sell, WithButtons);
-        UpgradeButton.gameObject.SetActive(UpgradeButton);
+        UpgradeButton.gameObject.SetActive(UpgradeButton && WithButtons);
 
     }
 
