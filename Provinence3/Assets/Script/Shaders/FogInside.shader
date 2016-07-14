@@ -3,15 +3,18 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
+	_Color("Main Color", Color) = (1,1,1,0.5)
+		diff("Density", Float) = 1.0
+		_C2("Height", Float) = 10.0
 	}
 		SubShader
 	{
-		Tags{ "RenderType" = "Opaque" }
-		LOD 100
 
 		Pass
 	{
-CGPROGRAM
+		CGPROGRAM
+		// Upgrade NOTE: excluded shader from DX11 and Xbox360; has structs without semantics (struct appdata members worldPos)
+		//#pragma exclude_renderers d3d11 xbox360
 #pragma vertex vert
 #pragma fragment frag
 
@@ -26,28 +29,39 @@ CGPROGRAM
 	struct v2f
 	{
 		float2 uv : TEXCOORD0;
-		float4 vertex : SV_POSITION;
-		float yy;
+		float4 vertex : SV_POSITION0;
+		float4 position_in_world_space : NORMAL;
 	};
 
+	fixed4 _Color;
+	uniform float diff;
+	uniform float _C2;
+	float b;
 	sampler2D _MainTex;
-	float4 _MainTex_ST;
 
 	v2f vert(appdata v)
 	{
 		v2f o;
 		o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-		o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-		o.yy = v.vertex.y;
+		o.uv = v.uv;
+		o.position_in_world_space = mul(_Object2World, v.vertex);
 		return o;
 	}
 
-		fixed4 frag(v2f i) : SV_Target
-		{
+	fixed4 frag(v2f i) : COLOR
+	{
+		//fixed4 col = tex2D(_MainTex, i.uv);
+		//b = (-4.3 - i.position_in_world_space.y) / 1;
+		//b = clamp(b, 0.0,1.0);
 
-			fixed4 col = tex2D(_MainTex, i.uv);
-			return col;
-		}
+		fixed4 col = tex2D(_MainTex, i.uv);
+	b = (_C2 - i.position_in_world_space.y) / diff;
+	b = clamp(b, 0.0, 1.0);
+
+
+	return  lerp(col,_Color,b);
+
+	}
 		ENDCG
 	}
 	}
