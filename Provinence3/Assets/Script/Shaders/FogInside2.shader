@@ -98,7 +98,7 @@ CGPROGRAM
 		//col += splat_control.a * tex2D(_Splat3, IN.uv_Splat3).rgb;
 
 
-		float b = (31.5 - pp.y) / 3.5;
+		float b = (34.5 - pp.y) / 19.5;
 		b = clamp(b, 0.0, 1.0);
 		col = lerp(col, _Color, b);
 
@@ -118,7 +118,7 @@ CGPROGRAM
 		fixed4 col = tex2D(_MainTex, i.uv);
 	//return col;
 
-		b = (31 - i.position_in_world_space.y) / 1.5;
+		b = (30 - i.position_in_world_space.y) / 4.5;
 		b = clamp(b, 0.0,1.0);
 
 		//fixed4 col = tex2D(_MainTex, i.uv);
