@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		_Color("Main Color", Color) = (0.32,0.32,0.32,1)
+		//_Color("Main Color", Color) = (0.32,0.32,0.32,1)
 		diff("Density", Float) = 1.0
 		_C2("Height", Float) = 10.0
 		// Control Texture ("Splat Map")
@@ -37,8 +37,8 @@ CGPROGRAM
 		float4 vertex : SV_POSITION0;
 		float4 position_in_world_space : NORMAL;
 	};
-
-	fixed4 _Color;
+	static const fixed4 _Color = fixed4(0.18, 0.18, 0.18,1);
+	//uniform float4 _Color = (0.32, 0.32, 0.32, 1);
 	uniform float diff;
 	uniform float _C2;
 	float b;
@@ -80,9 +80,9 @@ CGPROGRAM
 		//float4 aa = s.Position;
 		half d = dot(s.Normal, lightDir) * 0.5 + 0.5;
 		// Applied through ramp
-		half3 ramp = tex2D(_Ramp, float2(d, d)).rgb;
+		//half3 ramp = tex2D(_Ramp, float2(d, d)).rgb;
 		half4 c;
-		c.rgb = s.Albedo * _LightColor0.rgb * ramp * (atten * 2);
+		c.rgb = s.Albedo * _LightColor0.rgb * (atten * 2);
 		c.a = 0;
 		return c;
 	}
@@ -98,7 +98,7 @@ CGPROGRAM
 		//col += splat_control.a * tex2D(_Splat3, IN.uv_Splat3).rgb;
 
 
-		float b = (34.5 - pp.y) / 19.5;
+		float b = (31 - pp.y + 2) / 5.1;
 		b = clamp(b, 0.0, 1.0);
 		col = lerp(col, _Color, b);
 
@@ -111,24 +111,6 @@ CGPROGRAM
 		o.localPos = v.vertex.xyz;
 	}
 
-	fixed4 frag(v2f i) : COLOR
-	{
-		//float dist = distance(i.position_in_world_space,  _WorldSpaceCameraPos);
-		
-		fixed4 col = tex2D(_MainTex, i.uv);
-	//return col;
-
-		b = (30 - i.position_in_world_space.y) / 4.5;
-		b = clamp(b, 0.0,1.0);
-
-		//fixed4 col = tex2D(_MainTex, i.uv);
-		//b = (_C2 - i.position_in_world_space.y) / diff;
-		//b = clamp(b, 0.0, 1.0);
-
-
-		return  lerp(col,_Color,b);
-
-		}
-		ENDCG
+	ENDCG
 	}
 }

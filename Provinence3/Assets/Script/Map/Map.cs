@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Map : Singleton<Map>
@@ -28,7 +29,8 @@ public class Map : Singleton<Map>
     {
         level = lvl;
         LoadLevelGameObject(levelIndex);
-        Application.LoadLevelAdditive("Level" + levelIndex);
+        SceneManager.LoadScene("Level" + levelIndex,LoadSceneMode.Additive);
+//        Application.LoadLevelAdditive("Level" + levelIndex);
         heroBornPositions = levelMainObject.transform.Find("BornPos/HeroBornPositions");
         bossBonusMapElement = levelMainObject.transform.Find("BornPos/BossBonusMapElements");
         bornPositions = levelMainObject.transform.Find("BornPos");
@@ -93,6 +95,7 @@ public class Map : Singleton<Map>
     {
         if (levelMainObject != null)
         {
+            Debug.LogError("Level isn't unloaded!!!");
             Destroy(levelMainObject);
         }
 //        Resources.LoadAsync(BASE_WAY + levelIndex, typeof(GameObject));
@@ -100,6 +103,27 @@ public class Map : Singleton<Map>
         var prefab = Resources.Load(BASE_WAY + levelIndex,typeof(GameObject)) as GameObject;
         levelMainObject = GameObject.Instantiate(prefab);
         levelMainObject.transform.SetParent(transform);
+
+        /*
+        Make different scenes for all the levels.
+Put all the game objects inside an empty parent.(optional)
+Bake the Light Maps for all these individual scenes.
+Unity will create a folder with the scene name in which you can find these light maps.
+Now drag and drop all the light maps and the objects into the resources folder.
+You can now delete the level scenes as they wont be needed anymore.
+Now when you want to LoadLevelAdditive , you instantiate the prefab which holds the object for a particular level and assign the light maps programatically.
+
+
+        //Load LightMap
+        LightmapData[] lightmapData = new LightmapData[2];
+
+        lightmapData[0] = new LightmapData();
+        lightmapData[0].lightmapFar = Resources.Load("LightMaps/Level" + level_name + "/LightmapFar-0", typeof(Texture2D)) as Texture2D;
+        lightmapData[1] = new LightmapData();
+        lightmapData[1].lightmapFar = Resources.Load("LightMaps/Level" + level_name + "/LightmapFar-1", typeof(Texture2D)) as Texture2D;
+
+        LightmapSettings.lightmaps = lightmapData;
+        */
     }
 
     void Update()
@@ -198,7 +222,7 @@ public class Map : Singleton<Map>
 
     public void DestroyLevel()
     {
-        Application.UnloadLevel("Level" + level.MissionIndex);
+        SceneManager.UnloadScene("Level" + level.MissionIndex);
         Destroy(levelMainObject);
     }
 

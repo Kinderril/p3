@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		_Color("Main Color", Color) = (0.32,0.32,0.32,1)
+		//_Color("Main Color", Color) = (0.32,0.32,0.32,1)
 		diff("Density", Float) = 1.0
 		_C2("Height", Float) = 10.0
 	}
@@ -33,7 +33,7 @@
 		float4 position_in_world_space : NORMAL;
 	};
 
-	fixed4 _Color;
+	static const fixed4 _Color = fixed4(0.38, 0.38, 0.38, 1);
 	uniform float diff;
 	uniform float _C2;
 	float b;

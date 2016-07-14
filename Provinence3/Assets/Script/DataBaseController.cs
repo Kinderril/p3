@@ -61,8 +61,8 @@ public class DataBaseController : Singleton<DataBaseController>
 
     private void Awake()
     {
-        simpleShader = Shader.Find("Custom/BumperSpecular");
-        flashShader = Shader.Find("Custom/BumperSpecularFlash");
+        simpleShader = Shader.Find("Custom/FogInside");
+        flashShader = Shader.Find("Custom/FogInsideFlash");
         CheckEnums();
         CraftDB = new CraftDB();
         for (var i = 0; i < maxLevel; i++)
