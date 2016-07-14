@@ -50,6 +50,7 @@
 
 	fixed4 frag(v2f i) : COLOR
 	{
+		//float dist = distance(input.position_in_world_space,  _WorldSpaceCameraPos);
 		//fixed4 col = tex2D(_MainTex, i.uv);
 		//b = (-4.3 - i.position_in_world_space.y) / 1;
 		//b = clamp(b, 0.0,1.0);
