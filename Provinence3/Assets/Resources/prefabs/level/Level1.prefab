@@ -8846,9 +8846,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103882}
   m_LocalRotation: {x: 0, y: -0.5553757, z: 0, w: 0.8315996}
-  m_LocalPosition: {x: 1.4799995, y: 0, z: -0.4600067}
+  m_LocalPosition: {x: 1.4799995, y: -0.51, z: -0.4600067}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -67.4732, z: 0}
   m_Children: []
   m_Father: {fileID: 419678}
   m_RootOrder: 2
@@ -10114,9 +10114,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107098}
   m_LocalRotation: {x: 0, y: 0.19849572, z: 0, w: 0.98010176}
-  m_LocalPosition: {x: 3.03, y: -0.00000047683716, z: 2.23}
+  m_LocalPosition: {x: 3.03, y: -0.12, z: 2.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 22.897999, z: 0}
   m_Children: []
   m_Father: {fileID: 428080}
   m_RootOrder: 4
@@ -11897,9 +11897,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190818}
   m_LocalRotation: {x: 0, y: -0.3777814, z: 0, w: 0.92589486}
-  m_LocalPosition: {x: 1.2900009, y: 0, z: 1.1000061}
+  m_LocalPosition: {x: 1.2900009, y: -0.51, z: 1.1000061}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -44.3927, z: 0}
   m_Children: []
   m_Father: {fileID: 419678}
   m_RootOrder: 0
@@ -12618,7 +12618,7 @@ Transform:
   m_LocalRotation: {x: 0.6583294, y: -0.25807434, z: 0.25807428, w: 0.6583294}
   m_LocalPosition: {x: 70.37, y: -3.3294983, z: -6.57}
   m_LocalScale: {x: 8.099992, y: 8.099994, z: 8.099994}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.980194, y: -42.8118, z: 0}
   m_Children: []
   m_Father: {fileID: 439348}
   m_RootOrder: 0
@@ -16159,7 +16159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 514.66846, y: 136.33598, z: 0}
+  m_LocalPosition: {x: 313.5, y: 1.2, z: 112.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -23748,12 +23748,12 @@ Terrain:
   m_DrawHeightmap: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialType: 0
+  m_MaterialType: 3
   m_LegacySpecular:
     serializedVersion: 2
     rgba: 4286545791
   m_LegacyShininess: 0.078125
-  m_MaterialTemplate: {fileID: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: 61d4e86b9763ac1419b667fc94a83720, type: 2}
   m_BakeLightProbesForTrees: 1
   m_ScaleInLightmap: 0.0512
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}

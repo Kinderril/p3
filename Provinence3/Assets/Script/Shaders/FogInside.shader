@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-	_Color("Main Color", Color) = (1,1,1,0.5)
+		_Color("Main Color", Color) = (0.32,0.32,0.32,1)
 		diff("Density", Float) = 1.0
 		_C2("Height", Float) = 10.0
 	}
@@ -50,14 +50,17 @@
 
 	fixed4 frag(v2f i) : COLOR
 	{
-		//float dist = distance(input.position_in_world_space,  _WorldSpaceCameraPos);
-		//fixed4 col = tex2D(_MainTex, i.uv);
-		//b = (-4.3 - i.position_in_world_space.y) / 1;
-		//b = clamp(b, 0.0,1.0);
-
+		//float dist = distance(i.position_in_world_space,  _WorldSpaceCameraPos);
+		
 		fixed4 col = tex2D(_MainTex, i.uv);
-	b = (_C2 - i.position_in_world_space.y) / diff;
-	b = clamp(b, 0.0, 1.0);
+	//return col;
+
+		b = (31 - i.position_in_world_space.y) /1.3;
+		b = clamp(b, 0.0,1.0);
+
+		//fixed4 col = tex2D(_MainTex, i.uv);
+		//b = (_C2 - i.position_in_world_space.y) / diff;
+		//b = clamp(b, 0.0, 1.0);
 
 
 	return  lerp(col,_Color,b);

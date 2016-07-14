@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: TestFog
-  m_Shader: {fileID: 4800000, guid: ddb4b51e989d86948b2f508f4e61ef74, type: 3}
+  m_Shader: {fileID: 4800000, guid: be4ba8b04cf34f64bb6d5d9374061f67, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 6aeab46c5ac71c849be6514d1c4c29f2, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -32,6 +32,69 @@ Material:
       data:
         first:
           name: _DetailNormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Control
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat0
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat1
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat2
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat3
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Normal0
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Normal1
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Normal2
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Normal3
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -78,6 +141,20 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Ramp
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Bump
+        second:
+          m_Texture: {fileID: 2800000, guid: dae867784386c9d4fb31351b086c5a80, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -94,7 +171,47 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 0.44
+        second: 0.451
+      data:
+        first:
+          name: _Metallic0
+        second: 0
+      data:
+        first:
+          name: _Metallic1
+        second: 0
+      data:
+        first:
+          name: _Metallic2
+        second: 0
+      data:
+        first:
+          name: _Metallic3
+        second: 0
+      data:
+        first:
+          name: _Smoothness0
+        second: 1
+      data:
+        first:
+          name: _Smoothness1
+        second: 1
+      data:
+        first:
+          name: _Smoothness2
+        second: 1
+      data:
+        first:
+          name: _Smoothness3
+        second: 1
+      data:
+        first:
+          name: diff
+        second: 2.59
+      data:
+        first:
+          name: _C2
+        second: 0.26
       data:
         first:
           name: _Parallax
@@ -133,6 +250,10 @@ Material:
         second: 0
       data:
         first:
+          name: _Time2
+        second: 1
+      data:
+        first:
           name: radius
         second: 0
       data:
@@ -141,12 +262,20 @@ Material:
         second: 800
       data:
         first:
-          name: _Time2
-        second: 1
-      data:
-        first:
           name: _RimPower
         second: 2.6
+      data:
+        first:
+          name: _Outline
+        second: 0.0075
+      data:
+        first:
+          name: _Snow
+        second: 0.97
+      data:
+        first:
+          name: _SnowDepth
+        second: 0.000035
     m_Colors:
       data:
         first:
@@ -155,7 +284,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0.2205882, g: 0.2205882, b: 0.2205882, a: 1}
       data:
         first:
           name: _SpecColor
@@ -168,3 +297,19 @@ Material:
         first:
           name: _RimColor
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 1, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _MainColor
+        second: {r: 0.77205884, g: 0.30087587, b: 0.30087587, a: 1}
+      data:
+        first:
+          name: _SnowColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _SnowDirection
+        second: {r: 0, g: 1, b: 0, a: 1}

@@ -146409,21 +146409,21 @@ Terrain:
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
+  m_DetailObjectDistance: 43
   m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
+  m_HeightmapPixelError: 1
+  m_SplatMapDistance: 98
   m_HeightmapMaximumLOD: 0
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_DrawHeightmap: 1
   m_DrawTreesAndFoliage: 0
-  m_ReflectionProbeUsage: 3
-  m_MaterialType: 0
+  m_ReflectionProbeUsage: 0
+  m_MaterialType: 3
   m_LegacySpecular:
     serializedVersion: 2
     rgba: 4286545791
   m_LegacyShininess: 0.078125
-  m_MaterialTemplate: {fileID: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: 61d4e86b9763ac1419b667fc94a83720, type: 2}
   m_BakeLightProbesForTrees: 0
   m_ScaleInLightmap: 0.05
   m_LightmapParameters: {fileID: 15201, guid: 0000000000000000f000000000000000, type: 0}
