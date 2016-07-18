@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
+public class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
 {
     private Camera MainCamera;
     private int layerMask = 1;
@@ -24,6 +24,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     public Slider chargeSlider;
     private Vector2 dir;
     private int framesPressed = 0;
+    private int controlMoreX;
 
     public Text debugText;
     public Text debugText2;
@@ -31,6 +32,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
 
     public void Init(Level lvl)
     {
+        controlMoreX = Screen.width/2; 
         mainHero = lvl.MainHero;
         MainCamera = MainController.Instance.MainCamera;
         chargeSlider.gameObject.SetActive(false);
@@ -49,11 +51,11 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         mainHero.SwitchWeapon();
     }
 
-//    public void OnCrouch()
-//    {
-//        if (enable)
-//            mainHero.DoCrouch();
-//    }
+    //    public void OnCrouch()
+    //    {
+    //        if (enable)
+    //            mainHero.DoCrouch();
+    //    }
 
     void Update()
     {
@@ -81,12 +83,12 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         {
             y = -1;
         }
-        keybordDir = new Vector3(y,0,x);
+        keybordDir = new Vector3(y, 0, x);
         if (mainHero != null)
             mainHero.MoveToDirection(keybordDir);
 #endif
     }
-    
+
     private Vector3 RayCast(PointerEventData eventData)
     {
         RaycastHit hit;
@@ -104,9 +106,11 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     void UpdateSwipe()
     {
 #if UNITY_EDITOR
+        var mp = Input.mousePosition;
+
         if (Input.GetMouseButtonDown(0))
         {
-            startDrag = Input.mousePosition;
+            startDrag = mp;
         }
 
         if (Input.GetMouseButton(0))
@@ -115,8 +119,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             isLastFramePressed = true;
             isCharging = false;
             chargeTime = Time.time + Weapon.CHARGE_TIME_DELAY;
-            var m = Input.mousePosition;
-            dir = new Vector2(m.x, m.y) - startDrag;
+            dir = new Vector2(mp.x, mp.y) - startDrag;
 
             //            Debug.Log("dir " + dir);
             if (!isCharging && Time.time > chargeTime)
@@ -147,7 +150,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             }
         }
 #else
-         bool pressedCur = false;
+        bool pressedCur = false;
         Touch touch =default(Touch);
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -161,6 +164,10 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
                 break;
             }
         }
+        if (touch.x <= controlMoreX){
+            return;
+        }
+
         if (isLastFramePressed)
         {
             if (pressedCur)
@@ -204,7 +211,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         {
             float chargePower = Time.time - chargeTime;
             var v = new Vector3(dir.x, 0, dir.y);
-            mainHero.TryAttackByDirection(v, chargePower,true);
+            mainHero.TryAttackByDirection(v, chargePower, true);
         }
     }
 
@@ -240,7 +247,7 @@ public  class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     {
         if (enable)
             mainHero.MoveToDirection(dir);
-//        debugText.text = "vel:" + mainHero.Control.Velocity + "  dir:" + dir;
+        //        debugText.text = "vel:" + mainHero.Control.Velocity + "  dir:" + dir;
 
     }
 

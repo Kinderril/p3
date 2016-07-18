@@ -19,6 +19,7 @@ public class Map : Singleton<Map>
     public Transform bulletContainer;
     private Transform heroBornPositions;
     private Transform bossBonusMapElement;
+    public List<Transform> DynamicElements;
     private Level level;
     public List<BaseMonster> enemies;
     public CameraFollow CameraFollow;

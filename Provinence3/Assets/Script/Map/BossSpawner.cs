@@ -6,34 +6,34 @@ using UnityEngine;
 
 public class BossSpawner
 {
-    private int EnemiesOnStart;
+//    private int EnemiesOnStart;
+    private int enemiesKilled;
     private int ToSpawnBossOnStart;
     private Action<int> OnSpawnBoss;
     private bool isBossSpawned = false;
-    private float PRECENT_TO_KILL = 0.32f;
+    private float PRECENT_TO_KILL = 0.16f;
     private int bonusesGet = 0;
 
     public BossSpawner(int count, Action<int> SpawnBoss)
     {
+        enemiesKilled = 0;
+        OnSpawnBoss = SpawnBoss;
+        ToSpawnBossOnStart =(int)(count * PRECENT_TO_KILL );
 #if UNITY_EDITOR
         if (DebugController.Instance.LESS_COUNT_BOSS_COME)
         {
-            PRECENT_TO_KILL = 0.01f;
+            ToSpawnBossOnStart = 1;
         }
 #endif
-
-        OnSpawnBoss = SpawnBoss;
-        this.EnemiesOnStart = count;
-        ToSpawnBossOnStart =(int)( EnemiesOnStart*(1f-PRECENT_TO_KILL) );
     }
 
     public void EnemieDead()
     {
         if (!isBossSpawned)
         {
-            EnemiesOnStart--;
-            Debug.Log("ToSpawnBossOnStart " + ToSpawnBossOnStart + " > " + EnemiesOnStart);
-            if (ToSpawnBossOnStart > EnemiesOnStart)
+            enemiesKilled++;
+            Debug.Log("ToSpawnBossOnStart " + ToSpawnBossOnStart + " > " + enemiesKilled);
+            if (enemiesKilled > ToSpawnBossOnStart)
             {
                 isBossSpawned = true;
                 OnSpawnBoss(bonusesGet);
