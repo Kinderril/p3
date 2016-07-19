@@ -10,6 +10,7 @@ public class WindowInGame : BaseWindow
 
     public Slider TImeSlider;
     public Slider HealthSlider;
+    public Slider BossSpawnSlider;
     public MonsterInfo MonsterInfo;
     public Text moneyField;
     public WeaponChooserView WeaponChooser;
@@ -34,6 +35,8 @@ public class WindowInGame : BaseWindow
         level.OnCraftItemCollected += OnCraftItemCollected;
         level.MainHero.OnGetHit += OnHeroHit;
         level.MainHero.OnWeaponChanged += OnWeaponChanged;
+        Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
+
         WeaponChooser.Init(level);
         int index = 0;
         var allTalismans = MainController.Instance.PlayerData.GetAllWearedItems().Where(x => x.Slot == Slot.Talisman);
@@ -50,6 +53,11 @@ public class WindowInGame : BaseWindow
         HealthSlider.value = 1;
         ShowPreStartWindow();
         MonsterInfo.Init();
+    }
+
+    private void OnBossGetEnergy(int arg1, int arg2)
+    {
+        BossSpawnSlider.value = (float)arg1/(float)arg2;
     }
 
     private void OnRage()
@@ -98,6 +106,7 @@ public class WindowInGame : BaseWindow
         level.MainHero.OnGetHit -= OnHeroHit;
         level.MainHero.OnWeaponChanged -= OnWeaponChanged;
         level.OnCraftItemCollected -= OnCraftItemCollected;
+        Map.Instance.BossSpawner.OnBossGetEnergy -= OnBossGetEnergy;
     }
 
     private void OnItemCollected(ItemId arg1, float arg2,float delta)

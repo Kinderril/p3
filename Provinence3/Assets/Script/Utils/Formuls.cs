@@ -23,6 +23,10 @@ public class Formuls
         return av_mosters_kills* GoldInMonster(lvl) + av_chestes*GoldInChest(lvl);
     }
 
+    public static float ModifyBossHP(BossUnit boss,int bonuses)
+    {
+        return boss.CurHp * (1 - 0.03f * bonuses);
+    }
     public static int ChestItemCost(float lvl)
     {
         return (int)(2 * Mathf.Pow(lvl, 0.37f) * LevelGoldAv(lvl));

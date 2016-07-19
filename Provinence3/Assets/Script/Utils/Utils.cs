@@ -10,6 +10,12 @@ public static class Utils
     private static readonly Random random = new Random();
     private static bool uselast = true;
     private static double next_gaussian;
+    private static int groundLayerIndex;
+
+    public static void Init(Terrain terrain)
+    {
+        Utils.groundLayerIndex = terrain.gameObject.layer;
+    }
 
     public static T RandomElement<T>(this List<T> list)
     {
@@ -49,7 +55,7 @@ public static class Utils
     public static void GroundTransform(Transform transform, float checkDist = 9999f)
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, checkDist))
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, checkDist, groundLayerIndex))
         {
             var t = transform.position;
             var groundOffset = hitInfo.distance;
