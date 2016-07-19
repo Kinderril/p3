@@ -14,7 +14,7 @@ public static class Utils
 
     public static void Init(Terrain terrain)
     {
-        Utils.groundLayerIndex = terrain.gameObject.layer;
+        Utils.groundLayerIndex = 1 << terrain.gameObject.layer;
     }
 
     public static T RandomElement<T>(this List<T> list)
@@ -55,11 +55,17 @@ public static class Utils
     public static void GroundTransform(Transform transform, float checkDist = 9999f)
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, checkDist, groundLayerIndex))
+        var p = new Vector3(transform.position.x, 100, transform.position.z);
+        Ray ray = new Ray(p, Vector3.down);
+//        Debug.DrawRay(p, Vector3.down * 100, Color.yellow, 20);
+
+        
+
+        if (Physics.Raycast(ray, out hitInfo, checkDist,groundLayerIndex))
         {
             var t = transform.position;
-            var groundOffset = hitInfo.distance;
-            transform.position = new Vector3(t.x, t.y - groundOffset , t.z);
+//            var groundOffset = hitInfo.distance;
+            transform.position = new Vector3(t.x, hitInfo.point.y, t.z);
         }
     }
 

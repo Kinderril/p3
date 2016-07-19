@@ -4,8 +4,6 @@
 	{
 		_MainTex("Texture", 2D) = "white" {}
 		//_Color("Main Color", Color) = (0.32,0.32,0.32,1)
-		diff("Density", Float) = 1.0
-		_C2("Height", Float) = 10.0
 		// Control Texture ("Splat Map")
 		[HideInInspector] _Control("Control (RGBA)", 2D) = "red" {}
 
@@ -94,11 +92,11 @@ CGPROGRAM
 		fixed3 col;
 		col = splat_control.r * tex2D(_Splat0, IN.uv_Splat0).rgb;
 		col += splat_control.g * tex2D(_Splat1, IN.uv_Splat1).rgb;
-		//col += splat_control.b * tex2D(_Splat2, IN.uv_Splat2).rgb;
+		col += splat_control.b * tex2D(_Splat2, IN.uv_Splat2).rgb;
 		//col += splat_control.a * tex2D(_Splat3, IN.uv_Splat3).rgb;
 
 
-		float b = (31 - pp.y + 2) / 5.1;
+		float b = (31 - pp.y + 2) / 5.7;
 		b = clamp(b, 0.0, 1.0);
 		col = lerp(col, _Color, b);
 

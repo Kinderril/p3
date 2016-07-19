@@ -6,13 +6,12 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: plants_grass_01
+  m_Name: Meshki
   m_Shader: {fileID: 4800000, guid: ddb4b51e989d86948b2f508f4e61ef74, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Transparent
+  stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -20,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 99d0b8a45c88c4f7c96e4f433ea02ba3, type: 3}
+          m_Texture: {fileID: 2800000, guid: 2f8556b4d91e25c40acb43e7562f45ce, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -87,7 +86,7 @@ Material:
       data:
         first:
           name: _DstBlend
-        second: 10
+        second: 0
       data:
         first:
           name: _Cutoff
@@ -99,7 +98,7 @@ Material:
       data:
         first:
           name: _ZWrite
-        second: 0
+        second: 1
       data:
         first:
           name: _Glossiness
@@ -123,7 +122,7 @@ Material:
       data:
         first:
           name: _Mode
-        second: 3
+        second: 0
       data:
         first:
           name: _Metallic
@@ -144,4 +143,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.8, g: 0.8, b: 0.8, a: 0.19999999}
+        second: {r: 1, g: 1, b: 1, a: 1}

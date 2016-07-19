@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BonusElementMaterial
+  m_Name: GreyStone
   m_Shader: {fileID: 4800000, guid: ddb4b51e989d86948b2f508f4e61ef74, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: d5f6c550e49e840d0a439a3f420cb11c, type: 3}
+          m_Texture: {fileID: 2800000, guid: 9f9c6be209fed3f43bb6acf37c3e579f, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -93,12 +93,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: diff
-        second: 1
-      data:
-        first:
-          name: _C2
-        second: 10
+          name: _Shininess
+        second: 0.078125
       data:
         first:
           name: _Parallax
@@ -135,6 +131,14 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: diff
+        second: 1
+      data:
+        first:
+          name: _C2
+        second: 10
     m_Colors:
       data:
         first:
@@ -143,4 +147,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0.32352942, g: 0.32352942, b: 0.32352942, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 0.08088237, g: 0.08088237, b: 0.08088237, a: 1}

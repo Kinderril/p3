@@ -19,41 +19,38 @@ public class Map : Singleton<Map>
     public Transform bulletContainer;
     private Transform heroBornPositions;
     private Transform bossBonusMapElement;
-    public List<DynamicElement> DynamicElements = new List<DynamicElement>();
     private Level level;
     public List<BaseMonster> enemies;
     public CameraFollow CameraFollow;
     private BossUnit boss;
     private LevelObject levelMainObject;
+    private Dictionary<string, GameObject> LoadedLevels = new Dictionary<string, GameObject>();
 
     public Hero Init(Level lvl, int levelIndex, int heroBornPositionIndex)
     {
         level = lvl;
 
-        TimeUtils.StartMeasure("LOAD LEVEL OBJECt");
 
         LoadLevelGameObject(levelIndex);
         SceneManager.LoadScene("Level" + levelIndex,LoadSceneMode.Additive);
-//        Application.LoadLevelAdditive("Level" + levelIndex);
+
+        TimeUtils.StartMeasure("LOAD LEVEL SCENE");
         heroBornPositions = levelMainObject.transform.Find("BornPos/HeroBornPositions");
         bossBonusMapElement = levelMainObject.transform.Find("BornPos/BossBonusMapElements");
         bornPositions = levelMainObject.transform.Find("BornPos");
         enemiesContainer = transform.Find("Enemies");
 
-        TimeUtils.EndMeasure("LOAD LEVEL OBJECt");
+        TimeUtils.EndMeasure("LOAD LEVEL SCENE");
         TimeUtils.StartMeasure("LOAD HERO");
 
         var hero = DataBaseController.GetItem(DataBaseController.Instance.prefabHero, GetHeroBoenPos(heroBornPositionIndex));
         hero.Init();
+        levelMainObject.Init(hero);
         enemies = new List<BaseMonster>();
         appearPos = new List<MonsterBornPosition>();
         BossAppearPos = new List<BossBornPosition>();
         List<ChestBornPosition> chestPositions = new List<ChestBornPosition>();
 
-        foreach (var dynamicElement in DynamicElements)
-        {
-            dynamicElement.Init(hero);
-        }
 
         TimeUtils.EndMeasure("LOAD HERO");
         TimeUtils.StartMeasure("LOAD BORN");
@@ -110,17 +107,32 @@ public class Map : Singleton<Map>
 
     private void LoadLevelGameObject(int levelIndex)
     {
+        TimeUtils.StartMeasure("RES LOAD");
         if (levelMainObject != null)
         {
             Debug.LogError("Level isn't unloaded!!!");
             Destroy(levelMainObject.gameObject);
         }
         //        Resources.LoadAsync(BASE_WAY + levelIndex, typeof(GameObject));
+        var nameLevel = BASE_WAY + levelIndex;
 
-        var prefab = Resources.Load(BASE_WAY + levelIndex,typeof(GameObject)) as GameObject;
+        GameObject prefab;
+        if (LoadedLevels.ContainsKey(nameLevel))
+        {
+            prefab = LoadedLevels[nameLevel];
+        }
+        else
+        {
+            prefab = Resources.Load(nameLevel, typeof(GameObject)) as GameObject;
+            LoadedLevels.Add(nameLevel,prefab);
+        }
+        
+        TimeUtils.EndMeasure("RES LOAD");
+        TimeUtils.StartMeasure("Instantiate SCENE");
         levelMainObject = GameObject.Instantiate(prefab).GetComponent<LevelObject>();
         levelMainObject.transform.SetParent(transform);
         Utils.Init(levelMainObject.Terrain);
+        TimeUtils.EndMeasure("Instantiate SCENE");
 
         /*
         Make different scenes for all the levels.
@@ -165,10 +177,7 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
                 }
             }
         }
-        foreach (var dynamicElement in DynamicElements)
-        {
-            dynamicElement.UpdateByMap();
-        }
+        levelMainObject.UpdateByMap();
     }
 
     private Vector3 GetHeroBoenPos(int index)

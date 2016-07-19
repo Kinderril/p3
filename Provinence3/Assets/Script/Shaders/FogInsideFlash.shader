@@ -3,9 +3,6 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		//_Color("Main Color", Color) = (0.32,0.32,0.32,1)
-		diff("Density", Float) = 1.0
-		_C2("Height", Float) = 10.0
 		_Time2("Time", Range(0.0, 1)) = 0.0
 	}
 		SubShader
@@ -36,8 +33,6 @@
 
 	static const fixed4 _Color = fixed4(0.38, 0.38, 0.38, 1);
 	static const fixed4 _FlashColor = fixed4(1, 1, 1, 1);
-	uniform float diff;
-	uniform float _C2;
 	float b;
 	sampler2D _MainTex;
 	float _Time2;
@@ -58,7 +53,7 @@
 		fixed4 col = tex2D(_MainTex, i.uv);
 	//return col;
 
-		b = (31 - i.position_in_world_space.y) /1.3;
+	b = (31 - i.position_in_world_space.y) / 1.6;	
 		b = clamp(b, 0.0,1.0);
 
 		//fixed4 col = tex2D(_MainTex, i.uv);

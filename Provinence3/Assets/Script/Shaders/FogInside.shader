@@ -3,9 +3,6 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		//_Color("Main Color", Color) = (0.32,0.32,0.32,1)
-		diff("Density", Float) = 1.0
-		_C2("Height", Float) = 10.0
 	}
 		SubShader
 	{
@@ -33,9 +30,7 @@
 		float4 position_in_world_space : NORMAL;
 	};
 
-	static const fixed4 _Color = fixed4(0.38, 0.38, 0.38, 1);
-	uniform float diff;
-	uniform float _C2;
+	static const fixed4 _Color = fixed4(0.38, 0.38, 0.38, 0);
 	float b;
 	sampler2D _MainTex;
 
@@ -53,17 +48,10 @@
 		//float dist = distance(i.position_in_world_space,  _WorldSpaceCameraPos);
 		
 		fixed4 col = tex2D(_MainTex, i.uv);
-	//return col;
-
-		b = (31 - i.position_in_world_space.y) /1.3;
+		b = (31 - i.position_in_world_space.y) /1.6;
 		b = clamp(b, 0.0,1.0);
-
-		//fixed4 col = tex2D(_MainTex, i.uv);
-		//b = (_C2 - i.position_in_world_space.y) / diff;
-		//b = clamp(b, 0.0, 1.0);
-
-
-	return  lerp(col,_Color,b);
+		fixed4 lerped = lerp(col, _Color, b);
+		return lerped;
 
 	}
 		ENDCG

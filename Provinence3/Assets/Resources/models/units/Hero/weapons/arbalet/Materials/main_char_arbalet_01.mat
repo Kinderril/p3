@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: main_char_arbalet_01
-  m_Shader: {fileID: 4800000, guid: 9670580bb7c010f469cc3358a1822653, type: 3}
+  m_Shader: {fileID: 4800000, guid: ddb4b51e989d86948b2f508f4e61ef74, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000

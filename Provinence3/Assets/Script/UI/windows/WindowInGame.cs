@@ -50,6 +50,7 @@ public class WindowInGame : BaseWindow
         {
             TalismanButtons[i].gameObject.SetActive(false);
         }
+        BossSpawnSlider.value = 0;
         HealthSlider.value = 1;
         ShowPreStartWindow();
         MonsterInfo.Init();

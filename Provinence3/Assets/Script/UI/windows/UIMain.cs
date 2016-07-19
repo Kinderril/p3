@@ -15,6 +15,7 @@ public class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     public SubUIMain subUI;
     private bool enable;
     public Vector3 keybordDir;
+    
 
     private float chargeTime;
     private Vector2 startDrag;
@@ -107,6 +108,10 @@ public class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     {
 #if UNITY_EDITOR
         var mp = Input.mousePosition;
+        if (mp.x <= controlMoreX)
+        {
+            return;
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -150,29 +155,38 @@ public class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
             }
         }
 #else
-        bool pressedCur = false;
-        Touch touch =default(Touch);
+//        bool pressedCur = false;
+        Touch? touch = null;
         for (int i = 0; i < Input.touchCount; i++)
         {
             var touchTmp = Input.GetTouch(i);
             
             isOverUI = EventSystem.current.IsPointerOverGameObject(touchTmp.fingerId);
-            if (!isOverUI)
+            if (!isOverUI && touchTmp.position.x >= controlMoreX)
             {
-                pressedCur = true;
+//                pressedCur = true;
                 touch = touchTmp;
                 break;
             }
         }
-        if (touch.x <= controlMoreX){
-            return;
-        }
+//        if (!touch.HasValue)
+//        {
+//            pressedCur = false;
+//        }
 
+//        debugText.text = "touch.position.x: " + touch.Value.position.x + "  controlMoreX:"+ controlMoreX +  
+//            "   Scrren:" +Screen.width; 
+//        if (touch == default(Touch) ){
+//            return;
+//        }
+//        debugText2.text = " isLastFramePressed:" + isLastFramePressed + "  pressedCur:" + pressedCur
+//                          + "  framesPressed:" + framesPressed;
+            
         if (isLastFramePressed)
         {
-            if (pressedCur)
+            if (touch.HasValue)
             {
-                ContiniusPress(touch);
+                ContiniusPress(touch.Value);
             }
             else
             {
@@ -181,12 +195,12 @@ public class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
         }
         else
         {
-            if (pressedCur)
+            if (touch.HasValue)
             {
-                StartPress(touch);
+                StartPress(touch.Value);
             }
         }
-        isLastFramePressed = pressedCur;
+        isLastFramePressed = touch.HasValue;
 #endif
     }
     void LateUpdate()
