@@ -1,30 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &188824
+--- !u!1 &155072
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 471788}
-  - 15: {fileID: 1579352}
-  - 12: {fileID: 1256850}
-  - 26: {fileID: 2647876}
-  - 114: {fileID: 11421004}
+  - 4: {fileID: 495740}
+  - 15: {fileID: 1541854}
+  - 12: {fileID: 1246942}
+  - 26: {fileID: 2607978}
+  - 114: {fileID: 11480748}
   m_Layer: 0
-  m_Name: ball 12
+  m_Name: CAST SPELL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &471788
+  m_IsActive: 1
+--- !u!4 &495740
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188824}
+  m_GameObject: {fileID: 155072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,74 +32,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!12 &1256850
+--- !u!12 &1246942
 ParticleAnimator:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188824}
+  m_GameObject: {fileID: 155072}
   Does Animate Color?: 1
   colorAnimation[0]:
     serializedVersion: 2
-    rgba: 4290953922
+    rgba: 10658466
   colorAnimation[1]:
     serializedVersion: 2
-    rgba: 3418538690
+    rgba: 2210579138
   colorAnimation[2]:
     serializedVersion: 2
-    rgba: 1052951234
+    rgba: 2173800849
   colorAnimation[3]:
     serializedVersion: 2
-    rgba: 381862594
+    rgba: 1299609206
   colorAnimation[4]:
     serializedVersion: 2
-    rgba: 12763842
+    rgba: 3355443
   worldRotationAxis: {x: 0, y: 0, z: 0}
   localRotationAxis: {x: 0, y: 0, z: 0}
-  sizeGrow: -0.53
+  sizeGrow: 0
   rndForce: {x: 0, y: 0, z: 0}
   force: {x: 0, y: 0, z: 0}
   damping: 0.1
   stopSimulation: 0
   autodestruct: 1
---- !u!15 &1579352
+--- !u!15 &1541854
 EllipsoidParticleEmitter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188824}
+  m_GameObject: {fileID: 155072}
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: 1
-  maxSize: 1
-  minEnergy: 0.6
-  maxEnergy: 0.6
-  minEmission: 120
-  maxEmission: 120
+  minSize: 3.2
+  maxSize: 4
+  minEnergy: 0.52
+  maxEnergy: 1.1
+  minEmission: 4.05
+  maxEmission: 9.2
   worldVelocity: {x: 0, y: 0, z: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   rndVelocity: {x: 0, y: 0, z: 0}
-  emitterVelocityScale: 0.05
+  emitterVelocityScale: 0
   tangentVelocity: {x: 0, y: 0, z: 0}
-  angularVelocity: 0
+  angularVelocity: 11.03
   rndAngularVelocity: 0
   rndRotation: 1
   Simulate in Worldspace?: 1
-  m_OneShot: 0
+  m_OneShot: 1
   m_Ellipsoid: {x: 0, y: 0, z: 0}
-  m_MinEmitterRange: 0
---- !u!26 &2647876
+  m_MinEmitterRange: 1
+--- !u!26 &2607978
 ParticleRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188824}
+  m_GameObject: {fileID: 155072}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a4b658df5b16ee749a90c07409c66aed, type: 2}
+  - {fileID: 2100000, guid: 850766983d6626c4cba5172431d6b626, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -117,20 +117,20 @@ ParticleRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_CameraVelocityScale: 0
-  m_StretchParticles: 0
-  m_LengthScale: 2
+  m_StretchParticles: 4
+  m_LengthScale: 3
   m_VelocityScale: 0
-  m_MaxParticleSize: 0.25
+  m_MaxParticleSize: 1
   UV Animation:
     x Tile: 1
     y Tile: 1
     cycles: 1
---- !u!114 &11421004
+--- !u!114 &11480748
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188824}
+  m_GameObject: {fileID: 155072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c8ddc8d37584dc4faa91a9482331294, type: 3}
@@ -139,9 +139,9 @@ MonoBehaviour:
   m_fUserTag: 0
   m_fStartDelayTime: 0
   m_bBurst: 0
-  m_fBurstRepeatTime: 0.01
+  m_fBurstRepeatTime: 0.5
   m_nBurstRepeatCount: 0
-  m_fBurstEmissionCount: 1
+  m_fBurstEmissionCount: 10
   m_fEmitTime: 0
   m_fSleepTime: 0
   m_bScaleWithTransform: 1
@@ -173,5 +173,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 188824}
+  m_RootGameObject: {fileID: 155072}
   m_IsPrefabParent: 1

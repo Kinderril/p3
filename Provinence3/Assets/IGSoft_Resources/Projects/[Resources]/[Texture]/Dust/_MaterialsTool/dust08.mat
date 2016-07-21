@@ -22,7 +22,11 @@ Material:
           m_Texture: {fileID: 2800000, guid: 0bc1e366fd78d3c45ad2d23b20e3d2c6, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _InvFade
+        second: 1
     m_Colors:
       data:
         first:
@@ -31,4 +35,4 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: 0.46153843, g: 0.46153843, b: 0.46153843, a: 0.28627452}
+        second: {r: 0.48442906, g: 0.8235294, b: 0.78143424, a: 0.28627452}
