@@ -254,9 +254,9 @@ MonoBehaviour:
   m_fParticleSeparation: -0.24093956
   m_fTurnDistance: -0.030448616
   m_fVerticalTurnDistance: 0.30312064
-  m_fOriginOffset: -2.9807518
+  m_fOriginOffset: -0.8
   m_fTurnSpeed: -162.39905
-  m_fFadeValue: -0.8040993
+  m_fFadeValue: -0.05
   m_fSizeValue: 0.14
   m_nNumberOfSpawns: 9999999
   m_fSpawnRate: 5
