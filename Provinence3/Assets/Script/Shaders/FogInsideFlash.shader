@@ -36,6 +36,8 @@
 	float b;
 	sampler2D _MainTex;
 	float _Time2;
+	float _Fog_Diff;
+	float _Fog_Start_Level;
 
 	v2f vert(appdata v)
 	{
@@ -53,7 +55,7 @@
 		fixed4 col = tex2D(_MainTex, i.uv);
 	//return col;
 
-	b = (31 - i.position_in_world_space.y) / 1.6;	
+	b = (_Fog_Start_Level - i.position_in_world_space.y) / _Fog_Diff;
 		b = clamp(b, 0.0,1.0);
 
 		//fixed4 col = tex2D(_MainTex, i.uv);

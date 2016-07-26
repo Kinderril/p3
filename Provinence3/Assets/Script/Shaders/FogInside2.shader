@@ -1,5 +1,6 @@
 ﻿Shader "Custom/FogInside2"
 {
+	//THIS IS FOR TERRAIN
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
@@ -37,8 +38,8 @@ CGPROGRAM
 	};
 	static const fixed4 _Color = fixed4(0.18, 0.18, 0.18,1);
 	//uniform float4 _Color = (0.32, 0.32, 0.32, 1);
-	uniform float diff;
-	uniform float _C2;
+	float _Fog_Diff_Terrain;
+	float _Fog_Start_Level_Terrain;
 	float b;
 	sampler2D _MainTex;
 	uniform sampler2D _Control;
@@ -96,12 +97,12 @@ CGPROGRAM
 		//col += splat_control.a * tex2D(_Splat3, IN.uv_Splat3).rgb;
 
 
-		float b = (31 - pp.y + 2) / 5.7;
+		float b = (_Fog_Start_Level_Terrain - pp.y) / _Fog_Diff_Terrain;
 		b = clamp(b, 0.0, 1.0);
 		col = lerp(col, _Color, b);
 
 		o.Albedo = col;// (0.32, 0.32, 0.32, 1);
-		o.Alpha = 0.5;
+		//o.Alpha = 0.5;
 	} 
 	
 	void vert(inout appdata_full v, out Input o) {

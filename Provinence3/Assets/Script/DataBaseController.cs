@@ -61,21 +61,28 @@ public class DataBaseController : Singleton<DataBaseController>
 
     private void Awake()
     {
-        simpleShader = Shader.Find("Custom/FogInside");
-        flashShader = Shader.Find("Custom/FogInsideFlash");
-        CheckEnums();
-        CraftDB = new CraftDB();
-        for (var i = 0; i < maxLevel; i++)
+        try
         {
-            mosntersLevel.Add(i, new List<BaseMonster>());
+            simpleShader = Shader.Find("Custom/FogInside");
+            flashShader = Shader.Find("Custom/FogInsideFlash");
+            CheckEnums();
+            CraftDB = new CraftDB();
+            for (var i = 0; i < maxLevel; i++)
+            {
+                mosntersLevel.Add(i, new List<BaseMonster>());
+            }
+            foreach (var baseMonster in Monsters)
+            {
+                mosntersLevel[baseMonster.Parameters.Level].Add(baseMonster);
+            }
+            LoadSprites();
+            Pool = new Pool(this);
+            LoadRespawnPointsNames();
         }
-        foreach (var baseMonster in Monsters)
+        catch (Exception ex)
         {
-            mosntersLevel[baseMonster.Parameters.Level].Add(baseMonster);
+            DebugConsole.Instance.InfoField2.text = ex.ToString();
         }
-        LoadSprites();
-        Pool = new Pool(this);
-        LoadRespawnPointsNames();
     }
 
     private void LoadRespawnPointsNames()

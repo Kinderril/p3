@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public enum MainState
@@ -29,7 +30,14 @@ public class MainController : Singleton<MainController>
         ShopController.Instance.Init();
         TimerManager = new TimerManager();
         PlayerData = new PlayerData();
-        PlayerData.Load();
+        try
+        {
+            PlayerData.Load();
+        }
+        catch (Exception ex)
+        {
+            DebugConsole.Instance.InfoField1.text = ex.ToString();
+        }
         WindowManager.Instance.OpenWindow(MainState.start);
 //	    Test();
 	}

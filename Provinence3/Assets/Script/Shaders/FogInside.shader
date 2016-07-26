@@ -33,6 +33,8 @@
 	static const fixed4 _Color = fixed4(0.38, 0.38, 0.38, 0);
 	float b;
 	sampler2D _MainTex;
+	float _Fog_Diff;
+	float _Fog_Start_Level;
 
 	v2f vert(appdata v)
 	{
@@ -48,7 +50,7 @@
 		//float dist = distance(i.position_in_world_space,  _WorldSpaceCameraPos);
 		
 		fixed4 col = tex2D(_MainTex, i.uv);
-		b = (31 - i.position_in_world_space.y) /1.6;
+		b = (_Fog_Start_Level - i.position_in_world_space.y) / _Fog_Diff;
 		b = clamp(b, 0.0,1.0);
 		fixed4 lerped = lerp(col, _Color, b);
 		return lerped;
