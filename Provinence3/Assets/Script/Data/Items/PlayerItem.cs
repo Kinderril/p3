@@ -65,10 +65,13 @@ public class PlayerItem : BaseItem ,IEnhcant
         this.Rare = rare;
         RenderCam.Instance.DoRender(slot,out icon);
         LoadTexture();
+        Id = Utils.GetId();
         isEquped = false;
     }
-    public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, Rarity isRare, int cost,bool isEquiped,string name,string icon,int enchant)
+    public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, Rarity isRare, int cost,bool isEquiped,string name,string icon,int enchant,int id)
     {
+        this.Id = id;
+        Utils.SetId(Id);
         this.enchant = enchant;
         this.cost = cost;
         this.parameters = pparams;
@@ -125,6 +128,8 @@ public class PlayerItem : BaseItem ,IEnhcant
         ss.Append(DELEM);
         ss.Append(enchant.ToString());
         ss.Append(DELEM);
+        ss.Append(Id.ToString());
+        ss.Append(DELEM);
         StringBuilder specials = new StringBuilder();
         specials.Append((int)specialAbilities);
         var result = par.ToString() + MDEL + ss.ToString() + MDEL + specials.ToString();
@@ -167,6 +172,7 @@ public class PlayerItem : BaseItem ,IEnhcant
         int cost = Convert.ToInt32(Part2[4]);
         bool isEquped = Convert.ToBoolean(Part2[5]);
         int enchant = Mathf.Abs(Convert.ToInt32(Part2[6]));
+        int id = Mathf.Abs(Convert.ToInt32(Part2[7]));
         //PART1
         var firstPart = Part1[0].Split(DELEM);
         Dictionary<ParamType, float> itemParameters = new Dictionary<ParamType, float>();
@@ -180,7 +186,7 @@ public class PlayerItem : BaseItem ,IEnhcant
             float value = Convert.ToSingle(pp[1]);
             itemParameters.Add(type,value);
         }
-        PlayerItem playerItem = new PlayerItem(itemParameters, slot, isRare, cost, isEquped, name, icon, enchant);
+        PlayerItem playerItem = new PlayerItem(itemParameters, slot, isRare, cost, isEquped, name, icon, enchant, id);
         //Debug.Log(">>>Part3[0]   :" + Part3.ToString());
         var Part3 = Part1[2];
         var spec = (SpecialAbility) Convert.ToInt32(Part3.ToString());

@@ -100,9 +100,8 @@ public class WindowShop : BaseWindow
         switch (p0.PlayerItem.Slot)
         {
             case Slot.physical_weapon:
-                return 10;
             case Slot.magic_weapon:
-                return 10;
+                return 10 + p0.PlayerItem.Id;
             case Slot.body:
                 return 8;
             case Slot.helm:

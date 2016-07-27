@@ -9,7 +9,7 @@ public enum EnchantType
     weaponUpdate,
     powerUpdate,
     armorUpdate,
-    healthUpdate,
+//    healthUpdate,
 }
 public  class ExecEnchantItem : ExecutableItem
 {

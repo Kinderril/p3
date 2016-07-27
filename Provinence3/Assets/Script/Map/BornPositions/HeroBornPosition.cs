@@ -8,11 +8,13 @@ using UnityEngine;
 public class HeroBornPosition : BaseBornPosition
 {
     private bool isPositionOpend;
+    public GameObject OpenGameObject;
 
     public void Init(Map map,bool isOpen)
     {
         base.Init(map);
         isPositionOpend = isOpen;
+        OpenGameObject.gameObject.SetActive(isPositionOpend);
     }
 
     void OnTriggerEnter(Collider other)
@@ -25,6 +27,7 @@ public class HeroBornPosition : BaseBornPosition
                 MainController.Instance.PlayerData.OpenBornPosition(ID);
                 MainController.Instance.level.MessageAppear( "born point opened", Color.blue, DataBaseController.Instance.ItemIcon(ItemId.crystal));
                 isPositionOpend = true;
+                OpenGameObject.gameObject.SetActive(isPositionOpend);
             }
         }
     }

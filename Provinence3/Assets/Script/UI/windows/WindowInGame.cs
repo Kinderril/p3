@@ -16,7 +16,9 @@ public class WindowInGame : BaseWindow
     public WeaponChooserView WeaponChooser;
     public UIMain UiControls;
     public Transform hitTransform;
-    public List<TalismanButton> TalismanButtons;
+//    private List<TalismanButton> TalismanButtons;
+    public TalismanButton PrefabTalismanButton;
+    public Transform TalismanButtonsLayout;
     public Transform moneyContainer;
     public Transform itemsContainer;
     public PreStartWindow PreStartWindow;
@@ -38,18 +40,24 @@ public class WindowInGame : BaseWindow
         Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
 
         WeaponChooser.Init(level);
-        int index = 0;
-        var allTalismans = MainController.Instance.PlayerData.GetAllWearedItems().Where(x => x.Slot == Slot.Talisman);
+//        int index = 0;
+        var allTalismans = MainController.Instance.PlayerData.GetAllWearedItems().Where(x => x.Slot == Slot.Talisman).ToList();
+//        TalismanItem healItem = new TalismanItem(Formuls.GetTalismanPointsByLvl(level.difficult),TalismanType.heal);
+//        allTalismans.Add(healItem);
         foreach (var talic in allTalismans)
         {
             var talismain = talic as TalismanItem;
-            TalismanButtons[index].Init(talismain, allTalismans.Count(),level);
-            index++;
+            var tBtn = DataBaseController.GetItem<TalismanButton>(PrefabTalismanButton);
+            tBtn.transform.SetParent(TalismanButtonsLayout,false);
+            //            TalismanButtons.Add(tBtn);
+
+            tBtn.Init(talismain, allTalismans.Count(),level);
+//            index++;
         }
-        for (int i = index; i < TalismanButtons.Count; i++)
-        {
-            TalismanButtons[i].gameObject.SetActive(false);
-        }
+//        for (int i = index; i < TalismanButtons.Count; i++)
+//        {
+//            TalismanButtons[i].gameObject.SetActive(false);
+//        }
         BossSpawnSlider.value = 0;
         HealthSlider.value = 1;
         ShowPreStartWindow();

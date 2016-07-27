@@ -6,6 +6,12 @@ public class CameraFollow : MonoBehaviour
 
     public Transform target;
     public Vector3 offset;
+    public CameraShake CameraShake;
+
+    void Awake()
+    {
+        CameraShake = GetComponent<CameraShake>();
+    }
 
     public void Init(Transform target)
     {

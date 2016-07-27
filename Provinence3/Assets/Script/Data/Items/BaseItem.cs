@@ -18,6 +18,7 @@ public abstract class BaseItem
     public Sprite IconSprite;
     public int cost;
     public Slot Slot;
+    public int Id;
 
 
     public abstract char FirstChar();

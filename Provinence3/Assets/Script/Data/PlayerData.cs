@@ -36,7 +36,6 @@ public class PlayerData
         {Slot.Talisman, 2}, { Slot.executable, 0 }
     };
     public OpenLevels OpenLevels;
-    
 
     public event Action<BaseItem> OnNewItem;
     public event Action<ExecutableItem,int> OnChangeCount;
@@ -51,7 +50,7 @@ public class PlayerData
     {
         get { return CurrentLevel; }
     }
-
+    
     private int GetSlotCount(Slot s)
     {
         var c = 1;

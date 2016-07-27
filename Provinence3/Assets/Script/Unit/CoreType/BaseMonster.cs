@@ -116,10 +116,27 @@ public class BaseMonster : Unit
         MainController.Instance.level.AddItem(ItemId.energy, -energyadd);
         
         DropItems();
+        DropHeal();
         DropMoney();
 
         base.Death();
         Action = null;
+    }
+
+    private void DropHeal()
+    {
+        var isDrop = UnityEngine.Random.Range(0, 100) < 12;
+#if UNITY_EDITOR
+        if (DebugController.Instance.ALL_TIME_DROP)
+        {
+            isDrop = true;
+        }
+#endif
+        if (isDrop)
+        {
+            var HealMapItem = DataBaseController.GetItem<HealMapItem>(DataBaseController.Instance.HealMapItemPrefab, transform.position);
+            MapItemInit(HealMapItem);
+        }
     }
 
     private void DropItems()
@@ -157,18 +174,21 @@ public class BaseMonster : Unit
         {
             var itemMapItem = DataBaseController.GetItem<ItemMapItem>(DataBaseController.Instance.ItemMapItemPrefab, transform.position);
             itemMapItem.Init(t);
-            itemMapItem.transform.SetParent(Map.Instance.miscContainer, true);
-            itemMapItem.StartFly(transform);
+            MapItemInit(itemMapItem);
         }
     }
 
-
+    private void MapItemInit(BaseMapItem item)
+    {
+        item.transform.SetParent(Map.Instance.miscContainer, true);
+        item.StartFly(transform);
+    }
+    
     private void DropMoney()
     {
         var goldMapItem = DataBaseController.GetItem<GoldMapItem>(DataBaseController.Instance.GoldMapItemPrefab, transform.position);
         goldMapItem.Init(ItemId.money, Formuls.GoldInMonster(Parameters.Level,moneyCoef));
-        goldMapItem.transform.SetParent(Map.Instance.miscContainer, true);
-        goldMapItem.StartFly(transform);
+        MapItemInit(goldMapItem);
     }
 
     public override void GetHit(Bullet bullet)

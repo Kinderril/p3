@@ -46,6 +46,7 @@ public class DataBaseController : Singleton<DataBaseController>
     public FlyNumberWIthDependence FlyNumberWIthDependence;
     public GoldMapItem GoldMapItemPrefab;
     public ItemMapItem ItemMapItemPrefab;
+    public HealMapItem HealMapItemPrefab;
     public int maxLevel = 20;
     public List<BaseMonster> Monsters;
     public Dictionary<int, List<BaseMonster>> mosntersLevel = new Dictionary<int, List<BaseMonster>>();
@@ -59,7 +60,7 @@ public class DataBaseController : Singleton<DataBaseController>
     public Shader simpleShader;
     public Shader flashShader;
 
-    private void Awake()
+    public void Init()
     {
         try
         {
@@ -84,6 +85,7 @@ public class DataBaseController : Singleton<DataBaseController>
             DebugConsole.Instance.InfoField2.text = ex.ToString();
         }
     }
+    
 
     private void LoadRespawnPointsNames()
     {

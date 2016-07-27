@@ -26,6 +26,7 @@ public class Hero : Unit
     private ShootContainer shootContainer;
     private RotateContainer rotateContainer;
 
+
 //    public float CurrenthBonus
 //    {
 //        get { return currenthBonus; }

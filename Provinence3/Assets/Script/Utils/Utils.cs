@@ -11,7 +11,22 @@ public static class Utils
     private static bool uselast = true;
     private static double next_gaussian;
     private static int groundLayerIndex;
+    private static int MaxId;
 
+
+    public static void SetId(int id)
+    {
+        if (id > MaxId)
+        {
+            MaxId = id;
+        }
+    }
+
+    public static int GetId()
+    {
+        MaxId++;
+        return MaxId;
+    }
     public static void Init(Terrain terrain)
     {
         Utils.groundLayerIndex = 1 << terrain.gameObject.layer;

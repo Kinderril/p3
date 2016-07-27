@@ -213,6 +213,7 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
         var bossPrefab = DataBaseController.Instance.BossUnits.FirstOrDefault(x => x.Parameters.Level == level.difficult);
         if (bossPrefab != null)
         {
+            CameraFollow.CameraShake.Init(0.5f);
             boss = DataBaseController.GetItem<BossUnit>(bossPrefab, pos);
             var hero = MainController.Instance.level.MainHero;
             boss.Init(hero);
