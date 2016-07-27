@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine.UI;
 
 
 public class DebugController : Singleton<DebugController>
@@ -15,5 +16,8 @@ public class DebugController : Singleton<DebugController>
     public bool RESPAWN_TIME_CREEPS_FAST = false;
     public bool ALWAYS_GOOD_END = false;
     public bool CHANCE_STUN_100 = false;
+
+    public Text InfoField1;
+    public Text InfoField2;
 }
 

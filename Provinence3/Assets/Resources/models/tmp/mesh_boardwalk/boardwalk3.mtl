@@ -1,0 +1,11 @@
+# File created by luuv TSX
+# Created on: Tue May 11 11:25:38 2010 -1
+
+newmtl boardwalk3
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.100000 0.100000 0.100000
+d 0.996078
+map_Kd boardwalktex3.bmp 
+# End

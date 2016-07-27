@@ -1,0 +1,17 @@
+# Wavefront MTL file
+# Creator: Ultimate Unwrap3D Pro v3.26
+# URL: http://www.unwrap3d.com
+# Time: Sun Jul 03 14:33:51 2011
+# num_materials: 1
+
+newmtl NoName_5
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+d 1.000000
+illum 2
+Ns 0.000000
+map_Kd respawnpoint_tex.png
+map_Bump respawnpoint_NM.png
+
+# num_materials: 1

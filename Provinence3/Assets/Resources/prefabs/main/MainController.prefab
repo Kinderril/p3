@@ -55,6 +55,7 @@ MonoBehaviour:
     type: 2}
   GoldMapItemPrefab: {fileID: 11459134, guid: 1f0bb76def64c5c4e918eafcb99f5b28, type: 2}
   ItemMapItemPrefab: {fileID: 11418410, guid: 3f3b9b2e41ef7c045bfa82437578d2fc, type: 2}
+  HealMapItemPrefab: {fileID: 11405422, guid: e9d8a5c7921a48540bb18f08e59fe033, type: 2}
   maxLevel: 20
   Monsters:
   - {fileID: 11488782, guid: 4ec4aba656f59054ab427246e52db548, type: 2}
@@ -151,13 +152,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ALL_TIME_DROP: 1
   ALL_TALISMAN_CHARGED: 1
-  MAIN_HERO_MEGAHP: 0
+  MAIN_HERO_MEGAHP: 1
   LESS_COUNT_BOSS_COME: 0
   GET_START_BOOST: 1
   GET_ALL_TYPE_WEAPONS_BOOST: 1
   RESPAWN_TIME_CREEPS_FAST: 0
   ALWAYS_GOOD_END: 0
-  CHANCE_STUN_100: 1
+  CHANCE_STUN_100: 0
+  InfoField1: {fileID: 0}
+  InfoField2: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

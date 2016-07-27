@@ -1,0 +1,25 @@
+# Wavefront MTL file
+# Creator: Ultimate Unwrap3D Pro v3.34
+# URL: http://www.unwrap3d.com
+# Time: Sat Apr 21 10:29:52 2012
+# num_materials: 2
+
+newmtl fundament
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+d 1.000000
+illum 2
+Ns 0.000000
+map_Kd fundament_tex.png
+
+newmtl column
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+d 1.000000
+illum 2
+Ns 0.000000
+map_Kd column_tex.bmp
+
+# num_materials: 2

@@ -116,8 +116,8 @@ public class Formuls
                 return 1100;
             case EnchantType.armorUpdate:
                 return 1400;
-            case EnchantType.healthUpdate:
-                return 2600;
+//            case EnchantType.healthUpdate:
+//                return 2600;
         }
         return 900;
     }

@@ -82,7 +82,7 @@ public class DataBaseController : Singleton<DataBaseController>
         }
         catch (Exception ex)
         {
-            DebugConsole.Instance.InfoField2.text = ex.ToString();
+            DebugController.Instance.InfoField2.text = ex.ToString();
         }
     }
     

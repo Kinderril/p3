@@ -11,7 +11,7 @@ public class ShaderGlobalValues : EditorWindow
     private float fogLevel;
     private float fogDiff;
 
-    [MenuItem("Window/ShaderGlobalValues")]
+    [MenuItem("Construct/ShaderGlobalValues")]
     public static void ShowWindow()
     {
         EditorWindow.GetWindow(typeof(ShaderGlobalValues));
@@ -19,8 +19,6 @@ public class ShaderGlobalValues : EditorWindow
 
     void OnGUI()
     {
-        GUILayout.Label("Creates a clone of the game object where the triangles\n" +
-            "do not share vertices");
         GUILayout.Space(20);
         fogLevel = EditorGUILayout.FloatField("fogLevel", fogLevel);
         fogDiff = EditorGUILayout.FloatField("fogDiff", fogDiff);

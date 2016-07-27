@@ -24,7 +24,7 @@ public class LevelObject : MonoBehaviour
         }
         Shader.SetGlobalFloat(FOG_START_LEVEL, GlobalFogLevel);
         Shader.SetGlobalFloat(FOG_DIFF, GlobalFogDiff);
-        Shader.SetGlobalFloat(FOG_START_LEVEL_TERRAIN, GlobalFogLevel -2);
+        Shader.SetGlobalFloat(FOG_START_LEVEL_TERRAIN, GlobalFogLevel);
         Shader.SetGlobalFloat(FOG_DIFF_TERRAIN, GlobalFogDiff * 3);
     }
 

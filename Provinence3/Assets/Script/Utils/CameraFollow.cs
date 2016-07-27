@@ -10,7 +10,8 @@ public class CameraFollow : MonoBehaviour
 
     void Awake()
     {
-        CameraShake = GetComponent<CameraShake>();
+        if (CameraShake == null)
+            CameraShake = GetComponent<CameraShake>();
     }
 
     public void Init(Transform target)

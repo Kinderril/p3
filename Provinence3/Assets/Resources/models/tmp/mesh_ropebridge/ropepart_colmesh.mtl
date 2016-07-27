@@ -1,0 +1,19 @@
+# File created by luuv TSX
+# Created on: Tue Sep 25 19:54:20 2012 -1
+
+newmtl NoName,4000
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.200000 0.200000 0.200000
+d 0.996078
+map_bump Caligari.tga 
+map_Kd ropepart_tex.png 
+
+newmtl NoName,4001
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.498039 0.498039 0.498039
+Ks 0.000000 0.000000 0.000000
+d 0.996078
+# End

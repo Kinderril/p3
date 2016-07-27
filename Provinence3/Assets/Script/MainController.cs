@@ -38,7 +38,7 @@ public class MainController : Singleton<MainController>
         }
         catch (Exception ex)
         {
-            DebugConsole.Instance.InfoField1.text = ex.ToString();
+            DebugController.Instance.InfoField1.text = ex.ToString();
         }
         WindowManager.Instance.OpenWindow(MainState.start);
 //	    Test();
