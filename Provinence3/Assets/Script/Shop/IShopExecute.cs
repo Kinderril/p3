@@ -7,7 +7,6 @@ using UnityEngine;
 
 public abstract class IShopExecute : MonoBehaviour
 {
-    public int CrystalCost;
 //    public int MoneyCost;
     public int Parameter;
     public Sprite icon;
@@ -21,6 +20,11 @@ public abstract class IShopExecute : MonoBehaviour
     {
         get { return 0; }
     }
+    public virtual int CrystalCost
+    {
+        get { return 0; }
+    }
+
 
     public virtual void Execute(int parameter)
     {

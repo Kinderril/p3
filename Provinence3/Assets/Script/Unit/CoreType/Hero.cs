@@ -16,9 +16,6 @@ public class Hero : Unit
     public PSAbsorber GetItemEffect;
     private float currenthBonus = 0f;
     private float currenthBonusTimeLeft = 0f;
-//    public Action<float> CurrentBonusUpdateX;
-    public float moneyBonusFromItem = 0.0f;
-    public float damageBonusFromItem = 0.0f;
     private float regenCoef = 1.2f;
     private HeroControl heorControl;
     public bool isRegenHP = false;
@@ -44,9 +41,16 @@ public class Hero : Unit
     {
         base.Init();
         var playerData = MainController.Instance.PlayerData;
-        foreach (var allWearedItem in playerData.GetAllWearedItems())
+        var allWeared = playerData.GetAllWearedItems();
+        var notBonuses = allWeared.Where(x => x.Slot != Slot.bonus);
+        var bonuses = allWeared.Where(x => x.Slot == Slot.bonus);
+        foreach (var allWearedItem in notBonuses)
         {
             allWearedItem.Activate(this);
+        }
+        foreach (var bonuseItem in bonuses)
+        {
+            bonuseItem.Activate(this);
         }
 
         foreach (ParamType v in Enum.GetValues(typeof(ParamType)))
@@ -56,8 +60,8 @@ public class Hero : Unit
         }
         curHp = Parameters.Parameters[ParamType.Heath];
 
-        Parameters.Parameters[ParamType.PPower] *= (damageBonusFromItem + 1f);
-        Parameters.Parameters[ParamType.MPower] *= (damageBonusFromItem + 1f);
+//        Parameters.Parameters[ParamType.PPower] *= (damageBonusFromItem + 1f);
+//        Parameters.Parameters[ParamType.MPower] *= (damageBonusFromItem + 1f);
 //        GetItemEffect.Stop(true);
         heorControl = Control as HeroControl;
         heorControl.Init(OnRotationEnds);
@@ -278,6 +282,7 @@ public class Hero : Unit
 
     public void Rage()
     {
+        Debug.Log("RAGE!!!!");
         regenCoef = -1f;
         isRegenHP = true;
         Parameters.Parameters[ParamType.PPower] *= 1.5f;

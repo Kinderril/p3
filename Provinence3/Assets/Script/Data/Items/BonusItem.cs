@@ -7,7 +7,12 @@ using UnityEngine;
 public enum Bonustype
 {
     damage,
-    money
+    defence,
+    money,
+    cryslats,
+    energy,
+    speed,
+    maxHp,
 }
 
 public class BonusItem : BaseItem
@@ -37,11 +42,28 @@ public class BonusItem : BaseItem
         remainUsetime--;
         switch (Bonustype)
         {
+            case Bonustype.defence:
+                hero.Parameters.Parameters[ParamType.MDef] *= power;
+                hero.Parameters.Parameters[ParamType.PDef] *= power;
+                break;
+            case Bonustype.maxHp:
+                hero.Parameters.Parameters[ParamType.Heath] *= power;
+                break;
+            case Bonustype.speed:
+                hero.Parameters.Parameters[ParamType.Speed] += power;
+                break;
             case Bonustype.damage:
-                hero.damageBonusFromItem = power;
+                hero.Parameters.Parameters[ParamType.MPower] *= power;
+                hero.Parameters.Parameters[ParamType.PPower] *= power;
+                break;
+            case Bonustype.energy:
+                MainController.Instance.level.Energy.SpeedEnergyFallCoef = 0.9f;
+                break;
+            case Bonustype.cryslats:
+                MainController.Instance.level.CrystalsBonus = power;
                 break;
             case Bonustype.money:
-                hero.moneyBonusFromItem = power;
+                MainController.Instance.level.MoneyBonusFromItem = power;
                 break;
         }
         if (remainUsetime <= 0)

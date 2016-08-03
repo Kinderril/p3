@@ -41,8 +41,8 @@ public class WindowPersonage : BaseWindow
         var lvl = MainController.Instance.PlayerData.Level;
         alocatedField.text = "Remain:"+ ap.ToString("0") + "/" + ((lvl-1)*PlayerData.POINTS_PER_LVL);
         levelField.text = lvl.ToString("0");
-        var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[lvl];
-        costNextLevelField.text = cost.ToString("0");
+//        var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[lvl];
+        costNextLevelField.text = Formuls.LevelUpCost(lvl).ToString("0");
         UpgradeAllMainElements();
     }
 
@@ -77,7 +77,7 @@ public class WindowPersonage : BaseWindow
 
     public void OnLevelUpClicked()
     {
-        var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[MainController.Instance.PlayerData.Level];
+        var cost =  Formuls.LevelUpCost(MainController.Instance.PlayerData.Level);
         WindowManager.Instance.ConfirmWindow.Init(() =>
         {
             MainController.Instance.PlayerData.LevelUp();

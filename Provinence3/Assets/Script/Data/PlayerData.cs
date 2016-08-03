@@ -33,7 +33,7 @@ public class PlayerData
     public Dictionary<MainParam,int> MainParameters;
     private readonly Dictionary<Slot,int> slotsCount = new Dictionary<Slot, int>()
     {
-        {Slot.Talisman, 2}, { Slot.executable, 0 }
+        {Slot.Talisman, 2}, { Slot.executable, 0 } , {Slot.bonus, 5 }
     };
     public OpenLevels OpenLevels;
 
@@ -66,7 +66,7 @@ public class PlayerData
         if (CanUpgradeParameter())
         {
             Debug.Log("Upgdare Main Parameter " + parameter);
-            var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[MainParameters[parameter]];
+//            var cost = Formuls.LevelUpCost(MainParameters[parameter]);
             //AddCurrensy(ItemId.money, -cost);
             AllocatedPoints -= 1;
             MainParameters[parameter] += 1;
@@ -136,18 +136,14 @@ public class PlayerData
     public bool CanUpgradeLevel()
     {
         //Debug.Log("costParameterByLvl " + DataBaseController.Instance.DataStructs.costParameterByLvl.Length);
-        if (DataBaseController.Instance.DataStructs.costParameterByLvl.Length > CurrentLevel)
-        {
-            var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[CurrentLevel];
-            Debug.Log("cost level " + cost);
-            return CanPay(ItemId.money, cost);
-        }
-        return false;
+        var cost = Formuls.LevelUpCost(CurrentLevel);
+        Debug.Log("cost level " + cost);
+        return CanPay(ItemId.money, cost);
     }
 
     public void LevelUp()
     {
-        var cost = DataBaseController.Instance.DataStructs.costParameterByLvl[CurrentLevel];
+        var cost = Formuls.LevelUpCost(CurrentLevel);
         AllocatedPoints += POINTS_PER_LVL;
         CurrentLevel++;
         AddCurrensy(ItemId.money, -cost);

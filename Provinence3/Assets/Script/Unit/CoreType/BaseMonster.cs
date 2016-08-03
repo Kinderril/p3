@@ -66,7 +66,7 @@ public class BaseMonster : Unit
     {
         //runAwayDist = attackDist * 1.4f;
         base.Init();
-        Parameters.Parameters[ParamType.Speed] = GreatRandom.RandomizeValue(Parameters.Parameters[ParamType.Speed]);
+//        Parameters.Parameters[ParamType.Speed] = GreatRandom.RandomizeValue(Parameters.Parameters[ParamType.Speed]);
         bornPosition = transform.position;
         Utils.GroundTransform(transform, 999f);
         energyadd = (int)(Energy.CREEP_ENERGY_AV*energyCoef);

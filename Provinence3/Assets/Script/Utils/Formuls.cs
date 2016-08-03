@@ -23,6 +23,16 @@ public class Formuls
         return av_mosters_kills* GoldInMonster(lvl) + av_chestes*GoldInChest(lvl);
     }
 
+    public static int OpenLevelCost(int index)
+    {
+        return 15 + index;
+    }
+
+    public static int LevelUpCost(int index)
+    {
+        return (1 + index) * LevelGoldAv(index) / 2;
+    }
+
     public static float ModifyBossHP(BossUnit boss,int bonuses)
     {
         return boss.CurHp * (1 - 0.03f * bonuses);
@@ -223,7 +233,7 @@ public class Formuls
         switch (type)
         {
             case ParamType.Speed:
-                curVal += 4;
+                curVal += 400;
                 break;
             case ParamType.MPower:
                 curVal += MainParameters[MainParam.ATTACK] * PATTACK_COEF + 12;

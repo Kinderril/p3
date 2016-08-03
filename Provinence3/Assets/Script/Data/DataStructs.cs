@@ -51,7 +51,7 @@ public class DataStructs : MonoBehaviour
     public Color CraftItemColor;
     public CostItemsByLevel[] CostItemsByLevel;
     public EffectVisualsBehaviour[] EffectVisualsBehaviours;
-    public int[] costParameterByLvl;
+//    public int[] costParameterByLvl;
     public const int MISSION_LAST_INDEX = 2;
     public List<BaseBonusMapElement> BaseBonusMapElement;
     public PrefabsStruct PrefabsStruct;

@@ -56,6 +56,7 @@ public class Level
     public EndlevelType IsGoodEnd;
     public int EnemiesKills = 0;
     private float penalty;
+    public float MoneyBonusFromItem = 1f;
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
@@ -106,6 +107,11 @@ public class Level
         get { return collectedItems; }
     }
 
+    public float CrystalsBonus
+    {
+        get; set;
+    }
+
     private void OnPortalOpen()
     {
         //TODO
@@ -125,8 +131,11 @@ public class Level
         switch (type)
         {
             case ItemId.money:
+                value = (int)(value * MoneyBonusFromItem);
+                moneyInv[type] += value;
+                ActivaAction(type, value);
+                break;
             case ItemId.crystal:
-                value = (int)(value * (MainHero.moneyBonusFromItem + 1f));
                 moneyInv[type] += value;
                 ActivaAction(type, value);
                 break;
@@ -225,10 +234,11 @@ public class Level
 
     private void AddRandomGift()
     {
-        if (Energy.MorePowerLeft())
-        {
-            IsGoodEnd = EndlevelType.good;
-        }
+        IsGoodEnd = EndlevelType.good;
+        //        if (Energy.MorePowerLeft())
+        //        {
+        //            IsGoodEnd = EndlevelType.good;
+        //        }
 
         WDictionary<GiftType> gifts = new WDictionary<GiftType>(new Dictionary<GiftType, float>()
         {

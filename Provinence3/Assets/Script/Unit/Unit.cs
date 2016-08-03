@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 
 public enum UnitType
 {
@@ -87,7 +88,16 @@ public class Unit : MonoBehaviour
 
     public virtual void Init()
     {
+        const int speedCoef = 100;
         Parameters = Parameters.Copy();
+        var spd = Parameters.Parameters[ParamType.Speed];
+        if (spd != 0 && spd < 50)
+        { 
+            spd *= speedCoef;
+            Debug.LogError("Wrong speed " + name);
+        }
+
+        Parameters.Parameters[ParamType.Speed] = spd / speedCoef;
         if (Control == null)
             Control = GetComponent<BaseControl>();
         animationController = GetComponentInChildren<AnimationController>();

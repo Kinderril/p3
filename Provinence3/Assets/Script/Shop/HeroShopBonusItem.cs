@@ -18,6 +18,11 @@ public class HeroShopBonusItem : IShopExecute
         get { return Formuls.BonusCost(Parameter); }
     }
 
+    public override int CrystalCost
+    {
+        get { return 3; }
+    }
+
     public static BonusItem CreatBonusItem(int lvl)
     {
         var bonus = ShopController.RandomBonus();

@@ -9,8 +9,8 @@ public class Energy
     public const float TOTAl_AV_TIME = 60 * 7;
     public const float MAX_ENERGY = 60 * 3;
     public const float CREEP_ENERGY_AV = (TOTAl_AV_TIME - MAX_ENERGY) / Formuls.av_mosters_kills;
-    public const int MAGIC_WEAPON_COST = (int)(CREEP_ENERGY_AV * 1.5f);
-    public const float BONUS_ADD_ENERGY = 40;
+    public const int MAGIC_WEAPON_COST = (int)(CREEP_ENERGY_AV * 0.9f);
+    public const float BONUS_ADD_ENERGY = MAX_ENERGY/4;
 
     private float powerLeft;
     private float maxpower = MAX_ENERGY; // 3min;
@@ -18,7 +18,7 @@ public class Energy
 
     public Action<float, float> OnLeft;
     private Action<ItemId, int> activaAction;
-//    private const float speedEnergyFall = 1.5f;
+    private float speedEnergyFall = 1f;
     public event Action OnRage;
     private bool isRageActivated = false;
 
@@ -26,6 +26,11 @@ public class Energy
     {
         this.activaAction = activaAction;
         this.OnRage += OnRage;
+    }
+
+    public float SpeedEnergyFallCoef
+    {
+        set { speedEnergyFall = value; }
     }
 
     public void Add(int value)
@@ -61,13 +66,8 @@ public class Energy
 
     public void Update()
     {
-        powerLeft += Time.deltaTime;
+        powerLeft += Time.deltaTime* speedEnergyFall;
         ActionPOwerLeft();
-    }
-
-    public bool MorePowerLeft()
-    {
-        return powerLeft >= maxpower/2;
     }
 }
 

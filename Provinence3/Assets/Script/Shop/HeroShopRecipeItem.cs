@@ -11,6 +11,10 @@ public  class HeroShopRecipeItem : IShopExecute
         base.Init(lvl);
         name = "Recipe Chest";
     }
+    public override int CrystalCost
+    {
+        get { return 1; }
+    }
 
     public override void Execute(int parameter)
     {

@@ -38,7 +38,7 @@ public class BossSpawner
             {
                 OnBossGetEnergy(enemiesKilled,ToSpawnBossOnStart);
             }
-            if (enemiesKilled > ToSpawnBossOnStart)
+            if (enemiesKilled >= ToSpawnBossOnStart)
             {
                 isBossSpawned = true;
                 OnSpawnBoss(bonusesGet);
