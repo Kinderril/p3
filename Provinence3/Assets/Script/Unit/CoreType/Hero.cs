@@ -37,7 +37,7 @@ public class Hero : Unit
 //        }
 //    }
 
-    public override void Init()
+    public void Init(Level lvl)
     {
         base.Init();
         var playerData = MainController.Instance.PlayerData;
@@ -46,11 +46,11 @@ public class Hero : Unit
         var bonuses = allWeared.Where(x => x.Slot == Slot.bonus);
         foreach (var allWearedItem in notBonuses)
         {
-            allWearedItem.Activate(this);
+            allWearedItem.Activate(this, lvl);
         }
         foreach (var bonuseItem in bonuses)
         {
-            bonuseItem.Activate(this);
+            bonuseItem.Activate(this, lvl);
         }
 
         foreach (ParamType v in Enum.GetValues(typeof(ParamType)))
@@ -59,7 +59,7 @@ public class Hero : Unit
             Debug.Log("Calc parameter: " + v + " : " + Parameters.Parameters[v]);
         }
         curHp = Parameters.Parameters[ParamType.Heath];
-
+        Parameters.Parameters[ParamType.Speed] /= Formuls.SpeedCoef; ;
 //        Parameters.Parameters[ParamType.PPower] *= (damageBonusFromItem + 1f);
 //        Parameters.Parameters[ParamType.MPower] *= (damageBonusFromItem + 1f);
 //        GetItemEffect.Stop(true);
@@ -178,7 +178,7 @@ public class Hero : Unit
 
         var dir = target - transform.position;
 
-        var isLookToTarget = heorControl.SpinTransform.ShallRotate(dir);
+        var isLookToTarget = heorControl.SpinTransform.IslookingSame(dir);
 //        Debug.Log("Direction from UI:" + dir + "   isLookToTarget:"+ isLookToTarget);
         //        Debug.Log("hero try attack isLookToTarget: " + isLookToTarget);
         //        heorControl.SetLookDir(dir);

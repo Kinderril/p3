@@ -40,9 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308f0e6854ef9fe4b96d4f3d3ae0c8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrystalCost: 1
   Parameter: 1
-  icon: {fileID: 21300000, guid: 0f7aa3eaa3148f248904ce209cf68191, type: 3}
+  icon: {fileID: 21300000, guid: 3b73dd7bf34cc114dabe3c719f85c10a, type: 3}
   name: 
 --- !u!1001 &100100000
 Prefab:

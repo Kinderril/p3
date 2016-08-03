@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
   m_Name: Hero
   m_EditorClassIdentifier: 
-  Speed: 3.86
+  Speed: 386
   MPower: 1
   PPower: 1
   MaxHp: 734

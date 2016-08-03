@@ -23,6 +23,7 @@ public abstract class IShopExecute : MonoBehaviour
     public virtual int CrystalCost
     {
         get { return 0; }
+        set { }
     }
 
 

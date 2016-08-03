@@ -22,7 +22,7 @@ public abstract class BaseItem
 
 
     public abstract char FirstChar();
-    public abstract void Activate(Hero hero);
+    public abstract void Activate(Hero hero,Level lvl);
     public abstract string Save();
     public bool IsEquped
     {

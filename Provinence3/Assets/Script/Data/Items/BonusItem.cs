@@ -37,7 +37,7 @@ public class BonusItem : BaseItem
         Slot = Slot.bonus;
     }
 
-    public override void Activate(Hero hero)
+    public override void Activate(Hero hero, Level lvl)
     {
         remainUsetime--;
         switch (Bonustype)
@@ -57,13 +57,13 @@ public class BonusItem : BaseItem
                 hero.Parameters.Parameters[ParamType.PPower] *= power;
                 break;
             case Bonustype.energy:
-                MainController.Instance.level.Energy.SpeedEnergyFallCoef = 0.9f;
+                lvl.Energy.SpeedEnergyFallCoef = 0.9f;
                 break;
             case Bonustype.cryslats:
-                MainController.Instance.level.CrystalsBonus = power;
+                lvl.CrystalsBonus = power;
                 break;
             case Bonustype.money:
-                MainController.Instance.level.MoneyBonusFromItem = power;
+                lvl.MoneyBonusFromItem = power;
                 break;
         }
         if (remainUsetime <= 0)

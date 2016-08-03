@@ -8,6 +8,7 @@ using UnityEngine;
 public class Formuls
 {
     public const float BASE_MOSTER_ENERGY = 5;
+    public const int SpeedCoef = 100;
     public static float calcResist(float curResist)
     {
         return 1 - curResist / (150 + curResist);

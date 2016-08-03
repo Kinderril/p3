@@ -88,16 +88,15 @@ public class Unit : MonoBehaviour
 
     public virtual void Init()
     {
-        const int speedCoef = 100;
         Parameters = Parameters.Copy();
         var spd = Parameters.Parameters[ParamType.Speed];
         if (spd != 0 && spd < 50)
         { 
-            spd *= speedCoef;
+            spd *= Formuls.SpeedCoef;
             Debug.LogError("Wrong speed " + name);
         }
 
-        Parameters.Parameters[ParamType.Speed] = spd / speedCoef;
+        Parameters.Parameters[ParamType.Speed] = spd / Formuls.SpeedCoef;
         if (Control == null)
             Control = GetComponent<BaseControl>();
         animationController = GetComponentInChildren<AnimationController>();

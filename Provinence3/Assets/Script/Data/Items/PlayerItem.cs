@@ -151,7 +151,7 @@ public class PlayerItem : BaseItem ,IEnhcant
         return FIRSTCHAR;
     }
 
-    public override void Activate(Hero hero)
+    public override void Activate(Hero hero,Level lvl)
     {
         foreach (var parameter in parameters)
         {

@@ -76,6 +76,11 @@ public class ShopController : Singleton<ShopController>
         {
             {Bonustype.money,3f },
             {Bonustype.damage,3f },
+            {Bonustype.speed,4f },
+            {Bonustype.cryslats,3f },
+            {Bonustype.defence,3f },
+            {Bonustype.energy,4f },
+            {Bonustype.maxHp,4f },
         });
         return slots.Random();
     }

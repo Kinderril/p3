@@ -31,7 +31,7 @@ public class ExecutableItem : BaseItem
         return FIRSTCHAR;
     }
 
-    public override void Activate(Hero hero)
+    public override void Activate(Hero hero, Level lvl)
     {
 //        Debug.LogWarning("cannot be activate");
     }

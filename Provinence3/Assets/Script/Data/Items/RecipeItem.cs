@@ -79,7 +79,7 @@ public class RecipeItem : BaseItem
         return FIRSTCHAR;
     }
 
-    public override void Activate(Hero hero)
+    public override void Activate(Hero hero, Level lvl)
     {
 
     }

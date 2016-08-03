@@ -210,12 +210,11 @@ public class BaseMonster : Unit
 
     }
     
-    public void CheckDistance(float heroDist)
+    public void CheckDistance()
     {
         if (mainHero == null)
             return;
-
-        mainHeroDist = (mainHero.transform.position - transform.position).sqrMagnitude;
+        
         var isInAI = mainHeroDist < AI_DIST;
         bool isTargetClose = (mainHeroDist < attackDist);
         
@@ -359,5 +358,9 @@ public class BaseMonster : Unit
         return mainHeroDist > 0 && mainHeroDist < rad;
     }
 
+    public void SetDistance(float f)
+    {
+        mainHeroDist = f;
+    }
 }
 

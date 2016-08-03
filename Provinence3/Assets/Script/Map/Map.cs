@@ -44,7 +44,7 @@ public class Map : Singleton<Map>
         TimeUtils.StartMeasure("LOAD HERO");
 
         var hero = DataBaseController.GetItem(DataBaseController.Instance.prefabHero, GetHeroBoenPos(heroBornPositionIndex));
-        hero.Init();
+        hero.Init(lvl);
         levelMainObject.Init(hero);
         enemies = new List<BaseMonster>();
         appearPos = new List<MonsterBornPosition>();
@@ -170,12 +170,17 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
                 mainHeroDist = (mainHero.transform.position - baseMonster.transform.position).sqrMagnitude;
                 isActive = mainHeroDist < BaseMonster.AI_DIST;
                 baseMonster.gameObject.SetActive(isActive);
+                baseMonster.SetDistance(mainHeroDist);
                 if (isActive)
                 {
-                    baseMonster.CheckDistance(mainHeroDist);
+                    baseMonster.CheckDistance();
                     baseMonster.UpdateByManager();
                 }
             }
+        }
+        if (boss != null)
+        {
+            boss.CheckArrow();
         }
         levelMainObject.UpdateByMap();
     }

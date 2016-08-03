@@ -29,7 +29,7 @@ public class BonusItemInfo : WearingInventoryItemInfo
                 break;
         }
 
-
+        mainIcon.sprite = bonusItem.IconSprite;
         NameLabel.text = nameBonus;
         descField.text = descBonus;
         remainTimesField.text = "Remain:" + bonusItem.remainUsetime;

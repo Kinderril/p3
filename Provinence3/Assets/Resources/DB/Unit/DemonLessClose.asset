@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
   m_Name: DemonLessClose
   m_EditorClassIdentifier: 
-  Speed: 3.5
+  Speed: 350
   MPower: 68
   PPower: 65
   MaxHp: 230

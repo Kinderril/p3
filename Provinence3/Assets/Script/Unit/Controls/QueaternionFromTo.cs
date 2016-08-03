@@ -98,7 +98,8 @@ public class QueaternionFromTo : MonoBehaviour
             if (time >= 1f)
             {
                 time = 1f;
-                comeToRotation();
+                if (comeToRotation != null)
+                    comeToRotation();
                 isRotating = false;
                 StartWait();
             }
@@ -141,9 +142,8 @@ public class QueaternionFromTo : MonoBehaviour
         }
     }
 
-    public bool ShallRotate(Vector3 dir)
+    public bool IslookingSame(Vector3 dir)
     {
-
         return Quaternion.Angle(GetCurrentRotation(), Quaternion.LookRotation(dir)) < 4;
     }
 

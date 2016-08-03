@@ -11,7 +11,6 @@ public class ArrowTarget : MonoBehaviour
     private BossUnit BossUnit;
     public int distToDisappear;
     private bool isActive;
-    public float speed;
     public QueaternionFromTo rotateObject;
     private float lastRotateTime = 0;
     public GameObject ArrowGameObject;
@@ -21,31 +20,30 @@ public class ArrowTarget : MonoBehaviour
         ArrowGameObject.SetActive(false);
         gameObject.SetActive(false);
     }
-
-    void Update()
-    {
-        if (BossUnit != null)
-        {
-            if (isActive && (Time.time - lastRotateTime) > sec_time_out_sec)
-            {
-                lastRotateTime = Time.time;
-                var dir = BossUnit.transform.position - transform.position;
-                if (rotateObject.ShallRotate(dir))
-                {
-                    rotateObject.SetLookDir(dir);
-                }
-            }
-            isActive = BossUnit.mainHeroDist > distToDisappear;
-            ArrowGameObject.SetActive(isActive);
-        }
-    }
+    
 
     public void Init(BossUnit boss)
     {
         BossUnit = boss;
+        BossUnit.Arrow = this; 
 //        MainController.Instance.TimerManager 
         ArrowGameObject.SetActive(true);
         gameObject.SetActive(true);
+    }
+
+    public void UpdateByBoss()
+    {
+        if (isActive && (Time.time - lastRotateTime) > sec_time_out_sec)
+        {
+            lastRotateTime = Time.time;
+            var dir = BossUnit.transform.position - transform.position;
+            if (!rotateObject.IslookingSame(dir))
+            {
+                rotateObject.SetLookDir(dir);
+            }
+        }
+        isActive = BossUnit.mainHeroDist > distToDisappear;
+        ArrowGameObject.SetActive(isActive);
     }
 }
 

@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class BossUnit : BaseMonster
 {
+    public ArrowTarget Arrow { get; set; }
     protected override void Death()
     {
         base.Death();
@@ -19,6 +20,12 @@ public class BossUnit : BaseMonster
         yield return new WaitForSeconds(1);
         MainController.Instance.EndLevel(EndlevelType.normal);
 
-    } 
+    }
+
+    public void CheckArrow()
+    {
+        Arrow.UpdateByBoss();
+    }
+
 }
 
