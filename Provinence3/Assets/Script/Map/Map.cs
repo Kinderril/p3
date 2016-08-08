@@ -189,7 +189,8 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
     {
         Vector3 vector3s = Vector3.zero;
         var playerData =  MainController.Instance.PlayerData;
-       
+        List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(level.MissionIndex);
+
         foreach (Transform v in heroBornPositions)
         {
             if (vector3s == Vector3.zero)
@@ -204,8 +205,8 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
                 vector3s = v.position;
 //                break;
             }
-            var opend = playerData.OpenLevels.IsPositionOpen(level.MissionIndex, index);
-            Debug.Log(index + " ... " + opend);
+            var opend = opensRespawnPoints.Contains(heroBP.ID);
+            Debug.Log(heroBP.ID + " ... " + opend);
             heroBP.Init(this, opend);
 //            vector3s = v.position;
         }

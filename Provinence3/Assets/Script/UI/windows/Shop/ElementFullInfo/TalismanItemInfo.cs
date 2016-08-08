@@ -52,13 +52,13 @@ public class TalismanItemInfo : UpgWearingInvItemInfo
                 name = "Chain strike";
                 break;
             case TalismanType.trapDamage:
-                name = "Shooting totem";
+                name = "Shooting ward";
                 break;
             case TalismanType.trapAOE:
-                name = "Explosive totem";
+                name = "Explosive ward";
                 break;
             case TalismanType.trapFreez:
-                name = "Freezing totem";
+                name = "Freezing ward";
                 break;
             case TalismanType.bloodDamage:
                 name = "Rapture strike";

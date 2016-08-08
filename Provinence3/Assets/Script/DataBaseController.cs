@@ -64,8 +64,8 @@ public class DataBaseController : Singleton<DataBaseController>
     {
         try
         {
-            simpleShader = Shader.Find("Custom/FogInside");
-            flashShader = Shader.Find("Custom/FogInsideFlash");
+            if (simpleShader == null)
+                simpleShader = Shader.Find("Custom/FogInside");
             CheckEnums();
             CraftDB = new CraftDB();
             for (var i = 0; i < maxLevel; i++)
@@ -79,10 +79,13 @@ public class DataBaseController : Singleton<DataBaseController>
             LoadSprites();
             Pool = new Pool(this);
             LoadRespawnPointsNames();
+            if (flashShader == null)
+                flashShader = Shader.Find("Custom/FogInsideFlash");
+            DebugController.Instance.InfoField2.text = flashShader.ToString();
         }
         catch (Exception ex)
         {
-            DebugController.Instance.InfoField2.text = ex.ToString();
+            DebugController.Instance.InfoField1.text = ex.ToString();
         }
     }
     

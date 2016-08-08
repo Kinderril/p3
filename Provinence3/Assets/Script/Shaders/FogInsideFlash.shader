@@ -39,33 +39,24 @@
 	float _Fog_Diff;
 	float _Fog_Start_Level;
 
-	v2f vert(appdata v)
-	{
-		v2f o;
-		o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-		o.uv = v.uv;
-		o.position_in_world_space = mul(_Object2World, v.vertex);
-		return o;
-	}
+		v2f vert(appdata v)
+		{
+			v2f o;
+			o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+			o.uv = v.uv;
+			o.position_in_world_space = mul(_Object2World, v.vertex);
+			return o;
+		}
 
-	fixed4 frag(v2f i) : COLOR
-	{
-		//float dist = distance(i.position_in_world_space,  _WorldSpaceCameraPos);
-		
-		fixed4 col = tex2D(_MainTex, i.uv);
-	//return col;
+		fixed4 frag(v2f i) : COLOR
+		{
+			fixed4 col = tex2D(_MainTex, i.uv);
+			b = (_Fog_Start_Level - i.position_in_world_space.y) / _Fog_Diff;
+			b = clamp(b, 0.0,1.0);
+			//return  lerp(col, _Color, b);
+			return  lerp(col,_Color,b) *_Time2 * _FlashColor;
 
-	b = (_Fog_Start_Level - i.position_in_world_space.y) / _Fog_Diff;
-		b = clamp(b, 0.0,1.0);
-
-		//fixed4 col = tex2D(_MainTex, i.uv);
-		//b = (_C2 - i.position_in_world_space.y) / diff;
-		//b = clamp(b, 0.0, 1.0);
-
-
-	return  lerp(col,_Color,b) *_Time2 * _FlashColor;
-
-	}
+		}
 		ENDCG
 	}
 	}

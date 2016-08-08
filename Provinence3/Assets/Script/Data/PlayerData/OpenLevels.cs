@@ -30,14 +30,7 @@ public class OpenLevels
             Load();
         }
     }
-
-    public void OpenNewLevel(int lvl)
-    {
-        //TODO
-        Save();
-    }
-
-
+    
     public void Save()
     {
         string openedLevels = "";
@@ -101,6 +94,7 @@ public class OpenLevels
         {
             listOfOpendBornPositions[missionIndex].Add(id);
         }
+        Save();
     }
 }
 
