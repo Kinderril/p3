@@ -32,6 +32,7 @@ public class Map : Singleton<Map>
 
 
         LoadLevelGameObject(levelIndex);
+        string allInfo = "";
         SceneManager.LoadScene("Level" + levelIndex,LoadSceneMode.Additive);
 
         TimeUtils.StartMeasure("LOAD LEVEL SCENE");
@@ -40,7 +41,7 @@ public class Map : Singleton<Map>
         bornPositions = levelMainObject.transform.Find("BornPos");
         enemiesContainer = transform.Find("Enemies");
 
-        TimeUtils.EndMeasure("LOAD LEVEL SCENE");
+        allInfo += TimeUtils.EndMeasure("LOAD LEVEL SCENE");
         TimeUtils.StartMeasure("LOAD HERO");
 
         var hero = DataBaseController.GetItem(DataBaseController.Instance.prefabHero, GetHeroBoenPos(heroBornPositionIndex));
@@ -52,7 +53,7 @@ public class Map : Singleton<Map>
         List<ChestBornPosition> chestPositions = new List<ChestBornPosition>();
 
 
-        TimeUtils.EndMeasure("LOAD HERO");
+        allInfo += TimeUtils.EndMeasure("LOAD HERO");
         TimeUtils.StartMeasure("LOAD BORN");
         foreach (Transform bornPosition in bornPositions)
         {
@@ -82,7 +83,7 @@ public class Map : Singleton<Map>
                 }
             }
         }
-        TimeUtils.EndMeasure("LOAD BORN");
+        allInfo += TimeUtils.EndMeasure("LOAD BORN");
         TimeUtils.StartMeasure("LOAD LAST");
         var rnd = chestPositions.RandomElement();
         rnd.SetCrystal();
@@ -100,7 +101,8 @@ public class Map : Singleton<Map>
                 bonusBoss.Init(BossSpawner);
             }
         }
-        TimeUtils.EndMeasure("LOAD LAST");
+        allInfo += TimeUtils.EndMeasure("LOAD LAST");
+        DebugController.Instance.InfoField1.text = allInfo;
         //        callback();
         return hero;
     }

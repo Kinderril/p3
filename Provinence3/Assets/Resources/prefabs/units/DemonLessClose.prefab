@@ -650,6 +650,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 451596}
   - 95: {fileID: 9533408}
+  - 114: {fileID: 11486286}
   m_Layer: 0
   m_Name: Holder
   m_TagString: Untagged
@@ -2245,7 +2246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163a9628b1529144382abbe884b537ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathAnimator: {fileID: 9533408}
+  DeathAnimationCatcher: {fileID: 11486286}
   m_MovingTurnSpeed: 678
   m_StationaryTurnSpeed: 440.5
   Animator: {fileID: 9572444}
@@ -2300,6 +2301,18 @@ MonoBehaviour:
   waitTimeSec: 0
   isWaiting: 0
   endWaitTime: 0
+--- !u!114 &11486286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93095b8842d86eb4d8665ac602ea86b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathAnimator: {fileID: 9533408}
 --- !u!136 &13679438
 CapsuleCollider:
   m_ObjectHideFlags: 1

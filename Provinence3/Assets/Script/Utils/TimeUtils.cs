@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine.UI;
 
 public class TimeUtils
 {
@@ -46,13 +47,17 @@ public class TimeUtils
         return 0;
     }
 
-    public static void EndMeasure(string name)
+    public static string EndMeasure(string name)
     {
+        double ms = 0;
         if (dict.ContainsKey(name))
         {
-            UnityEngine.Debug.Log( "EndMeasure " + " " + name + " :" + (DateTime.Now - dict[name]).TotalMilliseconds + " ms.");
+            ms = (DateTime.Now - dict[name]).TotalMilliseconds;
+            var str = "EndMeasure " + " " + name + " :" + ms + " ms.";
+            UnityEngine.Debug.Log(str);
             dict[name] = DateTime.Now;
         }
+        return name + " " + ms + " ";
     }
 }
 

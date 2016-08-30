@@ -7,18 +7,19 @@ using UnityEngine;
 
 public class MapObjectWithDeath : MonoBehaviour
 {
-    public Animator DeathAnimator;
     private const string key_death = "death";
+    public DeathAnimationCatch DeathAnimationCatcher;
 
     public virtual void SetDeath()
     {
-        if (DeathAnimator == null)
+        if (DeathAnimationCatcher != null && DeathAnimationCatcher.DeathAnimator != null)
         {
-            EndDeathAnimation();
+            DeathAnimationCatcher.SetAction(EndDeathAnimation);
+            DeathAnimationCatcher.DeathAnimator.SetTrigger(key_death);
         }
         else
         {
-            DeathAnimator.SetTrigger(key_death);
+            EndDeathAnimation();
         }
     }
 
