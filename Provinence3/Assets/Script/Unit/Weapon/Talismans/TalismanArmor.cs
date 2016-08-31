@@ -22,13 +22,13 @@ public class TalismanArmor : TalismanWithTime
     {
         return "Increase Physical defence:" + (power*10).ToString("0") + "% on " + TimeCoef.ToString("0") + " second";
     }
-    
-    public override void Use()
+
+    protected override void Use()
     {
+        base.Use();
         var trg = MainController.Instance.level.MainHero;
         var timeEffect = new ParameterEffect(trg,TimeCoef,ParamType.PDef, power);
         TimeEffect.Creat(trg, timeEffect);
-        base.Use();
     }
 }
 

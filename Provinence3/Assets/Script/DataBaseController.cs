@@ -74,7 +74,7 @@ public class DataBaseController : Singleton<DataBaseController>
             }
             foreach (var baseMonster in Monsters)
             {
-                mosntersLevel[baseMonster.Parameters.Level].Add(baseMonster);
+                mosntersLevel[baseMonster.ParametersScriptable.Level].Add(baseMonster);
             }
             LoadSprites();
             Pool = new Pool(this);

@@ -6,7 +6,7 @@ using System.Text;
 
 public class TalismanEnergyVamp : Talisman
 {
-    public override void Use()
+    protected override void Use()
     {
         
         base.Use();

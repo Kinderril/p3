@@ -52,6 +52,7 @@ public abstract class Talisman
             if (absorber != null)
             {
                 CastEffect = DataBaseController.GetItem<BaseEffectAbsorber>(absorber);
+                CastEffect.transform.SetParent(hero.transform,false);
             }
         }
         if (DebugController.Instance.ALL_TALISMAN_CHARGED)
@@ -127,11 +128,19 @@ public abstract class Talisman
     {
         return Map.Instance.FindClosesEnemy(hero.transform.position);
     }
-    public virtual void Use()
+
+    public void UseIfCan()
+    {
+        Debug.Log("under !!! " + isUnderCooldown);
+        if (CanUse())
+            Use();
+    }
+
+    protected virtual void Use()
     {
         Debug.Log("Use!!! " + sourseItem.TalismanType);
         isUnderCooldown = true;
-        timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromMilliseconds(500));
+        timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromMilliseconds(1500));
         timer.OnTimer += OnTimerCome;
         AddEnergy(sourseItem.costShoot,true);
         if (CastEffect != null)

@@ -28,6 +28,7 @@ public class WindowInGame : BaseWindow
     {
         WindowManager.Instance.MainBack.gameObject.SetActive(false);
         base.Init(obj);
+        ClearTransform(TalismanButtonsLayout);
         level = obj as Level;
         moneyField.text = 0.ToString("0");
         UiControls.Init(level);
@@ -110,11 +111,12 @@ public class WindowInGame : BaseWindow
         MonsterInfo.DeInit();
         UiControls.Enable(false);
         level.Energy.OnLeft -= OnLeft;
-        level.Energy.OnRage += OnRage;
+        level.Energy.OnRage -= OnRage;
         level.OnItemCollected -= OnItemCollected;
         level.MainHero.OnGetHit -= OnHeroHit;
         level.MainHero.OnWeaponChanged -= OnWeaponChanged;
         level.OnCraftItemCollected -= OnCraftItemCollected;
+        ClearTransform(TalismanButtonsLayout);
         Map.Instance.BossSpawner.OnBossGetEnergy -= OnBossGetEnergy;
     }
 

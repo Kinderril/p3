@@ -32,7 +32,7 @@ public class TalismanChain : Talisman
     {
         cacheGameObject = Resources.Load(WAY_CHAIN_BULLET, typeof (ChainBullet)) as ChainBullet;
     }
-    public override void Use()
+    protected override void Use()
     {
         var bullet = DataBaseController.GetItem<ChainBullet>(cacheGameObject);
         bullet.Init(this,hero, targetsCount);

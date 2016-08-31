@@ -41,7 +41,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba935c99619b3344835db06e5a19bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EffectVisualsTalisman: []
+  EffectVisualsTalisman:
+  - type: 0
+    EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
+  - type: 4
+    EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
+  - type: 3
+    EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
+  - type: 5
+    EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
+  - type: 6
+    EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
+  - type: 7
+    EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
   ColorRarity:
   - Color: {r: 1, g: 1, b: 1, a: 1}
     Rarity: 0
@@ -95,7 +107,6 @@ MonoBehaviour:
     beh: {fileID: 11449676, guid: e045e72b6a66f7844aa4957eb998832f, type: 2}
   - type: 1
     beh: {fileID: 11455392, guid: 0cf5fa672fb0b1d43be5c1842d9097cb, type: 2}
-  costParameterByLvl: 16000000dc050000d007000060090000280a0000f00a0000b80b0000e40c0000100e00003c0f000030110000000000000000000000000000000000000000000000000000000000000000000000000000
   BaseBonusMapElement:
   - {fileID: 11441986, guid: a6455efdb7ed4fb46905b47cc35954fc, type: 2}
   - {fileID: 11423788, guid: 05ede93fe9ae27543b197450205ca4c3, type: 2}

@@ -19,12 +19,15 @@ public class TalismanFireWave : TalismanWithTime
         return "Fires nearby enemies for " + TimeCoef.ToString("0") + " sec. Dealing " + power.ToString("0") + " every second." ;
     }
 
-    public override void Use()
+    protected override void Use()
     {
         var targets2 = Map.Instance.GetEnimiesInRadius(80);
-        foreach (var baseMonster in targets2)
+        if (targets2.Count > 0)
         {
-            TimeEffect.Creat(baseMonster, EffectType.fire, power, TimeCoef);
+            foreach (var baseMonster in targets2)
+            {
+                TimeEffect.Creat(baseMonster, EffectType.fire, power, TimeCoef);
+            }
             base.Use();
         }
     }

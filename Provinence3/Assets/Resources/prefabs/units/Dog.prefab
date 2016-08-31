@@ -1694,7 +1694,8 @@ MonoBehaviour:
   Control: {fileID: 11455498}
   unitType: 1
   weaponsContainer: {fileID: 473838}
-  Parameters: {fileID: 11400000, guid: d1104344fabdc1f4aa96990464a5d803, type: 2}
+  ParametersScriptable: {fileID: 11400000, guid: d1104344fabdc1f4aa96990464a5d803,
+    type: 2}
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 0}
   _shield: 0

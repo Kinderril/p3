@@ -22,19 +22,19 @@ public class MonsterBornPosition : BaseBornPosition
         this.OnEnemyDead = OnEnemyDead;
         difficulty = difficulty + level.difficult - 1;
         base.Init(map);
+//        BornMosters();
+    }
+    public void BornMosters()
+    {
         if (work)
         {
-            BornMosters();
-        }
-    }
-
-    private void BornMosters()
-    {
-        var p = transform.position;
-        for (int i = 0; i < unitsCout; i++)
-        {
-            var b = new Vector3(p.x + UnityEngine.Random.Range(-radius, radius), p.y, p.z + UnityEngine.Random.Range(-radius, radius));
-            BornEnemy(b, OnEnemyDead, hero);
+            var p = transform.position;
+            for (int i = 0; i < unitsCout; i++)
+            {
+                var b = new Vector3(p.x + UnityEngine.Random.Range(-radius, radius), p.y,
+                    p.z + UnityEngine.Random.Range(-radius, radius));
+                BornEnemy(b, OnEnemyDead, hero);
+            }
         }
     }
 

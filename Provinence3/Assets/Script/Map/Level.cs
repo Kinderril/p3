@@ -60,7 +60,6 @@ public class Level
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
-
         TimeUtils.StartMeasure("LOAD PRELEVEL");
         Energy = new Energy(ActivaAction,OnRage);
         MissionIndex = levelIndex;
@@ -75,10 +74,9 @@ public class Level
         }
         TimeUtils.EndMeasure("LOAD PRELEVEL");
         MainHero = Map.Instance.Init(this, levelIndex ,indexBornPos);
-//        PortalsController.Start((int)maxpower,OnPortalOpen);
         isPLaying = false;
         callback(this);
-
+        Map.Instance.StartLoadingMonsters();
     }
 
     private void OnRage()

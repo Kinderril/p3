@@ -7,7 +7,7 @@ using System.Text;
 public class TalismanMassFreez : Talisman
 {
     //TODO calculates
-    public override void Use()
+    protected override void Use()
     {
         var targets = Map.Instance.GetEnimiesInRadius(80);
         foreach (var baseMonster in targets)

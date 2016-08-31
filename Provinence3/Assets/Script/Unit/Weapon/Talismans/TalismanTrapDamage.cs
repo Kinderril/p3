@@ -23,7 +23,7 @@ public class TalismanTrapDamage : TalismanWithTime ,IBulletHolder
         power = Formuls.PowerTalicStandart(LVL_1_P, LVL_10_P, sourseItem.points, sourseItem.enchant);
     }
 
-    public override void Use()
+    protected override void Use()
     {
         var p= hero.transform.position;
         var item = DataBaseController.GetItem<IncomingTrap>(cacheGameObject, p);

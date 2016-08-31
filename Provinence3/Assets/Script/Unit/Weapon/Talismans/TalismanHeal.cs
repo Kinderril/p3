@@ -18,10 +18,10 @@ public class TalismanHeal : Talisman
         return "Healing hero by: " + power.ToString("0");
     }
 
-    public override void Use()
+    protected override void Use()
     {
-        MainController.Instance.level.MainHero.GetHeal(power);
         base.Use();
+        MainController.Instance.level.MainHero.GetHeal(power);
     }
 }
 

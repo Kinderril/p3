@@ -26,7 +26,7 @@ public class TalismanTrapFreez : TalismanWithTime ,IBulletHolder
         return "Set a trap witch exposis when some monster come close with delay: " + Trap.WAIT_FOR_EXPLOSION + " and freez for " + Power.ToString("0") + " seconds all in radius";
     }
 
-    public override void Use()
+    protected override void Use()
     {
         var p = hero.transform.position;
         var item = DataBaseController.GetItem<AOETrap>(cacheGameObject, p);

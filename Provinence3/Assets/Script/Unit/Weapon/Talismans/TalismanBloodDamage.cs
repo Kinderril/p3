@@ -32,7 +32,7 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
     {
         cacheGameObject = Resources.Load(base_path + WAY_CHAIN_BULLET, typeof(Bullet)) as Bullet;
     }
-    public override void Use()
+    protected override void Use()
     {
         var closestMonster = GetClosestMonster();
         if (closestMonster != null)

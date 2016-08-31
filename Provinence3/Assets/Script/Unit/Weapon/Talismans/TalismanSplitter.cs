@@ -29,7 +29,7 @@ public class TalismanSplitter : Talisman ,IBulletHolder
         return "Casts magical arrors to nearby enemies for : " + power.ToString("0") + " total damage. Damage evenly divided by all enemies";
     }
 
-    public override void Use()
+    protected override void Use()
     {
         var closestEnemies = Map.Instance.GetEnimiesInRadius(70);
         if (closestEnemies.Count > 0)

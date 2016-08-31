@@ -115,6 +115,21 @@ public class Map : Singleton<Map>
         return hero;
     }
 
+    public void StartLoadingMonsters()
+    {
+        StartCoroutine(Loading());
+    }
+
+    private IEnumerator Loading()
+    {
+        foreach (var monsterBornPosition in appearPos)
+        {
+            yield return new WaitForEndOfFrame();
+            monsterBornPosition.BornMosters();
+        }
+
+    }
+
     private void LoadLevelGameObject(int levelIndex)
     {
         TimeUtils.StartMeasure("RES LOAD");
@@ -226,7 +241,7 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
     private void OnSpawnBoss(int bonuses)
     {
         var pos = BossAppearPos.RandomElement().transform.position;
-        var bossPrefab = DataBaseController.Instance.BossUnits.FirstOrDefault(x => x.Parameters.Level == level.difficult);
+        var bossPrefab = DataBaseController.Instance.BossUnits.FirstOrDefault(x => x.ParametersScriptable.Level == level.difficult);
         if (bossPrefab != null)
         {
             CameraFollow.CameraShake.Init(0.5f);

@@ -24,7 +24,7 @@ public class TalismanDoubleDamage : TalismanWithTime
         return "Increase outcoming hero damage by " + (10 * power).ToString("0") + "% for " + TimeCoef.ToString("0") + " sec.";
     }
 
-    public override void Use()
+    protected override void Use()
     {
         TimeEffect.Creat(MainController.Instance.level.MainHero, EffectType.doubleDamage,power,TimeCoef);
         base.Use();

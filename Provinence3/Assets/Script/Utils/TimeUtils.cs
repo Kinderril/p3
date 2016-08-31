@@ -57,7 +57,7 @@ public class TimeUtils
             UnityEngine.Debug.Log(str);
             dict[name] = DateTime.Now;
         }
-        return name + " " + ms + " ";
+        return name + " " + ms + " \n";
     }
 }
 
