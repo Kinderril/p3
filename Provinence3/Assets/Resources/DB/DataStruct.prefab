@@ -43,9 +43,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EffectVisualsTalisman:
   - type: 0
-    EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
+    EffectAbsorber: {fileID: 11437560, guid: 3c980e26bc91ad042b5d13b6c017b647, type: 2}
   - type: 4
-    EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
+    EffectAbsorber: {fileID: 11468380, guid: e5c23708c456e294aa43c0274a6ded16, type: 2}
   - type: 3
     EffectAbsorber: {fileID: 11437560, guid: 4d3cddaf6d3498b47aba853f88a9a36c, type: 2}
   - type: 5

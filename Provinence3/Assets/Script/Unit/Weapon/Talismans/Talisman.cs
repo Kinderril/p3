@@ -153,6 +153,10 @@ public abstract class Talisman
     private void OnTimerCome()
     {
         isUnderCooldown = false;
+        if (CastEffect != null)
+        {
+            CastEffect.Stop();
+        }
         DoCallback();
         timer = null;
     }
