@@ -20,7 +20,8 @@ public class Unit : MonoBehaviour
     public event Action<Unit> OnDead;
     public Action<float, float,float> OnGetHit;
     protected bool isDead = false;
-    public UnitParameters Parameters;
+    public UnitParameters ParametersScriptable;
+    public UnitParametersInGame Parameters;
     private AnimationController animationController;
     public Action<Unit> OnShootEnd;
     public Action<Weapon> OnWeaponChanged;
@@ -38,7 +39,7 @@ public class Unit : MonoBehaviour
         get { return curHp; }
         set
         {
-            curHp = Mathf.Clamp(value,-1,Parameters.Parameters[ParamType.Heath]);
+            curHp = Mathf.Clamp(value,-1,Parameters[ParamType.Heath]);
             if (curHp <= 0)
             {
                 Death();
@@ -86,21 +87,21 @@ public class Unit : MonoBehaviour
 
     public virtual void Init()
     {
-        Parameters = Parameters.Copy();
-        var spd = Parameters.Parameters[ParamType.Speed];
+        Parameters = ParametersScriptable.Get();
+        var spd = Parameters[ParamType.Speed];
         if (spd != 0 && spd < 50)
         { 
             spd *= Formuls.SpeedCoef;
             Debug.LogError("Wrong speed " + name);
         }
-
-        Parameters.Parameters[ParamType.Speed] = spd / Formuls.SpeedCoef;
+        Parameters[ParamType.Speed] = spd / Formuls.SpeedCoef;
         if (Control == null)
             Control = GetComponent<BaseControl>();
-        animationController = GetComponentInChildren<AnimationController>();
+        if (animationController == null)
+            animationController = GetComponentInChildren<AnimationController>();
         if(animationController == null)
             Debug.LogError("NO ANImator Controller");
-        curHp = Parameters.Parameters[ParamType.Heath];
+        curHp = Parameters[ParamType.Heath];
         //List<Weapon> weapons = new List<Weapon>();
         foreach (var inventoryWeapon in InventoryWeapons)
         {
@@ -108,7 +109,7 @@ public class Unit : MonoBehaviour
             inventoryWeapon.gameObject.SetActive(false);
             inventoryWeapon.transform.SetParent(weaponsContainer,true);
         }
-        Control.SetSpeed(Parameters.Parameters[ParamType.Speed]);
+        Control.SetSpeed(Parameters[ParamType.Speed]);
         if (InventoryWeapons.Count == 0)
         {
             Debug.LogWarning("NO WEAPON!!! " + gameObject.name);
@@ -199,15 +200,15 @@ public class Unit : MonoBehaviour
     }
     public void MoveToDirection(Vector3 dir)
     {
-        Control.MoveTo(dir * Parameters.Parameters[ParamType.Speed]);
+        Control.MoveTo(dir * Parameters[ParamType.Speed]);
     }
     
     public void GetHit(float power,WeaponType type,float mdef = -1,float pdef = -1)
     {
         if (mdef < 0 || pdef < 0)
         {
-            mdef = Parameters.Parameters[ParamType.MDef];
-            pdef = Parameters.Parameters[ParamType.PDef];
+            mdef = Parameters[ParamType.MDef];
+            pdef = Parameters[ParamType.PDef];
         }
         switch (type)
         {
@@ -238,7 +239,7 @@ public class Unit : MonoBehaviour
         {
             if (OnGetHit != null)
             {
-                OnGetHit(CurHp, Parameters.Parameters[ParamType.Heath], -power);
+                OnGetHit(CurHp, Parameters[ParamType.Heath], -power);
             }
         }
     }
@@ -247,8 +248,8 @@ public class Unit : MonoBehaviour
     {
         var addPower = 1 + Mathf.Clamp(bullet.AdditionalPower, 0, Weapon.MAX_CHARGE_TIME);
         float power = bullet.bulletHolder.Power * addPower;
-        float mdef = Parameters.Parameters[ParamType.MDef];
-        float pdef = Parameters.Parameters[ParamType.PDef];
+        float mdef = Parameters[ParamType.MDef];
+        float pdef = Parameters[ParamType.PDef];
 
         if (bullet.bulletHolder != null)
         {
@@ -269,12 +270,12 @@ public class Unit : MonoBehaviour
                     //TODO
                     break;
                 case SpecialAbility.slow:
-                    Parameters.Parameters[ParamType.Speed] *= 0.92f;
-                    Control.SetSpeed(Parameters.Parameters[ParamType.Speed]);
+                    Parameters[ParamType.Speed] *= 0.92f;
+                    Control.SetSpeed(Parameters[ParamType.Speed]);
                     break;
                 case SpecialAbility.removeDefence:
-                    Parameters.Parameters[ParamType.PDef] *= 0.94f;
-                    Parameters.Parameters[ParamType.MDef] *= 0.94f;
+                    Parameters[ParamType.PDef] *= 0.94f;
+                    Parameters[ParamType.MDef] *= 0.94f;
                     break;
                 case SpecialAbility.vampire:
                     var diff = power*0.1f;
@@ -284,7 +285,7 @@ public class Unit : MonoBehaviour
                         var isMax = owner.CurHp < owner.Parameters.MaxHp;
                         if (owner.OnGetHit != null && !isMax)
                         {
-                            owner.OnGetHit(owner.CurHp, owner.Parameters.Parameters[ParamType.Heath], diff);
+                            owner.OnGetHit(owner.CurHp, owner.Parameters[ParamType.Heath], diff);
                         }
                     }
                     break;

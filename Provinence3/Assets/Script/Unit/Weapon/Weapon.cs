@@ -50,10 +50,10 @@ public class Weapon : MonoBehaviour, IBulletHolder
         switch (Parameters.type)
         {
             case WeaponType.magic:
-                val = owner.Parameters.Parameters[ParamType.MPower];
+                val = owner.Parameters[ParamType.MPower];
                 break;
             case WeaponType.physics:
-                val = owner.Parameters.Parameters[ParamType.PPower];
+                val = owner.Parameters[ParamType.PPower];
                 break;
         }
         return val;

@@ -54,7 +54,7 @@ public class Map : Singleton<Map>
 
 
         allInfo += TimeUtils.EndMeasure("LOAD HERO");
-        TimeUtils.StartMeasure("LOAD BORN");
+        TimeUtils.StartMeasure("PARSE BORN");
         foreach (Transform bornPosition in bornPositions)
         {
             var bp = bornPosition.GetComponent<BaseBornPosition>();
@@ -69,7 +69,7 @@ public class Map : Singleton<Map>
                     case BornPositionType.monster:
                         var mBP = (bp as MonsterBornPosition);
                         appearPos.Add(mBP);
-                        mBP.Init(this, OnEnemyDead, lvl, hero);
+//                        mBP.Init(this, OnEnemyDead, lvl, hero);
                         break;
                     case BornPositionType.boss:
                         var bBP = (bp as BossBornPosition);
@@ -83,7 +83,15 @@ public class Map : Singleton<Map>
                 }
             }
         }
-        allInfo += TimeUtils.EndMeasure("LOAD BORN");
+        allInfo += TimeUtils.EndMeasure("PARSE BORN");
+
+        TimeUtils.StartMeasure("LOAD MONSTERS");
+        foreach (var monsterBornPosition in appearPos)
+        {
+            monsterBornPosition.Init(this, OnEnemyDead, lvl, hero);
+        }
+
+        allInfo += TimeUtils.EndMeasure("LOAD MONSTERS");
         TimeUtils.StartMeasure("LOAD LAST");
         var rnd = chestPositions.RandomElement();
         rnd.SetCrystal();
@@ -228,7 +236,7 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
             enemies.Add(boss);
             var resultBossHP = Formuls.ModifyBossHP(boss, bonuses);
             boss.CurHp = resultBossHP;
-            boss.Parameters.Parameters[ParamType.Heath] = resultBossHP;
+            boss.Parameters[ParamType.Heath] = resultBossHP;
             hero.ArrowTarget.Init(boss);
             boss.transform.SetParent(enemiesContainer);
             MainController.Instance.level.MessageAppear("Boss have appear", Color.red, DataBaseController.Instance.ItemIcon(ItemId.crystal));

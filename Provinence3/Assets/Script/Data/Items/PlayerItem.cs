@@ -155,7 +155,7 @@ public class PlayerItem : BaseItem ,IEnhcant
     {
         foreach (var parameter in parameters)
         {
-            hero.Parameters.Parameters[parameter.Key] += (1 + enchant / ENCHANT_PLAYER_COEF) *  parameter.Value ;
+            hero.Parameters[parameter.Key] += (1 + enchant / ENCHANT_PLAYER_COEF) *  parameter.Value ;
         }
     }
 

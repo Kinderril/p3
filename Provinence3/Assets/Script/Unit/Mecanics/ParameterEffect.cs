@@ -20,11 +20,11 @@ public class ParameterEffect : TimeEffect
         this.plus = plus;
         if (plus)
         {
-            targetUnit.Parameters.Parameters[type] *= coef;
+            targetUnit.Parameters[type] *= coef;
         }
         else
         {
-            targetUnit.Parameters.Parameters[type] /= coef;
+            targetUnit.Parameters[type] /= coef;
         }
         CheckOnSpeed();
         var visualEffect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType);
@@ -39,7 +39,7 @@ public class ParameterEffect : TimeEffect
     {
         if (Type == ParamType.Speed)
         {
-            targetUnit.Control.SetSpeed(targetUnit.Parameters.Parameters[Type]);
+            targetUnit.Control.SetSpeed(targetUnit.Parameters[Type]);
         }
     }
 
@@ -47,11 +47,11 @@ public class ParameterEffect : TimeEffect
     {
         if (plus)
         {
-            targetUnit.Parameters.Parameters[Type] /= coef;
+            targetUnit.Parameters[Type] /= coef;
         }
         else
         {
-            targetUnit.Parameters.Parameters[Type] *= coef;
+            targetUnit.Parameters[Type] *= coef;
         }
         CheckOnSpeed();
         base.OnTimer();

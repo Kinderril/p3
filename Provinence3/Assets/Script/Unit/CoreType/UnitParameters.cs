@@ -47,5 +47,27 @@ public class UnitParameters : ScriptableObject
         return p;
 
     }
+    public UnitParametersInGame Get()
+    {
+        var p = new UnitParametersInGame();
+        p.MaxHp = MaxHp;
+        p.AttackType = AttackType;
+        p.Level = Level;
+        p.Add(ParamType.Speed, Speed);
+        p.Add(ParamType.MPower, MPower);
+        p.Add(ParamType.PPower, PPower);
+        p.Add(ParamType.PDef, physicResist);
+        p.Add(ParamType.MDef, magicResist);
+        p.Add(ParamType.Heath, MaxHp);
+        return p;
+    }
 }
+
+public class UnitParametersInGame : Dictionary<ParamType, float>
+{
+    public float MaxHp;
+    public int Level = 1;
+    public AttackType AttackType;
+}
+
 

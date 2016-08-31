@@ -43,18 +43,18 @@ public class BonusItem : BaseItem
         switch (Bonustype)
         {
             case Bonustype.defence:
-                hero.Parameters.Parameters[ParamType.MDef] *= power;
-                hero.Parameters.Parameters[ParamType.PDef] *= power;
+                hero.Parameters[ParamType.MDef] *= power;
+                hero.Parameters[ParamType.PDef] *= power;
                 break;
             case Bonustype.maxHp:
-                hero.Parameters.Parameters[ParamType.Heath] *= power;
+                hero.Parameters[ParamType.Heath] *= power;
                 break;
             case Bonustype.speed:
-                hero.Parameters.Parameters[ParamType.Speed] += power;
+                hero.Parameters[ParamType.Speed] += power;
                 break;
             case Bonustype.damage:
-                hero.Parameters.Parameters[ParamType.MPower] *= power;
-                hero.Parameters.Parameters[ParamType.PPower] *= power;
+                hero.Parameters[ParamType.MPower] *= power;
+                hero.Parameters[ParamType.PPower] *= power;
                 break;
             case Bonustype.energy:
                 lvl.Energy.SpeedEnergyFallCoef = 0.9f;

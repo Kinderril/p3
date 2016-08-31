@@ -43,7 +43,7 @@ public class MonsterInfo : MonoBehaviour
 //            Debug.Log("SetTrigger(KEY_OPEN)");
             isOpen = true;
         }
-        MonsterSliderHP.value = obj.CurHp / obj.Parameters.Parameters[ParamType.Heath];
+        MonsterSliderHP.value = obj.CurHp / obj.Parameters[ParamType.Heath];
         if (timer != null)
         {
             timer.Stop();

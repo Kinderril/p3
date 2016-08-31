@@ -64,21 +64,17 @@ public class BaseMonster : Unit
 
     public override void Init()
     {
-        //runAwayDist = attackDist * 1.4f;
         base.Init();
-//        Parameters.Parameters[ParamType.Speed] = GreatRandom.RandomizeValue(Parameters.Parameters[ParamType.Speed]);
         bornPosition = transform.position;
         Utils.GroundTransform(transform, 999f);
         energyadd = (int)(Energy.CREEP_ENERGY_AV*energyCoef);
-        //curWeapon.power = GreatRandom.RandomizeValue(curWeapon.power);
-//        moneyCollect = GreatRandom.RandomizeValue(moneyCollect);
         aiStatus = AIStatus.disable;
     }
 
     public void Overcharg()
     {
         Dictionary<ParamType, float> tmpDictionary = new Dictionary<ParamType, float>();
-        foreach (var unitParameter in Parameters.Parameters)
+        foreach (var unitParameter in Parameters)
         {
             float c = 1f;
             switch (unitParameter.Key)
@@ -102,7 +98,7 @@ public class BaseMonster : Unit
         }
         foreach (var f in tmpDictionary)
         {
-            Parameters.Parameters[f.Key] = f.Value;
+            Parameters[f.Key] = f.Value;
         }
         transform.localScale = Vector3.one*1.5f;
         overcharged = true;

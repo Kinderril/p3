@@ -8,7 +8,7 @@ public class HealMapItem : BaseMapItem
 {
     protected override void Take(Hero unit)
     {
-        var val = unit.Parameters.Parameters[ParamType.Heath]*0.2f;
+        var val = unit.Parameters[ParamType.Heath]*0.2f;
         unit.GetHeal(val);
     }
 }
