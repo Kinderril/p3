@@ -24,6 +24,7 @@ public class Map : Singleton<Map>
     public CameraFollow CameraFollow;
     private BossUnit boss;
     private LevelObject levelMainObject;
+    private Action OnMonstersReady;
     private Dictionary<string, GameObject> LoadedLevels = new Dictionary<string, GameObject>();
 
     public Hero Init(Level lvl, int levelIndex, int heroBornPositionIndex)
@@ -100,7 +101,16 @@ public class Map : Singleton<Map>
             chestBornPosition.Init(this,lvl);
         }
         CameraFollow.Init(hero.transform);
-        BossSpawner = new BossSpawner(enemies.Count,OnSpawnBoss);
+        allInfo += TimeUtils.EndMeasure("LOAD LAST");
+        DebugController.Instance.InfoField1.text = allInfo;
+        //        callback();
+        return hero;
+    }
+
+    public void LoadBoss()
+    {
+
+        BossSpawner = new BossSpawner(enemies.Count, OnSpawnBoss);
         if (bossBonusMapElement != null)
         {
             foreach (Transform tr in bossBonusMapElement)
@@ -109,11 +119,8 @@ public class Map : Singleton<Map>
                 bonusBoss.Init(BossSpawner);
             }
         }
-        allInfo += TimeUtils.EndMeasure("LOAD LAST");
-        DebugController.Instance.InfoField1.text = allInfo;
-        //        callback();
-        return hero;
     }
+
 
     public void StartLoadingMonsters()
     {
@@ -127,7 +134,9 @@ public class Map : Singleton<Map>
             yield return new WaitForEndOfFrame();
             monsterBornPosition.BornMosters();
         }
-
+        LoadBoss();
+        if (OnMonstersReady != null)
+            OnMonstersReady();
     }
 
     private void LoadLevelGameObject(int levelIndex)
@@ -344,5 +353,9 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
         }
     }
 
+    public void SetCallBackMonstersReady(Action OnMonstersReady)
+    {
+        this.OnMonstersReady = OnMonstersReady;
+    }
 }
 

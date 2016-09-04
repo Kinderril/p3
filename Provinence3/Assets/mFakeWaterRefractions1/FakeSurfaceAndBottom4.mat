@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: FakeSurfaceAndBottom4
-  m_Shader: {fileID: 4800000, guid: 356a9c3b78d27354981e7da54f3a0ba4, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0a2d4af82e5a5ff4bafcc1867cd278d5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -20,7 +20,7 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: 84bf3794639f72a4c9ee3cbaf60344b7, type: 3}
-          m_Scale: {x: -0.64, y: 5}
+          m_Scale: {x: -4.32, y: 5}
           m_Offset: {x: -5.4, y: 0}
       data:
         first:
@@ -61,11 +61,11 @@ Material:
       data:
         first:
           name: _WaterSpeed
-        second: -0.09
+        second: 0.02
       data:
         first:
           name: _FakeDepth
-        second: 1.18
+        second: 1.63
       data:
         first:
           name: _WaveFreq

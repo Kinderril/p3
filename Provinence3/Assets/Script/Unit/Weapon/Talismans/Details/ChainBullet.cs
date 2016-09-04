@@ -13,15 +13,41 @@ public class ChainBullet : MonoBehaviour
     public BaseEffectAbsorber hitEffect;
     private float power;
     public int maxTargets = 3;
+    private TimerManager.ITimer timer;
     
 
     public void Init(TalismanChain sourseItem, Hero hero,int targetsCount)
     {
         power = sourseItem.Power;
         transform.position = hero.transform.position;
+        if (hitEffect != null)
+        {
+            hitEffect.Stop();
+        }
         maxTargets = targetsCount;
-        StartCoroutine(WaitForAction());
-}
+        timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromMilliseconds(800), true);
+        timer.OnTimer += OnTimer;
+        StartCoroutine(Wait1Frame());
+    }
+    protected IEnumerator Wait1Frame()
+    {
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        DoAction();
+    }
+
+    void OnDestroy()
+    {
+        if (timer != null)
+        {
+            timer.Stop();
+        }
+    }
+
+    private void OnTimer()
+    {
+        DoAction();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -42,25 +68,31 @@ public class ChainBullet : MonoBehaviour
         }
     }
     
-    protected IEnumerator WaitForAction()
+    protected IEnumerator WaitForStop()
     {
-        yield return new WaitForSeconds(0.8f);
-        DoAction();
+        yield return new WaitForSeconds(0.5f);
+        if (hitEffect != null)
+        {
+            hitEffect.Stop();
+        }
     }
 
     protected void DoAction()
     {
         var target = monstersInside.RandomElement();
+//        Debug.Log("monstersInside:" + monstersInside.Count);
         if (target == null)
         {
             Destroy(gameObject);
             return;
         }
-//        transform.SetParent(target.transform);
-        transform.position = target.transform.position;
+        transform.SetParent(target.transform,false);
+        transform.localPosition = Vector3.zero;
+//        Debug.Log("Do hit");
         if (hitEffect != null)
         {
             hitEffect.Play();
+            StartCoroutine(WaitForStop());
         }
         target.GetHit(power,WeaponType.magic);
         affectedList.Add(target);
@@ -68,9 +100,11 @@ public class ChainBullet : MonoBehaviour
         if (affectedList.Count > maxTargets)
         {
             Destroy(gameObject);
-            return;
         }
-        StartCoroutine(WaitForAction());
+//        else
+//        {
+//            StartCoroutine(WaitForAction());
+//        }
     }
 }
 

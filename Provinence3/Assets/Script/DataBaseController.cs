@@ -30,7 +30,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<Slot, Sprite> SlotSprites = new Dictionary<Slot, Sprite>();
     private readonly Dictionary<ItemId, Color> itemsColors = new Dictionary<ItemId, Color>();
     private readonly Dictionary<Rarity, Color> rarityColors = new Dictionary<Rarity, Color>();
-    private readonly Dictionary<TalismanType, BaseEffectAbsorber> TalismanEffects = new Dictionary<TalismanType, BaseEffectAbsorber>();
+    private readonly Dictionary<TalismanType, AbsorberWithPosition> TalismanEffects = new Dictionary<TalismanType, AbsorberWithPosition>();
     private readonly Dictionary<ParamType, Color> parameterColors = new Dictionary<ParamType, Color>();
     private readonly Dictionary<CraftItemType,Sprite> CraftItemsSprites = new Dictionary<CraftItemType, Sprite>(); 
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
@@ -173,7 +173,8 @@ public class DataBaseController : Singleton<DataBaseController>
         }
         foreach (var effects in DataStructs.EffectVisualsTalisman)
         {
-            TalismanEffects.Add(effects.type, effects.EffectAbsorber);
+            if (effects.EffectAbsorber != null)
+                TalismanEffects.Add(effects.type, effects.EffectAbsorber);
         }
         foreach (var colorUi in DataStructs.ColorParameter)
         {
@@ -258,7 +259,7 @@ public class DataBaseController : Singleton<DataBaseController>
     {
         return rarityColors[f];
     }
-    public BaseEffectAbsorber GetEffect(TalismanType f)
+    public AbsorberWithPosition GetEffect(TalismanType f)
     {
         if (TalismanEffects.ContainsKey(f))
         {
