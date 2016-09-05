@@ -42,6 +42,7 @@ public class Level
     public Action<BossUnit> OnBossAppear;
     public Action<CraftItemType, int> OnCraftItemCollected;
     public Action OnEndLevel;
+    public Action<bool> OnPause;
 
     public Energy Energy;
     public Hero MainHero;
@@ -57,6 +58,7 @@ public class Level
     public int EnemiesKills = 0;
     private float penalty;
     public float MoneyBonusFromItem = 1f;
+    public LevelQuestController QuestController;
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
@@ -84,9 +86,10 @@ public class Level
         MainHero.Rage();
     }
 
-    public void Start()
+    public void StartLevel()
     {
         isPLaying = true;
+        QuestController.Start(this);
 //        Utils.GroundTransform(MainHero.transform);
     }
 
@@ -128,16 +131,24 @@ public class Level
 
     public void Pause()
     {
-        WindowManager.Instance.OpenWindow(MainState.pause);
+//        WindowManager.Instance.OpenWindow(MainState.pause);
         //Open window
         Time.timeScale = 0;
         IsPause = true;
+        if (OnPause != null)
+        {
+            OnPause(IsPause);
+        }
     }
 
     public void UnPause()
     {
         Time.timeScale = 1;
         IsPause = false;
+        if (OnPause != null)
+        {
+            OnPause(IsPause);
+        }
     }
 
     public void AddItem(ItemId type, int value)
@@ -204,6 +215,7 @@ public class Level
     {
         IsGoodEnd = LevelEndType;
         PortalsController.Stop();
+        QuestController.Clear();
         MainHero.Control.enabled = false;
         var isBad = LevelEndType == EndlevelType.bad;
 #if UNITY_EDITOR
@@ -316,5 +328,9 @@ public class Level
         }
     }
 
+    public void AddQuestGiver(QuestGiver giver)
+    {
+        QuestController.Add(giver);
+    }
 }
 

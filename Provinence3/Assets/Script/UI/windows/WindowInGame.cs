@@ -22,6 +22,7 @@ public class WindowInGame : BaseWindow
     public Transform moneyContainer;
     public Transform itemsContainer;
     public PreStartWindow PreStartWindow;
+    public WindowPause WindowPause;
     private Level level;
 
     public override void Init<T>(T obj)
@@ -43,8 +44,10 @@ public class WindowInGame : BaseWindow
         {
             Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
         });
+        level.OnPause += OnPause;
 
-        
+
+
         WeaponChooser.Init(level);
 //        int index = 0;
         var allTalismans = MainController.Instance.PlayerData.GetAllWearedItems().Where(x => x.Slot == Slot.Talisman).ToList();
@@ -70,6 +73,18 @@ public class WindowInGame : BaseWindow
         MonsterInfo.Init();
     }
 
+    private void OnPause(bool obj)
+    {
+        if (obj)
+        {
+            WindowPause.Init(level);
+        }
+        else
+        {
+            WindowPause.Close();
+        }
+    }
+
     private void OnBossGetEnergy(int arg1, int arg2)
     {
         var energy = (float)arg1 / (float)arg2;
@@ -87,7 +102,7 @@ public class WindowInGame : BaseWindow
     {
         PreStartWindow.Init(level,() =>
         {
-            level.Start();
+            level.StartLevel();
             UiControls.Enable(true);
         });
     }
@@ -125,6 +140,7 @@ public class WindowInGame : BaseWindow
         level.OnCraftItemCollected -= OnCraftItemCollected;
         ClearTransform(TalismanButtonsLayout);
         Map.Instance.BossSpawner.OnBossGetEnergy -= OnBossGetEnergy;
+        level.OnPause -= OnPause;
     }
 
     private void OnItemCollected(ItemId arg1, float arg2,float delta)

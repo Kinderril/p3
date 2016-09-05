@@ -46,6 +46,11 @@ public class BossSpawner
         }
     }
 
+    public float GetPercent()
+    {
+        return (float)enemiesKilled/(float)ToSpawnBossOnStart;
+    }
+
     public void GetBonus()
     {
         bonusesGet++;

@@ -86,7 +86,14 @@ public class Map : Singleton<Map>
         }
         allInfo += TimeUtils.EndMeasure("PARSE BORN");
 
+        TimeUtils.StartMeasure("LOAD QUESTS");
+        var questsPositions = appearPos.RandomElement(4);
+        LoadQuests(questsPositions);
+
+
+        allInfo += TimeUtils.EndMeasure("LOAD QUESTS");
         TimeUtils.StartMeasure("LOAD MONSTERS");
+
         foreach (var monsterBornPosition in appearPos)
         {
             monsterBornPosition.Init(this, OnEnemyDead, lvl, hero);
@@ -105,6 +112,16 @@ public class Map : Singleton<Map>
         DebugController.Instance.InfoField1.text = allInfo;
         //        callback();
         return hero;
+    }
+
+    private void LoadQuests(List<MonsterBornPosition> questsPositions)
+    {
+        foreach (var bornPosition in questsPositions)
+        {
+
+            var giver = DataBaseController.GetItem(DataBaseController.Instance.QuestGiverPrefab, bornPosition.transform.position);
+            level.AddQuestGiver(giver);
+        }
     }
 
     public void LoadBoss()

@@ -38,6 +38,22 @@ public static class Utils
             return default(T);
         return list[UnityEngine.Random.Range(0, list.Count)];
     }
+    public static List<T> RandomElement<T>(this List<T> list,int count)
+    {
+        var listOut = new List<T>();
+        if (list.Count == 0)
+            return listOut;
+
+        
+        for (int i = 0; i < count; i++)
+        {
+            var a = (list.Count/count);
+            var e = list[UnityEngine.Random.Range(i * a + 1, (i+1) * a)];
+            listOut.Add(e);
+        }
+
+        return listOut;
+    }
 
     public static void Sort<T>(List<T> list, Func<T, int> GetPriority) where T : MonoBehaviour
     {

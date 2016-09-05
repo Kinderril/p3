@@ -109,10 +109,10 @@ public class BaseWindow : MonoBehaviour
     {
         WindowManager.Instance.OpenWindow<object>(MainState.parameters, null);
     }
-    public virtual void OnToPause()
-    {
-        WindowManager.Instance.OpenWindow<object>(MainState.pause, null);
-    }
+//    public virtual void OnToPause()
+//    {
+//        WindowManager.Instance.OpenWindow<object>(MainState.pause, null);
+//    }
     public virtual void OnToPlay()
     {
         WindowManager.Instance.OpenWindow<object>(MainState.play, null);

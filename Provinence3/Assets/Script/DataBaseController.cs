@@ -55,6 +55,7 @@ public class DataBaseController : Singleton<DataBaseController>
     public List<BossUnit> BossUnits = new List<BossUnit>(); 
     public Hero prefabHero;
     public List<Weapon> Weapons;
+    public QuestGiver QuestGiverPrefab;
     public Pool Pool;
 
     public Shader simpleShader;

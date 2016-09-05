@@ -8,7 +8,7 @@ public enum MainState
     play,
     mission,
     parameters,
-    pause,
+//    pause,
     shop,
     end,
     loading,
