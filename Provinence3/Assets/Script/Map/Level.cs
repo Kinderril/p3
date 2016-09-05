@@ -110,6 +110,8 @@ public class Level
         get; set;
     }
 
+    public bool IsPause { get; set; }
+
     private void OnPortalOpen()
     {
         //TODO
@@ -119,11 +121,25 @@ public class Level
 
     public void MessageAppear(string txt,Color color , Sprite icon)
     {
-
         var item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberWithPicture);
         item.transform.SetParent(WindowManager.Instance.CurrentWindow.transform);
         item.Init(txt, color, icon);
     }
+
+    public void Pause()
+    {
+        WindowManager.Instance.OpenWindow(MainState.pause);
+        //Open window
+        Time.timeScale = 0;
+        IsPause = true;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1;
+        IsPause = false;
+    }
+
     public void AddItem(ItemId type, int value)
     {
         switch (type)

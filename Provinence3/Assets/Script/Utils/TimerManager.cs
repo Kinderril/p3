@@ -10,9 +10,9 @@ public class TimerManager
     {
         event Action OnTimer;
 
-        TimeSpan Duration { get; }
-        DateTime EndTime { get; }
-        TimeSpan TimeLeft { get; }
+        float Duration { get; }
+        float EndTime { get; }
+        float TimeLeft { get; }
         bool IsLoopped { get; }
         bool IsActive { get; }
 
@@ -26,9 +26,9 @@ public class TimerManager
 
         public event Action OnTimer;
 
-        public DateTime EndTime { get; private set; }
-        public TimeSpan Duration { get; private set; }
-        public TimeSpan TimeLeft 
+        public float EndTime { get; private set; }
+        public float Duration { get; private set; }
+        public float TimeLeft 
         { 
             get
             {
@@ -36,7 +36,7 @@ public class TimerManager
                 {
 
                 }
-                return EndTime - DateTime.Now;
+                return EndTime - Time.time;
             }
         }
         public bool IsLoopped { get; private set; }
@@ -48,7 +48,7 @@ public class TimerManager
             this.onStart = onRestart;
         }
 
-        public void Start(DateTime endTime, TimeSpan duration, bool isLopped = false)
+        public void Start(float endTime, float duration, bool isLopped = false)
         {
             EndTime = endTime;
             Duration = duration;
@@ -82,7 +82,7 @@ public class TimerManager
 
     private LinkedList<Timer> timers = new LinkedList<Timer>();
 
-    public ITimer MakeTimer(DateTime endTime, TimeSpan duration, bool isLopped = false)
+    private ITimer MakeTimer(float endTime, float duration, bool isLopped = false)
     {
         Timer timer = new Timer();
         timer.Init(() =>
@@ -96,14 +96,24 @@ public class TimerManager
         return timer;
     }
 
-    public ITimer MakeTimer(TimeSpan duration, bool isLopped = false)
+    public ITimer MakeTimer(float duration, bool isLopped)
     {
-        return MakeTimer(DateTime.Now + duration, duration, isLopped);
+        return MakeTimer(Time.time + duration, duration, isLopped);
     }
 
-    public ITimer MakeTimer(DateTime endTime)
+    public ITimer MakeTimer(float endTime)
     {
-        return MakeTimer(endTime, endTime - DateTime.Now);
+        return MakeTimer(endTime, endTime + Time.time);
+    }
+    public ITimer MakeTimer(TimeSpan endTime)
+    {
+        var ms = (float)endTime.TotalMilliseconds/1000f;
+        return MakeTimer(ms, ms + Time.time);
+    }
+    public ITimer MakeTimer(TimeSpan endTime, bool isLopped)
+    {
+        var ms = (float)endTime.TotalMilliseconds/1000f;
+        return MakeTimer(ms, ms + Time.time);
     }
 
     public void Update()
@@ -112,14 +122,14 @@ public class TimerManager
         while (node != null)
         {
             var next = node.Next;
-            if (DateTime.Now > node.Value.EndTime)
+            if (Time.time > node.Value.EndTime)
             {
                 var timer = node.Value;
                 timer.Stop();
                 timer.Fire();
                 if (timer.IsLoopped)
                 {
-                    timer.Start(DateTime.Now + timer.Duration, timer.Duration, true);
+                    timer.Start(Time.time + timer.Duration, timer.Duration, true);
                 }
             }
             else

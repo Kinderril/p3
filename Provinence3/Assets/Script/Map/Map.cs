@@ -183,7 +183,7 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
 
     void Update()
     {
-        if (level == null || level.MainHero == null)
+        if (level == null || level.MainHero == null || !level.IsPause)
             return;
         var mainHero = level.MainHero;
         float mainHeroDist;
