@@ -20,7 +20,7 @@ public abstract class Talisman
     private int currentCharges = 0;
     private float max;
     protected float power;
-    private BaseEffectAbsorber CastEffect;
+    private AbsorberWithPosition CastEffect;
 
     public Talisman()
     {
@@ -51,7 +51,7 @@ public abstract class Talisman
             var absorber = db.GetEffect(sourseItem.TalismanType);
             if (absorber != null)
             {
-                CastEffect = DataBaseController.GetItem<BaseEffectAbsorber>(absorber);
+                CastEffect = DataBaseController.GetItem<AbsorberWithPosition>(absorber);
                 CastEffect.transform.SetParent(hero.transform,false);
             }
         }
@@ -131,7 +131,6 @@ public abstract class Talisman
 
     public void UseIfCan()
     {
-        Debug.Log("under !!! " + isUnderCooldown);
         if (CanUse())
             Use();
     }
@@ -145,7 +144,7 @@ public abstract class Talisman
         AddEnergy(sourseItem.costShoot,true);
         if (CastEffect != null)
         {
-            CastEffect.Play();
+            CastEffect.SetAndPlay(hero);
         }
         DoCallback();
     }

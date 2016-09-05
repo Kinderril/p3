@@ -38,8 +38,13 @@ public class WindowInGame : BaseWindow
         level.OnCraftItemCollected += OnCraftItemCollected;
         level.MainHero.OnGetHit += OnHeroHit;
         level.MainHero.OnWeaponChanged += OnWeaponChanged;
-        Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
+        Map.Instance.SetCallBackMonstersReady(
+        () =>
+        {
+            Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
+        });
 
+        
         WeaponChooser.Init(level);
 //        int index = 0;
         var allTalismans = MainController.Instance.PlayerData.GetAllWearedItems().Where(x => x.Slot == Slot.Talisman).ToList();
@@ -67,7 +72,9 @@ public class WindowInGame : BaseWindow
 
     private void OnBossGetEnergy(int arg1, int arg2)
     {
-        BossSpawnSlider.value = (float)arg1/(float)arg2;
+        var energy = (float)arg1 / (float)arg2;
+        Debug.Log("Energy:" + energy);
+        BossSpawnSlider.value = energy;
     }
 
     private void OnRage()

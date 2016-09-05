@@ -24,7 +24,6 @@ public class VisualEffectBehaviour : PoolElement
 
     public void Init(Unit unit,float timeWaitSec)
     {
-
         subInit(unit);
         base.Init();
         StartCoroutine(WaitFor(timeWaitSec));

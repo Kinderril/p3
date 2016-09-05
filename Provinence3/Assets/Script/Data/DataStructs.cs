@@ -32,7 +32,7 @@ public struct EffectVisualsBehaviour
 public struct EffectVisualsTalisman
 {
     public TalismanType type;
-    public BaseEffectAbsorber EffectAbsorber;
+    public AbsorberWithPosition EffectAbsorber;
 }
 [Serializable]
 public struct CostItemsByLevel
