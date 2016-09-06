@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -16,6 +18,20 @@ public enum QuestType
     f,e,//TODO
 }
 
+public enum QuestDifficulty
+{
+    easy,
+    normal,
+    hard,
+}
+public enum QuestRewardType
+{
+    money,
+    materials,
+    crystal,
+    item,
+}
+
 public class QuestGiver : MonoBehaviour
 {
     public GameObject freeStatus;
@@ -25,6 +41,8 @@ public class QuestGiver : MonoBehaviour
     public QuestType type;
     public QuestStatus QuestStatus = QuestStatus.free;
     public event Action<QuestGiver> OnDestroyGiver;
+    private QuestDifficulty Difficulty;
+    public BaseEffectAbsorber GetRewardEffect;
 
     public QuestStatus Status
     {
@@ -55,6 +73,8 @@ public class QuestGiver : MonoBehaviour
         freeStatus.gameObject.SetActive(false);
         readyStatus.gameObject.SetActive(false);
         this.controller = controller;
+        Difficulty = Formuls.RandomQuestDifficulty();
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -73,7 +93,6 @@ public class QuestGiver : MonoBehaviour
     {
         if (Status == QuestStatus.started)
         {
-               
         }
         return false;
     }
@@ -81,9 +100,37 @@ public class QuestGiver : MonoBehaviour
     public void Reward(Level level)
     {
         Status = QuestStatus.end;
-        level.AddItem(ItemId.money,400);//TODO
+        var rewardType = Formuls.RandomQuestReward(Difficulty);
+        var levelDif = controller.Level.difficult;
+        switch (rewardType)
+        {
+            case QuestRewardType.money:
+                controller.Level.AddItem(ItemId.money, 130);
+                break;
+            case QuestRewardType.materials:
+                controller.Level.AddItem(CraftItemType.Bone, 30);
+                break;
+            case QuestRewardType.crystal:
+                controller.Level.AddItem(ItemId.crystal, 1);
+                break;
+            case QuestRewardType.item:
+                var item = new PlayerItem(new Dictionary<ParamType, float>(), Slot.Talisman, Rarity.Magic, 1);
+                controller.Level.AddItem(item);
+                break;
+        }
+        if (GetRewardEffect != null)
+        {
+            GetRewardEffect.Play();
+        }
+        StartCoroutine(WaitLoPlayEffect());
     }
 
+
+    private IEnumerator WaitLoPlayEffect()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Destroy(gameObject);
+    } 
     public void Activate()
     {
         Status = QuestStatus.started;

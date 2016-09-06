@@ -268,5 +268,41 @@ public class Formuls
         return points10 - points1;
     }
 
+    public static QuestDifficulty RandomQuestDifficulty()
+    {
+        WDictionary<QuestDifficulty> w = new WDictionary<QuestDifficulty>(new Dictionary<QuestDifficulty, float>()
+        {
+            {QuestDifficulty.easy,3},{QuestDifficulty.normal,4},{QuestDifficulty.hard,3},
+        });
+        return w.Random();
+    }
+
+    public static QuestRewardType RandomQuestReward(QuestDifficulty d)
+    {
+        WDictionary<QuestRewardType> w;
+        switch (d)
+        {
+            case QuestDifficulty.easy:
+                w = new WDictionary<QuestRewardType>(new Dictionary<QuestRewardType, float>()
+                {
+                    { QuestRewardType.money, 70},{ QuestRewardType.materials, 40},{ QuestRewardType.crystal, 15},{ QuestRewardType.item, 5}
+                });
+                break;
+            case QuestDifficulty.normal:
+                w = new WDictionary<QuestRewardType>(new Dictionary<QuestRewardType, float>()
+                {
+                    { QuestRewardType.money, 70},{ QuestRewardType.materials, 50},{ QuestRewardType.crystal, 25},{ QuestRewardType.item, 10}
+                });
+                break;
+            case QuestDifficulty.hard:
+                w = new WDictionary<QuestRewardType>(new Dictionary<QuestRewardType, float>()
+                {
+                    { QuestRewardType.money, 50},{ QuestRewardType.materials, 30},{ QuestRewardType.crystal, 25},{ QuestRewardType.item, 15}
+                });
+                break;
+        }
+        return w.Random();
+    }
+
 }
 

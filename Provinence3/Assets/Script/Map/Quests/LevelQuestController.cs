@@ -12,7 +12,7 @@ public class LevelQuestController
     private int totalQuests;
     private List<int> finishedQuests = new List<int>(); 
     private List<QuestGiver> Quests = new List<QuestGiver>();
-    private Level level;
+    public Level Level;
 
     public void Statistics(out int cur, out int total)
     {
@@ -32,7 +32,7 @@ public class LevelQuestController
 
     public void Clear()
     {
-        level = null;
+        Level = null;
         foreach (var questGiver in Quests)
         {
             questGiver.OnDestroyGiver -= OnDestroyGiver;
@@ -68,7 +68,7 @@ public class LevelQuestController
     private void End(QuestGiver questGiver)
     {
         currentActiveQuest = null;
-        questGiver.Reward(level);
+        questGiver.Reward(Level);
     }
 
     private void Start(QuestGiver questGiver)
