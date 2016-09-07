@@ -36,13 +36,14 @@ public class QuestGiver : MonoBehaviour
 {
     public GameObject freeStatus;
     public GameObject readyStatus;
-    private LevelQuestController controller;
+    public LevelQuestController Controller;
     public int id;
     public QuestType type;
     public QuestStatus QuestStatus = QuestStatus.free;
     public event Action<QuestGiver> OnDestroyGiver;
     private QuestDifficulty Difficulty;
     public BaseEffectAbsorber GetRewardEffect;
+    private QuestLogicBase Logic;
 
     public QuestStatus Status
     {
@@ -72,7 +73,7 @@ public class QuestGiver : MonoBehaviour
     {
         freeStatus.gameObject.SetActive(false);
         readyStatus.gameObject.SetActive(false);
-        this.controller = controller;
+        this.Controller = controller;
         Difficulty = Formuls.RandomQuestDifficulty();
 
     }
@@ -84,43 +85,54 @@ public class QuestGiver : MonoBehaviour
             var monster = other.GetComponent<Hero>();
             if (monster != null)
             {
-                controller.Check(this);
+                Controller.Check(this);
             }
         }
     }
 
-    public bool Ready()
+    public void SetReady()
     {
         if (Status == QuestStatus.started)
         {
+            Status = QuestStatus.ready;
+            Controller.Ready(this);
+            Logic.Clear();
         }
-        return false;
     }
 
-    public void Reward(Level level)
+    public bool IsReady()
     {
-        Status = QuestStatus.end;
+        return Status == QuestStatus.ready;
+    }
+
+    public void Reward(Level level,Action<QuestGiver> callback )
+    {
         var rewardType = Formuls.RandomQuestReward(Difficulty);
-        var levelDif = controller.Level.difficult;
+        var levelDif = Controller.Level.difficult;
+
         switch (rewardType)
         {
             case QuestRewardType.money:
-                controller.Level.AddItem(ItemId.money, 130);
+                Controller.Level.AddItem(ItemId.money, 130);
                 break;
             case QuestRewardType.materials:
-                controller.Level.AddItem(CraftItemType.Bone, 30);
+                Controller.Level.AddItem(CraftItemType.Bone, 30);
                 break;
             case QuestRewardType.crystal:
-                controller.Level.AddItem(ItemId.crystal, 1);
+                Controller.Level.AddItem(ItemId.crystal, 1);
                 break;
             case QuestRewardType.item:
-                var item = new PlayerItem(new Dictionary<ParamType, float>(), Slot.Talisman, Rarity.Magic, 1);
-                controller.Level.AddItem(item);
+                Controller.Level.AddRandomGift(true);
                 break;
         }
+        Status = QuestStatus.end;
         if (GetRewardEffect != null)
         {
             GetRewardEffect.Play();
+        }
+        if (callback != null)
+        {
+            callback(this);
         }
         StartCoroutine(WaitLoPlayEffect());
     }
@@ -131,9 +143,13 @@ public class QuestGiver : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     } 
-    public void Activate()
+    public void Activate(Action<QuestGiver> callback)
     {
         Status = QuestStatus.started;
+        if (callback != null)
+        {
+            callback(this);
+        }
     }
 
     public string Info()
@@ -144,6 +160,10 @@ public class QuestGiver : MonoBehaviour
 
     void OnDestroy()
     {
+        if (Logic != null)
+        {
+            Logic.Clear();
+        }
         if (OnDestroyGiver != null)
         {
             OnDestroyGiver(this);

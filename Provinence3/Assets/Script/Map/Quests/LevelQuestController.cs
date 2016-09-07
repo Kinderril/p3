@@ -13,6 +13,7 @@ public class LevelQuestController
     private List<int> finishedQuests = new List<int>(); 
     private List<QuestGiver> Quests = new List<QuestGiver>();
     public Level Level;
+    public Action<QuestGiver> OnQuestStatusChanges; 
 
     public void Statistics(out int cur, out int total)
     {
@@ -57,7 +58,7 @@ public class LevelQuestController
         {
             if (currentActiveQuest == questGiver)
             {
-                if (questGiver.Ready())
+                if (questGiver.IsReady())
                 {
                     End(questGiver);
                 }
@@ -68,13 +69,20 @@ public class LevelQuestController
     private void End(QuestGiver questGiver)
     {
         currentActiveQuest = null;
-        questGiver.Reward(Level);
+        questGiver.Reward(Level,OnQuestStatusChanges);
     }
 
     private void Start(QuestGiver questGiver)
     {
         currentActiveQuest = questGiver;
-        questGiver.Activate();
+        questGiver.Activate(OnQuestStatusChanges);
+    }
+    public void Ready(QuestGiver questGiver)
+    {
+        if (OnQuestStatusChanges != null)
+        {
+            OnQuestStatusChanges(questGiver);
+        }
     }
 
     public void Add(QuestGiver giver)

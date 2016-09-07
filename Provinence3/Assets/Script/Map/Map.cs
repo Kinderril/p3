@@ -26,6 +26,7 @@ public class Map : Singleton<Map>
     private LevelObject levelMainObject;
     private Action OnMonstersReady;
     private Dictionary<string, GameObject> LoadedLevels = new Dictionary<string, GameObject>();
+    public event Action<Unit> OnEnemyDeadCallback; 
 
     public Hero Init(Level lvl, int levelIndex, int heroBornPositionIndex)
     {
@@ -52,7 +53,6 @@ public class Map : Singleton<Map>
         appearPos = new List<MonsterBornPosition>();
         BossAppearPos = new List<BossBornPosition>();
         List<ChestBornPosition> chestPositions = new List<ChestBornPosition>();
-
 
         allInfo += TimeUtils.EndMeasure("LOAD HERO");
         TimeUtils.StartMeasure("PARSE BORN");
@@ -319,6 +319,10 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
 
     private void OnEnemyDead(Unit obj)
     {
+        if (OnEnemyDeadCallback != null)
+        {
+            OnEnemyDeadCallback(obj);
+        }
         obj.OnDead -= OnEnemyDead;
         enemies.Remove(obj as BaseMonster);
         BossSpawner.EnemieDead();

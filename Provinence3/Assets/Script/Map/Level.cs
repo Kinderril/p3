@@ -39,6 +39,7 @@ public class DictionaryOfItemAndInt : SerializableDictionary<ItemId, int> { }
 public class Level
 {
     public Action<ItemId,float,float> OnItemCollected;
+    public Action<BaseItem> OnPlayerItemCollected;
     public Action<BossUnit> OnBossAppear;
     public Action<CraftItemType, int> OnCraftItemCollected;
     public Action OnEndLevel;
@@ -231,6 +232,7 @@ public class Level
         }
         else
         {
+            IsGoodEnd = EndlevelType.good;
             AddRandomGift();
             foreach (var collectedItem in collectedItems)
             {
@@ -257,15 +259,9 @@ public class Level
         yield return new WaitForFixedUpdate();
         DataBaseController.Instance.Pool.Clear();
     } 
-
-    private void AddRandomGift()
+    
+    public void AddRandomGift(bool withAction = false)
     {
-        IsGoodEnd = EndlevelType.good;
-        //        if (Energy.MorePowerLeft())
-        //        {
-        //            IsGoodEnd = EndlevelType.good;
-        //        }
-
         WDictionary<GiftType> gifts = new WDictionary<GiftType>(new Dictionary<GiftType, float>()
         {
             { GiftType.catalys, 6 },
@@ -278,24 +274,36 @@ public class Level
 
 
         int lvl = MainController.Instance.PlayerData.Level;
+        BaseItem baseItem = null;
         switch (val)
         {
             case GiftType.catalys:
-                collectedItems.Add(ExecCatalysItem.Creat());
+                baseItem = ExecCatalysItem.Creat();
                 break;
             case GiftType.recepi:
-                collectedItems.Add(HeroShopRecipeItem.CreatRandomRecipeItem(lvl));
+                baseItem = (HeroShopRecipeItem.CreatRandomRecipeItem(lvl));
                 break;
             case GiftType.item:
                 var item = HeroShopRandomItem.CreatMainSlot(ShopController.RandomSlot(), lvl);
-                collectedItems.Add(item);
+                baseItem = (item);
                 break;
             case GiftType.enchant:
-                collectedItems.Add(ExecEnchantItem.Creat());
+                baseItem = (ExecEnchantItem.Creat());
                 break;
             case GiftType.bonus:
-                collectedItems.Add(HeroShopBonusItem.CreatBonusItem(lvl));
+                baseItem = (HeroShopBonusItem.CreatBonusItem(lvl));
                 break;
+        }
+        if (baseItem != null)
+        {
+            collectedItems.Add(baseItem);
+            if (withAction)
+            {
+                if (OnPlayerItemCollected != null)
+                {
+                    OnPlayerItemCollected(baseItem);
+                }
+            }
         }
     }
 

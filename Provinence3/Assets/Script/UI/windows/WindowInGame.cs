@@ -23,6 +23,7 @@ public class WindowInGame : BaseWindow
     public Transform itemsContainer;
     public PreStartWindow PreStartWindow;
     public WindowPause WindowPause;
+    public QuestInfo QuestActive;
     private Level level;
 
     public override void Init<T>(T obj)
@@ -44,6 +45,7 @@ public class WindowInGame : BaseWindow
         {
             Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
         });
+        level.QuestController.OnQuestStatusChanges += OnQuestStatusChanges;
         level.OnPause += OnPause;
 
 
@@ -71,6 +73,24 @@ public class WindowInGame : BaseWindow
         HealthSlider.value = 1;
         ShowPreStartWindow();
         MonsterInfo.Init();
+    }
+
+    private void OnQuestStatusChanges(QuestGiver obj)
+    {
+        switch (obj.Status)
+        {
+            case QuestStatus.started:
+                QuestActive.gameObject.SetActive(true);
+                QuestActive.ReadyGameObject.gameObject.SetActive(false);
+                break;
+            case QuestStatus.ready:
+                QuestActive.ReadyGameObject.gameObject.SetActive(true);
+                break;
+            case QuestStatus.end:
+                QuestActive.gameObject.SetActive(true);
+                QuestActive.ReadyGameObject.gameObject.SetActive(false);
+                break;
+        }
     }
 
     private void OnPause(bool obj)
@@ -141,6 +161,7 @@ public class WindowInGame : BaseWindow
         ClearTransform(TalismanButtonsLayout);
         Map.Instance.BossSpawner.OnBossGetEnergy -= OnBossGetEnergy;
         level.OnPause -= OnPause;
+        level.QuestController.OnQuestStatusChanges -= OnQuestStatusChanges;
     }
 
     private void OnItemCollected(ItemId arg1, float arg2,float delta)
