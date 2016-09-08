@@ -3,13 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+public enum QuestLogicType
+{
+    killName,
+    killLowHp,
+    killMaxHp,
+    killCrossbow,
+    killTalisman,
+    collectGold,
+    collectReource,
+    killOvercharged,
+}
+
 public abstract class QuestLogicBase
 {
     public QuestGiver QuestGiver;
     protected int NeedToComplete;
     protected int currentCount;
-    public QuestLogicBase(QuestGiver QuestGiver, int NeedToComplete)
+    protected Action<int, int> OnQuestProgressChange;
+    public QuestLogicBase(QuestGiver QuestGiver, int NeedToComplete, Action<int, int> OnQuestProgressChange)
     {
+        this.OnQuestProgressChange = OnQuestProgressChange;
         this.NeedToComplete = NeedToComplete;
         this.QuestGiver = QuestGiver;
     }

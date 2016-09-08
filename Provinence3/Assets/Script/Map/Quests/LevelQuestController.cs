@@ -14,6 +14,7 @@ public class LevelQuestController
     private List<QuestGiver> Quests = new List<QuestGiver>();
     public Level Level;
     public Action<QuestGiver> OnQuestStatusChanges; 
+    public Action<QuestGiver,int ,int> OnQuestProgress; 
 
     public void Statistics(out int cur, out int total)
     {
@@ -75,7 +76,16 @@ public class LevelQuestController
     private void Start(QuestGiver questGiver)
     {
         currentActiveQuest = questGiver;
+        questGiver.SetCallBack(OnProgress);
         questGiver.Activate(OnQuestStatusChanges);
+    }
+
+    private void OnProgress(int cur, int target)
+    {
+        if (OnQuestProgress != null)
+        {
+            OnQuestProgress(currentActiveQuest,cur, target);
+        }
     }
     public void Ready(QuestGiver questGiver)
     {

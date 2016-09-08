@@ -94,7 +94,7 @@ public class ChainBullet : MonoBehaviour
             hitEffect.Play();
             StartCoroutine(WaitForStop());
         }
-        target.GetHit(power,WeaponType.magic);
+        target.GetHit(power,WeaponType.magic, new DeathInfo(power, WeaponType.magic, SourceType.talisman));
         affectedList.Add(target);
         monstersInside.Remove(target);
         if (affectedList.Count > maxTargets)

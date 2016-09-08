@@ -46,6 +46,7 @@ public class WindowInGame : BaseWindow
             Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
         });
         level.QuestController.OnQuestStatusChanges += OnQuestStatusChanges;
+        level.QuestController.OnQuestProgress += OnQuestProgress;
         level.OnPause += OnPause;
 
 
@@ -73,6 +74,11 @@ public class WindowInGame : BaseWindow
         HealthSlider.value = 1;
         ShowPreStartWindow();
         MonsterInfo.Init();
+    }
+
+    private void OnQuestProgress(QuestGiver arg1, int cur, int trg)
+    {
+        QuestActive.SetProgress(cur,trg);
     }
 
     private void OnQuestStatusChanges(QuestGiver obj)
@@ -162,6 +168,7 @@ public class WindowInGame : BaseWindow
         Map.Instance.BossSpawner.OnBossGetEnergy -= OnBossGetEnergy;
         level.OnPause -= OnPause;
         level.QuestController.OnQuestStatusChanges -= OnQuestStatusChanges;
+        level.QuestController.OnQuestProgress -= OnQuestProgress;
     }
 
     private void OnItemCollected(ItemId arg1, float arg2,float delta)

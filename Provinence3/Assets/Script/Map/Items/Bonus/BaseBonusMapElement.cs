@@ -60,8 +60,12 @@ public class BaseBonusMapElement : MonoBehaviour
                 var enemies = Map.Instance.GetEnimiesInRadius(36);
                 foreach (var baseMonster in enemies)
                 {
+                    if (baseMonster is BossUnit)
+                    {
+                        continue;
+                    }
                     Debug.Log(" " + baseMonster.mainHeroDist);
-                    baseMonster.CurHp -= 90000;
+                    baseMonster.SetHp(-1);
                 }
                 break;
         }

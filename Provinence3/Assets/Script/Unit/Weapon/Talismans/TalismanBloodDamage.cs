@@ -38,7 +38,7 @@ public class TalismanBloodDamage : Talisman , IBulletHolder
         if (closestMonster != null)
         {
             var bullet = DataBaseController.GetItem<Bullet>(cacheGameObject);
-            hero.GetHit(SefDmg, WeaponType.magic);
+            hero.GetHit(SefDmg, WeaponType.magic, new DeathInfo(SefDmg, WeaponType.magic, SourceType.talisman));
             bullet.transform.position = hero.weaponsContainer.position;
             bullet.Init(closestMonster, this, bullet.transform.position);
             base.Use();

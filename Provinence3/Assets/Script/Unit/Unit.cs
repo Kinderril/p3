@@ -32,18 +32,29 @@ public class Unit : MonoBehaviour
     public float _shield;
     public Action OnShieldOn;
     public IEndEffect OnShieldOff;
-    public List<TimeEffect> efftcs = new List<TimeEffect>(); 
+    public List<TimeEffect> efftcs = new List<TimeEffect>();
+    public DeathInfo LastHitInfo;
 
     public float CurHp
     {
         get { return curHp; }
-        set
+//        set
+//        {
+//            curHp = Mathf.Clamp(value,-1,Parameters[ParamType.Heath]);
+//            if (curHp <= 0)
+//            {
+//                Death();
+//            }
+//        }
+    }
+
+    public void SetHp(float val)
+    {
+
+        curHp = Mathf.Clamp(val, -1, Parameters[ParamType.Heath]);
+        if (curHp <= 0)
         {
-            curHp = Mathf.Clamp(value,-1,Parameters[ParamType.Heath]);
-            if (curHp <= 0)
-            {
-                Death();
-            }
+            Death();
         }
     }
 
@@ -203,8 +214,9 @@ public class Unit : MonoBehaviour
         Control.MoveTo(dir * Parameters[ParamType.Speed]);
     }
     
-    public void GetHit(float power,WeaponType type,float mdef = -1,float pdef = -1)
+    public void GetHit(float power,WeaponType type,DeathInfo info,float mdef = -1,float pdef = -1)
     {
+        LastHitInfo = info;
         if (mdef < 0 || pdef < 0)
         {
             mdef = Parameters[ParamType.MDef];
@@ -234,7 +246,7 @@ public class Unit : MonoBehaviour
                 OnShieldOff.Do();
             }
         }
-        CurHp = CurHp - power;
+        SetHp(CurHp - power);
         if (this is Hero)
         {
             if (OnGetHit != null)
@@ -279,7 +291,7 @@ public class Unit : MonoBehaviour
                     break;
                 case SpecialAbility.vampire:
                     var diff = power*0.1f;
-                    owner.CurHp += diff;
+                    SetHp(CurHp + diff);
                     if (owner is Hero)
                     {
                         var isMax = owner.CurHp < owner.Parameters.MaxHp;
@@ -326,7 +338,13 @@ public class Unit : MonoBehaviour
                 HitParticleSystem.Play();
             }
         }
-        GetHit(power, bullet.bulletHolder.DamageType, mdef, pdef);
+        SourceType sourceType = SourceType.talisman;
+        if (bullet.bulletHolder is Weapon)
+        {
+            sourceType = SourceType.weapon;
+        }
+
+        GetHit(power, bullet.bulletHolder.DamageType, new DeathInfo(power, bullet.bulletHolder.DamageType, sourceType), mdef, pdef);
     }
     
     protected virtual void Death()
