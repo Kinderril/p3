@@ -108,12 +108,12 @@ public class TimerManager
     public ITimer MakeTimer(TimeSpan endTime)
     {
         var ms = (float)endTime.TotalMilliseconds/1000f;
-        return MakeTimer(ms, ms + Time.time);
+        return MakeTimer(ms + Time.time, ms );
     }
     public ITimer MakeTimer(TimeSpan endTime, bool isLopped)
     {
         var ms = (float)endTime.TotalMilliseconds/1000f;
-        return MakeTimer(ms, ms + Time.time);
+        return MakeTimer(ms + Time.time, ms );
     }
 
     public void Update()

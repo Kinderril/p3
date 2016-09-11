@@ -34,6 +34,7 @@ public class Unit : MonoBehaviour
     public IEndEffect OnShieldOff;
     public List<TimeEffect> efftcs = new List<TimeEffect>();
     public DeathInfo LastHitInfo;
+    public FlashController FlashController;
 
     public float CurHp
     {

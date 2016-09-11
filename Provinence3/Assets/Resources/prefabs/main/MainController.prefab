@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestPrefab: {fileID: 11473748, guid: acb64bc8c843f474490dca07f7b6f49e, type: 2}
+  QuestGiverPrefab: {fileID: 11419570, guid: 513714e74ab1d814e8cf4f474dd6b360, type: 2}
   DataStructs: {fileID: 11474658, guid: a9a3e934f3d937040990b169755ea49f, type: 2}
-  debugCube: {fileID: 0}
   FlyingNumber: {fileID: 11432046, guid: 44342dab47e01834f9499a5efa0743fa, type: 2}
   FlyingNumberWithPicture: {fileID: 11409584, guid: 31f0402a0f0599a48ae07938d825b5c9,
     type: 2}
@@ -66,8 +66,8 @@ MonoBehaviour:
   - {fileID: 11408556, guid: bb08f8bde5e25184c9a36dfd5b115b75, type: 2}
   prefabHero: {fileID: 11487600, guid: fc190c4abdb826a49a92ed5e58aee7d5, type: 2}
   Weapons: []
-  simpleShader: {fileID: 0}
-  flashShader: {fileID: 0}
+  simpleShader: {fileID: 4800000, guid: ddb4b51e989d86948b2f508f4e61ef74, type: 3}
+  flashShader: {fileID: 4800000, guid: b99e44032733cfe4594238736448a2d5, type: 3}
 --- !u!114 &11417906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,11 +90,9 @@ MonoBehaviour:
     window: {fileID: 0}
   - state: 4
     window: {fileID: 0}
-  - state: 5
-    window: {fileID: 0}
   - state: 6
     window: {fileID: 0}
-  - state: 7
+  - state: 5
     window: {fileID: 0}
   MainCamera: {fileID: 0}
   SubCamera: {fileID: 0}
@@ -152,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ALL_TIME_DROP: 1
   ALL_TALISMAN_CHARGED: 1
-  MAIN_HERO_MEGAHP: 1
+  MAIN_HERO_MEGAHP: 0
   LESS_COUNT_BOSS_COME: 0
   GET_START_BOOST: 1
   GET_ALL_TYPE_WEAPONS_BOOST: 1

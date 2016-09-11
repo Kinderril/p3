@@ -15,4 +15,9 @@ public class QuestInfo : MonoBehaviour
     {
         ProgressField.text = cur + "/" + trg;
     }
+
+    public void Activate()
+    {
+        ReadyGameObject.gameObject.SetActive(false);
+    }
 }

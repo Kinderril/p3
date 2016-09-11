@@ -1380,8 +1380,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 552.6264, y: 159.06392, z: 277}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 552.64, y: 159.48, z: 276.99}
+  m_LocalScale: {x: 1.642273, y: 1.6422731, z: 1.6422731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 463980}
@@ -1707,8 +1707,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.23918152, z: 0}
-  m_LocalScale: {x: 2.0865932, y: 0.52164835, z: 2.0865934}
+  m_LocalPosition: {x: 0, y: 0.48926, z: 0}
+  m_LocalScale: {x: 1.4734207, y: 0.36835518, z: 1.4734207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 463980}
@@ -2459,6 +2459,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 0}
   _shield: 0
+  FlashController: {fileID: 11485534}
   attackDist: 45
   mainHeroDist: 0
   bornPosition: {x: 0, y: 0, z: 0}

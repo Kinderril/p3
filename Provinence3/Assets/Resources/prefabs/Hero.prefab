@@ -1197,7 +1197,7 @@ GameObject:
   - 114: {fileID: 11468852}
   - 136: {fileID: 13680810}
   m_Layer: 0
-  m_Name: Hero2
+  m_Name: Hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2782,6 +2782,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 0}
   _shield: 0
+  FlashController: {fileID: 0}
   GetItemEffect: {fileID: 0}
   isRegenHP: 0
   ArrowTarget: {fileID: 11442520}

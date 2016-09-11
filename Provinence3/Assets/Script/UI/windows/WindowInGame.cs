@@ -48,7 +48,7 @@ public class WindowInGame : BaseWindow
         level.QuestController.OnQuestStatusChanges += OnQuestStatusChanges;
         level.QuestController.OnQuestProgress += OnQuestProgress;
         level.OnPause += OnPause;
-
+        QuestActive.gameObject.SetActive(false);
 
 
         WeaponChooser.Init(level);
@@ -87,16 +87,14 @@ public class WindowInGame : BaseWindow
         {
             case QuestStatus.started:
                 MainController.Instance.level.MessageAppear("Quest Started", Color.cyan);
-                QuestActive.gameObject.SetActive(true);
-                QuestActive.ReadyGameObject.gameObject.SetActive(false);
+                QuestActive.Activate();
                 break;
             case QuestStatus.ready:
                 QuestActive.ReadyGameObject.gameObject.SetActive(true);
                 break;
             case QuestStatus.end:
                 MainController.Instance.level.MessageAppear("Quest Complete", Color.cyan);
-                QuestActive.gameObject.SetActive(true);
-                QuestActive.ReadyGameObject.gameObject.SetActive(false);
+                QuestActive.Activate();
                 break;
         }
     }

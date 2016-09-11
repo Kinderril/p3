@@ -14,6 +14,7 @@ public class BaseMapItem : MonoBehaviour
 
     public void Init()
     {
+        Utils.SetRandomOffset(transform,2f);
         Utils.SetRandomRotation(transform);
     }
     void OnTriggerEnter(Collider other)

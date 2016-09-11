@@ -147,11 +147,12 @@ public class QuestGiver : MonoBehaviour
     public void Activate(Action<QuestGiver> callback)
     {
         Status = QuestStatus.started;
+        Debug.Log("Quest Activated");
+        Logic = new MonsterKillByName(this,"dog",5,OnQuestProgressChange);
         if (callback != null)
         {
             callback(this);
         }
-        Logic = new MonsterKillByName(this,"dog",5,OnQuestProgressChange);
     }
 
     public string Info()

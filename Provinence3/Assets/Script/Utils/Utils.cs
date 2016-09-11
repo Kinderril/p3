@@ -82,6 +82,13 @@ public static class Utils
     {
         transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(-180, 180), 0);
     }
+    public static void SetRandomOffset(Transform transform,float offset = 5f)
+    {
+        var lp = transform.localPosition;
+        var xx = lp.x + UnityEngine.Random.Range(-offset, offset);
+        var zz = lp.z + UnityEngine.Random.Range(-offset, offset);
+        transform.localPosition = new Vector3(xx,lp.y,zz);
+    }
 
     public static void GroundTransform(Transform transform, float checkDist = 9999f)
     {

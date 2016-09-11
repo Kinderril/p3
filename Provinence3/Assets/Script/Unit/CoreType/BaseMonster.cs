@@ -43,7 +43,6 @@ public class BaseMonster : Unit
     private bool isDisabled = false;
     public bool haveAction;
     public List<DropItem> dropItems; 
-    public FlashController FlashController;
     private bool overcharged = false;
 
     public float moneyCoef = 1f;

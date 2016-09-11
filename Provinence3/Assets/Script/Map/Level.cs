@@ -63,6 +63,7 @@ public class Level
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
+        QuestController = new LevelQuestController();
         TimeUtils.StartMeasure("LOAD PRELEVEL");
         Energy = new Energy(ActivaAction,OnRage);
         MissionIndex = levelIndex;
@@ -338,6 +339,7 @@ public class Level
 
     public void AddQuestGiver(QuestGiver giver)
     {
+        giver.Init(QuestController);
         QuestController.Add(giver);
     }
 }

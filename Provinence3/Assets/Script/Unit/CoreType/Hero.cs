@@ -248,6 +248,7 @@ public class Hero : Unit
             MainController.Instance.EndLevel(EndlevelType.bad);
         }
     }
+    
 
     public void GetHeal(float currentPower)
     {
@@ -273,6 +274,11 @@ public class Hero : Unit
     public override void GetHit(Bullet bullet)
     {
         base.GetHit(bullet);
+        
+        if (CurHp > 0 && FlashController != null)
+        {
+            FlashController.Play();
+        }
     }
 
     public void GetItem(CraftItemType type, int count)

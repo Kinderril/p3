@@ -37,10 +37,10 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<int,Taple<int,int>> costByLevelItems = new Dictionary<int, Taple<int, int>>(); 
     
     public Chest chestPrefab;
-    
+    public QuestGiver QuestGiverPrefab;
+
     public DataStructs DataStructs;
     public CraftDB CraftDB;
-    public GameObject debugCube;
     public FlyingNumbers FlyingNumber;
     public FlyingNumbers FlyingNumberWithPicture;
     public FlyNumberWIthDependence FlyNumberWIthDependence;
@@ -55,7 +55,6 @@ public class DataBaseController : Singleton<DataBaseController>
     public List<BossUnit> BossUnits = new List<BossUnit>(); 
     public Hero prefabHero;
     public List<Weapon> Weapons;
-    public QuestGiver QuestGiverPrefab;
     public Pool Pool;
 
     public Shader simpleShader;
