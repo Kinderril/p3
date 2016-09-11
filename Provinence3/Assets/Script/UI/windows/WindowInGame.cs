@@ -80,6 +80,7 @@ public class WindowInGame : BaseWindow
         switch (obj.Status)
         {
             case QuestStatus.started:
+                MainController.Instance.level.MessageAppear("Quest Started", Color.cyan);
                 QuestActive.gameObject.SetActive(true);
                 QuestActive.ReadyGameObject.gameObject.SetActive(false);
                 break;
@@ -87,6 +88,7 @@ public class WindowInGame : BaseWindow
                 QuestActive.ReadyGameObject.gameObject.SetActive(true);
                 break;
             case QuestStatus.end:
+                MainController.Instance.level.MessageAppear("Quest Complete", Color.cyan);
                 QuestActive.gameObject.SetActive(true);
                 QuestActive.ReadyGameObject.gameObject.SetActive(false);
                 break;

@@ -118,7 +118,6 @@ public class Map : Singleton<Map>
     {
         foreach (var bornPosition in questsPositions)
         {
-
             var giver = DataBaseController.GetItem(DataBaseController.Instance.QuestGiverPrefab, bornPosition.transform.position);
             level.AddQuestGiver(giver);
         }

@@ -123,7 +123,7 @@ public class Level
         //Find closes bornPositions
     }
 
-    public void MessageAppear(string txt,Color color , Sprite icon)
+    public void MessageAppear(string txt,Color color , Sprite icon = null)
     {
         var item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberWithPicture);
         item.transform.SetParent(WindowManager.Instance.CurrentWindow.transform);

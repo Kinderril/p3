@@ -279,7 +279,7 @@ public class Formuls
 
     public static QuestRewardType RandomQuestReward(QuestDifficulty d)
     {
-        WDictionary<QuestRewardType> w;
+        WDictionary<QuestRewardType> w = null;
         switch (d)
         {
             case QuestDifficulty.easy:
@@ -300,6 +300,8 @@ public class Formuls
                     { QuestRewardType.money, 50},{ QuestRewardType.materials, 30},{ QuestRewardType.crystal, 25},{ QuestRewardType.item, 15}
                 });
                 break;
+            default:
+                return QuestRewardType.money;
         }
         return w.Random();
     }

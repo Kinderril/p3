@@ -52,14 +52,22 @@ public class FlyingNumbers : PoolElement
         }
     }
 
-    public void Init(string txt, Color textColor,  Sprite spr, FlyNumerDirection flyDir = FlyNumerDirection.side, int size = 42, Action OnDead = null)
+    public void Init(string txt, Color textColor,  Sprite spr , FlyNumerDirection flyDir = FlyNumerDirection.side, int size = 42, Action OnDead = null)
     {
         base.Init();
         this.OnDead = OnDead;
         text.text = txt;
         text.fontSize = size;
         text.color = textColor;
-        image.sprite = spr;
+        if (spr == null)
+        {
+            image.enabled = false;
+        }
+        else
+        {
+            image.enabled = true;
+            image.sprite = spr;
+        }
         subInit(flyDir);
     }
 
