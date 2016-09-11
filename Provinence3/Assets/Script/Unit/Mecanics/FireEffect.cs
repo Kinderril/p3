@@ -25,7 +25,8 @@ public class FireEffect : TimeEffect
     {
         
         yield return new WaitForSeconds(1);
-        targetUnit.CurHp -= power;
+        targetUnit.LastHitInfo = new DeathInfo(power,WeaponType.magic, SourceType.talisman);
+        targetUnit.SetHp(targetUnit.CurHp - power);
         FlyNumberWIthDependence.Create(targetUnit.transform, "-" + power.ToString("0"));
         if (!shallStop && !targetUnit.IsDead)
         {

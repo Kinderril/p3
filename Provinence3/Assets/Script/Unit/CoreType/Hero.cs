@@ -224,7 +224,7 @@ public class Hero : Unit
         if (isRegenHP)
         {
             var p = Time.deltaTime * regenCoef;
-            CurHp = CurHp + p;
+            SetHp(CurHp + p);
             if (OnGetHit != null)
             {
                 OnGetHit(CurHp, Parameters[ParamType.Heath], p);
@@ -262,7 +262,7 @@ public class Hero : Unit
         }
         if (p > 0)
         {
-            CurHp += p;
+            SetHp(CurHp + p);
             if (OnGetHit != null)
             {
                 OnGetHit(CurHp, Parameters[ParamType.Heath], p);

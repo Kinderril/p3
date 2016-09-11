@@ -41,6 +41,7 @@ public class QuestGiver : MonoBehaviour
     public QuestType type;
     public QuestStatus QuestStatus = QuestStatus.free;
     public event Action<QuestGiver> OnDestroyGiver;
+    public event Action<int, int> OnQuestProgressChange; 
     private QuestDifficulty Difficulty;
     public BaseEffectAbsorber GetRewardEffect;
     private QuestLogicBase Logic;
@@ -150,6 +151,7 @@ public class QuestGiver : MonoBehaviour
         {
             callback(this);
         }
+        Logic = new MonsterKillByName(this,"dog",5,OnQuestProgressChange);
     }
 
     public string Info()
@@ -168,6 +170,11 @@ public class QuestGiver : MonoBehaviour
         {
             OnDestroyGiver(this);
         }
+    }
+
+    public void SetCallBack(Action<int, int> onProgress)
+    {
+        OnQuestProgressChange = onProgress;
     }
 }
 

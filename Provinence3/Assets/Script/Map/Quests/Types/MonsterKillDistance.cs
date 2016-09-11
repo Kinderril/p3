@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 
 
-public class MonsterKillByName : MonsterKillBase
+public class MonsterKillDistance : MonsterKillBase
 {
-    private string name ;
-    public MonsterKillByName(QuestGiver QuestGiver, string name,int need, Action<int, int> OnQuestProgressChange)
+    private float dist;
+    public MonsterKillDistance(QuestGiver QuestGiver, float dist,int need, Action<int, int> OnQuestProgressChange)
         : base(QuestGiver,need, OnQuestProgressChange)
     {
-        this.name = name;
+        this.dist = dist* dist;
     }
 
     protected override void OnEnemyDeadCallback(Unit obj)
     {
         var monster = obj as BaseMonster;
-        if (monster != null && monster.name.Contains(name))
+        if (monster.mainHeroDist > dist)
         {
             currentCount++;
             base.OnEnemyDeadCallback(obj);

@@ -275,7 +275,7 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
             boss.Init(hero);
             enemies.Add(boss);
             var resultBossHP = Formuls.ModifyBossHP(boss, bonuses);
-            boss.CurHp = resultBossHP;
+            boss.SetHp(resultBossHP);
             boss.Parameters[ParamType.Heath] = resultBossHP;
             hero.ArrowTarget.Init(boss);
             boss.transform.SetParent(enemiesContainer);
