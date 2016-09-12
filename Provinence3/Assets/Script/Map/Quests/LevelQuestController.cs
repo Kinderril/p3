@@ -14,7 +14,21 @@ public class LevelQuestController
     private List<QuestGiver> Quests = new List<QuestGiver>();
     public Level Level;
     public Action<QuestGiver> OnQuestStatusChanges; 
-    public Action<QuestGiver,int ,int> OnQuestProgress; 
+    public Action<QuestGiver,int ,int> OnQuestProgress;
+    private List<QuestLogicType> AllQuestsTypes = new List<QuestLogicType>(); 
+
+    public LevelQuestController()
+    {
+        foreach (QuestLogicType a in Enum.GetValues(typeof(QuestLogicType)))
+        {
+            AllQuestsTypes.Add(a);
+        }
+    }
+
+    public QuestLogicType GetRandomQuest()
+    {
+        return AllQuestsTypes.RandomElement();
+    }
 
     public void Statistics(out int cur, out int total)
     {

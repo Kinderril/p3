@@ -13,6 +13,7 @@ public enum FlyNumerDirection
 public class FlyingNumbers : PoolElement
 {
     public Text text;
+    public Text subText;
     public Image image;
     private Action OnDead;
     private Animator anim;
@@ -20,10 +21,27 @@ public class FlyingNumbers : PoolElement
     private const string keyRight = "right";
     private const string keyNone = "none";
 
+    public void Init(string msg,string sub,Color textColor, FlyNumerDirection flyDir = FlyNumerDirection.side,int size = 42,Action OnDead = null)
+    {
+        base.Init();
+        this.OnDead = OnDead;
+        text.text = msg;
+        text.fontSize = size;
+        if (image != null)
+            image.enabled = false;
+        if (subText != null)
+        {
+            subText.text = sub;
+        }
+        text.color = textColor;
+        subInit(flyDir);
+    }
     public void Init(string msg,Color textColor, FlyNumerDirection flyDir = FlyNumerDirection.side,int size = 42,Action OnDead = null)
     {
         base.Init();
         this.OnDead = OnDead;
+        if (image != null)
+            image.enabled = false;
         text.text = msg;
         text.fontSize = size;
         text.color = textColor;

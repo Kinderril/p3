@@ -20,19 +20,26 @@ public class WindowPause : MonoBehaviour
         gameObject.SetActive(true);
         var map = Map.Instance;
         this.level = level;
-        BossProgressField.text = map.BossSpawner.GetPercent() + "% To Boss Born";
+        if (map.BossSpawner != null)
+        {
+            BossProgressField.text = map.BossSpawner.GetPercent().ToString("0.00") + "% To Boss Born";
+        }
+        else
+        {
+            BossProgressField.text = "";
+        }
         QuestField.text = level.QuestController.CurrentQuestInfo();
         MonstersKilledField.text = level.EnemiesKills + " Monsters killed";
         LevelDifficultyField.text = "Difficulty:"+level.difficult.ToString();
         LevelNameField.text = "Mission index:"+level.MissionIndex.ToString();
     }
     
-    void OnResume()
+    public void OnResume()
     {
         level.UnPause();
     }
 
-    void OnSurrender()
+    public void OnSurrender()
     {
         level.UnPause();
         MainController.Instance.EndLevel(EndlevelType.bad);

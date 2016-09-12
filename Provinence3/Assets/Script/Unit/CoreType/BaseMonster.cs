@@ -53,6 +53,10 @@ public class BaseMonster : Unit
     {
         get { return isDisabled; }
     }
+    public bool Overcharged
+    {
+        get { return overcharged; }
+    }
 
 
     public void Init(Hero hero)
