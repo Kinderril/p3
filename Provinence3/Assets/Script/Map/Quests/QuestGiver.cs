@@ -44,7 +44,7 @@ public class QuestGiver : MonoBehaviour
     public event Action<int, int> OnQuestProgressChange; 
     private QuestDifficulty Difficulty;
     public BaseEffectAbsorber GetRewardEffect;
-    private QuestLogicBase Logic;
+    public QuestLogicBase Logic;
 
     public QuestStatus Status
     {

@@ -8,11 +8,15 @@ public enum QuestLogicType
     killName,
     killLowHp,
     killMaxHp,
+
     killCrossbow,
     killTalisman,
-    collectGold,
-    collectReource,
     killOvercharged,
+
+    collectGold,
+    collectResource,
+    getDamage,
+
 }
 
 public abstract class QuestLogicBase
@@ -34,5 +38,10 @@ public abstract class QuestLogicBase
     protected void ReadyToReward()
     {
         QuestGiver.SetReady();
+    }
+
+    public virtual string SubInfo()
+    {
+        return "";
     }
 }

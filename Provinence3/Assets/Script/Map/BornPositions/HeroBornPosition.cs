@@ -28,8 +28,9 @@ public class HeroBornPosition : BaseBornPosition
             var unit = other.GetComponent<Hero>();
             if (unit != null)
             {
+                var names = DataBaseController.Instance.RespawnPositionsNames[MainController.Instance.level.MissionIndex];
                 MainController.Instance.PlayerData.OpenBornPosition(ID);
-                MainController.Instance.level.MessageAppear( "born point opened", Color.blue, DataBaseController.Instance.ItemIcon(ItemId.crystal));
+                MainController.Instance.level.MessageAppear( "Born point opened","Name:" + names[ID], Color.blue, DataBaseController.Instance.ItemIcon(ItemId.crystal));
                 isPositionOpend = true;
                 if (OpenGameObject != null)
                 {

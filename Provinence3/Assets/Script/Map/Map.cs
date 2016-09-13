@@ -279,7 +279,7 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
             boss.Parameters[ParamType.Heath] = resultBossHP;
             hero.ArrowTarget.Init(boss);
             boss.transform.SetParent(enemiesContainer);
-            MainController.Instance.level.MessageAppear("Boss have appear", Color.red, DataBaseController.Instance.ItemIcon(ItemId.crystal));
+            MainController.Instance.level.MessageAppear("Boss have appear","Find and kill him", Color.red, DataBaseController.Instance.ItemIcon(ItemId.crystal));
             if (level.OnBossAppear != null)
             {
                 level.OnBossAppear(boss);

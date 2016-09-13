@@ -13,6 +13,7 @@ public enum FlyNumerDirection
 public class FlyingNumbers : PoolElement
 {
     public Text text;
+    public Text subTextField;
     public Image image;
     private Action OnDead;
     private Animator anim;
@@ -20,14 +21,28 @@ public class FlyingNumbers : PoolElement
     private const string keyRight = "right";
     private const string keyNone = "none";
 
-    public void Init(string msg,Color textColor, FlyNumerDirection flyDir = FlyNumerDirection.side,int size = 42,Action OnDead = null)
+    public void Init(string msg,string subText,Color textColor, FlyNumerDirection flyDir = FlyNumerDirection.side,int size = 42,Action OnDead = null)
     {
         base.Init();
         this.OnDead = OnDead;
         text.text = msg;
         text.fontSize = size;
         text.color = textColor;
+        InfoSubText(subText);
         subInit(flyDir);
+    }
+
+    private void InfoSubText(string txt)
+    {
+
+        var subTextNoNull = subTextField != null;
+        var haveSubText = txt != null && subTextNoNull;
+        if (subTextNoNull)
+            subTextField.gameObject.SetActive(subTextField);
+        if (haveSubText)
+        {
+            subTextField.text = txt;
+        }
     }
 
     private void subInit(FlyNumerDirection flyDir)
@@ -52,13 +67,14 @@ public class FlyingNumbers : PoolElement
         }
     }
 
-    public void Init(string txt, Color textColor,  Sprite spr , FlyNumerDirection flyDir = FlyNumerDirection.side, int size = 42, Action OnDead = null)
+    public void Init(string txt, string subText, Color textColor,  Sprite spr , FlyNumerDirection flyDir = FlyNumerDirection.side, int size = 42, Action OnDead = null)
     {
         base.Init();
         this.OnDead = OnDead;
         text.text = txt;
         text.fontSize = size;
         text.color = textColor;
+        InfoSubText(subText);
         if (spr == null)
         {
             image.enabled = false;
