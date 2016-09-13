@@ -13,11 +13,6 @@ public enum QuestStatus
     end,
 }
 
-public enum QuestType
-{
-    f,e,//TODO
-}
-
 public enum QuestDifficulty
 {
     easy,
@@ -38,13 +33,13 @@ public class QuestGiver : MonoBehaviour
     public GameObject readyStatus;
     public LevelQuestController Controller;
     public int id;
-    public QuestType type;
+    public QuestLogicType type;
     public QuestStatus QuestStatus = QuestStatus.free;
     public event Action<QuestGiver> OnDestroyGiver;
     public event Action<int, int> OnQuestProgressChange; 
-    private QuestDifficulty Difficulty;
+    private QuestDifficulty difficulty;
     public BaseEffectAbsorber GetRewardEffect;
-    public QuestLogicBase Logic;
+    private QuestLogicBase logic;
 
     public QuestStatus Status
     {
@@ -70,12 +65,22 @@ public class QuestGiver : MonoBehaviour
         }
     }
 
+    public QuestLogicBase Logic
+    {
+        get { return logic; }
+    }
+
+    public QuestDifficulty Difficulty
+    {
+        get { return difficulty; }
+    }
+
     public void Init(LevelQuestController controller)
     {
         freeStatus.gameObject.SetActive(false);
         readyStatus.gameObject.SetActive(false);
         this.Controller = controller;
-        Difficulty = Formuls.RandomQuestDifficulty();
+        difficulty = Formuls.RandomQuestDifficulty();
 
     }
 
@@ -97,7 +102,7 @@ public class QuestGiver : MonoBehaviour
         {
             Status = QuestStatus.ready;
             Controller.Ready(this);
-            Logic.Clear();
+            logic.Clear();
         }
     }
 
@@ -108,7 +113,7 @@ public class QuestGiver : MonoBehaviour
 
     public void Reward(Level level,Action<QuestGiver> callback )
     {
-        var rewardType = Formuls.RandomQuestReward(Difficulty);
+        var rewardType = Formuls.RandomQuestReward(difficulty);
         var levelDif = Controller.Level.difficult;
 
         switch (rewardType)
@@ -147,8 +152,43 @@ public class QuestGiver : MonoBehaviour
     public void Activate(Action<QuestGiver> callback)
     {
         Status = QuestStatus.started;
+//        var typ = Controller.GetRandomQuest();
+//        switch (typ)
+//        {
+//            case QuestLogicType.killName:
+//                logic = new MonsterKillByName(this, "dog", 5, OnQuestProgressChange);
+//                break;
+//            case QuestLogicType.killLowHp:
+//                logic = new MonstersKillOnLowHp(this, 5, 0.3f, OnQuestProgressChange);
+//                break;
+//            case QuestLogicType.killDistance:
+//                logic = new MonsterKillDistance(this, 5,5, OnQuestProgressChange);
+//                break;
+//            case QuestLogicType.killCrossbow:
+//                logic = new MonstersKillWeaponType(this, 5, SourceType.weapon,WeaponType.magic, OnQuestProgressChange);
+//                break;
+//            case QuestLogicType.killTalisman:
+//                logic = new MonstersKillWeaponType(this, 5, SourceType.talisman, WeaponType.magic, OnQuestProgressChange);
+//                break;
+//            case QuestLogicType.killOvercharged:
+//                logic = new MonsterKillOvercharged(this, 5, OnQuestProgressChange);
+//                break;
+//            case QuestLogicType.collectGold:
+//                logic = new QuestCollectGold(this,400,ItemId.money, OnQuestProgressChange);
+//                break;
+//            case QuestLogicType.collectReource:
+//                logic = new QuestCollectResource(this, 10, CraftItemType.Leather, OnQuestProgressChange);
+//                break;
+//            case QuestLogicType.getDamage:
+//                logic = new QuestGetDamage(this, 500, OnQuestProgressChange);
+//                break;
+//            default:
+//                logic = new QuestGetDamage(this,500, OnQuestProgressChange);
+//                break;
+//        }
+
         Debug.Log("Quest Activated");
-        Logic = new MonsterKillByName(this,"dog",5,OnQuestProgressChange);
+        logic = new MonsterKillOvercharged(this, 5, OnQuestProgressChange);
         if (callback != null)
         {
             callback(this);
@@ -157,15 +197,14 @@ public class QuestGiver : MonoBehaviour
 
     public string Info()
     {
-        return "adsfds";//TODO
-
+        return Logic.PauseMessage();
     }
 
     void OnDestroy()
     {
-        if (Logic != null)
+        if (logic != null)
         {
-            Logic.Clear();
+            logic.Clear();
         }
         if (OnDestroyGiver != null)
         {
