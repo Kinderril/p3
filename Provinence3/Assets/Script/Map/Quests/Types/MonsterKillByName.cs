@@ -19,18 +19,18 @@ public class MonsterKillByName : MonsterKillBase
         var monster = obj as BaseMonster;
         if (monster != null && monster.name.Equals(name))
         {
-            currentCount++;
+            currentCount = CurrentCount + 1;
             base.OnEnemyDeadCallback(obj);
         }
     }
     public override string AppearMessage()
     {
-        return "Kill some type of monster:" + NeedToComplete;
+        return "Kill some type of monster:" + TargetCount;
     }
 
     public override string PauseMessage()
     {
-        return "Destroy monsters:" + name + " Progress:" + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+        return "Destroy monsters:" + name + " Progress:" + CurrentCount + "/" + TargetCount + "\n" + DifficultyStr();
     }
 }
 

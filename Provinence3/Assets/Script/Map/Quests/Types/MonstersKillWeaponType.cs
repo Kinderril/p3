@@ -8,8 +8,8 @@ public class MonstersKillWeaponType : MonsterKillBase
 {
     private SourceType SourceType;
     private WeaponType WeaponType;
-    public MonstersKillWeaponType(QuestGiver QuestGiver, int NeedToComplete, SourceType SourceType, WeaponType WeaponType, Action<int, int> OnQuestProgressChange) 
-        : base(QuestGiver, NeedToComplete, OnQuestProgressChange)
+    public MonstersKillWeaponType(QuestGiver QuestGiver, int targetCount, SourceType SourceType, WeaponType WeaponType, Action<int, int> OnQuestProgressChange) 
+        : base(QuestGiver, targetCount, OnQuestProgressChange)
     {
         this.SourceType = SourceType;
         this.WeaponType = WeaponType;
@@ -19,18 +19,18 @@ public class MonstersKillWeaponType : MonsterKillBase
     {
         if (obj.LastHitInfo.SourceType == SourceType && obj.LastHitInfo.DamageType == WeaponType)
         {
-            currentCount++;
+            currentCount = CurrentCount + 1;
             base.OnEnemyDeadCallback(obj);
         }
     }
     public override string AppearMessage()
     {
-        return "Destroy monsters with crossbow:" + NeedToComplete;
+        return "Destroy monsters with crossbow:" + TargetCount;
     }
 
     public override string PauseMessage()
     {
-        return "Use crossbow to kill some monsters: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+        return "Use crossbow to kill some monsters: " + CurrentCount + "/" + TargetCount + "\n" + DifficultyStr();
     }
 }
 

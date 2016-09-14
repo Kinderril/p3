@@ -6,17 +6,17 @@ using System.Text;
 
 public class QuestGetDamage : QuestLogicBase
 {
-    public QuestGetDamage(QuestGiver QuestGiver, int NeedToComplete,  Action<int, int> OnQuestProgressChange) : base(QuestGiver, NeedToComplete, OnQuestProgressChange)
+    public QuestGetDamage(QuestGiver QuestGiver, int targetCount,  Action<int, int> OnQuestProgressChange) : base(QuestGiver, targetCount, OnQuestProgressChange)
     {
         MainController.Instance.level.MainHero.OnGetHit += OnGetHit;
     }
 
     private void OnGetHit(float arg1, float arg2, float arg3)
     {
-        currentCount += (int)(arg3);
+        currentCount = CurrentCount + (int)(arg3);
         if (OnQuestProgressChange != null)
-            OnQuestProgressChange(currentCount, NeedToComplete);
-        if (currentCount > NeedToComplete)
+            OnQuestProgressChange(CurrentCount, TargetCount);
+        if (CurrentCount > TargetCount)
         {
             ReadyToReward();
         }
@@ -28,12 +28,12 @@ public class QuestGetDamage : QuestLogicBase
     }
     public override string AppearMessage()
     {
-        return "Get some damage:" + NeedToComplete;
+        return "Get some damage:" + TargetCount;
     }
 
     public override string PauseMessage()
     {
-        return "Get damage from monsters, and try not to die: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+        return "Get damage from monsters, and try not to die: " + CurrentCount + "/" + TargetCount + "\n" + DifficultyStr();
     }
 }
 

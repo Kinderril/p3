@@ -17,8 +17,9 @@ public class LevelQuestController
     public Action<QuestGiver,int ,int> OnQuestProgress;
     private List<QuestLogicType> AllQuestsTypes = new List<QuestLogicType>(); 
 
-    public LevelQuestController()
+    public LevelQuestController(Level level)
     {
+        this.Level = level;
         foreach (QuestLogicType a in Enum.GetValues(typeof(QuestLogicType)))
         {
             AllQuestsTypes.Add(a);

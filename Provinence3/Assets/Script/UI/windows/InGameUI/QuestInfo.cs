@@ -18,6 +18,14 @@ public class QuestInfo : MonoBehaviour
 
     public void Activate()
     {
+        gameObject.SetActive(true);
+        ReadyGameObject.gameObject.SetActive(false);
+    }
+
+    public void Hide()
+    {
+
+        gameObject.SetActive(false);
         ReadyGameObject.gameObject.SetActive(false);
     }
 }

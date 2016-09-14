@@ -18,18 +18,18 @@ public class MonsterKillDistance : MonsterKillBase
         var monster = obj as BaseMonster;
         if (monster.mainHeroDist > dist)
         {
-            currentCount++;
+            currentCount = CurrentCount + 1;
             base.OnEnemyDeadCallback(obj);
         }
     }
     public override string AppearMessage()
     {
-        return "Destroy monsters from distance:" + NeedToComplete;
+        return "Destroy monsters from distance:" + TargetCount;
     }
 
     public override string PauseMessage()
     {
-        return "You must kill monsters from big distance. Become sniper: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+        return "You must kill monsters from big distance. Become sniper: " + CurrentCount + "/" + TargetCount + "\n" + DifficultyStr();
     }
 }
 

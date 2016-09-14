@@ -18,19 +18,19 @@ public class MonsterKillOvercharged : MonsterKillBase
         var monster = obj as BaseMonster;
         if (monster != null && monster.Overcharged)
         {
-            currentCount++;
+            currentCount = CurrentCount + 1;
             base.OnEnemyDeadCallback(obj);
         }
     }
 
     public override string AppearMessage()
     {
-        return "Destroy overcharged monsters:" + NeedToComplete;
+        return "Destroy overcharged monsters:" + TargetCount;
     }
 
     public override string PauseMessage()
     {
-        return "Destroy overcharged monsters: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+        return "Destroy overcharged monsters: " + CurrentCount + "/" + TargetCount + "\n" + DifficultyStr();
     }
 }
 

@@ -7,8 +7,8 @@ using System.Text;
 public abstract class MonsterKillBase : QuestLogicBase
 {
     protected Hero hero;
-    protected MonsterKillBase(QuestGiver QuestGiver,int NeedToComplete, Action<int, int> OnQuestProgressChange)
-        : base(QuestGiver, NeedToComplete, OnQuestProgressChange)
+    protected MonsterKillBase(QuestGiver QuestGiver,int targetCount, Action<int, int> OnQuestProgressChange)
+        : base(QuestGiver, targetCount, OnQuestProgressChange)
     {
         hero = MainController.Instance.level.MainHero;
         Map.Instance.OnEnemyDeadCallback += OnEnemyDeadCallback;
@@ -18,9 +18,9 @@ public abstract class MonsterKillBase : QuestLogicBase
     {
         if (OnQuestProgressChange != null)
         {
-            OnQuestProgressChange(currentCount, NeedToComplete);
+            OnQuestProgressChange(CurrentCount, TargetCount);
         }
-        if (currentCount >= NeedToComplete)
+        if (CurrentCount >= TargetCount)
         {
             ReadyToReward();
         }

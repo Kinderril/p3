@@ -7,7 +7,7 @@ using System.Text;
 public class QuestCollectResource : QuestLogicBase
 {
     private CraftItemType _craftItemType;
-    public QuestCollectResource(QuestGiver QuestGiver, int NeedToComplete, CraftItemType craftItemType,Action<int, int> OnQuestProgressChange) : base(QuestGiver, NeedToComplete, OnQuestProgressChange)
+    public QuestCollectResource(QuestGiver QuestGiver, int targetCount, CraftItemType craftItemType,Action<int, int> OnQuestProgressChange) : base(QuestGiver, targetCount, OnQuestProgressChange)
     {
         this._craftItemType = craftItemType;
         MainController.Instance.level.OnCraftItemCollected += OnCraftItemCollected;
@@ -17,10 +17,10 @@ public class QuestCollectResource : QuestLogicBase
     {
         if (_craftItemType == arg1)
         {
-            currentCount++;
+            currentCount = CurrentCount + 1;
             if (OnQuestProgressChange != null)
-                OnQuestProgressChange(currentCount, NeedToComplete);
-            if (currentCount >= NeedToComplete)
+                OnQuestProgressChange(CurrentCount, TargetCount);
+            if (CurrentCount >= TargetCount)
             {
                 ReadyToReward();
             }
@@ -34,12 +34,12 @@ public class QuestCollectResource : QuestLogicBase
     }
     public override string AppearMessage()
     {
-        return "Collect resouces:" + NeedToComplete;
+        return "Collect resouces:" + TargetCount;
     }
 
     public override string PauseMessage()
     {
-        return "Collect:" + _craftItemType.ToString() + ". Progress:" + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+        return "Collect:" + _craftItemType.ToString() + ". Progress:" + CurrentCount + "/" + TargetCount + "\n" + DifficultyStr();
     }
 }
 

@@ -63,7 +63,7 @@ public class Level
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
-        QuestController = new LevelQuestController();
+        QuestController = new LevelQuestController(this);
         TimeUtils.StartMeasure("LOAD PRELEVEL");
         Energy = new Energy(ActivaAction,OnRage);
         MissionIndex = levelIndex;

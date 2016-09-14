@@ -32,7 +32,9 @@ public class FlyingNumbers : PoolElement
         if (subText != null)
         {
             subText.text = sub;
+            subText.gameObject.SetActive(sub.Length > 0);
         }
+
         text.color = textColor;
         subInit(flyDir);
     }
@@ -45,6 +47,10 @@ public class FlyingNumbers : PoolElement
         text.text = msg;
         text.fontSize = size;
         text.color = textColor;
+        if (subText != null)
+        {
+            subText.gameObject.SetActive(false);
+        }
         subInit(flyDir);
     }
 
@@ -85,6 +91,10 @@ public class FlyingNumbers : PoolElement
         {
             image.enabled = true;
             image.sprite = spr;
+        }
+        if (subText != null)
+        {
+            subText.gameObject.SetActive(false);
         }
         subInit(flyDir);
     }

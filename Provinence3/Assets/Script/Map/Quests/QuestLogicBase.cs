@@ -21,15 +21,26 @@ public enum QuestLogicType
 public abstract class QuestLogicBase
 {
     public QuestGiver QuestGiver;
-    protected int NeedToComplete;
+    protected int targetCount;
     protected int currentCount;
     protected Action<int, int> OnQuestProgressChange;
-    public QuestLogicBase(QuestGiver QuestGiver, int NeedToComplete, Action<int, int> OnQuestProgressChange)
+    public QuestLogicBase(QuestGiver QuestGiver, int targetCount, Action<int, int> OnQuestProgressChange)
     {
         this.OnQuestProgressChange = OnQuestProgressChange;
-        this.NeedToComplete = NeedToComplete;
+        this.targetCount = targetCount;
         this.QuestGiver = QuestGiver;
     }
+
+    public int CurrentCount
+    {
+        get { return currentCount; }
+    }
+
+    public int TargetCount
+    {
+        get { return targetCount; }
+    }
+
     public virtual void Clear()
     {
 

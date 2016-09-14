@@ -8,8 +8,8 @@ public class MonstersKillOnLowHp : MonsterKillBase
 {
     private Hero hero;
     private float targetHp;
-    public MonstersKillOnLowHp(QuestGiver QuestGiver, int NeedToComplete, float coef,Action<int, int> OnQuestProgressChange) 
-        : base(QuestGiver, NeedToComplete, OnQuestProgressChange)
+    public MonstersKillOnLowHp(QuestGiver QuestGiver, int targetCount, float coef,Action<int, int> OnQuestProgressChange) 
+        : base(QuestGiver, targetCount, OnQuestProgressChange)
     {
         hero = MainController.Instance.level.MainHero;
         targetHp = hero.Parameters.MaxHp*coef;
@@ -19,19 +19,19 @@ public class MonstersKillOnLowHp : MonsterKillBase
     {
         if (hero.CurHp < targetHp)
         {
-            currentCount++;
+            currentCount = CurrentCount + 1;
             base.OnEnemyDeadCallback(obj);
         }
     }
 
     public override string AppearMessage()
     {
-        return "Destroy monsters on low health:" + NeedToComplete;
+        return "Destroy monsters on low health:" + TargetCount;
     }
 
     public override string PauseMessage()
     {
-        return "Destroy monsters, when your health less than 33%: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+        return "Destroy monsters, when your health less than 33%: " + CurrentCount + "/" + TargetCount + "\n" + DifficultyStr();
     }
 }
 

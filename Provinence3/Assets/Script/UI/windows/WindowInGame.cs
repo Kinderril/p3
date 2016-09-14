@@ -78,6 +78,7 @@ public class WindowInGame : BaseWindow
 
     private void OnQuestProgress(QuestGiver arg1, int cur, int trg)
     {
+        Debug.Log("Quest progress " + cur);
         QuestActive.SetProgress(cur,trg);
     }
 
@@ -86,15 +87,16 @@ public class WindowInGame : BaseWindow
         switch (obj.Status)
         {
             case QuestStatus.started:
-                MainController.Instance.level.MessageAppear("Quest Started","", Color.cyan);
+                MainController.Instance.level.MessageAppear("Quest Started",obj.Logic.AppearMessage(), Color.white);
                 QuestActive.Activate();
+                QuestActive.SetProgress(obj.Logic.CurrentCount, obj.Logic.TargetCount);
                 break;
             case QuestStatus.ready:
                 QuestActive.ReadyGameObject.gameObject.SetActive(true);
                 break;
             case QuestStatus.end:
                 MainController.Instance.level.MessageAppear("Quest Complete", "", Color.cyan);
-                QuestActive.Activate();
+                QuestActive.Hide();
                 break;
         }
     }
