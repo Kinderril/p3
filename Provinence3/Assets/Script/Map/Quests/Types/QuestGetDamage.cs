@@ -14,6 +14,8 @@ public class QuestGetDamage : QuestLogicBase
     private void OnGetHit(float arg1, float arg2, float arg3)
     {
         currentCount += (int)(arg3);
+        if (OnQuestProgressChange != null)
+            OnQuestProgressChange(currentCount, NeedToComplete);
         if (currentCount > NeedToComplete)
         {
             ReadyToReward();

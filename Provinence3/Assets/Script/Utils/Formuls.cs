@@ -276,6 +276,45 @@ public class Formuls
         });
         return w.Random();
     }
+    public static GiftType CalcGiftType(QuestDifficulty difficulty)
+    {
+        Dictionary<GiftType, float> d;
+        switch (difficulty)
+        {
+            case QuestDifficulty.easy:
+                d = new Dictionary<GiftType, float>()
+                {
+                    {GiftType.catalys, 9},
+                    {GiftType.recepi, 8},
+                    {GiftType.item, 2},
+                    {GiftType.enchant, 8},
+                    {GiftType.bonus, 4},
+                };
+                break;
+            case QuestDifficulty.hard:
+                d = new Dictionary<GiftType, float>()
+                {
+                    {GiftType.catalys, 7},
+                    {GiftType.recepi, 6},
+                    {GiftType.item, 2},
+                    {GiftType.enchant, 9},
+                    {GiftType.bonus, 5},
+                };
+                break;
+            default:
+                d = new Dictionary<GiftType, float>()
+                {
+                    {GiftType.catalys, 3},
+                    {GiftType.recepi, 2},
+                    {GiftType.item, 2},
+                    {GiftType.enchant, 4},
+                    {GiftType.bonus, 3},
+                };
+                break;
+        }
+        WDictionary<GiftType> gifts = new WDictionary<GiftType>(d);
+        return gifts.Random();
+    }
 
     public static QuestRewardType RandomQuestReward(QuestDifficulty d)
     {

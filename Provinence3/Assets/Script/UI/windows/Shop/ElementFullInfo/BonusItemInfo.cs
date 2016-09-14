@@ -20,12 +20,32 @@ public class BonusItemInfo : WearingInventoryItemInfo
         switch (bonusItem.Bonustype)
         {
             case Bonustype.damage:
-                nameBonus = "Bonus Damage";
-                descBonus = " Give " + percent + "% additional damage at next round, for all time.\n Use 1 charge per round";
+                nameBonus = "Additional Damage";
+                descBonus = " Give " + percent + "% additional damage at next round.\n Use 1 charge per round";
                 break;
             case Bonustype.money:
-                nameBonus = "Additional Money";
-                descBonus = " Find more money for " + percent + "% for all coin you can find , for all time.\n Use 1 charge per round";
+                nameBonus = "Bonus Money";
+                descBonus = " Find more money for " + percent + "% for all coin you can find.\n Use 1 charge per round";
+                break;
+            case Bonustype.cryslats:
+                nameBonus = "Bonus Crystals";
+                descBonus = " Increase chance to find for " + percent + "%.\n Use 1 charge per round";
+                break;
+            case Bonustype.defence:
+                nameBonus = "Additional Defence";
+                descBonus = " Give " + percent + "% additional defence at next round.\n Use 1 charge per round";
+                break;
+            case Bonustype.energy:
+                nameBonus = "Bonus Energy";
+                descBonus = " Increase energy incoming for " + percent + "%.\n Use 1 charge per round";
+                break;
+            case Bonustype.maxHp:
+                nameBonus = "Power health";
+                descBonus = " Increase maximum healths points for " + percent + "%.\n Use 1 charge per round";
+                break;
+            case Bonustype.speed:
+                nameBonus = "Additional Speed";
+                descBonus = " Give " + percent + "% additional speed at next round.\n Use 1 charge per round";
                 break;
         }
 

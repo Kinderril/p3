@@ -84,14 +84,28 @@ public class LevelQuestController
     private void End(QuestGiver questGiver)
     {
         currentActiveQuest = null;
-        questGiver.Reward(Level,OnQuestStatusChanges);
+        questGiver.Reward(Level, giver =>
+        {
+            OnQuestStatusChanges(giver);
+            foreach (var quest in Quests.Where(x=>x != giver))
+            {
+                quest.UnBlock();
+            }
+        });
     }
 
     private void Start(QuestGiver questGiver)
     {
         currentActiveQuest = questGiver;
         questGiver.SetCallBack(OnProgress);
-        questGiver.Activate(OnQuestStatusChanges);
+        questGiver.Activate(giver =>
+        {
+            OnQuestStatusChanges(giver);
+            foreach (var quest in Quests.Where(x=>x != giver))
+            {
+                quest.SetBlock();
+            }
+        });
     }
 
     private void OnProgress(int cur, int target)

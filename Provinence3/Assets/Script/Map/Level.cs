@@ -268,22 +268,24 @@ public class Level
         DataBaseController.Instance.Pool.Clear();
     } 
     
-    public void AddRandomGift(bool withAction = false)
+    public void AddRandomGift(bool withAction = false,GiftType? giftType = null)
     {
-        WDictionary<GiftType> gifts = new WDictionary<GiftType>(new Dictionary<GiftType, float>()
+        if (giftType == null)
         {
-            { GiftType.catalys, 6 },
-            { GiftType.recepi ,5 },
-            { GiftType.item ,2 },
-            { GiftType.enchant ,8 },
-            { GiftType.bonus ,3 },
-        });
-        var val = gifts.Random();
-
+            WDictionary<GiftType> gifts = new WDictionary<GiftType>(new Dictionary<GiftType, float>()
+            {
+                {GiftType.catalys, 6},
+                {GiftType.recepi, 5},
+                {GiftType.item, 2},
+                {GiftType.enchant, 8},
+                {GiftType.bonus, 3},
+            });
+            giftType = gifts.Random();
+        }
 
         int lvl = MainController.Instance.PlayerData.Level;
         BaseItem baseItem = null;
-        switch (val)
+        switch (giftType)
         {
             case GiftType.catalys:
                 baseItem = ExecCatalysItem.Creat();

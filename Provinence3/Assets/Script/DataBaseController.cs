@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Threading;
 using UnityEngine;
 
 public enum ItemId
@@ -274,5 +276,26 @@ public class DataBaseController : Singleton<DataBaseController>
     public Color GetColor(CraftItemType arg1)
     {
         return DataStructs.CraftItemColor;
+    }
+
+    public CraftItemType GetRandomCraftItemType()
+    {
+        WDictionary<CraftItemType> d = new WDictionary<CraftItemType>(new Dictionary<CraftItemType, float>(
+        ){
+            {CraftItemType.Iron, 2f },
+            {CraftItemType.Wood, 2f },
+            {CraftItemType.Leather, 2f },
+            {CraftItemType.Thread, 2f },
+
+            {CraftItemType.Bone, 1f },
+            {CraftItemType.Mercury, 1f },
+            {CraftItemType.Gems, 1f },
+            {CraftItemType.Silver, 1f },
+
+            {CraftItemType.Splinter, 0.6f },
+        })
+        ;
+        
+        return d.Random();
     }
 }

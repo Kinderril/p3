@@ -18,6 +18,8 @@ public class QuestCollectGold : QuestLogicBase
         if (itemType == arg1)
         {
             currentCount+=(int)arg2;
+            if (OnQuestProgressChange != null)
+                OnQuestProgressChange(currentCount, NeedToComplete);
             if (currentCount >= NeedToComplete)
             {
                 ReadyToReward();

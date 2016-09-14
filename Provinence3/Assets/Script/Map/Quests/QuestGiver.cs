@@ -9,6 +9,7 @@ public enum QuestStatus
 {
     free,
     started,
+    blocked,
     ready,
     end,
 }
@@ -31,10 +32,12 @@ public class QuestGiver : MonoBehaviour
 {
     public GameObject freeStatus;
     public GameObject readyStatus;
+    public GameObject blockStatus;
     public LevelQuestController Controller;
     public int id;
     public QuestLogicType type;
     public QuestStatus QuestStatus = QuestStatus.free;
+    public QuestStatus OldStatus = QuestStatus.free;
     public event Action<QuestGiver> OnDestroyGiver;
     public event Action<int, int> OnQuestProgressChange; 
     private QuestDifficulty difficulty;
@@ -47,21 +50,24 @@ public class QuestGiver : MonoBehaviour
         set
         {
             QuestStatus = value;
-            switch (QuestStatus)
-            {
-                case QuestStatus.free:
-                    freeStatus.gameObject.SetActive(true);
-                    readyStatus.gameObject.SetActive(false);
-                    break;
-                case QuestStatus.ready:
-                    readyStatus.gameObject.SetActive(true);
-                    freeStatus.gameObject.SetActive(false);
-                    break;
-                default:
-                    freeStatus.gameObject.SetActive(false);
-                    readyStatus.gameObject.SetActive(false);
-                    break;
-            }
+            blockStatus.gameObject.SetActive(QuestStatus != QuestStatus.blocked);
+            freeStatus.gameObject.SetActive(QuestStatus == QuestStatus.free);
+            readyStatus.gameObject.SetActive(QuestStatus == QuestStatus.ready);
+//            switch (QuestStatus)
+//            {
+//                case QuestStatus.free:
+//                    freeStatus.gameObject.SetActive(true);
+//                    readyStatus.gameObject.SetActive(false);
+//                    break;
+//                case QuestStatus.ready:
+//                    readyStatus.gameObject.SetActive(true);
+//                    freeStatus.gameObject.SetActive(false);
+//                    break;
+//                default:
+//                    freeStatus.gameObject.SetActive(false);
+//                    readyStatus.gameObject.SetActive(false);
+//                    break;
+//            }
         }
     }
 
@@ -116,19 +122,54 @@ public class QuestGiver : MonoBehaviour
         var rewardType = Formuls.RandomQuestReward(difficulty);
         var levelDif = Controller.Level.difficult;
 
+
+        float diffCoef = 1f;
         switch (rewardType)
         {
             case QuestRewardType.money:
-                Controller.Level.AddItem(ItemId.money, 130);
+                float c = UnityEngine.Random.Range(3f, 5f);
+                var gold = Formuls.GoldInChest(levelDif);
+                switch (difficulty)
+                {
+                    case QuestDifficulty.easy:
+                        diffCoef = 0.6f;
+                        break;
+                    case QuestDifficulty.hard:
+                        diffCoef = 1.45f;
+                        break;
+                }
+                Controller.Level.AddItem(ItemId.money,(int)(diffCoef*gold*c));
                 break;
             case QuestRewardType.materials:
-                Controller.Level.AddItem(CraftItemType.Bone, 30);
+                float r = UnityEngine.Random.Range(4f, 6f);
+                switch (difficulty)
+                {
+                    case QuestDifficulty.easy:
+                        diffCoef = 0.6f;
+                        break;
+                    case QuestDifficulty.hard:
+                        diffCoef = 1.45f;
+                        break;
+                }
+                var craftType = DataBaseController.Instance.GetRandomCraftItemType();
+                Controller.Level.AddItem(craftType, (int)(r* diffCoef));
                 break;
             case QuestRewardType.crystal:
-                Controller.Level.AddItem(ItemId.crystal, 1);
+                switch (difficulty)
+                {
+                    case QuestDifficulty.easy:
+                        diffCoef = 0.6f;
+                        break;
+                    case QuestDifficulty.hard:
+                        diffCoef = 1.45f;
+                        break;
+                }
+                float cr = UnityEngine.Random.Range(1f, 3.1f);
+                Controller.Level.AddItem(ItemId.crystal, (int)(cr * diffCoef));
                 break;
             case QuestRewardType.item:
-                Controller.Level.AddRandomGift(true);
+                GiftType giftType = Formuls.CalcGiftType(difficulty);
+                Controller.Level.AddRandomGift(true, giftType);
                 break;
         }
         Status = QuestStatus.end;
@@ -142,8 +183,7 @@ public class QuestGiver : MonoBehaviour
         }
         StartCoroutine(WaitLoPlayEffect());
     }
-
-
+    
     private IEnumerator WaitLoPlayEffect()
     {
         yield return new WaitForSeconds(0.3f);
@@ -152,43 +192,66 @@ public class QuestGiver : MonoBehaviour
     public void Activate(Action<QuestGiver> callback)
     {
         Status = QuestStatus.started;
-//        var typ = Controller.GetRandomQuest();
-//        switch (typ)
-//        {
-//            case QuestLogicType.killName:
-//                logic = new MonsterKillByName(this, "dog", 5, OnQuestProgressChange);
-//                break;
-//            case QuestLogicType.killLowHp:
-//                logic = new MonstersKillOnLowHp(this, 5, 0.3f, OnQuestProgressChange);
-//                break;
-//            case QuestLogicType.killDistance:
-//                logic = new MonsterKillDistance(this, 5,5, OnQuestProgressChange);
-//                break;
-//            case QuestLogicType.killCrossbow:
-//                logic = new MonstersKillWeaponType(this, 5, SourceType.weapon,WeaponType.magic, OnQuestProgressChange);
-//                break;
-//            case QuestLogicType.killTalisman:
-//                logic = new MonstersKillWeaponType(this, 5, SourceType.talisman, WeaponType.magic, OnQuestProgressChange);
-//                break;
-//            case QuestLogicType.killOvercharged:
-//                logic = new MonsterKillOvercharged(this, 5, OnQuestProgressChange);
-//                break;
-//            case QuestLogicType.collectGold:
-//                logic = new QuestCollectGold(this,400,ItemId.money, OnQuestProgressChange);
-//                break;
-//            case QuestLogicType.collectReource:
-//                logic = new QuestCollectResource(this, 10, CraftItemType.Leather, OnQuestProgressChange);
-//                break;
-//            case QuestLogicType.getDamage:
-//                logic = new QuestGetDamage(this, 500, OnQuestProgressChange);
-//                break;
-//            default:
-//                logic = new QuestGetDamage(this,500, OnQuestProgressChange);
-//                break;
-//        }
+        float coef = 1;
+        switch (difficulty)
+        {
+            case QuestDifficulty.easy:
+                coef = 0.6f;
+                break;
+            case QuestDifficulty.hard:
+                coef = 1.6f;
+                break;
+        }
+
+        int r;
+        var typ = Controller.GetRandomQuest();
+        switch (typ)
+        {
+            case QuestLogicType.killName:
+                r = (int)(UnityEngine.Random.Range(7.5f, 9.5f)*coef);
+                logic = new MonsterKillByName(this, Map.Instance.enemies[0].name, r, OnQuestProgressChange);
+                break;
+            case QuestLogicType.killLowHp:
+                r = (int)(UnityEngine.Random.Range(6.5f, 8.5f) * coef);
+                logic = new MonstersKillOnLowHp(this, r, 0.3f, OnQuestProgressChange);
+                break;
+            case QuestLogicType.killDistance:
+                r = (int)(UnityEngine.Random.Range(6f, 8f) * coef);
+                logic = new MonsterKillDistance(this, 5,r, OnQuestProgressChange);
+                break;
+            case QuestLogicType.killCrossbow:
+                r = (int)(UnityEngine.Random.Range(9.5f, 11.5f) * coef);
+                logic = new MonstersKillWeaponType(this, r, SourceType.weapon,WeaponType.magic, OnQuestProgressChange);
+                break;
+            case QuestLogicType.killTalisman:
+                r = (int)(UnityEngine.Random.Range(6f, 8f) * coef);
+                logic = new MonstersKillWeaponType(this, r, SourceType.talisman, WeaponType.magic, OnQuestProgressChange);
+                break;
+            case QuestLogicType.killOvercharged:
+                r = (int)(UnityEngine.Random.Range(4f, 6f) * coef);
+                logic = new MonsterKillOvercharged(this, r, OnQuestProgressChange);
+                break;
+            case QuestLogicType.collectGold:
+                var g = Formuls.GoldInChest(MainController.Instance.level.difficult);
+                r = (int)(g * UnityEngine.Random.Range(6f, 9f) * coef);
+                logic = new QuestCollectGold(this,r,ItemId.money, OnQuestProgressChange);
+                break;
+            case QuestLogicType.collectReource:
+                r = (int)(UnityEngine.Random.Range(5f, 7f) * coef);
+                logic = new QuestCollectResource(this, r, CraftItemType.Leather, OnQuestProgressChange);
+                break;
+            case QuestLogicType.getDamage:
+                var h = MainController.Instance.level.MainHero.Parameters.MaxHp;
+                r = (int)(UnityEngine.Random.Range(0.8f, 2.3f) * h * coef);
+                logic = new QuestGetDamage(this, r, OnQuestProgressChange);
+                break;
+            default:
+                logic = new QuestGetDamage(this,500, OnQuestProgressChange);
+                break;
+        }
 
         Debug.Log("Quest Activated");
-        logic = new MonsterKillOvercharged(this, 5, OnQuestProgressChange);
+//        logic = new MonsterKillOvercharged(this, 5, OnQuestProgressChange);
         if (callback != null)
         {
             callback(this);
@@ -215,6 +278,18 @@ public class QuestGiver : MonoBehaviour
     public void SetCallBack(Action<int, int> onProgress)
     {
         OnQuestProgressChange = onProgress;
+    }
+
+    public void SetBlock()
+    {
+        OldStatus = Status;
+        Status = QuestStatus.blocked;
+
+    }
+
+    public void UnBlock()
+    {
+        Status = OldStatus;
     }
 }
 

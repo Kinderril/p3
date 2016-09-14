@@ -17,7 +17,7 @@ public class MonsterKillByName : MonsterKillBase
     protected override void OnEnemyDeadCallback(Unit obj)
     {
         var monster = obj as BaseMonster;
-        if (monster != null && monster.name.Contains(name))
+        if (monster != null && monster.name.Equals(name))
         {
             currentCount++;
             base.OnEnemyDeadCallback(obj);

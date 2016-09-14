@@ -18,6 +18,8 @@ public class QuestCollectResource : QuestLogicBase
         if (_craftItemType == arg1)
         {
             currentCount++;
+            if (OnQuestProgressChange != null)
+                OnQuestProgressChange(currentCount, NeedToComplete);
             if (currentCount >= NeedToComplete)
             {
                 ReadyToReward();
