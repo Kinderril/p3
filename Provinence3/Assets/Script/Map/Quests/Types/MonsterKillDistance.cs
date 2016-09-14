@@ -22,5 +22,14 @@ public class MonsterKillDistance : MonsterKillBase
             base.OnEnemyDeadCallback(obj);
         }
     }
+    public override string AppearMessage()
+    {
+        return "Destroy monsters from distance:" + NeedToComplete;
+    }
+
+    public override string PauseMessage()
+    {
+        return "You must kill monsters from big distance. Become sniper: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+    }
 }
 

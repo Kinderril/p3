@@ -32,5 +32,14 @@ public class QuestCollectResource : QuestLogicBase
     {
         MainController.Instance.level.OnCraftItemCollected -= OnCraftItemCollected;
     }
+    public override string AppearMessage()
+    {
+        return "Collect resouces:" + NeedToComplete;
+    }
+
+    public override string PauseMessage()
+    {
+        return "Collect:" + _craftItemType.ToString() + ". Progress:" + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+    }
 }
 

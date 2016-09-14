@@ -23,5 +23,14 @@ public class MonstersKillWeaponType : MonsterKillBase
             base.OnEnemyDeadCallback(obj);
         }
     }
+    public override string AppearMessage()
+    {
+        return "Destroy monsters with crossbow:" + NeedToComplete;
+    }
+
+    public override string PauseMessage()
+    {
+        return "Use crossbow to kill some monsters: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+    }
 }
 

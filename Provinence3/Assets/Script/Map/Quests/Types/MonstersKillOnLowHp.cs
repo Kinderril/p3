@@ -23,5 +23,15 @@ public class MonstersKillOnLowHp : MonsterKillBase
             base.OnEnemyDeadCallback(obj);
         }
     }
+
+    public override string AppearMessage()
+    {
+        return "Destroy monsters on low health:" + NeedToComplete;
+    }
+
+    public override string PauseMessage()
+    {
+        return "Destroy monsters, when your health less than 33%: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+    }
 }
 

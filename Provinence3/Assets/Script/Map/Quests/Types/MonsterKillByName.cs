@@ -23,5 +23,14 @@ public class MonsterKillByName : MonsterKillBase
             base.OnEnemyDeadCallback(obj);
         }
     }
+    public override string AppearMessage()
+    {
+        return "Kill some type of monster:" + NeedToComplete;
+    }
+
+    public override string PauseMessage()
+    {
+        return "Destroy monsters:" + name + " Progress:" + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+    }
 }
 

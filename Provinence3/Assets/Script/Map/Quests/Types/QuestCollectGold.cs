@@ -31,5 +31,14 @@ public class QuestCollectGold : QuestLogicBase
     {
         MainController.Instance.level.OnItemCollected -= OnItemCollected;
     }
+    public override string AppearMessage()
+    {
+        return "Collect gold:" + NeedToComplete;
+    }
+
+    public override string PauseMessage()
+    {
+        return "Find chests and grab gold from it: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+    }
 }
 

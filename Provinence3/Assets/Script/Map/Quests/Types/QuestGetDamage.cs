@@ -26,5 +26,14 @@ public class QuestGetDamage : QuestLogicBase
     {
         MainController.Instance.level.MainHero.OnGetHit -= OnGetHit;
     }
+    public override string AppearMessage()
+    {
+        return "Get some damage:" + NeedToComplete;
+    }
+
+    public override string PauseMessage()
+    {
+        return "Get damage from monsters, and try not to die: " + currentCount + "/" + NeedToComplete + "\n" + DifficultyStr();
+    }
 }
 
