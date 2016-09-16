@@ -38,25 +38,25 @@ public class Formuls
     {
         return boss.CurHp * (1 - 0.03f * bonuses);
     }
-    public static int ChestItemCost(float lvl)
+    public static int ShopPlayerItemCost(float lvl)
     {
         return (int)(2 * Mathf.Pow(lvl, 0.37f) * LevelGoldAv(lvl));
     }
-    public static int ChestItemCost(int lvl)
+    public static int ShopPlayerItemCost(int lvl)
     {
-        return ChestItemCost((float)lvl);
+        return ShopPlayerItemCost((float)lvl);
     }
     public static int RecepiCost(int lvl)
     {
-        return (int)(ChestItemCost(lvl) * 0.65f);
+        return (int)(ShopPlayerItemCost(lvl) * 0.65f);
     }
     public static int BonusCost(int lvl)
     {
-        return (int)(ChestItemCost(lvl) * 0.35f);
+        return (int)(ShopPlayerItemCost(lvl) * 0.35f);
     }
     public static int ExecutableCost(int lvl)
     {
-        return (int)(ChestItemCost(lvl) * 0.4f);
+        return (int)(ShopPlayerItemCost(lvl) * 0.4f);
     }
     
     public static int GoldInChest(int lvl)
@@ -149,7 +149,7 @@ public class Formuls
                 break;
         }
         var lvlCost = GetPlayerItemLvlByPoints(points) ;
-        var p = ChestItemCost(lvlCost);
+        var p = ShopPlayerItemCost(lvlCost);
         var totalCost = (int)(p * c / 4);
         Debug.Log("points: " + points + "  totalCost:"+ totalCost + "  lvlCost:" + lvlCost);
         return totalCost;

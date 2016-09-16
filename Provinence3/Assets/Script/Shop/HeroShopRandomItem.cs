@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class HeroShopRandomItem : IShopExecute
+public abstract class HeroShopRandomItem : IShopExecute
 {
-    public override void Execute(int level)
+    public void Execute(int level,Slot slot)
     {
-        var slot = ShopController.RandomSlot();
-//        Debug.Log("SLOT:" + slot);
         var levelResult = ShopController.RandomizeLvl(level);
         switch (slot)
         {
@@ -31,7 +29,7 @@ public class HeroShopRandomItem : IShopExecute
     {
         get { return Formuls.ChestItemCost(Parameter); }
     }
-    private void randomCreatAdditionalItem()
+    protected void randomCreatAdditionalItem()
     {
         
     }
