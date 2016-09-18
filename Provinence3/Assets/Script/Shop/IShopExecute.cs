@@ -7,10 +7,10 @@ using UnityEngine;
 
 public abstract class IShopExecute : MonoBehaviour
 {
-//    public int MoneyCost;
+
     public int Parameter;
     public Sprite icon;
-    public string name = "wrong";
+    public string ShopName = "wrong";
     public bool CanBuy
     {
         get { return MainController.Instance.PlayerData.Level >= Parameter; }

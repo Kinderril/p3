@@ -63,6 +63,7 @@ public class Level
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
+        CrystalsBonus = 1;
         QuestController = new LevelQuestController(this);
         TimeUtils.StartMeasure("LOAD PRELEVEL");
         Energy = new Energy(ActivaAction,OnRage);
@@ -116,14 +117,7 @@ public class Level
     }
 
     public bool IsPause { get; set; }
-
-    private void OnPortalOpen()
-    {
-        //TODO
-//        Vector3 placeToBorn;
-        //Find closes bornPositions
-    }
-
+    
     public void MessageAppear(string txt, string subTxt,Color color , Sprite icon = null)
     {
         var item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberWithPicture);

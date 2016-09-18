@@ -10,9 +10,9 @@ public class GoldMapItem : BaseMapItem
     private int count;
 
 
-    public void Init(ItemId type, int count)
+    public void Init(ItemId type, int count,bool fromChest = false)
     {
-        base.Init();
+        base.Init(fromChest);
         this.type = type;
         this.count = count;
     }

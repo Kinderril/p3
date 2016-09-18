@@ -12,9 +12,10 @@ public class BaseMapItem : MonoBehaviour
     public Animator animator;
     private bool canBeTaken = false;
 
-    public void Init()
+    public void Init(bool fromChest)
     {
-        Utils.SetRandomOffset(transform,2f);
+        if (!fromChest)
+            Utils.SetRandomOffset(transform,2f);
         Utils.SetRandomRotation(transform);
     }
     void OnTriggerEnter(Collider other)

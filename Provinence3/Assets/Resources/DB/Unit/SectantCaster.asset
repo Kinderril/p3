@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SectantCaster
   m_EditorClassIdentifier: 
   Speed: 310
-  MPower: 83
+  MPower: 53
   PPower: 0
   MaxHp: 260
   magicResist: 35

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Dog
   m_EditorClassIdentifier: 
   Speed: 600
-  MPower: 63
-  PPower: 63
+  MPower: 39
+  PPower: 39
   MaxHp: 205
   magicResist: 40
   physicResist: 45

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: DogMinor
   m_EditorClassIdentifier: 
   type: 1
-  range: 1.4
+  range: 1.58
   isHoming: 1
   attackCooldown: 0.74
   icon: {fileID: 0}

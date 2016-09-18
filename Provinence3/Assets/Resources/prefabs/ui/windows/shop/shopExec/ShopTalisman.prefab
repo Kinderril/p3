@@ -1,70 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &151978
+--- !u!1 &117254
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 431306}
-  - 114: {fileID: 11466538}
+  - 4: {fileID: 453386}
+  - 114: {fileID: 11495670}
   m_Layer: 0
-  m_Name: ShopItem
+  m_Name: ShopTalisman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &431306
+--- !u!4 &453386
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 151978}
+  m_GameObject: {fileID: 117254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.000015258789, z: 0}
+  m_LocalPosition: {x: 0, y: 0.000021896021, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11466538
+--- !u!114 &11495670
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 151978}
+  m_GameObject: {fileID: 117254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3023bce4d4d424aaa05e8aa8d528e8, type: 3}
+  m_Script: {fileID: 11500000, guid: b78608bf5a323a84995d5f3e8bd16d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrystalCost: 0
   Parameter: 0
-  icon: {fileID: 21300000, guid: 323779a68853986439d8c5e742858b31, type: 3}
-  name: 
+  icon: {fileID: 21300000, guid: 7833504942711db40aa426e9e75c4b82, type: 3}
+  ShopName: Talismans
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: MoneyCost
-      value: 213
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: Parameter
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 21300000, guid: 49b611e658efbf443b686a4036f74fe3,
-        type: 3}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 151978}
+  m_RootGameObject: {fileID: 117254}
   m_IsPrefabParent: 1

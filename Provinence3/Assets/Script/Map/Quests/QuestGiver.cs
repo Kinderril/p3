@@ -53,21 +53,6 @@ public class QuestGiver : MonoBehaviour
             blockStatus.gameObject.SetActive(QuestStatus != QuestStatus.blocked);
             freeStatus.gameObject.SetActive(QuestStatus == QuestStatus.free);
             readyStatus.gameObject.SetActive(QuestStatus == QuestStatus.ready);
-//            switch (QuestStatus)
-//            {
-//                case QuestStatus.free:
-//                    freeStatus.gameObject.SetActive(true);
-//                    readyStatus.gameObject.SetActive(false);
-//                    break;
-//                case QuestStatus.ready:
-//                    readyStatus.gameObject.SetActive(true);
-//                    freeStatus.gameObject.SetActive(false);
-//                    break;
-//                default:
-//                    freeStatus.gameObject.SetActive(false);
-//                    readyStatus.gameObject.SetActive(false);
-//                    break;
-//            }
         }
     }
 
@@ -87,6 +72,8 @@ public class QuestGiver : MonoBehaviour
         readyStatus.gameObject.SetActive(false);
         this.Controller = controller;
         difficulty = Formuls.RandomQuestDifficulty();
+        Utils.GroundTransform(transform);
+        Status = QuestStatus.free;
 
     }
 

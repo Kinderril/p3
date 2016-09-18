@@ -11,7 +11,7 @@ public class ItemMapItem : BaseMapItem
 
     public void Init(CraftItemType type,int count = 1)
     {
-        base.Init();
+        base.Init(false);
         this.count = count;
         this.type = type;
         Utils.GroundTransform(transform);

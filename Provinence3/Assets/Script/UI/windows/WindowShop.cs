@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -39,7 +40,10 @@ public class WindowShop : BaseWindow
 
     public HeroShopExecutableItem PrefabHeroShopExecutableItem;
     public HeroShopBonusItem PrefabHeroShopBonusItem;
-    public HeroShopRandomItem PrefabHeroShopRandomItem;
+//    public HeroShopRandomItem PrefabHeroShopRandomItem;
+    public HeroShopWeapon HeroShopWeapon;
+    public HeroShopTalisman HeroShopTalisman;
+    public HeroShopArmor HeroShopArmor;
     public HeroShopRecipeItem PrefabHeroShopRecipeItem;
 
     public override void Init()
@@ -145,13 +149,21 @@ public class WindowShop : BaseWindow
     {
         ClearTransform(layoutShopItems);
         int lvl = MainController.Instance.PlayerData.Level;
-        for (int i = Mathf.Clamp(lvl - 2,1,Int32.MaxValue); i <= lvl ; i++)
+        var countShopItems = Mathf.Clamp(lvl - 2, 1, Int32.MaxValue);
+        for (int i = countShopItems; i <= lvl ; i++)
         {
-            var e = DataBaseController.GetItem<HeroShopRandomItem>(PrefabHeroShopRandomItem);
+            var e = DataBaseController.GetItem<HeroShopRandomItem>(HeroShopWeapon);
             e.Init(i);
-//            var e = new HeroShopRandomItem(i);
             CreatShopElement(e);
+            var e2 = DataBaseController.GetItem<HeroShopRandomItem>(HeroShopArmor);
+            e2.Init(i);
+            CreatShopElement(e2);
+            var e3 = DataBaseController.GetItem<HeroShopRandomItem>(HeroShopTalisman);
+            e3.Init(i);
+            CreatShopElement(e3);
         }
+
+
         var bonItem = DataBaseController.GetItem<HeroShopBonusItem>(PrefabHeroShopBonusItem);
         bonItem.Init(lvl);
         CreatShopElement(bonItem);
@@ -188,18 +200,31 @@ public class WindowShop : BaseWindow
 
     private void NullSelection()
     {
-//        ItemInfoElement.gameObject.SetActive(false);
         selectedShopElement = null;
         selectedPlayerItem = null;
-//        OnSelected()
-        if (layoutShopItems.childCount > 0)
-        {
-            var tmp = layoutShopItems.GetChild(0);
-            var shopExec = tmp.GetComponent<IShopExecute>();
-            if (shopExec != null)
-                OnShopSelected(shopExec);
-        }
+        
+//        Debug.Log("child count " + layoutMyInventory.childCount);
+//        LayoutRebuilder.ForceRebuildLayoutImmediate(layoutMyInventory.GetComponent<RectTransform>());
+//        if (layoutMyInventory.childCount > 0)
+//        {
+//            var tmp = layoutMyInventory.GetChild(0);
+//            var shopExec = tmp.GetComponent<PlayerItemElement>();
+//            if (shopExec != null)
+//                OnSelected(shopExec);
+//        }
+        StartCoroutine(WaitBeforSelect());
+    }
 
+    private IEnumerator WaitBeforSelect()
+    {
+        yield return new WaitForEndOfFrame();
+        if (layoutMyInventory.childCount > 0)
+        {
+            var tmp = layoutMyInventory.GetChild(0);
+            var shopExec = tmp.GetComponent<PlayerItemElement>();
+            if (shopExec != null)
+                OnSelected(shopExec);
+        }
     }
 
 //    private void OnItemInit(BaseItem info,ItemOwner obj)

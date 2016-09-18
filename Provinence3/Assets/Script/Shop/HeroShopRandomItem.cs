@@ -27,7 +27,7 @@ public abstract class HeroShopRandomItem : IShopExecute
 
     public override int MoneyCost
     {
-        get { return Formuls.ChestItemCost(Parameter); }
+        get { return Formuls.ShopPlayerItemCost(Parameter); }
     }
     protected void randomCreatAdditionalItem()
     {

@@ -101,8 +101,12 @@ public class Map : Singleton<Map>
 
         allInfo += TimeUtils.EndMeasure("LOAD MONSTERS");
         TimeUtils.StartMeasure("LOAD LAST");
-        var rnd = chestPositions.RandomElement();
-        rnd.SetCrystal();
+        int cnt = (int)(level.CrystalsBonus);
+        var rnd = chestPositions.RandomElement(cnt);
+        foreach (var chestBornPosition in rnd)
+        {
+            chestBornPosition.SetCrystal();
+        }
         foreach (var chestBornPosition in chestPositions)
         {
             chestBornPosition.Init(this,lvl);
