@@ -573,7 +573,7 @@ public class PlayerData
         }
     }
 
-    public void DoCraft(RecipeItem recipeItem, ExecCatalysItem catalysItem = null)
+    public PlayerItem DoCraft(RecipeItem recipeItem, ExecCatalysItem catalysItem = null)
     {
         foreach (var execCraftItem in recipeItem.ItemsToCraft())
         {
@@ -582,6 +582,7 @@ public class PlayerData
         var resultItem = HeroShopRandomItem.CreatMainSlot(recipeItem.recipeSlot, recipeItem.Level, catalysItem);
         AddItem(resultItem);
         Save();
+        return resultItem;
     }
 }
 

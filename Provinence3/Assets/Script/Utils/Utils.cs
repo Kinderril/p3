@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using Random = System.Random;
 
@@ -104,6 +105,22 @@ public static class Utils
             var t = transform.position;
 //            var groundOffset = hitInfo.distance;
             transform.position = new Vector3(t.x, hitInfo.point.y, t.z);
+        }
+    }
+    public static void LoadTexture(string icon,Sprite IconSprite)
+    {
+        if (File.Exists(icon))
+        {
+            var bytes = System.IO.File.ReadAllBytes(icon);
+            var texture = new Texture2D(1, 1);
+            texture.LoadImage(bytes);
+            texture.filterMode = FilterMode.Bilinear;
+            texture.Apply();
+            IconSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        }
+        else
+        {
+            IconSprite = null;
         }
     }
 

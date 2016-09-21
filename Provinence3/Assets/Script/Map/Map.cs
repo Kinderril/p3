@@ -149,10 +149,12 @@ public class Map : Singleton<Map>
 
     private IEnumerator Loading()
     {
+        int curCount = 0;
         foreach (var monsterBornPosition in appearPos)
         {
             yield return new WaitForEndOfFrame();
             monsterBornPosition.BornMosters();
+            DebugController.Instance.InfoField1.text = "Count:"+enemies.Count.ToString();
         }
         LoadBoss();
         if (OnMonstersReady != null)

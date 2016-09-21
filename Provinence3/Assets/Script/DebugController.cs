@@ -16,6 +16,8 @@ public class DebugController : Singleton<DebugController>
     public bool RESPAWN_TIME_CREEPS_FAST = false;
     public bool ALWAYS_GOOD_END = false;
     public bool CHANCE_STUN_100 = false;
+    public bool QUEST_REWARD_ITEM = false;
+    public bool QUEST_COMPLETE = false;
 
     public Text InfoField1;
     public Text InfoField2;

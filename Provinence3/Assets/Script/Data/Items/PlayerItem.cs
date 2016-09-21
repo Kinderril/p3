@@ -91,15 +91,7 @@ public class PlayerItem : BaseItem ,IEnhcant
 
     public override void LoadTexture()
     {
-        if (File.Exists(icon))
-        {
-            var bytes = System.IO.File.ReadAllBytes(icon);
-            var texture = new Texture2D(1, 1);
-            texture.LoadImage(bytes);
-            texture.filterMode = FilterMode.Bilinear;
-            texture.Apply();
-            IconSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-        }
+        Utils.LoadTexture(icon, IconSprite);
     }
 
     

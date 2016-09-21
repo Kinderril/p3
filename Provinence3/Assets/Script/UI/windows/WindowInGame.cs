@@ -87,7 +87,8 @@ public class WindowInGame : BaseWindow
         switch (obj.Status)
         {
             case QuestStatus.started:
-                MainController.Instance.level.MessageAppear("Quest Started",obj.Logic.AppearMessage(), Color.white);
+                Color c1 = new Color(25f / 255f, 169f / 255f, 169f / 255f, 1);
+                MainController.Instance.level.BigMessageAppear("Quest Started",obj.Logic.AppearMessage(),c1, 1.5f);
                 QuestActive.Activate();
                 QuestActive.SetProgress(obj.Logic.CurrentCount, obj.Logic.TargetCount);
                 break;
@@ -95,7 +96,8 @@ public class WindowInGame : BaseWindow
                 QuestActive.ReadyGameObject.gameObject.SetActive(true);
                 break;
             case QuestStatus.end:
-                MainController.Instance.level.MessageAppear("Quest Complete", "", Color.cyan);
+                Color c = new Color(25f/255f,169f/255f,62f/255f,1);
+                MainController.Instance.level.BigMessageAppear("Quest Complete", "", c);
                 QuestActive.Hide();
                 break;
         }
@@ -178,24 +180,26 @@ public class WindowInGame : BaseWindow
         level.QuestController.OnQuestProgress -= OnQuestProgress;
     }
 
-    private void OnItemCollected(ItemId arg1, float arg2,float delta)
+    private void OnItemCollected(ItemId itemType, float arg2,float delta)
     {
         FlyingNumbers item;
-        switch (arg1)
+        switch (itemType)
         {
             case ItemId.money:
                 moneyField.text = arg2.ToString("00");
                 item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
                 item.transform.SetParent(moneyContainer);
-                item.Init(GetDeltaStr(delta) + " Gold", DataBaseController.Instance.GetColor(arg1),FlyNumerDirection.non,26);
+                item.Init(GetDeltaStr(delta) + " Gold", DataBaseController.Instance.GetColor(itemType),FlyNumerDirection.non,26);
                 break;
             case ItemId.crystal:
-                level.MessageAppear("You found crystal", "" ,Color.green, DataBaseController.Instance.ItemIcon(ItemId.crystal));
+                
+                Color c = new Color(139f/255f, 31/255f, 219f/255f,1f);
+                level.BigMessageAppear("You found crystal", "" ,c);
                 break;
             case ItemId.energy:
                 item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
                 item.transform.SetParent(moneyContainer);
-                item.Init("+" + Mathf.Abs(delta).ToString("0")+ " Energy", DataBaseController.Instance.GetColor(arg1), FlyNumerDirection.non,30);
+                item.Init("+" + Mathf.Abs(delta).ToString("0")+ " Energy", DataBaseController.Instance.GetColor(itemType), FlyNumerDirection.non,30);
                 break;
         }
     }

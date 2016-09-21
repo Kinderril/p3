@@ -224,6 +224,7 @@ public class Hero : Unit
         if (isRegenHP)
         {
             var p = Time.deltaTime * regenCoef;
+            Debug.Log("Regen Delta:" + p);
             SetHp(CurHp + p);
             if (OnGetHit != null)
             {

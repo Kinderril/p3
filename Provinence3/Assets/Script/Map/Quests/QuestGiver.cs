@@ -91,12 +91,13 @@ public class QuestGiver : MonoBehaviour
 
     public void SetReady()
     {
-        if (Status == QuestStatus.started)
-        {
-            Status = QuestStatus.ready;
-            Controller.Ready(this);
-            logic.Clear();
-        }
+        Controller.Check(this);
+//        if (Status == QuestStatus.started)
+//        {
+//            Status = QuestStatus.ready;
+//            Controller.Ready(this);
+//            logic.Clear();
+//        }
     }
 
     public bool IsReady()
@@ -108,7 +109,12 @@ public class QuestGiver : MonoBehaviour
     {
         var rewardType = Formuls.RandomQuestReward(difficulty);
         var levelDif = Controller.Level.difficult;
-
+#if UNITY_EDITOR
+        if (DebugController.Instance.QUEST_REWARD_ITEM)
+        {
+            rewardType = QuestRewardType.item;
+        }
+#endif
 
         float diffCoef = 1f;
         switch (rewardType)
@@ -200,7 +206,7 @@ public class QuestGiver : MonoBehaviour
                 break;
             case QuestLogicType.killLowHp:
                 r = (int)(UnityEngine.Random.Range(6.5f, 8.5f) * coef);
-                logic = new MonstersKillOnLowHp(this, r, 0.3f, OnQuestProgressChange);
+                logic = new MonstersKillOnLowHp(this, r, 0.5f, OnQuestProgressChange);
                 break;
             case QuestLogicType.killDistance:
                 r = (int)(UnityEngine.Random.Range(6f, 8f) * coef);

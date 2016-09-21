@@ -227,19 +227,6 @@ public class WindowShop : BaseWindow
         }
     }
 
-//    private void OnItemInit(BaseItem info,ItemOwner obj)
-//    {
-//        bool val = info == null;
-//        if (!val)
-//        {
-//            bool isEquiped = info.IsEquped;
-//            if (info.Slot != Slot.executable && info.Slot != Slot.recipe)
-//            {
-//                var canBeupgraded = MainController.Instance.PlayerData.CanBeUpgraded(info) != null;
-//            }
-//        }
-//        ItemInfoElement.gameObject.SetActive(true);
-//    }
     private void OnChangeCount(ExecutableItem obj,int delta)
     {
         var element = PlayerItemElements.FirstOrDefault(x => x.PlayerItem == obj);
@@ -346,6 +333,16 @@ public class WindowShop : BaseWindow
         ClearTransform(layoutMyInventory);
         ClearTransform(layoutShopItems);
         base.Close();
+    }
+
+    public void OpenCraft(RecipeItem recipe)
+    {
+        CraftWindow.Init(recipe, OnCraftComplete);
+    }
+
+    private void OnCraftComplete(BaseItem obj)
+    {
+        ItemWindow.Init(obj);
     }
 }
 

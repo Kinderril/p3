@@ -24,7 +24,7 @@ public class RecepiItemInfo : InventoryItemInfo
         var shop = WindowManager.Instance.CurrentWindow as WindowShop;
         if (shop != null)
         {
-            shop.CraftWindow.Init(recipe);
+            shop.OpenCraft(recipe);
         }
     }
 }

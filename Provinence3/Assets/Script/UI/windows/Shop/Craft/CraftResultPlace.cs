@@ -8,14 +8,19 @@ using UnityEngine.UI;
 public class CraftResultPlace : MonoBehaviour
 {
 
-    public Image mainImage;
-    public Text mainParameter;
-    public Image catalysImage;
+    public Image MainImage;
+//    public Text mainParameter;
+    public Image IconRune;
 
-    public void Init(RecipeItem recipe, ExecCatalysItem catalys = null)
+    public void Init(Sprite mainIcon, ExecCatalysItem catalys = null)
     {
         bool haveCatalys = catalys != null;
-        catalysImage.gameObject.SetActive(haveCatalys);
+        if (haveCatalys)
+        {
+            IconRune.sprite = catalys.IconSprite;
+        }
+        MainImage.sprite = mainIcon;
+        IconRune.gameObject.SetActive(haveCatalys);
 
     }
 }

@@ -67,6 +67,12 @@ public class LevelQuestController
             if (!finishedQuests.Contains(questGiver.id))
             {
                 Start(questGiver);
+#if UNITY_EDITOR
+                if (DebugController.Instance.QUEST_COMPLETE)
+                {
+                    End(questGiver);
+                }
+#endif
             }
         }
         else

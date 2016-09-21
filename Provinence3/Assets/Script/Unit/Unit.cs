@@ -51,7 +51,6 @@ public class Unit : MonoBehaviour
 
     public void SetHp(float val)
     {
-
         curHp = Mathf.Clamp(val, -1, Parameters[ParamType.Heath]);
         if (curHp <= 0)
         {

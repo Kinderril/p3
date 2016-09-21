@@ -118,7 +118,7 @@ public class Level
 
     public bool IsPause { get; set; }
     
-    public void MessageAppear(string txt, string subTxt,Color color , Sprite icon = null)
+    public void BigMessageAppear(string txt, string subTxt,Color color,float speed = 1)
     {
         var item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberWithPicture);
         item.transform.SetParent(WindowManager.Instance.CurrentWindow.transform);
@@ -214,7 +214,7 @@ public class Level
         }
     }
 
-    public void EndLevel(PlayerData PlayerData, EndlevelType LevelEndType)
+    public void EndLevel(PlayerData PlayerData, EndlevelType LevelEndType,bool endImmidiatly = false)
     {
         IsGoodEnd = LevelEndType;
         PortalsController.Stop();
@@ -229,8 +229,8 @@ public class Level
 #endif
         if (isBad)
         {
-            moneyInv.Remove(ItemId.crystal);
-            moneyInv[ItemId.money] /= 2;
+//            moneyInv.Remove(ItemId.crystal);
+//            moneyInv[ItemId.money] /= 2;
         }
         else
         {
@@ -253,14 +253,27 @@ public class Level
             OnEndLevel();
         }
         Energy.Dispose();
-        MainController.Instance.StartCoroutine(WaitEndLvl());
+        if (endImmidiatly)
+        {
+            AfterWait();
+        }
+        else
+        {
+            MainController.Instance.StartCoroutine(WaitEndLvl());
+        }
     }
 
     private IEnumerator WaitEndLvl()
     {
         yield return new WaitForFixedUpdate();
+        AfterWait();
+    }
+
+    private void AfterWait()
+    {
         DataBaseController.Instance.Pool.Clear();
-    } 
+
+    }
     
     public void AddRandomGift(bool withAction = false,GiftType? giftType = null)
     {

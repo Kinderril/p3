@@ -94,10 +94,10 @@ public class MainController : Singleton<MainController>
 
     }
 
-    public void EndLevel(EndlevelType goodEnd)
+    public void EndLevel(EndlevelType goodEnd,bool endImmidiatly = false)
     {
         Debug.Log("EndLevel>> goodEnd:" + goodEnd);
-        level.EndLevel(PlayerData, goodEnd);
+        level.EndLevel(PlayerData, goodEnd, endImmidiatly);
         StartCoroutine(w4death());
     }
 
