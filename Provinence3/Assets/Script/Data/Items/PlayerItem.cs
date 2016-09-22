@@ -91,7 +91,7 @@ public class PlayerItem : BaseItem ,IEnhcant
 
     public override void LoadTexture()
     {
-        Utils.LoadTexture(icon, IconSprite);
+        Utils.LoadTexture(icon,out IconSprite);
     }
 
     

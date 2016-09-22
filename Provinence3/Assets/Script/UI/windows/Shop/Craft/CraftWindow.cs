@@ -28,6 +28,7 @@ public class CraftWindow : MonoBehaviour
     private CraftItemElement failElement = null;
     private Sprite iconSprite;
     private Action<BaseItem> OnCraftComplete;
+    private List<CatalysItemElement> catalysElements = new List<CatalysItemElement>(); 
 
     public void Init(RecipeItem recipeItem,Action<BaseItem> OnCraftComplete )
     {
@@ -37,7 +38,7 @@ public class CraftWindow : MonoBehaviour
         {
             string icon;
             RenderCam.Instance.DoRender(recipeItem.recipeSlot, out icon);
-            Utils.LoadTexture(icon, iconSprite);
+            Utils.LoadTexture(icon,out iconSprite);
         }
         else
         {
@@ -46,7 +47,6 @@ public class CraftWindow : MonoBehaviour
         this.recipeItem = recipeItem;
         elements.Clear();
         BaseWindow.ClearTransform(CraftItemsLayout);
-        BaseWindow.ClearTransform(CatalysItemsLayout);
         foreach (var craftElement in recipeItem.ItemsToCraft())
         {
             if (craftElement.count > 0)
@@ -62,13 +62,19 @@ public class CraftWindow : MonoBehaviour
             }
         }
         var allCatalys = MainController.Instance.PlayerData.GetAllItems().Where(x => x is ExecCatalysItem);
+        BaseWindow.ClearTransform(CatalysItemsLayout);
         foreach (var cat in allCatalys)
         {
             CatalysItemElement catalysItemElement = DataBaseController.GetItem<CatalysItemElement>(CatalysItemPrefab);
             catalysItemElement.Init(cat as ExecCatalysItem, OnCatalysClick);
+            catalysItemElement.transform.SetParent(CatalysItemsLayout,false);
+            catalysElements.Add(catalysItemElement);
         }
         CatalysItemElement catalysItemElementFree = DataBaseController.GetItem<CatalysItemElement>(CatalysItemPrefab);
         catalysItemElementFree.Init(null, OnCatalysClick);
+        catalysItemElementFree.transform.SetParent(CatalysItemsLayout, false);
+        catalysElements.Add(catalysItemElementFree);
+
         CraftResultPlace.Init(iconSprite, null);
     }
 
@@ -99,12 +105,19 @@ public class CraftWindow : MonoBehaviour
     public void OnClose()
     {
         gameObject.SetActive(false);
+        catalysElements.Clear();
     }
 
     private void CatalysChanges(ExecCatalysItem catalysItem)
     {
         this.selectedCatalysItem = catalysItem;
-//        CatalysPlace.Set(catalysItem);
+        foreach (var catalysItemElement in catalysElements)
+        {
+            if (catalysItemElement.Item != catalysItem)
+            {
+                catalysItemElement.SelectAnother();
+            }
+        }
         CraftResultPlace.Init(iconSprite, selectedCatalysItem);
     }
 

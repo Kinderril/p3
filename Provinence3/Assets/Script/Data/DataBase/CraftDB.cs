@@ -61,6 +61,13 @@ public class CraftDB
             new CraftItemCoefs(CraftItemType.Gems, 4, 2.8f ,6),
             new CraftItemCoefs(CraftItemType.Mercury, 2, 1.9f ,7),
         });
+        crafts.Add(Slot.Talisman, new List<CraftItemCoefs>()
+        {
+            new CraftItemCoefs(CraftItemType.Thread, 8,5,0),//todo
+            new CraftItemCoefs(CraftItemType.Leather, 18,7,0),//todo
+            new CraftItemCoefs(CraftItemType.Gems, 4, 2.8f ,6),//todo
+            new CraftItemCoefs(CraftItemType.Mercury, 2, 1.9f ,7),//todo
+        });
         
     }
 

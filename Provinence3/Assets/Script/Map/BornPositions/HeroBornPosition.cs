@@ -29,7 +29,7 @@ public class HeroBornPosition : BaseBornPosition
             if (unit != null)
             {
                 MainController.Instance.PlayerData.OpenBornPosition(ID);
-                MainController.Instance.level.MessageAppear( "born point opened", "",Color.blue, DataBaseController.Instance.ItemIcon(ItemId.crystal));
+                MainController.Instance.level.BigMessageAppear( "Born point opened", "",Color.blue);
                 isPositionOpend = true;
                 if (OpenGameObject != null)
                 {

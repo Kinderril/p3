@@ -107,7 +107,7 @@ public static class Utils
             transform.position = new Vector3(t.x, hitInfo.point.y, t.z);
         }
     }
-    public static void LoadTexture(string icon,Sprite IconSprite)
+    public static void LoadTexture(string icon,out Sprite IconSprite)
     {
         if (File.Exists(icon))
         {

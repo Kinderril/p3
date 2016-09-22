@@ -236,10 +236,10 @@ public class Level
         {
             IsGoodEnd = EndlevelType.good;
             AddRandomGift();
-            foreach (var collectedItem in collectedItems)
-            {
-                PlayerData.AddItem(collectedItem, false);
-            }
+        }
+        foreach (var collectedItem in collectedItems)
+        {
+            PlayerData.AddItem(collectedItem, false);
         }
         foreach (var collectedCraft in collectedCrafts)
         {

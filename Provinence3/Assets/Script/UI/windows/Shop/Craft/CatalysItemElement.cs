@@ -14,6 +14,11 @@ public class CatalysItemElement : MonoBehaviour
     private Action<ExecCatalysItem> callback;
     private ExecCatalysItem item;
 
+    public ExecCatalysItem Item
+    {
+        get { return item; }
+    }
+
     public void Init(ExecCatalysItem item,Action<ExecCatalysItem> callback)
     {
         if (item != null)
