@@ -43,6 +43,7 @@ GameObject:
   - 33: {fileID: 3334966}
   - 23: {fileID: 2369492}
   - 114: {fileID: 11491346}
+  - 114: {fileID: 11436794}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -60,6 +61,7 @@ GameObject:
   - 4: {fileID: 408364}
   - 33: {fileID: 3315138}
   - 23: {fileID: 2396780}
+  - 114: {fileID: 11430378}
   m_Layer: 0
   m_Name: QMark
   m_TagString: Untagged
@@ -129,7 +131,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.017424, y: 1.236, z: 0.020949}
+  m_LocalPosition: {x: 0.017424, y: 1.473, z: 0.020949}
   m_LocalScale: {x: 1.0534935, y: 1.0534936, z: 1.0534936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -398,6 +400,69 @@ MonoBehaviour:
   QuestStatus: 0
   OldStatus: 0
   GetRewardEffect: {fileID: 0}
+--- !u!114 &11430378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c30c5ba201d3254a8a5d9027c487023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fUserTag: 0
+  m_bWorldSpace: 0
+  m_vRotationValue: {x: 0, y: 35.2, z: 0}
+--- !u!114 &11436794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d0dba4615c71d45bdbfd7c49b539ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fUserTag: 0
+  startOnInit: 1
+  m_OnEndAniFunction: OnEndAnimation
+  m_CurveInfoList:
+  - m_bEnabled: 1
+    m_CurveName: 
+    m_AniCurve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0.004166667
+        value: 0
+        inSlope: 0.08571428
+        outSlope: 0.08571428
+        tangentMode: 0
+      - time: 1
+        value: 0.9875
+        inSlope: -0.043165326
+        outSlope: -0.043165326
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 0
+      m_RotationOrder: 4
+    m_ApplyType: 1
+    m_bApplyOption: 00010001
+    m_bRecursively: 0
+    m_fValueScale: 0.19
+    m_FromColor: {x: 1, y: 1, z: 1, w: 1}
+    m_ToColor: {x: 1, y: 1, z: 1, w: 0}
+    m_nTag: 0
+    m_nSortGroup: 0
+    m_OriginalValue: {x: 0, y: 0, z: 0, w: 0}
+    m_BeforeValue: {x: 0, y: 0, z: 0, w: 0}
+    m_ChildOriginalColorValues: []
+    m_ChildBeforeColorValues: []
+  m_fDelayTime: 0
+  m_fDurationTime: 1.49
+  m_bAutoDestruct: 0
+  m_fAddElapsedTime: 0
 --- !u!114 &11456136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -464,7 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fUserTag: 0
   m_bWorldSpace: 0
-  m_vRotationValue: {x: 69.99, y: 360, z: 52.39}
+  m_vRotationValue: {x: 69.99, y: 47.8, z: 52.39}
 --- !u!135 &13527558
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -47,6 +47,7 @@ public class DataBaseController : Singleton<DataBaseController>
     public FlyingNumbers FlyingNumberWithPicture;
     public FlyNumberWIthDependence FlyNumberWIthDependence;
     public GoldMapItem GoldMapItemPrefab;
+    public GoldMapItem GrystalMapItemPrefab;
     public ItemMapItem ItemMapItemPrefab;
     public HealMapItem HealMapItemPrefab;
     public int maxLevel = 20;

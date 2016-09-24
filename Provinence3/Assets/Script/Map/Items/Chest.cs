@@ -36,8 +36,19 @@ public class Chest : MonoBehaviour
     {
         foreach (var item in items)
         {
-            var mo = DataBaseController.GetItem<GoldMapItem>(DataBaseController.Instance.GoldMapItemPrefab,
+            GoldMapItem prefab;
+            switch (item.Key)
+            {
+                case ItemId.crystal:
+                    prefab = DataBaseController.Instance.GrystalMapItemPrefab;
+                    break;
+                default:
+                    prefab = DataBaseController.Instance.GoldMapItemPrefab;
+                    break;
+            }
+            var mo = DataBaseController.GetItem<GoldMapItem>(prefab,
                 transform.position);
+
             mo.Init(item.Key, item.Value,true);
             mo.transform.SetParent(Map.Instance.miscContainer,true);
             mo.StartFly(transform);
