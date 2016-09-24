@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &161270
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.097, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -112,10 +112,10 @@ ParticleAnimator:
     rgba: 184549375
   colorAnimation[2]:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4281921766
   colorAnimation[3]:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4281651446
   colorAnimation[4]:
     serializedVersion: 2
     rgba: 184549375
@@ -136,12 +136,12 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: 1
-  maxSize: 1.5
-  minEnergy: 0.8
-  maxEnergy: 1
-  minEmission: 1
-  maxEmission: 1
+  minSize: 0.22
+  maxSize: 0.65
+  minEnergy: 0.25
+  maxEnergy: 0.4
+  minEmission: 0.14
+  maxEmission: 0.31
   worldVelocity: {x: 0, y: 0, z: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   rndVelocity: {x: 0, y: 0, z: 0}
@@ -151,7 +151,7 @@ EllipsoidParticleEmitter:
   rndAngularVelocity: 0
   rndRotation: 0
   Simulate in Worldspace?: 0
-  m_OneShot: 1
+  m_OneShot: 0
   m_Ellipsoid: {x: 0, y: 0, z: 0}
   m_MinEmitterRange: 0
 --- !u!23 &2342134
@@ -249,15 +249,15 @@ MonoBehaviour:
   m_fUserTag: 0
   m_fDelayTime: 0
   m_ParticlePrefab: {fileID: 100000, guid: 7c4c5ecfaf3872747afae55a48a3fb44, type: 2}
-  m_nNumberOfArms: 5
-  m_nParticlesPerArm: 23
-  m_fParticleSeparation: -0.24093956
-  m_fTurnDistance: -0.030448616
-  m_fVerticalTurnDistance: 0.30312064
-  m_fOriginOffset: -0.8
-  m_fTurnSpeed: -162.39905
+  m_nNumberOfArms: 3
+  m_nParticlesPerArm: 18
+  m_fParticleSeparation: -0.017
+  m_fTurnDistance: -5.35
+  m_fVerticalTurnDistance: 0.26
+  m_fOriginOffset: -1.4
+  m_fTurnSpeed: -62.49
   m_fFadeValue: -0.05
-  m_fSizeValue: 0.14
+  m_fSizeValue: 1
   m_nNumberOfSpawns: 9999999
   m_fSpawnRate: 5
 --- !u!114 &11475156
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_bWorldSpace: 0
   m_fStartSizeRate: 1
   m_fStartLifeTimeRate: 1
-  m_fStartEmissionRate: 1
+  m_fStartEmissionRate: 0.6
   m_fStartSpeedRate: 1
   m_fRenderLengthRate: 1
   m_fLegacyMinMeshNormalVelocity: 10

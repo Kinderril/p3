@@ -2033,10 +2033,10 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 0
-  minSize: 3.9
-  maxSize: 3.38
-  minEnergy: 1
-  maxEnergy: 1
+  minSize: 2.47
+  maxSize: 2.01
+  minEnergy: 1.8
+  maxEnergy: 2.11
   minEmission: 10.04
   maxEmission: 10.73
   worldVelocity: {x: 0, y: 0, z: 0}
@@ -2169,11 +2169,11 @@ MonoBehaviour:
   m_fSleepTime: 0
   m_bScaleWithTransform: 0
   m_bWorldSpace: 0
-  m_fStartSizeRate: 1.26
-  m_fStartLifeTimeRate: 2.25
+  m_fStartSizeRate: 0.72
+  m_fStartLifeTimeRate: 1.97
   m_fStartEmissionRate: 1
-  m_fStartSpeedRate: 0.69
-  m_fRenderLengthRate: 1
+  m_fStartSpeedRate: 1.22
+  m_fRenderLengthRate: 0.94
   m_fLegacyMinMeshNormalVelocity: 10
   m_fLegacyMaxMeshNormalVelocity: 10
   m_fShurikenSpeedRate: 1
@@ -2225,6 +2225,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 11478048}
   _shield: 0
+  FlashController: {fileID: 11466412}
   attackDist: 40
   mainHeroDist: 0
   bornPosition: {x: 0, y: 0, z: 0}
@@ -2233,7 +2234,6 @@ MonoBehaviour:
   dropItems:
   - chance0_1: 0.5
     type: 4
-  FlashController: {fileID: 11466412}
   moneyCoef: 1
   energyCoef: 1
 --- !u!114 &11463534

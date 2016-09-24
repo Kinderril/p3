@@ -10,6 +10,7 @@ public class DynamicElement : MonoBehaviour
     private const int RESET_DIST_SQR = 200;
     private float sqrDist;
     private Hero hero;
+    public bool CanRotate = false;
     public void Init(Hero hero)
     {
         this.hero = hero;
@@ -34,6 +35,12 @@ public class DynamicElement : MonoBehaviour
     {
 //        var oldp = transform.position;
         transform.position = transform.position + diff*1.9f;
+        if (CanRotate)
+        {
+            var rotation = transform.localRotation;
+            rotation.z = UnityEngine.Random.Range(-1f, 1f);
+            transform.localRotation = rotation;
+        }
 //        Debug.Log("Reset:" + name + "  diff:" + diff + "   to:"+ transform.position + "   from:" + oldp);
         Utils.GroundTransform(transform);
 

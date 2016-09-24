@@ -63,9 +63,10 @@ public class Level
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
+        TimeUtils.StartMeasure("MAIN");
+        TimeUtils.StartMeasure("LOAD PRELEVEL");
         CrystalsBonus = 1;
         QuestController = new LevelQuestController(this);
-        TimeUtils.StartMeasure("LOAD PRELEVEL");
         Energy = new Energy(ActivaAction,OnRage);
         MissionIndex = levelIndex;
         IndexBornPoint = indexBornPos;
@@ -77,8 +78,9 @@ public class Level
         {
             moneyInv.Add(id,0);
         }
-        TimeUtils.EndMeasure("LOAD PRELEVEL");
+        DebugController.Instance.InfoField2.text += TimeUtils.EndMeasure("LOAD PRELEVEL");
         MainHero = Map.Instance.Init(this, levelIndex ,indexBornPos);
+        DebugController.Instance.InfoField2.text += " " + TimeUtils.EndMeasure("MAIN");
         isPLaying = false;
         callback(this);
         Map.Instance.StartLoadingMonsters();

@@ -68,7 +68,6 @@ public class DataBaseController : Singleton<DataBaseController>
         {
             if (simpleShader == null)
                 simpleShader = Shader.Find("Custom/FogInside");
-            CheckEnums();
             CraftDB = new CraftDB();
             for (var i = 0; i < maxLevel; i++)
             {
@@ -109,15 +108,6 @@ public class DataBaseController : Singleton<DataBaseController>
         }
     }
 
-    private void CheckEnums()
-    {
-        int sac = Enum.GetValues(typeof (SpecialAbility)).Length;
-        int cic = Enum.GetValues(typeof(CatalysItemType)).Length;
-        if (sac - 1 != cic)
-        {
-            Debug.LogError("Wrong enums");
-        }
-    }
 
     private void LoadSprites()
     {

@@ -53,11 +53,11 @@ public class TimeUtils
         if (dict.ContainsKey(name))
         {
             ms = (DateTime.Now - dict[name]).TotalMilliseconds;
-            var str = "EndMeasure " + " " + name + " :" + ms + " ms.";
+            var str = "EndMeasure " + " " + name + " :" + ms.ToString("0.0") + " ms.";
             UnityEngine.Debug.Log(str);
             dict[name] = DateTime.Now;
         }
-        return name + " " + ms + " \n";
+        return name + " " + ms.ToString("0.0") + " \n";
     }
 }
 

@@ -229,8 +229,6 @@ public class PlayerData
             MainParameters.Add(global::MainParam.HP, 1);
             MainParameters.Add(global::MainParam.DEF, 1);
         }
-        OpenLevels = new OpenLevels();
-        CheckIfFirstLevel();
 #if UNITY_EDITOR
         if (DebugController.Instance.GET_START_BOOST)
         {
@@ -238,6 +236,8 @@ public class PlayerData
             playerInv[ItemId.crystal] += 10;
         }
 #endif
+        OpenLevels = new OpenLevels();
+//        CheckIfFirstLevel();
     }
     public ExecutableItem CanBeUpgraded(IEnhcant info)
     {
@@ -264,17 +264,24 @@ public class PlayerData
         ) as ExecutableItem;
     }
 
-    private void CheckIfFirstLevel()
+    public bool CheckIfFirstLevel()
     {
         var money = playerInv[ItemId.money] == 0;
         var lvl = Level == 1;
         var items = playerItems.Count == 0;
-        if (money && lvl && items)
+        return money && lvl && items;
+    }
+
+    public void AddStartEquipment()
+    {
+        if (CheckIfFirstLevel())
         {
             var p1 = Formuls.GetPlayerItemPointsByLvl(1);
-            PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() { {ParamType.PPower, p1 } },Slot.physical_weapon, Rarity.Normal, p1);
+            PlayerItem item1 = new PlayerItem(new Dictionary<ParamType, float>() {{ParamType.PPower, p1}},
+                Slot.physical_weapon, Rarity.Normal, p1);
             var p2 = Formuls.GetPlayerItemPointsByLvl(1);
-            PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.MPower, p2 } }, Slot.magic_weapon, Rarity.Normal, p2);
+            PlayerItem item2 = new PlayerItem(new Dictionary<ParamType, float>() {{ParamType.MPower, p2}},
+                Slot.magic_weapon, Rarity.Normal, p2);
             AddAndEquip(item1);
             AddAndEquip(item2);
             AddFirstTalisman(TalismanType.doubleDamage);
@@ -283,7 +290,8 @@ public class PlayerData
 #if UNITY_EDITOR
             if (DebugController.Instance.GET_START_BOOST)
             {
-                PlayerItem item3 = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PDef, 25 } }, Slot.body, Rarity.Rare, 25);
+                PlayerItem item3 = new PlayerItem(new Dictionary<ParamType, float>() {{ParamType.PDef, 25}}, Slot.body,
+                    Rarity.Rare, 25);
                 AddAndEquip(item3);
 
                 foreach (var ability in ShopController.AllTalismanstypes)
@@ -298,17 +306,14 @@ public class PlayerData
                 foreach (var ability in ShopController.AllSpecialAbilities)
                 {
                     var y = baseP + i++;
-                    PlayerItem itemA = new PlayerItem(new Dictionary<ParamType, float>() { { ParamType.PPower, y } }, Slot.physical_weapon, Rarity.Normal, y);
+                    PlayerItem itemA = new PlayerItem(new Dictionary<ParamType, float>() {{ParamType.PPower, y}},
+                        Slot.physical_weapon, Rarity.Normal, y);
                     itemA.specialAbilities = ability;
                     AddAndEquip(itemA);
                 }
-                
             }
-
-
 #endif
-
-            }
+        }
     }
 
     private void AddFirstTalisman(TalismanType t)

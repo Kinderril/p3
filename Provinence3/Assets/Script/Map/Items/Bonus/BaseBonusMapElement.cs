@@ -16,7 +16,7 @@ public class BaseBonusMapElement : MonoBehaviour
 {
     public BonusElementMapType bonusElementMapType;
     private bool isActive = true;
-    public PSAbsorber effectOnGet;
+    public BaseEffectAbsorber effectOnGet;
     public GameObject ActivePart;
 
     public void Init()

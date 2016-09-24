@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class WindowStart : BaseWindow
 {
+    public GameObject StartBoost;
     public override void Init()
     {
         base.Init();
         WindowManager.Instance.MainBack.gameObject.SetActive(true);
+        StartBoost.SetActive(MainController.Instance.PlayerData.CheckIfFirstLevel());
     }
 
     public void OnExitClick()
@@ -21,6 +23,13 @@ public class WindowStart : BaseWindow
     public void OnClearAllClick()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    public void OnGetStartBoost()
+    {
+        MainController.Instance.PlayerData.AddStartEquipment();
+        StartBoost.SetActive(false);
+        OnToShop();
     }
 }
 

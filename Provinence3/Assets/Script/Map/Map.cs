@@ -26,18 +26,17 @@ public class Map : Singleton<Map>
     private LevelObject levelMainObject;
     private Action OnMonstersReady;
     private Dictionary<string, GameObject> LoadedLevels = new Dictionary<string, GameObject>();
-    public event Action<Unit> OnEnemyDeadCallback; 
+    public event Action<Unit> OnEnemyDeadCallback;
+    private string allInfo;
 
     public Hero Init(Level lvl, int levelIndex, int heroBornPositionIndex)
     {
+        allInfo = "";
+        TimeUtils.StartMeasure("LOAD LEVEL SCENE");
         level = lvl;
 
-
         LoadLevelGameObject(levelIndex);
-        string allInfo = "";
         SceneManager.LoadScene("Level" + levelIndex,LoadSceneMode.Additive);
-
-        TimeUtils.StartMeasure("LOAD LEVEL SCENE");
         heroBornPositions = levelMainObject.transform.Find("BornPos/HeroBornPositions");
         bossBonusMapElement = levelMainObject.transform.Find("BornPos/BossBonusMapElements");
         bornPositions = levelMainObject.transform.Find("BornPos");
@@ -45,6 +44,7 @@ public class Map : Singleton<Map>
 
         allInfo += TimeUtils.EndMeasure("LOAD LEVEL SCENE");
         TimeUtils.StartMeasure("LOAD HERO");
+        DebugController.Instance.InfoField2.text = allInfo;
 
         var hero = DataBaseController.GetItem(DataBaseController.Instance.prefabHero, GetHeroBoenPos(heroBornPositionIndex));
         hero.Init(lvl);
@@ -56,6 +56,7 @@ public class Map : Singleton<Map>
 
         allInfo += TimeUtils.EndMeasure("LOAD HERO");
         TimeUtils.StartMeasure("PARSE BORN");
+        DebugController.Instance.InfoField2.text = allInfo;
         foreach (Transform bornPosition in bornPositions)
         {
             var bp = bornPosition.GetComponent<BaseBornPosition>();
@@ -84,15 +85,18 @@ public class Map : Singleton<Map>
                 }
             }
         }
-        allInfo += TimeUtils.EndMeasure("PARSE BORN");
 
+        allInfo += TimeUtils.EndMeasure("PARSE BORN");
         TimeUtils.StartMeasure("LOAD QUESTS");
+        DebugController.Instance.InfoField2.text = allInfo;
+
         var questsPositions = appearPos.RandomElement(4);
         LoadQuests(questsPositions);
 
 
         allInfo += TimeUtils.EndMeasure("LOAD QUESTS");
         TimeUtils.StartMeasure("LOAD MONSTERS");
+        DebugController.Instance.InfoField2.text = allInfo;
 
         foreach (var monsterBornPosition in appearPos)
         {
@@ -101,6 +105,8 @@ public class Map : Singleton<Map>
 
         allInfo += TimeUtils.EndMeasure("LOAD MONSTERS");
         TimeUtils.StartMeasure("LOAD LAST");
+        DebugController.Instance.InfoField2.text = allInfo;
+
         int cnt = (int)(level.CrystalsBonus);
         var rnd = chestPositions.RandomElement(cnt);
         foreach (var chestBornPosition in rnd)
@@ -112,9 +118,10 @@ public class Map : Singleton<Map>
             chestBornPosition.Init(this,lvl);
         }
         CameraFollow.Init(hero.transform);
+
         allInfo += TimeUtils.EndMeasure("LOAD LAST");
-        DebugController.Instance.InfoField1.text = allInfo;
-        //        callback();
+        DebugController.Instance.InfoField2.text = allInfo;
+
         return hero;
     }
 
@@ -182,13 +189,15 @@ public class Map : Singleton<Map>
             prefab = Resources.Load(nameLevel, typeof(GameObject)) as GameObject;
             LoadedLevels.Add(nameLevel,prefab);
         }
-        
-        TimeUtils.EndMeasure("RES LOAD");
+
+        allInfo += TimeUtils.EndMeasure("RES LOAD");
+        DebugController.Instance.InfoField2.text = allInfo;
         TimeUtils.StartMeasure("Instantiate SCENE");
         levelMainObject = GameObject.Instantiate(prefab).GetComponent<LevelObject>();
         levelMainObject.transform.SetParent(transform);
         Utils.Init(levelMainObject.Terrain);
-        TimeUtils.EndMeasure("Instantiate SCENE");
+        allInfo += TimeUtils.EndMeasure("Instantiate SCENE");
+        DebugController.Instance.InfoField2.text = allInfo;
 
         /*
         Make different scenes for all the levels.
