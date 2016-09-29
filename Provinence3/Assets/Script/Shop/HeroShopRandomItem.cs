@@ -8,17 +8,16 @@ public abstract class HeroShopRandomItem : IShopExecute
 {
     public void Execute(int level,Slot slot)
     {
-        var levelResult = ShopController.RandomizeLvl(level);
         switch (slot)
         {
             case Slot.physical_weapon:
             case Slot.magic_weapon:
             case Slot.body:
             case Slot.helm:
-                MainController.Instance.PlayerData.AddItem(CreatMainSlot(slot, levelResult));
+                MainController.Instance.PlayerData.AddItem(CreatMainSlot(slot, level));
                 break;
             case Slot.Talisman:
-                MainController.Instance.PlayerData.AddItem(CreaTalic(levelResult));
+                MainController.Instance.PlayerData.AddItem(CreaTalic(level));
                 break;
         }
         randomCreatAdditionalItem();
@@ -57,24 +56,16 @@ public abstract class HeroShopRandomItem : IShopExecute
         return Rarity.Rare;
     }
 
-    public static PlayerItem CreatMainSlot(Slot slot, int levelResult, ExecCatalysItem catalysItem = null)
+    public static PlayerItem CreatMainSlot(Slot slot, int level)
     {
-        var totalPoints = Formuls.GetPlayerItemPointsByLvl(levelResult)* Formuls.GetSlotCoef(slot);
-        var rarity = GetRarity();
-        float diff = 0;
-        if (catalysItem == null)
-        {
-            diff = Utils.RandomNormal(0.5f, 1f);
-        }
-        else
-        {
-            diff = Utils.RandomNormal(0.75f, 1f);
-        }
+        var totalPoints = Formuls.GetPlayerItemPointsByLvl(level) * Formuls.GetSlotCoef(slot);
+        float diff = Utils.RandomNormal(0.5f, 1f);
         var primaryValue = totalPoints * diff;
 
+        var rarity = GetRarity();
         var pparams = new Dictionary<ParamType, float>();
         bool addSpecial = false;
-        var special = GetSpecial(slot, catalysItem);
+        var special = GetSpecial(slot);
         Action paramInit = () =>
         {
             if ((special == SpecialAbility.none || UnityEngine.Random.Range(0, 10) < 5) || addSpecial)
@@ -116,25 +107,18 @@ public abstract class HeroShopRandomItem : IShopExecute
         return item;
     }
 
-    private static KeyValuePair<ParamType,float> GetSecondaryParam(float totalPoints,Slot slot)
+    public static KeyValuePair<ParamType,float> GetSecondaryParam(float totalPoints,Slot slot)
     {
         var secondary = Connections.GetSecondaryParamType(slot);
         var secondaryValue = totalPoints * (0.3f);
         return new KeyValuePair<ParamType, float>(secondary, secondaryValue);
     }
 
-    private static SpecialAbility GetSpecial(Slot slot, ExecCatalysItem catalysItem = null)
+    private static SpecialAbility GetSpecial(Slot slot)
     {
         if (slot == Slot.magic_weapon || slot == Slot.physical_weapon)
         {
-            if (catalysItem == null)
-            {
-                return ShopController.AllSpecialAbilities.RandomElement();
-            }
-            else
-            {
-                return catalysItem.GetSpec();
-            }
+            return ShopController.AllSpecialAbilities.RandomElement();
         }
         return SpecialAbility.none;
     }

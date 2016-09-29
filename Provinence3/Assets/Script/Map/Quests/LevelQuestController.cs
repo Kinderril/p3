@@ -14,7 +14,8 @@ public class LevelQuestController
     public Level Level;
     public Action<QuestGiver> OnQuestStatusChanges; 
     public Action<QuestGiver,int ,int> OnQuestProgress;
-    private List<QuestLogicType> AllQuestsTypes = new List<QuestLogicType>(); 
+    private List<QuestLogicType> AllQuestsTypes = new List<QuestLogicType>();
+    private int questsCompleted = 0;
 
     public LevelQuestController(Level level)
     {
@@ -92,6 +93,7 @@ public class LevelQuestController
         currentActiveQuest = null;
         questGiver.Reward(Level, giver =>
         {
+            questsCompleted++;
             OnQuestStatusChanges(giver);
             foreach (var quest in Quests.Where(x=>x != giver))
             {

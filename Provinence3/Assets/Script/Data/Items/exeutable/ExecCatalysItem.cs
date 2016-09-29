@@ -24,12 +24,7 @@ public class ExecCatalysItem : ExecutableItem
         ItemType = type;
         name = type.ToString();
     }
-
-    public SpecialAbility GetSpec()
-    {
-        return (SpecialAbility)Enum.Parse(typeof(SpecialAbility), ItemType.ToString(), true);
-    }
-
+    
     public static ExecCatalysItem Creat()
     {
         return new ExecCatalysItem(ShopController.AllCatalyses.RandomElement());

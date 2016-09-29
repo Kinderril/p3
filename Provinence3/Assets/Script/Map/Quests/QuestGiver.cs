@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -231,7 +232,12 @@ public class QuestGiver : MonoBehaviour
                 break;
             case QuestLogicType.collectReource:
                 r = (int)(UnityEngine.Random.Range(5f, 7f) * coef);
-                logic = new QuestCollectResource(this, r, CraftItemType.Leather, OnQuestProgressChange);
+                var enemies = Map.Instance.enemies;
+                var enemy = enemies.FirstOrDefault(x => x.dropItems.Any());
+                if (enemy != null)
+                {
+                    logic = new QuestCollectResource(this, r, enemy.dropItems[0].type, OnQuestProgressChange);
+                }
                 break;
             case QuestLogicType.getDamage:
                 var h = MainController.Instance.level.MainHero.Parameters.MaxHp;
@@ -245,7 +251,7 @@ public class QuestGiver : MonoBehaviour
 
         Debug.Log("Quest Activated");
 //        logic = new MonsterKillOvercharged(this, 5, OnQuestProgressChange);
-        if (callback != null)
+        if (callback != null && logic != null)
         {
             callback(this);
         }

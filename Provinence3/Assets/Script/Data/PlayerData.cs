@@ -584,7 +584,7 @@ public class PlayerData
         {
             RemoveItem(execCraftItem, execCraftItem.count);
         }
-        var resultItem = HeroShopRandomItem.CreatMainSlot(recipeItem.recipeSlot, recipeItem.Level, catalysItem);
+        PlayerItem resultItem = recipeItem.Craft(catalysItem);
         AddItem(resultItem);
         Save();
         return resultItem;

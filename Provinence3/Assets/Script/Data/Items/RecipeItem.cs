@@ -101,5 +101,94 @@ public class RecipeItem : BaseItem
         var slot = (Slot)Convert.ToInt32(s[1]);
         return new RecipeItem(lvl, slot);
     }
+
+    public PlayerItem Craft(ExecCatalysItem catalysItem)
+    {
+        var resultItem = HeroShopRandomItem.CreatMainSlot(recipeSlot, Level);
+        if (catalysItem != null)
+        {
+            switch (resultItem.Slot)
+            {
+                case Slot.physical_weapon:
+                case Slot.magic_weapon:
+                    var spedAbilities = PosibleAbilities(catalysItem.ItemType);
+                    var sa = spedAbilities.RandomElement();
+                    resultItem.specialAbilities = sa;
+                    break;
+                case Slot.body:
+                case Slot.helm:
+                    switch (catalysItem.ItemType)
+                    {
+                        case CatalysItemType.red:
+                            break;
+                        case CatalysItemType.blue:
+                            break;
+                        case CatalysItemType.green:
+                            break;
+                        case CatalysItemType.black:
+                            break;
+                        case CatalysItemType.white:
+                            break;
+                    }
+                    break;
+                case Slot.Talisman:
+                    switch (catalysItem.ItemType)
+                    {
+                        case CatalysItemType.red:
+//                            var p = resultItem.parameters.Values.;
+                            break;
+                        case CatalysItemType.blue:
+                            break;
+                        case CatalysItemType.green:
+                            break;
+                        case CatalysItemType.black:
+                            break;
+                        case CatalysItemType.white:
+                            break;
+                    }
+                    break;
+            }
+        }
+        return resultItem;
+    }
+
+    public static List<SpecialAbility> PosibleAbilities(CatalysItemType type)
+    {
+        List<SpecialAbility> spedAbilities = null;
+        switch (type)
+        {
+            case CatalysItemType.red:
+                spedAbilities = new List<SpecialAbility>()
+                            {
+                                SpecialAbility.clear,SpecialAbility.critical
+                            };
+                break;
+            case CatalysItemType.blue:
+                spedAbilities = new List<SpecialAbility>()
+                            {
+                                SpecialAbility.distance,SpecialAbility.hp
+                            };
+                break;
+            case CatalysItemType.green:
+                spedAbilities = new List<SpecialAbility>()
+                            {
+                                SpecialAbility.shield,SpecialAbility.vampire
+                            };
+                break;
+            case CatalysItemType.black:
+                spedAbilities = new List<SpecialAbility>()
+                            {
+                                SpecialAbility.slow,SpecialAbility.stun
+                            };
+                break;
+            case CatalysItemType.white:
+                spedAbilities = new List<SpecialAbility>()
+                            {
+                                SpecialAbility.removeDefence,SpecialAbility.critical
+                            };
+                break;
+        }
+        return spedAbilities;
+    } 
 }
 
