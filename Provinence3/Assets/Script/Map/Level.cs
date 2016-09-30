@@ -229,14 +229,13 @@ public class Level
             isBad = false;
         }
 #endif
-        if (isBad)
-        {
-//            moneyInv.Remove(ItemId.crystal);
-//            moneyInv[ItemId.money] /= 2;
-        }
-        else
+        if (!isBad)
         {
             IsGoodEnd = EndlevelType.good;
+            AddRandomGift();
+        }
+        if (LevelStatistics.GetReward(EnemiesKills, QuestController.CompletedQuests(), collectedCrafts,!isBad))
+        {
             AddRandomGift();
         }
         foreach (var collectedItem in collectedItems)

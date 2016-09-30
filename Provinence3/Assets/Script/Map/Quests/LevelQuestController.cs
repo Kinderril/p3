@@ -26,6 +26,11 @@ public class LevelQuestController
         }
     }
 
+    public int CompletedQuests()
+    {
+        return questsCompleted;
+    }
+
     public QuestLogicType GetRandomQuest()
     {
         return AllQuestsTypes.RandomElement();
