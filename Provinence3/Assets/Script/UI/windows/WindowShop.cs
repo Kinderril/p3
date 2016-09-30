@@ -45,6 +45,7 @@ public class WindowShop : BaseWindow
     public HeroShopTalisman HeroShopTalisman;
     public HeroShopArmor HeroShopArmor;
     public HeroShopRecipeItem PrefabHeroShopRecipeItem;
+    public HeroShopCheat PrefabHeroShopCheat;
 
     public override void Init()
     {
@@ -161,6 +162,11 @@ public class WindowShop : BaseWindow
             var e3 = DataBaseController.GetItem<HeroShopRandomItem>(HeroShopTalisman);
             e3.Init(i);
             CreatShopElement(e3);
+#if DEBUG
+            var e4 = DataBaseController.GetItem<HeroShopCheat>(PrefabHeroShopCheat);
+            e4.Init(i);
+            CreatShopElement(e4);
+#endif
         }
 
 

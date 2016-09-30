@@ -16,6 +16,7 @@ public class CraftWindow : MonoBehaviour
 //    public Text ResultItemName;
 
     public CraftResultPlace CraftResultPlace;
+    public CraftInfoPlace CraftInfoPlace;
 
     public CraftItemElement CraftItemPrefab;
     public CatalysItemElement CatalysItemPrefab;
@@ -44,9 +45,12 @@ public class CraftWindow : MonoBehaviour
         {
 //            iconSprite = DataBaseController.Instance.TalismanIcon()
         }
+        selectedCatalysItem = null;
+        CraftInfoPlace.Init(recipeItem,null);
         this.recipeItem = recipeItem;
         elements.Clear();
         BaseWindow.ClearTransform(CraftItemsLayout);
+        canCraft = true;
         foreach (var craftElement in recipeItem.ItemsToCraft())
         {
             if (craftElement.count > 0)
@@ -119,6 +123,14 @@ public class CraftWindow : MonoBehaviour
             }
         }
         CraftResultPlace.Init(iconSprite, selectedCatalysItem);
+        if (catalysItem != null)
+        {
+            CraftInfoPlace.Init(recipeItem, catalysItem.ItemType);
+        }
+        else
+        {
+            CraftInfoPlace.Init(recipeItem,null);
+        }
     }
 
     public void OnSimpleCraft()
