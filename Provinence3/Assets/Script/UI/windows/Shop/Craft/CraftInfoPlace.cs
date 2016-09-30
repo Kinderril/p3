@@ -36,16 +36,71 @@ public class CraftInfoPlace : MonoBehaviour
                 }
                 var min = totalPoints * 0.5f;
                 var max = totalPoints;
-                MainParameterField.text = min + " - " + max;
-                MainParameterIcon.sprite = DataBaseController.Instance.ParameterIcon(ParamType.PPower);
+                MainParameterField.text = min.ToString("0") + " - " + max;
+                switch (recipeItem.Slot)
+                {
+                    case Slot.physical_weapon:
+                        MainParameterIcon.sprite = DataBaseController.Instance.ParameterIcon(ParamType.PPower);
+                        break;
+                    case Slot.magic_weapon:
+                        MainParameterIcon.sprite = DataBaseController.Instance.ParameterIcon(ParamType.MPower);
+                        break;
+                }
                 
                 break;
             case Slot.body:
             case Slot.helm:
 
+                switch (recipeItem.Slot)
+                {
+                    case Slot.body:
+                        MainParameterIcon.sprite = DataBaseController.Instance.ParameterIcon(ParamType.PDef);
+                        break;
+                    case Slot.helm:
+                        MainParameterIcon.sprite = DataBaseController.Instance.ParameterIcon(ParamType.MDef);
+                        break;
+                }
+                var secondary = HeroShopRandomItem.GetSecondaryParam(totalPoints, recipeItem.recipeSlot);
+                var prm = Instantiate(PrefabSecondaryParam);
+                var img2 = prm.GetComponent<Image>();
+                var filed = prm.GetComponent<Text>();
+                var minS = secondary.Value*0.5f;
+                var maxS = secondary.Value;
+                string info = "";
+                Sprite spr = null;
+                if (type.HasValue)
+                {
+                    switch (type.Value)
+                    {
+                        case CatalysItemType.red:
+                            minS *= 1.25f;
+                            minS *= 1.25f;
+                            info = minS.ToString("0") + " - " + maxS.ToString("0");
+                            break;
+                        case CatalysItemType.blue:
+                            break;
+                        case CatalysItemType.green:
+                            break;
+                        case CatalysItemType.black:
+                            minS *= 1f;
+                            minS *= 1.5f;
+                            info = minS.ToString("0") + " - " + maxS.ToString("0");
+                            break;
+                        case CatalysItemType.white:
+                            info = "cost x2";
+                            spr = DataBaseController.Instance.ItemIcon(ItemId.money);
+                            break;
+                    }
+                }
+                else
+                {
+                    info = minS.ToString("0") + " - " + maxS.ToString("0");
+                    spr = DataBaseController.Instance.ParameterIcon(secondary.Key);
+                }
 
-                var secondaryParam = HeroShopRandomItem.GetSecondaryParam(totalPoints, recipeItem.recipeSlot);
-
+                filed.text = info;
+                img2.sprite = spr;
+                img2.transform.SetParent(LayoutSpecials, false);
 
                 break;
             case Slot.Talisman:

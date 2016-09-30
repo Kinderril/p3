@@ -135,7 +135,6 @@ public class RecipeItem : BaseItem
                     switch (catalysItem.ItemType)
                     {
                         case CatalysItemType.red:
-//                            var p = resultItem.parameters.Values.;
                             break;
                         case CatalysItemType.blue:
                             break;
