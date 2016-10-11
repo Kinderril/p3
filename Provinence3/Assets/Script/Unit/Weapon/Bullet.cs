@@ -10,6 +10,18 @@ public enum HitPosition
     target,
     bullet,
 }
+public enum ControlPointOffset
+{
+    none,
+    soft,
+    hard,
+}
+
+public enum FlyType
+{
+    straight,
+    curve
+}
 
 public class Bullet : PoolElement
 {
@@ -18,6 +30,7 @@ public class Bullet : PoolElement
     protected float time = 0;
     protected Vector3 trg;
     protected Vector3 start;
+    protected Vector3 control;
     private Unit targetUnit;
     public IBulletHolder bulletHolder;
     protected Action updateAction;
@@ -29,6 +42,7 @@ public class Bullet : PoolElement
     public bool playHitAnyway = true;
     private float additionalPower = 0;
     private float startDist2target;
+    public FlyType FlyType = FlyType.straight;
     public int ID;
 //    protected Weapon weapon;
 
@@ -55,7 +69,19 @@ public class Bullet : PoolElement
         start = FindStartPos(weapon);
         trg = direction.normalized * weapon.Parameters.range + start;
         subInit();
-        updateAction = updateVector;
+        switch (FlyType)
+        {
+            case FlyType.straight:
+                updateAction = updateVector;
+                break;
+            case FlyType.curve:
+                control = ContrtolPoint(start, trg, ControlPointOffset.soft);
+                updateAction = updateQuadVector;
+                break;
+            default:
+                updateAction = updateVector;
+                break;
+        }
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
@@ -215,6 +241,54 @@ public class Bullet : PoolElement
         {
             Death(null);
         }
+    }
+    protected void updateQuadVector()
+    {
+        time += speed;
+
+        float vn = 1 - time;
+        var v2 = vn*vn;
+        var t2 = time * time;
+        float px = v2 * start.x + 2 * time * vn * control.x + t2 * trg.x;
+        float py = v2 * start.y + 2 * time * vn * control.y + t2 * trg.y;
+        float pz = v2 * start.z + 2 * time * vn * control.z + t2 * trg.z;
+//        float y = start.y*vn + trg.y*time;
+
+        transform.position = new Vector3(px, py, pz); 
+
+
+        if (time > 1)
+        {
+            Death(null);
+        }
+    }
+
+    private Vector2 ContrtolPoint(Vector2 startPos, Vector2 end, ControlPointOffset offset = ControlPointOffset.soft)
+    {
+        float deltaOffset = 1f;
+
+        var milldePoint = (startPos + end) / 2;
+        var alpha = (startPos.y - end.y) / (startPos.x - end.x);
+        var dist = (startPos - end).magnitude;
+        var v = (new Vector2(1, -1 / alpha)).normalized;
+
+
+        switch (offset)
+        {
+            case ControlPointOffset.none:
+                deltaOffset = 0.1f;
+                break;
+            case ControlPointOffset.soft:
+                deltaOffset = Mathf.Sign(UnityEngine.Random.value - 0.5f) * (dist * 0.25f + UnityEngine.Random.value * dist * 0.75f);
+                break;
+            case ControlPointOffset.hard:
+                deltaOffset = Mathf.Sign(UnityEngine.Random.value - 0.5f) * (dist * 0.75f + UnityEngine.Random.value * dist * 1.25f);
+                break;
+        }
+
+        var contrtolPoint = milldePoint + v * deltaOffset;
+        Debug.Log(startPos + "   " + contrtolPoint + "   " + end);
+        return contrtolPoint;
     }
 
     private void updateTargetUnit()
