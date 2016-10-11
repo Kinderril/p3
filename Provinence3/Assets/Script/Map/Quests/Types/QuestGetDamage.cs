@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 
 public class QuestGetDamage : QuestLogicBase
@@ -13,7 +14,7 @@ public class QuestGetDamage : QuestLogicBase
 
     private void OnGetHit(float arg1, float arg2, float arg3)
     {
-        currentCount = CurrentCount + (int)(arg3);
+        currentCount = CurrentCount + Mathf.Abs((int)(arg3));
         if (OnQuestProgressChange != null)
             OnQuestProgressChange(CurrentCount, TargetCount);
         if (CurrentCount > TargetCount)
