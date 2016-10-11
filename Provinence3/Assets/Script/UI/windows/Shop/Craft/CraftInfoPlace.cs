@@ -19,6 +19,8 @@ public class CraftInfoPlace : MonoBehaviour
     {
         Utils.ClearTransform(LayoutSpecials);
         var totalPoints = Formuls.GetPlayerItemPointsByLvl(recipeItem.Level) * Formuls.GetSlotCoef(recipeItem.recipeSlot);
+        float min;
+        float max;
         switch (recipeItem.recipeSlot)
         {
             case Slot.physical_weapon:
@@ -34,10 +36,10 @@ public class CraftInfoPlace : MonoBehaviour
                         img.transform.SetParent(LayoutSpecials,false);
                     }
                 }
-                var min = totalPoints * 0.5f;
-                var max = totalPoints;
-                MainParameterField.text = min.ToString("0") + " - " + max;
-                switch (recipeItem.Slot)
+                min = totalPoints * 0.5f;
+                max = totalPoints;
+                MainParameterField.text = min.ToString("0") + " - " + max.ToString("0");
+                switch (recipeItem.recipeSlot)
                 {
                     case Slot.physical_weapon:
                         MainParameterIcon.sprite = DataBaseController.Instance.ParameterIcon(ParamType.PPower);
@@ -51,7 +53,9 @@ public class CraftInfoPlace : MonoBehaviour
             case Slot.body:
             case Slot.helm:
 
-                switch (recipeItem.Slot)
+                min = totalPoints * 0.5f;
+                max = totalPoints;
+                switch (recipeItem.recipeSlot)
                 {
                     case Slot.body:
                         MainParameterIcon.sprite = DataBaseController.Instance.ParameterIcon(ParamType.PDef);
@@ -63,9 +67,10 @@ public class CraftInfoPlace : MonoBehaviour
                 var secondary = HeroShopRandomItem.GetSecondaryParam(totalPoints, recipeItem.recipeSlot);
                 var prm = Instantiate(PrefabSecondaryParam);
                 var img2 = prm.GetComponent<Image>();
-                var filed = prm.GetComponent<Text>();
+                var filed = prm.GetComponentInChildren<Text>();
                 var minS = secondary.Value*0.5f;
                 var maxS = secondary.Value;
+                MainParameterField.text = min.ToString("0") + " - " + max.ToString("0");
                 string info = "";
                 Sprite spr = null;
                 if (type.HasValue)
@@ -73,18 +78,19 @@ public class CraftInfoPlace : MonoBehaviour
                     switch (type.Value)
                     {
                         case CatalysItemType.red:
-                            minS *= 1.25f;
-                            minS *= 1.25f;
-                            info = minS.ToString("0") + " - " + maxS.ToString("0");
+                            min *= 1.25f;
+                            max *= 1.25f;
+                            MainParameterField.text = min.ToString("0") + " - " + max.ToString("0");
                             break;
                         case CatalysItemType.blue:
                             break;
                         case CatalysItemType.green:
+                            info = "Chance to get new talisman.";
                             break;
                         case CatalysItemType.black:
-                            minS *= 1f;
-                            minS *= 1.5f;
-                            info = minS.ToString("0") + " - " + maxS.ToString("0");
+                            min *= 1f;
+                            max *= 1.5f;
+                            MainParameterField.text = min.ToString("0") + " - " + max.ToString("0");
                             break;
                         case CatalysItemType.white:
                             info = "cost x2";
@@ -98,7 +104,12 @@ public class CraftInfoPlace : MonoBehaviour
                     spr = DataBaseController.Instance.ParameterIcon(secondary.Key);
                 }
 
+
                 filed.text = info;
+                if (spr == null)
+                {
+                    img2.enabled = false;
+                }
                 img2.sprite = spr;
                 img2.transform.SetParent(LayoutSpecials, false);
 
