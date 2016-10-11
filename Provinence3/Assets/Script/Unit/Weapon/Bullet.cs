@@ -263,14 +263,14 @@ public class Bullet : PoolElement
         }
     }
 
-    private Vector2 ContrtolPoint(Vector2 startPos, Vector2 end, ControlPointOffset offset = ControlPointOffset.soft)
+    private Vector3 ContrtolPoint(Vector3 startPos, Vector3 end, ControlPointOffset offset = ControlPointOffset.soft)
     {
         float deltaOffset = 1f;
 
         var milldePoint = (startPos + end) / 2;
         var alpha = (startPos.y - end.y) / (startPos.x - end.x);
         var dist = (startPos - end).magnitude;
-        var v = (new Vector2(1, -1 / alpha)).normalized;
+        var v = (new Vector3(1, -1 / alpha)).normalized;
 
 
         switch (offset)
@@ -288,6 +288,7 @@ public class Bullet : PoolElement
 
         var contrtolPoint = milldePoint + v * deltaOffset;
         Debug.Log(startPos + "   " + contrtolPoint + "   " + end);
+        contrtolPoint.z = milldePoint.z;
         return contrtolPoint;
     }
 
