@@ -585,6 +585,11 @@ public class PlayerData
             RemoveItem(execCraftItem, execCraftItem.count);
         }
         PlayerItem resultItem = recipeItem.Craft(catalysItem);
+        if (catalysItem != null)
+        {
+            RemoveItem(catalysItem);
+        }
+        RemoveItem(recipeItem);
         AddItem(resultItem);
         Save();
         return resultItem;

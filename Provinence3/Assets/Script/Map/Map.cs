@@ -280,12 +280,26 @@ Now when you want to LoadLevelAdditive , you instantiate the prefab which holds 
 
     private void OnSpawnBoss(int bonuses)
     {
-        var pos = BossAppearPos.RandomElement().transform.position;
-        var bossPrefab = DataBaseController.Instance.BossUnits.FirstOrDefault(x => x.ParametersScriptable.Level == level.difficult);
+        Vector3 pos = default(Vector3);
+        float curDist = 9999999;
+        foreach (var bossBornPosition in BossAppearPos)
+        {
+            var tmpDist = (bossBornPosition.transform.position - level.MainHero.transform.position).sqrMagnitude;
+            if (curDist > tmpDist)
+            {
+                curDist = tmpDist;
+                pos = bossBornPosition.transform.position;
+            }
+        }
+
+        var bossPrefab = DataBaseController.Instance.BossUnits.RandomElement();
+        //FirstOrDefault(x => x.ParametersScriptable.Level == level.difficult);
+        
         if (bossPrefab != null)
         {
             CameraFollow.CameraShake.Init(0.5f);
             boss = DataBaseController.GetItem<BossUnit>(bossPrefab, pos);
+            boss.ModificateParams(level.difficult);
             var hero = MainController.Instance.level.MainHero;
             boss.Init(hero);
             enemies.Add(boss);
