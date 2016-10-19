@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 public class WindowEndGame : BaseWindow
 {
-    public Text moneyField;
-    public Text crystalField;
+    public ChangingCounter moneyField;
+    public ChangingCounter crystalField;
     public Text captureField;
-    public Text killsField;
+    public ChangingCounter killsField;
     public GameObject goodPicture;
     public GameObject badPicture;
     public Transform craftsLayout;
@@ -31,7 +31,7 @@ public class WindowEndGame : BaseWindow
         crystalField.transform.parent.gameObject.SetActive(false);
         foreach (var item in collectedMoney)
         {
-            Text t = null;
+            ChangingCounter t = null;
             switch (item.Key)
             {
                 case ItemId.money:
@@ -47,7 +47,10 @@ public class WindowEndGame : BaseWindow
                     break;
             }
             if (t != null)
-                t.text = "+" + item.Value;
+            {
+                t.Init(0);
+                t.ChangeTo(item.Value);
+            }
         }
         var crafts = level.CollectedCrafts;
         foreach (var craft in crafts)
@@ -69,8 +72,9 @@ public class WindowEndGame : BaseWindow
         string capt = isGoodEnd ? "Good end" : "Bad ending lose half of gold";
         goodPicture.SetActive(isGoodEnd);
         badPicture.SetActive(!isGoodEnd);
+        killsField.Init(0);
         captureField.text = capt;
-        killsField.text =  "Monsters killed:" + level.EnemiesKills.ToString("0");
+        killsField.ChangeTo(level.EnemiesKills);
     }
 }
 

@@ -12,7 +12,7 @@ public class WindowInGame : BaseWindow
     public Slider HealthSlider;
     public Slider BossSpawnSlider;
     public MonsterInfo MonsterInfo;
-    public Text moneyField;
+    public ChangingCounter moneyField;
     public WeaponChooserView WeaponChooser;
     public UIMain UiControls;
     public Transform hitTransform;
@@ -25,14 +25,16 @@ public class WindowInGame : BaseWindow
     public WindowPause WindowPause;
     public QuestInfo QuestActive;
     private Level level;
+    public FaderWindow FaderWindow;
 
     public override void Init<T>(T obj)
     {
         WindowManager.Instance.MainBack.gameObject.SetActive(false);
         base.Init(obj);
+        FaderWindow.Open();
         ClearTransform(TalismanButtonsLayout);
         level = obj as Level;
-        moneyField.text = 0.ToString("0");
+        moneyField.Init(0);
         UiControls.Init(level);
         level.Energy.OnLeft += OnLeft;
         level.Energy.OnRage += OnRage;
@@ -45,6 +47,7 @@ public class WindowInGame : BaseWindow
         {
             Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
         });
+        level.OnEndLevel += OnEndLevel;
         level.QuestController.OnQuestStatusChanges += OnQuestStatusChanges;
         level.QuestController.OnQuestProgress += OnQuestProgress;
         level.OnPause += OnPause;
@@ -74,6 +77,11 @@ public class WindowInGame : BaseWindow
         HealthSlider.value = 1;
         ShowPreStartWindow();
         MonsterInfo.Init();
+    }
+
+    private void OnEndLevel()
+    {
+        FaderWindow.Close();
     }
 
     private void OnQuestProgress(QuestGiver arg1, int cur, int trg)
@@ -167,6 +175,7 @@ public class WindowInGame : BaseWindow
         WindowManager.Instance.MainBack.gameObject.SetActive(true);
         MonsterInfo.DeInit();
         UiControls.Enable(false);
+        level.OnEndLevel -= OnEndLevel;
         level.Energy.OnLeft -= OnLeft;
         level.Energy.OnRage -= OnRage;
         level.OnItemCollected -= OnItemCollected;
@@ -186,7 +195,7 @@ public class WindowInGame : BaseWindow
         switch (itemType)
         {
             case ItemId.money:
-                moneyField.text = arg2.ToString("00");
+                moneyField.ChangeTo((int)arg2);
                 item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
                 item.transform.SetParent(moneyContainer);
                 item.Init(GetDeltaStr(delta) + " Gold", DataBaseController.Instance.GetColor(itemType),FlyNumerDirection.non,26);
