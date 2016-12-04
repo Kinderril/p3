@@ -14,7 +14,7 @@ MonoBehaviour:
   Speed: 600
   MPower: 39
   PPower: 39
-  MaxHp: 205
+  MaxHp: 175
   magicResist: 40
   physicResist: 45
   Level: 3

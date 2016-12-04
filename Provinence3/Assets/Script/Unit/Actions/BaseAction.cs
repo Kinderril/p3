@@ -19,7 +19,15 @@ public class BaseAction
     {
         this.endCallback = endCallback;
         this.owner = owner;
+        owner.OnDead += OnDead;
     }
+
+    private void OnDead(Unit obj)
+    {
+        owner.OnDead -= OnDead;
+        End();
+    }
+
     public virtual void Update()
     {
         

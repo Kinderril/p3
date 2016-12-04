@@ -11,7 +11,7 @@ public class WindowStart : BaseWindow
     public override void Init()
     {
         base.Init();
-        WindowManager.Instance.MainBack.gameObject.SetActive(true);
+//        WindowManager.Instance.MainBack.gameObject.SetActive(true);
         StartBoost.SetActive(MainController.Instance.PlayerData.CheckIfFirstLevel());
     }
 

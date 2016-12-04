@@ -16,6 +16,7 @@ public class FaderWindow : MonoBehaviour
 
     public void Open()
     {
+        gameObject.SetActive(true);
         info.gameObject.SetActive(true);
         anim.SetTrigger(open);
     }

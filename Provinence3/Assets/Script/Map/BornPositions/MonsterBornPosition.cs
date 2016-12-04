@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 public class MonsterBornPosition : BaseBornPosition
@@ -13,6 +14,7 @@ public class MonsterBornPosition : BaseBornPosition
     private Action<Unit> OnEnemyDead;
     private Hero hero;
     private bool isReborned = false;
+    private List<BaseMonster> activeMonsters = new List<BaseMonster>(); 
 
     public void Init(Map map, Action<Unit> OnEnemyDead,Level level, Hero hero)
     {
@@ -65,10 +67,12 @@ public class MonsterBornPosition : BaseBornPosition
             {
                 unit.Overcharg();
             }
+            unit.OnGetHitMonster += OnGetHitMonster;
             unit.transform.SetParent(map.enemiesContainer);
             unit.OnDead += OnEnemyDead;
             unit.OnDead += OnDead;
             totalUnits++;
+            activeMonsters.Add(unit);
         }
         else
         {
@@ -76,8 +80,22 @@ public class MonsterBornPosition : BaseBornPosition
         }
     }
 
+    private void OnGetHitMonster(BaseMonster monster)
+    {
+        foreach (var activeMonster in activeMonsters)
+        {
+            if (activeMonster != monster)
+            {
+                activeMonster.StartAttack();
+            }
+        }
+    }
+
     private void OnDead(Unit unit)
     {
+        var monster = (unit as BaseMonster);
+        activeMonsters.Remove(monster);
+        monster.OnGetHitMonster += OnGetHitMonster;
         unit.OnDead -= OnDead;
         totalUnits--;
 //        Debug.Log("OnDead  " + totalUnits + "    " + isReborned) ;

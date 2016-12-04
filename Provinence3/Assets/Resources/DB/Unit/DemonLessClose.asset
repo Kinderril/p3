@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Name: DemonLessClose
   m_EditorClassIdentifier: 
   Speed: 350
-  MPower: 48
-  PPower: 45
-  MaxHp: 230
+  MPower: 36
+  PPower: 35
+  MaxHp: 200
   magicResist: 10
   physicResist: 30
   Level: 2

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 330
   MPower: 1
-  PPower: 27
-  MaxHp: 190
+  PPower: 19
+  MaxHp: 160
   magicResist: 12
   physicResist: 20
   Level: 1

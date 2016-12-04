@@ -44,6 +44,7 @@ public class BaseMonster : Unit
     public bool haveAction;
     public List<DropItem> dropItems; 
     private bool overcharged = false;
+    public event Action<BaseMonster> OnGetHitMonster;
 
     public float moneyCoef = 1f;
     public float energyCoef = 1f;
@@ -206,6 +207,10 @@ public class BaseMonster : Unit
         {
             StartAttack(true);
         }
+        if (OnGetHitMonster != null)
+        {
+            OnGetHitMonster(this);
+        }
 
     }
     
@@ -337,6 +342,11 @@ public class BaseMonster : Unit
                 Action = new AttackCloseCombat(this, heroTarget, EndAttack, byHit);
                 break;
         }
+    }
+
+    public void StartAttack()
+    {
+        StartAttack(true);
     }
 
     private void EndAttack(EndCause obj)

@@ -108,7 +108,7 @@ public class CraftInfoPlace : MonoBehaviour
                 filed.text = info;
                 if (spr == null)
                 {
-                    img2.enabled = false;
+                    img2.gameObject.SetActive(false);
                 }
                 img2.sprite = spr;
                 prm.transform.SetParent(LayoutSpecials, false);
