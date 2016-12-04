@@ -29,7 +29,7 @@ public class WindowInGame : BaseWindow
 
     public override void Init<T>(T obj)
     {
-        WindowManager.Instance.MainBack.gameObject.SetActive(false);
+//        WindowManager.Instance.MainBack.gameObject.SetActive(false);
         base.Init(obj);
         FaderWindow.Open();
         ClearTransform(TalismanButtonsLayout);
@@ -172,7 +172,7 @@ public class WindowInGame : BaseWindow
     public override void Close()
     {
         base.Close();
-        WindowManager.Instance.MainBack.gameObject.SetActive(true);
+//        WindowManager.Instance.MainBack.gameObject.SetActive(true);
         MonsterInfo.DeInit();
         UiControls.Enable(false);
         level.OnEndLevel -= OnEndLevel;
