@@ -10,6 +10,14 @@ public enum UnitType
 }
 public class Unit : MonoBehaviour
 {
+    public Action<Unit> OnShootEnd;
+    public event Action OnUnitDestroy;
+    public event Action<Vector3> OnUnitAttack;
+    public Action<Weapon> OnWeaponChanged;
+    public Action OnShieldOn;
+    public event Action<Unit> OnDead;
+    public Action<float, float, float> OnGetHit;
+
     protected float curHp;
     public Weapon curWeapon;
     public List<Weapon> InventoryWeapons;
@@ -17,20 +25,15 @@ public class Unit : MonoBehaviour
     private BaseAction action;
     public UnitType unitType;
     public Transform weaponsContainer;
-    public event Action<Unit> OnDead;
-    public Action<float, float,float> OnGetHit;
     protected bool isDead = false;
     public UnitParameters ParametersScriptable;
     public UnitParametersInGame Parameters;
     private AnimationController animationController;
-    public Action<Unit> OnShootEnd;
-    public Action<Weapon> OnWeaponChanged;
     protected float lastWeaponChangse;
     public ParticleSystem HitParticleSystem;
     public BaseEffectAbsorber StartAttackEffect;
     protected bool isPlayAttack = false;
     public float _shield;
-    public Action OnShieldOn;
     public IEndEffect OnShieldOff;
     public List<TimeEffect> efftcs = new List<TimeEffect>();
     public DeathInfo LastHitInfo;
@@ -151,6 +154,10 @@ public class Unit : MonoBehaviour
             {
 //                Debug.Log("NSParticleAbsorber PLAY " + gameObject.name);
                 StartAttackEffect.Play();
+            }
+            if (OnUnitAttack != null)
+            {
+                OnUnitAttack(direction);
             }
             curWeapon.SetNextTimeShoot();
             animationController.StartPlayAttack(() =>
@@ -379,6 +386,14 @@ public class Unit : MonoBehaviour
     public void DeInit()
     {
         isDead = true;
+    }
+
+    void OnDestroy()
+    {
+        if (OnUnitDestroy != null)
+        {
+            OnUnitDestroy();
+        }
     }
 
 }

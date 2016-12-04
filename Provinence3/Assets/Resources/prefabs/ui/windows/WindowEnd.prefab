@@ -100,6 +100,7 @@ GameObject:
   - 222: {fileID: 22281452}
   - 114: {fileID: 11472226}
   - 114: {fileID: 11432548}
+  - 114: {fileID: 11497938}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -135,6 +136,7 @@ GameObject:
   - 222: {fileID: 22204766}
   - 114: {fileID: 11422216}
   - 114: {fileID: 11442972}
+  - 114: {fileID: 11430850}
   m_Layer: 5
   m_Name: Crystals
   m_TagString: Untagged
@@ -153,8 +155,9 @@ GameObject:
   - 222: {fileID: 22285264}
   - 114: {fileID: 11477338}
   - 114: {fileID: 11410140}
+  - 114: {fileID: 11499672}
   m_Layer: 5
-  m_Name: Kills
+  m_Name: Kills (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,6 +209,25 @@ GameObject:
   - 114: {fileID: 11427776}
   m_Layer: 5
   m_Name: Back
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162584
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22481522}
+  - 222: {fileID: 22279408}
+  - 114: {fileID: 11451902}
+  - 114: {fileID: 11407600}
+  - 114: {fileID: 11472800}
+  m_Layer: 5
+  m_Name: Kills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,6 +385,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0.5718291, g: 0.58823526, b: 0.56660897, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &11407600
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &11408816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -518,16 +554,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TopPanel: {fileID: 0}
   playOpenAnimIfCan: 1
-  moneyField: {fileID: 11472226}
-  crystalField: {fileID: 11422216}
+  moneyField: {fileID: 11497938}
+  crystalField: {fileID: 11430850}
   captureField: {fileID: 11441052}
-  killsField: {fileID: 11477338}
+  killsField: {fileID: 11472800}
   goodPicture: {fileID: 121232}
   badPicture: {fileID: 185910}
   craftsLayout: {fileID: 22423276}
   bigItemLayout: {fileID: 22459734}
   PrefabItem: {fileID: 11478132, guid: bb3db7f7c1ce31d49bf33b34a79437f0, type: 2}
   PrefabCraft: {fileID: 11408950, guid: e6e3aa6f543d317478dbe35f4ca1c38c, type: 2}
+--- !u!114 &11430850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4614b6f3853134c8733c564f119e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11432548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -749,6 +796,39 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11451902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9705882, g: 0.9705882, b: 0.9705882, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 86983c6bd4117a0498dfcb64cf777b37, type: 3}
+    m_FontSize: 54
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 54
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 293
 --- !u!114 &11454964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -845,6 +925,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Money
+--- !u!114 &11472800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4614b6f3853134c8733c564f119e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11474634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -898,13 +989,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 54
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Monsters Killed:293
+  m_Text: " Monsters \nKilled:"
 --- !u!114 &11478950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1117,6 +1208,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11497938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4614b6f3853134c8733c564f119e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11498758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1137,6 +1239,17 @@ MonoBehaviour:
   m_Spacing: 34.21
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
+--- !u!114 &11499672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4614b6f3853134c8733c564f119e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &22204766
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1221,6 +1334,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175158}
+--- !u!222 &22279408
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162584}
 --- !u!222 &22281452
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1332,12 +1451,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 22481522}
   m_Father: {fileID: 22494658}
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -458, y: 291}
+  m_AnchoredPosition: {x: -439.9, y: 291}
   m_SizeDelta: {x: 342.6, y: 172.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22448368
@@ -1520,6 +1640,24 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22481522
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 22424726}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 116, y: 58.7}
+  m_SizeDelta: {x: 126.1, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22489000
 RectTransform:

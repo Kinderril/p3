@@ -16,11 +16,17 @@ public class KeyCatcher : MonoBehaviour
     }
     public void EndAnimationKey()
     {
-        callbackClose();
+        if (callbackClose != null)
+        {
+            callbackClose();
+        }
     }
     public void StartAnimationKey()
     {
-        callbackOpen();
+        if (callbackOpen != null)
+        {
+            callbackOpen();
+        }
     }
 }
 

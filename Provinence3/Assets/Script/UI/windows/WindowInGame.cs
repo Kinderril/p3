@@ -34,7 +34,7 @@ public class WindowInGame : BaseWindow
         FaderWindow.Open();
         ClearTransform(TalismanButtonsLayout);
         level = obj as Level;
-        moneyField.Init(0);
+        moneyField.Init(0,3600);
         UiControls.Init(level);
         level.Energy.OnLeft += OnLeft;
         level.Energy.OnRage += OnRage;

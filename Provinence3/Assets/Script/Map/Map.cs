@@ -117,7 +117,7 @@ public class Map : Singleton<Map>
         {
             chestBornPosition.Init(this,lvl);
         }
-        CameraFollow.Init(hero.transform);
+        CameraFollow.Init(hero);
 
         allInfo += TimeUtils.EndMeasure("LOAD LAST");
         DebugController.Instance.InfoField2.text = allInfo;

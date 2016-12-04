@@ -4,46 +4,61 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour
 {
 
-    public Transform target;
+    public Unit targetTransform;
     public Vector3 offset;
-    private Vector3 xyOffset;
+    public Vector3 xyOffset;
     private Vector3 oldPos;
-    private Vector3 reverseDirection;
+    public Vector3 cureentDir;
     public CameraShake CameraShake;
-    public float maxSqrDistance = 10f;
-    public float frictionPower = 0.1f;
+    private float maxSqrDistance = 3f;
+    private float maxDstance;
+    private float maxWaitTime = 1.3f;
+    public float frictionPower = 0.04f;
+    private float expireTimeUpd;
+    public Vector3 lastTarget;
 
     void Awake()
     {
+        maxDstance = Mathf.Sqrt(maxSqrDistance);
         if (CameraShake == null)
             CameraShake = GetComponent<CameraShake>();
     }
 
-    public void Init(Transform target)
+    public void Init(Unit target)
     {
-        this.target = target;
+        this.targetTransform = target;
+        targetTransform.OnUnitAttack += OnUnitAttack;
+        targetTransform.OnUnitDestroy += OnUnitDestroy;
     }
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	    if (target != null)
-	    {
-	        var delta = target.position - oldPos;
-	        bool withDirection = delta.sqrMagnitude > 0.001f;
 
-            if (withDirection)
+    private void OnUnitDestroy()
+    {
+        targetTransform.OnUnitAttack -= OnUnitAttack;
+        targetTransform.OnUnitDestroy -= OnUnitDestroy;
+    }
+
+    private void OnUnitAttack(Vector3 dir)
+    {
+        expireTimeUpd = Time.time + maxWaitTime;
+        lastTarget = dir.normalized * maxDstance;
+    }
+
+    void Update ()
+	{
+	    if (targetTransform != null)
+	    {
+	        var dir = (lastTarget - xyOffset).normalized;
+            if (expireTimeUpd > Time.time)
 	        {
-	            reverseDirection = -delta.normalized*frictionPower;
-//	            oldPos = target.position;
-//	            var np = target.position + offset;
-//	            transform.position = np;
-	        }
+                cureentDir = dir * frictionPower;
+            }
 	        else
 	        {
-
+                cureentDir = -dir  * frictionPower;
             }
-            var xyOffsetNew = xyOffset + reverseDirection;
+            bool withDirection = dir.sqrMagnitude > 0.001f;
+            
+            Vector3 xyOffsetNew = xyOffset + cureentDir;
 	        if (withDirection)
 	        {
 	            if (xyOffsetNew.sqrMagnitude < maxSqrDistance)
@@ -55,12 +70,13 @@ public class CameraFollow : MonoBehaviour
 	        {
 	            if (xyOffsetNew.sqrMagnitude > 0)
 	            {
-	                reverseDirection = Vector3.zero;
+	                cureentDir = Vector3.zero;
                     xyOffset = xyOffsetNew;
                 }
 	        }
-            var np = target.position + offset + xyOffset;
-            //            var np = transform.position + reverseDirection;
+
+
+            var np = targetTransform.transform.position + offset + xyOffset;
             transform.position = np;
 
         }

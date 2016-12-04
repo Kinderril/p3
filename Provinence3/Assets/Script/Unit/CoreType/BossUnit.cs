@@ -29,13 +29,16 @@ public class BossUnit : BaseMonster
 
     public void ModificateParams(int difficult)
     {
-        var delta = (Parameters.Level - difficult) / 10f;
-        Parameters[ParamType.PPower] *= delta;
-        Parameters[ParamType.MDef] *= delta;
-        Parameters[ParamType.PDef] *= delta;
-        Parameters[ParamType.MPower] *= delta;
-        Parameters.MaxHp *= delta;
-        Parameters[ParamType.Heath] = Parameters.MaxHp;
+        if (Parameters != null)
+        {
+            var delta = (Parameters.Level - difficult)/10f;
+            Parameters[ParamType.PPower] *= delta;
+            Parameters[ParamType.MDef] *= delta;
+            Parameters[ParamType.PDef] *= delta;
+            Parameters[ParamType.MPower] *= delta;
+            Parameters.MaxHp *= delta;
+            Parameters[ParamType.Heath] = Parameters.MaxHp;
+        }
 
     }
 }

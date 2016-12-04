@@ -48,7 +48,7 @@ public class WindowEndGame : BaseWindow
             }
             if (t != null)
             {
-                t.Init(0);
+                t.Init(0, 3500);
                 t.ChangeTo(item.Value);
             }
         }
@@ -72,7 +72,7 @@ public class WindowEndGame : BaseWindow
         string capt = isGoodEnd ? "Good end" : "Bad ending lose half of gold";
         goodPicture.SetActive(isGoodEnd);
         badPicture.SetActive(!isGoodEnd);
-        killsField.Init(0);
+        killsField.Init(0,3500);
         captureField.text = capt;
         killsField.ChangeTo(level.EnemiesKills);
     }

@@ -66,7 +66,7 @@ public class CraftInfoPlace : MonoBehaviour
                 }
                 var secondary = HeroShopRandomItem.GetSecondaryParam(totalPoints, recipeItem.recipeSlot);
                 var prm = Instantiate(PrefabSecondaryParam);
-                var img2 = prm.GetComponent<Image>();
+                var img2 = prm.GetComponentInChildren<Image>();
                 var filed = prm.GetComponentInChildren<Text>();
                 var minS = secondary.Value*0.5f;
                 var maxS = secondary.Value;
@@ -111,7 +111,7 @@ public class CraftInfoPlace : MonoBehaviour
                     img2.enabled = false;
                 }
                 img2.sprite = spr;
-                img2.transform.SetParent(LayoutSpecials, false);
+                prm.transform.SetParent(LayoutSpecials, false);
 
                 break;
             case Slot.Talisman:

@@ -15,18 +15,20 @@ public enum CounterSide
 
 public class ChangingCounter : MonoBehaviour
 {
+    private const int MS = 1000;
+    private int TOTAL_CHANGE_TIME_MS = 1 * MS;//2sec
+    private int FPS = 30;
+
+
     private Text label;
     private int targetValue;
     private int curValue = 0;
     private bool shallCalc;
     private CounterSide counterSide;
-    private const int MS = 1000;
     public const float SHAKE_TIME = 1;
     public const float SHAKE_STR = 0.3f;
-    private const int TOTAL_CHANGE_TIME_MS = 2 * MS;//2sec
-    private const int FPS = 30;
-    private int MAX_CHANGES = FPS * TOTAL_CHANGE_TIME_MS / MS;
-    private int MIN_STEP_TIME = MS / FPS;
+    private int MAX_CHANGES;// = FPS * TOTAL_CHANGE_TIME_MS / MS;
+    private int MIN_STEP_TIME;// = MS / FPS;
     private int curChangeTime;
     private bool isUpdating = false;
     private float timeLast;
@@ -39,8 +41,13 @@ public class ChangingCounter : MonoBehaviour
     private float[] deltaChangeTime;
     private Action<int> workAction;
 
-    public void Init(int value = 0)
+    public void Init(int value = 0, int TOTAL_CHANGE_TIME_MS = 1000, int FPS = 30)
     {
+        this.TOTAL_CHANGE_TIME_MS = TOTAL_CHANGE_TIME_MS;
+        this.FPS = FPS;
+        MAX_CHANGES = FPS * TOTAL_CHANGE_TIME_MS / MS;
+        MIN_STEP_TIME = MS / FPS;
+        
         label = GetComponent<Text>();
         label.text = value.ToString();
         curValue = value;
