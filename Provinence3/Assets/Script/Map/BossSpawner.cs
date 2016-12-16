@@ -12,7 +12,7 @@ public class BossSpawner
     private Action<int> OnSpawnBoss;
     public event Action<int, int> OnBossGetEnergy;
     private bool isBossSpawned = false;
-    private float PRECENT_TO_KILL = 0.16f;
+    private float PRECENT_TO_KILL = 0.13f;
     private int bonusesGet = 0;
 
     public BossSpawner(int count, Action<int> SpawnBoss)

@@ -14,6 +14,18 @@ public enum ParamType
     Heath,
 
 }
+
+[Serializable]
+public struct DropItem
+{
+    public const float CHANCE_SIMPLE_0_1 = 0.45f;
+    public const float CHANCE_RARE_0_1 = 0.65f;
+
+    public float chance0_1_simple;
+    public float chance0_1_rare;
+    public CraftItemType type_simple;
+    public CraftItemType type_rare;
+}
 public class UnitParameters : ScriptableObject
 {
     public Dictionary<ParamType, float> Parameters; 
@@ -26,7 +38,8 @@ public class UnitParameters : ScriptableObject
     public float physicResist = 1f;
     public int Level = 1;
     public AttackType AttackType;
-    
+    public DropItem DropItem;
+
     public UnitParameters Copy()
     {
         var p = CreateInstance(typeof(UnitParameters)) as UnitParameters;
@@ -35,6 +48,7 @@ public class UnitParameters : ScriptableObject
         p.PPower = PPower;
         p.MaxHp = MaxHp;
         p.magicResist = magicResist;
+        p.DropItem = DropItem;
         p.physicResist = physicResist;
         p.Parameters= new Dictionary<ParamType, float>();
         p.Parameters.Add(ParamType.Speed,Speed );
@@ -59,12 +73,40 @@ public class UnitParameters : ScriptableObject
         p.Add(ParamType.PDef, physicResist);
         p.Add(ParamType.MDef, magicResist);
         p.Add(ParamType.Heath, MaxHp);
+        p.SimpleDrop = OtherType(DropItem.type_simple,false);
+        p.RareDrop = OtherType(DropItem.type_rare,true);
+
         return p;
+    }
+
+    private List<CraftItemType> OtherType(CraftItemType t,bool isRare)
+    {
+        var count = Enum.GetValues(typeof (CraftItemType)).Length;
+        List < CraftItemType > list = new List<CraftItemType>();
+        foreach (CraftItemType v in Enum.GetValues(typeof(CraftItemType)))
+        {
+            var rare = false;
+            if (isRare)
+            {
+                rare = (int) v >= count/2;
+            }
+            else
+            {
+                rare = (int)v < count / 2;
+            }
+            if (v != t && rare)
+            {
+                list.Add(v);
+            }
+        }
+        return list;
     }
 }
 
 public class UnitParametersInGame : Dictionary<ParamType, float>
 {
+    public List<CraftItemType> SimpleDrop;
+    public List<CraftItemType> RareDrop;
     public float MaxHp;
     public int Level = 1;
     public AttackType AttackType;

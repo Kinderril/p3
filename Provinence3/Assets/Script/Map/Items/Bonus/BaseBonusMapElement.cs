@@ -22,6 +22,7 @@ public class BaseBonusMapElement : MonoBehaviour
     public void Init()
     {
         Utils.GroundTransform(transform);
+        effectOnGet.Stop();
     }
     void OnTriggerEnter(Collider other)
     {

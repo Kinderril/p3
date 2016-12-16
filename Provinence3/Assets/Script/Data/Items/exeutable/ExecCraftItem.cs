@@ -6,11 +6,13 @@ using UnityEngine;
 
 public enum CraftItemType
 {
+    //Simple
     Iron,
     Wood,
     Leather,
     Thread,
 
+    //Rare
     Bone,
     Mercury,
     Gems,

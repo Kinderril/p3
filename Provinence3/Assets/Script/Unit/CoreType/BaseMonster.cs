@@ -4,18 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-[Serializable]
-public struct DropItem
-{
-    public float chance0_1;
-    public CraftItemType type;
-    public DropItem(float chance, CraftItemType type)
-    {
-        this.chance0_1 = chance;
-        this.type = type;
-    }
 
-}
 
 public enum AIStatus
 {
@@ -42,7 +31,6 @@ public class BaseMonster : Unit
     private BaseAction attackBehaviour;
     private bool isDisabled = false;
     public bool haveAction;
-    public List<DropItem> dropItems; 
     private bool overcharged = false;
     public event Action<BaseMonster> OnGetHitMonster;
 
@@ -141,24 +129,50 @@ public class BaseMonster : Unit
 
     private void DropItems()
     {
+        CheckDrop(true, ParametersScriptable.DropItem);
+        CheckDrop(false, ParametersScriptable.DropItem);
+    }
 
-        foreach (var dropItem in dropItems)
+    private void CheckDrop(bool isSimple,DropItem drop)
+    {
+        var chance = UnityEngine.Random.Range(0f, 1f);
+        if (overcharged)
         {
-            var chance = UnityEngine.Random.Range(0f, 1f);
-            if (overcharged)
-            {
-                chance /= 3;
-            }
-            var isDrop = chance < dropItem.chance0_1;
+            chance /= 3;
+        }
+        var isDrop = chance < (isSimple? drop.chance0_1_simple:drop.chance0_1_rare);
 #if UNITY_EDITOR
-            if (DebugController.Instance.ALL_TIME_DROP)
-            {
-                isDrop = true;
-            }
+        if (DebugController.Instance.ALL_TIME_DROP)
+        {
+            isDrop = true;
+        }
 #endif
-            if (isDrop)
+        if (isDrop)
+        {
+            if (isSimple)
             {
-                DropItem(dropItem.type);
+                var chaneSimple = UnityEngine.Random.Range(0f,1f );
+                if (chaneSimple < global::DropItem.CHANCE_SIMPLE_0_1)
+                {
+                    DropItem(drop.type_simple);
+                }
+                else
+                {
+                    DropItem(Parameters.SimpleDrop.RandomElement());
+                }
+            }
+            else
+            {
+                var chaneRare = UnityEngine.Random.Range(0f, 1f);
+                if (chaneRare < global::DropItem.CHANCE_RARE_0_1)
+                {
+                    DropItem(drop.type_rare);
+                }
+                else
+                {
+                    DropItem(Parameters.RareDrop.RandomElement());
+                }
+
             }
         }
     }

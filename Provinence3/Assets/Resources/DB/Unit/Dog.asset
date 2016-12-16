@@ -19,3 +19,8 @@ MonoBehaviour:
   physicResist: 45
   Level: 3
   AttackType: 1
+  DropItem:
+    chance0_1_simple: 0.23
+    chance0_1_rare: 0.3
+    type_simple: 1
+    type_rare: 6

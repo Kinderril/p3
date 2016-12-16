@@ -92,6 +92,7 @@ public class QuestGiver : MonoBehaviour
 
     public void SetReady()
     {
+        Status = QuestStatus.ready;
         Controller.Check(this);
 //        if (Status == QuestStatus.started)
 //        {
@@ -233,10 +234,10 @@ public class QuestGiver : MonoBehaviour
             case QuestLogicType.collectReource:
                 r = (int)(UnityEngine.Random.Range(5f, 7f) * coef);
                 var enemies = Map.Instance.enemies;
-                var enemy = enemies.FirstOrDefault(x => x.dropItems.Any());
+                var enemy = enemies.RandomElement();
                 if (enemy != null)
                 {
-                    logic = new QuestCollectResource(this, r, enemy.dropItems[0].type, OnQuestProgressChange);
+                    logic = new QuestCollectResource(this, r, enemy.ParametersScriptable.DropItem.type_rare, OnQuestProgressChange);
                 }
                 break;
             case QuestLogicType.getDamage:

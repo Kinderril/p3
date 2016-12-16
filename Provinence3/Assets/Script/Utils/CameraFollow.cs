@@ -16,6 +16,7 @@ public class CameraFollow : MonoBehaviour
     public float frictionPower = 0.04f;
     private float expireTimeUpd;
     public Vector3 lastTarget;
+    public bool withExpandLook;
 
     void Awake()
     {
@@ -47,36 +48,38 @@ public class CameraFollow : MonoBehaviour
 	{
 	    if (targetTransform != null)
 	    {
-	        var dir = (lastTarget - xyOffset).normalized;
-            if (expireTimeUpd > Time.time)
+	        if (withExpandLook)
 	        {
-                cureentDir = dir * frictionPower;
-            }
-	        else
-	        {
-                cureentDir = -dir  * frictionPower;
-            }
-            bool withDirection = dir.sqrMagnitude > 0.001f;
-            
-            Vector3 xyOffsetNew = xyOffset + cureentDir;
-	        if (withDirection)
-	        {
-	            if (xyOffsetNew.sqrMagnitude < maxSqrDistance)
+	            var dir = (lastTarget - xyOffset).normalized;
+	            if (expireTimeUpd > Time.time)
 	            {
-	                xyOffset = xyOffsetNew;
+	                cureentDir = dir*frictionPower;
+	            }
+	            else
+	            {
+	                cureentDir = -dir*frictionPower;
+	            }
+	            bool withDirection = dir.sqrMagnitude > 0.001f;
+
+	            Vector3 xyOffsetNew = xyOffset + cureentDir;
+	            if (withDirection)
+	            {
+	                if (xyOffsetNew.sqrMagnitude < maxSqrDistance)
+	                {
+	                    xyOffset = xyOffsetNew;
+	                }
+	            }
+	            else
+	            {
+	                if (xyOffsetNew.sqrMagnitude > 0)
+	                {
+	                    cureentDir = Vector3.zero;
+	                    xyOffset = xyOffsetNew;
+	                }
 	            }
 	        }
-	        else
-	        {
-	            if (xyOffsetNew.sqrMagnitude > 0)
-	            {
-	                cureentDir = Vector3.zero;
-                    xyOffset = xyOffsetNew;
-                }
-	        }
 
-
-            var np = targetTransform.transform.position + offset + xyOffset;
+	        var np = targetTransform.transform.position + offset + xyOffset;
             transform.position = np;
 
         }
