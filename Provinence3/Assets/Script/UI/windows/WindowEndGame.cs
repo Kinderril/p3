@@ -12,6 +12,7 @@ public class WindowEndGame : BaseWindow
     public ChangingCounter crystalField;
     public Text captureField;
     public ChangingCounter killsField;
+    public Text TimeField;
     public GameObject goodPicture;
     public GameObject badPicture;
     public Transform craftsLayout;
@@ -26,9 +27,11 @@ public class WindowEndGame : BaseWindow
         ClearTransform(bigItemLayout);
         var level = MainController.Instance.level;
         bool isGoodEnd = level.IsGoodEnd != EndlevelType.bad;
+        var statistics = level.LevelStatistics;
         var collectedMoney = level.GetAllCollectedMoney();
 //        crystalField.gameObject.SetActive(false);
         crystalField.transform.parent.gameObject.SetActive(false);
+
         foreach (var item in collectedMoney)
         {
             ChangingCounter t = null;
@@ -52,6 +55,8 @@ public class WindowEndGame : BaseWindow
                 t.ChangeTo(item.Value);
             }
         }
+        var duration = statistics.GetElapsetime();
+        TimeField.text = "Time " + (int)duration.Minutes+ ":" + (int)duration.Seconds;
         var crafts = level.CollectedCrafts;
         foreach (var craft in crafts)
         {
@@ -69,12 +74,12 @@ public class WindowEndGame : BaseWindow
             playerItem.gameObject.transform.SetParent(bigItemLayout, false);
         }
 
-        string capt = isGoodEnd ? "Good end" : "Bad ending lose half of gold";
+        string capt = "Level complited";//isGoodEnd ? "Good end" : "Bad ending lose half of gold";
         goodPicture.SetActive(isGoodEnd);
         badPicture.SetActive(!isGoodEnd);
         killsField.Init(0,3500);
         captureField.text = capt;
-        killsField.ChangeTo(level.EnemiesKills);
+        killsField.ChangeTo(statistics.EnemiesKills);
     }
 }
 

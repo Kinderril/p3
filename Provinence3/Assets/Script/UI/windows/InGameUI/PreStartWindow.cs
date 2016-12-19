@@ -18,7 +18,8 @@ public class PreStartWindow : MonoBehaviour
     {
         gameObject.SetActive(true);
         this.callback = callback;
-        FieldLevel.text = "Level:"+level.MissionIndex.ToString();
+//        DataBaseController.Instance.name
+        FieldLevel.text = DataBaseController.Instance.MissionNames[level.MissionIndex];
         var names = DataBaseController.Instance.RespawnPositionsNames[level.MissionIndex];
         Difficulty.text = "Difficulty:"+level.difficult.ToString();
         Startpoint.text = names[level.IndexBornPoint];

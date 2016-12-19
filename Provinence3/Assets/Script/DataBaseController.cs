@@ -54,6 +54,7 @@ public class DataBaseController : Singleton<DataBaseController>
     public List<BaseMonster> Monsters;
     public Dictionary<int, List<BaseMonster>> mosntersLevel = new Dictionary<int, List<BaseMonster>>();
     public Dictionary<int, Dictionary<int, string>> RespawnPositionsNames;
+    public Dictionary<int,string> MissionNames;
 
     public List<BossUnit> BossUnits = new List<BossUnit>(); 
     public Hero prefabHero;
@@ -97,7 +98,7 @@ public class DataBaseController : Singleton<DataBaseController>
         RespawnPositionsNames = new Dictionary<int, Dictionary<int, string>>();
         RespawnPositionsNames.Add(1,new Dictionary<int, string>() { {1,"Trainings"} });
         RespawnPositionsNames.Add(2, new Dictionary<int, string>() { { 1, "Forest" } , { 2, "Lake" } , { 3, "Fields" } , { 4, "Town" } });
-
+        MissionNames = new Dictionary<int, string>() { { 0, "Debug" }, { 1, "Tutorial" }, { 2, "Village" } } ;
         for (int i = 1; i < DataStructs.MISSION_LAST_INDEX+1; i++)
         {
             var pos = DataStructs.GetRespawnPointsCountByMission(i);

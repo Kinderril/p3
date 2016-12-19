@@ -56,13 +56,14 @@ public class Level
     public int MissionIndex = 1;
     public int IndexBornPoint = 0;
     public EndlevelType IsGoodEnd;
-    public int EnemiesKills = 0;
     private float penalty;
     public float MoneyBonusFromItem = 1f;
     public LevelQuestController QuestController;
+    public LevelStatistics LevelStatistics;
 
     public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
     {
+        LevelStatistics = new LevelStatistics();
         TimeUtils.StartMeasure("MAIN");
         TimeUtils.StartMeasure("LOAD PRELEVEL");
         CrystalsBonus = 1;
@@ -84,6 +85,7 @@ public class Level
         isPLaying = false;
         callback(this);
         Map.Instance.StartLoadingMonsters();
+
     }
 
     private void OnRage()
@@ -218,6 +220,7 @@ public class Level
 
     public void EndLevel(PlayerData PlayerData, EndlevelType LevelEndType,bool endImmidiatly = false)
     {
+        LevelStatistics.End();
         IsGoodEnd = LevelEndType;
         PortalsController.Stop();
         QuestController.Clear();
@@ -234,7 +237,7 @@ public class Level
             IsGoodEnd = EndlevelType.good;
             AddRandomGift();
         }
-        if (LevelStatistics.GetReward(EnemiesKills, QuestController.CompletedQuests(), collectedCrafts,!isBad))
+        if (LevelStatistics.GetReward(QuestController.CompletedQuests(), collectedCrafts,!isBad))
         {
             AddRandomGift();
         }
@@ -332,7 +335,7 @@ public class Level
 
     public void EnemieDead()
     {
-        EnemiesKills++;
+        LevelStatistics.EnemiesKills++;
     }
 
     public static float GetPenalty(int dif)

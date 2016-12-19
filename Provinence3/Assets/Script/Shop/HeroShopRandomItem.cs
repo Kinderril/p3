@@ -70,15 +70,7 @@ public abstract class HeroShopRandomItem : IShopExecute
         {
             if ((special == SpecialAbility.none || UnityEngine.Random.Range(0, 10) < 5) || addSpecial)
             {
-                var secondaryParam = GetSecondaryParam(totalPoints, slot);
-                if (pparams.ContainsKey(secondaryParam.Key))
-                {
-                    pparams[secondaryParam.Key] += secondaryParam.Value;
-                }
-                else
-                {
-                    pparams.Add(secondaryParam.Key, secondaryParam.Value);
-                }
+                AddSecondaryParam(slot, pparams, totalPoints);
             }
             else
             {
@@ -105,6 +97,21 @@ public abstract class HeroShopRandomItem : IShopExecute
             item.specialAbilities = special;
         }
         return item;
+    }
+
+    public static void AddSecondaryParam(Slot slot, Dictionary<ParamType, float> pparams,float totalPoints)
+    {
+    
+        var secondaryParam = GetSecondaryParam(totalPoints, slot);
+        if (pparams.ContainsKey(secondaryParam.Key))
+        {
+            pparams[secondaryParam.Key] += secondaryParam.Value;
+        }
+        else
+        {
+            pparams.Add(secondaryParam.Key, secondaryParam.Value);
+        }
+
     }
 
     public static KeyValuePair<ParamType,float> GetSecondaryParam(float totalPoints,Slot slot)

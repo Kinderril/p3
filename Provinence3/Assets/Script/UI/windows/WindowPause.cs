@@ -29,7 +29,7 @@ public class WindowPause : MonoBehaviour
             BossProgressField.text = "";
         }
         QuestField.text = level.QuestController.CurrentQuestInfo();
-        MonstersKilledField.text = level.EnemiesKills + " Monsters killed";
+        MonstersKilledField.text = level.LevelStatistics.EnemiesKills + " Monsters killed";
         LevelDifficultyField.text = "Difficulty:"+level.difficult.ToString();
         LevelNameField.text = "Mission index:"+level.MissionIndex.ToString();
     }

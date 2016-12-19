@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class RecipeItem : BaseItem
 {
+    public const float RED_COEF = 1.25f;
+    public const float BLACK_MIN_COEF = 1f;
+    public const float BLACK_MAX_COEF = 1.5f;
+
     public int Level = 1;
     public Slot recipeSlot;
     public const char FIRSTCHAR = '§';
@@ -107,27 +111,34 @@ public class RecipeItem : BaseItem
         var resultItem = HeroShopRandomItem.CreatMainSlot(recipeSlot, Level);
         if (catalysItem != null)
         {
+            var primaryType = Connections.GetPrimaryParamType(resultItem.Slot);
             switch (resultItem.Slot)
             {
                 case Slot.physical_weapon:
                 case Slot.magic_weapon:
                     var spedAbilities = PosibleAbilities(catalysItem.ItemType);
-                    var sa = spedAbilities.RandomElement();
-                    resultItem.specialAbilities = sa;
+//                    var sa = ;
+                    resultItem.specialAbilities = spedAbilities.RandomElement();
                     break;
                 case Slot.body:
                 case Slot.helm:
+                    var paramMain = resultItem.parameters[primaryType];
                     switch (catalysItem.ItemType)
                     {
                         case CatalysItemType.red:
+                            paramMain *= RED_COEF;
+                            resultItem.parameters[primaryType] = paramMain;
                             break;
                         case CatalysItemType.blue:
-                            break;
                         case CatalysItemType.green:
+                            HeroShopRandomItem.AddSecondaryParam(resultItem.Slot, resultItem.parameters, paramMain);
                             break;
                         case CatalysItemType.black:
+                            paramMain *= UnityEngine.Random.Range(BLACK_MIN_COEF, BLACK_MAX_COEF);
+                            resultItem.parameters[primaryType] = paramMain;
                             break;
                         case CatalysItemType.white:
+                            resultItem.cost *= 2;
                             break;
                     }
                     break;

@@ -111,8 +111,8 @@ public static class Connections
     {
         primary.Add(Slot.physical_weapon, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.PPower, 1 } }));
         primary.Add(Slot.magic_weapon, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.MPower, 3 } }));
-        primary.Add(Slot.body, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.PDef, 3 }, { ParamType.MDef, 1 } }));
-        primary.Add(Slot.helm, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.PDef, 1 }, { ParamType.MDef, 3 } }));
+        primary.Add(Slot.body, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.PDef, 3 } }));
+        primary.Add(Slot.helm, new WDictionary<ParamType>(new Dictionary<ParamType, float>() {  { ParamType.MDef, 3 } }));
 
         secondary.Add(Slot.physical_weapon, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.PDef, 1 } }));
         secondary.Add(Slot.magic_weapon, new WDictionary<ParamType>(new Dictionary<ParamType, float>() { { ParamType.MDef, 3 } }));

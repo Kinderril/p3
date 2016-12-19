@@ -68,6 +68,9 @@ public class PlayerItem : BaseItem ,IEnhcant
         Id = Utils.GetId();
         isEquped = false;
     }
+
+//    public 
+
     public PlayerItem(Dictionary<ParamType, float> pparams, Slot slot, Rarity isRare, int cost,bool isEquiped,string name,string icon,int enchant,int id)
     {
         this.Id = id;

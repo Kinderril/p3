@@ -155,9 +155,8 @@ GameObject:
   - 222: {fileID: 22285264}
   - 114: {fileID: 11477338}
   - 114: {fileID: 11410140}
-  - 114: {fileID: 11499672}
   m_Layer: 5
-  m_Name: Kills (1)
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,6 +336,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &194166
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22463436}
+  - 222: {fileID: 22271486}
+  - 114: {fileID: 11400286}
+  - 114: {fileID: 11402442}
+  - 114: {fileID: 11499672}
+  m_Layer: 5
+  m_Name: Kills (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &197846
 GameObject:
   m_ObjectHideFlags: 1
@@ -371,6 +389,53 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11400286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9705882, g: 0.9705882, b: 0.9705882, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 86983c6bd4117a0498dfcb64cf777b37, type: 3}
+    m_FontSize: 54
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 54
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: " Monsters \nKilled:"
+--- !u!114 &11402442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &11404562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -558,6 +623,7 @@ MonoBehaviour:
   crystalField: {fileID: 11430850}
   captureField: {fileID: 11441052}
   killsField: {fileID: 11472800}
+  TimeField: {fileID: 11477338}
   goodPicture: {fileID: 121232}
   badPicture: {fileID: 185910}
   craftsLayout: {fileID: 22423276}
@@ -984,18 +1050,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 86983c6bd4117a0498dfcb64cf777b37, type: 3}
-    m_FontSize: 54
+    m_FontSize: 43
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 54
-    m_Alignment: 3
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: " Monsters \nKilled:"
+  m_Text: 'Elapsed time: 14:14'
 --- !u!114 &11478950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1244,7 +1310,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142376}
+  m_GameObject: {fileID: 194166}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e4614b6f3853134c8733c564f119e1d, type: 3}
@@ -1328,6 +1394,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185910}
+--- !u!222 &22271486
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194166}
 --- !u!222 &22271580
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1451,15 +1523,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 22481522}
+  m_Children: []
   m_Father: {fileID: 22494658}
-  m_RootOrder: 2
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -439.9, y: 291}
-  m_SizeDelta: {x: 342.6, y: 172.5}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_RootOrder: 9
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -7, y: -40}
+  m_SizeDelta: {x: 697.4, y: 74.57}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!224 &22448368
 RectTransform:
   m_ObjectHideFlags: 1
@@ -1549,6 +1620,25 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -103, y: 0}
   m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22463436
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 22481522}
+  m_Father: {fileID: 22494658}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -439.9, y: 291}
+  m_SizeDelta: {x: 342.6, y: 172.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22470694
 RectTransform:
@@ -1652,7 +1742,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 22424726}
+  m_Father: {fileID: 22463436}
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1748,13 +1838,14 @@ RectTransform:
   m_Children:
   - {fileID: 22480298}
   - {fileID: 22490290}
-  - {fileID: 22424726}
+  - {fileID: 22463436}
   - {fileID: 22461966}
   - {fileID: 22408364}
   - {fileID: 22470694}
   - {fileID: 22492510}
   - {fileID: 22423276}
   - {fileID: 22459734}
+  - {fileID: 22424726}
   m_Father: {fileID: 22420714}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}

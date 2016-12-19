@@ -113,6 +113,7 @@ GameObject:
   - 224: {fileID: 22401702}
   - 222: {fileID: 22224650}
   - 114: {fileID: 11449228}
+  - 114: {fileID: 11458694}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -130,6 +131,7 @@ GameObject:
   - 224: {fileID: 22445530}
   - 222: {fileID: 22280316}
   - 114: {fileID: 11407960}
+  - 114: {fileID: 11462744}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -236,6 +238,7 @@ GameObject:
   - 222: {fileID: 22265976}
   - 114: {fileID: 11430924}
   - 114: {fileID: 11436574}
+  - 114: {fileID: 11499114}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -270,6 +273,7 @@ GameObject:
   - 224: {fileID: 22439734}
   - 222: {fileID: 22241766}
   - 114: {fileID: 11432302}
+  - 114: {fileID: 11455576}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -336,6 +340,7 @@ GameObject:
   - 224: {fileID: 22403320}
   - 222: {fileID: 22210574}
   - 114: {fileID: 11416868}
+  - 114: {fileID: 11472884}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -539,7 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.17647058, g: 0.17400071, b: 0.08693771, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -619,7 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.125, g: 0.121323526, b: 0.12489858, a: 1}
+  m_Color: {r: 0.17647058, g: 0.17400071, b: 0.08693771, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -652,7 +657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.17647058, g: 0.17400071, b: 0.08693771, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -736,7 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.9191176, g: 0.9191176, b: 0.9191176, a: 0.5}
+  m_EffectColor: {r: 0.51362455, g: 0.6619138, b: 0.7352941, a: 0.5}
   m_EffectDistance: {x: 1.52, y: -1.8}
   m_UseGraphicAlpha: 1
 --- !u!114 &11439010
@@ -796,7 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.17647058, g: 0.17400071, b: 0.08693771, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -923,6 +928,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11455576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.51362455, g: 0.6619138, b: 0.7352941, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &11456466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1002,6 +1021,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11458694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.51362455, g: 0.6619138, b: 0.7352941, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &11459924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1043,6 +1076,20 @@ MonoBehaviour:
   TopPanel: {fileID: 0}
   playOpenAnimIfCan: 0
   StartBoost: {fileID: 182574}
+--- !u!114 &11462744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.51362455, g: 0.6619138, b: 0.7352941, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &11469170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1070,6 +1117,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11472884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.51362455, g: 0.6619138, b: 0.7352941, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &11474748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1169,6 +1230,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11499114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!222 &22201340
 CanvasRenderer:
   m_ObjectHideFlags: 1

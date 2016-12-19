@@ -78,19 +78,22 @@ public class CraftInfoPlace : MonoBehaviour
                     switch (type.Value)
                     {
                         case CatalysItemType.red:
-                            min *= 1.25f;
-                            max *= 1.25f;
+                            min *= RecipeItem.RED_COEF;
+                            max *= RecipeItem.RED_COEF;
                             MainParameterField.text = min.ToString("0") + " - " + max.ToString("0");
+                            info = "Upgrade Main parameter";
                             break;
                         case CatalysItemType.blue:
-                            break;
                         case CatalysItemType.green:
-                            info = "Chance to get new talisman.";
+                            var secondaryParam = HeroShopRandomItem.GetSecondaryParam(totalPoints, recipeItem.recipeSlot);
+                            info = secondaryParam.Value.ToString("0") + " - " + secondaryParam.Value.ToString("0");
+                            spr = DataBaseController.Instance.ParameterIcon(secondaryParam.Key);
                             break;
                         case CatalysItemType.black:
-                            min *= 1f;
-                            max *= 1.5f;
+                            min *= RecipeItem.BLACK_MIN_COEF;
+                            max *= RecipeItem.BLACK_MAX_COEF;
                             MainParameterField.text = min.ToString("0") + " - " + max.ToString("0");
+                            info = "Upgrade Main parameter";
                             break;
                         case CatalysItemType.white:
                             info = "cost x2";
@@ -98,11 +101,11 @@ public class CraftInfoPlace : MonoBehaviour
                             break;
                     }
                 }
-                else
-                {
-                    info = minS.ToString("0") + " - " + maxS.ToString("0");
-                    spr = DataBaseController.Instance.ParameterIcon(secondary.Key);
-                }
+//                else
+//                {
+//                    info = minS.ToString("0") + " - " + maxS.ToString("0");
+//                    spr = DataBaseController.Instance.ParameterIcon(secondary.Key);
+//                }
 
 
                 filed.text = info;
@@ -115,6 +118,8 @@ public class CraftInfoPlace : MonoBehaviour
 
                 break;
             case Slot.Talisman:
+                info = "todo";
+//                filed.text = info;
                 break;
         }
     }
