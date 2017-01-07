@@ -3,6 +3,7 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
+		_ColorTint("Tint Color", Color) = (1,1,1,1)
 	}
 		SubShader
 	{
@@ -31,6 +32,7 @@
 	};
 
 	static const fixed4 _Color = fixed4(0.38, 0.38, 0.38, 0);
+	fixed4 _ColorTint = fixed4(0, 0, 0, 1);
 	float b;
 	sampler2D _MainTex;
 	float _Fog_Diff;
@@ -49,7 +51,7 @@
 	{
 		//float dist = distance(i.position_in_world_space,  _WorldSpaceCameraPos);
 		
-		fixed4 col = tex2D(_MainTex, i.uv);
+		fixed4 col = tex2D(_MainTex, i.uv) * _ColorTint;
 		b = (_Fog_Start_Level - i.position_in_world_space.y) / _Fog_Diff;
 		b = clamp(b, 0.0,1.0);
 		fixed4 lerped = lerp(col, _Color, b);

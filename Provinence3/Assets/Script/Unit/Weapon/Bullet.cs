@@ -82,7 +82,10 @@ public class Bullet : PoolElement
                 updateAction = updateVector;
                 break;
         }
-        transform.rotation = Quaternion.LookRotation(direction);
+        if (direction != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(direction);
+        else
+            Debug.Log("sss");
     }
 
     protected virtual Vector3 FindStartPos(Weapon weapon)

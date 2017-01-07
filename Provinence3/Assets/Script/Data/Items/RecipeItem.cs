@@ -199,6 +199,37 @@ public class RecipeItem : BaseItem
                 break;
         }
         return spedAbilities;
-    } 
+    }
+
+    public string Desc()
+    {
+        string ss = "Main element to craft {0}";
+        string element = "";
+        switch (recipeSlot)
+        {
+            case Slot.physical_weapon:
+                element = "weapon";
+                break;
+            case Slot.magic_weapon:
+                element = "magic crossbow";
+                break;
+            case Slot.body:
+                element = "body armor";
+                break;
+            case Slot.helm:
+                element = "helm";
+                break;
+            case Slot.bonus:
+                break;
+            case Slot.Talisman:
+                element = "talisman";
+                break;
+            case Slot.executable:
+                break;
+            case Slot.recipe:
+                break;
+        }
+        return String.Format(ss, element);
+    }
 }
 

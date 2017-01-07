@@ -65,10 +65,12 @@ public class MainController : Singleton<MainController>
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
-        level = new Level(levelIndex, indexStartPos, dif, (lvl) =>
+        level = new Level(levelIndex, indexStartPos, dif);
+        yield return level.Load((lvl) =>
         {
             WindowManager.Instance.OpenWindow(MainState.play, lvl);
         });
+        yield return null;
     }
 
     private IEnumerator w4death()

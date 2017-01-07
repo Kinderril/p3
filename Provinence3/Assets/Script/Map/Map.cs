@@ -25,18 +25,16 @@ public class Map : Singleton<Map>
     private BossUnit boss;
     private LevelObject levelMainObject;
     private Action OnMonstersReady;
-    private Dictionary<string, GameObject> LoadedLevels = new Dictionary<string, GameObject>();
+//    private Dictionary<string, GameObject> LoadedLevels = new Dictionary<string, GameObject>();
     public event Action<Unit> OnEnemyDeadCallback;
     private string allInfo;
 
-    public Hero Init(Level lvl, int levelIndex, int heroBornPositionIndex)
+    public Hero Init(Level lvl, LevelObject levelObject, int heroBornPositionIndex)
     {
         allInfo = "";
         TimeUtils.StartMeasure("LOAD LEVEL SCENE");
         level = lvl;
-
-        LoadLevelGameObject(levelIndex);
-        SceneManager.LoadScene("Level" + levelIndex,LoadSceneMode.Additive);
+        levelMainObject = levelObject;
         heroBornPositions = levelMainObject.transform.Find("BornPos/HeroBornPositions");
         bossBonusMapElement = levelMainObject.transform.Find("BornPos/BossBonusMapElements");
         bornPositions = levelMainObject.transform.Find("BornPos");
@@ -168,58 +166,37 @@ public class Map : Singleton<Map>
             OnMonstersReady();
     }
 
-    private void LoadLevelGameObject(int levelIndex)
-    {
-        TimeUtils.StartMeasure("RES LOAD");
-        if (levelMainObject != null)
-        {
-            Debug.LogError("Level isn't unloaded!!!");
-            Destroy(levelMainObject.gameObject);
-        }
-        //        Resources.LoadAsync(BASE_WAY + levelIndex, typeof(GameObject));
-        var nameLevel = BASE_WAY + levelIndex;
+//    private void LoadLevelGameObject(LevelObject levelIndex)
+//    {
+//        TimeUtils.StartMeasure("RES LOAD");
+//        if (levelMainObject != null)
+//        {
+//            Debug.LogError("Level isn't unloaded!!!");
+//            Destroy(levelMainObject.gameObject);
+//        }
+//        //        Resources.LoadAsync(BASE_WAY + levelIndex, typeof(GameObject));
+////        var nameLevel = BASE_WAY + levelIndex;
+//
+//        GameObject prefab;
+////        if (LoadedLevels.ContainsKey(nameLevel))
+////        {
+////            prefab = LoadedLevels[nameLevel];
+////        }
+////        else
+////        {
+////            prefab = Resources.Load(nameLevel, typeof(GameObject)) as GameObject;
+////            LoadedLevels.Add(nameLevel,prefab);
+////        }
+//
+//        allInfo += TimeUtils.EndMeasure("RES LOAD");
+//        DebugController.Instance.InfoField2.text = allInfo;
+//        TimeUtils.StartMeasure("Instantiate SCENE");
+////        levelMainObject = levelIndex;// GameObject.Instantiate(prefab).GetComponent<LevelObject>();
+////        levelMainObject.transform.SetParent(transform);
+//        allInfo += TimeUtils.EndMeasure("Instantiate SCENE");
+//        DebugController.Instance.InfoField2.text = allInfo;
 
-        GameObject prefab;
-        if (LoadedLevels.ContainsKey(nameLevel))
-        {
-            prefab = LoadedLevels[nameLevel];
-        }
-        else
-        {
-            prefab = Resources.Load(nameLevel, typeof(GameObject)) as GameObject;
-            LoadedLevels.Add(nameLevel,prefab);
-        }
-
-        allInfo += TimeUtils.EndMeasure("RES LOAD");
-        DebugController.Instance.InfoField2.text = allInfo;
-        TimeUtils.StartMeasure("Instantiate SCENE");
-        levelMainObject = GameObject.Instantiate(prefab).GetComponent<LevelObject>();
-        levelMainObject.transform.SetParent(transform);
-        Utils.Init(levelMainObject.Terrain);
-        allInfo += TimeUtils.EndMeasure("Instantiate SCENE");
-        DebugController.Instance.InfoField2.text = allInfo;
-
-        /*
-        Make different scenes for all the levels.
-Put all the game objects inside an empty parent.(optional)
-Bake the Light Maps for all these individual scenes.
-Unity will create a folder with the scene name in which you can find these light maps.
-Now drag and drop all the light maps and the objects into the resources folder.
-You can now delete the level scenes as they wont be needed anymore.
-Now when you want to LoadLevelAdditive , you instantiate the prefab which holds the object for a particular level and assign the light maps programatically.
-
-
-        //Load LightMap
-        LightmapData[] lightmapData = new LightmapData[2];
-
-        lightmapData[0] = new LightmapData();
-        lightmapData[0].lightmapFar = Resources.Load("LightMaps/Level" + level_name + "/LightmapFar-0", typeof(Texture2D)) as Texture2D;
-        lightmapData[1] = new LightmapData();
-        lightmapData[1].lightmapFar = Resources.Load("LightMaps/Level" + level_name + "/LightmapFar-1", typeof(Texture2D)) as Texture2D;
-
-        LightmapSettings.lightmaps = lightmapData;
-        */
-    }
+//    }
 
     void Update()
     {

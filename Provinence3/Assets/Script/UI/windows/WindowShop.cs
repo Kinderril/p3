@@ -170,13 +170,6 @@ public class WindowShop : BaseWindow
         }
 
 
-        var bonItem = DataBaseController.GetItem<HeroShopBonusItem>(PrefabHeroShopBonusItem);
-        bonItem.Init(lvl);
-        CreatShopElement(bonItem);
-
-        var execItem = DataBaseController.GetItem<HeroShopExecutableItem>(PrefabHeroShopExecutableItem);
-        execItem.Init(lvl);
-        CreatShopElement(execItem);
         Bookmarks = Bookmarks.weapons;
         NullSelection();
     }
@@ -187,10 +180,18 @@ public class WindowShop : BaseWindow
         int lvl = MainController.Instance.PlayerData.Level;
         for (int i = Mathf.Clamp(lvl - 1, 1, Int32.MaxValue); i <= lvl; i++)
         {
-            var execItem = DataBaseController.GetItem<HeroShopRecipeItem>(PrefabHeroShopRecipeItem);
-            execItem.Init(lvl);
-            CreatShopElement(execItem);
+            var heroShopRecipeItem = DataBaseController.GetItem<HeroShopRecipeItem>(PrefabHeroShopRecipeItem);
+            heroShopRecipeItem.Init(lvl);
+            CreatShopElement(heroShopRecipeItem);
         }
+
+        var bonItem = DataBaseController.GetItem<HeroShopBonusItem>(PrefabHeroShopBonusItem);
+        bonItem.Init(lvl);
+        CreatShopElement(bonItem);
+
+        var execItem1 = DataBaseController.GetItem<HeroShopExecutableItem>(PrefabHeroShopExecutableItem);
+        execItem1.Init(lvl);
+        CreatShopElement(execItem1);
         Bookmarks = Bookmarks.recipies;
         NullSelection();
     }

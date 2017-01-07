@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GiftType
 {
@@ -61,7 +62,7 @@ public class Level
     public LevelQuestController QuestController;
     public LevelStatistics LevelStatistics;
 
-    public Level(int levelIndex,int indexBornPos,int difficult,Action<Level> callback)
+    public Level(int levelIndex,int indexBornPos,int difficult)
     {
         LevelStatistics = new LevelStatistics();
         TimeUtils.StartMeasure("MAIN");
@@ -80,12 +81,45 @@ public class Level
             moneyInv.Add(id,0);
         }
         DebugController.Instance.InfoField2.text += TimeUtils.EndMeasure("LOAD PRELEVEL");
-        MainHero = Map.Instance.Init(this, levelIndex ,indexBornPos);
-        DebugController.Instance.InfoField2.text += " " + TimeUtils.EndMeasure("MAIN");
-        isPLaying = false;
-        callback(this);
-        Map.Instance.StartLoadingMonsters();
 
+
+    
+
+    }
+
+    public IEnumerator Load(Action<Level> callback)
+    {
+        var sceneName = "Level" + MissionIndex;
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        var scene = SceneManager.GetSceneByName(sceneName);
+        while (!scene.isLoaded)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        LevelObject obj = null;
+        foreach (var rootGameObject in scene.GetRootGameObjects())
+        {
+            obj = rootGameObject.GetComponent<LevelObject>();
+            if (obj != null)
+            {
+                break;
+            }
+        }
+        //        LoadLevelGameObject(levelIndex);
+        if (obj != null)
+        {
+            Utils.Init(obj.Terrain);
+            MainHero = Map.Instance.Init(this, obj, IndexBornPoint);
+            DebugController.Instance.InfoField2.text += " " + TimeUtils.EndMeasure("MAIN");
+            isPLaying = false;
+            callback(this);
+            Map.Instance.StartLoadingMonsters();
+        }
+        else
+        {
+            Debug.LogError("WRONG LEVEL LOAD");
+        }
+        yield return null;
     }
 
     private void OnRage()

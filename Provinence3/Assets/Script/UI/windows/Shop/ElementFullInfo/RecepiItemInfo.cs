@@ -16,6 +16,7 @@ public class RecepiItemInfo : InventoryItemInfo
         mainIcon.sprite = recipeItem.IconSprite;
         NameLabel.text = recipeItem.Name;
         RecipeButton.gameObject.SetActive(WithButtons);
+        descField.text = recipeItem.Desc();
         //        SlotLabel.sprite = DataBaseController.Instance.SlotIcon(recipeItem.Slot);
     }
     public void OnRecipeOpen()

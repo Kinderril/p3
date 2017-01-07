@@ -145,7 +145,7 @@ public class Unit : MonoBehaviour
     
     public virtual void TryAttack(Vector3 direction, float additionalPower = 0, Unit target = null)
     {
-        if (!isPlayAttack)
+        if (!isPlayAttack && direction.sqrMagnitude > 0)
         {
             isPlayAttack = true;
 //            Debug.Log("Start Attack : " + direction);

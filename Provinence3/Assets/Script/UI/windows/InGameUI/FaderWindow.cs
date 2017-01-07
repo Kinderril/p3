@@ -30,6 +30,7 @@ public class FaderWindow : MonoBehaviour
     {
         gameObject.SetActive(true);
         info.gameObject.SetActive(true);
+
         anim.SetTrigger(close);
     }
 

@@ -52,7 +52,7 @@ public class DataStructs : MonoBehaviour
     public CostItemsByLevel[] CostItemsByLevel;
     public EffectVisualsBehaviour[] EffectVisualsBehaviours;
 //    public int[] costParameterByLvl;
-    public const int MISSION_LAST_INDEX = 2;
+    public const int MISSION_LAST_INDEX = 3;
     public List<BaseBonusMapElement> BaseBonusMapElement;
     public PrefabsStruct PrefabsStruct;
     //    public HeroShopBonusItem HeroShopBonusItemPrefab;

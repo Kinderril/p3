@@ -97,8 +97,9 @@ public class DataBaseController : Singleton<DataBaseController>
     {
         RespawnPositionsNames = new Dictionary<int, Dictionary<int, string>>();
         RespawnPositionsNames.Add(1,new Dictionary<int, string>() { {1,"Trainings"} });
-        RespawnPositionsNames.Add(2, new Dictionary<int, string>() { { 1, "Forest" } , { 2, "Lake" } , { 3, "Fields" } , { 4, "Town" } });
-        MissionNames = new Dictionary<int, string>() { { 0, "Debug" }, { 1, "Tutorial" }, { 2, "Village" } } ;
+        RespawnPositionsNames.Add(2, new Dictionary<int, string>() { { 1, "Plants" } , { 2, "Lake" } , { 3, "Fields" } , { 4, "Town" } });
+        RespawnPositionsNames.Add(3, new Dictionary<int, string>() { { 1, "Gate" } , { 2, "FirstQuart" } , { 3, "Shop" } , { 4, "Church" } });
+        MissionNames = new Dictionary<int, string>() { { 0, "Debug" }, { 1, "Tutorial" }, { 2, "Forest" }, { 3, "Village" } } ;
         for (int i = 1; i < DataStructs.MISSION_LAST_INDEX+1; i++)
         {
             var pos = DataStructs.GetRespawnPointsCountByMission(i);
