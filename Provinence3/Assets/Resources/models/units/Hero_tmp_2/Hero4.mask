@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1011 &101100000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Hero4
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/legCont_L.004
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/legCont_L.004/legCont_L.005/legCont_L.006/legCont_L.006_end
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/legCont_R.004
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/legCont_R.004/legCont_R.005/legCont_R.006/legCont_R.006_end
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/hand_L.003
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/hand_L.003/hand_L.003_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/hand_R.003
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/hand_R.003/hand_R.003_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/neck
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/neck/head
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/neck/head/head_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L/finger_L.001/finger_L.001_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.002/finger_L.003/finger_L.003_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/finger_L.004/finger_L.004_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_L/hand_L/hand_L.001/hand_L.002/hand_L.004/hand_L.004_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R/finger_R.001/finger_R.001_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.002/finger_R.003/finger_R.003_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/finger_R.004/finger_R.004_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.001/shaoulder_R/hand_R/hand_R.001/hand_R.002/hand_R.004/hand_R.004_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.002
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/handler_top_01/spine/spine.002/spine.002_end
+    m_Weight: 1
+  - m_Path: char_mainChar_01_arm/Master/root/leg_L
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_L/leg_L.001/leg_L.002/leg_L.003/leg_L.003_end
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_R
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003
+    m_Weight: 0
+  - m_Path: char_mainChar_01_arm/Master/root/leg_R/leg_R.001/leg_R.002/leg_R.003/leg_R.003_end
+    m_Weight: 0
+  - m_Path: main (2)
+    m_Weight: 1
+  - m_Path: other
+    m_Weight: 1
+  - m_Path: other.001
+    m_Weight: 1

@@ -7,7 +7,7 @@ public class AnimationController : MonoBehaviour
     private Action action;
     public bool playImmidiatly = false;
 
-    public void EndPlayAttack()
+    public void EndPlayAttack()//THIS CATCH IN ANIMATION
     {
         if(!playImmidiatly)
             action();
