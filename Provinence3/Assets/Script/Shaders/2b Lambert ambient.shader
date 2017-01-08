@@ -1,4 +1,6 @@
-﻿Shader "Shantanu Bhadoria/Basic/2b Lambert - Ambient" {
+﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "Shantanu Bhadoria/Basic/2b Lambert - Ambient" {
 	Properties {
 		_Color( "Color", Color ) = ( 1.0, 1.0, 1.0, 1.0 )
 	}
@@ -34,7 +36,7 @@
 			vertexOutput vert(vertexInput v) {
 				vertexOutput o;
 				
-				float3 normalDirection = normalize( mul( float4( v.normal, 0.0 ), _World2Object ).xyz );
+				float3 normalDirection = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz );
 				float3 lightDirection;
 				float atten = 1.0;
 				

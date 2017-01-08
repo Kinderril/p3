@@ -1,4 +1,7 @@
-﻿Shader "Shantanu Bhadoria/Basic/3a Specular" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "Shantanu Bhadoria/Basic/3a Specular" {
 	Properties {
 		_Color( "Color", Color ) = ( 1.0, 1.0, 1.0, 1.0 )
 		_SpecColor( "Specular Color", Color ) = ( 1.0, 1.0, 1.0, 1.0 )
@@ -38,8 +41,8 @@
 			vertexOutput vert(vertexInput v) {
 				vertexOutput o;
 				
-				float3 normalDirection = normalize( mul( float4( v.normal, 0.0 ), _World2Object ).xyz );
-				float3 viewDirection = normalize( float3( float4( _WorldSpaceCameraPos.xyz, 1.0 ) - mul( _Object2World, v.vertex ).xyz ) );
+				float3 normalDirection = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz );
+				float3 viewDirection = normalize( float3( float4( _WorldSpaceCameraPos.xyz, 1.0 ) - mul( unity_ObjectToWorld, v.vertex ).xyz ) );
 				float3 lightDirection;
 				float atten = 1.0;
 				

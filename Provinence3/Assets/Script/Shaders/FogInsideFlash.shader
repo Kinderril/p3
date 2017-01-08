@@ -1,4 +1,6 @@
-﻿Shader "Custom/FogInsideFlash"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Custom/FogInsideFlash"
 {
 	Properties
 	{
@@ -44,7 +46,7 @@
 			v2f o;
 			o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 			o.uv = v.uv;
-			o.position_in_world_space = mul(_Object2World, v.vertex);
+			o.position_in_world_space = mul(unity_ObjectToWorld, v.vertex);
 			return o;
 		}
 

@@ -1,4 +1,7 @@
-﻿Shader "Shantanu Bhadoria/Basic/8b Emit Map" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "Shantanu Bhadoria/Basic/8b Emit Map" {
 	Properties {
 		_Color ( "Color Tint", Color ) = ( 1.0, 1.0, 1.0, 1.0 )
 		_MainTex ("Diffuse Texture gloss (a)", 2D) = "white" {}
@@ -57,11 +60,11 @@
 			vertexOutput vert( vertexInput v ) {
 				vertexOutput o;
 				
-				o.normalWorld = normalize( mul( float4( v.normal, 0.0 ), _World2Object ).xyz );		
-				o.tangentWorld = normalize( mul( _Object2World, v.tangent ).xyz );
+				o.normalWorld = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz );		
+				o.tangentWorld = normalize( mul( unity_ObjectToWorld, v.tangent ).xyz );
 				o.binormalWorld = normalize( cross( o.normalWorld, o.tangentWorld ) );
 						
-				o.posWorld = mul( _Object2World, v.vertex );
+				o.posWorld = mul( unity_ObjectToWorld, v.vertex );
 				o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
 				o.tex = v.texcoord;
 				
@@ -164,11 +167,11 @@
 			vertexOutput vert( vertexInput v ) {
 				vertexOutput o;
 				
-				o.normalWorld = normalize( mul( float4( v.normal, 0.0 ), _World2Object ).xyz );		
-				o.tangentWorld = normalize( mul( _Object2World, v.tangent ).xyz );
+				o.normalWorld = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz );		
+				o.tangentWorld = normalize( mul( unity_ObjectToWorld, v.tangent ).xyz );
 				o.binormalWorld = normalize( cross( o.normalWorld, o.tangentWorld ) );
 						
-				o.posWorld = mul( _Object2World, v.vertex );
+				o.posWorld = mul( unity_ObjectToWorld, v.vertex );
 				o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
 				o.tex = v.texcoord;
 				

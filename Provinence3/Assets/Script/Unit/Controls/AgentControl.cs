@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class AgentControl : BaseControl
 {
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
 
     protected override void Init()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         base.Init();
     }
 

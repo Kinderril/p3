@@ -1,4 +1,7 @@
-﻿Shader "Shantanu Bhadoria/Basic/6 Texture Map" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "Shantanu Bhadoria/Basic/6 Texture Map" {
 	Properties {
 		_Color ( "Color Tint", Color ) = ( 1.0, 1.0, 1.0, 1.0 )
 		_MainTex ("Diffuse Texture", 2D) = "white" {}
@@ -44,9 +47,9 @@
 			vertexOutput vert( vertexInput v ) {
 				vertexOutput o;
 				
-				o.posWorld = mul( _Object2World, v.vertex );
+				o.posWorld = mul( unity_ObjectToWorld, v.vertex );
 				
-				o.normalDir = normalize( mul( float4( v.normal, 0.0 ), _World2Object ).xyz );
+				o.normalDir = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz );
 				
 				o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
 				o.tex = v.texcoord;
@@ -124,9 +127,9 @@
 			vertexOutput vert( vertexInput v ) {
 				vertexOutput o;
 				
-				o.posWorld = mul( _Object2World, v.vertex );
+				o.posWorld = mul( unity_ObjectToWorld, v.vertex );
 				
-				o.normalDir = normalize( mul( float4( v.normal, 0.0 ), _World2Object ).xyz );
+				o.normalDir = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz );
 				
 				o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
 				o.tex = v.texcoord;

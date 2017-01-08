@@ -18,7 +18,7 @@ public class NgAsset
 	// ==========================================================================================================
 	public static Texture2D GetAssetPreview(Object tarObj)
 	{
-#if (UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9 || UNITY_5_3)
+#if (UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9 || UNITY_5_5)
         return AssetPreview.GetAssetPreview(tarObj);
 #else
 		return EditorUtility.GetAssetPreview(tarObj);
@@ -27,7 +27,7 @@ public class NgAsset
 
 	public static Texture2D GetMiniThumbnail(Object tarObj)
 	{
-#if (UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9 || UNITY_5_3)
+#if (UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9 || UNITY_5_5)
 		return AssetPreview.GetMiniThumbnail(tarObj);
 #else
 		return EditorUtility.GetMiniThumbnail(tarObj);
@@ -750,7 +750,7 @@ public class NgAsset
 		TextureImporterSettings settings = new TextureImporterSettings();
 		texImporter.ReadTextureSettings(settings);
 
- 		texImporter.textureType		= TextureImporterType.Image;
+ 		texImporter.textureType		= TextureImporterType.Default;
 		texImporter.wrapMode		= TextureWrapMode.Clamp;
 		texImporter.filterMode		= FilterMode.Bilinear;
 		texImporter.anisoLevel		= 0;
