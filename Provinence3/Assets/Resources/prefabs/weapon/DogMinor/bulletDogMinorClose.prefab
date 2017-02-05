@@ -5,12 +5,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 490680}
-  - 135: {fileID: 13564656}
-  - 54: {fileID: 5499592}
-  - 114: {fileID: 11421664}
+  - component: {fileID: 490680}
+  - component: {fileID: 13564656}
+  - component: {fileID: 5499592}
+  - component: {fileID: 11421664}
   m_Layer: 0
   m_Name: bulletDogMinorClose
   m_TagString: Untagged
@@ -27,10 +27,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.40328693, y: 32.40978, z: 139.17508}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5499592
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -64,6 +64,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   rebuildY: 0
   playHitAnyway: 1
+  FlyType: 0
   ID: 110
 --- !u!135 &13564656
 SphereCollider:

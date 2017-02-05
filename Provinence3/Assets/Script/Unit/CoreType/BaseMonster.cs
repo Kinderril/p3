@@ -29,6 +29,7 @@ public class BaseMonster : Unit
     private int energyadd;
     private bool isHome = true;
     private BaseAction attackBehaviour;
+    private bool isInited = false;
     private bool isDisabled = false;
     public bool haveAction;
     private bool overcharged = false;
@@ -41,6 +42,10 @@ public class BaseMonster : Unit
     public bool IsDisabled
     {
         get { return isDisabled; }
+    }
+    public bool IsInited
+    {
+        get { return isInited; }
     }
     public bool Overcharged
     {
@@ -57,6 +62,7 @@ public class BaseMonster : Unit
     public override void Init()
     {
         base.Init();
+        isInited = true;
         bornPosition = transform.position;
         Utils.GroundTransform(transform, 999f);
         energyadd = (int)(Energy.CREEP_ENERGY_AV*energyCoef);
@@ -342,10 +348,10 @@ public class BaseMonster : Unit
     protected virtual void StartAttack(bool byHit)
     {
         var heroTarget = MainController.Instance.level.MainHero;
-        if (heroTarget == null)
+        if (heroTarget == null || Parameters == null)
         {
             return;
-        }
+        } 
         aiStatus = AIStatus.attack;
         switch (Parameters.AttackType)
         {

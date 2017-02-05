@@ -18,6 +18,7 @@ public class PlayerData
     public const int ENCHANT_CHANCE = 60;
     public const int POINTS_PER_LVL = 2;
     public const string LEVEL = "LEVEL_";
+    public const string TUTORIAL = "TUTORIAL";
     public const string ALLOCATED = "ALLOCATED_";
     public const string INVENTORY = "INVENTORY_";
     public const string ITEMS = "ITEMS";
@@ -25,16 +26,19 @@ public class PlayerData
     public const string BORN_POSITIONS = "BORN_POSITIONS";
     public const char ITEMS_DELEMETER = '`';
 
+    private readonly Dictionary<Slot, int> slotsCount = new Dictionary<Slot, int>()
+    {
+        {Slot.Talisman, 2}, { Slot.executable, 0 } , {Slot.bonus, 5 }
+    };
+
 
     public DictionaryOfItemAndInt playerInv = new DictionaryOfItemAndInt();
     private List<BaseItem> playerItems = new List<BaseItem>();
     public int AllocatedPoints;
     private int CurrentLevel;
+
+    public bool _isTutorialComplete;
     public Dictionary<MainParam,int> MainParameters;
-    private readonly Dictionary<Slot,int> slotsCount = new Dictionary<Slot, int>()
-    {
-        {Slot.Talisman, 2}, { Slot.executable, 0 } , {Slot.bonus, 5 }
-    };
     public OpenLevels OpenLevels;
 
     public event Action<BaseItem> OnNewItem;
@@ -50,7 +54,17 @@ public class PlayerData
     {
         get { return CurrentLevel; }
     }
-    
+
+    public bool IsTutorialComplete
+    {
+        get { return _isTutorialComplete; }
+        set
+        {
+            _isTutorialComplete = value;
+            PlayerPrefs.SetInt(TUTORIAL, Convert.ToInt32(_isTutorialComplete));
+        }
+    }
+
     private int GetSlotCount(Slot s)
     {
         var c = 1;
@@ -161,6 +175,7 @@ public class PlayerData
 
     public void Load()
     {
+        _isTutorialComplete = Convert.ToBoolean(PlayerPrefs.GetInt(TUTORIAL, 0));
         CurrentLevel = PlayerPrefs.GetInt(LEVEL, 1);
         AllocatedPoints = PlayerPrefs.GetInt(ALLOCATED, 0);
         foreach (ItemId v in Enum.GetValues(typeof(ItemId)))
@@ -236,7 +251,7 @@ public class PlayerData
             playerInv[ItemId.crystal] += 10;
         }
 #endif
-        OpenLevels = new OpenLevels();
+        OpenLevels = new OpenLevels(_isTutorialComplete);
 //        CheckIfFirstLevel();
     }
     public ExecutableItem CanBeUpgraded(IEnhcant info)
@@ -284,7 +299,7 @@ public class PlayerData
                 Slot.magic_weapon, Rarity.Normal, p2);
             AddAndEquip(item1);
             AddAndEquip(item2);
-            AddFirstTalisman(TalismanType.doubleDamage);
+            AddFirstTalisman(TalismanType.splitter);
             AddFirstTalisman(TalismanType.heal);
 
 #if UNITY_EDITOR
@@ -593,6 +608,12 @@ public class PlayerData
         AddItem(resultItem);
         Save();
         return resultItem;
+    }
+
+    public void TutorEnd()
+    {
+        IsTutorialComplete = true;
+        OpenLevels.CompleteTutorial();
     }
 }
 

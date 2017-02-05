@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class WindowInGame : BaseWindow
 {
-
+    public MainTutorialWindow MainTutorialWindow;
     public Slider TImeSlider;
     public Slider HealthSlider;
     public Slider BossSpawnSlider;
@@ -34,6 +34,11 @@ public class WindowInGame : BaseWindow
         FaderWindow.Open();
         ClearTransform(TalismanButtonsLayout);
         level = obj as Level;
+        var tutor = level.levelObject.GetComponent<TutorialLevel>();
+        if (tutor != null)
+        {
+            MainTutorialWindow.Init(tutor);
+        }
         moneyField.Init(0,3600);
         UiControls.Init(level);
         level.Energy.OnLeft += OnLeft;

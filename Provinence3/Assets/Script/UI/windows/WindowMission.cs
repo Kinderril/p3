@@ -27,10 +27,19 @@ public class WindowMission : BaseWindow
     public override void Init()
     {
         base.Init();
+        var isTutorComplete = MainController.Instance.PlayerData.IsTutorialComplete;
         Dictionary<int, int> stubList = new Dictionary<int, int>();
-        var lastLevel = PlayerPrefs.GetInt(key_last_level_chosed, 1);
+        var lastLevel = PlayerPrefs.GetInt(key_last_level_chosed, 0);
+        if (lastLevel == 0)
+        {
+            if (isTutorComplete)
+            {
+                lastLevel = 1;
+            }
+        }
 //        var openedMissions = MainController.Instance.PlayerData.OpenLevels.GetAllOpenedMissions();
         int maxLvl = 0;
+        RespawnPointToggle lastToggledPoint = null;
         foreach (var pointToggle in MissionsToggles)
         {
             Debug.Log("Selected: " + pointToggle.transform.name);
@@ -54,14 +63,32 @@ public class WindowMission : BaseWindow
                 if (opensRespawnPoints.Count > 0)
                     maxLvl = a;
             }
-            
-            pointToggle.Toggle.isOn = pointToggle.ID == lastLevel;
-            //            pointToggle.Toggle.interactable = opensRespawnPoints.Count > 0;
+            if (pointToggle.ID == lastLevel)
+            {
+                lastToggledPoint = pointToggle;
+            }
         }
         foreach (var pointToggle in MissionsToggles)
         {
-            pointToggle.Toggle.interactable = pointToggle.ID <= maxLvl + 1;
+            if (pointToggle.ID == 0)
+            {
+                pointToggle.Toggle.interactable = !isTutorComplete;
+            }
+            else
+            {
+                pointToggle.Toggle.interactable = isTutorComplete && pointToggle.ID <= maxLvl + 1;
+            }
 
+        }
+        if (lastToggledPoint != null && lastToggledPoint.Toggle.interactable && lastToggledPoint.ID <= maxLvl)
+        {
+            lastToggledPoint.Toggle.isOn = true;
+        }
+        else
+        {
+            var allOpend = MissionsToggles.Where(x => x.Toggle.interactable && x.ID <= maxLvl);
+            var rnd = allOpend.ToList().RandomElement();
+            rnd.Toggle.isOn = true;
         }
 
         DifficultyChooser.Init(OnDifChanges);

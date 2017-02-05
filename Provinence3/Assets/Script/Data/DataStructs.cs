@@ -62,11 +62,13 @@ public class DataStructs : MonoBehaviour
     {
         switch (mission)
         {
-//            case 0:
-//                return 1;
+            case 0:
+                return 1;
             case 1:
                 return 1;
             case 2:
+                return 4;
+            case 3:
                 return 4;
         }
         return 0;

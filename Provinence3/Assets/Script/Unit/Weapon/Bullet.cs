@@ -157,41 +157,6 @@ public class Bullet : PoolElement
     protected virtual void Hit(Unit unit)
     {
         bool haveManyTargets = false;
-        /*
-        if (weapon != null && weapon.SpecAbility != null)
-        {
-            switch (weapon.SpecAbility)
-            {
-                case SpecialAbility.penetrating:
-                    haveManyTargets = true;
-                    if (AffecttedUnits.Count > 3)
-                    {
-                        Death(unit);
-                    }
-                    else
-                    {
-                        AffecttedUnits.Add(unit);
-                        unit.GetHit(this);
-                        return;
-                    }
-                    break;
-                case SpecialAbility.chain:
-                    //TODO find another target
-                    haveManyTargets = true;
-                    if (AffecttedUnits.Count > 3)
-                    {
-                        Death(unit);
-                    }
-                    else
-                    {
-                        AffecttedUnits.Add(unit);
-                        unit.GetHit(this);
-                        return;
-                    }
-                    break;
-            }
-        }
-        */
         if (!AffecttedUnits.Contains(unit))
         {
             AffecttedUnits.Add(unit);
@@ -300,7 +265,16 @@ public class Bullet : PoolElement
         time += speed;
         if (targetUnit != null)
         {
-            var trgPos = targetUnit.weaponsContainer.position;
+
+            Vector3 trgPos;
+            if (targetUnit.weaponsContainer == null)
+            {
+                trgPos = targetUnit.transform.position;
+            }
+            else
+            {
+                trgPos = targetUnit.weaponsContainer.position;
+            }
             transform.position = Vector3.Lerp(start, trgPos, time);
             var curDist = (start - trgPos).magnitude;
             var curTime = curDist/startDist2target;

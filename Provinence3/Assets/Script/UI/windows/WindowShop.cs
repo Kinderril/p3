@@ -54,7 +54,7 @@ public class WindowShop : BaseWindow
         CraftWindow.gameObject.SetActive(false);
         ItemWindow.gameObject.SetActive(false);
 //        ItemInfoElement.SetCallBack(OnItemInit);
-        AllParametersContainer.Init();
+        AllParametersContainer.Init(false);
         moneyField.text = MainController.Instance.PlayerData.playerInv[ItemId.money].ToString("0");
         crystalField.text = MainController.Instance.PlayerData.playerInv[ItemId.crystal].ToString("0");
         InitPlayerItems();

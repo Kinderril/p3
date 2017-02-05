@@ -12,16 +12,17 @@ public class OpenLevels
     private const char DELEM = '$';
     private const string KEY_OPENED_LEVELS = "KEY_OPENED_LEVELS";
     private const string KEY_OPENED_POS = "KEY_OPENED_POS";
-    public OpenLevels()
+    public OpenLevels(bool _isTutorialComplete)
     {
-        var isFirst = PlayerPrefs.GetString(KEY_OPENED_LEVELS, "").Length < 2;
+
+
+        var isFirst = !_isTutorialComplete;// PlayerPrefs.GetString(KEY_OPENED_LEVELS, "").Length < 2;
         if (isFirst)
         {
-            opendLevels.Add(1);
-            opendLevels.Add(2);
+            opendLevels.Add(0);
             foreach (var opendLevel in opendLevels)
             {
-                listOfOpendBornPositions.Add(opendLevel, new List<int>() {1});
+                listOfOpendBornPositions.Add(opendLevel, new List<int>() { 1 });
             }
             Save();
         }
@@ -29,6 +30,24 @@ public class OpenLevels
         {
             Load();
         }
+    }
+
+    public void CompleteTutorial()
+    {
+        opendLevels.Add(1);
+        foreach (var opendLevel in opendLevels)
+        {
+            List<int> places;
+            if (listOfOpendBornPositions.TryGetValue(opendLevel, out places))
+            {
+                listOfOpendBornPositions[opendLevel] = new List<int>() { 1 };
+            }
+            else
+            {
+                listOfOpendBornPositions.Add(opendLevel, new List<int>() { 1 });
+            }
+        }
+        Save();
     }
     
     public void Save()

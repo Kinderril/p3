@@ -12,11 +12,11 @@ public class AllParametersContainer : MonoBehaviour
     private List<GameParameterElement> elementsParams = new List<GameParameterElement>();
     public Transform layoutGameElements;
     private bool isInit = false;
-    public void Init()
+    public void Init(bool withNames)
     {
         if (!isInit)
         {
-            LoadTotalParameters();
+            LoadTotalParameters(withNames);
             isInit = true;
         }
         else
@@ -26,12 +26,12 @@ public class AllParametersContainer : MonoBehaviour
     }
 
 
-    private void LoadTotalParameters()
+    private void LoadTotalParameters(bool withNames)
     {
         foreach (ParamType v in Enum.GetValues(typeof(ParamType)))
         {
             var item = DataBaseController.GetItem(PrefabGameElement);
-            item.Init(v);
+            item.Init(v, withNames);
             item.gameObject.transform.SetParent(layoutGameElements);
             elementsParams.Add(item);
         }

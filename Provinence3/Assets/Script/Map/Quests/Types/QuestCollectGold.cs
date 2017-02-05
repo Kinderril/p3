@@ -22,6 +22,7 @@ public class QuestCollectGold : QuestLogicBase
                 OnQuestProgressChange(CurrentCount, TargetCount);
             if (CurrentCount >= TargetCount)
             {
+                Clear();
                 ReadyToReward();
             }
         }

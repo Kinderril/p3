@@ -15,6 +15,7 @@ public class LevelObject : MonoBehaviour
     public Terrain Terrain;
     public float GlobalFogLevel = 31;
     public float GlobalFogDiff = 1.7f;
+    public event Action<Hero> OnInited;
 
     public void Init(Hero hero)
     {
@@ -26,6 +27,10 @@ public class LevelObject : MonoBehaviour
         Shader.SetGlobalFloat(FOG_DIFF, GlobalFogDiff);
         Shader.SetGlobalFloat(FOG_START_LEVEL_TERRAIN, GlobalFogLevel);
         Shader.SetGlobalFloat(FOG_DIFF_TERRAIN, GlobalFogDiff * 3);
+        if (OnInited != null)
+        {
+            OnInited(hero);
+        }
     }
 
     public void UpdateByMap()

@@ -10,7 +10,7 @@ public class HeroBullet : Bullet
     protected override void OnBulletHit(Collider other)
     {
         var trg = other.GetComponent<BaseMonster>();
-        if (trg != null)
+        if (trg != null && trg.IsInited)
         {
             Hit(trg);
         }

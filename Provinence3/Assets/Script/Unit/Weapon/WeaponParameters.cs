@@ -13,6 +13,7 @@ public enum WeaponType
 
 public  class WeaponParameters : ScriptableObject
 {
+    public const float MID_MAX_RANGE = 8;
 //    public float bulletSpeed;
     public WeaponType type;
     public float range;

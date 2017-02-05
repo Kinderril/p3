@@ -29,7 +29,20 @@ public class ExecutableItemInfo : InventoryItemInfo
                 {
                     NameLabel.text = enchant.Name;
                     mainIcon.sprite = enchant.IconSprite;
-                    descField.text = "Use for enchant items to upgrade power";
+                    string desc = "";
+                    switch (enchant.ItemType)
+                    {
+                        case EnchantType.weaponUpdate:
+                            desc = "Use this to upgrade your weapon power";
+                            break;
+                        case EnchantType.powerUpdate:
+                            desc = "Use for enchant items to upgrade power";
+                            break;
+                        case EnchantType.armorUpdate:
+                            desc = "Use this to upgrade your armor";
+                            break;
+                    }
+                    descField.text = desc;
                 }
                 break;
             case ExecutableType.catalys:

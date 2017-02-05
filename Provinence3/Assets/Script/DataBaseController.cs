@@ -34,6 +34,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<Rarity, Color> rarityColors = new Dictionary<Rarity, Color>();
     private readonly Dictionary<TalismanType, AbsorberWithPosition> TalismanEffects = new Dictionary<TalismanType, AbsorberWithPosition>();
     private readonly Dictionary<ParamType, Color> parameterColors = new Dictionary<ParamType, Color>();
+    private Dictionary<ParamType, string> parameterNames;
     private readonly Dictionary<CraftItemType,Sprite> CraftItemsSprites = new Dictionary<CraftItemType, Sprite>(); 
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
     private readonly Dictionary<int,Taple<int,int>> costByLevelItems = new Dictionary<int, Taple<int, int>>(); 
@@ -82,31 +83,52 @@ public class DataBaseController : Singleton<DataBaseController>
             LoadSprites();
             Pool = new Pool(this);
             LoadRespawnPointsNames();
+            LoadOthers();
             if (flashShader == null)
                 flashShader = Shader.Find("Custom/FogInsideFlash");
             DebugController.Instance.InfoField2.text = flashShader.ToString();
         }
         catch (Exception ex)
         {
+            Debug.Log("DB:" + ex);
             DebugController.Instance.InfoField1.text = ex.ToString();
         }
     }
-    
+
+    public string GetName(ParamType type)
+    {
+        return parameterNames[type];
+    }
+
+    private void LoadOthers()
+    {
+        parameterNames = new Dictionary<ParamType, string>()
+        {
+            {ParamType.Heath, "Health" },
+            {ParamType.Speed, "Speed" },
+            {ParamType.MDef, "Magic resist" },
+            {ParamType.PDef, "Physical defence" },
+            {ParamType.MPower, "Magic power" },
+            {ParamType.PPower, "Physical power" },
+        };
+    }
+
 
     private void LoadRespawnPointsNames()
     {
         RespawnPositionsNames = new Dictionary<int, Dictionary<int, string>>();
+        RespawnPositionsNames.Add(0,new Dictionary<int, string>() { {1,"Trainings"} });
         RespawnPositionsNames.Add(1,new Dictionary<int, string>() { {1,"Trainings"} });
         RespawnPositionsNames.Add(2, new Dictionary<int, string>() { { 1, "Plants" } , { 2, "Lake" } , { 3, "Fields" } , { 4, "Town" } });
         RespawnPositionsNames.Add(3, new Dictionary<int, string>() { { 1, "Gate" } , { 2, "FirstQuart" } , { 3, "Shop" } , { 4, "Church" } });
         MissionNames = new Dictionary<int, string>() { { 0, "Debug" }, { 1, "Tutorial" }, { 2, "Forest" }, { 3, "Village" } } ;
-        for (int i = 1; i < DataStructs.MISSION_LAST_INDEX+1; i++)
+        for (int i = 0; i < DataStructs.MISSION_LAST_INDEX+1; i++)
         {
             var pos = DataStructs.GetRespawnPointsCountByMission(i);
             var namesCount = RespawnPositionsNames[i].Count;
             if (pos != namesCount)
             {
-                Debug.LogError("WRONG DATA!!!! IN RESPAWN POINTS");
+                Debug.LogError("WRONG DATA!!!! IN RESPAWN POINTS in mission " + i);
             }
         }
     }

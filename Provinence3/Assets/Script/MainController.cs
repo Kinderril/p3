@@ -38,10 +38,10 @@ public class MainController : Singleton<MainController>
         }
         catch (Exception ex)
         {
+            Debug.LogError(":" + ex);
             DebugController.Instance.InfoField1.text = ex.ToString();
         }
         WindowManager.Instance.OpenWindow(MainState.start);
-//	    Test();
 	}
 
     private void Test()

@@ -229,6 +229,20 @@ public class Formuls
     public const int MDEF_COEF = 5;
     public const int HP_COEF = 40;
 
+    public const int CRIT_CHANCE = 20;
+    public const float CRIT_COEF = 2.25f;
+    public const float SLOW_COEF = 0.92f;
+    public const float REMOVE_DEF_COEF = 0.94f;
+    public const float VAMP_COEF = 0.1f;
+    public const float CLEAR_COEF = 0.5f;
+    public const float CHANCE_STUN = 18f;
+    public const float STUN_TIME_SEC = 2f;
+    public const float DISTANCE_COEF = 0.07f;
+    public const float DISTANCE_MIN  = 1f;
+    public const float DISTANCE_MAX = 2f;
+    public const float HP_SKILL_COEF = 1.5f;
+
+
     public static float AffectMainParam(float curVal ,Dictionary<MainParam, int> MainParameters,ParamType type)
     {
         switch (type)

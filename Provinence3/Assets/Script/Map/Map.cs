@@ -46,10 +46,10 @@ public class Map : Singleton<Map>
 
         var hero = DataBaseController.GetItem(DataBaseController.Instance.prefabHero, GetHeroBoenPos(heroBornPositionIndex));
         hero.Init(lvl);
-        levelMainObject.Init(hero);
         enemies = new List<BaseMonster>();
         appearPos = new List<MonsterBornPosition>();
         BossAppearPos = new List<BossBornPosition>();
+        levelMainObject.Init(hero);
         List<ChestBornPosition> chestPositions = new List<ChestBornPosition>();
 
         allInfo += TimeUtils.EndMeasure("LOAD HERO");
@@ -207,7 +207,7 @@ public class Map : Singleton<Map>
         bool isActive;
         foreach (var baseMonster in enemies)
         {
-            if (!baseMonster.IsDead && !baseMonster.IsDisabled)
+            if (baseMonster != null && !baseMonster.IsDead && !baseMonster.IsDisabled)
             {
                 mainHeroDist = (mainHero.transform.position - baseMonster.transform.position).sqrMagnitude;
                 isActive = mainHeroDist < BaseMonster.AI_DIST;
@@ -255,7 +255,7 @@ public class Map : Singleton<Map>
         return vector3s;
     }
 
-    private void OnSpawnBoss(int bonuses)
+    public void SpawnBoss(int bonuses)
     {
         Vector3 pos = default(Vector3);
         float curDist = 9999999;
@@ -270,8 +270,7 @@ public class Map : Singleton<Map>
         }
 
         var bossPrefab = DataBaseController.Instance.BossUnits.RandomElement();
-        //FirstOrDefault(x => x.ParametersScriptable.Level == level.difficult);
-        
+
         if (bossPrefab != null)
         {
             CameraFollow.CameraShake.Init(0.5f);
@@ -285,7 +284,7 @@ public class Map : Singleton<Map>
             boss.Parameters[ParamType.Heath] = resultBossHP;
             hero.ArrowTarget.Init(boss);
             boss.transform.SetParent(enemiesContainer);
-            MainController.Instance.level.BigMessageAppear("Boss have appear","", Color.red);
+            MainController.Instance.level.BigMessageAppear("Boss have appear", "", Color.red);
             if (level.OnBossAppear != null)
             {
                 level.OnBossAppear(boss);
@@ -295,6 +294,11 @@ public class Map : Singleton<Map>
         {
             Debug.LogError("Can't find bossPrefab");
         }
+    }
+
+    private void OnSpawnBoss(int bonuses)
+    {
+        SpawnBoss(bonuses);
     }
 
     public void EndLevel()

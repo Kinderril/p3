@@ -92,11 +92,14 @@ public class QuestGiver : MonoBehaviour
 
     public void SetReady()
     {
-        Status = QuestStatus.ready;
-        Controller.Check(this);
-//        if (Status == QuestStatus.started)
+        if (Status != QuestStatus.ready && Status != QuestStatus.end)
+        {
+            Status = QuestStatus.ready;
+            Controller.Check(this);
+        }
+//        if (StatusMessage == QuestStatus.started)
 //        {
-//            Status = QuestStatus.ready;
+//            StatusMessage = QuestStatus.ready;
 //            Controller.Ready(this);
 //            logic.Clear();
 //        }

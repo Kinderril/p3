@@ -19,8 +19,23 @@ public  class ExecEnchantItem : ExecutableItem
     {
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Enchant/" + type.ToString());
         ItemType = type;
-        name = type.ToString();
+        name = NameOfEnchant(type);
     }
+
+    public static string NameOfEnchant(EnchantType type)
+    {
+        switch (type)
+        {
+            case EnchantType.weaponUpdate:
+                return "Weapon upgrade";
+            case EnchantType.powerUpdate:
+                return "Power enchante";
+            case EnchantType.armorUpdate:
+                return "Armor upgrade";
+        }
+        return "";
+    }
+    
     public static ExecEnchantItem Creat()
     {
         return new ExecEnchantItem(ShopController.AllEnchantes.RandomElement(),1);

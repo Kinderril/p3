@@ -21,7 +21,7 @@ public class Energy
     private float speedEnergyFall = 1f;
     public event Action OnRage;
     private bool isRageActivated = false;
-
+    
     public Energy(Action<ItemId, int> activaAction,Action OnRage)
     {
         this.activaAction = activaAction;

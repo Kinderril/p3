@@ -6,12 +6,12 @@ using UnityEngine;
 
 public enum ParamType
 {
-    Speed,
-    MPower,
     PPower,
+    MPower,
     PDef,
     MDef,
     Heath,
+    Speed,
 
 }
 

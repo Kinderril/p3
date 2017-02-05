@@ -61,6 +61,7 @@ public class Level
     public float MoneyBonusFromItem = 1f;
     public LevelQuestController QuestController;
     public LevelStatistics LevelStatistics;
+    public LevelObject levelObject = null;
 
     public Level(int levelIndex,int indexBornPos,int difficult)
     {
@@ -96,20 +97,20 @@ public class Level
         {
             yield return new WaitForSeconds(1f);
         }
-        LevelObject obj = null;
+        
         foreach (var rootGameObject in scene.GetRootGameObjects())
         {
-            obj = rootGameObject.GetComponent<LevelObject>();
-            if (obj != null)
+            levelObject = rootGameObject.GetComponent<LevelObject>();
+            if (levelObject != null)
             {
                 break;
             }
         }
         //        LoadLevelGameObject(levelIndex);
-        if (obj != null)
+        if (levelObject != null)
         {
-            Utils.Init(obj.Terrain);
-            MainHero = Map.Instance.Init(this, obj, IndexBornPoint);
+            Utils.Init(levelObject.Terrain);
+            MainHero = Map.Instance.Init(this, levelObject, IndexBornPoint);
             DebugController.Instance.InfoField2.text += " " + TimeUtils.EndMeasure("MAIN");
             isPLaying = false;
             callback(this);
@@ -254,6 +255,11 @@ public class Level
 
     public void EndLevel(PlayerData PlayerData, EndlevelType LevelEndType,bool endImmidiatly = false)
     {
+        var isTutor = MissionIndex == 0;
+        if (isTutor)
+        {
+            MainController.Instance.PlayerData.TutorEnd();
+        }
         LevelStatistics.End();
         IsGoodEnd = LevelEndType;
         PortalsController.Stop();

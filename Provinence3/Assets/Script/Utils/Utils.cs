@@ -49,7 +49,8 @@ public static class Utils
         for (int i = 0; i < count; i++)
         {
             var a = (list.Count/count);
-            var e = list[UnityEngine.Random.Range(i * a + 1, (i+1) * a)];
+            var index = UnityEngine.Random.Range(i*a + 1, (i + 1)*a);
+            var e = list[Mathf.Clamp(index,0,list.Count-1)];
             listOut.Add(e);
         }
 

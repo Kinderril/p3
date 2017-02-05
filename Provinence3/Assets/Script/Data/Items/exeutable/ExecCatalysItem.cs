@@ -22,9 +22,27 @@ public class ExecCatalysItem : ExecutableItem
 
         IconSprite = UnityEngine.Resources.Load<Sprite>("sprites/Catalys/" + type.ToString());
         ItemType = type;
-        name = type.ToString();
+        name = NameOfCatalys(type);
     }
-    
+
+    public static string NameOfCatalys(CatalysItemType type)
+    {
+        switch (type)
+        {
+            case CatalysItemType.red:
+                return "Fire enchant stone";
+            case CatalysItemType.blue:
+                return "Water enchant stone";
+            case CatalysItemType.green:
+                return "Forest enchant stone";
+            case CatalysItemType.black:
+                return "Space enchant stone";
+            case CatalysItemType.white:
+                return "Earth enchant stone";
+        }
+        return "";
+    }
+
     public static ExecCatalysItem Creat()
     {
         return new ExecCatalysItem(ShopController.AllCatalyses.RandomElement());

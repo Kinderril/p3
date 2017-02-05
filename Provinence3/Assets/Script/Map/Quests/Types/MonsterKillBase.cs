@@ -22,6 +22,7 @@ public abstract class MonsterKillBase : QuestLogicBase
         }
         if (CurrentCount >= TargetCount)
         {
+            Clear();
             ReadyToReward();
         }
     }

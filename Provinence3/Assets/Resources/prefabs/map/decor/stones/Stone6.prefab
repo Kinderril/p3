@@ -5,12 +5,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 499480}
-  - 33: {fileID: 3378144}
-  - 23: {fileID: 2381144}
-  - 65: {fileID: 6594080}
+  - component: {fileID: 499480}
+  - component: {fileID: 3378144}
+  - component: {fileID: 2381144}
+  - component: {fileID: 136348447178339406}
   m_Layer: 0
   m_Name: Stone6
   m_TagString: Untagged
@@ -25,12 +25,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100362}
   m_LocalRotation: {x: 0.61118704, y: -0.3555988, z: 0.35559872, w: 0.61118704}
-  m_LocalPosition: {x: 563.15, y: 163.98, z: -17.82}
+  m_LocalPosition: {x: 426.04782, y: -0.23, z: 306.66495}
   m_LocalScale: {x: 2.5238621, y: 2.5238621, z: 2.5238621}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2381144
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -40,17 +40,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 44929fa6244885c42a19e620436dd776, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -64,18 +69,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100362}
   m_Mesh: {fileID: 4300000, guid: 95d83d5e3403b4d4fb7aec6bc85d458c, type: 3}
---- !u!65 &6594080
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100362}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2085963, y: 1.7071656, z: 1.0998341}
-  m_Center: {x: -0.13987882, y: -0.01572216, z: -0.54704505}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -87,3 +80,16 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100362}
   m_IsPrefabParent: 1
+--- !u!136 &136348447178339406
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6042986
+  m_Height: 1.7071661
+  m_Direction: 1
+  m_Center: {x: -0.1398788, y: -0.015722236, z: -0.54704523}

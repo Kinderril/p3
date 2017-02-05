@@ -265,6 +265,10 @@ public class Unit : MonoBehaviour
 
     public virtual void GetHit(Bullet bullet)
     {
+        if (Parameters == null)
+        {
+            return;
+        }
         var addPower = 1 + Mathf.Clamp(bullet.AdditionalPower, 0, Weapon.MAX_CHARGE_TIME);
         float power = bullet.bulletHolder.Power * addPower;
         float mdef = Parameters[ParamType.MDef];
@@ -277,10 +281,10 @@ public class Unit : MonoBehaviour
             switch (bullet.bulletHolder.SpecAbility)
             {
                 case SpecialAbility.critical:
-                    var isCrit = UnityEngine.Random.Range(0, 10) < 2;
+                    var isCrit = UnityEngine.Random.Range(0, 100) < Formuls.CRIT_CHANCE;
                     if (isCrit)
                     {
-                        power *= 2.25f;
+                        power *= Formuls.CRIT_COEF;
                     }
                     break;
                 case SpecialAbility.push:
@@ -289,15 +293,15 @@ public class Unit : MonoBehaviour
                     //TODO
                     break;
                 case SpecialAbility.slow:
-                    Parameters[ParamType.Speed] *= 0.92f;
+                    Parameters[ParamType.Speed] *= Formuls.SLOW_COEF;
                     Control.SetSpeed(Parameters[ParamType.Speed]);
                     break;
                 case SpecialAbility.removeDefence:
-                    Parameters[ParamType.PDef] *= 0.94f;
-                    Parameters[ParamType.MDef] *= 0.94f;
+                    Parameters[ParamType.PDef] *= Formuls.REMOVE_DEF_COEF;
+                    Parameters[ParamType.MDef] *= Formuls.REMOVE_DEF_COEF;
                     break;
                 case SpecialAbility.vampire:
-                    var diff = power*0.1f;
+                    var diff = power*Formuls.VAMP_COEF;
                     SetHp(CurHp + diff);
                     if (owner is Hero)
                     {
@@ -309,24 +313,24 @@ public class Unit : MonoBehaviour
                     }
                     break;
                 case SpecialAbility.clear:
-                    mdef = mdef/2;
-                    pdef = pdef/2;
+                    mdef = mdef * Formuls.CLEAR_COEF;
+                    pdef = pdef * Formuls.CLEAR_COEF;
                     break;
                 case SpecialAbility.dot:
                     break;
                 case SpecialAbility.distance:
-                    var sqrdist = (owner.transform.position - transform.position).sqrMagnitude *  (38f * 0.4f);
-                    power *= Mathf.Clamp(sqrdist,1f,2f);
+                    var sqrdist = 1 + (owner.transform.position - transform.position).magnitude *  (Formuls.DISTANCE_COEF);
+                    power *= Mathf.Clamp(sqrdist,Formuls.DISTANCE_MIN,Formuls.DISTANCE_MAX);
                     break;
                 case SpecialAbility.hp:
-                    var c = ( 1 - CurHp/Parameters.MaxHp)/3;
+                    var c = ( 1 - CurHp/Parameters.MaxHp)/Formuls.HP_SKILL_COEF;
                     power *= c;
                     break;
                 case SpecialAbility.shield:
                     owner.Shield += MainController.Instance.level.difficult;
                     break;
                 case SpecialAbility.stun:
-                    var isStun = UnityEngine.Random.Range(0, 10) < 2;
+                    var isStun = UnityEngine.Random.Range(0, 100) < Formuls.CHANCE_STUN;
 #if UNITY_EDITOR
                     if (DebugController.Instance.CHANCE_STUN_100)
                     {
@@ -336,7 +340,7 @@ public class Unit : MonoBehaviour
                     Debug.Log("STUN! " + isStun);
                     if (isStun)
                     {
-                        TimeEffect.Creat(this, EffectType.freez,0,2);
+                        TimeEffect.Creat(this, EffectType.freez,0, Formuls.STUN_TIME_SEC);
                     }
                     break;
             }

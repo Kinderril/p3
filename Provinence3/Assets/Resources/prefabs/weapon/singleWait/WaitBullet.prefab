@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 495972}
-  - 135: {fileID: 13552044}
-  - 114: {fileID: 11458416}
+  - component: {fileID: 495972}
+  - component: {fileID: 13552044}
+  - component: {fileID: 11458416}
   m_Layer: 0
   m_Name: WaitBullet
   m_TagString: Untagged
@@ -22,10 +22,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 424992}
-  - 114: {fileID: 11421516}
+  - component: {fileID: 424992}
+  - component: {fileID: 11421516}
   m_Layer: 0
   m_Name: absorber
   m_TagString: Untagged
@@ -38,11 +38,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 408592}
-  - 114: {fileID: 11485696}
-  - 114: {fileID: 11418654}
+  - component: {fileID: 408592}
+  - component: {fileID: 11485696}
+  - component: {fileID: 11418654}
   m_Layer: 0
   m_Name: StrikeLight
   m_TagString: Untagged
@@ -55,13 +55,13 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 476996}
-  - 33: {fileID: 3305286}
-  - 23: {fileID: 2304520}
-  - 114: {fileID: 11471758}
-  - 114: {fileID: 11466280}
+  - component: {fileID: 476996}
+  - component: {fileID: 3305286}
+  - component: {fileID: 2304520}
+  - component: {fileID: 11471758}
+  - component: {fileID: 11466280}
   m_Layer: 0
   m_Name: plane_2
   m_TagString: Untagged
@@ -74,13 +74,13 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 476778}
-  - 33: {fileID: 3352312}
-  - 23: {fileID: 2339542}
-  - 114: {fileID: 11464186}
-  - 114: {fileID: 11490058}
+  - component: {fileID: 476778}
+  - component: {fileID: 3352312}
+  - component: {fileID: 2339542}
+  - component: {fileID: 11464186}
+  - component: {fileID: 11490058}
   m_Layer: 0
   m_Name: ground 25
   m_TagString: Untagged
@@ -93,9 +93,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 473942}
+  - component: {fileID: 473942}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -112,11 +112,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -9.059998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 473942}
   m_Father: {fileID: 424992}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &424992
 Transform:
   m_ObjectHideFlags: 1
@@ -126,13 +126,13 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 476778}
   - {fileID: 476996}
   - {fileID: 408592}
   m_Father: {fileID: 495972}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &473942
 Transform:
   m_ObjectHideFlags: 1
@@ -142,10 +142,10 @@ Transform:
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 408592}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &476778
 Transform:
   m_ObjectHideFlags: 1
@@ -155,10 +155,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 424992}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &476996
 Transform:
   m_ObjectHideFlags: 1
@@ -168,10 +168,10 @@ Transform:
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 9, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 2}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 424992}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &495972
 Transform:
   m_ObjectHideFlags: 1
@@ -181,11 +181,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 424992}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2304520
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -195,17 +195,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: e31c26962ce575f408be81fe9e33f364, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -221,17 +226,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 20261f7b294a8ee45b6c245f20c6d942, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -297,6 +307,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 11421516}
   rebuildY: 1
   playHitAnyway: 1
+  FlyType: 0
   ID: 100
   waitTime: 1
 --- !u!114 &11464186
@@ -319,16 +330,18 @@ MonoBehaviour:
     m_AniCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 0
         inSlope: 1
         outSlope: 1
-        tangentMode: 10
-      - time: 1
+        tangentMode: 34
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 1
         outSlope: 1
-        tangentMode: 10
+        tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -349,17 +362,20 @@ MonoBehaviour:
     m_AniCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: -5.3148675
         outSlope: -5.3148675
         tangentMode: 0
-      - time: 0.40010944
+      - serializedVersion: 2
+        time: 0.40010944
         value: 0.011478958
         inSlope: -0.015260903
         outSlope: 1.6583892
         tangentMode: 1
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 1.7716236
         outSlope: 1.7716236
@@ -415,17 +431,20 @@ MonoBehaviour:
     m_AniCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0.1978673
+      - serializedVersion: 2
+        time: 0.1978673
         value: 0.9949622
         inSlope: -5.3148675
         outSlope: -5.3148675
         tangentMode: 0
-      - time: 0.40010944
+      - serializedVersion: 2
+        time: 0.40010944
         value: 0.011478958
         inSlope: -0.015260903
         outSlope: 2.8586776
         tangentMode: 1
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0.0000029591956
         outSlope: 0.0000029591956
@@ -450,21 +469,24 @@ MonoBehaviour:
     m_AniCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0.2559242
+      - serializedVersion: 2
+        time: 0.2559242
         value: 0.0050377827
         inSlope: 4.047253
         outSlope: 4.047253
-        tangentMode: 10
-      - time: 0.5017606
+        tangentMode: 34
+      - serializedVersion: 2
+        time: 0.5017606
         value: 1
         inSlope: 4.047253
         outSlope: -0
-        tangentMode: 21
-      - time: 1
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 10
+        tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

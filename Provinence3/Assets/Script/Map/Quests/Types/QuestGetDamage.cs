@@ -19,6 +19,7 @@ public class QuestGetDamage : QuestLogicBase
             OnQuestProgressChange(CurrentCount, TargetCount);
         if (CurrentCount > TargetCount)
         {
+            Clear();
             ReadyToReward();
         }
     }

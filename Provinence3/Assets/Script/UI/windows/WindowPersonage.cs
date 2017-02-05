@@ -28,7 +28,7 @@ public class WindowPersonage : BaseWindow
         elements.Clear();
         //elementsParams.Clear();
         LoadParameters();
-        AllParametersContainer.Init();
+        AllParametersContainer.Init(true);
         MainController.Instance.PlayerData.OnParametersChange += OnParametersChange;
         MainController.Instance.PlayerData.OnCurrensyChanges += OnCurrensyChanges;
         MainController.Instance.PlayerData.OnLevelUp += OnLevelUp;
