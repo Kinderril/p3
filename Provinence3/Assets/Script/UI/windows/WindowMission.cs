@@ -16,8 +16,9 @@ public class WindowMission : BaseWindow
     public Transform Layout;
     public Button StartMisson;
     public Button BuyMission;
-    public Text CostMissionField;
+//    public Text CostMissionField;
 
+    public OpenLevelWindow OpenLevelWindow;
     public RespawnPointToggle PrefabRespawnPointToggle;
     public DifficultyChooser DifficultyChooser;
     private int curDiffChoosed;
@@ -27,6 +28,7 @@ public class WindowMission : BaseWindow
     public override void Init()
     {
         base.Init();
+        OpenLevelWindow.gameObject.SetActive(false);
         var isTutorComplete = MainController.Instance.PlayerData.IsTutorialComplete;
         Dictionary<int, int> stubList = new Dictionary<int, int>();
         var lastLevel = PlayerPrefs.GetInt(key_last_level_chosed, 0);
@@ -142,17 +144,35 @@ public class WindowMission : BaseWindow
         }
         StartMisson.gameObject.SetActive(canactivate);
         BuyMission.gameObject.SetActive(!canactivate);
-        if (!canactivate)
-        {
-            CostMissionField.text = "10 crystals";
-        }
+//        if (!canactivate)
+//        {
+//            CostMissionField.text = "10 crystals";
+//        }
         Debug.Log("currentSelectedRespawnPoint:" + currentSelectedRespawnPoint);
 
     }
 
     public void OnOpenLvlClick()
     {
-        var toPoen = currentSelectedMission;
+        var index = currentSelectedMission;
+        if (MainController.Instance.PlayerData.OpenLevels.CanOpenLevel(index))
+        {
+            OpenLevelWindow.Init(index,LevelOpened,OpenLevelClose);
+        }
+        else
+        {
+            WindowManager.Instance.InfoWindow.Init(null, "You need a higher level to open this location.");
+        }
+    }
+
+    private void OpenLevelClose()
+    {
+        
+    }
+
+    private void LevelOpened(int obj)
+    {
+        
     }
 
     public void OnPlayClick()

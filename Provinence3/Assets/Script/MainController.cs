@@ -27,6 +27,8 @@ public class MainController : Singleton<MainController>
 
     void Start ()
     {
+        Application.targetFrameRate = 30;
+        QualitySettings.vSyncCount = 0;
         DataBaseController.Instance.Init();
         WindowManager.Instance.Init();
         ShopController.Instance.Init();
@@ -73,10 +75,10 @@ public class MainController : Singleton<MainController>
         yield return null;
     }
 
-    private IEnumerator w4death()
+    private void w4death()
     {
         PostProcessingController.Instance.StartFadeIn();
-        yield return new WaitForSeconds(2f);
+//        yield return new WaitForSeconds(2f);
         PostProcessingController.Instance.EndFade();
         WindowManager.Instance.OpenWindow(MainState.end);
         Map.Instance.EndLevel();
@@ -96,11 +98,10 @@ public class MainController : Singleton<MainController>
 
     }
 
-    public void EndLevel(EndlevelType goodEnd,bool endImmidiatly = false)
+    public void EndLevel(bool endImmidiatly = false)
     {
-        Debug.Log("EndLevel>> goodEnd:" + goodEnd);
-        level.EndLevel(PlayerData, goodEnd, endImmidiatly);
-        StartCoroutine(w4death());
+        level.EndLevel(PlayerData, endImmidiatly);
+        w4death();
     }
 
     void Update () {

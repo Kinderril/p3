@@ -5,15 +5,15 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 473892}
-  - 114: {fileID: 11431316}
-  - 114: {fileID: 11411312}
-  - 114: {fileID: 11417906}
-  - 114: {fileID: 11424998}
-  - 114: {fileID: 11496442}
-  - 114: {fileID: 11447274}
+  - component: {fileID: 473892}
+  - component: {fileID: 11431316}
+  - component: {fileID: 11411312}
+  - component: {fileID: 11417906}
+  - component: {fileID: 11424998}
+  - component: {fileID: 11496442}
+  - component: {fileID: 11447274}
   m_Layer: 0
   m_Name: MainController
   m_TagString: Untagged
@@ -30,10 +30,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.3483454, y: 0.5192963, z: 0.7311668}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11411312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 11479450, guid: 884a0511add418d42a91874ad00ee2f5, type: 2}
   - {fileID: 11465162, guid: 3f1637189313f7e40b42cbba9ac58c46, type: 2}
   - {fileID: 11450574, guid: 13f06168c668d0044981699762ed6652, type: 2}
+  - {fileID: 114784697418096206, guid: 1eb6bcfc71819844aa1164b6aeb0180b, type: 2}
   BossUnits:
   - {fileID: 11408556, guid: bb08f8bde5e25184c9a36dfd5b115b75, type: 2}
   prefabHero: {fileID: 11487600, guid: fc190c4abdb826a49a92ed5e58aee7d5, type: 2}
@@ -150,17 +151,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4fe0a5036ef2c44a9b01f4ba1b9f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ALL_TIME_DROP: 1
-  ALL_TALISMAN_CHARGED: 1
+  ALL_TIME_DROP: 0
+  ALL_TALISMAN_CHARGED: 0
   MAIN_HERO_MEGAHP: 0
   LESS_COUNT_BOSS_COME: 0
   GET_START_BOOST: 0
-  GET_ALL_TYPE_WEAPONS_BOOST: 0
+  GET_ALL_TYPE_WEAPONS_BOOST: 1
   RESPAWN_TIME_CREEPS_FAST: 0
   ALWAYS_GOOD_END: 0
   CHANCE_STUN_100: 0
-  QUEST_REWARD_ITEM: 1
-  QUEST_COMPLETE: 1
+  QUEST_REWARD_ITEM: 0
+  QUEST_COMPLETE: 0
   InfoField1: {fileID: 0}
   InfoField2: {fileID: 0}
 --- !u!1001 &100100000

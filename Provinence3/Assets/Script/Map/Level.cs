@@ -44,6 +44,7 @@ public class Level
     public Action<BossUnit> OnBossAppear;
     public Action<CraftItemType, int> OnCraftItemCollected;
     public Action OnEndLevel;
+    public Action<EndlevelType> OnPreEndLevel;
     public Action<bool> OnPause;
 
     public Energy Energy;
@@ -62,6 +63,7 @@ public class Level
     public LevelQuestController QuestController;
     public LevelStatistics LevelStatistics;
     public LevelObject levelObject = null;
+    private EndlevelType LevelEndType;
 
     public Level(int levelIndex,int indexBornPos,int difficult)
     {
@@ -252,9 +254,9 @@ public class Level
             Energy.Update();
         }
     }
-
-    public void EndLevel(PlayerData PlayerData, EndlevelType LevelEndType,bool endImmidiatly = false)
+    public void PreEndLevel(EndlevelType type)
     {
+        LevelEndType = type;
         var isTutor = MissionIndex == 0;
         if (isTutor)
         {
@@ -265,6 +267,19 @@ public class Level
         PortalsController.Stop();
         QuestController.Clear();
         MainHero.Control.enabled = false;
+
+        if (OnPreEndLevel != null)
+        {
+            OnPreEndLevel(type);
+        }
+        Energy.Dispose();
+
+    }
+
+    public void EndLevel(PlayerData PlayerData, bool endImmidiatly = false)
+    {
+        Debug.Log("EndLevel>> goodEnd:" + LevelEndType);
+
         var isBad = LevelEndType == EndlevelType.bad;
 #if UNITY_EDITOR
         if (DebugController.Instance.ALWAYS_GOOD_END)
@@ -296,7 +311,6 @@ public class Level
         {
             OnEndLevel();
         }
-        Energy.Dispose();
         if (endImmidiatly)
         {
             AfterWait();
@@ -402,5 +416,6 @@ public class Level
         giver.Init(QuestController);
         QuestController.Add(giver);
     }
+
 }
 

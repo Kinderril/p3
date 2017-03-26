@@ -241,6 +241,10 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 11400658, guid: bdde3f8753c56c046a83b310440a0344, type: 2}
+      propertyPath: PrecentMonsterToBoss_0_1
+      value: 0.14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bdde3f8753c56c046a83b310440a0344, type: 2}
   m_IsPrefabParent: 0

@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 401248}
-  - 114: {fileID: 11474658}
-  - 114: {fileID: 11483194}
+  - component: {fileID: 401248}
+  - component: {fileID: 11474658}
+  - component: {fileID: 11483194}
   m_Layer: 0
   m_Name: DataStruct
   m_TagString: Untagged
@@ -26,10 +26,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 445.5, y: 93.10254, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11474658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,6 +41,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba935c99619b3344835db06e5a19bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HeroHeathColor: {r: 0.97794116, g: 0.057525948, b: 0.057525948, a: 0.941}
+  MonsterHeathColor: {r: 0.7058823, g: 0.3066937, b: 0, a: 0.853}
   EffectVisualsTalisman:
   - type: 0
     EffectAbsorber: {fileID: 11407062, guid: fdf7e09a55706c648814ec347319e611, type: 2}
@@ -95,7 +97,7 @@ MonoBehaviour:
     type: 1
   - color: {r: 0.5214503, g: 0, b: 0.6691177, a: 1}
     type: 2
-  - color: {r: 0.63235295, g: 0, b: 0, a: 1}
+  - color: {r: 0.8897059, g: 0.54952425, b: 0.039251715, a: 1}
     type: 3
   CraftItemColor: {r: 0.84858614, g: 0.9338235, b: 0.3158521, a: 1}
   CostItemsByLevel:

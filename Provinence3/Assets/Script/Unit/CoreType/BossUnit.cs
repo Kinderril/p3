@@ -18,7 +18,7 @@ public class BossUnit : BaseMonster
     private IEnumerator Wait4Dead()
     {
         yield return new WaitForSeconds(1);
-        MainController.Instance.EndLevel(EndlevelType.normal);
+        MainController.Instance.level.PreEndLevel(EndlevelType.normal);
 
     }
 
@@ -39,6 +39,11 @@ public class BossUnit : BaseMonster
             Parameters.MaxHp *= delta;
             Parameters[ParamType.Heath] = Parameters.MaxHp;
         }
+
+    }
+
+    protected override void DropItems()
+    {
 
     }
 }

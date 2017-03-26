@@ -9,10 +9,11 @@ using UnityEngine.UI;
 public class WindowPause : MonoBehaviour
 {
     public Text BossProgressField;
-    public Text QuestField;
+    public Transform QuestLayout;
     public Text MonstersKilledField;
     public Text LevelDifficultyField;
     public Text LevelNameField;
+    public CurQuestInfo CurQuestInfo;
     private Level level;
 
     public void Init(Level level)
@@ -22,16 +23,30 @@ public class WindowPause : MonoBehaviour
         this.level = level;
         if (map.BossSpawner != null)
         {
-            BossProgressField.text = map.BossSpawner.GetPercent().ToString("0.00") + "% To Boss Born";
+            BossProgressField.text = (map.BossSpawner.GetPercent()*100).ToString("0") + "% To Boss Born";
         }
         else
         {
             BossProgressField.text = "";
         }
-        QuestField.text = level.QuestController.CurrentQuestInfo();
+
+        Utils.ClearTransform(QuestLayout);
+        var curQuest = level.QuestController.CurrentActiveQuest;
+        if (curQuest != null)
+        {
+            var questItem1 = DataBaseController.GetItem<CurQuestInfo>(CurQuestInfo);
+            questItem1.Init(curQuest);
+            questItem1.transform.SetParent(QuestLayout,false);
+        }
+        foreach (var finishedQuest in level.QuestController.FinishedQuests)
+        {
+            var questItem = DataBaseController.GetItem<CurQuestInfo>(CurQuestInfo);
+            questItem.Init(finishedQuest);
+            questItem.transform.SetParent(QuestLayout, false);
+        }
         MonstersKilledField.text = level.LevelStatistics.EnemiesKills + " Monsters killed";
         LevelDifficultyField.text = "Difficulty:"+level.difficult.ToString();
-        LevelNameField.text = "Mission index:"+level.MissionIndex.ToString();
+        LevelNameField.text = "Mission:"+ DataBaseController.Instance.MissionNames[level.MissionIndex].ToString();
     }
     
     public void OnResume()
@@ -42,7 +57,7 @@ public class WindowPause : MonoBehaviour
     public void OnSurrender()
     {
         level.UnPause();
-        MainController.Instance.EndLevel(EndlevelType.bad);
+        MainController.Instance.level.PreEndLevel(EndlevelType.bad);
     }
 
     public void Close()

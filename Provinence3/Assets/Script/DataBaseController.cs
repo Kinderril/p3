@@ -35,9 +35,11 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<TalismanType, AbsorberWithPosition> TalismanEffects = new Dictionary<TalismanType, AbsorberWithPosition>();
     private readonly Dictionary<ParamType, Color> parameterColors = new Dictionary<ParamType, Color>();
     private Dictionary<ParamType, string> parameterNames;
+    private Dictionary<QuestLogicType, string> questTypeNames;
     private readonly Dictionary<CraftItemType,Sprite> CraftItemsSprites = new Dictionary<CraftItemType, Sprite>(); 
     private readonly Dictionary<EffectType, VisualEffectBehaviour> visualEffectBehaviours = new Dictionary<EffectType, VisualEffectBehaviour>();
     private readonly Dictionary<int,Taple<int,int>> costByLevelItems = new Dictionary<int, Taple<int, int>>(); 
+    private readonly Dictionary<int,LevelConst>  levelsConst = new Dictionary<int, LevelConst>();
     
     public Chest chestPrefab;
     public QuestGiver QuestGiverPrefab;
@@ -80,6 +82,7 @@ public class DataBaseController : Singleton<DataBaseController>
             {
                 mosntersLevel[baseMonster.ParametersScriptable.Level].Add(baseMonster);
             }
+            LoadLevelsCost();
             LoadSprites();
             Pool = new Pool(this);
             LoadRespawnPointsNames();
@@ -95,9 +98,28 @@ public class DataBaseController : Singleton<DataBaseController>
         }
     }
 
+    public Dictionary<int, LevelConst> LevelsCost
+    {
+        get { return levelsConst; }
+    }
+
+    private void LoadLevelsCost()
+    {
+        levelsConst.Add(0, new LevelConst(0, 1));
+        levelsConst.Add(1, new LevelConst(0, 1));
+        levelsConst.Add(2, new LevelConst(4, 2));
+        levelsConst.Add(3, new LevelConst(6, 4));
+        levelsConst.Add(4, new LevelConst(8, 6));
+    }
+
     public string GetName(ParamType type)
     {
         return parameterNames[type];
+    }
+
+    public string GetName(QuestLogicType type)
+    {
+        return questTypeNames[type];
     }
 
     private void LoadOthers()
@@ -111,6 +133,16 @@ public class DataBaseController : Singleton<DataBaseController>
             {ParamType.MPower, "Magic power" },
             {ParamType.PPower, "Physical power" },
         };
+        questTypeNames = new Dictionary<QuestLogicType, string>();
+        questTypeNames.Add(QuestLogicType.killName, "Kill monster");
+        questTypeNames.Add(QuestLogicType.killLowHp, "On Low HP");
+        questTypeNames.Add(QuestLogicType.killDistance, "On Distance");
+        questTypeNames.Add(QuestLogicType.killCrossbow, "With Crossbow");
+        questTypeNames.Add(QuestLogicType.killTalisman, "Use talisman");
+        questTypeNames.Add(QuestLogicType.collectGold, "Collect Gold");
+        questTypeNames.Add(QuestLogicType.collectReource,"Collect resource" );
+        questTypeNames.Add(QuestLogicType.killOvercharged, "Kill bit moster");
+        questTypeNames.Add(QuestLogicType.getDamage,"Get damage" );
     }
 
 
@@ -118,10 +150,10 @@ public class DataBaseController : Singleton<DataBaseController>
     {
         RespawnPositionsNames = new Dictionary<int, Dictionary<int, string>>();
         RespawnPositionsNames.Add(0,new Dictionary<int, string>() { {1,"Trainings"} });
-        RespawnPositionsNames.Add(1,new Dictionary<int, string>() { {1,"Trainings"} });
+        RespawnPositionsNames.Add(1,new Dictionary<int, string>() { {1,"Outskirts"}, { 2, "Thicket" } });
         RespawnPositionsNames.Add(2, new Dictionary<int, string>() { { 1, "Plants" } , { 2, "Lake" } , { 3, "Fields" } , { 4, "Town" } });
         RespawnPositionsNames.Add(3, new Dictionary<int, string>() { { 1, "Gate" } , { 2, "FirstQuart" } , { 3, "Shop" } , { 4, "Church" } });
-        MissionNames = new Dictionary<int, string>() { { 0, "Debug" }, { 1, "Tutorial" }, { 2, "Forest" }, { 3, "Village" } } ;
+        MissionNames = new Dictionary<int, string>() { { 0, "Tutorial" }, { 1, "Mines" }, { 2, "Forest" }, { 3, "Village" } } ;
         for (int i = 0; i < DataStructs.MISSION_LAST_INDEX+1; i++)
         {
             var pos = DataStructs.GetRespawnPointsCountByMission(i);

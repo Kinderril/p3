@@ -88,7 +88,7 @@ public class Map : Singleton<Map>
         TimeUtils.StartMeasure("LOAD QUESTS");
         DebugController.Instance.InfoField2.text = allInfo;
 
-        var questsPositions = appearPos.RandomElement(4);
+        var questsPositions = appearPos.RandomElement(levelObject.QuestCount);
         LoadQuests(questsPositions);
 
 
@@ -135,7 +135,7 @@ public class Map : Singleton<Map>
     public void LoadBoss()
     {
 
-        BossSpawner = new BossSpawner(enemies.Count, OnSpawnBoss);
+        BossSpawner = new BossSpawner(enemies.Count, OnSpawnBoss,levelMainObject.PrecentMonsterToBoss_0_1);
         if (bossBonusMapElement != null)
         {
             foreach (Transform tr in bossBonusMapElement)
@@ -323,7 +323,8 @@ public class Map : Singleton<Map>
     public void DestroyLevel()
     {
         SceneManager.UnloadScene("Level" + level.MissionIndex);
-        Destroy(levelMainObject.gameObject);
+        if (levelMainObject != null)
+            Destroy(levelMainObject.gameObject);
     }
 
     private void OnEnemyDead(Unit obj)

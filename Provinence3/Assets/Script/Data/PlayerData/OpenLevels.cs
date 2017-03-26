@@ -32,9 +32,27 @@ public class OpenLevels
         }
     }
 
-    public void CompleteTutorial()
+    public void DebugOpenAllLevels()
     {
-        opendLevels.Add(1);
+        MainController.Instance.PlayerData.IsTutorialComplete = true;
+        for (int i = 0; i < 4; i++)
+        {
+            OpenLevel(i,false);
+        }
+    }
+
+    public void OpenLevel(int index,bool withPay)
+    {
+        if (withPay)
+        {
+            var cost = DataBaseController.Instance.LevelsCost[index];
+            MainController.Instance.PlayerData.Pay(ItemId.crystal, cost.Crystals);
+        }
+
+        if (!opendLevels.Contains(index))
+        {
+            opendLevels.Add(index);
+        }
         foreach (var opendLevel in opendLevels)
         {
             List<int> places;
@@ -48,6 +66,12 @@ public class OpenLevels
             }
         }
         Save();
+
+    }
+
+    public void CompleteTutorial()
+    {
+        OpenLevel(1,false);
     }
     
     public void Save()
@@ -115,5 +139,37 @@ public class OpenLevels
         }
         Save();
     }
+
+    public bool CanOpenLevel(int index)
+    {
+        if (opendLevels.Contains(index))
+        {
+            return false;
+        }
+
+        if (!DataBaseController.Instance.LevelsCost.ContainsKey(index))
+        {
+            return false;
+        }
+
+        var cost = DataBaseController.Instance.LevelsCost[index];
+//        var canPay = MainController.Instance.PlayerData.CanPay(ItemId.crystal, cost.Crystals);
+        var haveLevel = MainController.Instance.PlayerData.Level >= cost.PlayerLevel;
+        return haveLevel;
+    }
+
+
 }
 
+public struct LevelConst
+{
+    public LevelConst(int Crystals, int PlayerLevel)
+    {
+        this.Crystals = Crystals;
+        this.PlayerLevel = PlayerLevel;
+    }
+
+    public int Crystals;
+    public int PlayerLevel;
+
+}

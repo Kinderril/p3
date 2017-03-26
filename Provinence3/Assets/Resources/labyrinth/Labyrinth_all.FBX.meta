@@ -1,0 +1,312 @@
+fileFormatVersion: 2
+guid: 932be93456854b944a8be5f3c3e890ac
+timeCreated: 1487573381
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: arc
+    100002: arc_003
+    100004: arc_2
+    100006: arc_big
+    100008: arc_corner
+    100010: arc_cross
+    100012: arc_triple
+    100014: arc_with door
+    100016: balc
+    100018: Box001
+    100020: Box002
+    100022: cell
+    100024: coffin
+    100026: coffin_cover
+    100028: column
+    100030: column_arc1
+    100032: column_arc2
+    100034: column_arc_full
+    100036: column_big
+    100038: column_broken
+    100040: column_small
+    100042: construct
+    100044: Cylinder001
+    100046: Door
+    100048: door
+    100050: floor
+    100052: floor002
+    100054: floor003
+    100056: floor_z_1
+    100058: floor_z_2
+    100060: //RootNode
+    100062: perekr
+    100064: shield
+    100066: Stair
+    100068: stone002
+    100070: stone01
+    100072: sword
+    100074: top
+    100076: top 1
+    100078: top_z
+    100080: Tube001
+    100082: wall
+    100084: wall_corner
+    100086: wall_doored
+    100088: wall_end
+    100090: wall_long
+    100092: wall_long_broken
+    100094: wall_short
+    100096: wall_windowed
+    400000: arc
+    400002: arc_003
+    400004: arc_2
+    400006: arc_big
+    400008: arc_corner
+    400010: arc_cross
+    400012: arc_triple
+    400014: arc_with door
+    400016: balc
+    400018: Box001
+    400020: Box002
+    400022: cell
+    400024: coffin
+    400026: coffin_cover
+    400028: column
+    400030: column_arc1
+    400032: column_arc2
+    400034: column_arc_full
+    400036: column_big
+    400038: column_broken
+    400040: column_small
+    400042: construct
+    400044: Cylinder001
+    400046: Door
+    400048: door
+    400050: floor
+    400052: floor002
+    400054: floor003
+    400056: floor_z_1
+    400058: floor_z_2
+    400060: //RootNode
+    400062: perekr
+    400064: shield
+    400066: Stair
+    400068: stone002
+    400070: stone01
+    400072: sword
+    400074: top
+    400076: top 1
+    400078: top_z
+    400080: Tube001
+    400082: wall
+    400084: wall_corner
+    400086: wall_doored
+    400088: wall_end
+    400090: wall_long
+    400092: wall_long_broken
+    400094: wall_short
+    400096: wall_windowed
+    2300000: arc
+    2300002: arc_003
+    2300004: arc_2
+    2300006: arc_big
+    2300008: arc_corner
+    2300010: arc_cross
+    2300012: arc_triple
+    2300014: arc_with door
+    2300016: balc
+    2300018: Box001
+    2300020: Box002
+    2300022: cell
+    2300024: coffin
+    2300026: coffin_cover
+    2300028: column
+    2300030: column_arc1
+    2300032: column_arc2
+    2300034: column_arc_full
+    2300036: column_big
+    2300038: column_broken
+    2300040: column_small
+    2300042: construct
+    2300044: Cylinder001
+    2300046: Door
+    2300048: door
+    2300050: floor
+    2300052: floor002
+    2300054: floor003
+    2300056: floor_z_1
+    2300058: floor_z_2
+    2300060: perekr
+    2300062: shield
+    2300064: Stair
+    2300066: stone002
+    2300068: stone01
+    2300070: sword
+    2300072: top 1
+    2300074: top_z
+    2300076: Tube001
+    2300078: wall
+    2300080: wall_corner
+    2300082: wall_doored
+    2300084: wall_end
+    2300086: wall_long
+    2300088: wall_long_broken
+    2300090: wall_short
+    2300092: wall_windowed
+    3300000: arc
+    3300002: arc_003
+    3300004: arc_2
+    3300006: arc_big
+    3300008: arc_corner
+    3300010: arc_cross
+    3300012: arc_triple
+    3300014: arc_with door
+    3300016: balc
+    3300018: Box001
+    3300020: Box002
+    3300022: cell
+    3300024: coffin
+    3300026: coffin_cover
+    3300028: column
+    3300030: column_arc1
+    3300032: column_arc2
+    3300034: column_arc_full
+    3300036: column_big
+    3300038: column_broken
+    3300040: column_small
+    3300042: construct
+    3300044: Cylinder001
+    3300046: Door
+    3300048: door
+    3300050: floor
+    3300052: floor002
+    3300054: floor003
+    3300056: floor_z_1
+    3300058: floor_z_2
+    3300060: perekr
+    3300062: shield
+    3300064: Stair
+    3300066: stone002
+    3300068: stone01
+    3300070: sword
+    3300072: top 1
+    3300074: top_z
+    3300076: Tube001
+    3300078: wall
+    3300080: wall_corner
+    3300082: wall_doored
+    3300084: wall_end
+    3300086: wall_long
+    3300088: wall_long_broken
+    3300090: wall_short
+    3300092: wall_windowed
+    4300000: wall
+    4300002: column
+    4300004: column_arc1
+    4300006: column_arc2
+    4300008: column_arc_full
+    4300010: wall_doored
+    4300012: construct
+    4300014: floor_z_1
+    4300016: floor_z_2
+    4300018: top_z
+    4300020: balc
+    4300022: perekr
+    4300024: wall_windowed
+    4300026: Door
+    4300028: floor
+    4300030: floor002
+    4300032: wall_long
+    4300034: wall_short
+    4300036: wall_end
+    4300038: column_small
+    4300040: column_big
+    4300042: wall_corner
+    4300044: arc
+    4300046: arc_with door
+    4300048: door
+    4300050: column_broken
+    4300052: Cylinder001
+    4300054: Box001
+    4300056: Stair
+    4300058: floor003
+    4300060: top
+    4300062: Box002
+    4300064: arc_2
+    4300066: stone01
+    4300068: stone002
+    4300070: arc_003
+    4300072: wall_long_broken
+    4300074: coffin
+    4300076: coffin_cover
+    4300078: arc_big
+    4300080: arc_corner
+    4300082: arc_triple
+    4300084: arc_cross
+    4300086: Tube001
+    4300088: cell
+    4300090: shield
+    4300092: sword
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

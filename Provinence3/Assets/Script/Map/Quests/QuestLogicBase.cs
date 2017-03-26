@@ -20,8 +20,10 @@ public enum QuestLogicType
 
 public abstract class QuestLogicBase
 {
+    public QuestDifficulty Difficulty;
     public QuestGiver QuestGiver;
     protected int targetCount;
+    public QuestLogicType LogicType;
     protected int currentCount;
     protected Action<int, int> OnQuestProgressChange;
     public QuestLogicBase(QuestGiver QuestGiver, int targetCount, Action<int, int> OnQuestProgressChange)
@@ -62,5 +64,15 @@ public abstract class QuestLogicBase
     protected string DifficultyStr()
     {
         return "\n Diffictulty" + QuestGiver.Difficulty.ToString();
+    }
+
+    public void SetType(QuestLogicType typ)
+    {
+        LogicType = typ;
+    }
+
+    public void SetDiff(QuestDifficulty diff)
+    {
+        Difficulty = diff;
     }
 }

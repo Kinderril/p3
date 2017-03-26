@@ -36,13 +36,14 @@ public class QuestGiver : MonoBehaviour
     public GameObject blockStatus;
     public LevelQuestController Controller;
     public int id;
-    public QuestLogicType type;
+//    public QuestLogicType type;
     public QuestStatus QuestStatus = QuestStatus.free;
     public QuestStatus OldStatus = QuestStatus.free;
     public event Action<QuestGiver> OnDestroyGiver;
     public event Action<int, int> OnQuestProgressChange; 
-    private QuestDifficulty difficulty;
+//    private QuestDifficulty difficulty;
     public BaseEffectAbsorber GetRewardEffect;
+    public BaseEffectAbsorber TakeQuestEffect;
     private QuestLogicBase logic;
 
     public QuestStatus Status
@@ -64,7 +65,7 @@ public class QuestGiver : MonoBehaviour
 
     public QuestDifficulty Difficulty
     {
-        get { return difficulty; }
+        get { return Logic.Difficulty; }
     }
 
     public void Init(LevelQuestController controller)
@@ -72,7 +73,6 @@ public class QuestGiver : MonoBehaviour
         freeStatus.gameObject.SetActive(false);
         readyStatus.gameObject.SetActive(false);
         this.Controller = controller;
-        difficulty = Formuls.RandomQuestDifficulty();
         Utils.GroundTransform(transform);
         Status = QuestStatus.free;
 
@@ -85,7 +85,14 @@ public class QuestGiver : MonoBehaviour
             var monster = other.GetComponent<Hero>();
             if (monster != null)
             {
-                Controller.Check(this);
+                var started = Controller.Check(this);
+                if (started)
+                {
+                    if (TakeQuestEffect != null)
+                    {
+                        TakeQuestEffect.Play();
+                    }
+                }
             }
         }
     }
@@ -95,14 +102,9 @@ public class QuestGiver : MonoBehaviour
         if (Status != QuestStatus.ready && Status != QuestStatus.end)
         {
             Status = QuestStatus.ready;
-            Controller.Check(this);
+            var started = Controller.Check(this);
         }
-//        if (StatusMessage == QuestStatus.started)
-//        {
-//            StatusMessage = QuestStatus.ready;
-//            Controller.Ready(this);
-//            logic.Clear();
-//        }
+
     }
 
     public bool IsReady()
@@ -112,7 +114,7 @@ public class QuestGiver : MonoBehaviour
 
     public void Reward(Level level,Action<QuestGiver> callback )
     {
-        var rewardType = Formuls.RandomQuestReward(difficulty);
+        var rewardType = Formuls.RandomQuestReward(Logic.Difficulty);
         var levelDif = Controller.Level.difficult;
 #if UNITY_EDITOR
         if (DebugController.Instance.QUEST_REWARD_ITEM)
@@ -127,7 +129,7 @@ public class QuestGiver : MonoBehaviour
             case QuestRewardType.money:
                 float c = UnityEngine.Random.Range(3f, 5f);
                 var gold = Formuls.GoldInChest(levelDif);
-                switch (difficulty)
+                switch (Logic.Difficulty)
                 {
                     case QuestDifficulty.easy:
                         diffCoef = 0.6f;
@@ -140,7 +142,7 @@ public class QuestGiver : MonoBehaviour
                 break;
             case QuestRewardType.materials:
                 float r = UnityEngine.Random.Range(4f, 6f);
-                switch (difficulty)
+                switch (Logic.Difficulty)
                 {
                     case QuestDifficulty.easy:
                         diffCoef = 0.6f;
@@ -153,7 +155,7 @@ public class QuestGiver : MonoBehaviour
                 Controller.Level.AddItem(craftType, (int)(r* diffCoef));
                 break;
             case QuestRewardType.crystal:
-                switch (difficulty)
+                switch (Logic.Difficulty)
                 {
                     case QuestDifficulty.easy:
                         diffCoef = 0.6f;
@@ -166,13 +168,14 @@ public class QuestGiver : MonoBehaviour
                 Controller.Level.AddItem(ItemId.crystal, (int)(cr * diffCoef));
                 break;
             case QuestRewardType.item:
-                GiftType giftType = Formuls.CalcGiftType(difficulty);
+                GiftType giftType = Formuls.CalcGiftType(Logic.Difficulty);
                 Controller.Level.AddRandomGift(true, giftType);
                 break;
         }
         Status = QuestStatus.end;
         if (GetRewardEffect != null)
         {
+            GetRewardEffect.transform.position = MainController.Instance.level.MainHero.transform.position;
             GetRewardEffect.Play();
         }
         if (callback != null)
@@ -191,7 +194,8 @@ public class QuestGiver : MonoBehaviour
     {
         Status = QuestStatus.started;
         float coef = 1;
-        switch (difficulty)
+        var diff = Formuls.RandomQuestDifficulty();
+        switch (diff)
         {
             case QuestDifficulty.easy:
                 coef = 0.6f;
@@ -252,7 +256,8 @@ public class QuestGiver : MonoBehaviour
                 logic = new QuestGetDamage(this,500, OnQuestProgressChange);
                 break;
         }
-
+        logic.SetType(typ);
+        logic.SetDiff(diff);
         Debug.Log("Quest Activated");
 //        logic = new MonsterKillOvercharged(this, 5, OnQuestProgressChange);
         if (callback != null && logic != null)

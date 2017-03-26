@@ -133,7 +133,7 @@ public class BaseMonster : Unit
         }
     }
 
-    private void DropItems()
+    protected virtual void DropItems()
     {
         CheckDrop(true, ParametersScriptable.DropItem);
         CheckDrop(false, ParametersScriptable.DropItem);

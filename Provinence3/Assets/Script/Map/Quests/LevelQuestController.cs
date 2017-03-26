@@ -9,7 +9,7 @@ public class LevelQuestController
 {
     private QuestGiver currentActiveQuest;
     private int totalQuests;
-    private List<int> finishedQuests = new List<int>(); 
+    private List<QuestLogicBase> finishedQuests = new List<QuestLogicBase>(); 
     private List<QuestGiver> Quests = new List<QuestGiver>();
     public Level Level;
     public Action<QuestGiver> OnQuestStatusChanges; 
@@ -24,6 +24,16 @@ public class LevelQuestController
         {
             AllQuestsTypes.Add(a);
         }
+    }
+
+    public List<QuestLogicBase> FinishedQuests
+    {
+        get { return finishedQuests; }
+    }
+
+    public QuestGiver CurrentActiveQuest
+    {
+        get { return currentActiveQuest; }
     }
 
     public int CompletedQuests()
@@ -66,12 +76,14 @@ public class LevelQuestController
         }
     }
 
-    public void Check(QuestGiver questGiver)
+    public bool Check(QuestGiver questGiver)
     {
+        bool started = false;
         if (currentActiveQuest == null)
         {
-            if (!finishedQuests.Contains(questGiver.id))
+            if (!finishedQuests.Contains(questGiver.Logic))
             {
+                started = true;
                 Start(questGiver);
 #if UNITY_EDITOR
                 if (DebugController.Instance.QUEST_COMPLETE)
@@ -91,11 +103,13 @@ public class LevelQuestController
                 }
             }
         }
+        return started;
     }
 
     private void End(QuestGiver questGiver)
     {
         currentActiveQuest = null;
+        finishedQuests.Add(questGiver.Logic);
         questGiver.Reward(Level, giver =>
         {
             questsCompleted++;

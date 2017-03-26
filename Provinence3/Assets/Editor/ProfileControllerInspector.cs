@@ -68,6 +68,15 @@ public class ProfileControllerInspector : EditorWindow
                 }
 
             }
+            if (GUILayout.Button("Open all level"))
+            {
+                MainController.Instance.PlayerData.OpenLevels.DebugOpenAllLevels();
+
+            }
+            if (GUILayout.Button("Tutor complete"))
+            {
+                MainController.Instance.PlayerData.TutorEnd();
+            }
         }
     }
 

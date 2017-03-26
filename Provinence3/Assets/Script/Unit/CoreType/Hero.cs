@@ -22,20 +22,8 @@ public class Hero : Unit
     public ArrowTarget ArrowTarget;
     private ShootContainer shootContainer;
     private RotateContainer rotateContainer;
+    public IEnumerable<BonusItem> Bonuses;
 
-
-//    public float CurrenthBonus
-//    {
-//        get { return currenthBonus; }
-//        set
-//        {
-//            currenthBonus = value;
-//            if (CurrentBonusUpdateX != null)
-//            {
-//                CurrentBonusUpdateX( currenthBonus );
-//            }
-//        }
-//    }
 
     public void Init(Level lvl)
     {
@@ -43,12 +31,12 @@ public class Hero : Unit
         var playerData = MainController.Instance.PlayerData;
         var allWeared = playerData.GetAllWearedItems();
         var notBonuses = allWeared.Where(x => x.Slot != Slot.bonus);
-        var bonuses = allWeared.Where(x => x.Slot == Slot.bonus);
+        Bonuses = allWeared.Where(x => x.Slot == Slot.bonus).Select(x=>x as BonusItem);
         foreach (var allWearedItem in notBonuses)
         {
             allWearedItem.Activate(this, lvl);
         }
-        foreach (var bonuseItem in bonuses)
+        foreach (var bonuseItem in Bonuses)
         {
             bonuseItem.Activate(this, lvl);
         }
@@ -246,7 +234,7 @@ public class Hero : Unit
         if (!IsDead)
         {
             base.Death();
-            MainController.Instance.EndLevel(EndlevelType.bad);
+            MainController.Instance.level.PreEndLevel(EndlevelType.bad);
         }
     }
     

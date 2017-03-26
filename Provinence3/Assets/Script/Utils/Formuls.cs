@@ -19,7 +19,7 @@ public class Formuls
     private const int base_gold_chest = 109;
     private const int base_monster_gold = 23;
 
-    public static int LevelGoldAv(float lvl)
+    public static int LevelGoldAv(float lvl)//Среднее кол во золота получаемого на уровне
     {
         return av_mosters_kills* GoldInMonster(lvl) + av_chestes*GoldInChest(lvl);
     }
@@ -29,9 +29,9 @@ public class Formuls
         return 15 + index;
     }
 
-    public static int LevelUpCost(int index)
+    public static int LevelUpCost(int index) //Цена лвлАпа
     {
-        return (1 + index) * LevelGoldAv(index) / 2;
+        return (int)((2.5f + index) * LevelGoldAv(index) / 1.5f);
     }
 
     public static float ModifyBossHP(BossUnit boss,int bonuses)

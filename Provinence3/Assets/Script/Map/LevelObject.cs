@@ -15,7 +15,9 @@ public class LevelObject : MonoBehaviour
     public Terrain Terrain;
     public float GlobalFogLevel = 31;
     public float GlobalFogDiff = 1.7f;
+    public float PrecentMonsterToBoss_0_1 = 0.25f;
     public event Action<Hero> OnInited;
+    public int QuestCount = 5;
 
     public void Init(Hero hero)
     {
@@ -35,7 +37,6 @@ public class LevelObject : MonoBehaviour
 
     public void UpdateByMap()
     {
-
         foreach (var dynamicElement in DynamicElements)
         {
             dynamicElement.UpdateByMap();

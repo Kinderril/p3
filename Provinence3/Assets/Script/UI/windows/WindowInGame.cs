@@ -25,19 +25,27 @@ public class WindowInGame : BaseWindow
     public WindowPause WindowPause;
     public QuestInfo QuestActive;
     private Level level;
+    public Text EndGameText;
     public FaderWindow FaderWindow;
 
     public override void Init<T>(T obj)
     {
-//        WindowManager.Instance.MainBack.gameObject.SetActive(false);
         base.Init(obj);
         FaderWindow.Open();
         ClearTransform(TalismanButtonsLayout);
         level = obj as Level;
-        var tutor = level.levelObject.GetComponent<TutorialLevel>();
-        if (tutor != null)
+        var isTutorComplete = MainController.Instance.PlayerData.IsTutorialComplete;
+        if (!isTutorComplete)
         {
-            MainTutorialWindow.Init(tutor);
+            var tutor = level.levelObject.GetComponent<TutorialLevel>();
+            if (tutor != null)
+            {
+                MainTutorialWindow.Init(tutor);
+            }
+        }
+        else
+        {
+            MainTutorialWindow.gameObject.SetActive(false);
         }
         moneyField.Init(0,3600);
         UiControls.Init(level);
@@ -53,6 +61,7 @@ public class WindowInGame : BaseWindow
             Map.Instance.BossSpawner.OnBossGetEnergy += OnBossGetEnergy;
         });
         level.OnEndLevel += OnEndLevel;
+        level.OnPreEndLevel += OnPreEndLevel;
         level.QuestController.OnQuestStatusChanges += OnQuestStatusChanges;
         level.QuestController.OnQuestProgress += OnQuestProgress;
         level.OnPause += OnPause;
@@ -84,9 +93,25 @@ public class WindowInGame : BaseWindow
         MonsterInfo.Init();
     }
 
+    private void OnPreEndLevel(EndlevelType type )
+    {
+        string txt;
+        if (type == EndlevelType.good)
+        {
+            txt = "Good job!";
+        }
+        else
+        {
+            txt = "You are dead";
+        }
+        EndGameText.text = txt;
+        UiControls.Enable(false);
+        FaderWindow.Close();
+    }
+
     private void OnEndLevel()
     {
-        FaderWindow.Close();
+
     }
 
     private void OnQuestProgress(QuestGiver arg1, int cur, int trg)
@@ -185,6 +210,7 @@ public class WindowInGame : BaseWindow
         level.Energy.OnRage -= OnRage;
         level.OnItemCollected -= OnItemCollected;
         level.MainHero.OnGetHit -= OnHeroHit;
+        level.OnPreEndLevel -= OnPreEndLevel;
         level.MainHero.OnWeaponChanged -= OnWeaponChanged;
         level.OnCraftItemCollected -= OnCraftItemCollected;
         ClearTransform(TalismanButtonsLayout);
@@ -235,7 +261,7 @@ public class WindowInGame : BaseWindow
         else if (delta <=-1)
         {
             number = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
-            color =  DataBaseController.Instance.GetColor(ItemId.health);
+            color =  DataBaseController.Instance.DataStructs.HeroHeathColor;
         }
         if (number != null)
         {
@@ -244,6 +270,11 @@ public class WindowInGame : BaseWindow
             number.Init(GetDeltaStr(delta), color);
         }
         HealthSlider.value = cur_HP / maxHp;
+    }
+
+    public void EndLevelClick()
+    {
+        MainController.Instance.EndLevel();
     }
 
     private void OnLeft(float arg1, float arg2)

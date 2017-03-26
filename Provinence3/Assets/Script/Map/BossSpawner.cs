@@ -12,14 +12,14 @@ public class BossSpawner
     private Action<int> OnSpawnBoss;
     public event Action<int, int> OnBossGetEnergy;
     private bool isBossSpawned = false;
-    private float PRECENT_TO_KILL = 0.13f;
+//    private float PRECENT_TO_KILL = 0.13f;
     private int bonusesGet = 0;
 
-    public BossSpawner(int count, Action<int> SpawnBoss)
+    public BossSpawner(int count, Action<int> SpawnBoss,float precentToKill )
     {
         enemiesKilled = 0;
         OnSpawnBoss = SpawnBoss;
-        ToSpawnBossOnStart =(int)(count * PRECENT_TO_KILL );
+        ToSpawnBossOnStart =(int)(count * precentToKill );
 #if UNITY_EDITOR
         if (DebugController.Instance.LESS_COUNT_BOSS_COME)
         {
