@@ -10,6 +10,7 @@ public class ListBaseEffectAbsorber : BaseEffectAbsorber
     {
         foreach (var absorber in list)
         {
+            absorber.gameObject.SetActive(true);
             absorber.Play();
         }
     }

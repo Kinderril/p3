@@ -15,7 +15,7 @@ public class FlyNumberWIthDependence : PoolElement
     {
         var fn = DataBaseController.Instance.Pool.GetItemFromPool<FlyNumberWIthDependence>(PoolType.flyNumberInGame);
         fn.transform.SetParent(WindowManager.Instance.CurrentWindow.TopPanel.transform);
-        fn.Init(tr, str, Color.red);
+        fn.Init(tr, str, DataBaseController.Instance.DataStructs.MonsterHeathColor);
         return fn;
     }
 

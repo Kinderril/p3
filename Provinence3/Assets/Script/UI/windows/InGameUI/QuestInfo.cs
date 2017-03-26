@@ -10,6 +10,8 @@ public class QuestInfo : MonoBehaviour
 {
     public Text ProgressField;
     public GameObject ReadyGameObject;
+    public GameObject IsReady;
+    public Text Type;
 
     public void SetProgress(int cur, int trg)
     {

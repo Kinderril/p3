@@ -40,7 +40,7 @@ public class DifficultyChooser : MonoBehaviour
         CurDif.text = curLvl.ToString("0");
         var p = Level.GetPenalty(curLvl);
         PenaltyText.gameObject.SetActive(p <1f);
-        PenaltyText.text = "Gold Penalty is:" + ((1f-p)*100f).ToString("00") + "%";
+        PenaltyText.text = "Penalty:" + ((1f-p)*100f).ToString("00") + "%";
         OnDifChanges(curLvl);
     }
 }

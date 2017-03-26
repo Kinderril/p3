@@ -12,6 +12,7 @@ public class MainTutorialWindow : MonoBehaviour
 
     public void Init(TutorialLevel tutorialLevel)
     {
+        gameObject.SetActive(true);
         this.tutorialLevel = tutorialLevel;
         tutorialLevel.OnManecenKilled += OnManecenKilled;
         tutorialLevel.OnTutorialChange += OnTutorialChange;

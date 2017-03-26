@@ -12,19 +12,25 @@ public class PreStartWindow : MonoBehaviour
     public Text FieldLevel;
     public Text Difficulty;
     public Text Startpoint;
-    public Text MonsterCountField;
-    public Text ActiveBonuses;
+    public Transform BonusLayout;
+    public BonusItemView PrefaBonusItemView;
     public void Init(Level level,Action callback)
     {
+        Utils.ClearTransform(BonusLayout);
         gameObject.SetActive(true);
         this.callback = callback;
-//        DataBaseController.Instance.name
+        var bonuses = level.MainHero.Bonuses;
+        BonusLayout.gameObject.SetActive(bonuses.Any());
+        foreach (var bonusItem in bonuses)
+        {
+            var item = DataBaseController.GetItem<BonusItemView>(PrefaBonusItemView);
+            item.transform.SetParent(BonusLayout, false);
+            item.Init(bonusItem);
+        }
         FieldLevel.text = DataBaseController.Instance.MissionNames[level.MissionIndex];
         var names = DataBaseController.Instance.RespawnPositionsNames[level.MissionIndex];
         Difficulty.text = "Difficulty:"+level.difficult.ToString();
         Startpoint.text = names[level.IndexBornPoint];
-        MonsterCountField.text = "Monsters:"+Map.Instance.enemies.Count.ToString();
-//        if (level.MainHero.CurrenthBonus)
 
     }
 
