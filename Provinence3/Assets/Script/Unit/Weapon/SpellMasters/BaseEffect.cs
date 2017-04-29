@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 
 
@@ -206,11 +205,11 @@ public class BaseEffect
         var dur = "";
         if (Duration == 0f)
         {
-            dur = "instant";
+            dur = " instant ";
         }
         else
         {
-            dur = "for " + Duration.ToString("0.00");
+            dur = " for " + Duration.ToString("0.00");
         }
 
         switch (Spectial)
@@ -219,7 +218,7 @@ public class BaseEffect
                 spc += "Do stun effect for " + Duration.ToString("0.00");
                 break;
             case EffectSpectials.none:
-                spc = "Affect on " + SubEffectData.ParamType + evt + " " + dur;
+                spc = "Affect on " + SubEffectData.ParamType +"  "+ SubEffectData.Value + "  " + evt + " " + dur;
                 break;
         }
         switch (Spectial)

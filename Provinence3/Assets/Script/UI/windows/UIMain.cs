@@ -261,8 +261,6 @@ public class UIMain : MonoBehaviour//,IPointerDownHandler,IPointerUpHandler
     {
         if (enable)
             mainHero.MoveToDirection(dir);
-        //        debugText.text = "vel:" + mainHero.Control.Velocity + "  dir:" + dir;
-
     }
 
     public void Enable(bool val)

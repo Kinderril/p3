@@ -10,9 +10,9 @@ public class HeroShopArmor : HeroShopRandomItem
     {
         var slots = new WDictionary<Slot>(new Dictionary<Slot, float>()
         {
-            { Slot.body,4f },
-            { Slot.helm, 4f },
-            { Slot.Talisman, 2f },
+            { Slot.body,11f },
+            { Slot.helm, 11f },
+            { Slot.Talisman, 1f },
         });
         var slot = slots.Random();
         base.Execute(level,slot);

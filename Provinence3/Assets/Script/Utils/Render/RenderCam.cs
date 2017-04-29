@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,8 @@ using UnityEngine.UI;
 public enum RenderSlotType
 {
     back,
-    bot,mid,top
+    bot,mid,top,
+    frame
 }
 
 public class RenderCam : Singleton<RenderCam>
@@ -18,6 +20,7 @@ public class RenderCam : Singleton<RenderCam>
     public Image topImage;
     public Image midImage;
     public Image botImage;
+    public Image frameImage;
     private RenderTexture RenderTexture;
     private int lastId;
     private const string key = "lastIDKey";
@@ -36,6 +39,8 @@ public class RenderCam : Singleton<RenderCam>
         RenderImage(slot, RenderSlotType.bot, botImage);
         RenderImage(slot, RenderSlotType.mid, midImage);
         RenderImage(slot, RenderSlotType.top, topImage);
+        RenderImage(slot, RenderSlotType.frame, frameImage);
+
         var fileName = Application.persistentDataPath + "/imagePic" + lastId + ".png";
         var pngTex = RenderImpl(RenderCamera, RenderTexture,fileName);
         lastId++;
@@ -65,16 +70,24 @@ public class RenderCam : Singleton<RenderCam>
 
     private void RenderImage(Slot slot, RenderSlotType type,Image img)
     {
-        int randBot = UnityEngine.Random.Range(0, 2);
-        string path;
-        if (type == RenderSlotType.back)
+        int randBot = UnityEngine.Random.Range(0, 3);
+        string path = "";
+        switch (type)
         {
-            path = baseway + type.ToString() + "/" + randBot;
+            case RenderSlotType.back:
+                path = baseway + type.ToString() + "/" + randBot;
+                break;
+            case RenderSlotType.bot:
+            case RenderSlotType.mid:
+            case RenderSlotType.top:
+                path = baseway + slot.ToString() + "/" + type.ToString() + "/" + randBot;
+                break;
+            case RenderSlotType.frame:
+                path = baseway +  "frame/" + randBot;
+
+                break;
         }
-        else
-        {
-            path = baseway + slot.ToString() + "/" + type.ToString() + "/" + randBot;
-        }
+        
         var res = Resources.Load<Sprite>(path);
         img.sprite = res;
 

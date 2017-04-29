@@ -132,7 +132,7 @@ public class BaseBullet
         var targted = BaseBulletTarget == BaseBulletTarget.homing ? "Homing" : "Targeted";
         var bulletInfo = bulletsCount > 1 ? " bullets" : " bullet";
 
-        string effects = Effect.Aggregate("", (current, baseEffect) => current + baseEffect.Desc());
+        string effects = Effect.Aggregate("", (current, baseEffect) => current + " <> " + baseEffect.Desc());
 
         return targted + bulletInfo + radius +"." + effects;
         

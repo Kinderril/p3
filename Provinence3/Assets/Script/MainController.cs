@@ -12,6 +12,7 @@ public enum MainState
     shop,
     end,
     loading,
+    statistics,
 }
 
 public class MainController : Singleton<MainController>

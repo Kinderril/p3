@@ -35,8 +35,9 @@ public static class SpellMerger
         var core = (new List<SpellCoreType>() { spell1.SpellCoreType, spell2.SpellCoreType }).RandomElement();
         var charges = UnityEngine.Random.Range(spell1.Charges, spell2.Charges);
         var cost = UnityEngine.Random.Range(spell1.Cost, spell2.Cost);
+        var bulletCnt = UnityEngine.Random.Range(spell1.BulletCount, spell2.BulletCount);
 
-        BaseSpell resultSpell = new BaseSpell(start, end, core, charges, cost);
+        BaseSpell resultSpell = new BaseSpell(start, end, core, charges, cost, bulletCnt, level);
         switch (core)
         {
             case SpellCoreType.Summon:
@@ -56,10 +57,7 @@ public static class SpellMerger
 
         BaseBullet bullet = new BaseBullet(spell1.Bullet, spell2.Bullet, resultSpell);
         resultSpell.Bullet = bullet;
-        resultSpell.Level = level;
-
-
-
+        
         //Если коллайдера нету и мы не самонаводящиеся пуля то все очень плохо)
         if (bullet.BulletColliderType == BulletColliderType.noOne &&
             resultSpell.TargetType == SpellTargetType.LookDirection)
@@ -127,6 +125,10 @@ public static class SpellMerger
     private static float SubPower(BaseSpell spell)
     {
         BaseBullet bullet = spell.Bullet;
+        if (spell.BulletCount == 0)
+        {
+            Debug.LogError("Spell bullets count 0");
+        }
         var cnt = spell.BulletCount;
         float summonCoef = 1f;
         if (spell.BaseSummon != null)

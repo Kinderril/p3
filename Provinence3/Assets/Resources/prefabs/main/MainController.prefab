@@ -65,8 +65,11 @@ MonoBehaviour:
   - {fileID: 11465162, guid: 3f1637189313f7e40b42cbba9ac58c46, type: 2}
   - {fileID: 11450574, guid: 13f06168c668d0044981699762ed6652, type: 2}
   - {fileID: 114784697418096206, guid: 1eb6bcfc71819844aa1164b6aeb0180b, type: 2}
+  - {fileID: 114509874695324910, guid: 4d4e285e1ddc62b4497d4fdcf36cb0d8, type: 2}
   BossUnits:
   - {fileID: 11408556, guid: bb08f8bde5e25184c9a36dfd5b115b75, type: 2}
+  - {fileID: 114214371569564636, guid: 03bbb2fa9651c1f42ad6133ab41a2c91, type: 2}
+  - {fileID: 114867029932564636, guid: 2deb1e134a8aae44ca0e0475a8436653, type: 2}
   prefabHero: {fileID: 11487600, guid: fc190c4abdb826a49a92ed5e58aee7d5, type: 2}
   Weapons: []
   simpleShader: {fileID: 4800000, guid: ddb4b51e989d86948b2f508f4e61ef74, type: 3}
@@ -96,6 +99,8 @@ MonoBehaviour:
   - state: 6
     window: {fileID: 0}
   - state: 5
+    window: {fileID: 0}
+  - state: 7
     window: {fileID: 0}
   MainCamera: {fileID: 0}
   SubCamera: {fileID: 0}
@@ -153,15 +158,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ALL_TIME_DROP: 0
   ALL_TALISMAN_CHARGED: 0
-  MAIN_HERO_MEGAHP: 0
-  LESS_COUNT_BOSS_COME: 0
+  MAIN_HERO_MEGAHP: 1
+  LESS_COUNT_BOSS_COME: 1
   GET_START_BOOST: 0
-  GET_ALL_TYPE_WEAPONS_BOOST: 1
+  GET_ALL_TYPE_WEAPONS_BOOST: 0
   RESPAWN_TIME_CREEPS_FAST: 0
   ALWAYS_GOOD_END: 0
   CHANCE_STUN_100: 0
   QUEST_REWARD_ITEM: 0
-  QUEST_COMPLETE: 0
+  QUEST_COMPLETE: 1
   InfoField1: {fileID: 0}
   InfoField2: {fileID: 0}
 --- !u!1001 &100100000

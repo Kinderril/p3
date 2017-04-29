@@ -65,7 +65,7 @@ MonoBehaviour:
   rebuildY: 0
   playHitAnyway: 1
   FlyType: 0
-  ID: 111
+  ID: 113
 --- !u!135 &13564656
 SphereCollider:
   m_ObjectHideFlags: 1

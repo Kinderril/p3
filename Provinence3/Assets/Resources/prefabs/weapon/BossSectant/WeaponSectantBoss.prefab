@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 444576}
-  - 114: {fileID: 11404244}
+  - component: {fileID: 444576}
+  - component: {fileID: 114319410865666740}
   m_Layer: 0
   m_Name: WeaponSectantBoss
   m_TagString: Untagged
@@ -25,27 +25,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2611338, y: 79.29347, z: -0.2698716}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11404244
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 189198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 667981a7bbb7b2e4a8c694c7070eeff8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 11417546, guid: 7716f15f913bf90419f20c96787e6f82, type: 2}
-  owner: {fileID: 0}
-  pSystemOnShot: {fileID: 0}
-  Parameters: {fileID: 11400000, guid: 1b2d2c1e563c9d94cba2d4641a00638a, type: 2}
-  bulletComeOut: {fileID: 0}
-  sideCount: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -67,3 +50,19 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 189198}
   m_IsPrefabParent: 1
+--- !u!114 &114319410865666740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80de761b5a4d4404db1cb232218fed03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 11417546, guid: 7716f15f913bf90419f20c96787e6f82, type: 2}
+  owner: {fileID: 0}
+  pSystemOnShot: {fileID: 0}
+  Parameters: {fileID: 11400000, guid: 765ffac4ac54d7b49bb14144ba28e601, type: 2}
+  bulletComeOut: {fileID: 444576}

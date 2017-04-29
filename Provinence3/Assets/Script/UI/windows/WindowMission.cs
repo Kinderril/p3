@@ -39,7 +39,19 @@ public class WindowMission : BaseWindow
                 lastLevel = 1;
             }
         }
-//        var openedMissions = MainController.Instance.PlayerData.OpenLevels.GetAllOpenedMissions();
+        var isOpen = MainController.Instance.PlayerData.OpenLevels.IsLevelOpen(lastLevel);
+        if (!isOpen)
+        {
+            if (isTutorComplete)
+            {
+                lastLevel = 1;
+            }
+            else
+            {
+                lastLevel = 0;
+            }
+        }
+        //        var openedMissions = MainController.Instance.PlayerData.OpenLevels.GetAllOpenedMissions();
         int maxLvl = 0;
         RespawnPointToggle lastToggledPoint = null;
         foreach (var pointToggle in MissionsToggles)

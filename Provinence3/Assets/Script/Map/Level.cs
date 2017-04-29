@@ -51,7 +51,7 @@ public class Level
     public Hero MainHero;
     private DictionaryOfItemAndInt moneyInv;
     public int difficult = 1;
-    public bool isPLaying ;
+    public bool IsPlaying ;
     private PortalsController PortalsController = new PortalsController();
     private List<BaseItem> collectedItems = new List<BaseItem>();
     private Dictionary<CraftItemType,int> collectedCrafts = new Dictionary<CraftItemType, int>(); 
@@ -114,7 +114,7 @@ public class Level
             Utils.Init(levelObject.Terrain);
             MainHero = Map.Instance.Init(this, levelObject, IndexBornPoint);
             DebugController.Instance.InfoField2.text += " " + TimeUtils.EndMeasure("MAIN");
-            isPLaying = false;
+            IsPlaying = false;
             callback(this);
             Map.Instance.StartLoadingMonsters();
         }
@@ -132,7 +132,7 @@ public class Level
 
     public void StartLevel()
     {
-        isPLaying = true;
+        IsPlaying = true;
         QuestController.Start(this);
 //        Utils.GroundTransform(MainHero.transform);
     }
@@ -249,7 +249,7 @@ public class Level
 
     public void Update()
     {
-        if (isPLaying)
+        if (IsPlaying)
         {
             Energy.Update();
         }
@@ -262,6 +262,7 @@ public class Level
         {
             MainController.Instance.PlayerData.TutorEnd();
         }
+        IsPlaying = false;
         LevelStatistics.End();
         IsGoodEnd = LevelEndType;
         PortalsController.Stop();
@@ -319,6 +320,7 @@ public class Level
         {
             MainController.Instance.StartCoroutine(WaitEndLvl());
         }
+        PlayerData.AddLevelEnd(this,LevelStatistics);
     }
 
     private IEnumerator WaitEndLvl()

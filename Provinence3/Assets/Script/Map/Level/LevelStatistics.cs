@@ -16,6 +16,8 @@ public class LevelStatistics
         startTime = Time.time;
     }
 
+    public string BossType = "no type";
+
     public void End()
     {
         ElapsedTime = Time.time - startTime;

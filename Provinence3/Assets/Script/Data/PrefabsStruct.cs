@@ -14,5 +14,6 @@ public class PrefabsStruct : MonoBehaviour
     public ExecutableItemInfo ExecutableItemInfo;
     public ShopSellElement ShopSellElement;
     public ParameterElement ParameterElement;
+    public StatElement PrefabStatElement;
 }
 

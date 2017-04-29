@@ -69,13 +69,13 @@ MonoBehaviour:
   - type: 11
     EffectAbsorber: {fileID: 0}
   ColorRarity:
-  - Color: {r: 1, g: 1, b: 1, a: 1}
+  - Color: {r: 1, g: 1, b: 1, a: 0.528}
     Rarity: 0
-  - Color: {r: 0.2635705, g: 0.4579741, b: 0.9191176, a: 1}
+  - Color: {r: 0.2635705, g: 0.4579741, b: 0.9191176, a: 0.566}
     Rarity: 1
-  - Color: {r: 1, g: 0.778, b: 0, a: 1}
+  - Color: {r: 1, g: 0.778, b: 0, a: 0.547}
     Rarity: 2
-  - Color: {r: 0.31627786, g: 0.5955882, b: 0, a: 1}
+  - Color: {r: 0.31627786, g: 0.5955882, b: 0, a: 0.528}
     Rarity: 3
   ColorParameter:
   - Color: {r: 0.20667297, g: 0.9117647, b: 0.07374569, a: 0.934}
@@ -146,6 +146,8 @@ MonoBehaviour:
   ExecutableItemInfo: {fileID: 11472970, guid: 1ca019261ed23a149b5cdda55fe4a448, type: 2}
   ShopSellElement: {fileID: 11473184, guid: 85112eb1abee2e040b629d96aad99a6f, type: 2}
   ParameterElement: {fileID: 11488954, guid: ff302ae67c38f5e4ebfeaa5010feb2ee, type: 2}
+  PrefabStatElement: {fileID: 114202029364446522, guid: fe4285ab6d824944ca876e2defa96d18,
+    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

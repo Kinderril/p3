@@ -84,16 +84,21 @@ public class Bullet : PoolElement
         }
         if (direction != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(direction);
-        else
-            Debug.Log("sss");
     }
 
     protected virtual Vector3 FindStartPos(Weapon weapon)
     {
         Vector3 sPos;
-        if (weapon != null && weapon.bulletComeOut != null)
+        if (weapon != null)
         {
-            sPos = weapon.bulletComeOut.position;
+            if (weapon.bulletComeOut != null)
+            {
+                sPos = weapon.bulletComeOut.position;
+            }
+            else
+            {
+                sPos = weapon.transform.position;
+            }
         }
         else
         {
@@ -269,7 +274,7 @@ public class Bullet : PoolElement
             Vector3 trgPos;
             if (targetUnit.weaponsContainer == null)
             {
-                trgPos = targetUnit.transform.position;
+                trgPos = targetUnit.transform.position + Vector3.up;
             }
             else
             {

@@ -308,7 +308,7 @@ MonoBehaviour:
   rebuildY: 1
   playHitAnyway: 1
   FlyType: 0
-  ID: 100
+  ID: 101
   waitTime: 1
 --- !u!114 &11464186
 MonoBehaviour:

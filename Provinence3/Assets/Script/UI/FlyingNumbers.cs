@@ -17,9 +17,15 @@ public class FlyingNumbers : PoolElement
     public Image image;
     private Action OnDead;
     private Animator anim;
+    private LayoutGroup LayoutGroup;
     private const string keyLeft = "left";
     private const string keyRight = "right";
     private const string keyNone = "none";
+
+    void Awake()
+    {
+        LayoutGroup = GetComponent<LayoutGroup>();
+    }
 
     public void Init(string msg,string sub,Color textColor, FlyNumerDirection flyDir = FlyNumerDirection.side,int size = 42,Action OnDead = null)
     {
@@ -31,8 +37,19 @@ public class FlyingNumbers : PoolElement
             image.enabled = false;
         if (subText != null)
         {
-            subText.text = sub;
-            subText.gameObject.SetActive(sub.Length > 0);
+            var haveSub = sub.Length > 0;
+            if (haveSub)
+            {
+                subText.text = sub;
+                subText.gameObject.SetActive(haveSub);
+            }
+            else
+            {
+                if (LayoutGroup != null)
+                {
+                    LayoutGroup.padding = new RectOffset(0,0,0,0);
+                }
+            }
         }
 
         text.color = textColor;

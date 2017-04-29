@@ -239,26 +239,6 @@ public class Hero : Unit
     }
     
 
-    public void GetHeal(float currentPower)
-    {
-        var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.heal);
-        effect.Init(this,3.5f);
-        var p =  currentPower;
-
-        var posibleDelta = Parameters[ParamType.Heath] - CurHp;
-        if (p >= posibleDelta)
-        {
-            p = posibleDelta;
-        }
-        if (p > 0)
-        {
-            SetHp(CurHp + p);
-            if (OnGetHit != null)
-            {
-                OnGetHit(CurHp, Parameters[ParamType.Heath], p);
-            }
-        }
-    }
 
     public override void GetHit(Bullet bullet)
     {

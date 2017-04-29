@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
-  m_Name: SectantBoss
+  m_Name: BossVeer
   m_EditorClassIdentifier: 
   Speed: 334
   MPower: 99.43
@@ -19,3 +19,8 @@ MonoBehaviour:
   physicResist: 73.03
   Level: 1
   AttackType: 0
+  DropItem:
+    chance0_1_simple: 0
+    chance0_1_rare: 0
+    type_simple: 0
+    type_rare: 0

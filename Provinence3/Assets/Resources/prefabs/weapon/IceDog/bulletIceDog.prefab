@@ -232,7 +232,7 @@ MonoBehaviour:
   rebuildY: 0
   playHitAnyway: 1
   FlyType: 0
-  ID: 107
+  ID: 108
 --- !u!114 &114274573793566620
 MonoBehaviour:
   m_ObjectHideFlags: 1

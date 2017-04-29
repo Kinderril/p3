@@ -140,6 +140,11 @@ public class OpenLevels
         Save();
     }
 
+    public bool IsLevelOpen(int index)
+    {
+        return opendLevels.Contains(index);
+    }
+
     public bool CanOpenLevel(int index)
     {
         if (opendLevels.Contains(index))

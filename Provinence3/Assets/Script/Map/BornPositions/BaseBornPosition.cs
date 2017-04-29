@@ -35,6 +35,11 @@ public class BaseBornPosition : MonoBehaviour
         work = UnityEngine.Random.Range(0f, 1f) < chanceToWork;
     }
 
+    public void SetWork()
+    {
+        work = true;
+    }
+
     public virtual BornPositionType GetBornPositionType()
     {
         return BornPositionType.none;

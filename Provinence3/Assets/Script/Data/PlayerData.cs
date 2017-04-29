@@ -40,6 +40,7 @@ public class PlayerData
     public bool _isTutorialComplete;
     public Dictionary<MainParam,int> MainParameters;
     public OpenLevels OpenLevels;
+    public PlayerStats PlayerStats;
 
     public event Action<BaseItem> OnNewItem;
     public event Action<ExecutableItem,int> OnChangeCount;
@@ -178,6 +179,8 @@ public class PlayerData
         _isTutorialComplete = Convert.ToBoolean(PlayerPrefs.GetInt(TUTORIAL, 0));
         CurrentLevel = PlayerPrefs.GetInt(LEVEL, 1);
         AllocatedPoints = PlayerPrefs.GetInt(ALLOCATED, 0);
+        PlayerStats = new PlayerStats();
+        PlayerStats.Load();
         foreach (ItemId v in Enum.GetValues(typeof(ItemId)))
         {
             var count = PlayerPrefs.GetInt(INVENTORY + v,0);
@@ -489,6 +492,11 @@ public class PlayerData
 
     public void Sell(BaseItem playerItem)
     {
+        if (!MainController.Instance.PlayerData.IsTutorialComplete)
+        {
+            WindowManager.Instance.InfoWindow.Init(() => { }, "You can't sell item before tutorial");
+            return;
+        }
         AddCurrensy(ItemId.money, playerItem.cost);
         RemoveItem(playerItem);
         Save();
@@ -614,6 +622,11 @@ public class PlayerData
     {
         IsTutorialComplete = true;
         OpenLevels.CompleteTutorial();
+    }
+
+    public void AddLevelEnd(Level level,LevelStatistics statistics)
+    {
+        PlayerStats.AddLevel(level,statistics);
     }
 }
 

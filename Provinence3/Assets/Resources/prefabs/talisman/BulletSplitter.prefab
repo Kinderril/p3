@@ -341,7 +341,7 @@ MonoBehaviour:
   rebuildY: 1
   playHitAnyway: 1
   FlyType: 0
-  ID: 105
+  ID: 106
 --- !u!114 &11436916
 MonoBehaviour:
   m_ObjectHideFlags: 1

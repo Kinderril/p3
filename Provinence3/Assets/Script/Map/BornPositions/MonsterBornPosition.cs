@@ -23,6 +23,7 @@ public class MonsterBornPosition : BaseBornPosition
         this.level = level;
         this.OnEnemyDead = OnEnemyDead;
         difficulty = difficulty + level.difficult - 1;
+        totalUnits = 0;
         base.Init(map);
 //        BornMosters();
     }
@@ -57,7 +58,6 @@ public class MonsterBornPosition : BaseBornPosition
             monster = monsterPrebaf;
         }
          
-        totalUnits = 0;
         if (monster != null)
         {
             var unit = DataBaseController.GetItem(monster, pos);
@@ -95,10 +95,9 @@ public class MonsterBornPosition : BaseBornPosition
     {
         var monster = (unit as BaseMonster);
         activeMonsters.Remove(monster);
-        monster.OnGetHitMonster += OnGetHitMonster;
+        monster.OnGetHitMonster -= OnGetHitMonster;
         unit.OnDead -= OnDead;
         totalUnits--;
-//        Debug.Log("OnDead  " + totalUnits + "    " + isReborned) ;
         if (totalUnits <= 0)
         {
             StartReborn();

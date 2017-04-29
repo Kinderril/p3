@@ -220,7 +220,27 @@ public class Unit : MonoBehaviour
     {
         Control.MoveTo(dir * Parameters[ParamType.Speed]);
     }
-    
+    public void GetHeal(float currentPower)
+    {
+        var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.heal);
+        effect.Init(this, 3.5f);
+        var p = currentPower;
+
+        var posibleDelta = Parameters[ParamType.Heath] - CurHp;
+        if (p >= posibleDelta)
+        {
+            p = posibleDelta;
+        }
+        if (p > 0)
+        {
+            SetHp(CurHp + p);
+            if (OnGetHit != null)
+            {
+                OnGetHit(CurHp, Parameters[ParamType.Heath], p);
+            }
+        }
+    }
+
     public void GetHit(float power,WeaponType type,DeathInfo info,float mdef = -1,float pdef = -1)
     {
         LastHitInfo = info;

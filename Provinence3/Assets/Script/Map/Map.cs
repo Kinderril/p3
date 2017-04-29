@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class Map : Singleton<Map>
 {
     private const string BASE_WAY = "prefabs/level/Level";
-    public List<MonsterBornPosition> appearPos;
+    public List<MonsterBornPosition> MonsterBornPositions;
     public List<BossBornPosition> BossAppearPos;
     private Transform bornPositions;
     public Transform enemiesContainer;
@@ -47,7 +47,7 @@ public class Map : Singleton<Map>
         var hero = DataBaseController.GetItem(DataBaseController.Instance.prefabHero, GetHeroBoenPos(heroBornPositionIndex));
         hero.Init(lvl);
         enemies = new List<BaseMonster>();
-        appearPos = new List<MonsterBornPosition>();
+        MonsterBornPositions = new List<MonsterBornPosition>();
         BossAppearPos = new List<BossBornPosition>();
         levelMainObject.Init(hero);
         List<ChestBornPosition> chestPositions = new List<ChestBornPosition>();
@@ -68,7 +68,7 @@ public class Map : Singleton<Map>
                         break;
                     case BornPositionType.monster:
                         var mBP = (bp as MonsterBornPosition);
-                        appearPos.Add(mBP);
+                        MonsterBornPositions.Add(mBP);
 //                        mBP.Init(this, OnEnemyDead, lvl, hero);
                         break;
                     case BornPositionType.boss:
@@ -88,7 +88,7 @@ public class Map : Singleton<Map>
         TimeUtils.StartMeasure("LOAD QUESTS");
         DebugController.Instance.InfoField2.text = allInfo;
 
-        var questsPositions = appearPos.RandomElement(levelObject.QuestCount);
+        var questsPositions = MonsterBornPositions.RandomElement(levelObject.QuestCount);
         LoadQuests(questsPositions);
 
 
@@ -96,7 +96,7 @@ public class Map : Singleton<Map>
         TimeUtils.StartMeasure("LOAD MONSTERS");
         DebugController.Instance.InfoField2.text = allInfo;
 
-        foreach (var monsterBornPosition in appearPos)
+        foreach (var monsterBornPosition in MonsterBornPositions)
         {
             monsterBornPosition.Init(this, OnEnemyDead, lvl, hero);
         }
@@ -155,7 +155,7 @@ public class Map : Singleton<Map>
     private IEnumerator Loading()
     {
         int curCount = 0;
-        foreach (var monsterBornPosition in appearPos)
+        foreach (var monsterBornPosition in MonsterBornPositions)
         {
             yield return new WaitForEndOfFrame();
             monsterBornPosition.BornMosters();
@@ -200,7 +200,7 @@ public class Map : Singleton<Map>
 
     void Update()
     {
-        if (level == null || level.MainHero == null || level.IsPause)
+        if (level == null || level.MainHero == null || level.IsPause || !level.IsPlaying)
             return;
         var mainHero = level.MainHero;
         float mainHeroDist;
@@ -310,7 +310,7 @@ public class Map : Singleton<Map>
         Utils.ClearTransform(enemiesContainer);
         Utils.ClearTransform(miscContainer);
         Utils.ClearTransform(bulletContainer);
-        foreach (var bornPosition in appearPos)
+        foreach (var bornPosition in MonsterBornPositions)
         {
             bornPosition.EndLevel();
         }
