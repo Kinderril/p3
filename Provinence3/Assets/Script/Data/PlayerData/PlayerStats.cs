@@ -102,6 +102,7 @@ public class PlayerStats
         levelStat.QuestsCompleted = level.QuestController.CompletedQuests();
         levelStat.TimeSpendSec = (int)statistics.GetElapsetime().TotalSeconds;
         levelStat.MonstersKilled = statistics.EnemiesKills;
+        levelStat.BossType = statistics.BossName;
         levelStat.IsGood = level.IsGoodEnd == EndlevelType.good;
         stats.Add(levelStat);
         Save();

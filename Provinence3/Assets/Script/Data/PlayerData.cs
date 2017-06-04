@@ -176,6 +176,7 @@ public class PlayerData
 
     public void Load()
     {
+        SpellsDataBase.LoadDataBase();
         _isTutorialComplete = Convert.ToBoolean(PlayerPrefs.GetInt(TUTORIAL, 0));
         CurrentLevel = PlayerPrefs.GetInt(LEVEL, 1);
         AllocatedPoints = PlayerPrefs.GetInt(ALLOCATED, 0);
@@ -205,6 +206,9 @@ public class PlayerData
                         break;
                     case TalismanItem.FIRSTCHAR:
                         itemBase = TalismanItem.Create(subStr);
+                        break;
+                    case SpellItem.FIRSTCHAR:
+                        itemBase = SpellItem.Create(subStr);
                         break;
                     case ExecutableItem.FIRSTCHAR:
                         itemBase = ExecutableItem.Create(subStr);
@@ -302,8 +306,10 @@ public class PlayerData
                 Slot.magic_weapon, Rarity.Normal, p2);
             AddAndEquip(item1);
             AddAndEquip(item2);
-            AddFirstTalisman(TalismanType.splitter);
-            AddFirstTalisman(TalismanType.heal);
+            AddRandomStartSpell();
+//            AddRandomStartSpell();
+//            AddFirstTalisman(TalismanType.splitter);
+//            AddFirstTalisman(TalismanType.heal);
 
 #if UNITY_EDITOR
             if (DebugController.Instance.GET_START_BOOST)
@@ -332,6 +338,13 @@ public class PlayerData
             }
 #endif
         }
+    }
+
+    private void AddRandomStartSpell()
+    {
+        var data = SpellsDataBase.Spells[0];
+        var spellItem = new SpellItem(data);
+        AddAndEquip(spellItem);
     }
 
     private void AddFirstTalisman(TalismanType t)

@@ -47,6 +47,11 @@ public class ItemInfoElement : MonoBehaviour
                 TalismanItemInfo.Init(item as TalismanItem, WithButtons);
                 CurItemInfo = TalismanItemInfo;
                 break;
+            case SpellItem.FIRSTCHAR:
+                SpellItemInfo SpellItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.SpellItemInfo);
+                SpellItemInfo.Init(item as SpellItem, WithButtons);
+                CurItemInfo = SpellItemInfo;
+                break;
             case RecipeItem.FIRSTCHAR:
                 RecepiItemInfo RecepiItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.RecepiItemInfo);
                 RecepiItemInfo.Init(item as RecipeItem, WithButtons);

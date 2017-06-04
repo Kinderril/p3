@@ -26,6 +26,7 @@ public class DataBaseController : Singleton<DataBaseController>
 {
     private readonly Dictionary<ItemId, Sprite> ItemIdSprites = new Dictionary<ItemId, Sprite>();
     private readonly Dictionary<TalismanType, Sprite> TalismansSprites = new Dictionary<TalismanType, Sprite>();
+    private readonly Dictionary<int, Sprite> SpellIcons = new Dictionary<int, Sprite>();
     private readonly Dictionary<SpecialAbility, Sprite> SpecialsSprites = new Dictionary<SpecialAbility, Sprite>();
     private readonly Dictionary<MainParam, Sprite> MainParamSprites = new Dictionary<MainParam, Sprite>();
     private readonly Dictionary<ParamType, Sprite> ParamTypeSprites = new Dictionary<ParamType, Sprite>();
@@ -82,6 +83,7 @@ public class DataBaseController : Singleton<DataBaseController>
             {
                 mosntersLevel[baseMonster.ParametersScriptable.Level].Add(baseMonster);
             }
+            BossUnits = BossUnits.Where(x => x != null).ToList();
             LoadLevelsCost();
             LoadSprites();
             Pool = new Pool(this);
@@ -237,8 +239,15 @@ public class DataBaseController : Singleton<DataBaseController>
         {
             costByLevelItems.Add(itemsByLevel.level,new Taple<int, int>(itemsByLevel.money, itemsByLevel.crystal));
         }
+        LoadIconsToSpellCraft();
+
     }
-    
+
+    private void LoadIconsToSpellCraft()
+    {
+        VisualEffectSetter.LoadAll();
+    }
+
     public Sprite MainParameterIcon(MainParam mp)
     {
         return MainParamSprites[mp];
@@ -283,6 +292,11 @@ public class DataBaseController : Singleton<DataBaseController>
     public Sprite TalismanIcon(TalismanType mp)
     {
         return TalismansSprites[mp];
+    }
+
+    public Sprite SpellIcon(int id)
+    {
+        return VisualEffectSetter.Icons[id];
     }
 
     public static T GetItem<T>(T item, Vector3 pos) where T : MonoBehaviour

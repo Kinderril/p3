@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public enum ParamType
-{
-    PPower,
-    MPower,
-    PDef,
-    MDef,
-    Heath,
-    Speed,
-
-}
+//public enum ParamType
+//{
+//    PPower,
+//    MPower,
+//    PDef,
+//    MDef,
+//    Heath,
+//    Speed,
+//
+//}
 
 [Serializable]
 public struct DropItem

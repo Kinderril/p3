@@ -19,7 +19,7 @@ public class BossShield : BossUnit
             shieldTimeUpdate = Time.time + Random.Range(1f, 2f);
             if (Shield < lvl*50)
             {
-                Shield++;
+                Shield += 3*lvl;
             }
         }
     }

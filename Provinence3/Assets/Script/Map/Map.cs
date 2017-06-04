@@ -270,7 +270,7 @@ public class Map : Singleton<Map>
         }
 
         var bossPrefab = DataBaseController.Instance.BossUnits.RandomElement();
-
+        level.LevelStatistics.BossName = bossPrefab.BossName;
         if (bossPrefab != null)
         {
             CameraFollow.CameraShake.Init(0.5f);

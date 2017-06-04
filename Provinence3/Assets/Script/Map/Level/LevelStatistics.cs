@@ -10,6 +10,7 @@ public class LevelStatistics
     private float startTime;
     private float ElapsedTime;
     public int EnemiesKills = 0;
+    public string BossName;
 
     public LevelStatistics()
     {

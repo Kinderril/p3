@@ -35,8 +35,8 @@ public class SimplePostEffect : PostEffectsBase
         rayMarchRT = new RenderTexture(Screen.width, Screen.height, 1, RenderTextureFormat.ARGBHalf);
         renderTextureMinor = new RenderTexture(Screen.width/ descale, Screen.height/ descale, 1,RenderTextureFormat.ARGBHalf);
         //        rect = new Rect(0f, 0f, Screen.width, Screen.height);
-        BloomMaterial.SetTexture("_SubTex", renderTextureAfterBlur);
-        BloomMaterial.SetTexture("_MainTex", renderTexture);
+//        BloomMaterial.SetTexture("_SubTex", renderTextureAfterBlur);
+//        BloomMaterial.SetTexture("_MainTex", renderTexture);
     }
 
     public override bool CheckResources()

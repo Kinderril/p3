@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class BossUnit : BaseMonster
 {
+    public string BossName;
+
     public ArrowTarget Arrow { get; set; }
     protected override void Death()
     {
