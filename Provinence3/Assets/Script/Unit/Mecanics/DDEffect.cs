@@ -9,18 +9,18 @@ public class DDEffect : TimeEffect
     public DDEffect(Unit targetUnit, float totalTime) 
         : base(targetUnit,totalTime)
     {
-        EffectType = EffectType.doubleDamage;
-        targetUnit.Parameters[ParamType.MPower] *= 2f;
-        targetUnit.Parameters[ParamType.PPower] *= 2f;
-        var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.doubleDamage);
-        effect.Init(targetUnit,endEffect);
+//        EffectType = EffectType.doubleDamage;
+//        targetUnit.Parameters.AddCoef(ParamType.MPower, 2f);
+//        targetUnit.Parameters.AddCoef(ParamType.PPower, 2f);
+//        var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.doubleDamage);
+//        effect.Init(targetUnit,endEffect);
         
     }
 
     protected override void OnTimer()
     {
-        targetUnit.Parameters[ParamType.MPower] /= 2f;
-        targetUnit.Parameters[ParamType.PPower] /= 2f;
+        targetUnit.Parameters.RemoveCoef(ParamType.MPower, 2f);
+        targetUnit.Parameters.RemoveCoef(ParamType.PPower, 2f);
         base.OnTimer();
     }
 }

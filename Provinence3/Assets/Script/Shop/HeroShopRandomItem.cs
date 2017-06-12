@@ -17,11 +17,16 @@ public abstract class HeroShopRandomItem : IShopExecute
                 MainController.Instance.PlayerData.AddItem(CreatMainSlot(slot, level));
                 break;
             case Slot.Talisman:
-                MainController.Instance.PlayerData.AddItem(CreaTalic(level));
+                MainController.Instance.PlayerData.AddItem(CreaSpell(level));
                 break;
         }
         randomCreatAdditionalItem();
         base.Execute(level);
+    }
+
+    private BaseItem CreaSpell(int level)
+    {
+        throw new NotImplementedException();
     }
 
     public override int MoneyCost
@@ -33,14 +38,14 @@ public abstract class HeroShopRandomItem : IShopExecute
         
     }
 
-    public static TalismanItem CreaTalic(int levelResult)
-    {
-        int point = Formuls.GetTalismanPointsByLvl(levelResult);
-        point = (int) Utils.RandomNormal(point*0.7f, point*1.3f);
-        var type = ShopController.AllTalismanstypes.RandomElement();
-        TalismanItem item = new TalismanItem(point, type);
-        return item;
-    }
+//    public static TalismanItem CreaTalic(int levelResult)
+//    {
+//        int point = Formuls.GetTalismanPointsByLvl(levelResult);
+//        point = (int) Utils.RandomNormal(point*0.7f, point*1.3f);
+//        var type = ShopController.AllTalismanstypes.RandomElement();
+//        TalismanItem item = new TalismanItem(point, type);
+//        return item;
+//    }
 
     public static Rarity GetRarity()
     {

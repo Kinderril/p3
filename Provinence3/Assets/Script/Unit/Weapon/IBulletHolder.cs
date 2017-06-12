@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 
 public interface IBulletHolder
@@ -15,11 +16,24 @@ public interface IBulletHolder
     {
         get;
     }
+    float Range
+    {
+        get;
+    }
     Unit Owner 
     {
         get;
     }
     WeaponType DamageType
+    {
+        get;
+    }
+
+    Transform BulletComeOut
+    {
+        get;
+    }
+    Transform Transform
     {
         get;
     }

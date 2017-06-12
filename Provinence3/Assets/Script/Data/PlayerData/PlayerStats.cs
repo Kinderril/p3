@@ -13,7 +13,7 @@ public class LevelStat
     public int GoldCollected;
     public int MonstersKilled;
     public int TimeSpendSec;
-    public string BossType;
+    public string BossType = "Unknown";
     public int QuestsCompleted;
     public bool IsGood;
 
@@ -24,7 +24,7 @@ public class LevelStat
                  GoldCollected.ToString() + DELEM +//2
                  MonstersKilled.ToString() + DELEM +//3
                  TimeSpendSec.ToString() + DELEM +//4
-                 BossType.ToString() + DELEM +//5
+                 BossType == null? "Unknown" : BossType.ToString() + DELEM +//5
                  QuestsCompleted.ToString() + DELEM +//6
                  IsGood.ToString() + DELEM;//7
         return ss;

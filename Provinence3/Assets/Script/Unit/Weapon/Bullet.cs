@@ -59,7 +59,7 @@ public class Bullet : PoolElement
             HitParticleSystem.Stop();
         }
     }
-    public virtual void Init(Vector3 direction,Weapon weapon)
+    public virtual void Init(Vector3 direction, IBulletHolder weapon)
     {
         if (rebuildY)
         {
@@ -67,7 +67,7 @@ public class Bullet : PoolElement
         }
         this.bulletHolder = weapon;
         start = FindStartPos(weapon);
-        trg = direction.normalized * weapon.Parameters.range + start;
+        trg = direction.normalized * weapon.Range + start;
         subInit();
         switch (FlyType)
         {
@@ -86,18 +86,18 @@ public class Bullet : PoolElement
             transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    protected virtual Vector3 FindStartPos(Weapon weapon)
+    protected virtual Vector3 FindStartPos(IBulletHolder weapon)
     {
         Vector3 sPos;
         if (weapon != null)
         {
-            if (weapon.bulletComeOut != null)
+            if (weapon.BulletComeOut != null)
             {
-                sPos = weapon.bulletComeOut.position;
+                sPos = weapon.BulletComeOut.position;
             }
             else
             {
-                sPos = weapon.transform.position;
+                sPos = weapon.Transform.position;
             }
         }
         else
@@ -156,7 +156,60 @@ public class Bullet : PoolElement
 
     protected virtual void OnBulletHit(Collider other)
     {
-        Debug.LogError("DON'T USE THIS CLASSS");
+        var trg = other.GetComponent<Unit>();
+        var spell = bulletHolder as SpellInGame;
+        var isHeroOwner = bulletHolder.Owner is Hero;
+        if (trg is Hero)
+        {
+            if (spell != null)
+            {
+                switch (spell.sourseItem.SpellData.IsPositive())
+                {
+                    case EffectPositiveType.Positive:
+                        if (isHeroOwner)
+                        {
+                            Hit(trg);
+                        }
+                        break;
+                    case EffectPositiveType.Negative:
+                        if (!isHeroOwner)
+                        {
+                            Hit(trg);
+                        }
+                        break;
+                }
+
+            }
+            else if (!isHeroOwner)
+            {
+                Hit(trg);
+            }
+        }
+        else if (trg is BaseMonster)
+        {
+            if (spell != null)
+            {
+                switch (spell.sourseItem.SpellData.IsPositive())
+                {
+                    case EffectPositiveType.Positive:
+                        if (!isHeroOwner)
+                        {
+                            Hit(trg);
+                        }
+                        break;
+                    case EffectPositiveType.Negative:
+                        if (isHeroOwner)
+                        {
+                            Hit(trg);
+                        }
+                        break;
+               }
+            }
+            else if (isHeroOwner)
+            {
+                Hit(trg);
+            }
+        }
     }
 
     protected virtual void Hit(Unit unit)
@@ -175,6 +228,12 @@ public class Bullet : PoolElement
 
     protected void Death(Unit lastUnitHitted)
     {
+        var spell = bulletHolder as SpellInGame;
+        if (spell != null)
+        {
+            Debug.Log("sadsa");
+            return;
+        }
         if (HitParticleSystem != null)
         {
             if (playHitAnyway)

@@ -150,13 +150,13 @@ public class PlayerItem : BaseItem ,IEnhcant
     {
         foreach (var parameter in parameters)
         {
-            hero.Parameters[parameter.Key] += (1 + enchant / ENCHANT_PLAYER_COEF) *  parameter.Value ;
+            hero.Parameters.SetAbsolute(parameter.Key, hero.Parameters[parameter.Key] + (1 + enchant / ENCHANT_PLAYER_COEF) * parameter.Value);
         }
     }
 
     public static PlayerItem Create(string item)
     {
-        Debug.Log("Creat from:   " + item);
+        Debug.Log("Execute from:   " + item);
         var Part1 = item.Split(MDEL);
         var Part2 = Part1[1].Split(DELEM);
         //PART2

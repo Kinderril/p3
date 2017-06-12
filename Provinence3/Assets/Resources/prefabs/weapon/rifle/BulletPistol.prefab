@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 402758}
   - component: {fileID: 13528144}
   - component: {fileID: 5484734}
-  - component: {fileID: 11475076}
+  - component: {fileID: 114719273173145630}
   m_Layer: 0
   m_Name: BulletPistol
   m_TagString: Untagged
@@ -216,26 +216,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &11475076
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8334ff0b73f9e764db219ee909e44758, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.1
-  maxTargets: 1
-  hitPOsition: 0
-  TrailParticleSystem: {fileID: 11481394}
-  HitParticleSystem: {fileID: 0}
-  rebuildY: 0
-  playHitAnyway: 1
-  FlyType: 0
-  ID: 112
 --- !u!114 &11481394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2936,3 +2916,23 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 199688}
   m_IsPrefabParent: 1
+--- !u!114 &114719273173145630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429ef8812cbae97428bfe81de72da100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.04
+  maxTargets: 1
+  hitPOsition: 0
+  TrailParticleSystem: {fileID: 11481394}
+  HitParticleSystem: {fileID: 0}
+  rebuildY: 1
+  playHitAnyway: 1
+  FlyType: 0
+  ID: 107

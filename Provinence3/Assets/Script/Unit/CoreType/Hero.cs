@@ -43,11 +43,12 @@ public class Hero : Unit
 
         foreach (ParamType v in Enum.GetValues(typeof(ParamType)))
         {
-            Parameters[v] = playerData.CalcParameter(v);
+            Parameters.SetAbsolute(v,playerData.CalcParameter(v));
             Debug.Log("Calc parameter: " + v + " : " + Parameters[v]);
         }
         curHp = Parameters[ParamType.Heath];
-        Parameters[ParamType.Speed] /= Formuls.SpeedCoef; ;
+        Parameters.SetAbsolute(ParamType.Speed, Parameters[ParamType.Speed] / Formuls.SpeedCoef);
+        ; ;
 //        Parameters.Parameters[ParamType.PPower] *= (damageBonusFromItem + 1f);
 //        Parameters.Parameters[ParamType.MPower] *= (damageBonusFromItem + 1f);
 //        GetItemEffect.Stop(true);
@@ -260,11 +261,11 @@ public class Hero : Unit
         Debug.Log("RAGE!!!!");
         regenCoef = -1f;
         isRegenHP = true;
-        Parameters[ParamType.PPower] *= 1.5f;
-        Parameters[ParamType.MPower] *= 1.5f;
-        Parameters[ParamType.MDef] *= 1.3f;
-        Parameters[ParamType.PDef] *= 1.3f;
-        Parameters[ParamType.Speed] *= 1.3f;
+        Parameters.AddCoef(ParamType.PPower, 1.5f);
+        Parameters.AddCoef(ParamType.MPower, 1.5f);
+        Parameters.AddCoef(ParamType.MDef, 1.3f);
+        Parameters.AddCoef(ParamType.PDef, 1.3f);
+        Parameters.AddCoef(ParamType.Speed, 1.3f);
         //TODO add rage effect
     }
 }

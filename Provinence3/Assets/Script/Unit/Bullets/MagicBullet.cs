@@ -5,16 +5,16 @@ using System.Text;
 using UnityEngine;
 
 
-public class MagicBullet : HeroBullet
+public class MagicBullet : Bullet
 {
-    private Weapon weapon;
-    public override void Init(Vector3 direction, Weapon weapon)
+    private IBulletHolder weapon;
+    public override void Init(Vector3 direction, IBulletHolder weapon)
     {
         base.Init(direction, weapon);
         this.weapon = weapon;
     }
 
-    protected override Vector3 FindStartPos(Weapon weapon)
+    protected override Vector3 FindStartPos(IBulletHolder weapon)
     {
         if (AffecttedUnits.Count > 0)
         {

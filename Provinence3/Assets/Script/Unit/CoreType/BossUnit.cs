@@ -34,12 +34,11 @@ public class BossUnit : BaseMonster
         if (Parameters != null)
         {
             var delta = (Parameters.Level - difficult)/10f;
-            Parameters[ParamType.PPower] *= delta;
-            Parameters[ParamType.MDef] *= delta;
-            Parameters[ParamType.PDef] *= delta;
-            Parameters[ParamType.MPower] *= delta;
+            Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.PPower] * delta);
+            Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.MPower] * delta);
+            Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.MDef] * delta);
+            Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.PDef] * delta);
             Parameters.MaxHp *= delta;
-            Parameters[ParamType.Heath] = Parameters.MaxHp;
         }
 
     }

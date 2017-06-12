@@ -13,6 +13,7 @@ public class SpellItem : BaseItem, IEnhcant
 
     public SpellItem(BaseSpell spellData)
     {
+        Slot = Slot.Talisman;
         SpellData = spellData;
         LoadTexture();
     }
@@ -53,7 +54,7 @@ public class SpellItem : BaseItem, IEnhcant
     }
     public static SpellItem Create(string subStr)
     {
-        Debug.Log("TalismanItem Creat from:   " + subStr);
+        Debug.Log("TalismanItem Execute from:   " + subStr);
         var pp = subStr.Split(MDEL);
         var Id = Convert.ToInt32(pp[0]);
         var IdSpell = Convert.ToInt32(pp[1]);

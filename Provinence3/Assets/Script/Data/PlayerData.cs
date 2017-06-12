@@ -204,9 +204,9 @@ public class PlayerData
                     case BonusItem.FIRSTCHAR:
                         itemBase = BonusItem.Create(subStr);
                         break;
-                    case TalismanItem.FIRSTCHAR:
-                        itemBase = TalismanItem.Create(subStr);
-                        break;
+//                    case TalismanItem.FIRSTCHAR:
+//                        itemBase = TalismanItem.Create(subStr);
+//                        break;
                     case SpellItem.FIRSTCHAR:
                         itemBase = SpellItem.Create(subStr);
                         break;
@@ -318,10 +318,10 @@ public class PlayerData
                     Rarity.Rare, 25);
                 AddAndEquip(item3);
 
-                foreach (var ability in ShopController.AllTalismanstypes)
-                {
-                    AddFirstTalisman(ability);
-                }
+//                foreach (var ability in ShopController.AllTalismanstypes)
+//                {
+//                    AddFirstTalisman(ability);
+//                }
             }
             if (DebugController.Instance.GET_ALL_TYPE_WEAPONS_BOOST)
             {
@@ -347,11 +347,11 @@ public class PlayerData
         AddAndEquip(spellItem);
     }
 
-    private void AddFirstTalisman(TalismanType t)
-    {
-        var talisman2 = new TalismanItem(40, t);
-        AddAndEquip(talisman2);
-    }
+//    private void AddFirstTalisman(TalismanType t)
+//    {
+//        var talisman2 = new TalismanItem(40, t);
+//        AddAndEquip(talisman2);
+//    }
 
     private void AddAndEquip(BaseItem item)
     {

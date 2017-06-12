@@ -51,5 +51,27 @@ public class BaseSummon
         summon.IdVisual = IdVisual;
         return summon;
     }
+
+    public static BaseSummon Merge(BaseSummon s1, BaseSummon s2)
+    {
+        if (s1 == null && s2 == null)
+        {
+            return new BaseSummon(SMUtils.Range(0.8f, 3.5f), SMUtils.Range(1,2));
+        }
+
+        if (s1 == null)
+        {
+            return s2.CopyWithRnd();
+        }
+        if (s2 == null)
+        {
+            return s1.CopyWithRnd();
+        }
+
+        var shootsResult = (int)SMUtils.Range(s1.ShootCount*SMUtils.Range(0.5f,1.5f), s2.ShootCount * SMUtils.Range(0.5f, 1.5f));
+        var delay = SMUtils.Range(s1.DelayShoot*SMUtils.Range(0.5f,1.5f), s2.DelayShoot * SMUtils.Range(0.5f, 1.5f));
+
+        return new BaseSummon(delay, shootsResult);
+    }
 }
 

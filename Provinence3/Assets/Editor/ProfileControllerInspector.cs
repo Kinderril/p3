@@ -59,7 +59,14 @@ public class ProfileControllerInspector : EditorWindow
         }
         else
         {
-
+            var mainApp = MainController.Instance.level;
+            if (mainApp != null && mainApp.IsPlaying)
+            {
+                if (GUILayout.Button("GIVE EnergyL"))
+                {
+                    mainApp.AddItem(ItemId.energy,-100);
+                }
+            }
             if (GUILayout.Button("GIVE ALL ITEMS ALL"))
             {
                 foreach(CraftItemType v in Enum.GetValues(typeof(CraftItemType)))

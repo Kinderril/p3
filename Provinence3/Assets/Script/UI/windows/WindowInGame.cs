@@ -75,12 +75,12 @@ public class WindowInGame : BaseWindow
 //        allTalismans.Add(healItem);
         foreach (var talic in allTalismans)
         {
-            var talismain = talic as TalismanItem;
+            var spellItem = talic as SpellItem;
             var tBtn = DataBaseController.GetItem<TalismanButton>(PrefabTalismanButton);
             tBtn.transform.SetParent(TalismanButtonsLayout,false);
             //            TalismanButtons.Add(tBtn);
 
-            tBtn.Init(talismain, allTalismans.Count(),level);
+            tBtn.Init(spellItem, allTalismans.Count(),level,level.MainHero);
 //            index++;
         }
 //        for (int i = index; i < TalismanButtons.Count; i++)

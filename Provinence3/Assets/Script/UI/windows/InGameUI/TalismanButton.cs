@@ -7,29 +7,29 @@ using UnityEngine.UI;
 
 public class TalismanButton : MonoBehaviour
 {
-    private TalismanItem TalismanItem;
-    private Talisman talicLogic;
+    private SpellItem spellItem;
+    private SpellInGame talicLogic;
 //    public Slider sliderReady;
     public Image RadialImage;
     public Button button;
     public Image icon;
     public Text chargesField;
 
-    public void Init(TalismanItem talic, int countTalismans,Level level)
+    public void Init(SpellItem spell, int countTalismans,Level level,Unit owner)
     {
-        this.TalismanItem = talic;
-        talicLogic = Talisman.Creat(TalismanItem, countTalismans, level);
+        this.spellItem = spell;
+        talicLogic = SpellInGame.Creat(spellItem, countTalismans, level, owner);
         talicLogic.OnReady += OnReady;
         RadialImage.type = Image.Type.Filled;
 
         gameObject.SetActive(true);
-        icon.sprite = talic.IconSprite;
+        icon.sprite = spell.IconSprite;
         OnReady(false, 0,0);
     }
 
     private void OnReady(bool isReady, float percent,int curCharges)
     {
-        RadialImage.gameObject.SetActive(talicLogic.sourseItem.MaxCharges != curCharges);
+        RadialImage.gameObject.SetActive(talicLogic.sourseItem.SpellData.Charges != curCharges);
 //        sliderReady.value = percent;
         RadialImage.fillAmount = 1 - percent;
         button.interactable = isReady;

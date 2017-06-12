@@ -30,7 +30,7 @@ GameObject:
   - component: {fileID: 440464}
   - component: {fileID: 13530402}
   - component: {fileID: 5467570}
-  - component: {fileID: 11456090}
+  - component: {fileID: 114150796693129318}
   m_Layer: 0
   m_Name: bulletDemonLessClose
   m_TagString: Untagged
@@ -190,26 +190,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uvAnimation: {fileID: 11470484}
---- !u!114 &11456090
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 164426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 643407f979a15d64596f9d219a77a70f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.02
-  maxTargets: 1
-  hitPOsition: 0
-  TrailParticleSystem: {fileID: 11436858}
-  HitParticleSystem: {fileID: 0}
-  rebuildY: 0
-  playHitAnyway: 1
-  FlyType: 0
-  ID: 105
 --- !u!114 &11470484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,3 +276,23 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164426}
   m_IsPrefabParent: 1
+--- !u!114 &114150796693129318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429ef8812cbae97428bfe81de72da100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.002
+  maxTargets: 1
+  hitPOsition: 0
+  TrailParticleSystem: {fileID: 11436858}
+  HitParticleSystem: {fileID: 0}
+  rebuildY: 1
+  playHitAnyway: 1
+  FlyType: 0
+  ID: 104

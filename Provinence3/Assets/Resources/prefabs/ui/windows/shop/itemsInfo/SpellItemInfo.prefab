@@ -560,7 +560,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114813440709713942}
         m_MethodName: OnEquip
         m_Mode: 1
         m_Arguments:
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114813440709713942}
         m_MethodName: OnUnequipItem
         m_Mode: 1
         m_Arguments:
@@ -841,7 +841,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114813440709713942}
         m_MethodName: OnUpgradeClick
         m_Mode: 1
         m_Arguments:
@@ -971,7 +971,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114813440709713942}
         m_MethodName: OnSell
         m_Mode: 1
         m_Arguments:

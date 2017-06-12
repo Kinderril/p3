@@ -42,11 +42,11 @@ public class ItemInfoElement : MonoBehaviour
                 ExecutableItemInfo.Init(item as ExecutableItem, WithButtons);
                 CurItemInfo = ExecutableItemInfo;
                 break;
-            case TalismanItem.FIRSTCHAR:
-                TalismanItemInfo TalismanItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.TalismanItemInfo);
-                TalismanItemInfo.Init(item as TalismanItem, WithButtons);
-                CurItemInfo = TalismanItemInfo;
-                break;
+//            case TalismanItem.FIRSTCHAR:
+//                TalismanItemInfo TalismanItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.TalismanItemInfo);
+//                TalismanItemInfo.Init(item as TalismanItem, WithButtons);
+//                CurItemInfo = TalismanItemInfo;
+//                break;
             case SpellItem.FIRSTCHAR:
                 SpellItemInfo SpellItemInfo = DataBaseController.GetItem(DataBaseController.Instance.DataStructs.PrefabsStruct.SpellItemInfo);
                 SpellItemInfo.Init(item as SpellItem, WithButtons);

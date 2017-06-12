@@ -12,26 +12,41 @@ public enum EffectPositiveType
 {
     Positive,
     Negative,
-    Both,
+//    Both,
 }
 
 public enum TMpModifType
 {
     none,
+
     addSpecial,//Добавляем рандомный спешиал из заранее созданого спеска // OK
     shoot,//Обязательно не суммонер //ОК
     summon,//Обязательно сумонер //ОК
+    trigger,//Обязательно триггер //ОК
     moreRandom, //Увеличиваем разброс//ОК
-    moreAOE, // Добавить либо пулек либо АОЕ
-//    toSingle,
 }
 
 public static class SpellMerger
 {
     public static List<EffectSpectials> Specials2Rnd = new List<EffectSpectials>()
     {
-        EffectSpectials.charging,EffectSpectials.dependsOnDist,EffectSpectials.heroMPower,
-        EffectSpectials.hpOfSelf,EffectSpectials.hpOfTarget
+        EffectSpectials.charging,EffectSpectials.dependsOnDist,
+//        EffectSpectials.heroMPower,
+//        EffectSpectials.hpOfSelf,
+        EffectSpectials.hpOfTarget
+    }; 
+
+    public static List<SpellTriggerType> Triggers2Rnd = new List<SpellTriggerType>()
+    {
+        SpellTriggerType.shoot,
+        SpellTriggerType.shootMagic,
+        SpellTriggerType.getDamage,
+        SpellTriggerType.cast,
+        SpellTriggerType.deathNear,
+        SpellTriggerType.getGold,
+        SpellTriggerType.questAction,
+        SpellTriggerType.takeBonus,
+        SpellTriggerType.getEffect,
     }; 
 
     public const float BASE_COST = 20f;
@@ -69,15 +84,26 @@ public static class SpellMerger
             case TMpModifType.summon:
                 core = SpellCoreType.Summon;
                 break;
+            case TMpModifType.trigger:
+                core = SpellCoreType.Trigger;
+                break;
         }
-
-        if (core == SpellCoreType.Summon) //Если это саммон то мы стреляем всегда из себя
+        switch (core)
         {
-            start = SpellTargetType.Self;
-            if (end == SpellTargetType.LookDirection)
-                end = SpellTargetType.ClosestsEnemy;
+            case SpellCoreType.Shoot:
+                break;
+            case SpellCoreType.Summon://Если это саммон то мы стреляем всегда из себя (В реализации из тотема)
+                start = SpellTargetType.Self;
+                if (end == SpellTargetType.LookDirection)
+                    end = SpellTargetType.ClosestsEnemy;
+                break;
+            case SpellCoreType.Trigger:
+                //No restrictions
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
-
+        
         var d = DIFF_COST_CHARGE;
         if (modifType == TMpModifType.moreRandom)
         {
@@ -92,16 +118,10 @@ public static class SpellMerger
         switch (core)
         {
             case SpellCoreType.Summon:
-                BaseSummon bsSummon;
-                if (spell1.BaseSummon != null)
-                {
-                    bsSummon = spell1.BaseSummon;
-                }
-                else
-                {
-                    bsSummon = spell2.BaseSummon;
-                }
-                resultSpell.BaseSummon = bsSummon.CopyWithRnd();
+                resultSpell.BaseSummon = BaseSummon.Merge(spell1.BaseSummon, spell2.BaseSummon);
+                break;
+            case SpellCoreType.Trigger:
+                resultSpell.BaseTrigger = BaseTrigger.Merge(spell1.BaseTrigger, spell2.BaseTrigger);
                 break;
         }
 
@@ -117,31 +137,21 @@ public static class SpellMerger
 
 
         //В зависимости от типа пули надо посчитать каким может быть эффект
-        EffectPositiveType positiveType = EffectPositiveType.Both;
-        switch (bullet.BulletColliderType)
-        {
-            case BulletColliderType.noOne:
-                switch (resultSpell.TargetType)
-                {
-                    case SpellTargetType.Self:
-                        positiveType = EffectPositiveType.Positive;
-                        break;
-                    case SpellTargetType.ClosestsEnemy:
-                        positiveType = EffectPositiveType.Negative;
-                        break;
-                    case SpellTargetType.LookDirection:
-                        //такого варианта быть не может
-                        break;
-                }
+        EffectPositiveType positiveType = EffectPositiveType.Negative;
 
+        switch (resultSpell.TargetType)
+        {
+            case SpellTargetType.Self:
+                positiveType = EffectPositiveType.Positive;
                 break;
-            case BulletColliderType.box:
-            case BulletColliderType.sphrere:
-                positiveType = EffectPositiveType.Both;
+            case SpellTargetType.ClosestsEnemy:
+                positiveType = EffectPositiveType.Negative;
+                break;
+            case SpellTargetType.LookDirection:
+                positiveType = EffectPositiveType.Negative;
                 break;
         }
-
-
+        
         rndPowerTotal = ModifByBulletAndSpell(rndPowerTotal, resultSpell); //Посчитали какая мощность будет дана на эффекты в зависимости от кол-ва пули и прочего
         var effects = spell1.Bullet.Effect.ToList();
         effects.AddRange(spell2.Bullet.Effect);
@@ -199,12 +209,17 @@ public static class SpellMerger
         }
         var cnt = spell.BulletCount;
         float summonCoef = 1f;
+        float triggerCoef = 1f;
         if (spell.BaseSummon != null)
         {
             summonCoef = spell.BaseSummon.CalcPower();
         }
+        if (spell.BaseTrigger != null)
+        {
+            triggerCoef =spell.BaseTrigger.CalcPower();
+        }
         var bulletPower = bullet.CalcPower();
-        return bulletPower*cnt*summonCoef*costCoef*chargeCoef;
+        return bulletPower*cnt*summonCoef*costCoef*chargeCoef* triggerCoef;
     }
 
 

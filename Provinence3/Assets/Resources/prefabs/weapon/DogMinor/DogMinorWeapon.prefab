@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 492540}
-  - 114: {fileID: 11480042}
+  - component: {fileID: 492540}
+  - component: {fileID: 11480042}
   m_Layer: 0
   m_Name: DogMinorWeapon
   m_TagString: Untagged
@@ -25,10 +25,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.312, y: 0.746, z: -0.185}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11480042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80de761b5a4d4404db1cb232218fed03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 11421664, guid: a489ddab944a6b6419865e3db1f6c0de, type: 2}
+  bullet: {fileID: 114961291485471318, guid: a489ddab944a6b6419865e3db1f6c0de, type: 2}
   owner: {fileID: 0}
   pSystemOnShot: {fileID: 0}
   Parameters: {fileID: 11400000, guid: aaf6e3e4729ea2b459d4ea4c980974eb, type: 2}

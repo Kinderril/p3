@@ -23,7 +23,16 @@ public class Weapon : MonoBehaviour, IBulletHolder
     public void Init(Unit owner,PlayerItem PlayerItem)
     {
         pool = DataBaseController.Instance.Pool;
-        pool.RegisterBullet(bullet);
+        try
+        {
+
+            pool.RegisterBullet(bullet);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Weapon have problem bullet " + name);
+            throw  ex;
+        }
         bulletParent = Map.Instance.bulletContainer;
         nexAttackTime = 0;
         this.PlayerItem = PlayerItem;
@@ -142,6 +151,11 @@ public class Weapon : MonoBehaviour, IBulletHolder
         } 
     }
 
+    public float Range
+    {
+        get { return Parameters.range; }
+    }
+
     public Unit Owner
     {
         get { return owner; }
@@ -149,6 +163,16 @@ public class Weapon : MonoBehaviour, IBulletHolder
     public WeaponType DamageType
     {
         get { return Parameters.type; }
+    }
+
+    public Transform BulletComeOut
+    {
+        get { return bulletComeOut; }
+    }
+
+    public Transform Transform
+    {
+        get { return transform; }
     }
 }
 

@@ -25,7 +25,7 @@ public enum PoolType
 public class DataBaseController : Singleton<DataBaseController>
 {
     private readonly Dictionary<ItemId, Sprite> ItemIdSprites = new Dictionary<ItemId, Sprite>();
-    private readonly Dictionary<TalismanType, Sprite> TalismansSprites = new Dictionary<TalismanType, Sprite>();
+//    private readonly Dictionary<TalismanType, Sprite> TalismansSprites = new Dictionary<TalismanType, Sprite>();
     private readonly Dictionary<int, Sprite> SpellIcons = new Dictionary<int, Sprite>();
     private readonly Dictionary<SpecialAbility, Sprite> SpecialsSprites = new Dictionary<SpecialAbility, Sprite>();
     private readonly Dictionary<MainParam, Sprite> MainParamSprites = new Dictionary<MainParam, Sprite>();
@@ -33,7 +33,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<Slot, Sprite> SlotSprites = new Dictionary<Slot, Sprite>();
     private readonly Dictionary<ItemId, Color> itemsColors = new Dictionary<ItemId, Color>();
     private readonly Dictionary<Rarity, Color> rarityColors = new Dictionary<Rarity, Color>();
-    private readonly Dictionary<TalismanType, AbsorberWithPosition> TalismanEffects = new Dictionary<TalismanType, AbsorberWithPosition>();
+//    private readonly Dictionary<TalismanType, AbsorberWithPosition> TalismanEffects = new Dictionary<TalismanType, AbsorberWithPosition>();
     private readonly Dictionary<ParamType, Color> parameterColors = new Dictionary<ParamType, Color>();
     private Dictionary<ParamType, string> parameterNames;
     private Dictionary<QuestLogicType, string> questTypeNames;
@@ -83,19 +83,19 @@ public class DataBaseController : Singleton<DataBaseController>
             {
                 mosntersLevel[baseMonster.ParametersScriptable.Level].Add(baseMonster);
             }
+            LoadOthers();
             BossUnits = BossUnits.Where(x => x != null).ToList();
             LoadLevelsCost();
             LoadSprites();
             Pool = new Pool(this);
             LoadRespawnPointsNames();
-            LoadOthers();
             if (flashShader == null)
                 flashShader = Shader.Find("Custom/FogInsideFlash");
             DebugController.Instance.InfoField2.text = flashShader.ToString();
         }
         catch (Exception ex)
         {
-            Debug.Log("DB:" + ex);
+            Debug.LogError("DB:" + ex);
             DebugController.Instance.InfoField1.text = ex.ToString();
         }
     }
@@ -210,10 +210,10 @@ public class DataBaseController : Singleton<DataBaseController>
         {
             SpecialsSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/SpecialAbility/" + v.ToString()));
         }
-        foreach (TalismanType v in Enum.GetValues(typeof(TalismanType)))
-        {
-            TalismansSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Talisman/" + v.ToString()));
-        }
+//        foreach (TalismanType v in Enum.GetValues(typeof(TalismanType)))
+//        {
+//            TalismansSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Talisman/" + v.ToString()));
+//        }
         foreach (var colorUi in DataStructs.ColorsOfUI)
         {
             itemsColors.Add(colorUi.type,colorUi.color);
@@ -222,11 +222,11 @@ public class DataBaseController : Singleton<DataBaseController>
         {
             rarityColors.Add(colorUi.Rarity, colorUi.Color);
         }
-        foreach (var effects in DataStructs.EffectVisualsTalisman)
-        {
-            if (effects.EffectAbsorber != null)
-                TalismanEffects.Add(effects.type, effects.EffectAbsorber);
-        }
+//        foreach (var effects in DataStructs.EffectVisualsTalisman)
+//        {
+//            if (effects.EffectAbsorber != null)
+//                TalismanEffects.Add(effects.type, effects.EffectAbsorber);
+//        }
         foreach (var colorUi in DataStructs.ColorParameter)
         {
             parameterColors.Add(colorUi.ParamType, colorUi.Color);
@@ -289,10 +289,10 @@ public class DataBaseController : Singleton<DataBaseController>
         return SpecialsSprites[itemId];
     }
 
-    public Sprite TalismanIcon(TalismanType mp)
-    {
-        return TalismansSprites[mp];
-    }
+//    public Sprite TalismanIcon(TalismanType mp)
+//    {
+//        return TalismansSprites[mp];
+//    }
 
     public Sprite SpellIcon(int id)
     {
@@ -327,14 +327,14 @@ public class DataBaseController : Singleton<DataBaseController>
     {
         return rarityColors[f];
     }
-    public AbsorberWithPosition GetEffect(TalismanType f)
-    {
-        if (TalismanEffects.ContainsKey(f))
-        {
-            return TalismanEffects[f];
-        }
-        return null;
-    }
+//    public AbsorberWithPosition GetEffect(TalismanType f)
+//    {
+//        if (TalismanEffects.ContainsKey(f))
+//        {
+//            return TalismanEffects[f];
+//        }
+//        return null;
+//    }
     public Color GetColor(ParamType f)
     {
         return parameterColors[f];

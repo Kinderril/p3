@@ -14,11 +14,11 @@ public class FireEffect : TimeEffect
     public FireEffect(Unit targetUnit,float power, float totalTime)
         : base(targetUnit, totalTime)
     {
-        this.power = power;
-        EffectType = EffectType.fire;
-        var visualEffect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType);
-        visualEffect.Init(targetUnit, endEffect);
-        targetUnit.StartCoroutine(Burn());
+//        this.power = power;
+////        EffectType = EffectType.fire;
+//        var visualEffect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType);
+//        visualEffect.Init(targetUnit, endEffect);
+//        targetUnit.StartCoroutine(Burn());
     }
 
     private IEnumerator Burn()

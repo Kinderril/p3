@@ -35,7 +35,7 @@ public class Unit : MonoBehaviour
     protected bool isPlayAttack = false;
     public float _shield;
     public IEndEffect OnShieldOff;
-    public List<TimeEffect> efftcs = new List<TimeEffect>();
+    private List<TimeEffect> TimeEffects = new List<TimeEffect>();
     public DeathInfo LastHitInfo;
     public FlashController FlashController;
 
@@ -108,7 +108,8 @@ public class Unit : MonoBehaviour
             spd *= Formuls.SpeedCoef;
             Debug.LogError("Wrong speed " + name);
         }
-        Parameters[ParamType.Speed] = spd / Formuls.SpeedCoef;
+
+        Parameters.SetAbsolute(ParamType.Speed,spd / Formuls.SpeedCoef);
         if (Control == null)
             Control = GetComponent<BaseControl>();
         if (animationController == null)
@@ -241,7 +242,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void GetHit(float power,WeaponType type,DeathInfo info,float mdef = -1,float pdef = -1)
+    public virtual void GetDamage(float power,WeaponType type,DeathInfo info,float mdef = -1,float pdef = -1)
     {
         LastHitInfo = info;
         if (mdef < 0 || pdef < 0)
@@ -285,6 +286,13 @@ public class Unit : MonoBehaviour
 
     public virtual void GetHit(Bullet bullet)
     {
+        var spell = bullet.bulletHolder as SpellInGame;
+        if (spell != null)
+        {
+            AffectSpell(spell);
+            return;
+        }
+
         if (Parameters == null)
         {
             return;
@@ -313,12 +321,12 @@ public class Unit : MonoBehaviour
                     //TODO
                     break;
                 case SpecialAbility.slow:
-                    Parameters[ParamType.Speed] *= Formuls.SLOW_COEF;
+                    Parameters.AddCoef(ParamType.Speed, Formuls.SLOW_COEF); 
                     Control.SetSpeed(Parameters[ParamType.Speed]);
                     break;
                 case SpecialAbility.removeDefence:
-                    Parameters[ParamType.PDef] *= Formuls.REMOVE_DEF_COEF;
-                    Parameters[ParamType.MDef] *= Formuls.REMOVE_DEF_COEF;
+                    Parameters.AddCoef(ParamType.PDef, Formuls.REMOVE_DEF_COEF);
+                    Parameters.AddCoef(ParamType.MDef, Formuls.REMOVE_DEF_COEF);
                     break;
                 case SpecialAbility.vampire:
                     var diff = power*Formuls.VAMP_COEF;
@@ -375,9 +383,83 @@ public class Unit : MonoBehaviour
             sourceType = SourceType.weapon;
         }
 
-        GetHit(power, bullet.bulletHolder.DamageType, new DeathInfo(power, bullet.bulletHolder.DamageType, sourceType), mdef, pdef);
+        GetDamage(power, bullet.bulletHolder.DamageType, new DeathInfo(power, bullet.bulletHolder.DamageType, sourceType), mdef, pdef);
     }
-    
+
+    private void AffectSpell(SpellInGame spell)
+    {
+        foreach (var baseEffect in spell.sourseItem.SpellData.Bullet.Effect)
+        {
+            AffectEffect(baseEffect);
+        }
+    }
+
+    private void AffectEffect(BaseEffect effect)
+    {
+        float coef = 1f;
+        switch (effect.Spectial)
+        {
+//            case EffectSpectials.hpOfSelf:
+//                break;
+            case EffectSpectials.hpOfTarget:
+                break;
+//            case EffectSpectials.heroMPower:
+//                break;
+            case EffectSpectials.dependsOnDist:
+                break;
+        }
+        float value = 0;
+        if (effect.SubEffectData != null)
+        {
+            float curVal = Parameters[effect.SubEffectData.ParamType];
+            switch (effect.SubEffectData.EffectValType)
+            {
+                case EffectValType.abs:
+                    value = effect.SubEffectData.Value;
+                    break;
+                case EffectValType.percent:
+                    value = curVal * effect.SubEffectData.Value;
+                    break;
+            }
+        }
+
+        if (effect.Duration > 0)
+        {
+            if (effect.SubEffectData != null)
+            {
+                var e = new ParameterEffect(this, effect.Duration, effect.SubEffectData.ParamType, value, value > 0,
+                    effect.SubEffectData.EffectValType);
+                TimeEffect.Execute(this, e);
+            }
+            else
+            {
+                if (effect.Spectial == EffectSpectials.stun)
+                {
+                    //TODO
+                }
+            }
+        }
+        else
+        {
+            if (effect.SubEffectData != null)
+            {
+                switch (effect.SubEffectData.EffectValType)
+                {
+                    case EffectValType.abs:
+                        this.Parameters.Add(effect.SubEffectData.ParamType, effect.SubEffectData.Value);
+                        break;
+                    case EffectValType.percent:
+                        this.Parameters.AddCoef(effect.SubEffectData.ParamType, effect.SubEffectData.Value);
+                        break;
+                }
+            }
+            else
+            {
+                Debug.LogError("странный ефект. проверить настройки");
+            }
+        }
+    }
+
     protected virtual void Death()
     {
         if (IsDead)
@@ -420,4 +502,25 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public void AddEffect(TimeEffect effect)
+    {
+        switch (effect.EffectType)
+        {
+            case EffectType.parameter:
+                ParameterEffect pEffect = effect as ParameterEffect;
+                break;
+            case EffectType.heal:
+                break;
+            case EffectType.freez:
+                break;
+            case EffectType.shield:
+                break;
+        }
+        TimeEffects.Add(effect);
+    }
+
+    public void TimeEffectsRemove(TimeEffect effect)
+    {
+        TimeEffects.Remove(effect);
+    }
 }

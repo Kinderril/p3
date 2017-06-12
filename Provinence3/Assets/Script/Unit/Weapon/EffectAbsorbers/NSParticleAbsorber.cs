@@ -8,6 +8,19 @@ using UnityEngine;
 public class NSParticleAbsorber : BaseEffectAbsorber
 {
     public NcParticleSystem uvAnimation;
+
+    void Awake()
+    {
+        if (uvAnimation == null)
+        {
+            uvAnimation = GetComponent<NcParticleSystem>();
+            if (uvAnimation == null)
+            {
+                Debug.LogError("Some effect absorber have null effect");
+            }
+        }
+    }
+
     public override void Play()
     {
 

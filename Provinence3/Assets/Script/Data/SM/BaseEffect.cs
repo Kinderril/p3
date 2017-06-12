@@ -16,9 +16,9 @@ public enum EffectSpectials
 {
     none,
     stun,
-    hpOfSelf,
+//    hpOfSelf,
     hpOfTarget,
-    heroMPower,
+//    heroMPower,
     charging,
     dependsOnDist
 }
@@ -111,9 +111,6 @@ public class BaseEffect
             case EffectPositiveType.Negative:
                 resultPower = -Mathf.Abs(resultPower);
                 break;
-            case EffectPositiveType.Both:
-                resultPower =  SMUtils.Range(0f,1f) < 0.5f ? Mathf.Abs(resultPower) : -Mathf.Abs(resultPower);
-                break;
             default:
                 throw new ArgumentOutOfRangeException("positiveType", positiveType, null);
         }
@@ -131,9 +128,9 @@ public class BaseEffect
         switch (Spectial)
         {
             case EffectSpectials.none:
-            case EffectSpectials.hpOfSelf:
+//            case EffectSpectials.hpOfSelf:
             case EffectSpectials.hpOfTarget:
-            case EffectSpectials.heroMPower:
+//            case EffectSpectials.heroMPower:
             case EffectSpectials.charging:
             case EffectSpectials.dependsOnDist:
 //            case EffectSpectials.bulletCount:
@@ -362,15 +359,15 @@ public class BaseEffect
         }
         switch (Spectial)
         {
-            case EffectSpectials.hpOfSelf:
-                spc += " Depence on heath of hero.";
-                break;
+//            case EffectSpectials.hpOfSelf:
+//                spc += " Depence on heath of hero.";
+//                break;
             case EffectSpectials.hpOfTarget:
                 spc += " Depence on heath of target.";
                 break;
-            case EffectSpectials.heroMPower:
-                spc += " Depence on magic power of hero.";
-                break;
+//            case EffectSpectials.heroMPower:
+//                spc += " Depence on magic power of hero.";
+//                break;
             case EffectSpectials.charging:
                 spc += " Charging for more damage.";
                 break;
@@ -421,15 +418,15 @@ public class BaseEffect
         }
         switch (Spectial)
         {
-            case EffectSpectials.hpOfSelf:
-                spc += " depence on heath of hero";
-                break;
+//            case EffectSpectials.hpOfSelf:
+//                spc += " depence on heath of hero";
+//                break;
             case EffectSpectials.hpOfTarget:
                 spc += " depence on heath of target";
                 break;
-            case EffectSpectials.heroMPower:
-                spc += " depence on magic power of hero";
-                break;
+//            case EffectSpectials.heroMPower:
+//                spc += " depence on magic power of hero";
+//                break;
             case EffectSpectials.charging:
                 spc += " charging for more damage.";
                 break;

@@ -16,6 +16,7 @@ public enum SpellCoreType
 {
     Shoot,
     Summon,
+    Trigger,
 }
 
 public class BaseSpell
@@ -34,7 +35,9 @@ public class BaseSpell
     public BaseBullet Bullet;
     public SpellCoreType SpellCoreType;
     public BaseSummon BaseSummon;
+    public BaseTrigger BaseTrigger;
     public int Level;
+//    public EffectPositiveType EffectPositiveType;
 
     public BaseSpell(SpellTargetType start, SpellTargetType end, SpellCoreType core, 
         int charges, int cost, int bulletCount, int level)
@@ -47,9 +50,28 @@ public class BaseSpell
         BulletCount = bulletCount;
         Cost = cost;
         Name = SpellNameGenerator.GetName();
+//        EffectPositiveType = IsPositive();
     }
 
+    public EffectPositiveType IsPositive()
+    {
 
+        EffectPositiveType type = EffectPositiveType.Negative;
+
+        List< EffectPositiveType > effectse = new List<EffectPositiveType>();
+        foreach (var baseEffect in Bullet.Effect)
+        {
+            if (baseEffect.Value > 0)
+            {
+                effectse.Add(EffectPositiveType.Positive);
+            }
+            else
+            {
+                effectse.Add(EffectPositiveType.Negative);
+            }
+        }
+        return effectse[0];
+    }
 
     public string Save()
     {
@@ -129,6 +151,9 @@ public class BaseSpell
         }
         switch (SpellCoreType)
         {
+            case SpellCoreType.Trigger:
+                targetType = "Trigger spell when " + BaseTrigger.GetDescByType(BaseTrigger.TriggerType) + ". " + targetType;
+                break;
             case SpellCoreType.Shoot:
 
                 break;
@@ -175,6 +200,9 @@ public class BaseSpell
                         break;
                 }
                 targetType = "Summon totem casting every " + BaseSummon.DelayShoot.ToString("0.0") + " Sec " + BaseSummon.ShootCount + " times " + targetType;
+                break;
+            case SpellCoreType.Trigger:
+                targetType = "Trigger spell when" + BaseTrigger.GetDescByType(BaseTrigger.TriggerType)  + targetType;
                 break;
         }
         return  targetType + ". " + Bullet.Desc(this);

@@ -10,6 +10,7 @@ public static class SpellsDataBase
 
     public static Dictionary<int,BaseSpell> Spells = new Dictionary<int, BaseSpell>(); 
     public static Dictionary<int,BaseSummon> Summons = new Dictionary<int, BaseSummon>(); 
+    public static Dictionary<int,BaseTrigger> Triggers = new Dictionary<int, BaseTrigger>(); 
     public static Dictionary<int,BaseEffect> Effects = new Dictionary<int, BaseEffect>(); 
     public static Dictionary<int,BaseBullet> Bullets = new Dictionary<int, BaseBullet>();
 
@@ -17,6 +18,7 @@ public static class SpellsDataBase
     private const string SUMMON_PREF = "SUMMON_PREF"; 
     private const string EFFECTS_PREF = "EFFECTS_PREF"; 
     private const string BULLETS_PREF = "BULLETS_PREF"; 
+    private const string TRIGGERS_PREF = "TRIGGERS_PREF"; 
 
     public static void Add(BaseBullet data)
     {
@@ -64,7 +66,7 @@ public static class SpellsDataBase
         }
     }
 
-    public static void LoadStartSpells()
+    public static void LoadStartSpells(bool withSave = true)
     {
         if (Spells.Count <= 0)
         {
@@ -76,8 +78,10 @@ public static class SpellsDataBase
             CreateSpell(TestSpellPowerChain);
             CreateSpell(TestSpellPower);
             CreateSpell(TestSpellFlameStrike);
+            CreateSpell(TestPercentStrike);
             CreateSpell(TestSpellPowerHeal);
-            SaveDataBase();
+            if (withSave)
+                SaveDataBase();
         }
     }
 
@@ -137,6 +141,12 @@ public static class SpellsDataBase
             saveEffect += baseSpell.Value.Save() + MDEL;
         }
         PlayerPrefs.SetString(EFFECTS_PREF, saveEffect);
+        string saveTrigger = "";
+        foreach (var trigger in Triggers)
+        {
+            saveTrigger += trigger.Value.Save() + MDEL;
+        }
+        PlayerPrefs.SetString(TRIGGERS_PREF, saveTrigger);
     }
     public static void LoadDataBase()
     {
@@ -145,12 +155,21 @@ public static class SpellsDataBase
         var saveBullet = PlayerPrefs.GetString(BULLETS_PREF).Split(MDEL);
         var saveTotem = PlayerPrefs.GetString(SUMMON_PREF).Split(MDEL);
         var saveEffect = PlayerPrefs.GetString(EFFECTS_PREF).Split(MDEL);
+        var saveTriggers = PlayerPrefs.GetString(TRIGGERS_PREF).Split(MDEL);
         foreach (var s in saveEffect)
         {
             if (s.Length > 5)
             {
                 var effect = BaseEffect.Load(s);
                 Effects.Add(effect.Id,effect);
+            }
+        }
+        foreach (var s in saveTriggers)
+        {
+            if (s.Length > 5)
+            {
+                var trigger = BaseTrigger.Load(s);
+                Triggers.Add(trigger.Id,trigger);
             }
         }
 
@@ -220,10 +239,23 @@ public static class SpellsDataBase
         return spell1;
     }
 
+    private static BaseSpell TestPercentStrike()
+    {
+        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 3, 22, 1, 1);
+        var bullet1 = new BaseBullet(1.5f, 1, BaseBulletTarget.target, Vector3.zero, BulletColliderType.noOne, 1);
+        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.percent, ParamType.Heath, -35), EffectSpectials.none);
+        spell1.Bullet = bullet1;
+        spell1.SpellCoreType = SpellCoreType.Trigger;
+        spell1.BaseTrigger = new BaseTrigger(3,SpellTriggerType.shootMagic);
+        bullet1.Effect = new List<BaseEffect>() { effect1 };
+//        LogSpell(spell1, "Flame strike");
+        return spell1;
+    }
+
     private static BaseSpell TestSpellSimpleStrike()
     {
         var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 2, 21, 1, 1);
-        var bullet1 = new BaseBullet(1.5f, 1, BaseBulletTarget.homing, Vector3.one * 1.5f, BulletColliderType.noOne, 1);
+        var bullet1 = new BaseBullet(0.002f, 0, BaseBulletTarget.homing, Vector3.one * 1.5f, BulletColliderType.noOne, 1);
         var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -241), EffectSpectials.none);
         spell1.Bullet = bullet1;
         spell1.SpellCoreType = SpellCoreType.Shoot;
@@ -250,7 +282,8 @@ public static class SpellsDataBase
         var bullet1 = new BaseBullet(1f, 0, BaseBulletTarget.homing, new Vector3(1, 1, 1), BulletColliderType.noOne, 1);
         var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -30), EffectSpectials.none);
         spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Shoot;
+        spell1.SpellCoreType = SpellCoreType.Trigger;
+        spell1.BaseTrigger = new BaseTrigger(1, SpellTriggerType.getDamage);
         bullet1.Effect = new List<BaseEffect>() { effect1 };
 //        LogSpell(spell1, "Split shot");
         return spell1;
@@ -287,10 +320,11 @@ public static class SpellsDataBase
         var time = 12f;
         var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.Self, SpellCoreType.Shoot, 1, 19, 1, 1);
         var bullet1 = new BaseBullet(1f, 0, BaseBulletTarget.homing, new Vector3(4, 4, 4), BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(time, new SubEffectData(EffectValType.percent, ParamType.PPower, 40), EffectSpectials.none);
+        var effect1 = new BaseEffect(time, new SubEffectData(EffectValType.percent, ParamType.PPower, 70), EffectSpectials.none);
         //        var effect2 = new BaseEffect(time, new SubEffectData(EffectValType.percent, ParamType.MPower, 50), EffectSpectials.none);
         spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Shoot;
+        spell1.SpellCoreType = SpellCoreType.Trigger;
+        spell1.BaseTrigger = new BaseTrigger(2,SpellTriggerType.getGold);
         bullet1.Effect = new List<BaseEffect>()
         {
             effect1

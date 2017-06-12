@@ -28,12 +28,12 @@ public struct EffectVisualsBehaviour
     public EffectType type;
     public VisualEffectBehaviour beh;
 }
-[Serializable]
-public struct EffectVisualsTalisman
-{
-    public TalismanType type;
-    public AbsorberWithPosition EffectAbsorber;
-}
+//[Serializable]
+//public struct EffectVisualsTalisman
+//{
+////    public TalismanType type;
+//    public AbsorberWithPosition EffectAbsorber;
+//}
 [Serializable]
 public struct CostItemsByLevel
 {
@@ -45,7 +45,7 @@ public class DataStructs : MonoBehaviour
 {
     public Color HeroHeathColor;
     public Color MonsterHeathColor;
-    public EffectVisualsTalisman[] EffectVisualsTalisman;
+//    public EffectVisualsTalisman[] EffectVisualsTalisman;
     public ColorRarity[] ColorRarity;
     public ColorParameter[] ColorParameter;
     public ColorUI[] ColorsOfUI;
@@ -56,6 +56,9 @@ public class DataStructs : MonoBehaviour
     public const int MISSION_LAST_INDEX = 3;
     public List<BaseBonusMapElement> BaseBonusMapElement;
     public PrefabsStruct PrefabsStruct;
+    public Bullet BaseBullet;
+    public Bullet BaseBulletAOE;
+
     //    public HeroShopBonusItem HeroShopBonusItemPrefab;
     //    public HeroShopExecutableItem HeroShopExecutableItemPrefab;
     //    public HeroShopRandomItem HeroShopRandomItemPrefab;

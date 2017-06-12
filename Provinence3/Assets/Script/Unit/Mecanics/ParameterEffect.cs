@@ -10,21 +10,38 @@ public class ParameterEffect : TimeEffect
 {
     private bool plus;
     public ParamType Type;
-    private float coef;
-    public ParameterEffect(Unit targetUnit, float totalTime, ParamType type, float coef , bool plus = true)
+    private EffectValType typeVal;
+    private float _value;
+    public ParameterEffect(Unit targetUnit, float totalTime, ParamType type, float value , bool plus , EffectValType typeVal)
         : base(targetUnit, totalTime)
     {
         this.Type = type;
+        this.typeVal = typeVal;
         EffectType = EffectType.parameter;
-        this.coef = coef;
+        this._value = value;
         this.plus = plus;
-        if (plus)
+        switch (typeVal)
         {
-            targetUnit.Parameters[type] *= coef;
-        }
-        else
-        {
-            targetUnit.Parameters[type] /= coef;
+            case EffectValType.abs:
+                if (plus)
+                {
+                    targetUnit.Parameters.Add(Type, value);
+                }
+                else
+                {
+                    targetUnit.Parameters.Remove(Type, value);
+                }
+                break;
+            case EffectValType.percent:
+                if (plus)
+                {
+                    targetUnit.Parameters.AddCoef(Type, value);
+                }
+                else
+                {
+                    targetUnit.Parameters.RemoveCoef(Type, value);
+                }
+                break;
         }
         CheckOnSpeed();
         var visualEffect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType);
@@ -45,16 +62,36 @@ public class ParameterEffect : TimeEffect
 
     protected override void OnTimer()
     {
-        if (plus)
-        {
-            targetUnit.Parameters[Type] /= coef;
-        }
-        else
-        {
-            targetUnit.Parameters[Type] *= coef;
-        }
+        EndEffect();
         CheckOnSpeed();
         base.OnTimer();
+    }
+
+    private void EndEffect()
+    {
+        switch (typeVal)
+        {
+            case EffectValType.abs:
+                if (plus)
+                {
+                    targetUnit.Parameters.Remove(Type, _value);
+                }
+                else
+                {
+                    targetUnit.Parameters.Add(Type, _value);
+                }
+                break;
+            case EffectValType.percent:
+                if (plus)
+                {
+                    targetUnit.Parameters.RemoveCoef(Type, _value);
+                }
+                else
+                {
+                    targetUnit.Parameters.AddCoef(Type, _value);
+                }
+                break;
+        }
     }
 }
 

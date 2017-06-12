@@ -34,7 +34,7 @@ public class SpellMergeTestes
         var spell2 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 2, 20, 1, 3);
         var bullet2 = new BaseBullet(0.3f, 0, BaseBulletTarget.target, Vector3.zero, BulletColliderType.noOne, 2);
         var effect2 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -76), EffectSpectials.none);
-        var effect3 = new BaseEffect(10, new SubEffectData(EffectValType.percent, ParamType.PPower, -10), EffectSpectials.hpOfSelf);
+        var effect3 = new BaseEffect(10, new SubEffectData(EffectValType.percent, ParamType.PPower, -10), EffectSpectials.charging);
         spell2.Bullet = bullet2;
         bullet2.Effect = new List<BaseEffect>() { effect2, effect3 };
 
@@ -47,6 +47,12 @@ public class SpellMergeTestes
         LogSpell(SpellMerger.Merge(spell1, spell2), "result2");
         LogSpell(SpellMerger.Merge(spell1, spell2), "result3");
         Console.WriteLine("--------StartPowers------");
+
+        SpellsDataBase.LoadStartSpells(false);
+        foreach (var value in SpellsDataBase.Spells.Values)
+        {
+            LogSpell(value);
+        }
     }
 
 

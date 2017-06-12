@@ -71,33 +71,13 @@ public class BaseMonster : Unit
 
     public void Overcharg()
     {
-        Dictionary<ParamType, float> tmpDictionary = new Dictionary<ParamType, float>();
-        foreach (var unitParameter in Parameters)
-        {
-            float c = 1f;
-            switch (unitParameter.Key)
-            {
-                case ParamType.Speed:
-                    c = 1.15f;
-                    break;
-                case ParamType.MPower:
-                case ParamType.PPower:
-                case ParamType.PDef:
-                case ParamType.MDef:
-                    c = 1.3f;
-                    break;
-                case ParamType.Heath:
-                    c = 2.3f;
-                    curHp = unitParameter.Value*c;
-                    break;
-            }
-            var upg = unitParameter.Value*c;
-            tmpDictionary[unitParameter.Key] = upg;
-        }
-        foreach (var f in tmpDictionary)
-        {
-            Parameters[f.Key] = f.Value;
-        }
+        var c = 1.3f;
+        Parameters.AddCoef(ParamType.Speed, 1.15f);
+        Parameters.AddCoef(ParamType.MPower, c);
+        Parameters.AddCoef(ParamType.PPower, c);
+        Parameters.AddCoef(ParamType.PDef, c);
+        Parameters.AddCoef(ParamType.MDef, c);
+        Parameters.AddCoef(ParamType.Heath, 2.3f);
         transform.localScale = Vector3.one*1.5f;
         overcharged = true;
         moneyCoef *= 4f;

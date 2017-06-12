@@ -281,7 +281,7 @@ public class Map : Singleton<Map>
             enemies.Add(boss);
             var resultBossHP = Formuls.ModifyBossHP(boss, bonuses);
             boss.SetHp(resultBossHP);
-            boss.Parameters[ParamType.Heath] = resultBossHP;
+            boss.Parameters.SetAbsolute(ParamType.Heath, resultBossHP);
             hero.ArrowTarget.Init(boss);
             boss.transform.SetParent(enemiesContainer);
             MainController.Instance.level.BigMessageAppear("Boss have appear", "", Color.red);

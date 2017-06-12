@@ -5,10 +5,10 @@ using System.Text;
 using UnityEngine;
 
 
-public class AOEBullet : HeroBullet
+public class AOEBullet : Bullet
 {
     public bool StayOnPosition;
-    public override void Init(Vector3 target, Weapon weapon)
+    public override void Init(Vector3 target, IBulletHolder weapon)
     {
         base.Init(target, weapon);
         if (StayOnPosition)

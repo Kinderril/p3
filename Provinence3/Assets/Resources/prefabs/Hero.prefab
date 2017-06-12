@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80de761b5a4d4404db1cb232218fed03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 11475076, guid: 4b97b25bf7e0cf1459a7d38f4cbff297, type: 2}
+  bullet: {fileID: 114719273173145630, guid: 4b97b25bf7e0cf1459a7d38f4cbff297, type: 2}
   owner: {fileID: 0}
   pSystemOnShot: {fileID: 11460786}
   Parameters: {fileID: 11400000, guid: 6f0f72c9f726a2842a403ae01e8e8c7b, type: 2}

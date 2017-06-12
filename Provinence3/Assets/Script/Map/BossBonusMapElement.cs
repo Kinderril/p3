@@ -20,8 +20,8 @@ public class BossBonusMapElement : MapObjectWithDeath
     {
         if (isActive)
         {
-            var heroBullet = other.GetComponent<HeroBullet>();
-            if (heroBullet != null)
+            var heroBullet = other.GetComponent<Bullet>();
+            if (heroBullet != null && heroBullet.bulletHolder.Owner is Hero)
             {
                 isActive = false;
                 if (effect != null)

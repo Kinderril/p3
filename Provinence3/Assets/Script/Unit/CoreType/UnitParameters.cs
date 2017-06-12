@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using UnityEngine;
 
@@ -63,16 +64,17 @@ public class UnitParameters : ScriptableObject
     }
     public UnitParametersInGame Get()
     {
-        var p = new UnitParametersInGame();
+        var d = new Dictionary<ParamType,float>();
+        d.Add(ParamType.Speed, Speed);
+        d.Add(ParamType.MPower, MPower);
+        d.Add(ParamType.PPower, PPower);
+        d.Add(ParamType.PDef, physicResist);
+        d.Add(ParamType.MDef, magicResist);
+        d.Add(ParamType.Heath, MaxHp);
+        var p = new UnitParametersInGame(d);
         p.MaxHp = MaxHp;
         p.AttackType = AttackType;
         p.Level = Level;
-        p.Add(ParamType.Speed, Speed);
-        p.Add(ParamType.MPower, MPower);
-        p.Add(ParamType.PPower, PPower);
-        p.Add(ParamType.PDef, physicResist);
-        p.Add(ParamType.MDef, magicResist);
-        p.Add(ParamType.Heath, MaxHp);
         p.SimpleDrop = OtherType(DropItem.type_simple,false);
         p.RareDrop = OtherType(DropItem.type_rare,true);
 
@@ -103,13 +105,70 @@ public class UnitParameters : ScriptableObject
     }
 }
 
-public class UnitParametersInGame : Dictionary<ParamType, float>
+public class UnitParametersInGame// : Dictionary<ParamType, float>
 {
     public List<CraftItemType> SimpleDrop;
     public List<CraftItemType> RareDrop;
-    public float MaxHp;
+    private float _maxHp;
+    public float MaxHp
+    {
+        get { return _maxHp; }
+        set
+        {
+            _maxHp = value;
+            baseParams[ParamType.Heath] = _maxHp;
+        }
+    }
+
     public int Level = 1;
     public AttackType AttackType;
+
+    private Dictionary<ParamType, float> baseParams = new Dictionary<ParamType, float>();
+    private Dictionary<ParamType, float> coefParams = new Dictionary<ParamType, float>();
+    private Dictionary<ParamType, float> effectParams = new Dictionary<ParamType, float>();
+
+    public UnitParametersInGame(Dictionary<ParamType, float> startParams)
+    {
+        foreach (ParamType p in Enum.GetValues(typeof(ParamType)))
+        {
+            baseParams.Add(p, startParams[p]);
+            coefParams.Add(p,1f);
+            effectParams.Add(p,0f);
+        }
+    }
+
+    private float Get(ParamType t)
+    {
+        return (baseParams[t] + effectParams[t])* coefParams[t];
+    }
+
+    public void Add(ParamType t, float v)
+    {
+        effectParams[t] += v;
+    }
+    public void Remove(ParamType t, float v)
+    {
+        effectParams[t] -= v;
+    }
+
+    public void AddCoef(ParamType t,float v)
+    {
+        coefParams[t] *= v;
+    }
+    public void RemoveCoef(ParamType t,float v)
+    {
+        coefParams[t] /= v;
+    }
+
+    public float this[ParamType t]
+    {
+        get { return Get(t); }
+    }
+
+    public void SetAbsolute(ParamType t,float v)
+    {
+        baseParams[t] = v;
+    }
 }
 
 

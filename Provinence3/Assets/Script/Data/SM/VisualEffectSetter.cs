@@ -9,10 +9,12 @@ using UnityEngine;
 public static class VisualEffectSetter
 {
     public static Dictionary<int,Sprite> Icons = new Dictionary<int, Sprite>(); 
+    public static Dictionary<int,AbsorberWithPosition> CastEffects = new Dictionary<int, AbsorberWithPosition>(); 
+    public static Dictionary<int,BaseEffectAbsorber> BulletEffects = new Dictionary<int, BaseEffectAbsorber>(); 
 
-    private const string WAY_TO_ICON = "/Resources/sprites/Spell";
-    private const string WAY_TO_CAST_EFFECT = "";
-    private const string WAY_TO_BULLET = "";
+    private const string WAY_TO_ICON = "/Resources/sprites/Spell/";
+    private const string WAY_TO_CAST_EFFECT = "/Resources/prefabs/visualEffects/Craft/Cast/";
+    private const string WAY_TO_BULLET = "/Resources/prefabs/visualEffects/Craft/Bullet/";
     private const string WAY_TO_HIT = "";
     private const string WAY_TO_TOTEM = "";
     private const string WAY_TO_LONG_EFFECT = "";
@@ -20,6 +22,44 @@ public static class VisualEffectSetter
     public static void LoadAll()
     {
         GetAllIcons();
+        //        GetAllCasts();
+        GetAll<BaseEffectAbsorber>(BulletEffects, WAY_TO_BULLET, "Bullet");
+        GetAll<AbsorberWithPosition>(CastEffects, WAY_TO_CAST_EFFECT, "Cast");
+    }
+
+//    private static void GetAllCasts()
+//    {
+//        string way = Application.dataPath + WAY_TO_CAST_EFFECT;
+//        var files = Directory.GetFiles(way, "*.prefab", SearchOption.AllDirectories);
+//        var c = files.Length;
+//        for (int i = 0; i < c; i++)
+//        {
+//            var way2 = "prefabs/visualEffects/Craft/Cast/" + i.ToString();
+//            var b = UnityEngine.Resources.Load(way2) as GameObject;
+//            CastEffects.Add(i,b.GetComponent<AbsorberWithPosition>());
+//        }
+//    }
+    private static void GetAll<T>(Dictionary<int,T> toDictionary,string way1,string wayLast )
+    {
+        var subType = ".prefab";
+        string way = Application.dataPath + way1;
+        var files = Directory.GetFiles(way, "*"+ subType, SearchOption.AllDirectories);
+
+
+        var c = files.Length;
+        for (int i = 0; i < c; i++)
+        {
+            var fileName = files[i];
+            var lastnameArray = fileName.Split('/');
+            var lastname = lastnameArray[lastnameArray.Length - 1].Replace(subType,"");
+            var way2 = "prefabs/visualEffects/Craft/"+ wayLast + "/" + lastname.ToString();
+            var b = UnityEngine.Resources.Load(way2) as GameObject;
+            if (b == null)
+            {
+                Debug.LogError("Wrong "  + way1 +  "   " + wayLast);
+            }
+            toDictionary.Add(i,b.GetComponent<T>());
+        }
     }
 
     private static void GetAllIcons()
@@ -48,6 +88,8 @@ public static class VisualEffectSetter
 
     public static void Set(BaseSpell spell)
     {
+//        return;
+
         var countIcon = Directory.GetFiles(
              Application.dataPath + WAY_TO_ICON,
              "*.png", SearchOption.AllDirectories).Length;
@@ -100,5 +142,10 @@ public static class VisualEffectSetter
         }
 
     }
+
+//    public static AbsorberWithPosition GetCaseById(int idCast)
+//    {
+//        return DataBaseController.GetItem<AbsorberWithPosition>(CastEffects[idCast]);
+//    }
 }
 

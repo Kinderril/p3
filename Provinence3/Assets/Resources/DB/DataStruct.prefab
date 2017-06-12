@@ -43,31 +43,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeroHeathColor: {r: 0.97794116, g: 0.057525948, b: 0.057525948, a: 0.941}
   MonsterHeathColor: {r: 0.7058823, g: 0.3066937, b: 0, a: 0.853}
-  EffectVisualsTalisman:
-  - type: 0
-    EffectAbsorber: {fileID: 11407062, guid: fdf7e09a55706c648814ec347319e611, type: 2}
-  - type: 4
-    EffectAbsorber: {fileID: 11418646, guid: 9bd9bb685ab280a49933d597eecde02d, type: 2}
-  - type: 3
-    EffectAbsorber: {fileID: 0}
-  - type: 5
-    EffectAbsorber: {fileID: 11400842, guid: 0f270eaed19a67c49865fa634d6080f1, type: 2}
-  - type: 6
-    EffectAbsorber: {fileID: 11413072, guid: da23450165ee33a48bef75c6873b2706, type: 2}
-  - type: 7
-    EffectAbsorber: {fileID: 0}
-  - type: 7
-    EffectAbsorber: {fileID: 0}
-  - type: 8
-    EffectAbsorber: {fileID: 0}
-  - type: 9
-    EffectAbsorber: {fileID: 0}
-  - type: 10
-    EffectAbsorber: {fileID: 11405130, guid: 5c14df52136e69f4ca42b40453a7549e, type: 2}
-  - type: 12
-    EffectAbsorber: {fileID: 0}
-  - type: 11
-    EffectAbsorber: {fileID: 0}
   ColorRarity:
   - Color: {r: 1, g: 1, b: 1, a: 0.528}
     Rarity: 0
@@ -128,6 +103,10 @@ MonoBehaviour:
   - {fileID: 11413902, guid: 2d2fec2785bf138448f90b93165e269e, type: 2}
   - {fileID: 11407316, guid: 3e687f2ce10a5664a8743ac8a02dd41d, type: 2}
   PrefabsStruct: {fileID: 11483194}
+  BaseBullet: {fileID: 114126298536682368, guid: f126400046b449c46b1b55a8e81be46d,
+    type: 2}
+  BaseBulletAOE: {fileID: 114525149422278168, guid: 4d9b09633e580a242ba1c18e9d54ec32,
+    type: 2}
 --- !u!114 &11483194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,7 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RecepiItemInfo: {fileID: 11444668, guid: 2be2df67012fa9649bc4b1e9913ba198, type: 2}
-  TalismanItemInfo: {fileID: 11454610, guid: d30f2b84f848f6c44a995d55048862a6, type: 2}
   SpellItemInfo: {fileID: 114813440709713942, guid: af0f792a18b8c054b9737d8dcfb47bd9,
     type: 2}
   PlayerItemInfo: {fileID: 11439630, guid: 1ab5e148e759a3346af59953a46c1044, type: 2}
