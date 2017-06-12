@@ -306,7 +306,8 @@ public class PlayerData
                 Slot.magic_weapon, Rarity.Normal, p2);
             AddAndEquip(item1);
             AddAndEquip(item2);
-            AddRandomStartSpell();
+            AddRandomStartSpell(0);
+            AddRandomStartSpell(1);
 //            AddRandomStartSpell();
 //            AddFirstTalisman(TalismanType.splitter);
 //            AddFirstTalisman(TalismanType.heal);
@@ -340,9 +341,9 @@ public class PlayerData
         }
     }
 
-    private void AddRandomStartSpell()
+    private void AddRandomStartSpell(int index)
     {
-        var data = SpellsDataBase.Spells[0];
+        var data = SpellsDataBase.Spells[index];
         var spellItem = new SpellItem(data);
         AddAndEquip(spellItem);
     }

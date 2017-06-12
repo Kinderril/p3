@@ -38,7 +38,7 @@ public class MainController : Singleton<MainController>
         try
         {
             PlayerData.Load();
-        }
+        } 
         catch (Exception ex)
         {
             Debug.LogError(":" + ex);

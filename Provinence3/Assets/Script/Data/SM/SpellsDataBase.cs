@@ -71,6 +71,8 @@ public static class SpellsDataBase
         if (Spells.Count <= 0)
         {
             CreateSpell(TestSpellSimpleStrike);
+            CreateSpell(TestPercentStrike);
+            CreateSpell(TestPercentTriggerStrike);
             CreateSpell(TestSpellPowerTotemStrike);
             CreateSpell(TestSpellPowerSplitShot);
             CreateSpell(TestSpellPowerAOE);
@@ -78,12 +80,12 @@ public static class SpellsDataBase
             CreateSpell(TestSpellPowerChain);
             CreateSpell(TestSpellPower);
             CreateSpell(TestSpellFlameStrike);
-            CreateSpell(TestPercentStrike);
             CreateSpell(TestSpellPowerHeal);
             if (withSave)
                 SaveDataBase();
         }
     }
+
 
     private static void CreateSpell(Func<BaseSpell> action)
     {
@@ -227,6 +229,18 @@ public static class SpellsDataBase
         return spell1;
     }
 
+    private static BaseSpell TestPercentStrike()
+    {
+        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 3, 22, 1, 1);
+        var bullet1 = new BaseBullet(0.004f, 0, BaseBulletTarget.homing, Vector3.zero, BulletColliderType.noOne, 1);
+        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.percent, ParamType.Heath, -35), EffectSpectials.none);
+        spell1.Bullet = bullet1;
+        bullet1.Effect = new List<BaseEffect>() { effect1 };
+        //        LogSpell(spell1, "Flame strike");
+        return spell1;
+
+    }
+
     private static BaseSpell TestSpellFlameStrike()
     {
         var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.LookDirection, SpellCoreType.Shoot, 3, 22, 1, 1);
@@ -239,7 +253,7 @@ public static class SpellsDataBase
         return spell1;
     }
 
-    private static BaseSpell TestPercentStrike()
+    private static BaseSpell TestPercentTriggerStrike()
     {
         var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 3, 22, 1, 1);
         var bullet1 = new BaseBullet(1.5f, 1, BaseBulletTarget.target, Vector3.zero, BulletColliderType.noOne, 1);

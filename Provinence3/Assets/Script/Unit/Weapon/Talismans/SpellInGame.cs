@@ -116,10 +116,9 @@ public class SpellInGame : IBulletHolder
     private void UseByData(Unit trg)
     {
         var bulletPrefab = sourseItem.SpellData.Bullet;
-        var effect = DataBaseController.GetItem<BaseEffectAbsorber>(VisualEffectSetter.BulletEffects[bulletPrefab.IdVisual]);
         var bullet = DataBaseController.GetItem<Bullet>(DataBaseController.Instance.DataStructs.BaseBullet);
-        effect.transform.SetParent(bullet.transform,false);
-        effect.transform.localPosition = Vector3.zero;
+
+        bullet.transform.SetParent(Map.Instance.bulletContainer,true);
         Vector3 startPos = Vector3.zero;
         Vector3 endPos = Vector3.zero;
         switch (sourseItem.SpellData.StartType)
@@ -148,12 +147,15 @@ public class SpellInGame : IBulletHolder
         }
         if (sourseItem.SpellData.Bullet.BaseBulletTarget == BaseBulletTarget.target)
         {
-            bullet.Init(trg, this, startPos);
+            bullet.Init(endPos - startPos, this);
         }
         else
         {
-            bullet.Init(endPos-startPos,this);
+            bullet.Init(trg, this, startPos);
         }
+        var effect = DataBaseController.GetItem<BaseEffectAbsorber>(VisualEffectSetter.BulletEffects[bulletPrefab.IdVisual]);
+        effect.transform.SetParent(bullet.transform, false);
+        effect.transform.localPosition = Vector3.zero;
 
 
     }

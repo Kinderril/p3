@@ -290,9 +290,16 @@ public class Unit : MonoBehaviour
         if (spell != null)
         {
             AffectSpell(spell);
-            return;
         }
+        else
+        {
+            return;
+            AffcetSimpleBullet(bullet);
+        }
+ }
 
+    private void AffcetSimpleBullet(Bullet bullet)
+    {
         if (Parameters == null)
         {
             return;
@@ -316,12 +323,12 @@ public class Unit : MonoBehaviour
                     }
                     break;
                 case SpecialAbility.push:
-//                    var owner2 = bullet.weapon.Owner;
-//                    var dir = (transform.position - owner2.transform.position).normalized;
+                    //                    var owner2 = bullet.weapon.Owner;
+                    //                    var dir = (transform.position - owner2.transform.position).normalized;
                     //TODO
                     break;
                 case SpecialAbility.slow:
-                    Parameters.AddCoef(ParamType.Speed, Formuls.SLOW_COEF); 
+                    Parameters.AddCoef(ParamType.Speed, Formuls.SLOW_COEF);
                     Control.SetSpeed(Parameters[ParamType.Speed]);
                     break;
                 case SpecialAbility.removeDefence:
@@ -329,7 +336,7 @@ public class Unit : MonoBehaviour
                     Parameters.AddCoef(ParamType.MDef, Formuls.REMOVE_DEF_COEF);
                     break;
                 case SpecialAbility.vampire:
-                    var diff = power*Formuls.VAMP_COEF;
+                    var diff = power * Formuls.VAMP_COEF;
                     SetHp(CurHp + diff);
                     if (owner is Hero)
                     {
@@ -347,11 +354,11 @@ public class Unit : MonoBehaviour
                 case SpecialAbility.dot:
                     break;
                 case SpecialAbility.distance:
-                    var sqrdist = 1 + (owner.transform.position - transform.position).magnitude *  (Formuls.DISTANCE_COEF);
-                    power *= Mathf.Clamp(sqrdist,Formuls.DISTANCE_MIN,Formuls.DISTANCE_MAX);
+                    var sqrdist = 1 + (owner.transform.position - transform.position).magnitude * (Formuls.DISTANCE_COEF);
+                    power *= Mathf.Clamp(sqrdist, Formuls.DISTANCE_MIN, Formuls.DISTANCE_MAX);
                     break;
                 case SpecialAbility.hp:
-                    var c = ( 1 - CurHp/Parameters.MaxHp)/Formuls.HP_SKILL_COEF;
+                    var c = (1 - CurHp / Parameters.MaxHp) / Formuls.HP_SKILL_COEF;
                     power *= c;
                     break;
                 case SpecialAbility.shield:
@@ -368,7 +375,7 @@ public class Unit : MonoBehaviour
                     Debug.Log("STUN! " + isStun);
                     if (isStun)
                     {
-                        TimeEffect.Creat(this, EffectType.freez,0, Formuls.STUN_TIME_SEC);
+                        TimeEffect.Creat(this, EffectType.freez, 0, Formuls.STUN_TIME_SEC);
                     }
                     break;
             }
@@ -384,6 +391,7 @@ public class Unit : MonoBehaviour
         }
 
         GetDamage(power, bullet.bulletHolder.DamageType, new DeathInfo(power, bullet.bulletHolder.DamageType, sourceType), mdef, pdef);
+
     }
 
     private void AffectSpell(SpellInGame spell)
@@ -418,7 +426,7 @@ public class Unit : MonoBehaviour
                     value = effect.SubEffectData.Value;
                     break;
                 case EffectValType.percent:
-                    value = curVal * effect.SubEffectData.Value;
+                    value = curVal * effect.SubEffectData.Value/100f;
                     break;
             }
         }
@@ -446,10 +454,29 @@ public class Unit : MonoBehaviour
                 switch (effect.SubEffectData.EffectValType)
                 {
                     case EffectValType.abs:
-                        this.Parameters.Add(effect.SubEffectData.ParamType, effect.SubEffectData.Value);
+                        if (effect.SubEffectData.ParamType == ParamType.Heath)
+                        {
+                            var val = Mathf.Abs(effect.SubEffectData.Value);
+                            var d = new DeathInfo(val, WeaponType.magic,SourceType.talisman );
+                            GetDamage(val, WeaponType.magic,d);
+                        }
+                        else
+                        {
+                            this.Parameters.Add(effect.SubEffectData.ParamType, effect.SubEffectData.Value);
+                        }
                         break;
                     case EffectValType.percent:
-                        this.Parameters.AddCoef(effect.SubEffectData.ParamType, effect.SubEffectData.Value);
+                        if (effect.SubEffectData.ParamType == ParamType.Heath)
+                        {
+                            var val = this.CurHp*effect.SubEffectData.Value/100f;
+                            val = Mathf.Abs(val);
+                            var d = new DeathInfo(val, WeaponType.magic, SourceType.talisman);
+                            GetDamage(val, WeaponType.magic, d);
+                        }
+                        else
+                        {
+                            this.Parameters.AddCoef(effect.SubEffectData.ParamType, effect.SubEffectData.Value);
+                        }
                         break;
                 }
             }

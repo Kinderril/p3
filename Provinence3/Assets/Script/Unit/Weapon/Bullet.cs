@@ -59,6 +59,7 @@ public class Bullet : PoolElement
             HitParticleSystem.Stop();
         }
     }
+
     public virtual void Init(Vector3 direction, IBulletHolder weapon)
     {
         if (rebuildY)
@@ -228,12 +229,12 @@ public class Bullet : PoolElement
 
     protected void Death(Unit lastUnitHitted)
     {
-        var spell = bulletHolder as SpellInGame;
-        if (spell != null)
-        {
-            Debug.Log("sadsa");
-            return;
-        }
+//        var spell = bulletHolder as SpellInGame;
+//        if (spell != null)
+//        {
+//            Debug.Log("sadsa");
+//            return;
+//        }
         if (HitParticleSystem != null)
         {
             if (playHitAnyway)
@@ -365,6 +366,12 @@ public class Bullet : PoolElement
 
     void FixedUpdate()
     {
+                var spell = bulletHolder as SpellInGame;
+                if (spell != null)
+                {
+                    Debug.Log("sadsa");
+//                    return;
+                }
         if (IsUsing && updateAction != null)
         {
             updateAction();

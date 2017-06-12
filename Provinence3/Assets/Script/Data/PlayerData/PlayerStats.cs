@@ -19,15 +19,15 @@ public class LevelStat
 
     public string Save()
     {
-        var ss = Index.ToString() + DELEM +//0
-                 MissionIndex.ToString() + DELEM +//1
-                 GoldCollected.ToString() + DELEM +//2
-                 MonstersKilled.ToString() + DELEM +//3
-                 TimeSpendSec.ToString() + DELEM +//4
-                 BossType == null? "Unknown" : BossType.ToString() + DELEM +//5
+        var ss = Index.ToString() + DELEM + //0
+                 MissionIndex.ToString() + DELEM + //1
+                 GoldCollected.ToString() + DELEM + //2
+                 MonstersKilled.ToString() + DELEM + //3
+                 TimeSpendSec.ToString() + DELEM;//4
+        var s2 = ( BossType == null? "Unknown" : BossType.ToString()) + DELEM +//5
                  QuestsCompleted.ToString() + DELEM +//6
                  IsGood.ToString() + DELEM;//7
-        return ss;
+        return ss+s2;
     }
     public static LevelStat Load(string data)
     {

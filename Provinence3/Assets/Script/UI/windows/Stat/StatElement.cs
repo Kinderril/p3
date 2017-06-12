@@ -25,7 +25,7 @@ public class StatElement : MonoBehaviour
         GoldCollected.text = stat.GoldCollected.ToString();
         MonstersKilled.text = stat.MonstersKilled.ToString();
         TimeSpendSec.text = stat.TimeSpendSec.ToString();
-        BossType.text = stat.BossType.ToString();
+        BossType.text = stat.BossType == null?"Unknown": stat.BossType.ToString();
         QuestsCompleted.text = stat.QuestsCompleted.ToString();
         if (stat.IsGood)
         {

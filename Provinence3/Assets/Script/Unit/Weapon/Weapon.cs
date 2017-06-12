@@ -134,7 +134,6 @@ public class Weapon : MonoBehaviour, IBulletHolder
     protected Bullet InstantiateBullet()
     {
         Bullet bullet1 = pool.GetBullet(bullet.ID);   
-//        Bullet bullet1 = Instantiate(bullet.gameObject).GetComponent<Bullet>();
         bullet1.gameObject.transform.SetParent(bulletParent);
         return bullet1;
     }
