@@ -178,12 +178,27 @@ public static class SpellMerger
         return resultSpell;
     }
 
+    public static void CalcEffectResultPower(float power, BaseSpell spell)
+    {
+        var rndPowerTotal = ModifByBulletAndSpell(power, spell); //Посчитали какая мощность будет дана на эффекты в зависимости от кол-ва пули и прочего
+        var countEffects = spell.Bullet.Effect.Count;
+        var delta = rndPowerTotal/(float)countEffects;
+        List<BaseEffect> effects2set = new List<BaseEffect>();
+        foreach (var baseEffect in spell.Bullet.Effect)
+        {
+            var e = BaseEffect.CreateWithBase(baseEffect,delta,spell.TargetType,spell.Level);
+            effects2set.Add(e);
+        }
+        spell.Bullet.Effect = effects2set;
+    }
+
     private static float ModifByBulletAndSpell(float rndPowerTotal, BaseSpell spell)
     {
-        var costCoef = 1f + (spell.Cost - BASE_COST)*COST_COEF;
-        var chargeCoef = 1f + Mathf.Clamp((spell.Charges - 1f)*CHARGE_COEF, 0, 2f);
+//        var costCoef = 1f + (spell.Cost - BASE_COST)*COST_COEF;
+//        var chargeCoef = 1f + Mathf.Clamp((spell.Charges - 1f)*CHARGE_COEF, 0, 2f);
 
-        return rndPowerTotal*chargeCoef*costCoef/SubPower(spell);
+        return rndPowerTotal /SubPower(spell);
+//        return rndPowerTotal /**chargeCoef*costCoef *//SubPower(spell);
     }
 
     public static float GetPowerCoef(BaseSpell spell)

@@ -85,12 +85,23 @@ public class SpellInGame : IBulletHolder
             if (sourseItem.SpellData.StartType == SpellTargetType.ClosestsEnemy
          || sourseItem.SpellData.TargetType == SpellTargetType.ClosestsEnemy)
         {
+            if (owner is Hero)
+            {
                 p = Map.Instance.FindClosesEnemy(owner.transform.position, 40);
                 if (p == null)
                 {
                     haveTrg = false;
 
                 }
+            }
+            else
+            {
+                p = MainController.Instance.level.MainHero;
+            }
+        }
+            if (sourseItem.SpellData.TargetType == SpellTargetType.Self)
+            {
+                p = owner;
             }
             if (haveTrg)
             {
@@ -99,7 +110,7 @@ public class SpellInGame : IBulletHolder
         }
     }
 
-    protected virtual void Use(Unit pos)
+    protected virtual void Use(Unit unit)
     {
         isUnderCooldown = true;
         timer = MainController.Instance.TimerManager.MakeTimer(TimeSpan.FromMilliseconds(1500));
@@ -109,7 +120,7 @@ public class SpellInGame : IBulletHolder
         {
             CastEffect.SetAndPlay(hero);
         }
-        UseByData(pos);
+        UseByData(unit);
         DoCallback();
     }
 

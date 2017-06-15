@@ -10,7 +10,8 @@ public enum ItemId
     money,
     crystal,
     energy,
-    health
+    health,
+    ammo
 }
 
 public enum PoolType
@@ -54,6 +55,7 @@ public class DataBaseController : Singleton<DataBaseController>
     public GoldMapItem GrystalMapItemPrefab;
     public ItemMapItem ItemMapItemPrefab;
     public HealMapItem HealMapItemPrefab;
+    public AmmoMapItem AmmoMapItem;
     public int maxLevel = 20;
     public List<BaseMonster> Monsters;
     public Dictionary<int, List<BaseMonster>> mosntersLevel = new Dictionary<int, List<BaseMonster>>();

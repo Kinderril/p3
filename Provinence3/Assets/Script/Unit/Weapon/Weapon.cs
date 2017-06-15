@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
     private Transform bulletParent;
     private Pool pool;
 
-    public void Init(Unit owner,PlayerItem PlayerItem)
+    public virtual void Init(Unit owner,PlayerItem PlayerItem)
     {
         pool = DataBaseController.Instance.Pool;
         try
@@ -43,7 +43,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
         this.owner = owner;
     }
 
-    public bool CanShoot()
+    public virtual bool CanShoot()
     {
         return Time.time > nexAttackTime;
     }

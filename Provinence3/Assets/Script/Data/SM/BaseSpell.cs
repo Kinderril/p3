@@ -56,21 +56,7 @@ public class BaseSpell
     public EffectPositiveType IsPositive()
     {
 
-        EffectPositiveType type = EffectPositiveType.Negative;
-
-        List< EffectPositiveType > effectse = new List<EffectPositiveType>();
-        foreach (var baseEffect in Bullet.Effect)
-        {
-            if (baseEffect.Value > 0)
-            {
-                effectse.Add(EffectPositiveType.Positive);
-            }
-            else
-            {
-                effectse.Add(EffectPositiveType.Negative);
-            }
-        }
-        return effectse[0];
+        return TargetType == SpellTargetType.Self?EffectPositiveType.Positive : EffectPositiveType.Negative;
     }
 
     public string Save()
@@ -163,7 +149,7 @@ public class BaseSpell
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        return name + targetType + " <> " + Bullet.DescFull(this) + (withCostCharges ? (cost + charges) : "");
+        return name + targetType + " <> " + Bullet.DescFull(this,IsPositive()) + (withCostCharges ? (cost + charges) : "");
     }
 
     public string Desc()
@@ -199,13 +185,28 @@ public class BaseSpell
                         targetType = "to closest enemy";
                         break;
                 }
-                targetType = "Summon totem casting every " + BaseSummon.DelayShoot.ToString("0.0") + " Sec " + BaseSummon.ShootCount + " times " + targetType;
+                if (BaseSummon != null)
+                    targetType = "Summon totem casting every " + BaseSummon.DelayShoot.ToString("0.0") + " Sec " +
+                                 BaseSummon.ShootCount + " times " + targetType;
+                else
+                {
+                    Debug.Log("Wrong summon data");
+                    targetType = "Wrong summon data";
+                }
                 break;
             case SpellCoreType.Trigger:
-                targetType = "Trigger spell when" + BaseTrigger.GetDescByType(BaseTrigger.TriggerType)  + targetType;
+                if (BaseTrigger != null)
+                {
+                    targetType = "Trigger spell when" + BaseTrigger.GetDescByType(BaseTrigger.TriggerType) + targetType;
+                }
+                else
+                {
+                    Debug.Log("Wrong Trigger data");
+                    targetType = "Wrong Trigger data";
+                }
                 break;
         }
-        return  targetType + ". " + Bullet.Desc(this);
+        return  targetType + ". " + Bullet.Desc(this,IsPositive());
     }
 }
 

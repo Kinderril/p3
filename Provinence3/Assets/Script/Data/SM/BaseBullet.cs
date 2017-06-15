@@ -147,7 +147,7 @@ public class BaseBullet
         return (v.x + v.z) / (2 * HUMAN_SIZE);
     }
 
-    public string Desc(BaseSpell spell)
+    public string Desc(BaseSpell spell, EffectPositiveType type)
     {
         var radius = BulletColliderType == BulletColliderType.noOne
             ? "."
@@ -158,14 +158,14 @@ public class BaseBullet
         for (int i = 0; i < Effect.Count; i++)
         {
             var effect = Effect[i];
-            string ss = effect.Desc(spell) + "\n";
+            string ss = effect.Desc(spell, type) + "\n";
             effects += ss;
 
         }
         return "Use" + bulletInfo + radius + " \n Effects:" + effects;
     }
 
-    public string DescFull(BaseSpell spell)
+    public string DescFull(BaseSpell spell,EffectPositiveType type)
     {
         var radius = BulletColliderType == BulletColliderType.noOne
             ? "."
@@ -173,7 +173,7 @@ public class BaseBullet
         var targted = BaseBulletTarget == BaseBulletTarget.homing ? "Homing" : "Targeted";
         var bulletInfo = spell.BulletCount > 1 ? " " + spell.BulletCount + " bullets" : " bullet";
         var mt = " max targets:" + MaxTargets;
-        string effects = Effect.Aggregate("", (current, baseEffect) => current + " {" + baseEffect.DescFull(spell) +"}");
+        string effects = Effect.Aggregate("", (current, baseEffect) => current + " {" + baseEffect.DescFull(spell, type) +"}");
         return targted + bulletInfo + radius + mt + "." + effects;
     }
 

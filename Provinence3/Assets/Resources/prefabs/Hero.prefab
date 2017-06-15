@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 484012}
-  - component: {fileID: 11466590}
+  - component: {fileID: 114975738445959880}
   m_Layer: 0
   m_Name: WeaponPistol
   m_TagString: Untagged
@@ -903,22 +903,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PSystem: {fileID: 19886636}
---- !u!114 &11466590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80de761b5a4d4404db1cb232218fed03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 114719273173145630, guid: 4b97b25bf7e0cf1459a7d38f4cbff297, type: 2}
-  owner: {fileID: 0}
-  pSystemOnShot: {fileID: 11460786}
-  Parameters: {fileID: 11400000, guid: 6f0f72c9f726a2842a403ae01e8e8c7b, type: 2}
-  bulletComeOut: {fileID: 493708}
 --- !u!114 &11468852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -954,7 +938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curWeapon: {fileID: 0}
   InventoryWeapons:
-  - {fileID: 11466590}
+  - {fileID: 114975738445959880}
   - {fileID: 11409188}
   Control: {fileID: 11468852}
   unitType: 0
@@ -5604,6 +5588,22 @@ MonoBehaviour:
   - {fileID: 137950858324699724}
   - {fileID: 137247545510110836}
   - {fileID: 137929613952546166}
+--- !u!114 &114975738445959880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91d6280930df7f4496b645257eb5759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 114719273173145630, guid: 4b97b25bf7e0cf1459a7d38f4cbff297, type: 2}
+  owner: {fileID: 0}
+  pSystemOnShot: {fileID: 0}
+  Parameters: {fileID: 11400000, guid: 6f0f72c9f726a2842a403ae01e8e8c7b, type: 2}
+  bulletComeOut: {fileID: 493708}
 --- !u!114 &114988944243972236
 MonoBehaviour:
   m_ObjectHideFlags: 1

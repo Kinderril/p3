@@ -293,7 +293,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            return;
+//            return;
             AffcetSimpleBullet(bullet);
         }
  }

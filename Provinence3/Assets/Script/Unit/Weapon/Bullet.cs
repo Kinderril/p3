@@ -342,7 +342,11 @@ public class Bullet : PoolElement
             }
             transform.position = Vector3.Lerp(start, trgPos, time);
             var curDist = (start - trgPos).magnitude;
-            var curTime = curDist/startDist2target;
+            var curTime = curDist / startDist2target;
+            if (startDist2target <= 0)
+            { 
+                curTime = 0;
+            }
             if (time > curTime)
             {
                 TryHitTragetUnitAndDEath();
@@ -366,12 +370,6 @@ public class Bullet : PoolElement
 
     void FixedUpdate()
     {
-                var spell = bulletHolder as SpellInGame;
-                if (spell != null)
-                {
-                    Debug.Log("sadsa");
-//                    return;
-                }
         if (IsUsing && updateAction != null)
         {
             updateAction();

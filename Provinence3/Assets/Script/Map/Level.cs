@@ -48,6 +48,7 @@ public class Level
     public Action<bool> OnPause;
 
     public Energy Energy;
+    public Ammo Ammo;
     public Hero MainHero;
     private DictionaryOfItemAndInt moneyInv;
     public int difficult = 1;
@@ -73,6 +74,7 @@ public class Level
         CrystalsBonus = 1;
         QuestController = new LevelQuestController(this);
         Energy = new Energy(ActivaAction,OnRage);
+        Ammo = new Ammo(ActivaAction);
         MissionIndex = levelIndex;
         IndexBornPoint = indexBornPos;
         this.difficult = difficult;
@@ -134,7 +136,8 @@ public class Level
     {
         IsPlaying = true;
         QuestController.Start(this);
-//        Utils.GroundTransform(MainHero.transform);
+        Ammo.AddAmmo(10);
+        //        Utils.GroundTransform(MainHero.transform);
     }
 
     public float Penalty
@@ -210,6 +213,9 @@ public class Level
                 break;
             case ItemId.energy:
                 Energy.Add(value);
+                break;
+            case ItemId.ammo:
+                Ammo.AddAmmo(value);
                 break;
             case ItemId.health:
                 break;

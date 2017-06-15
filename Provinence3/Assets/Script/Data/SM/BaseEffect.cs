@@ -45,10 +45,13 @@ public class BaseEffect
 
     public const int PATTACK_COEF = 8;
     public const int MATTACK_COEF = 9;
-    public const int PDEF_COEF = 6;
-    public const int MDEF_COEF = 5;
+    public const int PDEF_COEF = 5;
+    public const int MDEF_COEF = 7;
     public const int HP_COEF = 40;
+    public const int HP_COEF_ADD = 100;
     public const int SPEED_COEF = 1;
+
+    public const int MODIFY_BY_TYPE = 140;
 
     public int Id;
     public SubEffectData SubEffectData;
@@ -115,28 +118,40 @@ public class BaseEffect
                 throw new ArgumentOutOfRangeException("positiveType", positiveType, null);
         }
         
-        var effect = new BaseEffect(specials, valuesType, paramsTypes, durations, resultPower, level, spell.TargetType);
+        var effect = BaseEffect.Create(specials, valuesType, paramsTypes, durations, resultPower, level, spell.TargetType);
 
         Console.WriteLine("end power:" + effect.CalcValue(spell));
         return effect;
     }
 
-    private BaseEffect(List<EffectSpectials> specials, List<EffectValType> valuesType, List<ParamType> paramsTypes, List<float> durations, float resultPower, int level, SpellTargetType targetType)
+    public static BaseEffect CreateWithBase(BaseEffect oldData,float power, SpellTargetType targetType,int lvl)
     {
-        //MainEffect = //TODO
-        Spectial = specials.RandomElement();
-        switch (Spectial)
+        ParamType t = ParamType.Heath;
+        EffectValType vt = EffectValType.abs;
+        if (oldData.SubEffectData != null)
+        {
+            t = oldData.SubEffectData.ParamType;
+            vt = oldData.SubEffectData.EffectValType;
+        }
+
+        return new BaseEffect(oldData.Spectial,vt,t,oldData.Duration,power,lvl, targetType);
+    }
+
+    public BaseEffect(EffectSpectials special, EffectValType valuesType, ParamType paramsType,
+        float duration, float resultPower, int level, SpellTargetType targetType)
+    {
+        Spectial = special;
+        Duration = duration;
+        switch (special)
         {
             case EffectSpectials.none:
-//            case EffectSpectials.hpOfSelf:
+            //            case EffectSpectials.hpOfSelf:
             case EffectSpectials.hpOfTarget:
-//            case EffectSpectials.heroMPower:
+            //            case EffectSpectials.heroMPower:
             case EffectSpectials.charging:
             case EffectSpectials.dependsOnDist:
-//            case EffectSpectials.bulletCount:
-                SubEffectData = new SubEffectData(valuesType.RandomElement(), paramsTypes.RandomElement(), resultPower);
-                var dur2 = durations.RandomElement(2);
-                Duration = SpellMerger.MergeVal(dur2[0], dur2[1], true);
+                //            case EffectSpectials.bulletCount:
+                SubEffectData = new SubEffectData(valuesType, paramsType, resultPower);
                 if (targetType == SpellTargetType.Self && SubEffectData.ParamType != ParamType.Heath && Duration < 0.1f)
                 {
                     resultPower /= INSTANCE_COEF_SELF_INSTANT;
@@ -152,7 +167,7 @@ public class BaseEffect
         {
             if (SubEffectData.ParamType != ParamType.Heath && Duration > 0.1f)
             {
-                resultPower /= Duration / BASE_DURAION;
+                resultPower /= (Duration / BASE_DURAION);
             }
             resultPower = ModifFromType(resultPower, SubEffectData.ParamType);
             switch (SubEffectData.EffectValType)
@@ -161,11 +176,23 @@ public class BaseEffect
                     Value = resultPower;
                     break;
                 case EffectValType.percent:
-                    Value = Abs2Percent(level, resultPower,SubEffectData.ParamType,Duration <= 0f);
+                    Value = Abs2Percent(level, resultPower, SubEffectData.ParamType, Duration <= 0f);
                     break;
             }
 
         }
+    }
+
+    public static BaseEffect Create(List<EffectSpectials> specials, List<EffectValType> valuesType, List<ParamType> paramsTypes, 
+        List<float> durations, float resultPower, int level, SpellTargetType targetType)
+    {
+        //MainEffect = //TODO
+        var spectial = specials.RandomElement();
+        var valType = valuesType.RandomElement();
+        var paramsType = paramsTypes.RandomElement();
+        var dur2 = durations.RandomElement(2);
+        var duration = SpellMerger.MergeVal(dur2[0], dur2[1], true);
+        return new BaseEffect(spectial,valType,paramsType, duration,resultPower,level,targetType);
     }
 
     public float CalcValue(BaseSpell spell)
@@ -234,7 +261,7 @@ public class BaseEffect
                 cur = SPEED_COEF;
                 break;
             case ParamType.Heath:
-                cur = HP_COEF;
+                cur = HP_COEF_ADD;
                 break;
         }
         return cur;
@@ -242,18 +269,18 @@ public class BaseEffect
 
     private float ModifByType(float abs, ParamType paramType) //Обратная к ModifFromType
     {
-        return abs*HP_COEF/PByType(paramType);
+        return abs* MODIFY_BY_TYPE / PByType(paramType);
     }
 
     private float ModifFromType(float val, ParamType paramType) //Обратная к ModifByType
     {
-        return (PByType(paramType)*val)/HP_COEF;
+        return (PByType(paramType)*val)/ MODIFY_BY_TYPE;
     }
 
 
     private float Abs2Percent(int level, float v, ParamType paramType, bool isIntance)
     {
-        var m = MiddleHPByLevel(level, paramType);
+        var m = MiddleParamByLevel(level, paramType);
         var r = 100 * v / m;
         if (isIntance && paramType != ParamType.Heath)
         {
@@ -264,7 +291,7 @@ public class BaseEffect
 
     private float Percent2Abs(int level, float v,ParamType paramType,bool isIntance)
     {
-        var m = MiddleHPByLevel(level, paramType);
+        var m = MiddleParamByLevel(level, paramType);
         var res = m * v / 100f;
         if (isIntance && paramType != ParamType.Heath)
         {
@@ -273,7 +300,7 @@ public class BaseEffect
         return res;
     }
 
-    public float MiddleHPByLevel(int lvl, ParamType paramType)
+    public float MiddleParamByLevel(int lvl, ParamType paramType)
     {
         switch (paramType)
         {
@@ -282,11 +309,11 @@ public class BaseEffect
             case ParamType.MPower:
                 return 20 + lvl * MATTACK_COEF;
             case ParamType.PDef:
-                return 10 + lvl * PDEF_COEF;
+                return 9 + lvl * PDEF_COEF;
             case ParamType.MDef:
-                return 1 + lvl * MDEF_COEF;
+                return 4 + lvl * MDEF_COEF;
             case ParamType.Heath:
-                return 300 + lvl * HP_COEF;
+                return 500 + lvl * HP_COEF;
             case ParamType.Speed:
                 return 400 + lvl * SPEED_COEF;
         }
@@ -303,7 +330,7 @@ public class BaseEffect
         return power/(40 + 20*spellLevel);
     }
 
-    public string Desc(BaseSpell spell)
+    public string Desc(BaseSpell spell, EffectPositiveType positiveType)
     {
         var evt = "";
 //        var powerStr = " power:" + CalcValue(spell).ToString("0.0") + " ";
@@ -333,7 +360,7 @@ public class BaseEffect
                 var val = Mathf.Abs(SubEffectData.Value).ToString("0.0");
                 if (SubEffectData.ParamType == ParamType.Heath)
                 {
-                    if (SubEffectData.Value > 0)
+                    if (positiveType == EffectPositiveType.Positive)
                     {
                         spc = "Heal on " + val;
                     }
@@ -344,7 +371,7 @@ public class BaseEffect
                 }
                 else
                 {
-                    if (SubEffectData.Value > 0)
+                    if (positiveType == EffectPositiveType.Positive)
                     {
                         spc = "Increase "+ NameParam(SubEffectData.ParamType) + " on " + val;
                     }
@@ -386,7 +413,7 @@ public class BaseEffect
         return p.ToString();
     }
 
-    public string DescFull(BaseSpell spell)
+    public string DescFull(BaseSpell spell, EffectPositiveType type)
     {
         var evt = "";
         var powerStr = " power:" + CalcValue(spell).ToString("0.0") + " ";

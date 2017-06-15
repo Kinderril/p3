@@ -40,7 +40,7 @@ public class SpellItem : BaseItem, IEnhcant
 
     public override string Save()
     {
-        var s = Id.ToString() + MDEL + SpellData.Id.ToString() + MDEL + enchant.ToString();
+        var s = Id.ToString() + MDEL + SpellData.Id.ToString() + MDEL + enchant.ToString()+ MDEL + IsEquped.ToString();
         return s;
     }
 
@@ -59,9 +59,11 @@ public class SpellItem : BaseItem, IEnhcant
         var Id = Convert.ToInt32(pp[0]);
         var IdSpell = Convert.ToInt32(pp[1]);
         var enchant = Convert.ToInt32(pp[2]);
+        var isEquiped = Convert.ToBoolean(pp[3]);
         var spellData = SpellsDataBase.Spells[IdSpell];
         SpellItem spellItem = new SpellItem(spellData);
         spellItem.Id = Id;
+        spellItem.isEquped = isEquiped;
         spellItem.enchant = enchant;
         return spellItem;
     }

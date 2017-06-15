@@ -14,6 +14,24 @@ public class Chest : MonoBehaviour
     public ParticleSystemMultiplier SystemMultiplier;
     private Animator animator;
 
+    public void Init(bool withCrystal, Level lvl)
+    {
+        float m_GroundCheckDistance = 9999f;
+        animator = GetComponent<Animator>();
+        Utils.GroundTransform(transform, m_GroundCheckDistance);
+        Utils.SetRandomRotation(transform);
+        var p = lvl.Penalty;
+        var rnd = (int)(Formuls.GoldInChest(lvl.difficult) * p);
+        items.Add(ItemId.money, GreatRandom.RandomizeValue(rnd));
+        if (withCrystal && p > 0.99f)
+            items.Add(ItemId.crystal, 1);
+        if (SMUtils.Range(0, 100) < 50)
+        {
+            items.Add(ItemId.ammo, SMUtils.Range(5,15));
+        }
+
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (!isOpen)
@@ -42,6 +60,13 @@ public class Chest : MonoBehaviour
                 case ItemId.crystal:
                     prefab = DataBaseController.Instance.GrystalMapItemPrefab;
                     break;
+                case ItemId.ammo:
+                    var prefab2 = DataBaseController.Instance.AmmoMapItem;
+                    var ammo = DataBaseController.GetItem<AmmoMapItem>(prefab2,transform.position);
+                    ammo.Init(ItemId.ammo, 10, true);
+                    SubInitMapItem(ammo);
+                    return;
+                    break;
                 default:
                     prefab = DataBaseController.Instance.GoldMapItemPrefab;
                     break;
@@ -50,9 +75,14 @@ public class Chest : MonoBehaviour
                 transform.position);
 
             mo.Init(item.Key, item.Value,true);
-            mo.transform.SetParent(Map.Instance.miscContainer,true);
-            mo.StartFly(transform);
+            SubInitMapItem(mo);
         }
+    }
+
+    private void SubInitMapItem(BaseMapItem item)
+    {
+        item.transform.SetParent(Map.Instance.miscContainer, true);
+        item.StartFly(transform);
     }
 
     private void PlayOpen()
@@ -64,18 +94,5 @@ public class Chest : MonoBehaviour
         }
     }
 
-    public void Init(bool withCrystal,Level lvl)
-    {
-		float m_GroundCheckDistance = 9999f;
-        animator = GetComponent<Animator>();
-        Utils.GroundTransform(transform, m_GroundCheckDistance);
-        Utils.SetRandomRotation(transform);
-        var p = lvl.Penalty;
-        var rnd = (int)(Formuls.GoldInChest(lvl.difficult) * p); 
-        items.Add(ItemId.money,GreatRandom.RandomizeValue(rnd));
-        if (withCrystal && p > 0.99f)
-            items.Add(ItemId.crystal, 1);
-
-    }
 }
 

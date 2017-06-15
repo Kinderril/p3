@@ -86,11 +86,17 @@ public static class SpellsDataBase
         }
     }
 
+    private static float PowerSpellFromLvl(int lvl)
+    {
+        return lvl*70 + 190;
+    }
 
-    private static void CreateSpell(Func<BaseSpell> action)
+    private static void CreateSpell(Func<BaseSpell> action,int lvl = 1)
     {
         var spell = action();
         VisualEffectSetter.Set(spell);
+        var power = PowerSpellFromLvl(lvl);
+        SpellMerger.CalcEffectResultPower(power, spell);
         SaveSpell(spell);
     } 
 

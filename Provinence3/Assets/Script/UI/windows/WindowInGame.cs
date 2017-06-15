@@ -26,6 +26,7 @@ public class WindowInGame : BaseWindow
     public QuestInfo QuestActive;
     private Level level;
     public Text EndGameText;
+    public Text AmmoField;
     public FaderWindow FaderWindow;
 
     public override void Init<T>(T obj)
@@ -240,6 +241,9 @@ public class WindowInGame : BaseWindow
                 item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
                 item.transform.SetParent(moneyContainer);
                 item.Init("+" + Mathf.Abs(delta).ToString("0")+ " Energy", DataBaseController.Instance.GetColor(itemType), FlyNumerDirection.non,30);
+                break;
+            case ItemId.ammo:
+                AmmoField.text = "Ammo:" + delta.ToString();
                 break;
         }
     }

@@ -87,15 +87,13 @@ MonoBehaviour:
     money: 1400
   EffectVisualsBehaviours:
   - type: 0
-    beh: {fileID: 11449360, guid: 6f3c6fc0dd451e74f93abfecf0bdae7a, type: 2}
-  - type: 2
-    beh: {fileID: 11485206, guid: bed4bd9f35ff7e44fb840759298db891, type: 2}
-  - type: 4
-    beh: {fileID: 11425332, guid: b12a16778f9b0224298449f01d094f4e, type: 2}
-  - type: 5
-    beh: {fileID: 11449676, guid: e045e72b6a66f7844aa4957eb998832f, type: 2}
-  - type: 1
     beh: {fileID: 11455392, guid: 0cf5fa672fb0b1d43be5c1842d9097cb, type: 2}
+  - type: 1
+    beh: {fileID: 11485206, guid: bed4bd9f35ff7e44fb840759298db891, type: 2}
+  - type: 2
+    beh: {fileID: 11427850, guid: 6187ca18dfd73f84381e6a6df4530b5a, type: 2}
+  - type: 3
+    beh: {fileID: 11449676, guid: e045e72b6a66f7844aa4957eb998832f, type: 2}
   BaseBonusMapElement:
   - {fileID: 11441986, guid: a6455efdb7ed4fb46905b47cc35954fc, type: 2}
   - {fileID: 11423788, guid: 05ede93fe9ae27543b197450205ca4c3, type: 2}

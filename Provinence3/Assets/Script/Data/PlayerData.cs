@@ -251,13 +251,7 @@ public class PlayerData
             MainParameters.Add(global::MainParam.HP, 1);
             MainParameters.Add(global::MainParam.DEF, 1);
         }
-#if UNITY_EDITOR
-        if (DebugController.Instance.GET_START_BOOST)
-        {
-            playerInv[ItemId.money] += 1000;
-            playerInv[ItemId.crystal] += 10;
-        }
-#endif
+
         OpenLevels = new OpenLevels(_isTutorialComplete);
 //        CheckIfFirstLevel();
     }
@@ -318,11 +312,19 @@ public class PlayerData
                 PlayerItem item3 = new PlayerItem(new Dictionary<ParamType, float>() {{ParamType.PDef, 25}}, Slot.body,
                     Rarity.Rare, 25);
                 AddAndEquip(item3);
+                for (int i = 2; i < 11; i++)
+                {
+                    try
+                    {
 
-//                foreach (var ability in ShopController.AllTalismanstypes)
-//                {
-//                    AddFirstTalisman(ability);
-//                }
+                        AddRandomStartSpell(i);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
             }
             if (DebugController.Instance.GET_ALL_TYPE_WEAPONS_BOOST)
             {
