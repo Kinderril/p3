@@ -20,6 +20,7 @@ public class WindowManager : Singleton<WindowManager>
     public Camera MainCamera;
     public Camera SubCamera;
     public ConfirmWindow ConfirmWindow;
+    public WindowSellWithCount ConfirmWindowWithCount;
     public InfoWindow InfoWindow;
     private GameObject planeX;
     public GameObject MainBack;
@@ -39,6 +40,7 @@ public class WindowManager : Singleton<WindowManager>
             window.window.Activate();
         }
         ConfirmWindow.gameObject.SetActive(false);
+        ConfirmWindowWithCount.gameObject.SetActive(false);
         InfoWindow.gameObject.SetActive(false);
     }
 

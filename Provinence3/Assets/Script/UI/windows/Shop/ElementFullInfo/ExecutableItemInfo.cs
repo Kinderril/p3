@@ -56,4 +56,15 @@ public class ExecutableItemInfo : InventoryItemInfo
                 break;
         }
     }
+
+    public override void OnSell()
+    {
+        ExecutableItem executableItem = BaseItem as ExecutableItem;
+        WindowManager.Instance.ConfirmWindowWithCount.Init(OnSellOk,null, "do you wnat to sell it?", executableItem.count);
+    }
+
+    private void OnSellOk(int count)
+    {
+        MainController.Instance.PlayerData.Sell(BaseItem, count);
+    }
 }

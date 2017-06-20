@@ -398,11 +398,18 @@ public class Unit : MonoBehaviour
     {
         foreach (var baseEffect in spell.sourseItem.SpellData.Bullet.Effect)
         {
-            AffectEffect(baseEffect);
+            AffectEffect(baseEffect, spell);
         }
     }
 
-    private void AffectEffect(BaseEffect effect)
+    private float PenltyCoef(int lvlUnit, int lvlSpell)
+    {
+        if (lvlSpell >= lvlUnit)
+            return 1f;
+        return Mathf.Clamp(1f - (lvlUnit - lvlSpell)*0.2f,0f,1f);
+    }
+
+    private void AffectEffect(BaseEffect effect, SpellInGame spell)
     {
         float coef = 1f;
         switch (effect.Spectial)
@@ -426,7 +433,8 @@ public class Unit : MonoBehaviour
                     value = effect.SubEffectData.Value;
                     break;
                 case EffectValType.percent:
-                    value = curVal * effect.SubEffectData.Value/100f;
+                    var p = PenltyCoef(Parameters.Level, spell.sourseItem.SpellData.Level);
+                    value = curVal * effect.SubEffectData.Value/100f* p;
                     break;
             }
         }
@@ -468,7 +476,8 @@ public class Unit : MonoBehaviour
                     case EffectValType.percent:
                         if (effect.SubEffectData.ParamType == ParamType.Heath)
                         {
-                            var val = this.CurHp*effect.SubEffectData.Value/100f;
+                            var p = PenltyCoef(Parameters.Level, spell.sourseItem.SpellData.Level);
+                            var val = this.CurHp*effect.SubEffectData.Value/100f * p;
                             val = Mathf.Abs(val);
                             var d = new DeathInfo(val, WeaponType.magic, SourceType.talisman);
                             GetDamage(val, WeaponType.magic, d);

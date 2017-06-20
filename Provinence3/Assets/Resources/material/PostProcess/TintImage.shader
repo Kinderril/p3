@@ -1,4 +1,6 @@
-﻿Shader "PostProcess/TintImage"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "PostProcess/TintImage"
 {
 	Properties
 	{
@@ -21,7 +23,7 @@
 	v2f vert(appdata_img v)
 	{
 		v2f o = (v2f)0;
-		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv = v.texcoord;
 
 		return o;

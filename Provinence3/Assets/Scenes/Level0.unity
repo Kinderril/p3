@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 8
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,6 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -32,16 +33,16 @@ RenderSettings:
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
+  m_DefaultReflectionResolution: 512
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.450944, g: 0.5008172, b: 0.57445246, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 9
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -53,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 4
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -67,14 +68,28 @@ LightmapSettings:
       type: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 112000138, guid: a782a2be6f4f2b7428ad40123d5df073,
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFiltering: 0
+    m_PVRFilteringMode: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
+  m_LightingDataAsset: {fileID: 112000290, guid: a782a2be6f4f2b7428ad40123d5df073,
     type: 2}
-  m_RuntimeCPUUsage: 50
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -91,6 +106,8 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 23800000, guid: d9012e3bea2ddc24ebe82ab6f032ef31, type: 2}
 --- !u!1001 &25640041
@@ -1879,19 +1896,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 402562, guid: 31d8c2ccf25d4d74ea9ee5eca0d1ab7f, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.30391362
+      value: 0.3039136
       objectReference: {fileID: 0}
     - target: {fileID: 402562, guid: 31d8c2ccf25d4d74ea9ee5eca0d1ab7f, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.5521606
+      value: 0.55216056
       objectReference: {fileID: 0}
     - target: {fileID: 402562, guid: 31d8c2ccf25d4d74ea9ee5eca0d1ab7f, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.5778201
+      value: -0.57782006
       objectReference: {fileID: 0}
     - target: {fileID: 402562, guid: 31d8c2ccf25d4d74ea9ee5eca0d1ab7f, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.5185357
+      value: 0.5185356
       objectReference: {fileID: 0}
     - target: {fileID: 402562, guid: 31d8c2ccf25d4d74ea9ee5eca0d1ab7f, type: 2}
       propertyPath: m_RootOrder
@@ -3417,7 +3434,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 710711997}
   m_Enabled: 1
-  serializedVersion: 7
+  serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1.16
@@ -3442,6 +3459,8 @@ Light:
   m_Lightmapping: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &710711999
@@ -4668,19 +4687,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425706, guid: 17fd0ffc39e16074dbbd5517db3f61ff, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.54169273
+      value: 0.5416927
       objectReference: {fileID: 0}
     - target: {fileID: 425706, guid: 17fd0ffc39e16074dbbd5517db3f61ff, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.32950157
+      value: 0.32950154
       objectReference: {fileID: 0}
     - target: {fileID: 425706, guid: 17fd0ffc39e16074dbbd5517db3f61ff, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.30124673
+      value: -0.3012467
       objectReference: {fileID: 0}
     - target: {fileID: 425706, guid: 17fd0ffc39e16074dbbd5517db3f61ff, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.71221364
+      value: 0.7122136
       objectReference: {fileID: 0}
     - target: {fileID: 425706, guid: 17fd0ffc39e16074dbbd5517db3f61ff, type: 2}
       propertyPath: m_RootOrder

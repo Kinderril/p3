@@ -16,8 +16,9 @@ public abstract class InventoryItemInfo : BaseItemInfo
         SellButton.gameObject.SetActive(WithButtons);
     }
 
-    public void OnSell()
+    public virtual void OnSell()
     {
+
         WindowManager.Instance.ConfirmWindow.Init(() => MainController.Instance.PlayerData.Sell(BaseItem),
             null, "do you wnat to sell it?");
     }

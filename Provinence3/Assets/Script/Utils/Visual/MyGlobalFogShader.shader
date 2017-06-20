@@ -1,4 +1,6 @@
-﻿ 
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+ 
  
  
 Shader "Hidden/MyGlobalFogShader" {
@@ -53,7 +55,7 @@ CGINCLUDE
         #endif
        
         int index = (int)floor(xx+yy*2 + 0.5);
-        o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+        o.pos = UnityObjectToClipPos(v.vertex);
        
         o.uv2 = uv;
        

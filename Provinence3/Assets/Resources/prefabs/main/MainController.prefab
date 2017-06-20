@@ -58,6 +58,8 @@ MonoBehaviour:
     type: 2}
   ItemMapItemPrefab: {fileID: 11418410, guid: 3f3b9b2e41ef7c045bfa82437578d2fc, type: 2}
   HealMapItemPrefab: {fileID: 11405422, guid: e9d8a5c7921a48540bb18f08e59fe033, type: 2}
+  AmmoMapItem: {fileID: 114600665203093712, guid: 6751f1e85a4dd184b8d8014524e1face,
+    type: 2}
   maxLevel: 20
   Monsters:
   - {fileID: 11488782, guid: 4ec4aba656f59054ab427246e52db548, type: 2}
@@ -105,6 +107,7 @@ MonoBehaviour:
   MainCamera: {fileID: 0}
   SubCamera: {fileID: 0}
   ConfirmWindow: {fileID: 0}
+  ConfirmWindowWithCount: {fileID: 0}
   InfoWindow: {fileID: 0}
   MainBack: {fileID: 0}
   UIPool: {fileID: 0}
@@ -119,7 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec381d4dac79b0f438592670f0a5fc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RejectedTalismanTypes: 0b0000000100000002000000
   RejectedSpecialAbilities: 040000000500000009000000070000000200000001000000
 --- !u!114 &11431316
 MonoBehaviour:
@@ -159,14 +161,14 @@ MonoBehaviour:
   ALL_TIME_DROP: 0
   ALL_TALISMAN_CHARGED: 0
   MAIN_HERO_MEGAHP: 1
-  LESS_COUNT_BOSS_COME: 1
+  LESS_COUNT_BOSS_COME: 0
   GET_START_BOOST: 0
-  GET_ALL_TYPE_WEAPONS_BOOST: 0
+  GET_ALL_TYPE_WEAPONS_BOOST: 1
   RESPAWN_TIME_CREEPS_FAST: 0
   ALWAYS_GOOD_END: 0
   CHANCE_STUN_100: 0
   QUEST_REWARD_ITEM: 0
-  QUEST_COMPLETE: 1
+  QUEST_COMPLETE: 0
   InfoField1: {fileID: 0}
   InfoField2: {fileID: 0}
 --- !u!1001 &100100000

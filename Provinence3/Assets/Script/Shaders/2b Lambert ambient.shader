@@ -1,4 +1,6 @@
-﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
 
 Shader "Shantanu Bhadoria/Basic/2b Lambert - Ambient" {
 	Properties {
@@ -46,7 +48,7 @@ Shader "Shantanu Bhadoria/Basic/2b Lambert - Ambient" {
 				float3 lightFinal = diffuseReflection + UNITY_LIGHTMODEL_AMBIENT.xyz;
 				
 				o.col = float4(lightFinal * _Color.rgb,1.0);
-				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.pos = UnityObjectToClipPos(v.vertex);
 				return o;			
 			}
 			

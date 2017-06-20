@@ -1,4 +1,6 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
 
 Shader "Shantanu Bhadoria/Basic/6 Texture Map" {
@@ -51,7 +53,7 @@ Shader "Shantanu Bhadoria/Basic/6 Texture Map" {
 				
 				o.normalDir = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz );
 				
-				o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
+				o.pos = UnityObjectToClipPos( v.vertex );
 				o.tex = v.texcoord;
 				
 				return o;
@@ -131,7 +133,7 @@ Shader "Shantanu Bhadoria/Basic/6 Texture Map" {
 				
 				o.normalDir = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz );
 				
-				o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
+				o.pos = UnityObjectToClipPos( v.vertex );
 				o.tex = v.texcoord;
 				
 				return o;

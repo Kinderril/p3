@@ -506,15 +506,15 @@ public class PlayerData
         Save();
     }
 
-    public void Sell(BaseItem playerItem)
+    public void Sell(BaseItem playerItem,int cnt = 1)
     {
         if (!MainController.Instance.PlayerData.IsTutorialComplete)
         {
             WindowManager.Instance.InfoWindow.Init(() => { }, "You can't sell item before tutorial");
             return;
         }
-        AddCurrensy(ItemId.money, playerItem.cost);
-        RemoveItem(playerItem);
+        AddCurrensy(ItemId.money, playerItem.cost * cnt);
+        RemoveItem(playerItem, cnt);
         Save();
     }
 

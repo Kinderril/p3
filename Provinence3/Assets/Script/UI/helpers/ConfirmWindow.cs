@@ -11,7 +11,7 @@ public class ConfirmWindow : MonoBehaviour
     private Action onConfirm;
     private Action onReject ;
     public Text labelField;
-    public void Init(Action onConfirm, Action onReject,string ss)
+    public virtual void Init(Action onConfirm, Action onReject,string ss)
     {
         this.onConfirm = onConfirm;
         this.onReject = onReject;
@@ -20,13 +20,13 @@ public class ConfirmWindow : MonoBehaviour
         transform.SetAsLastSibling();
     }
 
-    public void OnConfirmClick()
+    public virtual void OnConfirmClick()
     {
         if (onConfirm != null)
             onConfirm();
         gameObject.SetActive(false);
     }
-    public void OnRejectClick()
+    public virtual void OnRejectClick()
     {
         if (onReject != null)
             onReject();
