@@ -194,11 +194,7 @@ public static class SpellMerger
 
     private static float ModifByBulletAndSpell(float rndPowerTotal, BaseSpell spell)
     {
-//        var costCoef = 1f + (spell.Cost - BASE_COST)*COST_COEF;
-//        var chargeCoef = 1f + Mathf.Clamp((spell.Charges - 1f)*CHARGE_COEF, 0, 2f);
-
         return rndPowerTotal /SubPower(spell);
-//        return rndPowerTotal /**chargeCoef*costCoef *//SubPower(spell);
     }
 
     public static float GetPowerCoef(BaseSpell spell)

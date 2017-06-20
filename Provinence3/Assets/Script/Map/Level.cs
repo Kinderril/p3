@@ -44,6 +44,7 @@ public class Level
     public Action<BossUnit> OnBossAppear;
     public Action<CraftItemType, int> OnCraftItemCollected;
     public Action OnEndLevel;
+    public Action TriggerZeroAmmo;
     public Action<EndlevelType> OnPreEndLevel;
     public Action<bool> OnPause;
 
@@ -74,7 +75,7 @@ public class Level
         CrystalsBonus = 1;
         QuestController = new LevelQuestController(this);
         Energy = new Energy(ActivaAction,OnRage);
-        Ammo = new Ammo(ActivaAction);
+        Ammo = new Ammo(ActivaAction, TriggerZeroActivate);
         MissionIndex = levelIndex;
         IndexBornPoint = indexBornPos;
         this.difficult = difficult;
@@ -90,6 +91,14 @@ public class Level
 
     
 
+    }
+
+    private void TriggerZeroActivate()
+    {
+        if (TriggerZeroAmmo != null)
+        {
+            TriggerZeroAmmo();
+        }
     }
 
     public IEnumerator Load(Action<Level> callback)
@@ -161,7 +170,7 @@ public class Level
     }
 
     public bool IsPause { get; set; }
-    
+
     public void BigMessageAppear(string txt, string subTxt,Color color,float speed = 1)
     {
         var item = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberWithPicture);
@@ -215,6 +224,7 @@ public class Level
                 Energy.Add(value);
                 break;
             case ItemId.ammo:
+                moneyInv[type] += value;
                 Ammo.AddAmmo(value);
                 break;
             case ItemId.health:

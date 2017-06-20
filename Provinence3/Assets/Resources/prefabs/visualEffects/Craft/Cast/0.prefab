@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80936b170e97b0459efbb3ef75563d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VisualEffectPosition: 1
+  VisualEffectPosition: 0
   Absorber: {fileID: 114842343602785880}
 --- !u!114 &114357253230724726
 MonoBehaviour:

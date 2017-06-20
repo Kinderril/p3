@@ -17,16 +17,18 @@ public abstract class HeroShopRandomItem : IShopExecute
                 MainController.Instance.PlayerData.AddItem(CreatMainSlot(slot, level));
                 break;
             case Slot.Talisman:
-                MainController.Instance.PlayerData.AddItem(CreaSpell(level));
+                MainController.Instance.PlayerData.AddItem(CreatSpell(level));
                 break;
         }
         randomCreatAdditionalItem();
         base.Execute(level);
     }
 
-    private BaseItem CreaSpell(int level)
+    private BaseItem CreatSpell(int level)
     {
-        throw new NotImplementedException();
+        BaseSpell spelldata = SpellsDataBase.CreatSpellData(level);
+        var item = new SpellItem(spelldata);
+        return item;
     }
 
     public override int MoneyCost

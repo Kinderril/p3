@@ -15,7 +15,15 @@ public class SpellItem : BaseItem, IEnhcant
     {
         Slot = Slot.Talisman;
         SpellData = spellData;
+//        Id = 
+        CostMoney();
         LoadTexture();
+    }
+
+    private void CostMoney()
+    {
+        var power = SpellMerger.GetPowerCoef(SpellData);
+        cost = (int)power*7;
     }
 
     public override char FirstChar()

@@ -42,6 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HeroHeathColor: {r: 0.97794116, g: 0.057525948, b: 0.057525948, a: 0.941}
+  AmmoColor: {r: 0.9558824, g: 0.9306765, b: 0.59039795, a: 1}
   MonsterHeathColor: {r: 0.7058823, g: 0.3066937, b: 0, a: 0.853}
   ColorRarity:
   - Color: {r: 1, g: 1, b: 1, a: 0.528}

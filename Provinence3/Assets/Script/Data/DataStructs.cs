@@ -44,6 +44,7 @@ public struct CostItemsByLevel
 public class DataStructs : MonoBehaviour
 {
     public Color HeroHeathColor;
+    public Color AmmoColor;
     public Color MonsterHeathColor;
 //    public EffectVisualsTalisman[] EffectVisualsTalisman;
     public ColorRarity[] ColorRarity;

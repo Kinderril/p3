@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class WindowInGame : BaseWindow
 {
+    private const string AMMO_GLOW = "glow";
+    
     public MainTutorialWindow MainTutorialWindow;
     public Slider TImeSlider;
     public Slider HealthSlider;
@@ -28,6 +30,7 @@ public class WindowInGame : BaseWindow
     public Text EndGameText;
     public Text AmmoField;
     public FaderWindow FaderWindow;
+    public Animator AmmoAnimator;
 
     public override void Init<T>(T obj)
     {
@@ -51,6 +54,7 @@ public class WindowInGame : BaseWindow
         moneyField.Init(0,3600);
         UiControls.Init(level);
         level.Energy.OnLeft += OnLeft;
+        level.TriggerZeroAmmo += TriggerZeroAmmon;
         level.Energy.OnRage += OnRage;
         level.OnItemCollected += OnItemCollected;
         level.OnCraftItemCollected += OnCraftItemCollected;
@@ -206,6 +210,7 @@ public class WindowInGame : BaseWindow
 //        WindowManager.Instance.MainBack.gameObject.SetActive(true);
         MonsterInfo.DeInit();
         UiControls.Enable(false);
+        level.TriggerZeroAmmo -= TriggerZeroAmmon;
         level.OnEndLevel -= OnEndLevel;
         level.Energy.OnLeft -= OnLeft;
         level.Energy.OnRage -= OnRage;
@@ -243,7 +248,13 @@ public class WindowInGame : BaseWindow
                 item.Init("+" + Mathf.Abs(delta).ToString("0")+ " Energy", DataBaseController.Instance.GetColor(itemType), FlyNumerDirection.non,30);
                 break;
             case ItemId.ammo:
-                AmmoField.text = "Ammo:" + delta.ToString();
+                var isZero = delta == 0;
+                Utils.DeactivateIfNedd(AmmoField.gameObject,!isZero);
+                if (!isZero)
+                {
+                    AmmoField.text = level.Ammo.CurAmmo.ToString();
+                }
+                DrawAmmoGet((int)delta);
                 break;
         }
     }
@@ -251,6 +262,24 @@ public class WindowInGame : BaseWindow
     private string GetDeltaStr(float delta)
     {
         return ((delta > 0) ? "+" : "") + delta.ToString("0");
+    }
+
+    public void TriggerZeroAmmon()
+    {
+        AmmoAnimator.SetTrigger(AMMO_GLOW);
+    }
+
+    public void DrawAmmoGet(int ammo)
+    {
+        if (ammo <= 0)
+            return;
+        var number = DataBaseController.Instance.Pool.GetItemFromPool<FlyingNumbers>(PoolType.flyNumberInUI);
+        if (number != null)
+        {
+            number.transform.SetParent(transform);
+            number.transform.position = hitTransform.position;
+            number.Init(GetDeltaStr(ammo) + " ammo", DataBaseController.Instance.DataStructs.AmmoColor);
+        }
     }
 
     private void OnHeroHit(float cur_HP, float maxHp,float delta)

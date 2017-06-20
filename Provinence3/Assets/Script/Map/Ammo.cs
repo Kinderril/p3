@@ -6,29 +6,39 @@ using System.Text;
 
 public class Ammo
 {
-    public int curAmmon;
+    public int CurAmmo { get; private set; }
     private Action<ItemId, int> activaAction;
+    private Action TriggerZeroAmmo;
 
-    public Ammo(Action<ItemId, int> activaAction)
+    public Ammo(Action<ItemId, int> activaAction,Action triggerZeroAmmo)
     {
         this.activaAction = activaAction;
+        this.TriggerZeroAmmo = triggerZeroAmmo;
     }
 
     public void DoShoot()
     {
-        curAmmon--;
-        activaAction(ItemId.ammo, curAmmon);
+        CurAmmo--;
+        activaAction(ItemId.ammo, -1);
     }
 
     public bool CanShoot()
     {
-        return curAmmon > 0;
+        bool b = CurAmmo > 0;
+        if (!b)
+        {
+            if (TriggerZeroAmmo != null)
+            {
+                TriggerZeroAmmo();
+            }
+        }
+        return b;
     }
 
     public void AddAmmo(int ammo)
     {
-        curAmmon += ammo;
-        activaAction(ItemId.ammo, curAmmon);
+        CurAmmo += ammo;
+        activaAction(ItemId.ammo, ammo);
     }
 }
 

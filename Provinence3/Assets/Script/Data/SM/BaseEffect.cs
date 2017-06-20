@@ -305,9 +305,9 @@ public class BaseEffect
         switch (paramType)
         {
             case ParamType.PPower:
-                return 30 + lvl * PATTACK_COEF;
+                return 25 + lvl * PATTACK_COEF;
             case ParamType.MPower:
-                return 20 + lvl * MATTACK_COEF;
+                return 15 + lvl * MATTACK_COEF;
             case ParamType.PDef:
                 return 9 + lvl * PDEF_COEF;
             case ParamType.MDef:

@@ -57,6 +57,19 @@ public static class Utils
         return listOut;
     }
 
+    public static void DeactivateIfNedd(GameObject go,bool val)
+    {
+        if (!go.activeSelf && val)
+        {
+            go.SetActive(val);
+            return;
+        }
+        if (go.activeSelf && !val)
+        {
+            go.SetActive(val);
+            return;
+        }
+    }
     public static void Sort<T>(List<T> list, Func<T, int> GetPriority) where T : MonoBehaviour
     {
         list.Sort((x, y) =>

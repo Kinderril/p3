@@ -120,6 +120,7 @@ public static class SpellsDataBase
             baseEffect.Id = effectId;
             Add(baseEffect);
         }
+        SaveDataBase();
         return spell.Save();
     }
 
@@ -207,8 +208,18 @@ public static class SpellsDataBase
         }
         LoadStartSpells();
     }
+    public static BaseSpell CreatSpellData(int level)
+    {
+        var list = Spells.Values.ToList();
+        var rndSpells = list.RandomElement(2);
+        var spell = SpellMerger.Merge(rndSpells[0], rndSpells[1]);
+        SpellMerger.CalcEffectResultPower(PowerSpellFromLvl(level), spell);
+        VisualEffectSetter.Set(spell);
+        SaveSpell(spell);
+        return spell;
+    }
 
-#region StartSpells
+    #region StartSpells
     private static BaseSpell TestSpellPowerHeal()
     {
         var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.Self, SpellCoreType.Shoot, 2, 8, 1, 1);
@@ -353,5 +364,6 @@ public static class SpellsDataBase
         return spell1;
     }
     #endregion
+
 }
 

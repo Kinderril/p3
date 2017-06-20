@@ -47,7 +47,9 @@ public static class SMUtils
 
     public static int Range(int a1,int a2)
     {
-        return _r.Next(a1, a2);
+        var min = Math.Min(a1, a2);
+        var max = Math.Max(a1, a2);
+        return _r.Next(min, max);
     }
 
     public static float Abs(float power2)

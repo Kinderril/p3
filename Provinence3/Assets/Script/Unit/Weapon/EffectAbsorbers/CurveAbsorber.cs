@@ -7,6 +7,15 @@ using System.Text;
 public class CurveAbsorber : BaseEffectAbsorber
 {
     public NcCurveAnimation uvAnimation;
+
+    void Awake()
+    {
+        if (uvAnimation == null)
+        {
+            uvAnimation = GetComponent<NcCurveAnimation>();
+        }
+    }
+
     public override void Play()
     {
         uvAnimation.gameObject.SetActive(true);

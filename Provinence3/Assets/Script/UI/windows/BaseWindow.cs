@@ -113,6 +113,10 @@ public class BaseWindow : MonoBehaviour
     {
         WindowManager.Instance.OpenWindow<object>(MainState.statistics, null);
     }
+    public virtual void OnToSpell()
+    {
+        WindowManager.Instance.OpenWindow<object>(MainState.spell, null);
+    }
 //    public virtual void OnToPause()
 //    {
 //        WindowManager.Instance.OpenWindow<object>(MainState.pause, null);

@@ -13,6 +13,7 @@ public enum MainState
     end,
     loading,
     statistics,
+    spell,
 }
 
 public class MainController : Singleton<MainController>
