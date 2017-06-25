@@ -16,6 +16,7 @@ public class WindowMission : BaseWindow
     public Transform Layout;
     public Button StartMisson;
     public Button BuyMission;
+    public Button DebugStartMisson;
 //    public Text CostMissionField;
 
     public OpenLevelWindow OpenLevelWindow;
@@ -28,6 +29,10 @@ public class WindowMission : BaseWindow
     public override void Init()
     {
         base.Init();
+        DebugStartMisson.gameObject.SetActive(false);
+#if DEBUG
+        DebugStartMisson.gameObject.SetActive(true);
+#endif
         OpenLevelWindow.gameObject.SetActive(false);
         var isTutorComplete = MainController.Instance.PlayerData.IsTutorialComplete;
         Dictionary<int, int> stubList = new Dictionary<int, int>();
@@ -190,6 +195,12 @@ public class WindowMission : BaseWindow
     public void OnPlayClick()
     {
         MainController.Instance.StartLevel(currentSelectedRespawnPoint, curDiffChoosed, currentSelectedMission);
+    }
+
+    public void OnPlayDebugClick()
+    {
+        MainController.Instance.StartLevel(0, curDiffChoosed, 99);
+
     }
 
 }

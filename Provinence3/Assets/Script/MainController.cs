@@ -29,23 +29,23 @@ public class MainController : Singleton<MainController>
 
     void Start ()
     {
-        Application.targetFrameRate = 30;
-        QualitySettings.vSyncCount = 0;
-        DataBaseController.Instance.Init();
-        WindowManager.Instance.Init();
-        ShopController.Instance.Init();
-        TimerManager = new TimerManager();
-        PlayerData = new PlayerData();
         try
         {
+            Application.targetFrameRate = 30;
+            QualitySettings.vSyncCount = 0;
+            DataBaseController.Instance.Init();
+            WindowManager.Instance.Init();
+            ShopController.Instance.Init();
+            TimerManager = new TimerManager();
+            PlayerData = new PlayerData();
             PlayerData.Load();
+            WindowManager.Instance.OpenWindow(MainState.start);
         } 
         catch (Exception ex)
         {
-            Debug.LogError(":" + ex);
+            Debug.LogError("Main:" + ex);
             DebugController.Instance.InfoField1.text = ex.ToString();
         }
-        WindowManager.Instance.OpenWindow(MainState.start);
 	}
 
     private void Test()

@@ -5,17 +5,24 @@ using System.Collections.Generic;
 
 public class FlashController : MonoBehaviour
 {
-    private const float totalTime = .26f;
+    public const float TOTAL_FLASH_TIME = .26f;
+    private const string keyTime = "_Time2";
+
     private float power = 14;
-    private float curTime = 0;
     private Shader flashShader;
     private Shader simpleShader;
+
+    protected float curTime = 0;
+    protected bool isPlaying = false;
     public List<Renderer> Renderers;
-    private bool isPlaying = false;
-    private const string keyTime = "_Time2";
-    private List<Material> materials = new List<Material>(); 
+    protected List<Material> materials = new List<Material>(); 
 
     void Awake()
+    {
+        AwakeInner();
+    }
+
+    protected virtual void AwakeInner()
     {
         foreach (var renderer1 in Renderers)
         {
@@ -30,6 +37,7 @@ public class FlashController : MonoBehaviour
         }
         flashShader = DataBaseController.Instance.flashShader;
         simpleShader = DataBaseController.Instance.simpleShader;
+
     }
 
     public void Play()
@@ -38,6 +46,11 @@ public class FlashController : MonoBehaviour
         isPlaying = true;
         curTime = 0;
 
+        SubPlaye();
+    }
+
+    protected virtual void SubPlaye()
+    {
         foreach (var material in materials)
         {
             material.shader = flashShader;
@@ -46,30 +59,35 @@ public class FlashController : MonoBehaviour
 
     }
 
-
-    void Update()
+    protected virtual void UpdateInner()
     {
+
         if (isPlaying)
         {
             curTime += Time.deltaTime;
             float c = curTime;
-            if (curTime > totalTime/2f)
+            if (curTime > TOTAL_FLASH_TIME / 2f)
             {
-                c = totalTime - curTime;
+                c = TOTAL_FLASH_TIME - curTime;
             }
-//            Debug.Log("curTime:" + curTime + "   prev c:" + c);
-            c = Mathf.Clamp(power * c/totalTime,0,Single.MaxValue);
+            //            Debug.Log("curTime:" + curTime + "   prev c:" + c);
+            c = Mathf.Clamp(power * c / TOTAL_FLASH_TIME, 0, Single.MaxValue);
             foreach (var material in materials)
             {
                 material.SetFloat(keyTime, c);
             }
-//            Debug.Log("curTime:" + curTime + "   c:"+c);
-            if (curTime > totalTime)
+            //            Debug.Log("curTime:" + curTime + "   c:"+c);
+            if (curTime > TOTAL_FLASH_TIME)
             {
                 End();
 
             }
         }
+    }
+
+    void Update()
+    {
+        UpdateInner();
     }
 
     void End()

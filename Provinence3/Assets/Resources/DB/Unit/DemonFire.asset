@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
+  m_Name: DemonFire
+  m_EditorClassIdentifier: 
+  Speed: 418.33
+  MPower: 41.3
+  PPower: 32.6
+  MaxHp: 340
+  magicResist: 30
+  physicResist: 40
+  Level: 4
+  AttackType: 0
+  DropItem:
+    chance0_1_simple: 0.2
+    chance0_1_rare: 0.4
+    type_simple: 2
+    type_rare: 5
