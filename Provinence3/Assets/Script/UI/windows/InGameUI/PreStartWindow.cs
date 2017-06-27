@@ -27,10 +27,14 @@ public class PreStartWindow : MonoBehaviour
             item.transform.SetParent(BonusLayout, false);
             item.Init(bonusItem);
         }
-        FieldLevel.text = DataBaseController.Instance.MissionNames[level.MissionIndex];
-        var names = DataBaseController.Instance.RespawnPositionsNames[level.MissionIndex];
-        Difficulty.text = "Difficulty:"+level.difficult.ToString();
-        Startpoint.text = names[level.IndexBornPoint];
+        if (DataBaseController.Instance.MissionNames.ContainsKey(level.MissionIndex))
+        {
+
+            FieldLevel.text = DataBaseController.Instance.MissionNames[level.MissionIndex];
+            var names = DataBaseController.Instance.RespawnPositionsNames[level.MissionIndex];
+            Difficulty.text = "Difficulty:" + level.difficult.ToString();
+            Startpoint.text = names[level.IndexBornPoint];
+        }
 
     }
 
