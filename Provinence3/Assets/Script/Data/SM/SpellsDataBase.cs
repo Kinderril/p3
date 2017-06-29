@@ -70,35 +70,65 @@ public static class SpellsDataBase
     {
         if (Spells.Count <= 0)
         {
-            CreateSpell(TestSpellSimpleStrike);
-            CreateSpell(TestPercentStrike);
-            CreateSpell(TestPercentTriggerStrike);
-            CreateSpell(TestSpellPowerTotemStrike);
-            CreateSpell(TestSpellPowerSplitShot);
-            CreateSpell(TestSpellPowerAOE);
-            CreateSpell(TestSpellArmor);
-            CreateSpell(TestSpellPowerChain);
-            CreateSpell(TestSpellPower);
-            CreateSpell(TestSpellFlameStrike);
-            CreateSpell(TestSpellPowerHeal);
+            CreateSpell(StartSpellLibrary.SimpleAOESlow);
+            CreateSpell(StartSpellLibrary.SimpleDamage);
+            CreateSpell(StartSpellLibrary.SimplePAtck);
+            CreateSpell(StartSpellLibrary.TotemHealer);
+            CreateSpell(StartSpellLibrary.TotemPDef);
+            CreateSpell(StartSpellLibrary.TotemSlower);
+            CreateSpell(StartSpellLibrary.TriggerDef);
+            CreateSpell(StartSpellLibrary.TriggerMAttack);
+            CreateSpell(StartSpellLibrary.TriggerSplitShot);
             if (withSave)
                 SaveDataBase();
         }
     }
 
-    private static float PowerSpellFromLvl(int lvl)
+    private static float PowerByLvl(int l)
     {
-        return lvl*70 + 190;
+        return 190f + l*60f;
     }
 
-    private static void CreateSpell(Func<BaseSpell> action,int lvl = 1)
+//    public static BaseSpell CreateRndSpell(int lvl)
+//    {
+//        var spells = Spells.Values;
+//        var s1 = spells.RandomElement();
+//        var s2 = spells.RandomElement();
+//        //to del
+//        if (s1 == s2)
+//        {
+//            s2 = spells.RandomElement();
+//        }
+//        //end 2 del
+//
+//        var result = SpellMerger.Merge(s1, s2);
+////        var power = PowerByLvl(lvl);// * SMUtils.Range(0.9f,1.1f);
+////        SpellMerger.CalcEffectResultPower(power, result);
+//        return result;
+//    }
+
+    private static void CreateSpell(Func<BaseSpell> action)
     {
         var spell = action();
         VisualEffectSetter.Set(spell);
-        var power = PowerSpellFromLvl(lvl);
+        var power = PowerByLvl(1) * SMUtils.Range(0.93f, 1.07f);
         SpellMerger.CalcEffectResultPower(power, spell);
         SaveSpell(spell);
-    } 
+    }
+    private static float PowerSpellFromLvl(int lvl)
+    {
+        return lvl * 70 + 190;
+    }
+    public static BaseSpell CreatSpellData(int level)
+    {
+        var list = Spells.Values.ToList();
+        var rndSpells = list.RandomElement(2);
+        var spell = SpellMerger.Merge(rndSpells[0], rndSpells[1]);
+        SpellMerger.CalcEffectResultPower(PowerSpellFromLvl(level), spell);
+        VisualEffectSetter.Set(spell);
+        SaveSpell(spell);
+        return spell;
+    }
 
     private static string SaveSpell(BaseSpell spell)
     {
@@ -208,162 +238,5 @@ public static class SpellsDataBase
         }
         LoadStartSpells();
     }
-    public static BaseSpell CreatSpellData(int level)
-    {
-        var list = Spells.Values.ToList();
-        var rndSpells = list.RandomElement(2);
-        var spell = SpellMerger.Merge(rndSpells[0], rndSpells[1]);
-        SpellMerger.CalcEffectResultPower(PowerSpellFromLvl(level), spell);
-        VisualEffectSetter.Set(spell);
-        SaveSpell(spell);
-        return spell;
-    }
-
-    #region StartSpells
-    private static BaseSpell TestSpellPowerHeal()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.Self, SpellCoreType.Shoot, 2, 8, 1, 1);
-        var bullet1 = new BaseBullet(1f, 0, BaseBulletTarget.homing, new Vector3(1, 1, 1), BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, 160), EffectSpectials.none);
-        
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Shoot;
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-//        LogSpell(spell1, "Heal");
-        return spell1;
-    }
-
-    private static BaseSpell TestSpellPowerTotemStrike()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 3, 22, 2, 1);
-        var bullet1 = new BaseBullet(1.5f, 0, BaseBulletTarget.homing, Vector3.zero, BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -91), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Summon;
-        spell1.BaseSummon = new BaseSummon(0.9f, 3);
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-//        LogSpell(spell1, "Strike totem");
-        return spell1;
-    }
-
-    private static BaseSpell TestPercentStrike()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 3, 22, 1, 1);
-        var bullet1 = new BaseBullet(0.004f, 0, BaseBulletTarget.homing, Vector3.zero, BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.percent, ParamType.Heath, -35), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-        //        LogSpell(spell1, "Flame strike");
-        return spell1;
-
-    }
-
-    private static BaseSpell TestSpellFlameStrike()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.LookDirection, SpellCoreType.Shoot, 3, 22, 1, 1);
-        var bullet1 = new BaseBullet(1.5f, 1, BaseBulletTarget.target, Vector3.one * 1.5f, BulletColliderType.sphrere, 1);
-        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -201), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Shoot;
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-//        LogSpell(spell1, "Flame strike");
-        return spell1;
-    }
-
-    private static BaseSpell TestPercentTriggerStrike()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 3, 22, 1, 1);
-        var bullet1 = new BaseBullet(1.5f, 1, BaseBulletTarget.target, Vector3.zero, BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.percent, ParamType.Heath, -35), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Trigger;
-        spell1.BaseTrigger = new BaseTrigger(3,SpellTriggerType.shootMagic);
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-//        LogSpell(spell1, "Flame strike");
-        return spell1;
-    }
-
-    private static BaseSpell TestSpellSimpleStrike()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 2, 21, 1, 1);
-        var bullet1 = new BaseBullet(0.002f, 0, BaseBulletTarget.homing, Vector3.one * 1.5f, BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -241), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Shoot;
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-//        LogSpell(spell1, "Simple strike");
-        return spell1;
-    }
-
-    private static BaseSpell TestSpellPowerChain()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 2, 22, 1, 1);
-        var bullet1 = new BaseBullet(0f, 0, BaseBulletTarget.homing, Vector3.zero, BulletColliderType.noOne, 4);
-        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -80), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Shoot;
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-//        LogSpell(spell1, "Chain light");
-        return spell1;
-    }
-
-    private static BaseSpell TestSpellPowerSplitShot()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 2, 15, 7, 1);
-        var bullet1 = new BaseBullet(1f, 0, BaseBulletTarget.homing, new Vector3(1, 1, 1), BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -30), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Trigger;
-        spell1.BaseTrigger = new BaseTrigger(1, SpellTriggerType.getDamage);
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-//        LogSpell(spell1, "Split shot");
-        return spell1;
-    }
-
-    private static BaseSpell TestSpellPowerAOE()
-    {
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.Self, SpellCoreType.Shoot, 1, 19, 1, 1);
-        var bullet1 = new BaseBullet(1f, 0, BaseBulletTarget.homing, new Vector3(4, 4, 4), BulletColliderType.sphrere, 1);
-        var effect1 = new BaseEffect(7, new SubEffectData(EffectValType.abs, ParamType.Heath, -80), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Shoot;
-        bullet1.Effect = new List<BaseEffect>() { effect1 };
-//        LogSpell(spell1, "AOE");
-        return spell1;
-    }
-
-    private static BaseSpell TestSpellArmor()
-    {
-        var time = 12f;
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.Self, SpellCoreType.Shoot, 1, 19, 1, 1);
-        var bullet1 = new BaseBullet(1f, 0, BaseBulletTarget.homing, new Vector3(4, 4, 4), BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(time, new SubEffectData(EffectValType.percent, ParamType.PDef, 50), EffectSpectials.none);
-        var effect2 = new BaseEffect(time, new SubEffectData(EffectValType.percent, ParamType.MDef, 50), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Shoot;
-        bullet1.Effect = new List<BaseEffect>() { effect1, effect2 };
-//        LogSpell(spell1, "Armor");
-        return spell1;
-    }
-
-    private static BaseSpell TestSpellPower()
-    {
-        var time = 12f;
-        var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.Self, SpellCoreType.Shoot, 1, 19, 1, 1);
-        var bullet1 = new BaseBullet(1f, 0, BaseBulletTarget.homing, new Vector3(4, 4, 4), BulletColliderType.noOne, 1);
-        var effect1 = new BaseEffect(time, new SubEffectData(EffectValType.percent, ParamType.PPower, 70), EffectSpectials.none);
-        //        var effect2 = new BaseEffect(time, new SubEffectData(EffectValType.percent, ParamType.MPower, 50), EffectSpectials.none);
-        spell1.Bullet = bullet1;
-        spell1.SpellCoreType = SpellCoreType.Trigger;
-        spell1.BaseTrigger = new BaseTrigger(2,SpellTriggerType.getGold);
-        bullet1.Effect = new List<BaseEffect>()
-        {
-            effect1
-        };
-//        LogSpell(spell1, "Power");
-        return spell1;
-    }
-    #endregion
-
 }
 

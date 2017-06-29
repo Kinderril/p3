@@ -15,8 +15,44 @@ public class SpellMergeTestes
 
     public void Init()
     {
-       
-        TestMerge();
+        TestRndSpells();
+//        TestSpellStart();
+//        TestMerge();
+    }
+    
+    private void LoadDB()
+    {
+
+        SpellsDataBase.LoadStartSpells(false);
+        foreach (var value in SpellsDataBase.Spells.Values)
+        {
+            LogSpell(value);
+        }
+    }
+
+    private void CreateRndSpell()
+    {
+
+//        var rndSpell = SpellsDataBase.CreateRndSpell(2);
+//        Console.WriteLine("--------------");
+//        Console.WriteLine("--------------");
+//        LogSpell(rndSpell);
+    }
+
+    private void TestRndSpells()
+    {
+        LoadDB();
+        Console.WriteLine("<<<<<<-------------->>>>>");
+        CreateRndSpell();
+        CreateRndSpell();
+        CreateRndSpell();
+        CreateRndSpell();
+        CreateRndSpell();
+        CreateRndSpell();
+        CreateRndSpell();
+        CreateRndSpell();
+        CreateRndSpell();
+        CreateRndSpell();
     }
 
     private void TestMerge()

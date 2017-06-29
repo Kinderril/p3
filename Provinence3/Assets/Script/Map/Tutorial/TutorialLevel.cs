@@ -33,8 +33,10 @@ public class TutorialLevel : MonoBehaviour
     private LevelObject map;
     private bool isEnergyRegen = false;
     private bool isHealthRegen = false;
+    private bool isAmmoRegen = false;
     private float nextGiveTimeHealth = 0;
     private float nextGiveTimeEnergy = 0;
+    private float nextGiveTimeAmmo = 0;
     private TutorialPart tutorialPart;
 
     public event Action<TutorialPart> OnTutorialChange;
@@ -54,12 +56,17 @@ public class TutorialLevel : MonoBehaviour
             }
             isEnergyRegen = false;
             isHealthRegen = false;
+            isAmmoRegen = false;
             switch (tutorialPart)
             {
+                case TutorialPart.shoot:
+                    isAmmoRegen = true; 
+                    break;
                 case TutorialPart.cast:
                     isEnergyRegen = true;
                     break;
                 case TutorialPart.boss:
+                    isAmmoRegen = true;
                     isEnergyRegen = true;
                     isHealthRegen = true;
                     Map.Instance.SpawnBoss(0);
@@ -144,10 +151,15 @@ public class TutorialLevel : MonoBehaviour
             nextGiveTimeEnergy = Time.time + 5f;
             if (isEnergyRegen)
             {
-//                if (!MainController.Instance.level.Energy.IsFull)
-//                {
                 hero.GetItems(ItemId.energy, -50);
-//                }
+            }
+        }
+        if (nextGiveTimeAmmo < Time.time)
+        {
+            nextGiveTimeAmmo = Time.time + 5f;
+            if (isAmmoRegen)
+            {
+                hero.GetItems(ItemId.ammo, 5);
             }
         }
         if (isHealthRegen)

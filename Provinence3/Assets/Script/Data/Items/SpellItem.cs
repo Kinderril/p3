@@ -43,7 +43,7 @@ public class SpellItem : BaseItem, IEnhcant
 
     public override void LoadTexture()
     {
-        IconSprite = DataBaseController.Instance.SpellIcon(SpellData.IdIcon);
+        IconSprite = DataBaseController.Instance.SpellIcon(SpellData.IdIcon,SpellData.IsPositive() == EffectPositiveType.Positive);
     }
 
     public override string Save()

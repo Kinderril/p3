@@ -9,6 +9,7 @@ public class MainTutorialWindow : MonoBehaviour
 {
     private TutorialLevel tutorialLevel;
     public Text MainMessage;
+    public Animator ShowImage;
 
     public void Init(TutorialLevel tutorialLevel)
     {
@@ -45,6 +46,7 @@ public class MainTutorialWindow : MonoBehaviour
                 ss = "Show your skills and kill the boss!";
                 break;
         }
+        ShowImage.SetTrigger("start");
         MainMessage.text = ss + tutorialLevel.StatusMessage();
         LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
     }

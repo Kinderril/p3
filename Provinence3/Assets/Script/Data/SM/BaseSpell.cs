@@ -56,8 +56,27 @@ public class BaseSpell
     public EffectPositiveType IsPositive()
     {
 
-        return TargetType == SpellTargetType.Self?EffectPositiveType.Positive : EffectPositiveType.Negative;
+        return TargetType == SpellTargetType.Self ? EffectPositiveType.Positive : EffectPositiveType.Negative;
     }
+//    private EffectPositiveType IsPositive()
+//    {
+//
+//        EffectPositiveType type = EffectPositiveType.Negative;
+//
+//        List< EffectPositiveType > effectse = new List<EffectPositiveType>();
+//        foreach (var baseEffect in Bullet.Effect)
+//        {
+//            if (baseEffect.Value > 0)
+//            {
+//                effectse.Add(EffectPositiveType.Positive);
+//            }
+//            else
+//            {
+//                effectse.Add(EffectPositiveType.Negative);
+//            }
+//        }
+//        return effectse[0];
+//    }
 
     public string Save()
     {
@@ -149,7 +168,7 @@ public class BaseSpell
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        return name + targetType + " <> " + Bullet.DescFull(this,IsPositive()) + (withCostCharges ? (cost + charges) : "");
+        return name + targetType + " <> " + Bullet.DescFull(this) + (withCostCharges ? (cost + charges) : "");
     }
 
     public string Desc()
@@ -185,25 +204,10 @@ public class BaseSpell
                         targetType = "to closest enemy";
                         break;
                 }
-                if (BaseSummon != null)
-                    targetType = "Summon totem casting every " + BaseSummon.DelayShoot.ToString("0.0") + " Sec " +
-                                 BaseSummon.ShootCount + " times " + targetType;
-                else
-                {
-                    Debug.Log("Wrong summon data");
-                    targetType = "Wrong summon data";
-                }
+                targetType = "Summon totem casting every " + BaseSummon.DelayShoot.ToString("0.0") + " Sec " + BaseSummon.ShootCount + " times " + targetType;
                 break;
             case SpellCoreType.Trigger:
-                if (BaseTrigger != null)
-                {
-                    targetType = "Trigger spell when" + BaseTrigger.GetDescByType(BaseTrigger.TriggerType) + targetType;
-                }
-                else
-                {
-                    Debug.Log("Wrong Trigger data");
-                    targetType = "Wrong Trigger data";
-                }
+                targetType = "Trigger spell when" + BaseTrigger.GetDescByType(BaseTrigger.TriggerType)  + targetType;
                 break;
         }
         return  targetType + ". " + Bullet.Desc(this,IsPositive());

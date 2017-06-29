@@ -8,7 +8,8 @@ using UnityEngine;
 
 public static class VisualEffectSetter
 {
-    public static Dictionary<int,Sprite> Icons = new Dictionary<int, Sprite>(); 
+    public static Dictionary<int,Sprite> IconsDamage = new Dictionary<int, Sprite>(); 
+    public static Dictionary<int,Sprite> IconsBuff = new Dictionary<int, Sprite>(); 
     public static Dictionary<int,AbsorberWithPosition> CastEffects = new Dictionary<int, AbsorberWithPosition>(); 
     public static Dictionary<int,BaseEffectAbsorber> BulletEffects = new Dictionary<int, BaseEffectAbsorber>();
 
@@ -88,9 +89,14 @@ public static class VisualEffectSetter
 
     private static void GetAllIcons()
     {
+        SetIcons("Buff", IconsBuff);
+        SetIcons("Damage", IconsDamage);
+    }
 
+    private static void SetIcons(string s, Dictionary<int, Sprite> list)
+    {
 
-        var aa = "sprites/Spell/";
+        var aa = "sprites/Spell/"+s+"/";
         var allObjects = UnityEngine.Resources.LoadAll(aa);
         for (int i = 0; i < allObjects.Length; i++)
         {
@@ -106,46 +112,16 @@ public static class VisualEffectSetter
                 spr = b as Sprite;
             }
 ;
-            Icons.Add(i, spr);
+            list.Add(i, spr);
         }
-
-
-//
-//        string way = Application.dataPath + WAY_TO_ICON;
-//        FileInfo[] fileinfo;
-//        int c = 0;
-////#if UNITY_ANDROID
-//        DirectoryInfo dataDir = new DirectoryInfo(way);
-//        fileinfo = dataDir.GetFiles("*.png");
-//        c = fileinfo.Length;
-////#else
-////        var files = Directory.GetFiles(way,"*.png", SearchOption.AllDirectories);
-////        c = files.Length;
-////#endif
-//        for (int i = 0; i < c; i++)
-//        {
-//            var way2 = "sprites/Spell/" + i.ToString();
-//            var b = UnityEngine.Resources.Load(way2);
-//            Sprite spr;
-//            var texture = b as Texture2D;
-//            if (texture != null)
-//            {
-//                spr = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),new Vector2(0.5f,0.5f));
-//            }
-//            else
-//            {
-//                spr = b as Sprite;
-//            }
-//;
-//            Icons.Add(i,spr);
-//        }
-    } 
+    }
 
     public static void Set(BaseSpell spell)
     {
 //        return;
+        var icons = spell.IsPositive() == EffectPositiveType.Positive ? IconsBuff : IconsDamage;
 
-        var countIcon = Icons.Count;
+        var countIcon = icons.Count;
 
         spell.IdIcon = SMUtils.Range(0, countIcon);
         spell.IdCast = SMUtils.Range(0, CastEffects.Count);

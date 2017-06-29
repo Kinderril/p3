@@ -142,7 +142,7 @@ public class Bullet : PoolElement
     public override void EndUse()
     {
         targetUnit = null;
-        bulletHolder = null;
+//        bulletHolder = null;
         updateAction = null;
         time = 0;
         AffecttedUnits.Clear();

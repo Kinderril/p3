@@ -151,8 +151,8 @@ public static class SpellMerger
                 positiveType = EffectPositiveType.Negative;
                 break;
         }
-        
         rndPowerTotal = ModifByBulletAndSpell(rndPowerTotal, resultSpell); //Посчитали какая мощность будет дана на эффекты в зависимости от кол-ва пули и прочего
+
         var effects = spell1.Bullet.Effect.ToList();
         effects.AddRange(spell2.Bullet.Effect);
         int effectsCount = SMUtils.Range(1, spell1.Bullet.Effect.Count + spell2.Bullet.Effect.Count - 1);
@@ -166,6 +166,10 @@ public static class SpellMerger
         for (int i = 0; i < effectsCount; i++)
         {
             var delta = (rndPowerTotal/(float) effectsCount)*SMUtils.Range(1f - offset, 1f + offset);
+            if (delta > 99999 ||Single.IsNaN(delta))
+            {
+                Console.WriteLine(">>>");
+            }
             resultEffects.Add(BaseEffect.Create(effects, delta, resultSpell.Level, positiveType, resultSpell));
         }
         bullet.Effect = resultEffects;
@@ -175,6 +179,7 @@ public static class SpellMerger
             e.Spectial = Specials2Rnd.RandomElement();
         }
         VisualEffectSetter.Set(resultSpell);
+//        Console.WriteLine("Power of end spell:" + GetPowerCoef(resultSpell) + " <<<<< "  );
         return resultSpell;
     }
 
@@ -194,7 +199,12 @@ public static class SpellMerger
 
     private static float ModifByBulletAndSpell(float rndPowerTotal, BaseSpell spell)
     {
-        return rndPowerTotal /SubPower(spell);
+//        var costCoef = 1f + (spell.Cost - BASE_COST)*COST_COEF;
+//        var chargeCoef = 1f + Mathf.Clamp((spell.Charges - 1f)*CHARGE_COEF, 0, 2f);
+        var p1 = SubPower(spell);
+        var r = rndPowerTotal/p1;
+        return r;
+//        return rndPowerTotal /**chargeCoef*costCoef *//SubPower(spell);
     }
 
     public static float GetPowerCoef(BaseSpell spell)
@@ -205,7 +215,8 @@ public static class SpellMerger
             var v = baseEffect.CalcValue(spell);
             val += v;
         }
-        return SubPower(spell)*val;
+        var p = SubPower(spell);
+        return p*val;
     }
 
     private static float SubPower(BaseSpell spell)
@@ -230,7 +241,9 @@ public static class SpellMerger
             triggerCoef =spell.BaseTrigger.CalcPower();
         }
         var bulletPower = bullet.CalcPower();
-        return bulletPower*cnt*summonCoef*costCoef*chargeCoef* triggerCoef;
+        var r = bulletPower * cnt * summonCoef * costCoef * chargeCoef * triggerCoef;
+
+        return r;
     }
 
 

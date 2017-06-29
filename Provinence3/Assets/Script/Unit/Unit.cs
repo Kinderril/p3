@@ -411,6 +411,11 @@ public class Unit : MonoBehaviour
 
     private void AffectEffect(BaseEffect effect, SpellInGame spell)
     {
+        if (Parameters == null)
+        {
+            //Tutor hack
+            return;
+        }
         float coef = 1f;
         switch (effect.Spectial)
         {

@@ -296,9 +296,16 @@ public class DataBaseController : Singleton<DataBaseController>
 //        return TalismansSprites[mp];
 //    }
 
-    public Sprite SpellIcon(int id)
+    public Sprite SpellIcon(int id,bool isPositive)
     {
-        return VisualEffectSetter.Icons[id];
+        if (isPositive)
+        {
+            return VisualEffectSetter.IconsBuff[id];
+        }
+        else
+        {
+            return VisualEffectSetter.IconsDamage[id];
+        }
     }
 
     public static T GetItem<T>(T item, Vector3 pos) where T : MonoBehaviour

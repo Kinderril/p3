@@ -29,6 +29,10 @@ public class BaseTrigger
     {
 //        DelayShoot = delayShoot;
         ShootCount = shootCount;
+        if (ShootCount < 1)
+        {
+            ShootCount = 1;
+        }
         TriggerType = triggerType;
     }
 
@@ -52,7 +56,12 @@ public class BaseTrigger
     public float CalcPower()
     {
         var typeCOef = GetCoefByTiggerType(TriggerType);
-        return typeCOef * TRIGGER_COEF * ShootCount; 
+        var r = typeCOef * TRIGGER_COEF * ShootCount;
+        if (r == 0)
+        {
+            Console.WriteLine("???");
+        }
+        return r;
     }
 
     public static string GetDescByType(SpellTriggerType type)
@@ -83,17 +92,14 @@ public class BaseTrigger
 
     private static SpellTriggerType RndClose(SpellTriggerType type)
     {
-        int index = (int)type + SMUtils.Range(-1, 1);
+        int index = (int)type + SMUtils.Range(0, 3);
         var allTriggers = SpellMerger.Triggers2Rnd;
-        if (index < 0)
-        {
-            index = allTriggers.Count - 1;
-        }
         if (index >= allTriggers.Count)
         {
-            index = 0;
+            index = index - allTriggers.Count + 1;
         }
-        return(SpellTriggerType)index;
+        var t = (SpellTriggerType)index;
+        return t;
     }
 
     public BaseTrigger CopyWithRnd()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -42,15 +43,19 @@ public class BaseEffect
     private const float BASE_DURAION = 6f;
     private const float INSTANCE_COEF_SELF_INSTANT = 4.5f;
 
-    public const int PATTACK_COEF = 8;
-    public const int MATTACK_COEF = 9;
-    public const int PDEF_COEF = 5;
-    public const int MDEF_COEF = 7;
+    public const int PATTACK_COEF = 9;
+    public const int MATTACK_COEF = 8;
+    public const int PDEF_COEF = 7;
+    public const int MDEF_COEF = 5;
     public const int HP_COEF = 40;
-    public const int HP_COEF_ADD = 100;
-    public const int SPEED_COEF = 1;
+    public const int SPEED_COEF = 49;
 
-    public const int MODIFY_BY_TYPE = 140;
+    public const int PATTACK_COEF_LVL = 8;
+    public const int MATTACK_COEF_LVL = 9;
+    public const int PDEF_COEF_LVL = 6;
+    public const int MDEF_COEF_LVL = 5;
+    public const int HP_COEF_LVL = 40;
+    public const int SPEED_COEF_LVL = 20;
 
     public int Id;
     public SubEffectData SubEffectData;
@@ -90,7 +95,7 @@ public class BaseEffect
 
     public static BaseEffect Create(List<BaseEffect> effects, float resultPower, int level, EffectPositiveType positiveType, BaseSpell spell)
     {
-        Console.WriteLine("start power:" + resultPower);
+//        Console.WriteLine("start power:" + resultPower);
         List<EffectSpectials> specials = new List<EffectSpectials>();
         List< EffectValType > valuesType = new List<EffectValType>();
         List<ParamType> paramsTypes = new List<ParamType>();
@@ -119,7 +124,7 @@ public class BaseEffect
         
         var effect = BaseEffect.Create(specials, valuesType, paramsTypes, durations, resultPower, level, spell.TargetType);
 
-        Console.WriteLine("end power:" + effect.CalcValue(spell));
+//        Console.WriteLine("end power:" + effect.CalcValue(spell));
         return effect;
     }
 
@@ -166,7 +171,7 @@ public class BaseEffect
         {
             if (SubEffectData.ParamType != ParamType.Heath && Duration > 0.1f)
             {
-                resultPower /= (Duration / BASE_DURAION);
+                resultPower /= Duration / BASE_DURAION;
             }
             resultPower = ModifFromType(resultPower, SubEffectData.ParamType);
             switch (SubEffectData.EffectValType)
@@ -260,7 +265,7 @@ public class BaseEffect
                 cur = SPEED_COEF;
                 break;
             case ParamType.Heath:
-                cur = HP_COEF_ADD;
+                cur = HP_COEF;
                 break;
         }
         return cur;
@@ -268,18 +273,18 @@ public class BaseEffect
 
     private float ModifByType(float abs, ParamType paramType) //Обратная к ModifFromType
     {
-        return abs* MODIFY_BY_TYPE / PByType(paramType);
+        return abs*HP_COEF/PByType(paramType);
     }
 
     private float ModifFromType(float val, ParamType paramType) //Обратная к ModifByType
     {
-        return (PByType(paramType)*val)/ MODIFY_BY_TYPE;
+        return (PByType(paramType)*val)/HP_COEF;
     }
 
 
     private float Abs2Percent(int level, float v, ParamType paramType, bool isIntance)
     {
-        var m = MiddleParamByLevel(level, paramType);
+        var m = MiddleHPByLevel(level, paramType);
         var r = 100 * v / m;
         if (isIntance && paramType != ParamType.Heath)
         {
@@ -288,9 +293,9 @@ public class BaseEffect
         return r;
     }
 
-    private float Percent2Abs(int level, float v,ParamType paramType,bool isIntance)
+    public static float Percent2Abs(int level, float v,ParamType paramType,bool isIntance)
     {
-        var m = MiddleParamByLevel(level, paramType);
+        var m = MiddleHPByLevel(level, paramType);
         var res = m * v / 100f;
         if (isIntance && paramType != ParamType.Heath)
         {
@@ -299,22 +304,22 @@ public class BaseEffect
         return res;
     }
 
-    public float MiddleParamByLevel(int lvl, ParamType paramType)
+    public static float MiddleHPByLevel(int lvl, ParamType paramType)
     {
         switch (paramType)
         {
             case ParamType.PPower:
-                return 25 + lvl * PATTACK_COEF;
+                return 30 + lvl * PATTACK_COEF_LVL;
             case ParamType.MPower:
-                return 15 + lvl * MATTACK_COEF;
+                return 20 + lvl * MATTACK_COEF_LVL;
             case ParamType.PDef:
-                return 9 + lvl * PDEF_COEF;
+                return 10 + lvl * PDEF_COEF_LVL;
             case ParamType.MDef:
-                return 4 + lvl * MDEF_COEF;
+                return 1 + lvl * MDEF_COEF_LVL;
             case ParamType.Heath:
-                return 500 + lvl * HP_COEF;
+                return 300 + lvl * HP_COEF_LVL;
             case ParamType.Speed:
-                return 400 + lvl * SPEED_COEF;
+                return 400 + lvl * SPEED_COEF_LVL;
         }
         return 300;
     }
@@ -412,7 +417,7 @@ public class BaseEffect
         return p.ToString();
     }
 
-    public string DescFull(BaseSpell spell, EffectPositiveType type)
+    public string DescFull(BaseSpell spell)
     {
         var evt = "";
         var powerStr = " power:" + CalcValue(spell).ToString("0.0") + " ";
