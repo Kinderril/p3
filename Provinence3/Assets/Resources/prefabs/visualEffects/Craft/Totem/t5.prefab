@@ -70,6 +70,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4462640663104356}
+  - component: {fileID: 114453163218925522}
   m_Layer: 0
   m_Name: t5
   m_TagString: Untagged
@@ -279,6 +280,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23761863558066788
 MeshRenderer:
@@ -310,6 +312,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!26 &26233479106629374
 ParticleRenderer:
@@ -341,6 +344,7 @@ ParticleRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_CameraVelocityScale: 0
@@ -366,6 +370,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1712507977681112}
   m_Mesh: {fileID: 4300000, guid: 0e15254d31b3a174f975a8551197b1de, type: 3}
+--- !u!114 &114453163218925522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1611063669707342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ef853d3536177498d0cc88ea86077e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114985459063703432
 MonoBehaviour:
   m_ObjectHideFlags: 1

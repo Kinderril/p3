@@ -182,7 +182,7 @@ public class SpellInGame : IBulletHolder
         if (FindTarget(out trg))
         {
             summonnerBehaviour.ActivationFine();
-            LaunchBullets(trg);
+            LaunchBullets(trg, summonnerBehaviour);
         }
     }
 

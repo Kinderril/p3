@@ -21,7 +21,7 @@ public class SummonnerBehaviour : MonoBehaviour
         BaseSummon = SpellInGame.sourseItem.SpellData.BaseSummon;
         chargesRemain = BaseSummon.ShootCount;
         destroyTime = BaseSummon.LIFE_TIME_SEC + Time.time;
-
+        nextActivateTime = BaseSummon.DelayShoot + Time.time + 1f;
 
     }
 
@@ -56,7 +56,7 @@ public class SummonnerBehaviour : MonoBehaviour
 
     private void Activate()
     {
-        nextActivateTime = BaseSummon.DelayShoot;
+        nextActivateTime = BaseSummon.DelayShoot + Time.time;
         SpellInGame.ActivateBySummon(this);
     }
 
