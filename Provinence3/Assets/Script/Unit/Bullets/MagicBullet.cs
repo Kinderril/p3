@@ -14,14 +14,14 @@ public class MagicBullet : Bullet
         this.weapon = weapon;
     }
 
-    protected override Vector3 FindStartPos(IBulletHolder weapon)
-    {
-        if (AffecttedUnits.Count > 0)
-        {
-            return transform.position;
-        }
-        return base.FindStartPos(weapon);
-    }
+//    protected override Vector3 FindStartPos(IBulletHolder weapon)
+//    {
+//        if (AffecttedUnits.Count > 0)
+//        {
+//            return transform.position;
+//        }
+//        return base.FindStartPos(weapon);
+//    }
 
     protected override void Hit(Unit unit)
     {
@@ -42,7 +42,9 @@ public class MagicBullet : Bullet
         if (target != null)
         {
             var dir = target.transform.position - transform.position;
-            Init(dir, weapon);
+            start = transform.position;
+            trg = dir.normalized * weapon.Range + start;
+            //            Init(dir, weapon);
         }
         else
         {

@@ -13,7 +13,7 @@ public  class HeroShopRecipeItem : IShopExecute
     }
     public override int CrystalCost
     {
-        get { return 1; }
+        get { return 0; }
     }
 
     public override void Execute(int parameter)

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
+  m_Name: DemonSpectr
+  m_EditorClassIdentifier: 
+  Speed: 380.2
+  MPower: 64.7
+  PPower: 35
+  MaxHp: 370
+  magicResist: 57.54
+  physicResist: 30
+  Level: 4
+  AttackType: 0
+  DropItem:
+    chance0_1_simple: 0.02
+    chance0_1_rare: 0.45
+    type_simple: 3
+    type_rare: 6

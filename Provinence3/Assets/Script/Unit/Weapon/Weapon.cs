@@ -68,7 +68,7 @@ public class Weapon : MonoBehaviour, IBulletHolder
         return val;
     }
 
-    protected Vector3 GetStartPos()
+    protected virtual Vector3 GetStartPos()
     {
         Vector3 outPosVector3;
         if (bulletComeOut != null)
@@ -130,6 +130,20 @@ public class Weapon : MonoBehaviour, IBulletHolder
             pSystemOnShot.Play();
         }
     }
+    public virtual Vector3 FindStartPosition(Bullet bullet)
+    {
+        if (BulletComeOut != null)
+        {
+            return BulletComeOut.position;
+        }
+        return Transform.position;
+    }
+
+    public virtual Vector3 FindTrgPosition(Vector3 direction, Vector3 start)
+    {
+        return direction.normalized * Range + start;
+    }
+
 
     protected Bullet InstantiateBullet()
     {
@@ -173,5 +187,6 @@ public class Weapon : MonoBehaviour, IBulletHolder
     {
         get { return transform; }
     }
+
 }
 

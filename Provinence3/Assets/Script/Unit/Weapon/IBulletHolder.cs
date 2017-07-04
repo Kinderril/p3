@@ -37,5 +37,8 @@ public interface IBulletHolder
     {
         get;
     }
+
+    Vector3 FindStartPosition(Bullet bullet);
+    Vector3 FindTrgPosition(Vector3 direction,Vector3 start);
 }
 

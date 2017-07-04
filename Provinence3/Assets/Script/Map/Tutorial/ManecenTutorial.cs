@@ -45,12 +45,12 @@ public class ManecenTutorial : MonoBehaviour
     private void Dispose()
     {
         var par = transform.parent;
-        HitEffect.transform.SetParent(par,true);
+        HitEffect.transform.SetParent(TutorialLevel.transform, true);
         HitEffect.Play();
-        var g = GetComponent<BaseMonster>();
+        var g = par.GetComponent<BaseMonster>();
         TutorialLevel.Monsters.Remove(g);
-        var p = transform.position;
-        transform.position = new Vector3(p.x,p.y-100,p.z);
+        var p = par.transform.position;
+        par.transform.position = new Vector3(p.x,p.y-100,p.z);
     }
 }
 

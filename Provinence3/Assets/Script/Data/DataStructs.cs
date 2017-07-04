@@ -58,7 +58,8 @@ public class DataStructs : MonoBehaviour
     public List<BaseBonusMapElement> BaseBonusMapElement;
     public PrefabsStruct PrefabsStruct;
     public Bullet BaseBullet;
-    public Bullet BaseBulletAOE;
+    public Bullet BaseBulletAOESphere;
+    public Bullet BaseBulletAOECube;
 
     //    public HeroShopBonusItem HeroShopBonusItemPrefab;
     //    public HeroShopExecutableItem HeroShopExecutableItemPrefab;

@@ -152,6 +152,7 @@ ParticleRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_CameraVelocityScale: 0
@@ -287,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429ef8812cbae97428bfe81de72da100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.002
+  speed: 0.03
   maxTargets: 1
   hitPOsition: 0
   TrailParticleSystem: {fileID: 11436858}
@@ -295,4 +296,5 @@ MonoBehaviour:
   rebuildY: 1
   playHitAnyway: 1
   FlyType: 0
-  ID: 106
+  Collider: {fileID: 0}
+  ID: 107

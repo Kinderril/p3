@@ -21,6 +21,8 @@ public class SpellInGame : IBulletHolder
     private float max;
     protected float power;
     private AbsorberWithPosition CastEffect;
+    private TriggerInGame TriggerInGame;
+    private SummonInGame SummonInGame;
     private Unit owner;
 //    private Level level;
 
@@ -64,6 +66,11 @@ public class SpellInGame : IBulletHolder
 
     public void Dispose()
     {
+        if (TriggerInGame != null)
+        {
+            TriggerInGame.Dispose();
+            TriggerInGame = null;
+        }
         if (timer != null)
         {
             timer.Stop();
@@ -81,9 +88,28 @@ public class SpellInGame : IBulletHolder
         if (CanUse())
         {
             Unit p = null;
-            var haveTrg = true;
-            if (sourseItem.SpellData.StartType == SpellTargetType.ClosestsEnemy
-         || sourseItem.SpellData.TargetType == SpellTargetType.ClosestsEnemy)
+            if (FindTarget(out p))
+            {
+                Use(p);
+            }
+        }
+    }
+
+    private void UseWithUnit()
+    {
+        Unit p = null;
+        if (FindTarget(out p))
+        {
+            Use(p);
+        }
+    }
+
+    private bool FindTarget(out Unit p)
+    {
+        p = null;
+        var haveTrg = true;
+        if (sourseItem.SpellData.StartType == SpellTargetType.ClosestsEnemy
+          || sourseItem.SpellData.TargetType == SpellTargetType.ClosestsEnemy)
         {
             if (owner is Hero)
             {
@@ -99,15 +125,11 @@ public class SpellInGame : IBulletHolder
                 p = MainController.Instance.level.MainHero;
             }
         }
-            if (sourseItem.SpellData.TargetType == SpellTargetType.Self)
-            {
-                p = owner;
-            }
-            if (haveTrg)
-            {
-                Use(p);
-            }
+        if (sourseItem.SpellData.TargetType == SpellTargetType.Self)
+        {
+            p = owner;
         }
+        return haveTrg;
     }
 
     protected virtual void Use(Unit unit)
@@ -120,29 +142,120 @@ public class SpellInGame : IBulletHolder
         {
             CastEffect.SetAndPlay(hero);
         }
-        UseByData(unit);
+        switch (sourseItem.SpellData.SpellCoreType)
+        {
+            case SpellCoreType.Shoot:
+                LaunchBullets(unit);
+                break;
+            case SpellCoreType.Summon:
+                ActivateSummon();
+                break;
+            case SpellCoreType.Trigger:
+                ActivateTrigger();
+                break;
+        }
         DoCallback();
+        owner.UseSpellCallback(this);
     }
 
-    private void UseByData(Unit trg)
+    private void ActivateTrigger()
     {
-        var bulletPrefab = sourseItem.SpellData.Bullet;
-        var bullet = DataBaseController.GetItem<Bullet>(DataBaseController.Instance.DataStructs.BaseBullet);
+        if (TriggerInGame == null)
+        {
+            TriggerInGame = new TriggerInGame(this, owner);
+        }
+        TriggerInGame.Use();
+    }
+
+    private void ActivateSummon()
+    {
+        if (SummonInGame == null)
+        {
+            SummonInGame = new SummonInGame(this, owner);
+        }
+        SummonInGame.Use();
+    }
+
+    public void ActivateBySummon(SummonnerBehaviour summonnerBehaviour)
+    {
+        Unit trg;
+        if (FindTarget(out trg))
+        {
+            summonnerBehaviour.ActivationFine();
+            LaunchBullets(trg);
+        }
+    }
+
+    public void ActivateByTrigger()
+    {
+        Unit p;
+        if (FindTarget(out p))
+        {
+            LaunchBullets(p);
+        }
+    }
+
+    
+    private void LaunchBullets(Unit trg,SummonnerBehaviour summoner = null)
+    {
+        var bulletData = sourseItem.SpellData.Bullet;
+        Bullet bulletPrefab;
+        switch (bulletData.BulletColliderType)
+        {
+            case BulletColliderType.box:
+                bulletPrefab = DataBaseController.Instance.DataStructs.BaseBulletAOECube;
+                break;
+            case BulletColliderType.sphrere:
+                bulletPrefab = DataBaseController.Instance.DataStructs.BaseBulletAOESphere;
+                break;
+            default:
+            case BulletColliderType.noOne:
+                bulletPrefab = DataBaseController.Instance.DataStructs.BaseBullet;
+                break;
+        }
+
+        var bullet = DataBaseController.GetItem<Bullet>(bulletPrefab);
+        switch (bulletData.BulletColliderType)
+        {
+
+            case BulletColliderType.sphrere:
+                var sCollider = bullet.Collider as SphereCollider;
+                if (sCollider != null)
+                {
+                    sCollider.radius = bulletData.ColliderSize.magnitude;
+                }
+                break;
+            case BulletColliderType.box:
+                var bCollider = bullet.Collider as BoxCollider;
+                if (bCollider != null)
+                {
+                    bCollider.size = bulletData.ColliderSize;
+                }
+                break;
+        }
+
 
         bullet.transform.SetParent(Map.Instance.bulletContainer,true);
         Vector3 startPos = Vector3.zero;
         Vector3 endPos = Vector3.zero;
-        switch (sourseItem.SpellData.StartType)
+        if (summoner == null)
         {
-            case SpellTargetType.Self:
-                startPos = owner.transform.position;
-                break;
-            case SpellTargetType.ClosestsEnemy:
-                startPos = trg.transform.position;
-                break;
-            case SpellTargetType.LookDirection:
-                startPos = owner.transform.position;
-                break;
+            switch (sourseItem.SpellData.StartType)
+            {
+                case SpellTargetType.Self:
+                    startPos = owner.transform.position;
+                    break;
+                case SpellTargetType.ClosestsEnemy:
+                    startPos = trg.transform.position;
+                    break;
+                case SpellTargetType.LookDirection:
+                    startPos = owner.transform.position;
+                    break;
+            }
+        }
+        else
+        {
+            startPos = summoner.transform.position; 
         }
         switch (sourseItem.SpellData.TargetType)
         {
@@ -164,7 +277,7 @@ public class SpellInGame : IBulletHolder
         {
             bullet.Init(trg, this, startPos);
         }
-        var effect = DataBaseController.GetItem<BaseEffectAbsorber>(VisualEffectSetter.BulletEffects[bulletPrefab.IdVisual]);
+        var effect = DataBaseController.GetItem<BaseEffectAbsorber>(VisualEffectSetter.BulletEffects[bulletData.IdVisual]);
         effect.transform.SetParent(bullet.transform, false);
         effect.transform.localPosition = Vector3.zero;
 
@@ -217,6 +330,8 @@ public class SpellInGame : IBulletHolder
     {
         var sp = new SpellInGame();
         sp.Init(level,spellItem,countTalismans,owner);
+
+        owner.AddSpell(sp);
         return sp;
     }
 
@@ -225,7 +340,7 @@ public class SpellInGame : IBulletHolder
     public float Power { get { return -1f; } }
     public float Range { get { return sourseItem.SpellData.Bullet.LifeTime; } }//TODO calc
     public Unit Owner { get { return owner; } }
-    public WeaponType DamageType { get; }
+    public WeaponType DamageType { get { return WeaponType.magic;} }
     public Transform BulletComeOut {
         get { return owner.weaponsContainer; }
     }
@@ -234,5 +349,21 @@ public class SpellInGame : IBulletHolder
     {
         get { return owner.transform; }
     }
+
+    public Vector3 FindStartPosition(Bullet bullet)
+    {
+        if (BulletComeOut != null)
+        {
+            return BulletComeOut.position;
+        }
+        return Transform.position;
+    }
+
+    public Vector3 FindTrgPosition(Vector3 direction, Vector3 start)
+    {
+
+        return direction.normalized * Range + start;
+    }
+
 }
 

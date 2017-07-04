@@ -40,7 +40,7 @@ public class Formuls
     }
     public static int ShopPlayerItemCost(float lvl)
     {
-        return (int)(2 * Mathf.Pow(lvl, 0.37f) * LevelGoldAv(lvl));
+        return (int)(2 * Mathf.Pow(lvl, 0.41f) * LevelGoldAv(lvl));
     }
     public static int ShopPlayerItemCost(int lvl)
     {

@@ -11,8 +11,8 @@ public enum SpellTriggerType
     cast,
     deathNear,
     getGold,
-    questAction,
-    takeBonus,
+//    questAction,
+    getHeal,
     getEffect,
 
 }
@@ -80,9 +80,9 @@ public class BaseTrigger
                 return " someone become dead near";
             case SpellTriggerType.getGold:
                 return " found some gold";
-            case SpellTriggerType.questAction:
-                return " do part of quest";
-            case SpellTriggerType.takeBonus:
+//            case SpellTriggerType.questAction:
+//                return " do part of quest";
+            case SpellTriggerType.getHeal:
                 return " take bonus";
             case SpellTriggerType.getEffect:
                 return " get some parameters effect";
@@ -126,10 +126,10 @@ public class BaseTrigger
                 return 0.75f;
             case SpellTriggerType.getGold:
                 return 0.7f;
-            case SpellTriggerType.questAction:
-                return 0.4f;
-            case SpellTriggerType.takeBonus:
-                return 0.4f;
+//            case SpellTriggerType.questAction:
+//                return 0.4f;
+            case SpellTriggerType.getHeal:
+                return 0.65f;
             case SpellTriggerType.getEffect:
                 return 0.7f;
         }

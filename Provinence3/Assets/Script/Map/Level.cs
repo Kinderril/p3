@@ -170,6 +170,8 @@ public class Level
     }
 
     public bool IsPause { get; set; }
+    public bool IsTutor
+    { get { return MissionIndex == 0; }}
 
     public void BigMessageAppear(string txt, string subTxt,Color color,float speed = 1)
     {
@@ -273,8 +275,7 @@ public class Level
     public void PreEndLevel(EndlevelType type)
     {
         LevelEndType = type;
-        var isTutor = MissionIndex == 0;
-        if (isTutor)
+        if (IsTutor && type != EndlevelType.bad)
         {
             MainController.Instance.PlayerData.TutorEnd();
         }

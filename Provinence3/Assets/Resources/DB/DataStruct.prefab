@@ -104,7 +104,9 @@ MonoBehaviour:
   PrefabsStruct: {fileID: 11483194}
   BaseBullet: {fileID: 114126298536682368, guid: f126400046b449c46b1b55a8e81be46d,
     type: 2}
-  BaseBulletAOE: {fileID: 114525149422278168, guid: 4d9b09633e580a242ba1c18e9d54ec32,
+  BaseBulletAOESphere: {fileID: 114525149422278168, guid: 4d9b09633e580a242ba1c18e9d54ec32,
+    type: 2}
+  BaseBulletAOECube: {fileID: 114525149422278168, guid: 6d45e3842ecd1354fb72f35dedc25a0e,
     type: 2}
 --- !u!114 &11483194
 MonoBehaviour:

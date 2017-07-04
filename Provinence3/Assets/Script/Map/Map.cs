@@ -276,6 +276,13 @@ public class Map : Singleton<Map>
             CameraFollow.CameraShake.Init(0.5f);
             boss = DataBaseController.GetItem<BossUnit>(bossPrefab, pos);
             boss.ModificateParams(level.difficult);
+            if (level.IsTutor)
+            {
+                boss.Parameters.SetAbsolute(ParamType.PPower, 10);
+                boss.Parameters.SetAbsolute(ParamType.MPower, 10);
+                boss.Parameters.SetAbsolute(ParamType.PDef, 1);
+                boss.Parameters.SetAbsolute(ParamType.MDef, 1);
+            }
             var hero = MainController.Instance.level.MainHero;
             boss.Init(hero);
             enemies.Add(boss);
@@ -307,6 +314,7 @@ public class Map : Singleton<Map>
         {
             enemy.DeInit();
         }
+        MainController.Instance.level.MainHero.Dispose();
         Utils.ClearTransform(enemiesContainer);
         Utils.ClearTransform(miscContainer);
         Utils.ClearTransform(bulletContainer);

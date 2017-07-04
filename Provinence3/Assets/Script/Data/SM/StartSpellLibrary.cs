@@ -15,7 +15,7 @@ public static class StartSpellLibrary
     public static BaseSpell SimpleDamage()
     {
         var spell1 = new BaseSpell(SpellTargetType.Self, SpellTargetType.ClosestsEnemy, SpellCoreType.Shoot, 2, 8, 1, 1);
-        var bullet1 = new BaseBullet(0.05f, 0, BaseBulletTarget.homing, Vector3.zero, BulletColliderType.noOne, 1);
+        var bullet1 = new BaseBullet(0.05f, 0, BaseBulletTarget.homing, Vector3.one, BulletColliderType.sphrere, 1);
         var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, -160), EffectSpectials.none);
 
         spell1.Bullet = bullet1;

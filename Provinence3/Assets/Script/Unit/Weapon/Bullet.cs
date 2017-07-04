@@ -43,6 +43,7 @@ public class Bullet : PoolElement
     private float additionalPower = 0;
     private float startDist2target;
     public FlyType FlyType = FlyType.straight;
+    public Collider Collider;
     public int ID;
 //    protected Weapon weapon;
 
@@ -67,8 +68,8 @@ public class Bullet : PoolElement
             direction = new Vector3(direction.x, 0, direction.z);
         }
         this.bulletHolder = weapon;
-        start = FindStartPos(weapon);
-        trg = direction.normalized * weapon.Range + start;
+        start = weapon.FindStartPosition(this);
+        trg = weapon.FindTrgPosition(direction, start);
         subInit();
         switch (FlyType)
         {
@@ -85,28 +86,6 @@ public class Bullet : PoolElement
         }
         if (direction != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(direction);
-    }
-
-    protected virtual Vector3 FindStartPos(IBulletHolder weapon)
-    {
-        Vector3 sPos;
-        if (weapon != null)
-        {
-            if (weapon.BulletComeOut != null)
-            {
-                sPos = weapon.BulletComeOut.position;
-            }
-            else
-            {
-                sPos = weapon.Transform.position;
-            }
-        }
-        else
-        {
-            sPos = transform.position;
-            Debug.Log("wrong bullet start position " + start);
-        }
-        return sPos;
     }
     
     public virtual void Init(Unit target, IBulletHolder weapon,Vector3 startPosition)
@@ -142,7 +121,7 @@ public class Bullet : PoolElement
     public override void EndUse()
     {
         targetUnit = null;
-//        bulletHolder = null;
+        bulletHolder = null;
         updateAction = null;
         time = 0;
         AffecttedUnits.Clear();

@@ -62,6 +62,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &3348148
 MeshFilter:
@@ -89,7 +90,8 @@ MonoBehaviour:
   rebuildY: 1
   playHitAnyway: 1
   FlyType: 0
-  ID: 103
+  Collider: {fileID: 0}
+  ID: 104
 --- !u!135 &13526074
 SphereCollider:
   m_ObjectHideFlags: 1

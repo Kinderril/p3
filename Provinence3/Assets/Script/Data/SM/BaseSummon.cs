@@ -6,6 +6,8 @@ using System.Text;
 
 public class BaseSummon
 {
+    public const float LIFE_TIME_SEC = 15;
+
     public int Id;
     public int IdVisual;
     public float DelayShoot;

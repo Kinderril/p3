@@ -301,7 +301,7 @@ public class PlayerData
             AddAndEquip(item1);
             AddAndEquip(item2);
             AddRandomStartSpell(0);
-            AddRandomStartSpell(1);
+//            AddRandomStartSpell(1);
 //            AddRandomStartSpell();
 //            AddFirstTalisman(TalismanType.splitter);
 //            AddFirstTalisman(TalismanType.heal);

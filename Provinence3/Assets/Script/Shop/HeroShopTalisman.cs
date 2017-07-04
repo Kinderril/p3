@@ -13,7 +13,7 @@ public class HeroShopTalisman : HeroShopRandomItem
 
     public override int CrystalCost
     {
-        get { return 3; }
+        get { return 1; }
     }
 
     public override int MoneyCost

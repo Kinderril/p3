@@ -70,8 +70,8 @@ public static class SpellsDataBase
     {
         if (Spells.Count <= 0)
         {
-            CreateSpell(StartSpellLibrary.SimpleAOESlow);
             CreateSpell(StartSpellLibrary.SimpleDamage);
+            CreateSpell(StartSpellLibrary.SimpleAOESlow);
             CreateSpell(StartSpellLibrary.SimplePAtck);
             CreateSpell(StartSpellLibrary.TotemHealer);
             CreateSpell(StartSpellLibrary.TotemPDef);

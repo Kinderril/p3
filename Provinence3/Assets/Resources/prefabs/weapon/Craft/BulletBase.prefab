@@ -59,4 +59,5 @@ MonoBehaviour:
   rebuildY: 1
   playHitAnyway: 1
   FlyType: 0
+  Collider: {fileID: 0}
   ID: 100

@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80de761b5a4d4404db1cb232218fed03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 11421664, guid: a489ddab944a6b6419865e3db1f6c0de, type: 2}
+  bullet: {fileID: 0}
   owner: {fileID: 0}
   pSystemOnShot: {fileID: 0}
   Parameters: {fileID: 11400000, guid: 8cb00242ebfc1ac4a89c68d7fa63abff, type: 2}
@@ -1698,7 +1698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80de761b5a4d4404db1cb232218fed03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 11417546, guid: 85ce84dd40711084c9439b23d7dfe237, type: 2}
+  bullet: {fileID: 114065677873425102, guid: 85ce84dd40711084c9439b23d7dfe237, type: 2}
   owner: {fileID: 0}
   pSystemOnShot: {fileID: 0}
   Parameters: {fileID: 11400000, guid: e6ce117782ab7be4a88e78ba304e7069, type: 2}
@@ -1856,6 +1856,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -1932,6 +1933,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -2008,6 +2010,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -2061,6 +2064,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1558977212433122}
   m_Enabled: 1
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2.45
   m_Acceleration: 20

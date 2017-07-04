@@ -12,11 +12,14 @@ public class Unit : MonoBehaviour
 {
     public Action<Unit> OnShootEnd;
     public event Action OnUnitDestroy;
+    public event Action OnHeal;
+    public event Action<BaseEffect> OnGetEffect;
     public event Action<Vector3> OnUnitAttack;
     public Action<Weapon> OnWeaponChanged;
     public Action OnShieldOn;
     public event Action<Unit> OnDead;
     public Action<float, float, float> OnGetHit;
+    public event Action<SpellInGame> OnCastSpell;
 
     protected float curHp;
     public Weapon curWeapon;
@@ -38,6 +41,7 @@ public class Unit : MonoBehaviour
     private List<TimeEffect> TimeEffects = new List<TimeEffect>();
     public DeathInfo LastHitInfo;
     public FlashController FlashController;
+    protected List<SpellInGame> Spells = new List<SpellInGame>(); 
 
     public float CurHp
     {
@@ -136,6 +140,14 @@ public class Unit : MonoBehaviour
         OnShieldOff = new IEndEffect();
     }
 
+    public void UseSpellCallback(SpellInGame spell)
+    {
+        if (OnCastSpell != null)
+        {
+            OnCastSpell(spell);
+        }
+    }
+
     protected virtual void InitWEapons()
     {
         foreach (var inventoryWeapon in InventoryWeapons)
@@ -221,6 +233,7 @@ public class Unit : MonoBehaviour
     {
         Control.MoveTo(dir * Parameters[ParamType.Speed]);
     }
+
     public void GetHeal(float currentPower)
     {
         var effect = DataBaseController.Instance.Pool.GetItemFromPool(EffectType.heal);
@@ -239,6 +252,10 @@ public class Unit : MonoBehaviour
             {
                 OnGetHit(CurHp, Parameters[ParamType.Heath], p);
             }
+        }
+        if (OnHeal != null)
+        {
+            OnHeal();
         }
     }
 
@@ -499,6 +516,10 @@ public class Unit : MonoBehaviour
                 Debug.LogError("странный ефект. проверить настройки");
             }
         }
+        if (OnGetEffect != null)
+        {
+            OnGetEffect(effect);
+        }
     }
 
     protected virtual void Death()
@@ -563,5 +584,18 @@ public class Unit : MonoBehaviour
     public void TimeEffectsRemove(TimeEffect effect)
     {
         TimeEffects.Remove(effect);
+    }
+
+    public void AddSpell(SpellInGame sp)
+    {
+        Spells.Add(sp);
+    }
+
+    public virtual void Dispose()
+    {
+        foreach (var spellInGame in Spells)
+        {
+            spellInGame.Dispose();
+        }
     }
 }

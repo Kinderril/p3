@@ -44,8 +44,8 @@ public static class SpellMerger
         SpellTriggerType.cast,
         SpellTriggerType.deathNear,
         SpellTriggerType.getGold,
-        SpellTriggerType.questAction,
-        SpellTriggerType.takeBonus,
+//        SpellTriggerType.questAction,
+        SpellTriggerType.getHeal,
         SpellTriggerType.getEffect,
     }; 
 

@@ -2035,7 +2035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 667981a7bbb7b2e4a8c694c7070eeff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 11417546, guid: 7716f15f913bf90419f20c96787e6f82, type: 2}
+  bullet: {fileID: 114469664411954004, guid: 7716f15f913bf90419f20c96787e6f82, type: 2}
   owner: {fileID: 0}
   pSystemOnShot: {fileID: 0}
   Parameters: {fileID: 11400000, guid: 1b2d2c1e563c9d94cba2d4641a00638a, type: 2}
@@ -2137,6 +2137,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -2223,6 +2224,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -2286,6 +2288,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175918}
   m_Enabled: 1
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2.45
   m_Acceleration: 45.19
