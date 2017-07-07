@@ -9,18 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
-  m_Name: DemonLessClose
+  m_Name: Hero
   m_EditorClassIdentifier: 
-  Speed: 350
-  MPower: 36
-  PPower: 35
-  MaxHp: 200
-  magicResist: 10
-  physicResist: 30
+  Speed: 386
+  MPower: 1
+  PPower: 1
+  MaxHp: 734
+  magicResist: 1
+  physicResist: 1
   Level: 1
-  AttackType: 1
+  AttackType: 0
   DropItem:
-    chance0_1_simple: 0.23
-    chance0_1_rare: 0.67
+    chance0_1_simple: 0
+    chance0_1_rare: 0
     type_simple: 0
-    type_rare: 7
+    type_rare: 0

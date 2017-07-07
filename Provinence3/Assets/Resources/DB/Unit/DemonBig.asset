@@ -9,18 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
-  m_Name: DemonLessClose
+  m_Name: DemonBig
   m_EditorClassIdentifier: 
-  Speed: 350
-  MPower: 36
+  Speed: 380.2
+  MPower: 64.7
   PPower: 35
-  MaxHp: 200
-  magicResist: 10
+  MaxHp: 370
+  magicResist: 57.54
   physicResist: 30
-  Level: 1
+  Level: 4
   AttackType: 1
   DropItem:
-    chance0_1_simple: 0.23
-    chance0_1_rare: 0.67
-    type_simple: 0
-    type_rare: 7
+    chance0_1_simple: 0.02
+    chance0_1_rare: 0.45
+    type_simple: 3
+    type_rare: 6

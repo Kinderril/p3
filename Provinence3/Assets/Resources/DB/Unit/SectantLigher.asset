@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Name: SectantLigher
   m_EditorClassIdentifier: 
   Speed: 310
-  MPower: 53
+  MPower: 75.1
   PPower: 0
-  MaxHp: 260
-  magicResist: 35
-  physicResist: 18
+  MaxHp: 310
+  magicResist: 27.6
+  physicResist: 13.4
   Level: 3
   AttackType: 0
   DropItem:

@@ -14,10 +14,10 @@ MonoBehaviour:
   Speed: 600
   MPower: 39
   PPower: 39
-  MaxHp: 175
+  MaxHp: 165
   magicResist: 40
   physicResist: 45
-  Level: 3
+  Level: 2
   AttackType: 1
   DropItem:
     chance0_1_simple: 0.23

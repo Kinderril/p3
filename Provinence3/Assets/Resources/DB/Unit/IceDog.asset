@@ -17,7 +17,7 @@ MonoBehaviour:
   MaxHp: 261
   magicResist: 39.4
   physicResist: 67.47
-  Level: 4
+  Level: 3
   AttackType: 0
   DropItem:
     chance0_1_simple: 0.25

@@ -9,13 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c785b671cbf3c594d9dc59355f41f442, type: 3}
-  m_Name: Hero
+  m_Name: SectantSpectr
   m_EditorClassIdentifier: 
-  Speed: 386
+  Speed: 330
   MPower: 1
-  PPower: 1
-  MaxHp: 734
-  magicResist: 1
-  physicResist: 1
-  Level: 1
-  AttackType: 0
+  PPower: 55.7
+  MaxHp: 621
+  magicResist: 12
+  physicResist: 53.78
+  Level: 3
+  AttackType: 1
+  DropItem:
+    chance0_1_simple: 0.43
+    chance0_1_rare: 0.16
+    type_simple: 2
+    type_rare: 7

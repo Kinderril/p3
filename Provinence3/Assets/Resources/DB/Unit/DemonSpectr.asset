@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Name: DemonSpectr
   m_EditorClassIdentifier: 
   Speed: 380.2
-  MPower: 64.7
+  MPower: 70.7
   PPower: 35
-  MaxHp: 370
-  magicResist: 57.54
-  physicResist: 30
-  Level: 4
+  MaxHp: 366
+  magicResist: 58.61
+  physicResist: 81.8
+  Level: 5
   AttackType: 0
   DropItem:
     chance0_1_simple: 0.02

@@ -68,6 +68,11 @@ MonoBehaviour:
   - {fileID: 11450574, guid: 13f06168c668d0044981699762ed6652, type: 2}
   - {fileID: 114784697418096206, guid: 1eb6bcfc71819844aa1164b6aeb0180b, type: 2}
   - {fileID: 114509874695324910, guid: 4d4e285e1ddc62b4497d4fdcf36cb0d8, type: 2}
+  - {fileID: 114115519268238620, guid: fba8ffa0566c18c4684c7aae2b762121, type: 2}
+  - {fileID: 114822968043029718, guid: 01fb56f35e25adb4aa3c72c53ea2592d, type: 2}
+  - {fileID: 114057964928325510, guid: 6e03c000e9b0e9b4ca8f30ff8ef86e36, type: 2}
+  - {fileID: 11476422, guid: b0aaa35ff8b75e54ba22e774a81e0b9d, type: 2}
+  - {fileID: 114188932273716584, guid: 94cab55efe79f634b962d77fe3405c2c, type: 2}
   BossUnits:
   - {fileID: 11408556, guid: bb08f8bde5e25184c9a36dfd5b115b75, type: 2}
   - {fileID: 114214371569564636, guid: 03bbb2fa9651c1f42ad6133ab41a2c91, type: 2}
@@ -161,9 +166,9 @@ MonoBehaviour:
   ALL_TIME_DROP: 0
   ALL_TALISMAN_CHARGED: 0
   MAIN_HERO_MEGAHP: 1
-  LESS_COUNT_BOSS_COME: 0
+  LESS_COUNT_BOSS_COME: 1
   GET_START_BOOST: 0
-  GET_ALL_TYPE_WEAPONS_BOOST: 1
+  GET_ALL_TYPE_WEAPONS_BOOST: 0
   RESPAWN_TIME_CREEPS_FAST: 0
   ALWAYS_GOOD_END: 0
   CHANCE_STUN_100: 0

@@ -205,8 +205,10 @@ public class Map : Singleton<Map>
         var mainHero = level.MainHero;
         float mainHeroDist;
         bool isActive;
-        foreach (var baseMonster in enemies)
+//        foreach (var baseMonster in enemies)
+        for (int i = 0; i < enemies.Count; i++)
         {
+            var baseMonster = enemies[i];
             if (baseMonster != null && !baseMonster.IsDead && !baseMonster.IsDisabled)
             {
                 mainHeroDist = (mainHero.transform.position - baseMonster.transform.position).sqrMagnitude;
