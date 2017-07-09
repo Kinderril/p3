@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class SpellInGame : IBulletHolder
 {
+    private const float LAUNCH_DELAY = 0.3f;
     protected const float LVL_1_AV_MONSTER_HP = 100;
     protected const float LVL_10_AV_MONSTER_HP = 330;
 
@@ -24,6 +25,10 @@ public class SpellInGame : IBulletHolder
     private TriggerInGame TriggerInGame;
     private SummonInGame SummonInGame;
     private Unit owner;
+    private float nextTimeLaunch;
+    private int launchesRemain;
+
+
 //    private Level level;
 
     public virtual string PowerInfo()
@@ -198,6 +203,31 @@ public class SpellInGame : IBulletHolder
     
     private void LaunchBullets(Unit trg,SummonnerBehaviour summoner = null)
     {
+        if (sourseItem.SpellData.BulletCount == 1)
+        {
+            LaunchBullet(trg,summoner);
+        }
+        else
+        {
+            launchesRemain += sourseItem.SpellData.BulletCount;
+            nextTimeLaunch = 0;
+        }
+    }
+
+    public void ManualUpdate()
+    {
+        if (launchesRemain > 0)
+        {
+            if (nextTimeLaunch < Time.time)
+            {
+                launchesRemain--;
+                nextTimeLaunch = Time.time + LAUNCH_DELAY;
+            } 
+        }
+    }
+
+    private void LaunchBullet(Unit trg, SummonnerBehaviour summoner = null)
+    {
         var bulletData = sourseItem.SpellData.Bullet;
         Bullet bulletPrefab;
         switch (bulletData.BulletColliderType)
@@ -235,7 +265,7 @@ public class SpellInGame : IBulletHolder
         }
 
 
-        bullet.transform.SetParent(Map.Instance.bulletContainer,true);
+        bullet.transform.SetParent(Map.Instance.bulletContainer, true);
         Vector3 startPos = Vector3.zero;
         Vector3 endPos = Vector3.zero;
         if (summoner == null)
@@ -255,7 +285,7 @@ public class SpellInGame : IBulletHolder
         }
         else
         {
-            startPos = summoner.transform.position; 
+            startPos = summoner.transform.position;
         }
         switch (sourseItem.SpellData.TargetType)
         {
@@ -280,8 +310,6 @@ public class SpellInGame : IBulletHolder
         var effect = DataBaseController.GetItem<BaseEffectAbsorber>(VisualEffectSetter.BulletEffects[bulletData.IdVisual]);
         effect.transform.SetParent(bullet.transform, false);
         effect.transform.localPosition = Vector3.zero;
-
-
     }
 
     private void OnTimerCome()

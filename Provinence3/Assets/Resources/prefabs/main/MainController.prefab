@@ -109,6 +109,8 @@ MonoBehaviour:
     window: {fileID: 0}
   - state: 7
     window: {fileID: 0}
+  - state: 8
+    window: {fileID: 0}
   MainCamera: {fileID: 0}
   SubCamera: {fileID: 0}
   ConfirmWindow: {fileID: 0}

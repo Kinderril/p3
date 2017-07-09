@@ -16,6 +16,7 @@ public abstract class BaseItemInfo : MonoBehaviour
 
     protected virtual void Init(BaseItem item,bool sell = true, bool WithButtons = true)
     {
+        Utils.ClearTransform(moneyLayout);
         BaseItem = item;
         if (SlotLabel != null)
         {

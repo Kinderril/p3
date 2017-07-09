@@ -214,15 +214,15 @@ public class HeroControl : BaseControl
         return doRotate;
     }
 
-    protected override void UpdateCharacter()
-    {
-        base.UpdateCharacter();
+//    protected override void UpdateCharacter()
+//    {
+//        base.UpdateCharacter();
 //        SpinTransform.UpdateRotate();
 //        CheckRemainBackDir();
 //        if (DebuGameObject != null)
 //        {
 ////            DebuGameObject.SetActive(isBackDir);
 //        }
-    }
+//    }
 }
 

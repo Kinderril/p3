@@ -91,6 +91,7 @@ public class BaseMonster : Unit
         
         DropItems();
         DropHeal();
+        DropAmmo();
         DropMoney();
 
         base.Death();
@@ -110,6 +111,23 @@ public class BaseMonster : Unit
         {
             var HealMapItem = DataBaseController.GetItem<HealMapItem>(DataBaseController.Instance.HealMapItemPrefab, transform.position);
             MapItemInit(HealMapItem);
+        }
+    }
+
+    private void DropAmmo()
+    {
+        var isDrop = UnityEngine.Random.Range(0, 100) < 50;
+#if UNITY_EDITOR
+        if (DebugController.Instance.ALL_TIME_DROP)
+        {
+            isDrop = true;
+        }
+#endif
+        if (isDrop)
+        {
+            var ammoMapItem = DataBaseController.GetItem<AmmoMapItem>(DataBaseController.Instance.AmmoMapItem, transform.position);
+            ammoMapItem.Init(ItemId.ammo,SMUtils.Range(2,5));
+            MapItemInit(ammoMapItem);
         }
     }
 

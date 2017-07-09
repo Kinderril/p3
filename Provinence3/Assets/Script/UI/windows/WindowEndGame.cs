@@ -74,7 +74,7 @@ public class WindowEndGame : BaseWindow
             playerItem.gameObject.transform.SetParent(bigItemLayout, false);
         }
 
-        string capt = "Misson completed";//isGoodEnd ? "Good end" : "Bad ending lose half of gold";
+        string capt = "Level complited";//isGoodEnd ? "Good end" : "Bad ending lose half of gold";
         goodPicture.SetActive(isGoodEnd);
         badPicture.SetActive(!isGoodEnd);
         killsField.Init(0,3500);

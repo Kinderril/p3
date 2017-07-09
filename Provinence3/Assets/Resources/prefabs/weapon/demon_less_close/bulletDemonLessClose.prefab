@@ -31,6 +31,7 @@ GameObject:
   - component: {fileID: 13530402}
   - component: {fileID: 5467570}
   - component: {fileID: 114150796693129318}
+  - component: {fileID: 114486813062138926}
   m_Layer: 0
   m_Name: bulletDemonLessClose
   m_TagString: Untagged
@@ -288,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429ef8812cbae97428bfe81de72da100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.03
+  speed: 0.04
   maxTargets: 1
   hitPOsition: 0
   TrailParticleSystem: {fileID: 11436858}
@@ -298,3 +299,19 @@ MonoBehaviour:
   FlyType: 0
   Collider: {fileID: 0}
   ID: 107
+  AdditionaBehaviours: []
+--- !u!114 &114486813062138926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95da5f4a80193a4ea5fb1eb944588d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Duration: 10
+  ParamType: 2
+  Value: -50
+  EffectValType: 1

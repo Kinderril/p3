@@ -14,7 +14,7 @@ public class AmmoMapItem : BaseMapItem
     {
         base.Init(fromChest);
         this.type = type;
-        this.count = (int) Utils.RandomNormal(count*0.5f, count * 1.6f);
+        this.count = (int) Utils.RandomNormal(count*0.7f, count * 1.3f);
     }
 
     protected override void Take(Hero unit)

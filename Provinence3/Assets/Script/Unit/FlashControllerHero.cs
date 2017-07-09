@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
 
 public class FlashControllerHero : FlashController
 {
-    private float startVal = 3.5f;
-    private float endVal = -1f;
-    private const string keyTime = "_RimPower";
+    public float endVal = -1f;
+    public string keyTime = "_RimPower";
+    public float startVal = 3.5f;
 
     protected override void AwakeInner()
     {
         endVal *= 2;
         foreach (var renderer1 in Renderers)
         {
-            List<Material> materialsInside = new List<Material>();
+            var materialsInside = new List<Material>();
             var mat = renderer1.materials;
-            for (int i = 0; i < mat.Length; i++)
+            for (var i = 0; i < mat.Length; i++)
             {
-                materialsInside.Add(Instantiate(mat[i]) as Material);
+                materialsInside.Add(Instantiate(mat[i]));
             }
             renderer1.materials = materialsInside.ToArray();
             materials.AddRange(materialsInside);
@@ -32,28 +28,27 @@ public class FlashControllerHero : FlashController
         if (isPlaying)
         {
             curTime += Time.deltaTime;
-            float c = curTime;
-            if (curTime > FlashController.TOTAL_FLASH_TIME / 2f)
+            var c = curTime;
+            if (curTime > TOTAL_FLASH_TIME/2f)
             {
-                c = FlashController.TOTAL_FLASH_TIME - curTime;
+                c = TOTAL_FLASH_TIME - curTime;
             }
-            var percent = c/FlashController.TOTAL_FLASH_TIME;
+            var percent = 2f*c/TOTAL_FLASH_TIME;
             var pp = startVal*(1 - percent) + endVal*percent;
-//                        Debug.Log("percent:" + percent + "   p:" + pp);
-            c = Mathf.Clamp(pp, -5f, Single.MaxValue);
+            c = Mathf.Clamp(pp, -5f, float.MaxValue);
             foreach (var material in materials)
             {
                 material.SetFloat(keyTime, c);
             }
-            //            Debug.Log("curTime:" + curTime + "   c:"+c);
-            if (curTime > FlashController.TOTAL_FLASH_TIME)
+//            Debug.Log("setting balue:" + c + "  materials:" + materials.Count + "   startVal:" + startVal + " endVal:" +
+//                      endVal + "  percent:" + percent);
+            if (curTime > TOTAL_FLASH_TIME)
             {
                 End();
-
             }
         }
     }
-    
+
     protected override void SubPlaye()
     {
         foreach (var material in materials)
@@ -62,11 +57,9 @@ public class FlashControllerHero : FlashController
         }
     }
 
-    void End()
+    private void End()
     {
         enabled = false;
         isPlaying = false;
     }
-
 }
-

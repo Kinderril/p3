@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 4996270362356044}
   - component: {fileID: 95050729217903670}
   - component: {fileID: 114631393618794312}
-  - component: {fileID: 114646351366880034}
+  - component: {fileID: 114947905928671940}
   m_Layer: 0
   m_Name: demon_flight_01
   m_TagString: Untagged
@@ -2894,7 +2894,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 0}
   _shield: 0
-  FlashController: {fileID: 114646351366880034}
+  FlashController: {fileID: 114947905928671940}
   attackDist: 40
   mainHeroDist: 0
   bornPosition: {x: 0, y: 0, z: 0}
@@ -3114,20 +3114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playImmidiatly: 0
---- !u!114 &114646351366880034
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1443152826965104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47054580f9541b64b9b13144142aceb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Renderers:
-  - {fileID: 137083872189092370}
-  - {fileID: 137339489862669478}
 --- !u!114 &114760733297292864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3145,6 +3131,7 @@ MonoBehaviour:
   Parameters: {fileID: 11400000, guid: 6a9cf1a402ad633468ca215fb965e67d, type: 2}
   bulletComeOut: {fileID: 4302873015121304}
   countBullets: 3
+  rndPower: 2.5
 --- !u!114 &114887496808686242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3184,6 +3171,23 @@ MonoBehaviour:
   m_fPrefabScale: 1
   m_fPrefabSpeed: 1
   m_fPrefabLifeTime: 2
+--- !u!114 &114947905928671940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443152826965104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c89d34a62cfdf488761f5e74f65c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers:
+  - {fileID: 137083872189092370}
+  - {fileID: 137339489862669478}
+  startVal: 3.5
+  endVal: -1
+  keyTime: _RimPower
 --- !u!136 &136368842463616132
 CapsuleCollider:
   m_ObjectHideFlags: 1

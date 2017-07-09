@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 4444693632966766}
   - component: {fileID: 95200686810675168}
   - component: {fileID: 114991414784101316}
-  - component: {fileID: 114226876977702918}
+  - component: {fileID: 114769421840061260}
   m_Layer: 0
   m_Name: demon_flight_01
   m_TagString: Untagged
@@ -1826,7 +1826,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1695591670657804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 359.4448, y: 44.48235, z: 104.60319}
+  m_LocalPosition: {x: 21.595207, y: 40.090874, z: 38.93892}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4972160645487300}
@@ -2122,20 +2122,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114226876977702918
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1369871662871100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47054580f9541b64b9b13144142aceb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Renderers:
-  - {fileID: 137702259786496742}
-  - {fileID: 137557492443717148}
 --- !u!114 &114261638277984154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2215,6 +2201,23 @@ MonoBehaviour:
   m_fPrefabScale: 1
   m_fPrefabSpeed: 1
   m_fPrefabLifeTime: 2
+--- !u!114 &114769421840061260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369871662871100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c89d34a62cfdf488761f5e74f65c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers:
+  - {fileID: 137702259786496742}
+  - {fileID: 137557492443717148}
+  endVal: 0
+  keyTime: _RimPower
+  startVal: 7
 --- !u!114 &114822968043029718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2237,7 +2240,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 114424731852407276}
   _shield: 0
-  FlashController: {fileID: 114226876977702918}
+  FlashController: {fileID: 114769421840061260}
   attackDist: 40
   mainHeroDist: 0
   bornPosition: {x: 0, y: 0, z: 0}

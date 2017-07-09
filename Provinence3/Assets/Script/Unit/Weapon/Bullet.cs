@@ -45,6 +45,7 @@ public class Bullet : PoolElement
     public FlyType FlyType = FlyType.straight;
     public Collider Collider;
     public int ID;
+    public List<EffectBehaviour> AdditionaBehaviours; 
 //    protected Weapon weapon;
 
     public float AdditionalPower
@@ -280,7 +281,7 @@ public class Bullet : PoolElement
         float deltaOffset = 1f;
 
         var milldePoint = (startPos + end) / 2;
-        var alpha = (startPos.y - end.y) / (startPos.x - end.x);
+        var alpha = (startPos.z - end.z) / (startPos.x - end.x);
         var dist = (startPos - end).magnitude;
         var v = (new Vector3(1, -1 / alpha)).normalized;
 
@@ -300,7 +301,7 @@ public class Bullet : PoolElement
 
         var contrtolPoint = milldePoint + v * deltaOffset;
         Debug.Log(startPos + "   " + contrtolPoint + "   " + end);
-        contrtolPoint.z = milldePoint.z;
+        contrtolPoint.y = milldePoint.y;
         return contrtolPoint;
     }
 

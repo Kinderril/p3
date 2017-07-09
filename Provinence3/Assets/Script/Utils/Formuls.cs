@@ -40,7 +40,7 @@ public class Formuls
     }
     public static int ShopPlayerItemCost(float lvl)
     {
-        return (int)(2 * Mathf.Pow(lvl, 0.41f) * LevelGoldAv(lvl));
+        return (int)(2 * Mathf.Pow(lvl, 0.56f) * LevelGoldAv(lvl));
     }
     public static int ShopPlayerItemCost(int lvl)
     {
@@ -48,7 +48,7 @@ public class Formuls
     }
     public static int RecepiCost(int lvl)
     {
-        return (int)(ShopPlayerItemCost(lvl) * 0.65f);
+        return (int)(ShopPlayerItemCost(lvl) * 0.75f);
     }
     public static int BonusCost(int lvl)
     {
@@ -149,7 +149,7 @@ public class Formuls
                 break;
         }
         var lvlCost = GetPlayerItemLvlByPoints(points) ;
-        var p = ShopPlayerItemCost(lvlCost);
+        var p = ShopPlayerItemCost(lvlCost)*0.8f;
         var totalCost = (int)(p * c / 4);
         Debug.Log("points: " + points + "  totalCost:"+ totalCost + "  lvlCost:" + lvlCost);
         return totalCost;

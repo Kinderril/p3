@@ -34,10 +34,15 @@ public class BossUnit : BaseMonster
         if (Parameters != null)
         {
             var delta = (Parameters.Level - difficult)/10f;
+            if (delta <= 1)
+            {
+                delta = 1f;
+            }
             Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.PPower] * delta);
             Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.MPower] * delta);
             Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.MDef] * delta);
             Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.PDef] * delta);
+          
             Parameters.MaxHp *= delta;
         }
 

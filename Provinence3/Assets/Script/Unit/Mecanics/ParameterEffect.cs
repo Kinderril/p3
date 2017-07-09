@@ -23,24 +23,26 @@ public class ParameterEffect : TimeEffect
         switch (typeVal)
         {
             case EffectValType.abs:
+                if (Type == ParamType.Speed)
+                {
+                    _value = _value / Formuls.SpeedCoef;
+                }
                 if (plus)
                 {
-                    targetUnit.Parameters.Add(Type, value);
+                    targetUnit.Parameters.Add(Type, _value);
                 }
                 else
                 {
-                    targetUnit.Parameters.Remove(Type, value);
+                    targetUnit.Parameters.Remove(Type, _value);
                 }
                 break;
             case EffectValType.percent:
-                if (plus)
+                _value = 1 + _value;
+                if (_value < 0)
                 {
-                    targetUnit.Parameters.AddCoef(Type, value);
+                    _value = 0f;
                 }
-                else
-                {
-                    targetUnit.Parameters.RemoveCoef(Type, value);
-                }
+                targetUnit.Parameters.AddCoef(Type, _value);
                 break;
         }
         CheckOnSpeed();
@@ -82,14 +84,7 @@ public class ParameterEffect : TimeEffect
                 }
                 break;
             case EffectValType.percent:
-                if (plus)
-                {
-                    targetUnit.Parameters.RemoveCoef(Type, _value);
-                }
-                else
-                {
-                    targetUnit.Parameters.AddCoef(Type, _value);
-                }
+                targetUnit.Parameters.RemoveCoef(Type, _value);
                 break;
         }
     }

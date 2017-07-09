@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,7 +104,11 @@ public class Hero : Unit
             inventoryWeapon.Init(this,additionItem);
         }
     }
-    
+
+    void Update()
+    {
+        UpdateUnit();
+    }
 
     protected override void UpdateUnit()
     {
@@ -116,10 +121,24 @@ public class Hero : Unit
                 currenthBonus = 0;
             }
         }
-        Control.UpdateFromUnit();
-        if (Action != null)
-            Action.Update();
+//        Control.UpdateFromUnit();
+//        if (Action != null)
+//            Action.Update();
+        DEbugUpdate();
     }
+
+    private void DEbugUpdate()
+    {
+        var s = "";
+        s += " " +Parameters[ParamType.Heath].ToString("0.0");
+        s += " " + Parameters[ParamType.PPower].ToString("0.0");
+        s += " " + Parameters[ParamType.MPower].ToString("0.0");
+        s += " " + Parameters[ParamType.PDef].ToString("0.0");
+        s += " " + Parameters[ParamType.MDef].ToString("0.0");
+        s += " " + Parameters[ParamType.Speed].ToString("0.0");
+        DebugController.Instance.InfoField1.text = s;
+    }
+
     public void TryAttackByDirection(Vector3 dir, float additionalPower = 0,bool homing = false)
     {
         var p = transform.position;

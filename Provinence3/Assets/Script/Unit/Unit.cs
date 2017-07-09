@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour
     public Action<Unit> OnShootEnd;
     public event Action OnUnitDestroy;
     public event Action OnHeal;
-    public event Action<BaseEffect> OnGetEffect;
+    public event Action OnGetEffect;
     public event Action<Vector3> OnUnitAttack;
     public Action<Weapon> OnWeaponChanged;
     public Action OnShieldOn;
@@ -310,10 +310,17 @@ public class Unit : MonoBehaviour
         }
         else
         {
-//            return;
             AffcetSimpleBullet(bullet);
         }
- }
+
+        if (bullet.AdditionaBehaviours != null)
+        {
+            foreach (var effect in bullet.AdditionaBehaviours)
+            {
+                AffectEffect(EffectSpectials.none, effect.Duration, effect.Value, effect.Bullet.bulletHolder.Owner.ParametersScriptable.Level, effect.ParamType, effect.EffectValType);
+            }
+        }
+    }
 
     private void AffcetSimpleBullet(Bullet bullet)
     {
@@ -426,101 +433,104 @@ public class Unit : MonoBehaviour
         return Mathf.Clamp(1f - (lvlUnit - lvlSpell)*0.2f,0f,1f);
     }
 
-    private void AffectEffect(BaseEffect effect, SpellInGame spell)
+    private void AffectEffect(EffectSpectials spectial, float duration, float valueInner, int level , ParamType pType, EffectValType eValType)
     {
         if (Parameters == null)
         {
-            //Tutor hack
             return;
         }
-        float coef = 1f;
-        switch (effect.Spectial)
+        float value = 1f;
+        float curVal = Parameters[pType];
+        switch (eValType)
         {
-//            case EffectSpectials.hpOfSelf:
-//                break;
-            case EffectSpectials.hpOfTarget:
+            case EffectValType.abs:
+                value = valueInner;
                 break;
-//            case EffectSpectials.heroMPower:
-//                break;
-            case EffectSpectials.dependsOnDist:
+            case EffectValType.percent:
+                var p = PenltyCoef(Parameters.Level, level);
+                value = valueInner / 100f * p;
                 break;
-        }
-        float value = 0;
-        if (effect.SubEffectData != null)
-        {
-            float curVal = Parameters[effect.SubEffectData.ParamType];
-            switch (effect.SubEffectData.EffectValType)
-            {
-                case EffectValType.abs:
-                    value = effect.SubEffectData.Value;
-                    break;
-                case EffectValType.percent:
-                    var p = PenltyCoef(Parameters.Level, spell.sourseItem.SpellData.Level);
-                    value = curVal * effect.SubEffectData.Value/100f* p;
-                    break;
-            }
         }
 
-        if (effect.Duration > 0)
+        if (duration > 0)
         {
-            if (effect.SubEffectData != null)
+            if (spectial == EffectSpectials.stun)
             {
-                var e = new ParameterEffect(this, effect.Duration, effect.SubEffectData.ParamType, value, value > 0,
-                    effect.SubEffectData.EffectValType);
-                TimeEffect.Execute(this, e);
+                //TODO
             }
             else
             {
-                if (effect.Spectial == EffectSpectials.stun)
-                {
-                    //TODO
-                }
+                var e = new ParameterEffect(this, duration, pType, value, value > 0, eValType);
+                TimeEffect.Execute(this, e);
             }
         }
         else
         {
-            if (effect.SubEffectData != null)
+            switch (eValType)
             {
-                switch (effect.SubEffectData.EffectValType)
-                {
-                    case EffectValType.abs:
-                        if (effect.SubEffectData.ParamType == ParamType.Heath)
-                        {
-                            var val = Mathf.Abs(effect.SubEffectData.Value);
-                            var d = new DeathInfo(val, WeaponType.magic,SourceType.talisman );
-                            GetDamage(val, WeaponType.magic,d);
-                        }
-                        else
-                        {
-                            this.Parameters.Add(effect.SubEffectData.ParamType, effect.SubEffectData.Value);
-                        }
-                        break;
-                    case EffectValType.percent:
-                        if (effect.SubEffectData.ParamType == ParamType.Heath)
-                        {
-                            var p = PenltyCoef(Parameters.Level, spell.sourseItem.SpellData.Level);
-                            var val = this.CurHp*effect.SubEffectData.Value/100f * p;
-                            val = Mathf.Abs(val);
-                            var d = new DeathInfo(val, WeaponType.magic, SourceType.talisman);
-                            GetDamage(val, WeaponType.magic, d);
-                        }
-                        else
-                        {
-                            this.Parameters.AddCoef(effect.SubEffectData.ParamType, effect.SubEffectData.Value);
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                Debug.LogError("странный ефект. проверить настройки");
+                case EffectValType.abs:
+                    if (pType == ParamType.Heath)
+                    {
+                        var val = Mathf.Abs(valueInner);
+                        var d = new DeathInfo(val, WeaponType.magic, SourceType.talisman);
+                        GetDamage(val, WeaponType.magic, d);
+                    }
+                    else
+                    {
+                        this.Parameters.Add(pType, valueInner);
+                    }
+                    break;
+                case EffectValType.percent:
+                    if (pType == ParamType.Heath)
+                    {
+                        var p = PenltyCoef(Parameters.Level, level);
+                        var val = this.CurHp* valueInner / 100f*p;
+                        val = Mathf.Abs(val);
+                        var d = new DeathInfo(val, WeaponType.magic, SourceType.talisman);
+                        GetDamage(val, WeaponType.magic, d);
+                    }
+                    else
+                    {
+                        this.Parameters.AddCoef(pType, valueInner);
+                    }
+                    break;
+
             }
         }
         if (OnGetEffect != null)
         {
-            OnGetEffect(effect);
+            OnGetEffect();
         }
     }
+
+    private void AffectEffect(BaseEffect effect, SpellInGame spell)
+    {
+        if (effect.SubEffectData != null)
+        {
+            var data = effect.SubEffectData;
+            AffectEffect(effect.Spectial, effect.Duration, data.Value, spell.sourseItem.SpellData.Level, data.ParamType,
+                data.EffectValType);
+        }
+        else
+        {
+            AffectEffect(effect.Spectial);
+        }
+    }
+
+    private void AffectEffect(EffectSpectials spectial)
+    {
+        switch (spectial)
+        {
+                
+        }
+        Debug.Log("TODO!!!!::: "  + spectial.ToString());
+        if (OnGetEffect != null)
+        {
+            OnGetEffect();
+        }
+    }
+
+
 
     protected virtual void Death()
     {

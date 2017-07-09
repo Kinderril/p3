@@ -3366,7 +3366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chanceToWork: 2
   radius: 2
-  unitsCout: 3
+  unitsCout: 1
   ID: 0
   monsterPrebaf: {fileID: 11465162, guid: 3f1637189313f7e40b42cbba9ac58c46, type: 2}
   difficulty: 1
@@ -3657,7 +3657,7 @@ MonoBehaviour:
   radius: 2
   unitsCout: 1
   ID: 0
-  monsterPrebaf: {fileID: 11482598, guid: 4257c488398242448a5c2c024ddc1fb3, type: 2}
+  monsterPrebaf: {fileID: 0}
   difficulty: 2
 --- !u!23 &247209541
 MeshRenderer:
@@ -17288,7 +17288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chanceToWork: 2
   radius: 2
-  unitsCout: 3
+  unitsCout: 1
   ID: 0
   monsterPrebaf: {fileID: 114784697418096206, guid: 1eb6bcfc71819844aa1164b6aeb0180b,
     type: 2}
@@ -18952,7 +18952,8 @@ MonoBehaviour:
   radius: 2
   unitsCout: 1
   ID: 0
-  monsterPrebaf: {fileID: 0}
+  monsterPrebaf: {fileID: 114509874695324910, guid: 4d4e285e1ddc62b4497d4fdcf36cb0d8,
+    type: 2}
   difficulty: 2
 --- !u!23 &1336919006
 MeshRenderer:
@@ -26368,7 +26369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chanceToWork: 0.9
   radius: 2
-  unitsCout: 2
+  unitsCout: 1
   ID: 0
   monsterPrebaf: {fileID: 11479450, guid: 884a0511add418d42a91874ad00ee2f5, type: 2}
   difficulty: 1

@@ -159,7 +159,7 @@ public class Map : Singleton<Map>
         {
             yield return new WaitForEndOfFrame();
             monsterBornPosition.BornMosters();
-            DebugController.Instance.InfoField1.text = "Count:"+enemies.Count.ToString();
+//            DebugController.Instance.InfoField1.text = "Count:"+enemies.Count.ToString();
         }
         LoadBoss();
         if (OnMonstersReady != null)
@@ -277,6 +277,9 @@ public class Map : Singleton<Map>
         {
             CameraFollow.CameraShake.Init(0.5f);
             boss = DataBaseController.GetItem<BossUnit>(bossPrefab, pos);
+            var hero = MainController.Instance.level.MainHero;
+            boss.Init(hero);
+            enemies.Add(boss);
             boss.ModificateParams(level.difficult);
             if (level.IsTutor)
             {
@@ -285,9 +288,6 @@ public class Map : Singleton<Map>
                 boss.Parameters.SetAbsolute(ParamType.PDef, 1);
                 boss.Parameters.SetAbsolute(ParamType.MDef, 1);
             }
-            var hero = MainController.Instance.level.MainHero;
-            boss.Init(hero);
-            enemies.Add(boss);
             var resultBossHP = Formuls.ModifyBossHP(boss, bonuses);
             boss.SetHp(resultBossHP);
             boss.Parameters.SetAbsolute(ParamType.Heath, resultBossHP);

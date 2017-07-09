@@ -26,7 +26,7 @@ public class TriggerInGame
         Activate();
     }
 
-    private void OnGetEffect(BaseEffect obj)
+    private void OnGetEffect()
     {
         Activate();
     }

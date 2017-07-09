@@ -101,13 +101,13 @@ public class WindowInGame : BaseWindow
     private void OnPreEndLevel(EndlevelType type )
     {
         string txt;
-        if (type == EndlevelType.good)
+        if (type == EndlevelType.bad )
         {
-            txt = "Good job!";
+            txt = "You are dead";
         }
         else
         {
-            txt = "You are dead";
+            txt = "Good job!";
         }
         EndGameText.text = txt;
         UiControls.Enable(false);
