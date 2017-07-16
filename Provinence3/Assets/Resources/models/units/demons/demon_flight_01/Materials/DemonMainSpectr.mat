@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RimTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: da0a9f3b56d1f1b448631e729908c8dd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularTex:
@@ -62,13 +62,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WrapTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c87a2c47aa831f946a6ade836da12c5e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _C2: 10
-    - _Cutoff: 0.5
+    - _Cutoff: 0.572
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Fresnel: 1

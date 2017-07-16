@@ -38,7 +38,7 @@ public class BaseTrigger
 
     public string Save()
     {
-        var result = Id.ToString() + SMUtils.DELEM + TriggerType.ToString() + SMUtils.DELEM + SMUtils.DELEM + ShootCount;
+        var result = Id.ToString() + SMUtils.DELEM + TriggerType.ToString() + SMUtils.DELEM + ShootCount;
         return result;
     }
 

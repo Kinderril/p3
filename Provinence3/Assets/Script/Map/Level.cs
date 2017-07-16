@@ -436,5 +436,13 @@ public class Level
         QuestController.Add(giver);
     }
 
+    public bool DropAmmon()
+    {
+        if (Ammo.CurAmmo < 3)
+        {
+            return true;
+        }
+        return SMUtils.Range(0f, 100f) < 50f;
+    }
 }
 

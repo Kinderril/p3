@@ -6,6 +6,8 @@ using Random = System.Random;
 
 public static class Utils
 {
+    public static int LAYER_STATIC_OBJ;
+
     private static bool haveNextNextGaussian;
     private static float nextNextGaussian;
     private static readonly Random random = new Random();
@@ -31,6 +33,7 @@ public static class Utils
     public static void Init(Terrain terrain)
     {
         Utils.groundLayerIndex = 1 << terrain.gameObject.layer;
+        Utils.LAYER_STATIC_OBJ = LayerMask.NameToLayer("StaticObjects");
     }
 
     public static T RandomElement<T>(this List<T> list)

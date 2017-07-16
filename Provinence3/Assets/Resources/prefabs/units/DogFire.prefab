@@ -202,8 +202,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4922594349715130}
   - component: {fileID: 95717917907670386}
-  - component: {fileID: 114582711593001534}
   - component: {fileID: 114446496926226402}
+  - component: {fileID: 114868827955616454}
   m_Layer: 0
   m_Name: demon_dog_01
   m_TagString: Untagged
@@ -1201,7 +1201,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1981303717151970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 352.509, y: 19.173, z: 61.792}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4269836584669194}
@@ -1741,6 +1741,7 @@ ParticleRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_CameraVelocityScale: 0
@@ -1884,21 +1885,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playImmidiatly: 0
---- !u!114 &114582711593001534
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1286976218395184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47054580f9541b64b9b13144142aceb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Renderers:
-  - {fileID: 137779023513656260}
-  - {fileID: 137267696355027322}
-  - {fileID: 137633734683821242}
 --- !u!114 &114619830405710024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1930,7 +1916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80de761b5a4d4404db1cb232218fed03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 114412544272344246, guid: 2deec77e760c69044989855ad3a75269, type: 2}
+  bullet: {fileID: 114796866050283398, guid: 2deec77e760c69044989855ad3a75269, type: 2}
   owner: {fileID: 0}
   pSystemOnShot: {fileID: 0}
   Parameters: {fileID: 11400000, guid: 97a59407ca8863b4eb3c24fbfa092b3c, type: 2}
@@ -1957,7 +1943,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 0}
   _shield: 0
-  FlashController: {fileID: 114582711593001534}
+  FlashController: {fileID: 114868827955616454}
   attackDist: 26.2
   mainHeroDist: 0
   bornPosition: {x: 0, y: 0, z: 0}
@@ -1965,6 +1951,24 @@ MonoBehaviour:
   haveAction: 0
   moneyCoef: 1
   energyCoef: 1
+--- !u!114 &114868827955616454
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286976218395184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c89d34a62cfdf488761f5e74f65c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers:
+  - {fileID: 137779023513656260}
+  - {fileID: 137267696355027322}
+  - {fileID: 137633734683821242}
+  endVal: -1
+  keyTime: _RimPower
+  startVal: 3.5
 --- !u!136 &136636035540729420
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2008,6 +2012,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -2084,6 +2089,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -2160,6 +2166,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -2213,6 +2220,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1981303717151970}
   m_Enabled: 1
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2.45
   m_Acceleration: 20

@@ -111,6 +111,7 @@ public class WindowSpellMerge : BaseWindow
             playerData.RemoveItem(selectedSpell1);
             playerData.RemoveItem(selectedSpell2);
             var nSpell = SpellMerger.Merge(selectedSpell1.SpellData, selectedSpell2.SpellData);
+            SpellsDataBase.SaveSpell(nSpell);
             var nItem = new SpellItem(nSpell);
             playerData.AddItem(nItem);
             SpellShow.Init(nItem, () =>

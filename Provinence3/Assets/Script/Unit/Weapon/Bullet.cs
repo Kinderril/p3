@@ -40,6 +40,7 @@ public class Bullet : PoolElement
     protected List<Unit> AffecttedUnits = new List<Unit>();
     public bool rebuildY = true;
     public bool playHitAnyway = true;
+    public bool deadIfCollideAny = false;
     private float additionalPower = 0;
     private float startDist2target;
     public FlyType FlyType = FlyType.straight;
@@ -52,14 +53,6 @@ public class Bullet : PoolElement
     {
         get { return additionalPower; }
         set { additionalPower = value; }
-    }
-
-    void Awake()
-    {
-        if (HitParticleSystem != null)
-        {
-            HitParticleSystem.Stop();
-        }
     }
 
     public virtual void Init(Vector3 direction, IBulletHolder weapon)
@@ -184,11 +177,21 @@ public class Bullet : PoolElement
                             Hit(trg);
                         }
                         break;
-               }
+                }
             }
             else if (isHeroOwner)
             {
                 Hit(trg);
+            }
+        }
+        else if(deadIfCollideAny)
+        {
+            if (trg == null)
+            {
+                if (other.gameObject.layer == Utils.LAYER_STATIC_OBJ)
+                {
+                    Death(null);
+                }
             }
         }
     }
@@ -233,6 +236,7 @@ public class Bullet : PoolElement
                         break;
                     case HitPosition.bullet:
                         Map.Instance.LeaveEffect(HitParticleSystem, transform);
+                        HitParticleSystem.transform.rotation = Quaternion.identity;
                         break;
                 }
             }

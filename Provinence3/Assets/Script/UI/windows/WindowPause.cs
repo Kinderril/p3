@@ -46,7 +46,8 @@ public class WindowPause : MonoBehaviour
         }
         MonstersKilledField.text = level.LevelStatistics.EnemiesKills + " Monsters killed";
         LevelDifficultyField.text = "Difficulty:"+level.difficult.ToString();
-        LevelNameField.text = "Mission:"+ DataBaseController.Instance.MissionNames[level.MissionIndex].ToString();
+        if (DataBaseController.Instance.MissionNames.ContainsKey(level.MissionIndex))
+            LevelNameField.text = "Mission:"+ DataBaseController.Instance.MissionNames[level.MissionIndex].ToString();
     }
     
     public void OnResume()

@@ -105,8 +105,8 @@ GameObject:
   m_Component:
   - component: {fileID: 484064}
   - component: {fileID: 9593910}
-  - component: {fileID: 11416644}
   - component: {fileID: 11441254}
+  - component: {fileID: 114931548027527344}
   m_Layer: 0
   m_Name: demon_dog_01
   m_TagString: Untagged
@@ -1405,7 +1405,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 558.9682, y: 158.87202, z: -26.764172}
+  m_LocalPosition: {x: 355.12384, y: 19.029392, z: 60.53288}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 457908}
@@ -1630,21 +1630,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11416644
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47054580f9541b64b9b13144142aceb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Renderers:
-  - {fileID: 13783608}
-  - {fileID: 13710190}
-  - {fileID: 13770118}
 --- !u!114 &11441254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1699,7 +1684,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 0}
   _shield: 0
-  FlashController: {fileID: 11416644}
+  FlashController: {fileID: 114931548027527344}
   attackDist: 40
   mainHeroDist: 0
   bornPosition: {x: 0, y: 0, z: 0}
@@ -1798,6 +1783,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -1874,6 +1860,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -1950,6 +1937,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
@@ -2003,6 +1991,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105606}
   m_Enabled: 1
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2.45
   m_Acceleration: 20
@@ -2031,3 +2020,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105606}
   m_IsPrefabParent: 1
+--- !u!114 &114931548027527344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c89d34a62cfdf488761f5e74f65c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers:
+  - {fileID: 13783608}
+  - {fileID: 13710190}
+  - {fileID: 13770118}
+  endVal: -1
+  keyTime: _RimPower
+  startVal: 3.5

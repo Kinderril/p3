@@ -309,9 +309,11 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 11421516}
   rebuildY: 1
   playHitAnyway: 1
+  deadIfCollideAny: 0
   FlyType: 0
   Collider: {fileID: 0}
   ID: 102
+  AdditionaBehaviours: []
   waitTime: 1
 --- !u!114 &11464186
 MonoBehaviour:

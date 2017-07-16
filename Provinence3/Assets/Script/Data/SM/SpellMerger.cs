@@ -179,7 +179,7 @@ public static class SpellMerger
             e.Spectial = Specials2Rnd.RandomElement();
         }
         VisualEffectSetter.Set(resultSpell);
-//        Console.WriteLine("Power of end spell:" + GetPowerCoef(resultSpell) + " <<<<< "  );
+        //        Console.WriteLine("Power of end spell:" + GetPowerCoef(resultSpell) + " <<<<< "  );
         return resultSpell;
     }
 

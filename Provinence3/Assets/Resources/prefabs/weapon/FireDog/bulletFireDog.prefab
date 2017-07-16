@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 4602720603451870}
   - component: {fileID: 54699765951535172}
   - component: {fileID: 65963785645516954}
-  - component: {fileID: 114412544272344246}
+  - component: {fileID: 114796866050283398}
   m_Layer: 0
   m_Name: bulletFireDog
   m_TagString: Untagged
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_fPrefabScale: 1
   m_fPrefabSpeed: 1
   m_fPrefabLifeTime: 2
---- !u!114 &114412544272344246
+--- !u!114 &114796866050283398
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -445,17 +445,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1218794106861722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff641b8cb650714ea464ff1966693ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 429ef8812cbae97428bfe81de72da100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.002
+  speed: 0.02
   maxTargets: 1
   hitPOsition: 0
-  TrailParticleSystem: {fileID: 0}
+  TrailParticleSystem: {fileID: 114167485245365864}
   HitParticleSystem: {fileID: 0}
   rebuildY: 1
   playHitAnyway: 1
+  deadIfCollideAny: 0
   FlyType: 0
   Collider: {fileID: 0}
-  ID: 117
-  StayOnPosition: 0
+  ID: 118
+  AdditionaBehaviours: []

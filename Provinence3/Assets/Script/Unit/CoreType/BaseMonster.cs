@@ -116,7 +116,7 @@ public class BaseMonster : Unit
 
     private void DropAmmo()
     {
-        var isDrop = UnityEngine.Random.Range(0, 100) < 50;
+        bool isDrop = MainController.Instance.level.DropAmmon();
 #if UNITY_EDITOR
         if (DebugController.Instance.ALL_TIME_DROP)
         {

@@ -964,7 +964,7 @@ GameObject:
   - component: {fileID: 4103917698736186}
   - component: {fileID: 95354552123269570}
   - component: {fileID: 114866996485498290}
-  - component: {fileID: 114585212546316766}
+  - component: {fileID: 114734922716288302}
   m_Layer: 0
   m_Name: demon_flight_01
   m_TagString: Untagged
@@ -1130,7 +1130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397923831599084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 345.67752, y: 24.6815, z: 140.71928}
+  m_LocalPosition: {x: 365.0106, y: 27.523718, z: 67.31874}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4216694439285064}
@@ -2223,7 +2223,7 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   StartAttackEffect: {fileID: 114021224301900828}
   _shield: 0
-  FlashController: {fileID: 114585212546316766}
+  FlashController: {fileID: 114734922716288302}
   attackDist: 40
   mainHeroDist: 0
   bornPosition: {x: 0, y: 0, z: 0}
@@ -2270,20 +2270,6 @@ MonoBehaviour:
   m_fPrefabScale: 1
   m_fPrefabSpeed: 1
   m_fPrefabLifeTime: 2
---- !u!114 &114585212546316766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1919114564977936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47054580f9541b64b9b13144142aceb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Renderers:
-  - {fileID: 137276352419043168}
-  - {fileID: 137008158624882138}
 --- !u!114 &114610559215618998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2296,6 +2282,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathAnimator: {fileID: 95696154220685038}
+--- !u!114 &114734922716288302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1919114564977936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c89d34a62cfdf488761f5e74f65c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers:
+  - {fileID: 137008158624882138}
+  - {fileID: 137276352419043168}
+  endVal: -1
+  keyTime: _RimPower
+  startVal: 3.5
 --- !u!114 &114864182824226150
 MonoBehaviour:
   m_ObjectHideFlags: 1

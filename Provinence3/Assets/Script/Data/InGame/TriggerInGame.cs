@@ -8,7 +8,7 @@ using UnityEngine;
 public class TriggerInGame
 {
     private const float SQR_DIST_DEATH = 5*5;
-    private BaseSpell spell;//TODO spell in game
+    private BaseSpell spellData;
     private int chargesRemain = 0;
     private Unit Owner;
     private BaseTrigger triggerData;
@@ -18,6 +18,7 @@ public class TriggerInGame
     {
         this.sourseItem = sourseItem;
         Owner = owner;
+        spellData = sourseItem.sourseItem.SpellData;
         triggerData = sourseItem.sourseItem.SpellData.BaseTrigger;
     }
 
@@ -126,7 +127,6 @@ public class TriggerInGame
 
     public void Use()
     {
-        chargesRemain = spell.BaseTrigger.ShootCount; //TODO
         if (chargesRemain <= 0)
         {
             switch (triggerData.TriggerType)
@@ -149,8 +149,6 @@ public class TriggerInGame
                 case SpellTriggerType.getGold:
                     MainController.Instance.level.OnItemCollected += OnItemCollected;
                     break;
-                //                case SpellTriggerType.questAction:
-                //                    break;
                 case SpellTriggerType.getHeal:
                     Owner.OnHeal += OnHeal;
                     break;
@@ -162,6 +160,7 @@ public class TriggerInGame
                     break;
             }
         }
+        chargesRemain = spellData.BaseTrigger.ShootCount; //TODO
     }
 }
 

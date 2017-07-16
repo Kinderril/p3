@@ -112,5 +112,4 @@ public class MainController : Singleton<MainController>
 	    if (level != null)
 	        level.Update();
 	}
-
 }

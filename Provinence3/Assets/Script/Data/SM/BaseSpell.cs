@@ -93,8 +93,9 @@ public class BaseSpell
                      SpellCoreType.ToString() + SMUtils.DELEM +//10
                      ValueGold.ToString() + SMUtils.DELEM +//11
                      (BaseSummon != null?BaseSummon.Id:-1) + SMUtils.DELEM +//12
-                     Level + SMUtils.DELEM + //13
-                     Name + SMUtils.DELEM;//14
+                     (BaseTrigger != null? BaseTrigger.Id:-1) + SMUtils.DELEM +//13
+                     Level + SMUtils.DELEM + //14
+                     Name + SMUtils.DELEM;//15
         return spell;
     }
 
@@ -115,8 +116,9 @@ public class BaseSpell
         var SpellCoreType = (SpellCoreType)Enum.Parse(typeof(SpellCoreType), strs[10]);
         int ValueGold = Convert.ToInt32(strs[11]);
         int BaseSummon = Convert.ToInt32(strs[12]);
-        int Level = Convert.ToInt32(strs[13]);
-        string Name = strs[14];
+        int BaseTrigger = Convert.ToInt32(strs[13]);
+        int Level = Convert.ToInt32(strs[14]);
+        string Name = strs[15];
         BaseSpell result = new BaseSpell(StartType,TargetType,SpellCoreType,Charges,Cost,BulletCount,Level);
         result.Id = id;
         result.IdIcon = IdIcon;
@@ -128,6 +130,10 @@ public class BaseSpell
         if (BaseSummon > 0)
         {
             result.BaseSummon = SpellsDataBase.Summons[BaseSummon];
+        }
+        if (BaseTrigger > 0)
+        {
+            result.BaseTrigger = SpellsDataBase.Triggers[BaseTrigger];
         }
 
         return result;

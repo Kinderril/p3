@@ -65,6 +65,17 @@ public static class SpellsDataBase
             Effects.Add(data.Id, data);
         }
     }
+    public static void Add(BaseTrigger data)
+    {
+        if (Triggers.ContainsKey(data.Id))
+        {
+            Triggers[data.Id] = data;
+        }
+        else
+        {
+            Triggers.Add(data.Id, data);
+        }
+    }
 
     public static void LoadStartSpells(bool withSave = true)
     {
@@ -130,7 +141,7 @@ public static class SpellsDataBase
         return spell;
     }
 
-    private static string SaveSpell(BaseSpell spell)
+    public static string SaveSpell(BaseSpell spell)
     {
         var spellID = Spells.Count;
         var bulletID = Bullets.Count;
@@ -149,6 +160,12 @@ public static class SpellsDataBase
             var effectId = Effects.Count;
             baseEffect.Id = effectId;
             Add(baseEffect);
+        }
+        if (spell.BaseTrigger != null)
+        {
+            var trgId = Triggers.Values.Count;
+            spell.BaseTrigger.Id = trgId;
+            Add(spell.BaseTrigger);
         }
         SaveDataBase();
         return spell.Save();

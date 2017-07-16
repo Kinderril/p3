@@ -295,6 +295,8 @@ MonoBehaviour:
   HitParticleSystem: {fileID: 0}
   rebuildY: 1
   playHitAnyway: 1
+  deadIfCollideAny: 0
   FlyType: 1
   Collider: {fileID: 0}
   ID: 110
+  AdditionaBehaviours: []
