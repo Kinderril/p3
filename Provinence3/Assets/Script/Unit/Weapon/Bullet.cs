@@ -46,7 +46,9 @@ public class Bullet : PoolElement
     public FlyType FlyType = FlyType.straight;
     public Collider Collider;
     public int ID;
-    public List<EffectBehaviour> AdditionaBehaviours; 
+    public List<EffectBehaviour> AdditionaBehaviours;
+    public float TrailOffTime = 1f;
+    private bool trailStop = false;
 //    protected Weapon weapon;
 
     public float AdditionalPower
@@ -254,6 +256,10 @@ public class Bullet : PoolElement
     {
         time += speed;
         transform.position = Vector3.Lerp(start, trg, time);
+  
+        OffTrail();
+        
+
         if (time > 1)
         {
             Death(null);
@@ -271,13 +277,30 @@ public class Bullet : PoolElement
         float pz = v2 * start.z + 2 * time * vn * control.z + t2 * trg.z;
 //        float y = start.y*vn + trg.y*time;
 
-        transform.position = new Vector3(px, py, pz); 
-
+        transform.position = new Vector3(px, py, pz);
+        
+        OffTrail();
+        
 
         if (time > 1)
         {
             Death(null);
         }
+    }
+
+    private void OffTrail()
+    {
+        if (!trailStop && time > TrailOffTime)
+        {
+            trailStop = true;
+            if (TrailParticleSystem != null)
+            {
+                TrailParticleSystem.Stop();
+                Map.Instance.LeaveEffect(TrailParticleSystem, transform);
+            }
+        }
+        
+
     }
 
     private Vector3 ContrtolPoint(Vector3 startPos, Vector3 end, ControlPointOffset offset = ControlPointOffset.soft)

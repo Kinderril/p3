@@ -55,7 +55,7 @@ public class WindowInGame : BaseWindow
         UiControls.Init(level);
         level.Energy.OnLeft += OnLeft;
         level.TriggerZeroAmmo += TriggerZeroAmmon;
-        level.Energy.OnRage += OnRage;
+//        level.Energy.OnRage += OnRage;
         level.OnItemCollected += OnItemCollected;
         level.OnCraftItemCollected += OnCraftItemCollected;
         level.MainHero.OnGetHit += OnHeroHit;
@@ -213,7 +213,7 @@ public class WindowInGame : BaseWindow
         level.TriggerZeroAmmo -= TriggerZeroAmmon;
         level.OnEndLevel -= OnEndLevel;
         level.Energy.OnLeft -= OnLeft;
-        level.Energy.OnRage -= OnRage;
+//        level.Energy.OnRage -= OnRage;
         level.OnItemCollected -= OnItemCollected;
         level.MainHero.OnGetHit -= OnHeroHit;
         level.OnPreEndLevel -= OnPreEndLevel;

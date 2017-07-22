@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class Formuls
     public const int SpeedCoef = 100;
     public static float calcResist(float curResist)
     {
-        return 1 - curResist / (150 + curResist);
+        return 1 - curResist / (100 + curResist);
     }
 
     public const int av_mosters_kills = 45;
@@ -359,5 +360,10 @@ public class Formuls
         return w.Random();
     }
 
+    public static float CrystalBonusPower(float power)
+    {
+        float x = 1.5f;
+        return Mathf.Clamp(x, 1f, 2f);
+    }
 }
 

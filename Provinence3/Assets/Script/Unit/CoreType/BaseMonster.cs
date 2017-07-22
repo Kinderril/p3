@@ -77,7 +77,7 @@ public class BaseMonster : Unit
         Parameters.AddCoef(ParamType.PPower, c);
         Parameters.AddCoef(ParamType.PDef, c);
         Parameters.AddCoef(ParamType.MDef, c);
-        Parameters.AddCoef(ParamType.Heath, 2.3f);
+        Parameters.MaxHp = Parameters[ParamType.Heath]*2.3f;
         transform.localScale = Vector3.one*1.5f;
         overcharged = true;
         moneyCoef *= 4f;
@@ -205,7 +205,7 @@ public class BaseMonster : Unit
     private void DropMoney()
     {
         var goldMapItem = DataBaseController.GetItem<GoldMapItem>(DataBaseController.Instance.GoldMapItemPrefab, transform.position);
-        goldMapItem.Init(ItemId.money, Formuls.GoldInMonster(Parameters.Level,moneyCoef));
+        goldMapItem.Init(ItemId.money, Formuls.GoldInMonster(Level, moneyCoef));
         MapItemInit(goldMapItem);
     }
 

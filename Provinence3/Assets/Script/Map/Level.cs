@@ -74,7 +74,7 @@ public class Level
         TimeUtils.StartMeasure("LOAD PRELEVEL");
         CrystalsBonus = 1;
         QuestController = new LevelQuestController(this);
-        Energy = new Energy(ActivaAction,OnRage);
+        Energy = new Energy(ActivaAction,OnHealthShoot);
         Ammo = new Ammo(ActivaAction, TriggerZeroActivate);
         MissionIndex = levelIndex;
         IndexBornPoint = indexBornPos;
@@ -91,6 +91,12 @@ public class Level
 
     
 
+    }
+
+    private void OnHealthShoot(int obj)
+    {
+//        MainHero.SetHp(MainHero.CurHp - obj);
+        MainHero.GetDamage(obj,WeaponType.magic, new DeathInfo(obj,WeaponType.magic, SourceType.talisman),0,0);
     }
 
     private void TriggerZeroActivate()

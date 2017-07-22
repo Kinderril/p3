@@ -33,7 +33,7 @@ public class BossUnit : BaseMonster
     {
         if (Parameters != null)
         {
-            var delta = (Parameters.Level - difficult)/10f;
+            var delta = (Level - difficult)/10f;
             if (delta <= 1)
             {
                 delta = 1f;

@@ -13,6 +13,7 @@ public class OpenLevelWindow : MonoBehaviour
     private int index;
     private Action<int> OnOpenLevelCallback;
     private Action OnWindowClose;
+    private int cost;
 
     public void Init(int index,Action<int> OnOpenLevelCallback,Action OnWindowClose)
     {
@@ -20,15 +21,22 @@ public class OpenLevelWindow : MonoBehaviour
         this.OnWindowClose = OnWindowClose;
         this.index = index;
         gameObject.SetActive(true);
-        var cost = DataBaseController.Instance.LevelsCost[index];
-        CrystalsCost.text = cost.Crystals.ToString("0");
+        cost = DataBaseController.Instance.LevelsCost[index].Crystals;
+        CrystalsCost.text =  "Crystals cost to open level:" + cost.ToString("0");
 //        LevelField.text = cost.PlayerLevel.ToString("0");
     }
 
     public void OnOpenClick()
     {
-        MainController.Instance.PlayerData.OpenLevels.OpenLevel(index,true);
-        OnOpenLevelCallback(index);
+        if (MainController.Instance.PlayerData.CanPay(ItemId.crystal, cost))
+        {
+            MainController.Instance.PlayerData.OpenLevels.OpenLevel(index, true);
+            OnOpenLevelCallback(index);
+        }
+        else
+        {
+            WindowManager.Instance.InfoWindow.Init(null,"You don't have enought crystals");
+        }
         Close();
     }
 

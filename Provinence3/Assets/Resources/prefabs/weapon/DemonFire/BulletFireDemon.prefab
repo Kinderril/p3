@@ -385,6 +385,7 @@ MonoBehaviour:
   Collider: {fileID: 0}
   ID: 120
   AdditionaBehaviours: []
+  TrailOffTime: 1
 --- !u!114 &114811505320166382
 MonoBehaviour:
   m_ObjectHideFlags: 1

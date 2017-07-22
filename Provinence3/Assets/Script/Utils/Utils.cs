@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
@@ -48,13 +49,23 @@ public static class Utils
         if (list.Count == 0)
             return listOut;
 
+
+//        if (list.Count <= count)
+//        {
+//            foreach (var v in list)
+//            {
+//                listOut.Add(v);
+//            }
+//            return listOut;
+//        }
         
         for (int i = 0; i < count; i++)
         {
             var a = (list.Count/count);
             var index = UnityEngine.Random.Range(i*a + 1, (i + 1)*a);
             var e = list[Mathf.Clamp(index,0,list.Count-1)];
-            listOut.Add(e);
+//            if (!listOut.Contains(e))
+                listOut.Add(e);
         }
 
         return listOut;

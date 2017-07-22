@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: DemonMainSpectr
-  m_Shader: {fileID: 4800000, guid: aa50eab07c8a3024eb23612c390e42eb, type: 3}
+  m_Shader: {fileID: 4800000, guid: c29d9de78e3a573419b0ded84362d757, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
@@ -85,7 +85,7 @@ Material:
     - _ZWrite: 1
     - diff: 1
     m_Colors:
-    - _Color: {r: 0.49956748, g: 0.7756831, b: 0.9705882, a: 0.441}
+    - _Color: {r: 0.49956748, g: 0.7756831, b: 0.9705882, a: 0.728}
     - _ColorTint: {r: 1, g: 1, b: 1, a: 0.378}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0.71501946, g: 0.6541955, b: 0.7352941, a: 0.434}

@@ -29,6 +29,12 @@ public class WindowMission : BaseWindow
     public override void Init()
     {
         base.Init();
+        InitLevels();
+    }
+
+    private void InitLevels()
+    {
+
         DebugStartMisson.gameObject.SetActive(false);
 #if DEBUG
         DebugStartMisson.gameObject.SetActive(true);
@@ -64,23 +70,23 @@ public class WindowMission : BaseWindow
             Debug.Log("Selected: " + pointToggle.transform.name);
             pointToggle.text.text = pointToggle.ID.ToString();
             pointToggle.Toggle.onValueChanged.RemoveAllListeners();
-            int a = pointToggle.ID;
-            stubList.Add(a, pointToggle.ID);
-            
+            int mission = pointToggle.ID;
+            stubList.Add(mission, pointToggle.ID);
+
             pointToggle.Toggle.onValueChanged.AddListener(arg0 =>
             {
                 if (arg0)
                 {
-                    var id = stubList[a];
+                    var id = stubList[mission];
                     List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(id);
-                    MissionSelected(stubList[a], opensRespawnPoints.Count > 0);
+                    MissionSelected(stubList[mission], opensRespawnPoints.Count > 0);
                 }
             });
-            if (a > maxLvl)
+            if (mission > maxLvl)
             {
-                List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(a);
+                List<int> opensRespawnPoints = MainController.Instance.PlayerData.OpenLevels.GetAllBornPositions(mission);
                 if (opensRespawnPoints.Count > 0)
-                    maxLvl = a;
+                    maxLvl = mission;
             }
             if (pointToggle.ID == lastLevel)
             {
@@ -111,7 +117,7 @@ public class WindowMission : BaseWindow
         }
 
         DifficultyChooser.Init(OnDifChanges);
-        MissionSelected(lastLevel,true);
+        MissionSelected(lastLevel, true);
     }
 
     private void OnDifChanges(int obj)
@@ -189,7 +195,7 @@ public class WindowMission : BaseWindow
 
     private void LevelOpened(int obj)
     {
-        
+        InitLevels();
     }
 
     public void OnPlayClick()
@@ -202,6 +208,5 @@ public class WindowMission : BaseWindow
         MainController.Instance.StartLevel(0, curDiffChoosed, 99);
 
     }
-
 }
 

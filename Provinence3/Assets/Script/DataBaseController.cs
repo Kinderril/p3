@@ -31,6 +31,7 @@ public class DataBaseController : Singleton<DataBaseController>
     private readonly Dictionary<SpecialAbility, Sprite> SpecialsSprites = new Dictionary<SpecialAbility, Sprite>();
     private readonly Dictionary<MainParam, Sprite> MainParamSprites = new Dictionary<MainParam, Sprite>();
     private readonly Dictionary<ParamType, Sprite> ParamTypeSprites = new Dictionary<ParamType, Sprite>();
+    private readonly Dictionary<SpellTriggerType, Sprite> SpellTriggerIcons = new Dictionary<SpellTriggerType, Sprite>();
     private readonly Dictionary<Slot, Sprite> SlotSprites = new Dictionary<Slot, Sprite>();
     private readonly Dictionary<ItemId, Color> itemsColors = new Dictionary<ItemId, Color>();
     private readonly Dictionary<Rarity, Color> rarityColors = new Dictionary<Rarity, Color>();
@@ -208,6 +209,11 @@ public class DataBaseController : Singleton<DataBaseController>
             ParamTypeSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/Parameters/" + v.ToString()));
         }
 
+        foreach (SpellTriggerType v in Enum.GetValues(typeof(SpellTriggerType)))
+        {
+            SpellTriggerIcons.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/SpellTriggerType/" + v.ToString()));
+        }
+
         foreach (SpecialAbility v in Enum.GetValues(typeof(SpecialAbility)))
         {
             SpecialsSprites.Add(v, UnityEngine.Resources.Load<Sprite>("sprites/SpecialAbility/" + v.ToString()));
@@ -285,6 +291,10 @@ public class DataBaseController : Singleton<DataBaseController>
     public Sprite ParameterIcon(ParamType mp)
     {
         return ParamTypeSprites[mp];
+    }
+    public Sprite SpellTrigger(SpellTriggerType mp)
+    {
+        return SpellTriggerIcons[mp];
     }
     public Sprite SpecialAbilityIcon(SpecialAbility itemId)
     {

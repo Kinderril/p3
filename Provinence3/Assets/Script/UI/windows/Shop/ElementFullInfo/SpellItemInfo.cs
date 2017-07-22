@@ -18,7 +18,9 @@ public class SpellItemInfo : UpgWearingInvItemInfo
 //        var item = Talisman.Execute(talismanItem, 0, null);
 //        slo
         mainIcon.sprite = spellItem.IconSprite;
-//        powerField.text = spellItem.SpellData.ValueGold.ToString() + "TODO";
+        powerField.text ="Charges:" + spellItem.SpellData.Charges.ToString("0") + "\n" +
+                          "Cost:" + spellItem.SpellData.Cost.ToString("0") + "\n" +
+                          "Level:" + spellItem.SpellData.Level.ToString("0");
         descField.text = spellItem.SpellData.Desc();
         NameLabel.text = spellItem.SpellData.Name;
         

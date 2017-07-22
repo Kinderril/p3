@@ -64,6 +64,7 @@ MonoBehaviour:
   Collider: {fileID: 135135325232415996}
   ID: 103
   AdditionaBehaviours: []
+  TrailOffTime: 1
 --- !u!135 &135135325232415996
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -105,7 +105,7 @@ public class Map : Singleton<Map>
         TimeUtils.StartMeasure("LOAD LAST");
         DebugController.Instance.InfoField2.text = allInfo;
 
-        int cnt = (int)(level.CrystalsBonus);
+        int cnt = (int)(level.CrystalsBonus* levelObject.CrystalsCount);
         var rnd = chestPositions.RandomElement(cnt);
         foreach (var chestBornPosition in rnd)
         {

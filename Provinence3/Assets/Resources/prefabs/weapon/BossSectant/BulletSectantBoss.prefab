@@ -3220,7 +3220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429ef8812cbae97428bfe81de72da100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.04
+  speed: 0.025
   maxTargets: 1
   hitPOsition: 0
   TrailParticleSystem: {fileID: 0}
@@ -3232,3 +3232,4 @@ MonoBehaviour:
   Collider: {fileID: 0}
   ID: 119
   AdditionaBehaviours: []
+  TrailOffTime: 1

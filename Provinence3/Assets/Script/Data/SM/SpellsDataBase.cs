@@ -137,6 +137,7 @@ public static class SpellsDataBase
         var spell = SpellMerger.Merge(rndSpells[0], rndSpells[1]);
         SpellMerger.CalcEffectResultPower(PowerSpellFromLvl(level), spell);
         VisualEffectSetter.Set(spell);
+        spell.Level = level;
         SaveSpell(spell);
         return spell;
     }

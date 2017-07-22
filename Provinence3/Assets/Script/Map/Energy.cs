@@ -19,13 +19,16 @@ public class Energy
     public Action<float, float> OnLeft;
     private Action<ItemId, int> activaAction;
     private float speedEnergyFall = 1f;
-    public event Action OnRage;
-    private bool isRageActivated = false;
-    
-    public Energy(Action<ItemId, int> activaAction,Action OnRage)
+//    public event Action OnRage;
+//    private bool isRageActivated = false;
+    private Action<int> onActionHealth;
+
+
+    public Energy(Action<ItemId, int> activaAction,Action<int> onActionHealth)
     {
         this.activaAction = activaAction;
-        this.OnRage += OnRage;
+        this.onActionHealth = onActionHealth;
+//        this.OnRage += OnRage;
     }
 
     public float SpeedEnergyFallCoef
@@ -35,33 +38,42 @@ public class Energy
 
     public void Add(int value)
     {
-        powerLeft = Mathf.Clamp(powerLeft + value, -1, maxpower);
+        var powerLeft2 = Mathf.Clamp(powerLeft + value, 0, maxpower*2);
+        if (powerLeft2 > maxpower)
+        {
+            powerLeft = maxpower;
+            onActionHealth(Mathf.Abs((int)(powerLeft2-maxpower)));
+        }
+        else
+        {
+            powerLeft = powerLeft2;
+        }
         ActionPOwerLeft();
         activaAction(ItemId.energy, value);
     }
     private void ActionPOwerLeft()
     {
-        if (!isRageActivated)
+        if (OnLeft != null)
         {
-            if (OnLeft != null)
-            {
-                OnLeft(powerLeft, maxpower);
-            }
-
-            if (powerLeft > maxpower)
-            {
-                if (OnRage != null)
-                {
-                    OnRage();
-                }
-                isRageActivated = true;
-            }
+            OnLeft(powerLeft, maxpower);
         }
+//        if (!isRageActivated)
+//        {
+//
+//            if (powerLeft > maxpower)
+//            {
+//                if (OnRage != null)
+//                {
+//                    OnRage();
+//                }
+//                isRageActivated = true;
+//            }
+//        }
     }
 
     public void Dispose()
     {
-        OnRage = null;
+//        OnRage = null;
     }
 
     public void Update()

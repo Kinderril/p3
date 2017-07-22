@@ -15,6 +15,7 @@ public class SpellInGame : IBulletHolder
     public SpellItem sourseItem;
     public float currentEnergy;
     public Action<bool,float,int> OnReady;
+    public event Action<int> OnTriggerChargesChange;
     protected Hero hero;
     private bool isUnderCooldown = false;
     private TimerManager.ITimer timer;
@@ -167,7 +168,7 @@ public class SpellInGame : IBulletHolder
     {
         if (TriggerInGame == null)
         {
-            TriggerInGame = new TriggerInGame(this, owner);
+            TriggerInGame = new TriggerInGame(this, owner, OnTriggerChargesChange);
         }
         TriggerInGame.Use();
     }

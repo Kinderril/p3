@@ -460,3 +460,4 @@ MonoBehaviour:
   Collider: {fileID: 0}
   ID: 118
   AdditionaBehaviours: []
+  TrailOffTime: 1

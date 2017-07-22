@@ -76,3 +76,4 @@ MonoBehaviour:
   Collider: {fileID: 65905797404325406}
   ID: 108
   AdditionaBehaviours: []
+  TrailOffTime: 1

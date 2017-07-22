@@ -60,7 +60,7 @@ public class BonusItem : BaseItem
                 lvl.Energy.SpeedEnergyFallCoef = 0.9f;
                 break;
             case Bonustype.cryslats:
-                lvl.CrystalsBonus = power;
+                lvl.CrystalsBonus = Formuls.CrystalBonusPower(power);
                 break;
             case Bonustype.money:
                 lvl.MoneyBonusFromItem = power;

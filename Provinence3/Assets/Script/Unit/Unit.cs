@@ -56,6 +56,11 @@ public class Unit : MonoBehaviour
 //        }
     }
 
+    protected virtual int Level
+    {
+        get { return Parameters.Level; }
+    }
+
     public void SetHp(float val)
     {
         curHp = Mathf.Clamp(val, -1, Parameters[ParamType.Heath]);
@@ -433,7 +438,8 @@ public class Unit : MonoBehaviour
         return Mathf.Clamp(1f - (lvlUnit - lvlSpell)*0.2f,0f,1f);
     }
 
-    private void AffectEffect(EffectSpectials spectial, float duration, float valueInner, int level , ParamType pType, EffectValType eValType)
+    private void AffectEffect(EffectSpectials spectial, float duration, float valueInner, int level 
+        , ParamType pType, EffectValType eValType)
     {
         if (Parameters == null)
         {
@@ -447,7 +453,7 @@ public class Unit : MonoBehaviour
                 value = valueInner;
                 break;
             case EffectValType.percent:
-                var p = PenltyCoef(Parameters.Level, level);
+                var p = PenltyCoef(Level, level);
                 value = valueInner / 100f * p;
                 break;
         }
@@ -471,27 +477,33 @@ public class Unit : MonoBehaviour
                 case EffectValType.abs:
                     if (pType == ParamType.Heath)
                     {
-                        var val = Mathf.Abs(valueInner);
+                        var val = Mathf.Abs(value);
                         var d = new DeathInfo(val, WeaponType.magic, SourceType.talisman);
                         GetDamage(val, WeaponType.magic, d);
                     }
                     else
                     {
-                        this.Parameters.Add(pType, valueInner);
+                        this.Parameters.Add(pType, value);
                     }
                     break;
                 case EffectValType.percent:
                     if (pType == ParamType.Heath)
                     {
-                        var p = PenltyCoef(Parameters.Level, level);
-                        var val = this.CurHp* valueInner / 100f*p;
+//                        var p = PenltyCoef(Level, level);
+//                        var val = this.CurHp * valueInner / 100f*p;
+                        var val = this.CurHp * value;
                         val = Mathf.Abs(val);
                         var d = new DeathInfo(val, WeaponType.magic, SourceType.talisman);
                         GetDamage(val, WeaponType.magic, d);
                     }
                     else
                     {
-                        this.Parameters.AddCoef(pType, valueInner);
+                        value = 1f + value;
+                        if (value < 0)
+                        {
+                            value = 0f;
+                        }
+                        this.Parameters.AddCoef(pType,value);
                     }
                     break;
 
@@ -507,8 +519,14 @@ public class Unit : MonoBehaviour
     {
         if (effect.SubEffectData != null)
         {
+            var enchant = spell.sourseItem.enchant;
             var data = effect.SubEffectData;
-            AffectEffect(effect.Spectial, effect.Duration, data.Value, spell.sourseItem.SpellData.Level, data.ParamType,
+            var val = data.Value;
+            if (enchant > 1)
+            {
+                val = val*((enchant - 1)*0.1f);
+            }
+            AffectEffect(effect.Spectial, effect.Duration, val, spell.sourseItem.SpellData.Level, data.ParamType,
                 data.EffectValType);
         }
         else

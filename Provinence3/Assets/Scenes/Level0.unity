@@ -7847,10 +7847,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DynamicElements: []
   Terrain: {fileID: 293577855}
-  GlobalFogLevel: 31
-  GlobalFogDiff: 1.7
   PrecentMonsterToBoss_0_1: 0.25
   QuestCount: 5
+  CrystalsCount: 0
 --- !u!4 &1622483780
 Transform:
   m_ObjectHideFlags: 0

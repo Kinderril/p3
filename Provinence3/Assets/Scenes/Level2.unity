@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 0}
   m_AmbientEquatorColor: {r: 0, g: 0, b: 0, a: 0}
   m_AmbientGroundColor: {r: 0, g: 0, b: 0, a: 0}
-  m_AmbientIntensity: 0
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 1472925608}
+  m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0.449641, g: 0.49971133, b: 0.5756529, a: 1}
 --- !u!157 &3
 LightmapSettings:
@@ -57,14 +57,14 @@ LightmapSettings:
     serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
-    m_TextureWidth: 1024
+    m_TextureWidth: 2048
     m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 0
     m_CompAOExponentDirect: 0
     m_Padding: 2
-    m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000,
+    m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000,
       type: 0}
     m_LightmapsBakeMode: 0
     m_TextureCompression: 0
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 112000002, guid: 72900dea00d8f2444b6c14c25a43bb29,
+  m_LightingDataAsset: {fileID: 112000002, guid: 8ca2bb9d3805cdb4fa5cd6ec2a73be41,
     type: 2}
   m_ShadowMaskMode: 0
 --- !u!196 &4
@@ -15958,11 +15958,10 @@ Prefab:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 11400658, guid: bdde3f8753c56c046a83b310440a0344, type: 2}
+      propertyPath: CrystalsCount
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bdde3f8753c56c046a83b310440a0344, type: 2}
   m_IsPrefabParent: 0
---- !u!108 &1472925608 stripped
-Light:
-  m_PrefabParentObject: {fileID: 10895468, guid: bdde3f8753c56c046a83b310440a0344,
-    type: 2}
-  m_PrefabInternal: {fileID: 1472925607}

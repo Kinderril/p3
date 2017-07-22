@@ -314,6 +314,7 @@ MonoBehaviour:
   Collider: {fileID: 0}
   ID: 102
   AdditionaBehaviours: []
+  TrailOffTime: 1
   waitTime: 1
 --- !u!114 &11464186
 MonoBehaviour:

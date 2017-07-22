@@ -13,9 +13,11 @@ public class TriggerInGame
     private Unit Owner;
     private BaseTrigger triggerData;
     private SpellInGame sourseItem;
+    private event Action<int> OnChargesChange;
 
-    public TriggerInGame(SpellInGame sourseItem,Unit owner)
+    public TriggerInGame(SpellInGame sourseItem,Unit owner, Action<int> OnChargesChange)
     {
+        this.OnChargesChange = OnChargesChange;
         this.sourseItem = sourseItem;
         Owner = owner;
         spellData = sourseItem.sourseItem.SpellData;
@@ -82,7 +84,7 @@ public class TriggerInGame
     {
         sourseItem.ActivateByTrigger();
         chargesRemain--;
-        
+        OnChargesChange(chargesRemain);
         if (chargesRemain <= 0)
         {
             Dispose();
@@ -161,6 +163,7 @@ public class TriggerInGame
             }
         }
         chargesRemain = spellData.BaseTrigger.ShootCount; //TODO
+        OnChargesChange(chargesRemain);
     }
 }
 

@@ -25,6 +25,10 @@ public class Hero : Unit
     private RotateContainer rotateContainer;
     public IEnumerable<BonusItem> Bonuses;
 
+    protected override int Level
+    {
+        get { return MainController.Instance.PlayerData.Level; }
+    }
 
     public void Init(Level lvl)
     {

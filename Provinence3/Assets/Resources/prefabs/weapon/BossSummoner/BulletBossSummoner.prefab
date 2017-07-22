@@ -3232,3 +3232,4 @@ MonoBehaviour:
   Collider: {fileID: 0}
   ID: 101
   AdditionaBehaviours: []
+  TrailOffTime: 1

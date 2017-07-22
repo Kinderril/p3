@@ -15,16 +15,37 @@ public class TalismanButton : MonoBehaviour
     public Image icon;
     public Text chargesField;
 
+    public Image iconTrigger;
+    public Text triggerCharges;
+
     public void Init(SpellItem spell, int countTalismans,Level level,Unit owner)
     {
         this.spellItem = spell;
         talicLogic = SpellInGame.Creat(spellItem, countTalismans, level, owner);
         talicLogic.OnReady += OnReady;
         RadialImage.type = Image.Type.Filled;
+        if (spell.SpellData.BaseTrigger != null)
+        {
+            iconTrigger.sprite = DataBaseController.Instance.SpellTrigger(spell.SpellData.BaseTrigger.TriggerType);
+            talicLogic.OnTriggerChargesChange += OnTriggerChargesChange;
+            iconTrigger.gameObject.SetActive(true);
+        }
+        else
+        {
+            iconTrigger.gameObject.SetActive(false);
+        }
+        triggerCharges.gameObject.SetActive(false);
+
 
         gameObject.SetActive(true);
         icon.sprite = spell.IconSprite;
         OnReady(false, 0,0);
+    }
+
+    private void OnTriggerChargesChange(int obj)
+    {
+        triggerCharges.gameObject.SetActive(obj > 0);
+        triggerCharges.text = obj.ToString();
     }
 
     private void OnReady(bool isReady, float percent,int curCharges)
@@ -45,6 +66,7 @@ public class TalismanButton : MonoBehaviour
     {
         if (talicLogic != null)
         {
+            talicLogic.OnTriggerChargesChange -= OnTriggerChargesChange;
             talicLogic.Dispose();
             talicLogic.OnReady -= OnReady;
         }
