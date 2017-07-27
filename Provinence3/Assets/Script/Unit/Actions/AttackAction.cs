@@ -36,6 +36,7 @@ public class AttackAction : BaseAction
     protected AttackStatus attackStatus = AttackStatus.none;
     protected float activateTime;
     protected bool isActivated = true;
+    protected float endAttackTime;
 
     public AttackAction(BaseMonster owner, Unit target ,Action<EndCause> endCallback)
         : base(owner, endCallback)
@@ -79,6 +80,7 @@ public class AttackAction : BaseAction
 
     public override void Update()
     {
+        CheckTime();
         if (attackStatus == AttackStatus.move)
         {
             var isMoving = !owner.Control.IsPathComplete();
@@ -100,6 +102,17 @@ public class AttackAction : BaseAction
                 //                lastTargetScanPos = curp;
 //                Debug.Log("TargetMove By Offset " + offset);
                 TargetMove();
+            }
+        }
+    }
+
+    private void CheckTime()
+    {
+        if (attackStatus == AttackStatus.shoot)
+        {
+            if (Time.time > endAttackTime)
+            {
+                owner.ShootEnd();
             }
         }
     }
@@ -133,12 +146,15 @@ public class AttackAction : BaseAction
         owner.Control.SetToDirection(dir);
         //dir = new Vector3(dir.x,owner.transform.position.y,dir.z);
 //        Debug.Log("attack: " + dir + "    " + dir.sqrMagnitude);
-        owner.TryAttack(dir,0, target);
-        owner.OnShootEnd += OnShootEnd;
-        attackStatus = AttackStatus.shoot;
-        if (shallStop)
+        if (owner.TryAttack(dir, 0, target))
         {
-            ((AgentControl)owner.Control).Stop(false);
+            endAttackTime = owner.Control.AtackTimeSec + Time.time;
+            owner.OnShootEnd += OnShootEnd;
+            attackStatus = AttackStatus.shoot;
+            if (shallStop)
+            {
+                ((AgentControl) owner.Control).Stop(false);
+            }
         }
     }
 

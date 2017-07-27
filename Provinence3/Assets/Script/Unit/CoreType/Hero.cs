@@ -76,7 +76,7 @@ public class Hero : Unit
         }
     }
 
-    protected override void ShootEnd()
+    public override void ShootEnd()
     {
         base.ShootEnd();
 //        Debug.Log("ShootEnds");
@@ -176,7 +176,7 @@ public class Hero : Unit
         TryAttack(trg, additionalPower);
     }
 
-    public override void TryAttack(Vector3 target,float additionalPower = 0,Unit unit = null)
+    public override bool TryAttack(Vector3 target,float additionalPower = 0,Unit unit = null)
     {
         var can = curWeapon.CanShoot();
 
@@ -202,6 +202,7 @@ public class Hero : Unit
         {
             subTR(target, dir, additionalPower);
         }
+        return true;
     }
 
     private void subTR(Vector3 target,Vector3 dir,float additionalPower)
@@ -257,6 +258,7 @@ public class Hero : Unit
     {
         if (!IsDead)
         {
+            RemoveEffectsVisuals();
             base.Death();
             MainController.Instance.level.PreEndLevel(EndlevelType.bad);
         }
@@ -291,6 +293,7 @@ public class Hero : Unit
         Parameters.AddCoef(ParamType.Speed, 1.3f);
         //TODO add rage effect
     }
+
 }
 
 class ShootContainer

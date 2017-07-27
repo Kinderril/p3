@@ -2613,6 +2613,7 @@ MonoBehaviour:
   m_StationaryTurnSpeed: 180
   Animator: {fileID: 9553398}
   UseAltAttack: 1
+  AttackClipName: sec_range_attack_01
   Direction: {x: 0, y: 0, z: 0}
   ThisByQuaterhnion: {fileID: 0}
   RagDollRigidbody: {fileID: 5415220}

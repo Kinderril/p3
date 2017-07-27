@@ -141,12 +141,7 @@ public class Level
         }
         yield return null;
     }
-
-    private void OnRage()
-    {
-        MainHero.Rage();
-    }
-
+    
     public void StartLevel()
     {
         IsPlaying = true;

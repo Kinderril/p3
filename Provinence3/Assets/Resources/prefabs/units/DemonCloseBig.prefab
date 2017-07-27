@@ -1130,7 +1130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397923831599084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 365.0106, y: 27.523718, z: 67.31874}
+  m_LocalPosition: {x: 354.80524, y: 26.661285, z: 98.154205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4216694439285064}
@@ -2169,6 +2169,7 @@ MonoBehaviour:
   m_StationaryTurnSpeed: 440.5
   Animator: {fileID: 95354552123269570}
   UseAltAttack: 0
+  AttackClipName: strike_01
   Direction: {x: 0, y: 0, z: 0}
   ThisByQuaterhnion: {fileID: 0}
   RagDollRigidbody: {fileID: 0}

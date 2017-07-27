@@ -70,7 +70,7 @@ public class TimeEffect
         targetUnit.TimeEffectsRemove(this);
         targetUnit.OnDead -= OnTargetDead;
         MainController.Instance.level.OnEndLevel -= OnEndLevel;
-        Debug.Log("Effect UnSET ");
+//        Debug.Log("Effect UnSET " + EffectType.ToString());
         endEffect.Do();
     }
 

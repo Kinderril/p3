@@ -1757,7 +1757,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1907654886325998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.862577, y: 43.62889, z: 41.478916}
+  m_LocalPosition: {x: 349.5292, y: 29.097906, z: 97.26845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4405175112459868}
@@ -2829,6 +2829,7 @@ MonoBehaviour:
   m_StationaryTurnSpeed: 440.5
   Animator: {fileID: 95050729217903670}
   UseAltAttack: 1
+  AttackClipName: ranged_attack_01
   Direction: {x: 0, y: 0, z: 0}
   ThisByQuaterhnion: {fileID: 0}
   RagDollRigidbody: {fileID: 0}
@@ -3185,9 +3186,9 @@ MonoBehaviour:
   Renderers:
   - {fileID: 137083872189092370}
   - {fileID: 137339489862669478}
-  startVal: 3.5
   endVal: -1
   keyTime: _RimPower
+  startVal: 3.5
 --- !u!136 &136368842463616132
 CapsuleCollider:
   m_ObjectHideFlags: 1

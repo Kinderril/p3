@@ -26,6 +26,7 @@ public class MapObjectWithDeath : MonoBehaviour
     public void EndDeathAnimation()
     {
         Destroy(gameObject);
+        Debug.Log("Destroy " + name);
     }
 }
 

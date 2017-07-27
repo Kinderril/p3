@@ -5,10 +5,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 442750}
-  - 114: {fileID: 11462394}
+  - component: {fileID: 442750}
+  - component: {fileID: 11462394}
   m_Layer: 0
   m_Name: SlowEffect
   m_TagString: Untagged
@@ -21,13 +21,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 497440}
-  - 33: {fileID: 3306432}
-  - 23: {fileID: 2323930}
-  - 114: {fileID: 11474026}
-  - 114: {fileID: 11430936}
+  - component: {fileID: 497440}
+  - component: {fileID: 3306432}
+  - component: {fileID: 2323930}
+  - component: {fileID: 11474026}
+  - component: {fileID: 11430936}
   m_Layer: 0
   m_Name: slowEffect
   m_TagString: Untagged
@@ -44,11 +44,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.4936495, y: 5.83488, z: -3.4161482}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 497440}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &497440
 Transform:
   m_ObjectHideFlags: 1
@@ -58,10 +58,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 442750}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2323930
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -71,22 +71,28 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 3c89da27acfde0c4fa30b88806d38b64, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &3306432
 MeshFilter:
@@ -143,17 +149,20 @@ MonoBehaviour:
     m_AniCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 0
         inSlope: 2
         outSlope: 2
         tangentMode: 0
-      - time: 0.20710757
+      - serializedVersion: 2
+        time: 0.20710757
         value: 0.7981171
         inSlope: 0.3420997
         outSlope: 0.3420997
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -178,17 +187,20 @@ MonoBehaviour:
     m_AniCurve:
       serializedVersion: 2
       m_Curve:
-      - time: 0
+      - serializedVersion: 2
+        time: 0
         value: 1
         inSlope: -4.606219
         outSlope: -4.606219
         tangentMode: 0
-      - time: 0.50082034
+      - serializedVersion: 2
+        time: 0.50082034
         value: 0.0039222836
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 1
+      - serializedVersion: 2
+        time: 1
         value: 1
         inSlope: 4.155259
         outSlope: 4.155259
@@ -210,7 +222,7 @@ MonoBehaviour:
     m_ChildBeforeColorValues: []
   m_fDelayTime: 0
   m_fDurationTime: 0.6
-  m_bAutoDestruct: 1
+  m_bAutoDestruct: 0
   m_fAddElapsedTime: 0
 --- !u!1001 &100100000
 Prefab:

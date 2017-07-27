@@ -21,6 +21,7 @@ public class BaseControl : MapObjectWithDeath
 	protected Rigidbody m_Rigidbody;
 	public Animator Animator;
     public bool UseAltAttack;
+    public string AttackClipName = "";
     protected string attackKey;
 	float m_TurnAmount;
 	float m_ForwardAmount;
@@ -31,6 +32,7 @@ public class BaseControl : MapObjectWithDeath
 //    public bool haveRagDoll = false;
     public Rigidbody RagDollRigidbody;
     public List<Rigidbody> listForRagDoll; 
+    public float AtackTimeSec { get; private set; }
 
     public Vector3 TargetDirection
     {
@@ -80,6 +82,18 @@ public class BaseControl : MapObjectWithDeath
                 child.isKinematic = true;
             }
         }
+        FindTimeAttack();
+    }
+    private void FindTimeAttack()
+    {
+        var animator = Animator.GetComponent<Animator>();
+        var clip = animator.runtimeAnimatorController.animationClips.FirstOrDefault(x => x.name == AttackClipName);
+        if (clip == null)
+        {
+            Debug.LogError("Bad cnimation clip name " + name);
+            return;
+        }
+        AtackTimeSec = clip.length +0.1f;
     }
 
     private void OnComeRotation()

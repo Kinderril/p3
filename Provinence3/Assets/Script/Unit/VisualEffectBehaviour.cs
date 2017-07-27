@@ -56,7 +56,7 @@ public class VisualEffectBehaviour : PoolElement
         base.Init();
     }
 
-    private void subInit(Unit unit)
+    private void  subInit(Unit unit)
     {
         lastUseUnit = unit;
         transform.SetParent(unit.transform);
@@ -103,7 +103,7 @@ public class VisualEffectBehaviour : PoolElement
         StopAbsorber(SetEffectEffect);
         lastUseUnit.OnDead -= OnDead;
         EndUse();
-    }
+     }
 
     private void StopAbsorber(BaseEffectAbsorber psAbsorber)
     {

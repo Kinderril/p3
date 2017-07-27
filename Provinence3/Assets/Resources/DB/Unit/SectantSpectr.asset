@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SectantSpectr
   m_EditorClassIdentifier: 
   Speed: 330
-  MPower: 1
+  MPower: 45.09
   PPower: 55.7
   MaxHp: 621
   magicResist: 12

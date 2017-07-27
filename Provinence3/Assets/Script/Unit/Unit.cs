@@ -31,7 +31,7 @@ public class Unit : MonoBehaviour
     protected bool isDead = false;
     public UnitParameters ParametersScriptable;
     public UnitParametersInGame Parameters;
-    private AnimationController animationController;
+    protected AnimationController animationController;
     protected float lastWeaponChangse;
     public ParticleSystem HitParticleSystem;
     public BaseEffectAbsorber StartAttackEffect;
@@ -161,7 +161,7 @@ public class Unit : MonoBehaviour
         }
     }
     
-    public virtual void TryAttack(Vector3 direction, float additionalPower = 0, Unit target = null)
+    public virtual bool TryAttack(Vector3 direction, float additionalPower = 0, Unit target = null)
     {
         if (!isPlayAttack && direction.sqrMagnitude > 0)
         {
@@ -182,21 +182,23 @@ public class Unit : MonoBehaviour
             {
                 curWeapon.DoShoot(direction, additionalPower, target);
                 ShootEnd();
-                if (StartAttackEffect != null)
-                {
-                    StartAttackEffect.Stop();
-                }
             });
+            return true;
         }
+        return false;
     }
 
-    protected virtual void ShootEnd()
+    public virtual void ShootEnd()
     {
 //        Debug.Log("End attack ");
         isPlayAttack = false;
         if (OnShootEnd != null)
         {
             OnShootEnd(this);
+        }
+        if (StartAttackEffect != null)
+        {
+            StartAttackEffect.Stop();
         }
     }
 
@@ -308,6 +310,10 @@ public class Unit : MonoBehaviour
 
     public virtual void GetHit(Bullet bullet)
     {
+        if (IsDead)
+        {
+            return;
+        }
         var spell = bullet.bulletHolder as SpellInGame;
         if (spell != null)
         {
@@ -318,11 +324,34 @@ public class Unit : MonoBehaviour
             AffcetSimpleBullet(bullet);
         }
 
+        if (IsDead)
+        {
+            return;
+        }
         if (bullet.AdditionaBehaviours != null)
         {
             foreach (var effect in bullet.AdditionaBehaviours)
             {
                 AffectEffect(EffectSpectials.none, effect.Duration, effect.Value, effect.Bullet.bulletHolder.Owner.ParametersScriptable.Level, effect.ParamType, effect.EffectValType);
+            }
+        }
+    }
+    public void RemoveEffectsVisuals()
+    {
+        foreach (Transform tr in transform)
+        {
+            var cc = tr.GetComponent<VisualEffectBehaviour>();
+            if (cc != null)
+            {
+                cc.SetToBaseParent();
+            }
+        }
+        foreach (Transform tr in weaponsContainer)
+        {
+            var cc = tr.GetComponent<VisualEffectBehaviour>();
+            if (cc != null)
+            {
+                cc.SetToBaseParent();
             }
         }
     }
@@ -552,11 +581,13 @@ public class Unit : MonoBehaviour
 
     protected virtual void Death()
     {
+
         if (IsDead)
         {
             Debug.LogError(gameObject.name + " is already dead");
             return;
         }
+        RemoveEffectsVisuals();
         if (OnDead != null)
         {
             OnDead(this);

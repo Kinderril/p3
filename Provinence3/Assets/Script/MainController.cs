@@ -85,7 +85,10 @@ public class MainController : Singleton<MainController>
         WindowManager.Instance.OpenWindow(MainState.end);
         Map.Instance.EndLevel();
         if (level.MainHero != null)
+        {
+            level.MainHero.RemoveEffectsVisuals();
             Destroy(level.MainHero.gameObject);
+        }
         DataBaseController.Instance.Pool.Clear();
         Map.Instance.DestroyLevel();
     }

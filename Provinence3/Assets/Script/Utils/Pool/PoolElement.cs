@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class PoolElement : MonoBehaviour
 {
-    protected bool isUsing;
     private Transform baseParent;
+    protected bool isUsing;
+    public int ID_Pool = 0;
+    public int timesUse = 0;
 
     public bool IsUsing
     {
@@ -18,11 +15,14 @@ public class PoolElement : MonoBehaviour
     public void SetBaseParent(Transform baseParent)
     {
         this.baseParent = baseParent;
-        transform.SetParent(baseParent,false);
+        transform.SetParent(baseParent, false);
     }
 
     public virtual void Init()
     {
+        ID_Pool = Utils.GetId();
+        timesUse++;
+//        Debug.Log("Start Use " + isUsing + "  " + ID + "   " + name);
         isUsing = true;
         if (baseParent == null)
         {
@@ -33,10 +33,20 @@ public class PoolElement : MonoBehaviour
 
     public virtual void EndUse()
     {
-        isUsing = false;
-        transform.SetParent(baseParent,false);
-        gameObject.SetActive(IsUsing);
         
+//        Debug.Log("END Use " + isUsing + "  " + ID);
+        if (gameObject != null)
+        {
+            isUsing = false;
+            SetToBaseParent();
+            gameObject.SetActive(IsUsing);
+        }
+    }
+
+    public void SetToBaseParent()
+    {
+        if (name.Contains("Visu"))
+            Debug.Log("SetToBaseParent " + name);
+        transform.SetParent(baseParent, false);
     }
 }
-

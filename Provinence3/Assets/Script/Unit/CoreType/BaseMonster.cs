@@ -69,6 +69,7 @@ public class BaseMonster : Unit
         aiStatus = AIStatus.disable;
     }
 
+
     public void Overcharg()
     {
         var c = 1.3f;

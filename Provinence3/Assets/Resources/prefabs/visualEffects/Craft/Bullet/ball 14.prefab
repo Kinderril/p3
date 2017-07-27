@@ -69,7 +69,7 @@ ParticleAnimator:
   force: {x: 0, y: 0, z: 0}
   damping: 0.1
   stopSimulation: 0
-  autodestruct: 1
+  autodestruct: 0
 --- !u!15 &1500000
 EllipsoidParticleEmitter:
   m_ObjectHideFlags: 1
@@ -127,6 +127,7 @@ ParticleRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_CameraVelocityScale: 0
