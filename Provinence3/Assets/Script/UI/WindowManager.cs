@@ -121,13 +121,22 @@ public class WindowManager : Singleton<WindowManager>
             nextWindow.transform.SetSiblingIndex(sIndex + 1);
         }
         //window.StartAnimation();
-        if (obj != null)
+        try
         {
-            nextWindow.Init<T>(obj);
+
+            if (obj != null)
+            {
+                nextWindow.Init<T>(obj);
+            }
+            else
+            {
+                nextWindow.Init();
+            }
         }
-        else
+        catch (Exception ex)
         {
-            nextWindow.Init();
+            DebugController.Instance.InfoField2.text = nextWindow.name + " error " + ex;
+            Debug.LogError(ex);
         }
         currentWindow = nextWindow;
     }

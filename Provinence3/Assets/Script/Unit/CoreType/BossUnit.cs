@@ -43,7 +43,7 @@ public class BossUnit : BaseMonster
             Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.MDef] * delta);
             Parameters.SetAbsolute(ParamType.PPower,Parameters[ParamType.PDef] * delta);
           
-            Parameters.MaxHp *= delta;
+            Parameters.SetAbsolute(ParamType.Heath, Parameters[ParamType.Heath] * delta);
         }
 
     }

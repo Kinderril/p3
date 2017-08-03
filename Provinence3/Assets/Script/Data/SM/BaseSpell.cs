@@ -163,18 +163,18 @@ public class BaseSpell
         switch (SpellCoreType)
         {
             case SpellCoreType.Trigger:
-                targetType = "Trigger spell when " + BaseTrigger.GetDescByType(BaseTrigger.TriggerType) + ". " + targetType;
+                targetType = "\n Trigger spell when " + BaseTrigger.GetDescByType(BaseTrigger.TriggerType) + ". " + targetType + "   shoots:" + BaseTrigger.ShootCount;
                 break;
             case SpellCoreType.Shoot:
 
                 break;
             case SpellCoreType.Summon:
-                targetType = "Summon totem casting every " + BaseSummon.DelayShoot.ToString("0.0") + " Sec " + BaseSummon.ShootCount + " times. " + targetType;
+                targetType = "\n Summon totem casting every " + BaseSummon.DelayShoot.ToString("0.0") + " Sec " + BaseSummon.ShootCount + " times. " + targetType;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        return name + targetType + " <> " + Bullet.DescFull(this) + (withCostCharges ? (cost + charges) : "");
+        return name + targetType + "\n <> " + Bullet.DescFull(this) + " \n" + (withCostCharges ? (cost + charges) : "");
     }
 
     public string Desc()

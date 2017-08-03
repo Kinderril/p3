@@ -23,6 +23,8 @@ public  class HeroShopCheat : IShopExecute
         MainController.Instance.PlayerData.AddItem(new ExecCatalysItem(CatalysItemType.green, 2));
         MainController.Instance.PlayerData.AddItem(new ExecCatalysItem(CatalysItemType.red, 2));
         MainController.Instance.PlayerData.AddItem(new ExecCatalysItem(CatalysItemType.blue, 2));
+        MainController.Instance.PlayerData.AddCurrensy(ItemId.crystal, 5);
+        MainController.Instance.PlayerData.AddCurrensy(ItemId.money, 100000);
 
         foreach (CraftItemType v in Enum.GetValues(typeof(CraftItemType)))
         {

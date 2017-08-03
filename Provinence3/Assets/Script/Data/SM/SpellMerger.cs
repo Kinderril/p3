@@ -66,7 +66,7 @@ public static class SpellMerger
 //        Console.WriteLine("Power of new spell:" + rndPowerTotal + " <<<<< " + rangeResult);
 //        return null;
         //Начинаем мержить базу для заклинания
-        int level = SMUtils.Range(spell1.Level, spell1.Level + 1);
+        int level = Mathf.Max(spell1.Level, spell1.Level);
         var listStartTrg = new List<SpellTargetType>() {spell1.StartType,spell2.StartType};
         var start = listStartTrg.RandomElement();
 
@@ -191,7 +191,9 @@ public static class SpellMerger
         List<BaseEffect> effects2set = new List<BaseEffect>();
         foreach (var baseEffect in spell.Bullet.Effect)
         {
-            var e = BaseEffect.CreateWithBase(baseEffect,delta,spell.TargetType,spell.Level);
+            int extraCoef = 1;
+            var e = BaseEffect.CreateWithBase(baseEffect,delta,spell.TargetType,spell.Level,out extraCoef);
+            spell.BulletCount *= extraCoef; 
             effects2set.Add(e);
         }
         spell.Bullet.Effect = effects2set;

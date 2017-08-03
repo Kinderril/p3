@@ -3635,7 +3635,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 247209538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.2, y: 2.7599983, z: -29.3}
+  m_LocalPosition: {x: 63.13, y: 2.7599983, z: -30.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1109792034}
@@ -3657,7 +3657,8 @@ MonoBehaviour:
   radius: 2
   unitsCout: 1
   ID: 0
-  monsterPrebaf: {fileID: 0}
+  monsterPrebaf: {fileID: 114188932273716584, guid: 94cab55efe79f634b962d77fe3405c2c,
+    type: 2}
   difficulty: 2
 --- !u!23 &247209541
 MeshRenderer:
@@ -9851,7 +9852,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 723205986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.54, y: 2.7599945, z: -6.62}
+  m_LocalPosition: {x: 35.39, y: 2.7599945, z: -10.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1109792034}
@@ -18727,7 +18728,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1332268055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.94, y: 2, z: -18.33}
+  m_LocalPosition: {x: 61.83, y: 2, z: -19.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1109792034}
@@ -18930,7 +18931,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1336919003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.38, y: 2.7599945, z: -40.99}
+  m_LocalPosition: {x: 52.33, y: 2.7599945, z: -40.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1109792034}
@@ -20686,7 +20687,7 @@ GameObject:
   - component: {fileID: 1443102176}
   - component: {fileID: 1443102175}
   m_Layer: 0
-  m_Name: Level1
+  m_Name: Level99
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20706,10 +20707,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DynamicElements: []
   Terrain: {fileID: 1074959205}
-  GlobalFogLevel: 31
-  GlobalFogDiff: 1.7
   PrecentMonsterToBoss_0_1: 0.25
   QuestCount: 5
+  CrystalsCount: 1
 --- !u!4 &1443102176
 Transform:
   m_ObjectHideFlags: 0
@@ -26349,7 +26349,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1987554575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.38, y: 2, z: -4.54}
+  m_LocalPosition: {x: 49.03, y: 2, z: -7.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1109792034}

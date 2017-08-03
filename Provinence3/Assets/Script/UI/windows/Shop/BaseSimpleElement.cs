@@ -12,7 +12,7 @@ public class BaseSimpleElement : MonoBehaviour
     public Image iconImage;
     public Image SlotLabel;
     public Text enchantField;
-    public Text NameField;
+//    public Text NameField;
     public Text CountField;
     public BaseItem PlayerItem;
 
@@ -26,13 +26,13 @@ public class BaseSimpleElement : MonoBehaviour
     {
         if (enchantField != null)
             enchantField.gameObject.SetActive(false);
-        NameField.text = PlayerItem.Name;
+//        NameField.text = PlayerItem.Name;
         CountField.gameObject.SetActive(false);
         iconImage.sprite = PlayerItem.IconSprite;
         if (PlayerItem is PlayerItem)
         {
             var pItem = PlayerItem as PlayerItem;
-            NameField.color = DataBaseController.Instance.GetColor(pItem.Rare);
+//            NameField.color = DataBaseController.Instance.GetColor(pItem.Rare);
             rareImage.Set(pItem.Rare);
             bool haveEnchant = pItem.enchant > 0;
             if (haveEnchant)
@@ -43,7 +43,7 @@ public class BaseSimpleElement : MonoBehaviour
         }
         else
         {
-            NameField.color = DataBaseController.Instance.GetColor(Rarity.Normal);
+//            NameField.color = DataBaseController.Instance.GetColor(Rarity.Normal);
             rareImage.gameObject.SetActive(false);
         }
 

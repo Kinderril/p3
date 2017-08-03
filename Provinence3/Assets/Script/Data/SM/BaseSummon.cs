@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 
 public class BaseSummon
@@ -21,11 +22,14 @@ public class BaseSummon
 
     public float CalcPower()
     {
+        var c = (DelayShoot - 2f);
+        c = Mathf.Clamp(c, 1f, 3f);
+        c = 1/c;
         if (ShootCount <= 1f)
         {
-            return 1f;
+            return c * 1f;
         }
-        return ShootCount / 2f;
+        return c *  ShootCount * 0.5f;
     }
 
     public BaseSummon CopyWithRnd()
@@ -58,7 +62,7 @@ public class BaseSummon
     {
         if (s1 == null && s2 == null)
         {
-            return new BaseSummon(SMUtils.Range(0.8f, 3.5f), SMUtils.Range(1,2));
+            return new BaseSummon(SMUtils.Range(0.8f, 3.5f), SMUtils.Range(2,5));
         }
 
         if (s1 == null)
@@ -70,7 +74,7 @@ public class BaseSummon
             return s1.CopyWithRnd();
         }
 
-        var shootsResult = (int)SMUtils.Range(s1.ShootCount*SMUtils.Range(0.5f,1.5f), s2.ShootCount * SMUtils.Range(0.5f, 1.5f));
+        var shootsResult = Mathf.Clamp((int)SMUtils.Range(s1.ShootCount*SMUtils.Range(0.5f,1.5f), s2.ShootCount * SMUtils.Range(0.5f, 1.5f)),1,100);
         var delay = SMUtils.Range(s1.DelayShoot*SMUtils.Range(0.5f,1.5f), s2.DelayShoot * SMUtils.Range(0.5f, 1.5f));
 
         return new BaseSummon(delay, shootsResult);

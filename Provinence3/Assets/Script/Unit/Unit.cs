@@ -63,7 +63,7 @@ public class Unit : MonoBehaviour
 
     public void SetHp(float val)
     {
-        curHp = Mathf.Clamp(val, -1, Parameters[ParamType.Heath]);
+        curHp = Mathf.Clamp(val, -1, Parameters.MaxHp);
         if (curHp <= 0)
         {
             Death();
@@ -394,11 +394,12 @@ public class Unit : MonoBehaviour
                     Parameters.AddCoef(ParamType.MDef, Formuls.REMOVE_DEF_COEF);
                     break;
                 case SpecialAbility.vampire:
-                    var diff = power * Formuls.VAMP_COEF;
-                    SetHp(CurHp + diff);
+                    var diff = Mathf.Abs(power * Formuls.VAMP_COEF);
+                    owner.SetHp(owner.CurHp + diff);
                     if (owner is Hero)
                     {
-                        var isMax = owner.CurHp < owner.Parameters.MaxHp;
+                        var isMax = owner.CurHp >= owner.Parameters.MaxHp;
+                        Debug.Log("CurHp:" + owner.CurHp + "   isMax:" + isMax + "    owner.Parameters.MaxHp:" + owner.Parameters.MaxHp);
                         if (owner.OnGetHit != null && !isMax)
                         {
                             owner.OnGetHit(owner.CurHp, owner.Parameters[ParamType.Heath], diff);

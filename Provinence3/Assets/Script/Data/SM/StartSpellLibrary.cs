@@ -68,7 +68,7 @@ public static class StartSpellLibrary
         var effect1 = new BaseEffect(0, new SubEffectData(EffectValType.abs, ParamType.Heath, 91), EffectSpectials.none);
         spell1.Bullet = bullet1;
         spell1.SpellCoreType = SpellCoreType.Summon;
-        spell1.BaseSummon = new BaseSummon(0.9f, 3);
+        spell1.BaseSummon = new BaseSummon(1.9f, 3);
         bullet1.Effect = new List<BaseEffect>() { effect1 };
         return spell1;
     }
@@ -80,7 +80,7 @@ public static class StartSpellLibrary
         var effect1 = new BaseEffect(6, new SubEffectData(EffectValType.percent, ParamType.PDef, -50), EffectSpectials.none);
         spell1.Bullet = bullet1;
         spell1.SpellCoreType = SpellCoreType.Summon;
-        spell1.BaseSummon = new BaseSummon(0.6f, 2);
+        spell1.BaseSummon = new BaseSummon(1.6f, 4);
         bullet1.Effect = new List<BaseEffect>() { effect1 };
         return spell1;
     }
@@ -92,7 +92,7 @@ public static class StartSpellLibrary
         var effect1 = new BaseEffect(6, new SubEffectData(EffectValType.percent, ParamType.PDef, -50), EffectSpectials.none);
         spell1.Bullet = bullet1;
         spell1.SpellCoreType = SpellCoreType.Summon;
-        spell1.BaseSummon = new BaseSummon(0.6f, 1);
+        spell1.BaseSummon = new BaseSummon(2.6f, 2);
         bullet1.Effect = new List<BaseEffect>() { effect1 };
         return spell1;
     }

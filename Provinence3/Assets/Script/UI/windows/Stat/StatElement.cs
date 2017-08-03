@@ -21,7 +21,12 @@ public class StatElement : MonoBehaviour
 
     public void Init(LevelStat stat)
     {
-        MissionIndex.text =  DataBaseController.Instance.MissionNames[stat.MissionIndex];
+        if (DataBaseController.Instance.MissionNames.ContainsKey(stat.MissionIndex))
+            MissionIndex.text =  DataBaseController.Instance.MissionNames[stat.MissionIndex];
+        else
+        {
+            MissionIndex.text = "";
+        }
         GoldCollected.text = stat.GoldCollected.ToString();
         MonstersKilled.text = stat.MonstersKilled.ToString();
         TimeSpendSec.text = stat.TimeSpendSec.ToString();

@@ -173,7 +173,7 @@ public class BaseBullet
         var targted = BaseBulletTarget == BaseBulletTarget.homing ? "Homing" : "Targeted";
         var bulletInfo = spell.BulletCount > 1 ? " " + spell.BulletCount + " bullets" : " bullet";
         var mt = " max targets:" + MaxTargets;
-        string effects = Effect.Aggregate("", (current, baseEffect) => current + " {" + baseEffect.DescFull(spell) +"}");
+        string effects = Effect.Aggregate("", (current, baseEffect) => current + " \n {" + baseEffect.DescFull(spell) +"}");
         return targted + bulletInfo + radius + mt + "." + effects;
     }
 

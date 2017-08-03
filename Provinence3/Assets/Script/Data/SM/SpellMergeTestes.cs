@@ -33,10 +33,11 @@ public class SpellMergeTestes
     private void CreateRndSpell()
     {
 
-//        var rndSpell = SpellsDataBase.CreateRndSpell(2);
+        var rndSpell = SpellsDataBase.CreatSpellData(1);//.(2);
+        Console.WriteLine("--------------");
 //        Console.WriteLine("--------------");
-//        Console.WriteLine("--------------");
-//        LogSpell(rndSpell);
+        LogSpell(rndSpell);
+//SpellMerger.Merge()
     }
 
     private void TestRndSpells()
@@ -95,7 +96,7 @@ public class SpellMergeTestes
 
     private void LogSpell(BaseSpell spell,string txtFirst = "")
     {
-        var txt = txtFirst +" >>>" + SpellMerger.GetPowerCoef(spell).ToString("0.0") +"<<<   " + spell.Desc();
+        var txt = txtFirst +" >>>" + SpellMerger.GetPowerCoef(spell).ToString("0.0") +"<<<   " + spell.DescFull(true);
         Console.WriteLine(txt);
 //        Debug.Log(txt);
 //        Debug.Log("bullet: " + spell.Bullet.Desc());

@@ -35,8 +35,8 @@ public class Hero : Unit
         base.Init();
         var playerData = MainController.Instance.PlayerData;
         var allWeared = playerData.GetAllWearedItems();
-        var notBonuses = allWeared.Where(x => x.Slot != Slot.bonus);
-        Bonuses = allWeared.Where(x => x.Slot == Slot.bonus).Select(x=>x as BonusItem);
+        var notBonuses = allWeared.Where(x => x.Slot != Slot.bonus).ToList();
+        Bonuses = allWeared.Where(x => x.Slot == Slot.bonus).Select(x=>x as BonusItem).ToList();
         foreach (var allWearedItem in notBonuses)
         {
             allWearedItem.Activate(this, lvl);
@@ -45,13 +45,15 @@ public class Hero : Unit
         {
             bonuseItem.Activate(this, lvl);
         }
-
+        
         foreach (ParamType v in Enum.GetValues(typeof(ParamType)))
         {
             Parameters.SetAbsolute(v,playerData.CalcParameter(v));
             Debug.Log("Calc parameter: " + v + " : " + Parameters[v]);
         }
         curHp = Parameters[ParamType.Heath];
+        Parameters.SetAbsolute(ParamType.Heath, curHp);
+//        Parameters.MaxHp = curHp;
         Parameters.SetAbsolute(ParamType.Speed, Parameters[ParamType.Speed] / Formuls.SpeedCoef);
         ; ;
 //        Parameters.Parameters[ParamType.PPower] *= (damageBonusFromItem + 1f);

@@ -302,6 +302,7 @@ public class WindowInGame : BaseWindow
             number.transform.position = hitTransform.position;
             number.Init(GetDeltaStr(delta), color);
         }
+        Debug.Log("hp:"  + cur_HP + "   delta:" + delta);
         HealthSlider.value = cur_HP / maxHp;
     }
 

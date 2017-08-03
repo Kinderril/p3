@@ -128,7 +128,7 @@ public class BaseEffect
         return effect;
     }
 
-    public static BaseEffect CreateWithBase(BaseEffect oldData,float power, SpellTargetType targetType,int lvl)
+    public static BaseEffect CreateWithBase(BaseEffect oldData,float power, SpellTargetType targetType,int lvl,out int extraCoef )
     {
         ParamType t = ParamType.Heath;
         EffectValType vt = EffectValType.abs;
@@ -137,8 +137,25 @@ public class BaseEffect
             t = oldData.SubEffectData.ParamType;
             vt = oldData.SubEffectData.EffectValType;
         }
-
-        return new BaseEffect(oldData.Spectial,vt,t,oldData.Duration,power,lvl, targetType);
+        extraCoef = 1;
+        var effect = new BaseEffect(oldData.Spectial, vt, t, oldData.Duration, power, lvl, targetType);
+        if (effect.SubEffectData != null)
+        {
+            if (effect.SubEffectData.ParamType == ParamType.Heath && effect.SubEffectData.EffectValType == EffectValType.percent)
+            {
+                if (effect.SubEffectData.Value > 90)
+                {
+                    effect.SubEffectData.Value = effect.SubEffectData.Value / 3f;
+                    extraCoef = 3;
+                }
+                else if (effect.SubEffectData.Value > 50)
+                {
+                    effect.SubEffectData.Value = effect.SubEffectData.Value / 2f;
+                    extraCoef = 2;
+                }
+            }
+        }
+        return effect;
     }
 
     public BaseEffect(EffectSpectials special, EffectValType valuesType, ParamType paramsType,

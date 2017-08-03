@@ -72,7 +72,7 @@ public class UnitParameters : ScriptableObject
         d.Add(ParamType.MDef, magicResist);
         d.Add(ParamType.Heath, MaxHp);
         var p = new UnitParametersInGame(d);
-        p.MaxHp = MaxHp;
+//        p.MaxHp = MaxHp;
         p.AttackType = AttackType;
         p.Level = Level;
         p.SimpleDrop = OtherType(DropItem.type_simple,false);
@@ -109,15 +109,10 @@ public class UnitParametersInGame// : Dictionary<ParamType, float>
 {
     public List<CraftItemType> SimpleDrop;
     public List<CraftItemType> RareDrop;
-    private float _maxHp;
+//    private float _maxHp;
     public float MaxHp
     {
-        get { return _maxHp; }
-        set
-        {
-            _maxHp = value;
-            baseParams[ParamType.Heath] = _maxHp;
-        }
+        get { return Get(ParamType.Heath); }
     }
 
     public int Level = 1;
@@ -136,6 +131,8 @@ public class UnitParametersInGame// : Dictionary<ParamType, float>
             effectParams.Add(p,0f);
         }
     }
+
+//    public float MaxHp { get; }
 
     private float Get(ParamType t)
     {

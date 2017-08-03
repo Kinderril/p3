@@ -383,9 +383,9 @@ public class PlayerData
         PlayerPrefs.SetInt(LEVEL,CurrentLevel);
         PlayerPrefs.SetInt(ALLOCATED, AllocatedPoints);
     }
-    public IEnumerable<BaseItem> GetAllWearedItems()
+    public List<BaseItem> GetAllWearedItems()
     {
-        return playerItems.Where(x => x.IsEquped);
+        return playerItems.Where(x => x.IsEquped).ToList();
     }
 
     public void AddInventory(DictionaryOfItemAndInt inventory)

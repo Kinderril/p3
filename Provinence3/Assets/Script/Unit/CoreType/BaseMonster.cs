@@ -78,7 +78,7 @@ public class BaseMonster : Unit
         Parameters.AddCoef(ParamType.PPower, c);
         Parameters.AddCoef(ParamType.PDef, c);
         Parameters.AddCoef(ParamType.MDef, c);
-        Parameters.MaxHp = Parameters[ParamType.Heath]*2.3f;
+        Parameters.SetAbsolute(ParamType.Heath, Parameters[ParamType.Heath] * 2.3f);
         transform.localScale = Vector3.one*1.5f;
         overcharged = true;
         moneyCoef *= 4f;
